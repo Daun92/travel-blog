@@ -26,6 +26,16 @@
     "workflow:feedback": "npm run moltbook:feedback && npm run moltbook:analyze",
     "hugo:serve": "cd blog && hugo server -D",
     "hugo:build": "cd blog && hugo --gc --minify",
+    "queue": "tsx src/cli/index.ts queue",
+    "queue:list": "tsx src/cli/index.ts queue list",
+    "queue:add": "tsx src/cli/index.ts queue add",
+    "queue:remove": "tsx src/cli/index.ts queue remove",
+    "daily": "tsx src/cli/index.ts daily",
+    "daily:run": "tsx src/cli/index.ts daily run",
+    "daily:preview": "tsx src/cli/index.ts daily preview",
+    "daily:deploy": "tsx src/cli/index.ts daily deploy",
+    "daily:cancel": "tsx src/cli/index.ts daily cancel",
+    "daily:status": "tsx src/cli/index.ts daily status",
     "test": "vitest"
   },
   "keywords": [
