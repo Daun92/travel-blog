@@ -19,6 +19,8 @@ import { keywordsCommand } from './commands/keywords.js';
 import { statusCommand } from './commands/status.js';
 import { moltbookCommand } from './commands/moltbook.js';
 import { collectCommand } from './commands/collect.js';
+import { queueCommand } from './commands/queue.js';
+import { dailyCommand } from './commands/daily.js';
 
 const program = new Command();
 
@@ -98,6 +100,24 @@ program
   .description('Moltbook 커뮤니티 통합 (setup|share|feedback|heartbeat|analyze)')
   .option('-f, --file <file>', '공유할 파일')
   .action(moltbookCommand);
+
+// 주제 큐 관리
+program
+  .command('queue [action] [args...]')
+  .description('주제 큐 관리 (list|add|remove|move|clear)')
+  .option('--type <type>', '주제 유형 (travel|culture)', 'travel')
+  .option('--completed', '완료된 주제 표시')
+  .option('--clear', '큐 초기화')
+  .action((action = 'list', args, options) => queueCommand(action, args, options));
+
+// 일일 자동화
+program
+  .command('daily [action]')
+  .description('일일 자동화 제어 (run|preview|deploy|cancel|status)')
+  .option('--count <count>', '생성할 포스트 수')
+  .option('--delay <hours>', '배포 지연 시간')
+  .option('--today', '오늘 생성된 초안만')
+  .action((action = 'run', options) => dailyCommand(action, options));
 
 // 프로그램 실행
 program.parse();
