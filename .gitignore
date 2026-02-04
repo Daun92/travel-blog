@@ -1,0 +1,30 @@
+# Node.js
+node_modules/
+dist/
+*.log
+npm-debug.log*
+
+# 환경 변수
+.env
+.env.local
+.env.*.local
+
+# Hugo
+blog/public/
+blog/resources/
+blog/.hugo_build.lock
+
+# 임시 파일
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 빌드 결과물
+*.tsbuildinfo
