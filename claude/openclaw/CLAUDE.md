@@ -108,7 +108,10 @@ Required:
 - `OLLAMA_MODEL` - Model name (default: `qwen3:8b`)
 
 Optional:
-- `UNSPLASH_ACCESS_KEY` - Image search
+- `UNSPLASH_ACCESS_KEY` - Image search (cover images)
+- `GEMINI_API_KEY` - Gemini AI image generation (inline images)
+- `GEMINI_IMAGE_ENABLED` - Enable inline image generation (default: `false`)
+- `HUGO_BASE_URL` - Hugo path prefix (default: `/travel-blog`)
 - `KTO_API_KEY` - Korean Tourism API
 - `CULTURE_API_KEY` - Culture Portal API
 
@@ -126,3 +129,69 @@ Length options: short (1500-2000), medium (2500-3500), long (4000-5000) characte
 - Posts follow Hugo permalink structure: `/posts/:year/:month/:slug/`
 - Frontmatter includes SEO fields, tags, categories, and custom metadata (location, visitDate, budget)
 - Moltbook feedback automatically adjusts content strategy without manual intervention
+
+## Image System (Hybrid)
+
+**Cover Images**: Unsplash API (real photos)
+**Inline Images**: Gemini AI generation (illustrated infographics)
+
+```bash
+# Generate post with inline images
+npm run new -- -t "주제" --type travel --inline-images --image-count 3
+```
+
+### Image Styles
+- `infographic` - 여행 다이어리 페이지 스타일
+- `diagram` - 보물지도 여정 스타일
+- `map` - 친구가 그려준 약도 스타일
+- `comparison` - 카페 칠판 메뉴판 스타일
+- `moodboard` - 감성 콜라주
+- `bucketlist` - 게이미피케이션 체크리스트
+
+## Critical Development Rules
+
+### 1. Hugo Image Paths (IMPORTANT)
+All image paths MUST include the Hugo baseURL prefix:
+```markdown
+# CORRECT
+image: "/travel-blog/images/cover-xxx.jpg"
+![alt](/travel-blog/images/inline-xxx.jpeg)
+
+# WRONG - will cause 404
+image: "/images/cover-xxx.jpg"
+image: "images/cover-xxx.jpg"
+```
+
+### 2. TypeScript API Responses
+Always define interfaces for external API responses:
+```typescript
+// Define response type
+interface ApiResponse {
+  data?: { ... };
+  error?: { message: string };
+}
+
+// Cast response
+const data = await response.json() as ApiResponse;
+```
+
+### 3. Standalone Scripts
+Scripts in `scripts/` must load environment variables:
+```typescript
+import { config } from 'dotenv';
+config();  // Load .env at the top
+```
+
+### 4. Git Repository Structure
+- `openclaw/` - Main repository (source code, NOT blog/)
+- `blog/` - Separate repository (Hugo site for GitHub Pages)
+
+Do NOT add `blog/` folder to main git staging.
+
+## Troubleshooting Reference
+
+See `WORKLOG.md` for detailed:
+- Development history and decisions
+- Problem resolution records
+- Development guidelines and checklists
+- API usage tracking
