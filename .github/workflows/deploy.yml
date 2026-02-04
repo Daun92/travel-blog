@@ -53,7 +53,6 @@ jobs:
 
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-        working-directory: ./blog
 
       - name: Build with Hugo
         env:
@@ -65,12 +64,11 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
-        working-directory: ./blog
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./blog/public
+          path: ./public
 
   # 배포 작업
   deploy:
