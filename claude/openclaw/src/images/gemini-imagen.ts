@@ -52,7 +52,7 @@ interface GeminiResponse {
 }
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
-const DEFAULT_MODEL = 'gemini-2.0-flash-exp';
+const DEFAULT_MODEL = 'gemini-3.0-pro-preview';
 
 // 일일 사용량 제한
 const DAILY_IMAGE_LIMIT = parseInt(process.env.GEMINI_IMAGE_MAX_COUNT || '50', 10);

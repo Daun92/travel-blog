@@ -9,39 +9,42 @@ import ora from 'ora';
 import matter from 'gray-matter';
 import { checkOllamaStatus, listModels } from '../../generator/index.js';
 
+interface TopicQueue {
+  queue: { title: string; type: string }[];
+  completed: { title: string; type: string }[];
+  settings: {
+    postsPerDay: number;
+    deployDelayHours: number;
+  };
+}
+
 export async function statusCommand(): Promise<void> {
   console.log(chalk.cyan('\n📊 시스템 상태\n'));
 
   const spinner = ora();
 
-  // 1. Ollama 상태
-  console.log(chalk.white.bold('🤖 Ollama'));
-  spinner.start('연결 확인 중...');
+  // 1. LLM 상태 (Gemini API)
+  console.log(chalk.white.bold('🤖 LLM (Gemini API)'));
+  spinner.start('API 키 확인 중...');
 
   const ollamaOnline = await checkOllamaStatus();
+  const llmModel = process.env.LLM_MODEL || 'gemini-3.0-flash';
+  const geminiImageModel = process.env.GEMINI_IMAGE_MODEL || 'gemini-3.0-pro-preview';
 
   if (ollamaOnline) {
-    spinner.succeed(chalk.green('연결됨'));
+    spinner.succeed(chalk.green('API 키 설정됨'));
 
-    // 모델 목록
+    // 사용 가능한 모델 목록
     const models = await listModels();
-    if (models.length > 0) {
-      console.log(chalk.dim('  사용 가능한 모델:'));
-      models.forEach(m => console.log(chalk.dim(`    • ${m}`)));
-    }
+    console.log(chalk.dim('  사용 가능한 모델:'));
+    models.forEach(m => console.log(chalk.dim(`    • ${m}`)));
 
     // 현재 설정 모델
-    const configModel = process.env.OLLAMA_MODEL || 'qwen3:8b';
-    const hasModel = models.some(m => m.includes(configModel.split(':')[0]));
-    if (hasModel) {
-      console.log(chalk.green(`  ✓ 설정된 모델 사용 가능: ${configModel}`));
-    } else {
-      console.log(chalk.yellow(`  ⚠ 설정된 모델 없음: ${configModel}`));
-      console.log(chalk.dim(`    설치: ollama pull ${configModel}`));
-    }
+    console.log(chalk.green(`  ✓ 텍스트 생성: ${llmModel}`));
+    console.log(chalk.green(`  ✓ 이미지 생성: ${geminiImageModel}`));
   } else {
-    spinner.fail(chalk.red('연결 실패'));
-    console.log(chalk.dim('  Ollama 시작: ollama serve'));
+    spinner.fail(chalk.red('API 키 미설정'));
+    console.log(chalk.dim('  .env에 GEMINI_API_KEY 설정 필요'));
   }
 
   // 2. 디렉토리 상태
@@ -136,13 +139,43 @@ export async function statusCommand(): Promise<void> {
     console.log(chalk.dim('  포스트 폴더 없음'));
   }
 
-  // 5. 환경 변수
+  // 5. 주제 큐 상태
+  console.log(chalk.white.bold('\n📋 주제 큐'));
+
+  try {
+    const queueContent = await readFile('./config/topic-queue.json', 'utf-8');
+    const queue: TopicQueue = JSON.parse(queueContent);
+
+    console.log(chalk.dim(`  대기 중: ${queue.queue.length}개`));
+    console.log(chalk.dim(`  완료됨: ${queue.completed.length}개`));
+    console.log(chalk.dim(`  일일 생성: ${queue.settings.postsPerDay}개`));
+
+    if (queue.queue.length > 0) {
+      console.log(chalk.dim('  다음 주제:'));
+      queue.queue.slice(0, 2).forEach((topic, i) => {
+        const emoji = topic.type === 'travel' ? '🧳' : '🎨';
+        console.log(chalk.dim(`    ${i + 1}. ${emoji} ${topic.title.slice(0, 30)}...`));
+      });
+    }
+
+    if (queue.queue.length < 5) {
+      console.log(chalk.yellow(`  ⚠ 큐에 주제가 부족합니다 (${queue.queue.length}개)`));
+      console.log(chalk.dim('    npm run queue:add -- "주제" --type travel'));
+    }
+  } catch {
+    console.log(chalk.yellow('  ⚠ 주제 큐 파일 없음'));
+    console.log(chalk.dim('    npm run queue:list로 초기화'));
+  }
+
+  // 6. 환경 변수
   console.log(chalk.white.bold('\n⚙️  환경 설정'));
 
   const envVars = [
-    { key: 'OLLAMA_HOST', default: 'http://localhost:11434' },
-    { key: 'OLLAMA_MODEL', default: 'qwen3:8b' },
-    { key: 'UNSPLASH_ACCESS_KEY', secret: true }
+    { key: 'GEMINI_API_KEY', secret: true, required: true },
+    { key: 'LLM_MODEL', default: 'gemini-3.0-flash' },
+    { key: 'GEMINI_IMAGE_MODEL', default: 'gemini-3.0-pro-preview' },
+    { key: 'UNSPLASH_ACCESS_KEY', secret: true },
+    { key: 'HUGO_BASE_URL', default: '/travel-blog' }
   ];
 
   for (const env of envVars) {
@@ -155,19 +188,26 @@ export async function statusCommand(): Promise<void> {
       }
     } else if (env.default) {
       console.log(chalk.dim(`  • ${env.key}: ${env.default} (기본값)`));
+    } else if ((env as any).required) {
+      console.log(chalk.red(`  ✗ ${env.key}: 필수 설정 누락`));
     } else {
       console.log(chalk.yellow(`  ⚠ ${env.key}: 미설정`));
     }
   }
 
-  // 6. 명령어 안내
+  // 7. 명령어 안내
   console.log(chalk.cyan('\n💡 사용 가능한 명령어'));
-  console.log(chalk.dim('  npm run new       - 새 포스트 생성'));
-  console.log(chalk.dim('  npm run drafts    - 초안 목록'));
-  console.log(chalk.dim('  npm run review    - 초안 검토'));
-  console.log(chalk.dim('  npm run publish   - 포스트 발행'));
-  console.log(chalk.dim('  npm run keywords  - 키워드 추천'));
-  console.log(chalk.dim('  npm run hugo:serve - 로컬 미리보기'));
+  console.log(chalk.white.bold('  일일 자동화:'));
+  console.log(chalk.dim('  npm run daily:run     - 일일 2포스트 생성'));
+  console.log(chalk.dim('  npm run daily:preview - 프리뷰 보고서'));
+  console.log(chalk.dim('  npm run daily:deploy  - 배포'));
+  console.log(chalk.white.bold('  주제 큐:'));
+  console.log(chalk.dim('  npm run queue:list    - 큐 목록'));
+  console.log(chalk.dim('  npm run queue:add     - 주제 추가'));
+  console.log(chalk.white.bold('  수동 작업:'));
+  console.log(chalk.dim('  npm run new           - 새 포스트 생성'));
+  console.log(chalk.dim('  npm run drafts        - 초안 목록'));
+  console.log(chalk.dim('  npm run hugo:serve    - 로컬 미리보기'));
 
   console.log('');
 }

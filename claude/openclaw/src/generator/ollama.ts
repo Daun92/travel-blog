@@ -25,7 +25,7 @@ export interface GenerateOptions {
 function getDefaultConfig(): LLMConfig {
   return {
     apiKey: process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY || '',
-    model: process.env.LLM_MODEL || 'gemini-2.0-flash'
+    model: process.env.LLM_MODEL || 'gemini-3.0-flash'
   };
 }
 
@@ -65,6 +65,7 @@ export async function checkOllamaStatus(config?: LLMConfig): Promise<boolean> {
  */
 export async function listModels(config?: LLMConfig): Promise<string[]> {
   return [
+    'gemini-3.0-flash',
     'gemini-2.0-flash',
     'gemini-1.5-flash',
     'gemini-1.5-pro'
