@@ -1,0 +1,151 @@
+baseURL = "https://username.github.io/"
+languageCode = "ko-KR"
+title = "여행과 문화예술 이야기"
+theme = "PaperMod"
+
+# 기본 설정
+defaultContentLanguage = "ko"
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+
+# 페이지네이션
+[pagination]
+  pagerSize = 10
+  path = "page"
+
+# 퍼머링크 설정
+[permalinks]
+  posts = "/posts/:year/:month/:slug/"
+
+# 메뉴 설정
+[menu]
+  [[menu.main]]
+    identifier = "menu-travel"
+    name = "여행"
+    url = "/posts/travel/"
+    weight = 10
+  [[menu.main]]
+    identifier = "menu-culture"
+    name = "문화예술"
+    url = "/posts/culture/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "소개"
+    url = "/about/"
+    weight = 30
+  [[menu.main]]
+    identifier = "search"
+    name = "검색"
+    url = "/search/"
+    weight = 40
+
+# 출력 형식
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+
+# 마크업 설정
+[markup]
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    style = "monokai"
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+# 파라미터 설정 (PaperMod 테마용)
+[params]
+  # 기본 정보
+  description = "한국의 아름다운 여행지와 문화예술을 소개합니다"
+  author = "Blog Author"
+
+  # 메타 설정
+  keywords = ["여행", "문화", "예술", "한국", "travel", "culture", "korea"]
+
+  # 테마 설정
+  defaultTheme = "auto"
+  disableThemeToggle = false
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowWordCount = true
+  ShowRssButtonInSectionTermList = true
+  UseHugoToc = true
+  disableSpecial1stPost = false
+  disableScrollToTop = false
+  hidemeta = false
+  hideSummary = false
+  showtoc = true
+  tocopen = false
+
+  # 홈페이지 설정
+  [params.homeInfoParams]
+    Title = "여행과 문화예술 이야기"
+    Content = "한국의 숨겨진 여행 명소와 다채로운 문화예술 이야기를 전합니다."
+
+  # 소셜 아이콘
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/username"
+  [[params.socialIcons]]
+    name = "rss"
+    url = "/index.xml"
+
+  # 커버 이미지 설정
+  [params.cover]
+    hidden = false
+    hiddenInList = false
+    hiddenInSingle = false
+    linkFullImages = true
+
+  # 검색 설정
+  [params.fuseOpts]
+    isCaseSensitive = false
+    shouldSort = true
+    location = 0
+    distance = 1000
+    threshold = 0.4
+    minMatchCharLength = 0
+    keys = ["title", "permalink", "summary", "content"]
+
+# SEO 설정
+[params.assets]
+  favicon = "/favicon.ico"
+  favicon16x16 = "/favicon-16x16.png"
+  favicon32x32 = "/favicon-32x32.png"
+  apple_touch_icon = "/apple-touch-icon.png"
+
+# 분류 체계
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+  series = "series"
+
+# 프라이버시 설정
+[privacy]
+  [privacy.googleAnalytics]
+    disable = false
+    respectDoNotTrack = true
+  [privacy.x]
+    enableDNT = true
+  [privacy.youtube]
+    privacyEnhanced = true
+
+# 미니파이 설정
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
