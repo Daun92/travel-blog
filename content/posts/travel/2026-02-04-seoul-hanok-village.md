@@ -8,7 +8,7 @@ tags: ["여행", "국내여행", "서울", "북촌", "한옥마을", "데이트�
 categories: ["travel"]
 keywords: ["북촌한옥마을", "서울 여행", "한옥마을 가볼만한곳", "북촌 포토스팟"]
 cover:
-  image: "/images/bukchon-cover.jpg"
+  image: "images/bukchon-cover.jpg"
   alt: "a room with a wooden ceiling and a clock on the wall"
   caption: "Photo by [Clark Gu](https://unsplash.com/@atluminon) on [Unsplash](https://unsplash.com)"
   relative: false
