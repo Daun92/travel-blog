@@ -8,7 +8,7 @@ tags: ["문화", "예술", "전시회", "미술관", "서울", "국립현대미�
 categories: ["culture"]
 keywords: ["국립현대미술관", "MMCA 서울", "서울 전시회", "미술관 추천"]
 cover:
-  image: "images/mmca-cover.jpg"
+  image: "/travel-blog/images/mmca-cover.jpg"
   alt: "a couple of large sculptures sitting on top of a cement floor"
   caption: "Photo by [Andrea De Santis](https://unsplash.com/@santesson89) on [Unsplash](https://unsplash.com)"
   relative: false
@@ -41,6 +41,9 @@ ShowWordCount: true
 | **휴관일** | 매주 월요일, 1월 1일, 설/추석 당일 |
 | **입장료** | 무료 (일부 기획전 4,000원) |
 | **예매** | [국립현대미술관 공식 홈페이지](https://www.mmca.go.kr) |
+
+![관람 정보 가이드](/travel-blog/images/inline-mmca-exhibition-1.jpeg)
+*AI 생성 관람 가이드*
 
 ## 2026년 주요 전시
 
@@ -81,6 +84,9 @@ ShowWordCount: true
 
 ### 3. 미술관 서점 & 아트샵
 1층 아트샵에서는 전시 관련 도록과 아트 굿즈를 구매할 수 있습니다.
+
+![추천 관람 동선](/travel-blog/images/inline-mmca-exhibition-2.jpeg)
+*AI 생성 관람 동선*
 
 ## 관람 전 알아두면 좋은 것
 

@@ -8,7 +8,7 @@ tags: ["여행", "국내여행", "서울", "북촌", "한옥마을", "데이트�
 categories: ["travel"]
 keywords: ["북촌한옥마을", "서울 여행", "한옥마을 가볼만한곳", "북촌 포토스팟"]
 cover:
-  image: "images/bukchon-cover.jpg"
+  image: "/travel-blog/images/bukchon-cover.jpg"
   alt: "a room with a wooden ceiling and a clock on the wall"
   caption: "Photo by [Clark Gu](https://unsplash.com/@atluminon) on [Unsplash](https://unsplash.com)"
   relative: false
@@ -68,6 +68,9 @@ ShowWordCount: true
 - 북촌 6경은 한옥 지붕과 서울 시내가 함께 담김
 - 한복 대여 시 더 멋진 사진 가능 (대여비 약 2-3만원)
 
+![북촌한옥마을 산책 코스 지도](/travel-blog/images/inline-bukchon-walking-map.jpeg)
+*안국역에서 삼청동까지 - 북촌 완벽 산책 동선과 포토스팟*
+
 ## 맛집 & 카페
 
 ### 1. 북촌손만두
@@ -91,6 +94,9 @@ ShowWordCount: true
 - **추천 메뉴**: 쑥라떼, 인절미 빙수
 
 한옥을 개조한 감성 카페로 분위기가 정말 좋습니다.
+
+![북촌 & 삼청동 카페 맛집 가이드](/travel-blog/images/inline-bukchon-cafe-guide.jpeg)
+*북촌 맛집 & 한옥 카페 추천 - 반나절 코스 예산 3-5만원*
 
 ## 여행 팁
 
