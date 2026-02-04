@@ -1,0 +1,419 @@
+/**
+ * 콘텐츠 생성기 메인 모듈
+ */
+
+import { writeFile, mkdir } from 'fs/promises';
+import { join, dirname } from 'path';
+import { format } from 'date-fns';
+import {
+  getTravelPrompt,
+  getCulturePrompt,
+  getKeywordPrompt,
+  getTitlePrompt,
+  type PromptContext
+} from './prompts.js';
+import {
+  generate,
+  generateStream,
+  checkOllamaStatus,
+  listModels
+} from './ollama.js';
+import {
+  generateFrontmatter,
+  generateSlug,
+  parseSeoMeta,
+  generateMarkdownFile,
+  type FrontmatterData
+} from './frontmatter.js';
+import {
+  parseContent,
+  insertImages,
+  removeImageMarkers,
+  insertAutoMarkers,
+  extractImageMarkers,
+  type ImageResult
+} from './content-parser.js';
+import { generatePromptFromMarker, type ImageContext } from './image-prompts.js';
+import {
+  GeminiImageClient,
+  saveImage,
+  getMaxImagesPerPost,
+  type ImageStyle
+} from '../images/gemini-imagen.js';
+
+export interface GeneratePostOptions {
+  topic: string;
+  type: 'travel' | 'culture';
+  keywords?: string[];
+  length?: 'short' | 'medium' | 'long';
+  draft?: boolean;
+  outputDir?: string;
+  coverImage?: string;
+  coverAlt?: string;
+  coverCaption?: string;
+  inlineImages?: boolean;
+  imageCount?: number;
+  onProgress?: (message: string) => void;
+}
+
+export interface GeneratedPost {
+  filename: string;
+  filepath: string;
+  frontmatter: FrontmatterData;
+  content: string;
+  inlineImages?: string[];
+}
+
+/**
+ * 블로그 포스트 생성
+ */
+export async function generatePost(options: GeneratePostOptions): Promise<GeneratedPost> {
+  const {
+    topic,
+    type,
+    keywords = [],
+    length = 'medium',
+    draft = true,
+    outputDir = './drafts',
+    coverImage,
+    coverAlt,
+    coverCaption,
+    inlineImages = false,
+    imageCount = 3,
+    onProgress = () => {}
+  } = options;
+
+  // Ollama 상태 확인
+  onProgress('Ollama 서버 연결 확인 중...');
+  const isOnline = await checkOllamaStatus();
+  if (!isOnline) {
+    throw new Error('Ollama 서버에 연결할 수 없습니다. 서버가 실행 중인지 확인하세요.');
+  }
+
+  // 프롬프트 생성
+  onProgress('프롬프트 생성 중...');
+  const context: PromptContext = { topic, type, keywords, length };
+  const prompt = type === 'travel'
+    ? getTravelPrompt(context)
+    : getCulturePrompt(context);
+
+  // AI 콘텐츠 생성
+  onProgress('AI가 콘텐츠 생성 중... (1-2분 소요)');
+  const rawContent = await generate(prompt, {
+    temperature: 0.7,
+    max_tokens: 4096
+  });
+
+  // SEO 메타데이터 추출
+  onProgress('SEO 메타데이터 추출 중...');
+  const { title, description, keywords: seoKeywords, content: parsedContent } = parseSeoMeta(rawContent);
+
+  // 제목 추출 (SEO에서 못 찾으면 본문에서 추출)
+  const finalTitle = title || extractTitleFromContent(parsedContent) || topic;
+  const finalDescription = description || extractDescriptionFromContent(parsedContent) || topic;
+  const finalKeywords = seoKeywords || keywords;
+
+  // 슬러그 생성 (이미지 파일명에도 사용)
+  const slug = generateSlug(finalTitle);
+
+  // 인라인 이미지 처리
+  let finalContent = parsedContent;
+  const generatedImagePaths: string[] = [];
+
+  if (inlineImages) {
+    onProgress('인라인 이미지 처리 중...');
+    const imageResult = await processInlineImages({
+      content: parsedContent,
+      topic,
+      type,
+      slug,
+      imageCount: Math.min(imageCount, getMaxImagesPerPost()),
+      onProgress
+    });
+    finalContent = imageResult.content;
+    generatedImagePaths.push(...imageResult.imagePaths);
+  } else {
+    // 인라인 이미지 비활성화 시 마커 제거
+    finalContent = removeImageMarkers(parsedContent);
+  }
+
+  // 프론트매터 데이터 구성
+  const frontmatter: FrontmatterData = {
+    title: finalTitle,
+    date: new Date(),
+    draft,
+    description: finalDescription,
+    summary: finalDescription,
+    tags: type === 'travel'
+      ? ['여행', '국내여행', ...finalKeywords.slice(0, 3)]
+      : ['문화', '예술', ...finalKeywords.slice(0, 3)],
+    categories: [type],
+    keywords: finalKeywords,
+    author: 'Blog Author',
+    ...(coverImage && {
+      cover: {
+        image: coverImage,
+        alt: coverAlt || finalTitle,
+        caption: coverCaption,
+        relative: false,
+        hidden: false
+      }
+    })
+  };
+
+  // 파일명 생성
+  const filename = `${slug}.md`;
+
+  // 출력 디렉토리 생성
+  const filepath = join(outputDir, filename);
+  await mkdir(dirname(filepath), { recursive: true });
+
+  // 마크다운 파일 생성
+  const markdown = generateMarkdownFile(frontmatter, finalContent);
+  await writeFile(filepath, markdown, 'utf-8');
+
+  onProgress(`포스트 생성 완료: ${filename}`);
+
+  return {
+    filename,
+    filepath,
+    frontmatter,
+    content: finalContent,
+    ...(generatedImagePaths.length > 0 && { inlineImages: generatedImagePaths })
+  };
+}
+
+/**
+ * 인라인 이미지 처리
+ */
+interface ProcessInlineImagesOptions {
+  content: string;
+  topic: string;
+  type: 'travel' | 'culture';
+  slug: string;
+  imageCount: number;
+  onProgress: (message: string) => void;
+}
+
+interface ProcessInlineImagesResult {
+  content: string;
+  imagePaths: string[];
+}
+
+async function processInlineImages(
+  options: ProcessInlineImagesOptions
+): Promise<ProcessInlineImagesResult> {
+  const { content, topic, type, slug, imageCount, onProgress } = options;
+
+  const geminiClient = new GeminiImageClient();
+
+  // Gemini 이미지 생성 가능 여부 확인
+  if (!geminiClient.isConfigured() || !geminiClient.isEnabled()) {
+    onProgress('Gemini 이미지 생성이 비활성화되어 있습니다. 마커를 제거합니다.');
+    return {
+      content: removeImageMarkers(content),
+      imagePaths: []
+    };
+  }
+
+  // 사용량 확인
+  const usageCheck = await geminiClient.checkUsageLimit(imageCount);
+  if (!usageCheck.allowed) {
+    onProgress(`${usageCheck.warning} 마커를 제거합니다.`);
+    return {
+      content: removeImageMarkers(content),
+      imagePaths: []
+    };
+  }
+
+  if (usageCheck.warning) {
+    onProgress(`주의: ${usageCheck.warning}`);
+  }
+
+  // 콘텐츠에서 마커 추출 또는 자동 삽입
+  let processedContent = content;
+  let markers = extractImageMarkers(content);
+
+  // 마커가 없으면 자동 삽입
+  if (markers.length === 0) {
+    onProgress('이미지 마커가 없습니다. 적절한 위치에 자동 삽입합니다.');
+    processedContent = insertAutoMarkers(content, type, imageCount);
+    markers = extractImageMarkers(processedContent);
+  }
+
+  // 요청된 이미지 수만큼만 처리
+  const markersToProcess = markers.slice(0, imageCount);
+
+  if (markersToProcess.length === 0) {
+    onProgress('이미지 삽입 위치를 찾을 수 없습니다.');
+    return {
+      content: removeImageMarkers(processedContent),
+      imagePaths: []
+    };
+  }
+
+  onProgress(`${markersToProcess.length}개의 인라인 이미지 생성 중...`);
+
+  // 이미지 출력 디렉토리
+  const imageOutputDir = join(process.cwd(), 'blog', 'static', 'images');
+
+  // 이미지 생성
+  const imageResults: ImageResult[] = [];
+  const imagePaths: string[] = [];
+  const imageContext: ImageContext = { topic, type };
+
+  for (let i = 0; i < markersToProcess.length; i++) {
+    const marker = markersToProcess[i];
+    onProgress(`  [${i + 1}/${markersToProcess.length}] ${marker.style} 이미지 생성 중...`);
+
+    try {
+      // 마커에서 프롬프트 생성
+      const promptInfo = generatePromptFromMarker(marker.marker, imageContext);
+      if (!promptInfo) {
+        onProgress(`    스킵: 잘못된 마커 형식`);
+        continue;
+      }
+
+      // 이미지 생성
+      const generatedImage = await geminiClient.generateImage({
+        prompt: promptInfo.prompt,
+        style: promptInfo.style,
+        aspectRatio: '16:9',
+        topic
+      });
+
+      // 이미지 저장
+      const filename = `inline-${slug}-${i + 1}`;
+      const savedImage = await saveImage(generatedImage, imageOutputDir, filename);
+
+      imageResults.push({
+        marker,
+        relativePath: savedImage.relativePath,
+        alt: marker.description,
+        caption: savedImage.caption
+      });
+
+      imagePaths.push(savedImage.filepath);
+      onProgress(`    완료: ${savedImage.relativePath}`);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      onProgress(`    실패: ${errorMessage}`);
+    }
+  }
+
+  // 이미지 삽입
+  let finalContent = processedContent;
+  if (imageResults.length > 0) {
+    finalContent = insertImages(processedContent, imageResults);
+  }
+
+  // 처리되지 않은 마커 제거
+  finalContent = removeImageMarkers(finalContent);
+
+  return {
+    content: finalContent,
+    imagePaths
+  };
+}
+
+/**
+ * 키워드 추천
+ */
+export async function recommendKeywords(
+  category: 'travel' | 'culture' | 'all' = 'all'
+): Promise<Array<{
+  keyword: string;
+  category: string;
+  difficulty: string;
+  reason: string;
+}>> {
+  const isOnline = await checkOllamaStatus();
+  if (!isOnline) {
+    throw new Error('Ollama 서버에 연결할 수 없습니다.');
+  }
+
+  const prompt = getKeywordPrompt(category);
+  const response = await generate(prompt, {
+    temperature: 0.8,
+    max_tokens: 2048
+  });
+
+  // JSON 추출
+  const jsonMatch = response.match(/```json\s*([\s\S]*?)```/);
+  if (jsonMatch) {
+    try {
+      return JSON.parse(jsonMatch[1]);
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+}
+
+/**
+ * 제목 추천
+ */
+export async function suggestTitles(
+  topic: string,
+  type: 'travel' | 'culture'
+): Promise<string[]> {
+  const isOnline = await checkOllamaStatus();
+  if (!isOnline) {
+    throw new Error('Ollama 서버에 연결할 수 없습니다.');
+  }
+
+  const prompt = getTitlePrompt(topic, type);
+  const response = await generate(prompt, {
+    temperature: 0.9,
+    max_tokens: 1024
+  });
+
+  // JSON 추출
+  const jsonMatch = response.match(/```json\s*([\s\S]*?)```/);
+  if (jsonMatch) {
+    try {
+      return JSON.parse(jsonMatch[1]);
+    } catch {
+      return [];
+    }
+  }
+
+  return [];
+}
+
+/**
+ * 콘텐츠에서 제목 추출
+ */
+function extractTitleFromContent(content: string): string | null {
+  const titleMatch = content.match(/^#\s+(.+)$/m);
+  return titleMatch ? titleMatch[1].trim() : null;
+}
+
+/**
+ * 콘텐츠에서 설명 추출
+ */
+function extractDescriptionFromContent(content: string): string | null {
+  // 첫 번째 문단 추출
+  const lines = content.split('\n').filter(line =>
+    line.trim() && !line.startsWith('#') && !line.startsWith('!')
+  );
+
+  if (lines.length > 0) {
+    const firstPara = lines[0].trim();
+    return firstPara.length > 150
+      ? firstPara.slice(0, 147) + '...'
+      : firstPara;
+  }
+
+  return null;
+}
+
+// 모듈 내보내기
+export {
+  checkOllamaStatus,
+  listModels,
+  generateFrontmatter,
+  generateSlug,
+  parseSeoMeta
+};

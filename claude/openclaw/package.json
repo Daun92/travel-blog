@@ -1,0 +1,62 @@
+{
+  "name": "openclaw-blog-automation",
+  "version": "1.0.0",
+  "description": "여행/문화예술 블로그 자동화 시스템",
+  "main": "dist/cli/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/cli/index.ts",
+    "new": "tsx src/cli/index.ts new",
+    "drafts": "tsx src/cli/index.ts drafts",
+    "review": "tsx src/cli/index.ts review",
+    "publish": "tsx src/cli/index.ts publish",
+    "schedule": "tsx src/cli/index.ts schedule",
+    "keywords": "tsx src/cli/index.ts keywords",
+    "status": "tsx src/cli/index.ts status",
+    "collect": "tsx src/cli/index.ts collect",
+    "moltbook": "tsx src/cli/index.ts moltbook",
+    "moltbook:setup": "tsx src/cli/index.ts moltbook setup",
+    "moltbook:share": "tsx src/cli/index.ts moltbook share",
+    "moltbook:feedback": "tsx src/cli/index.ts moltbook feedback",
+    "moltbook:heartbeat": "tsx src/cli/index.ts moltbook heartbeat",
+    "moltbook:analyze": "tsx src/cli/index.ts moltbook analyze",
+    "workflow:create": "npm run collect && npm run new",
+    "workflow:publish": "npm run publish && npm run moltbook:share",
+    "workflow:feedback": "npm run moltbook:feedback && npm run moltbook:analyze",
+    "hugo:serve": "cd blog && hugo server -D",
+    "hugo:build": "cd blog && hugo --gc --minify",
+    "test": "vitest"
+  },
+  "keywords": [
+    "blog",
+    "automation",
+    "hugo",
+    "ai",
+    "content-generation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.72.1",
+    "@google/generative-ai": "^0.24.1",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "date-fns": "^3.6.0",
+    "date-fns-tz": "^3.1.3",
+    "dotenv": "^16.4.5",
+    "gray-matter": "^4.0.3",
+    "inquirer": "^9.2.15",
+    "node-fetch": "^3.3.2",
+    "ora": "^8.0.1",
+    "slugify": "^1.6.6",
+    "yaml": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.11.24",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.2",
+    "vitest": "^1.3.1"
+  }
+}

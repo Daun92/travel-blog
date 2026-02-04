@@ -1,0 +1,31 @@
+services:
+  openclaw:
+    image: alpine/openclaw:latest
+    container_name: openclaw
+    stdin_open: true
+    tty: true
+    ports:
+      - "18789:18789"  # Gateway WebSocket port
+      - "19000:19000"  # HTTP API port
+      - "19002:19002"  # Browser port
+      - "19003:19003"  # Canvas port
+    volumes:
+      - openclaw_openclaw_data:/home/node/.openclaw
+      - ./workspace:/home/node/.openclaw/workspace
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENCLAW_GATEWAY_HOST=0.0.0.0
+      - OPENCLAW_GATEWAY_TOKEN=openclaw-local-dev
+    entrypoint: ""
+    command: ["node", "/app/openclaw.mjs", "gateway", "run", "--bind", "lan", "--verbose", "--token", "openclaw-local-dev"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "/app/openclaw.mjs", "health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  openclaw_openclaw_data:
+    external: true
