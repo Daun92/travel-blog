@@ -95,10 +95,10 @@ enableEmoji = true
   # 소셜 아이콘
   [[params.socialIcons]]
     name = "github"
-    url = "https://github.com/username"
+    url = "https://github.com/Daun92"
   [[params.socialIcons]]
     name = "rss"
-    url = "/index.xml"
+    url = "index.xml"
 
   # 커버 이미지 설정
   [params.cover]
