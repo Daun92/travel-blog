@@ -7,12 +7,9 @@ summary: "북촌한옥마을의 매력적인 골목길과 포토스팟, 주변 �
 tags: ["여행", "국내여행", "서울", "북촌", "한옥마을", "데이트코스"]
 categories: ["travel"]
 keywords: ["북촌한옥마을", "서울 여행", "한옥마을 가볼만한곳", "북촌 포토스팟"]
-cover:
-  image: "/travel-blog/images/bukchon-cover.jpg"
-  alt: "a room with a wooden ceiling and a clock on the wall"
-  caption: "Photo by [Clark Gu](https://unsplash.com/@atluminon) on [Unsplash](https://unsplash.com)"
-  relative: false
-  hidden: false
+image: /travel-blog/images/bukchon-cover.jpg
+imageAlt: a room with a wooden ceiling and a clock on the wall
+imageCredit: Photo by Clark Gu on Unsplash
 author: "Blog Author"
 location: "서울 종로구 북촌"
 visitDate: "2026년 2월"
