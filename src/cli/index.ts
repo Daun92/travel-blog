@@ -21,6 +21,14 @@ import { moltbookCommand } from './commands/moltbook.js';
 import { collectCommand } from './commands/collect.js';
 import { queueCommand } from './commands/queue.js';
 import { dailyCommand } from './commands/daily.js';
+import { factcheckCommand } from './commands/factcheck.js';
+import { validateCommand, reviewHumanCommand } from './commands/validate.js';
+import { aeoCommand } from './commands/aeo.js';
+import { workflowCommand } from './commands/workflow.js';
+import { pipelineCommand } from './commands/pipeline.js';
+import { monitorCommand } from './commands/monitor.js';
+import { enhanceCommand } from './commands/enhance.js';
+import { linksCommand } from './commands/links.js';
 
 const program = new Command();
 
@@ -71,6 +79,7 @@ program
   .option('-f, --file <file>', '특정 파일 발행')
   .option('--all', '모든 승인된 초안 발행')
   .option('-m, --message <message>', '커밋 메시지')
+  .option('--skip-validation', '품질 검증 건너뛰기')
   .action(publishCommand);
 
 // 키워드 추천
@@ -97,17 +106,20 @@ program
 // Moltbook 커뮤니티
 program
   .command('moltbook <action>')
-  .description('Moltbook 커뮤니티 통합 (setup|share|feedback|heartbeat|analyze)')
+  .description('Moltbook 커뮤니티 통합 (setup|share|feedback|heartbeat|analyze|draft|draft-feedback|draft-status)')
   .option('-f, --file <file>', '공유할 파일')
   .action(moltbookCommand);
 
 // 주제 큐 관리
 program
   .command('queue [action] [args...]')
-  .description('주제 큐 관리 (list|add|remove|move|clear)')
+  .description('주제 큐 관리 (list|add|remove|move|clear|discover|discovered)')
   .option('--type <type>', '주제 유형 (travel|culture)', 'travel')
   .option('--completed', '완료된 주제 표시')
   .option('--clear', '큐 초기화')
+  .option('--gaps', '갭 분석 포함 (discover)')
+  .option('--auto', '자동 큐 채우기 (discover)')
+  .option('--min-score <n>', '최소 점수 (discover --auto)')
   .action((action = 'list', args, options) => queueCommand(action, args, options));
 
 // 일일 자동화
@@ -118,6 +130,49 @@ program
   .option('--delay <hours>', '배포 지연 시간')
   .option('--today', '오늘 생성된 초안만')
   .action((action = 'run', options) => dailyCommand(action, options));
+
+// 팩트체크
+program.addCommand(factcheckCommand);
+
+// 품질 검증
+program.addCommand(validateCommand);
+program.addCommand(reviewHumanCommand);
+
+// AEO (AI Engine Optimization)
+program.addCommand(aeoCommand);
+
+// 통합 워크플로우
+program.addCommand(workflowCommand);
+
+// 콘텐츠 파이프라인
+program.addCommand(pipelineCommand);
+
+// 모니터링
+program.addCommand(monitorCommand);
+
+// 드래프트 향상 (페르소나 + 디테일링)
+program
+  .command('enhance')
+  .description('드래프트 향상 (페르소나 적용 + 클리셰 제거 + 디테일링)')
+  .option('-f, --file <file>', '특정 파일 향상')
+  .option('-a, --all', '모든 드래프트 향상')
+  .option('--type <type>', '콘텐츠 유형 (travel|culture)')
+  .option('--dry-run', '실제 저장 없이 미리보기')
+  .option('--analyze', '분석만 수행 (향상 없이)')
+  .option('-v, --verbose', '상세 출력')
+  .action(enhanceCommand);
+
+// 실용 링크 처리
+program
+  .command('links')
+  .description('드래프트/발행 포스트의 링크 마커를 실제 URL로 변환')
+  .option('-f, --file <file>', '특정 파일 처리')
+  .option('-a, --all', '모든 드래프트 처리')
+  .option('-p, --published', '발행된 포스트 처리')
+  .option('-e, --enhance', 'AI로 장소명 추출 후 링크 자동 추가')
+  .option('--dry-run', '실제 저장 없이 미리보기')
+  .option('-v, --verbose', '상세 출력')
+  .action(linksCommand);
 
 // 프로그램 실행
 program.parse();

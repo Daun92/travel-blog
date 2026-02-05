@@ -63,6 +63,18 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
    마커 형식: [IMAGE:스타일:설명]
    스타일 옵션: infographic, diagram, map, comparison, moodboard, bucketlist
 
+7. **실용 링크 삽입** (권장):
+   독자가 실제로 활용할 수 있는 링크를 마커 형식으로 추가하세요.
+   마커 형식: [LINK:타입:검색어] 또는 [LINK:타입:검색어:표시텍스트]
+
+   - 장소 소개 시: [LINK:map:성산일출봉] → 네이버 지도 검색
+   - 상세 정보 안내: [LINK:place:제주 올레길] → 네이버 검색
+   - 공식 웹사이트: [LINK:official:https://www.visitjeju.net:제주관광공사]
+
+   예시:
+   "성산일출봉은 [LINK:map:성산일출봉]에서 위치를 확인할 수 있습니다."
+   "자세한 정보는 [LINK:official:https://www.visitjeju.net:제주관광공사 공식 사이트]를 참고하세요."
+
 ## 출력 형식
 마크다운 형식으로 작성하세요. 맨 앞에 SEO 메타 정보를 JSON 주석으로 포함하세요.
 
@@ -131,6 +143,20 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
 
    마커 형식: [IMAGE:스타일:설명]
    스타일 옵션: infographic, diagram, map, comparison, moodboard, bucketlist
+
+7. **실용 링크 삽입** (권장):
+   독자가 실제로 활용할 수 있는 링크를 마커 형식으로 추가하세요.
+   마커 형식: [LINK:타입:검색어] 또는 [LINK:타입:검색어:표시텍스트]
+
+   - 장소 안내: [LINK:map:국립현대미술관 서울] → 네이버 지도 검색
+   - 티켓 예매: [LINK:booking:뮤지컬 오페라의 유령] → 인터파크 티켓
+   - 예스24 예매: [LINK:yes24:라이온 킹 뮤지컬] → 예스24 티켓
+   - 공식 웹사이트: [LINK:official:https://www.mmca.go.kr:국립현대미술관]
+
+   예시:
+   "예매는 [LINK:booking:뮤지컬 오페라의 유령:인터파크 티켓]에서 가능합니다."
+   "전시 일정은 [LINK:official:https://www.mmca.go.kr:공식 홈페이지]에서 확인하세요."
+   "위치는 [LINK:map:국립현대미술관 서울]에서 확인할 수 있습니다."
 
 ## 출력 형식
 마크다운 형식으로 작성하세요. 맨 앞에 SEO 메타 정보를 JSON 주석으로 포함하세요.

@@ -35,6 +35,11 @@ import {
 } from './content-parser.js';
 import { generatePromptFromMarker, type ImageContext } from './image-prompts.js';
 import {
+  processLinks,
+  processLinksWithInfo,
+  analyzeLinkMarkers
+} from './link-processor.js';
+import {
   GeminiImageClient,
   saveImage,
   getMaxImagesPerPost,
@@ -83,11 +88,11 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     onProgress = () => {}
   } = options;
 
-  // Ollama 상태 확인
-  onProgress('Ollama 서버 연결 확인 중...');
+  // LLM API 상태 확인
+  onProgress('Gemini API 연결 확인 중...');
   const isOnline = await checkOllamaStatus();
   if (!isOnline) {
-    throw new Error('Ollama 서버에 연결할 수 없습니다. 서버가 실행 중인지 확인하세요.');
+    throw new Error('Gemini API 키가 설정되지 않았습니다. .env에 GEMINI_API_KEY를 설정하세요.');
   }
 
   // 프롬프트 생성
@@ -135,6 +140,20 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
   } else {
     // 인라인 이미지 비활성화 시 마커 제거
     finalContent = removeImageMarkers(parsedContent);
+  }
+
+  // 실용 링크 처리
+  const linkAnalysis = analyzeLinkMarkers(finalContent);
+  if (linkAnalysis.totalMarkers > 0) {
+    onProgress(`실용 링크 처리 중... (${linkAnalysis.totalMarkers}개 마커 발견)`);
+    const linkResult = processLinksWithInfo(finalContent);
+    finalContent = linkResult.content;
+    if (linkResult.processed.length > 0) {
+      onProgress(`  ${linkResult.processed.length}개 링크 변환 완료`);
+    }
+    if (linkResult.failed.length > 0) {
+      onProgress(`  ${linkResult.failed.length}개 링크 변환 실패 (텍스트로 대체)`);
+    }
   }
 
   // 프론트매터 데이터 구성
@@ -329,7 +348,7 @@ export async function recommendKeywords(
 }>> {
   const isOnline = await checkOllamaStatus();
   if (!isOnline) {
-    throw new Error('Ollama 서버에 연결할 수 없습니다.');
+    throw new Error('Gemini API 키가 설정되지 않았습니다.');
   }
 
   const prompt = getKeywordPrompt(category);
@@ -360,7 +379,7 @@ export async function suggestTitles(
 ): Promise<string[]> {
   const isOnline = await checkOllamaStatus();
   if (!isOnline) {
-    throw new Error('Ollama 서버에 연결할 수 없습니다.');
+    throw new Error('Gemini API 키가 설정되지 않았습니다.');
   }
 
   const prompt = getTitlePrompt(topic, type);
