@@ -34,8 +34,84 @@ ShowWordCount: true
 image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
 imageAlt: City skyline with bridge and river at night
 imageCredit: Photo by JHANY BLUE on Unsplash
+faqs:
+  - q: 여수 야경을 차로 구경할 때 어디에 주차하는 것이 좋나요?
+    a: 돌산공원 공영주차장을 추천합니다. 주말 저녁에는 매우 혼잡하므로 일몰 1시간 전에 도착하는 것이 좋습니다.
+  - q: 여수 해상 케이블카 이용 요금은 얼마인가요?
+    a: '2024년 대인 왕복 기준 일반 캐빈은 17,000원, 바닥이 투명한 크리스탈 캐빈은 24,000원입니다.'
+  - q: 케이블카 탑승 대기 시간을 줄일 수 있는 방법이 있나요?
+    a: 네이버 예약 등으로 모바일 티켓을 미리 구매하면 매표소 줄을 서지 않아도 되어 시간을 절약할 수 있습니다.
+  - q: 여수 낭만포차의 대표 메뉴와 가격대는 어떻게 되나요?
+    a: '대표 메뉴는 ''돌문어해물삼합''이며, 가격은 보통 40,000원에서 50,000원 선입니다.'
+  - q: 낭만포차 거리가 너무 붐빌 때 갈만한 대안 장소가 있나요?
+    a: 근처 종화동 카페거리 식당이나 현지 느낌이 강한 '교동시장 포차거리'를 방문해 보시는 것을 추천합니다.
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 여수 야경을 차로 구경할 때 어디에 주차하는 것이 좋나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 돌산공원 공영주차장을 추천합니다. 주말 저녁에는 매우 혼잡하므로 일몰 1시간 전에 도착하는 것이 좋습니다.
+      - '@type': Question
+        name: 여수 해상 케이블카 이용 요금은 얼마인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '2024년 대인 왕복 기준 일반 캐빈은 17,000원, 바닥이 투명한 크리스탈 캐빈은 24,000원입니다.'
+      - '@type': Question
+        name: 케이블카 탑승 대기 시간을 줄일 수 있는 방법이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 네이버 예약 등으로 모바일 티켓을 미리 구매하면 매표소 줄을 서지 않아도 되어 시간을 절약할 수 있습니다.
+      - '@type': Question
+        name: 여수 낭만포차의 대표 메뉴와 가격대는 어떻게 되나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '대표 메뉴는 ''돌문어해물삼합''이며, 가격은 보통 40,000원에서 50,000원 선입니다.'
+      - '@type': Question
+        name: 낭만포차 거리가 너무 붐빌 때 갈만한 대안 장소가 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 근처 종화동 카페거리 식당이나 현지 느낌이 강한 '교동시장 포차거리'를 방문해 보시는 것을 추천합니다.
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스'
+    description: >-
+      여수 밤바다의 진수를 느낄 수 있는 야경 여행 코스를 소개합니다. 여수 케이블카 이용 팁부터 낭만포차 맛집 정보까지, 낭만 가득한
+      여수 여행을 계획해 보세요.
+    image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
+    author:
+      '@type': Person
+      name: Blog Author
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: 2026-02-05T12:25:04.000Z
+    dateModified: 2026-02-05T12:25:04.000Z
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-05-yeosu-night/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 여행
+        item: /travel-blog/travel/
+      - '@type': ListItem
+        position: 3
+        name: '여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스'
+        item: /travel-blog/posts//
 ---
-
 # 여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스
 
 버스커버스커의 노래 한 소절로 전 국민의 마음속에 각인된 도시, 전라남도 여수는 이제 대한민국을 대표하는 야경의 성지가 되었습니다. "여수 밤바다~"라는 멜로디를 흥얼거리며 떠나는 **여수 여행**은 단순한 관광을 넘어선 하나의 낭만적인 경험이 됩니다. 반짝이는 조명 아래 일렁이는 바다와 그 위를 가로지르는 케이블카, 그리고 맛있는 음식이 가득한 포차 거리까지. 오늘은 제가 직접 다녀오며 느꼈던 여수의 밤을 가장 완벽하게 즐길 수 있는 야경 코스를 상세히 소개해 드리겠습니다.
@@ -90,3 +166,25 @@ imageCredit: Photo by JHANY BLUE on Unsplash
 *   [여수 해상케이블카](http://yeosucablecar.com/)
 *   [여수 낭만포차 거리](https://map.naver.com/v5/search/여수낭만포차거리)
 *   [돌산공원](https://map.naver.com/v5/search/돌산공원)
+
+## 자주 묻는 질문
+
+### 여수 야경을 차로 구경할 때 어디에 주차하는 것이 좋나요?
+
+돌산공원 공영주차장을 추천합니다. 주말 저녁에는 매우 혼잡하므로 일몰 1시간 전에 도착하는 것이 좋습니다.
+
+### 여수 해상 케이블카 이용 요금은 얼마인가요?
+
+2024년 대인 왕복 기준 일반 캐빈은 17,000원, 바닥이 투명한 크리스탈 캐빈은 24,000원입니다.
+
+### 케이블카 탑승 대기 시간을 줄일 수 있는 방법이 있나요?
+
+네이버 예약 등으로 모바일 티켓을 미리 구매하면 매표소 줄을 서지 않아도 되어 시간을 절약할 수 있습니다.
+
+### 여수 낭만포차의 대표 메뉴와 가격대는 어떻게 되나요?
+
+대표 메뉴는 '돌문어해물삼합'이며, 가격은 보통 40,000원에서 50,000원 선입니다.
+
+### 낭만포차 거리가 너무 붐빌 때 갈만한 대안 장소가 있나요?
+
+근처 종화동 카페거리 식당이나 현지 느낌이 강한 '교동시장 포차거리'를 방문해 보시는 것을 추천합니다.

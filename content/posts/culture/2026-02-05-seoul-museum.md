@@ -34,6 +34,83 @@ ShowWordCount: true
 image: /travel-blog/images/cover-museum-ePa-rlcuwvA.jpg
 imageAlt: A group of people standing in a kitchen preparing food
 imageCredit: Photo by Raymond Yeung on Unsplash
+faqs:
+  - q: 서울공예박물관에 가려면 반드시 사전 예약을 해야 하나요?
+    a: 주말에는 현장 입장이 금방 마감되므로 무조건 사전 예약을 하고 방문하는 것이 안전합니다.
+  - q: 박물관 방문 시 자동차와 대중교통 중 무엇을 추천하나요?
+    a: 주차비가 입장료보다 비싸게 나올 수 있으므로 지하철 등 대중교통 이용을 강력히 추천합니다.
+  - q: 뮤지엄김치간에서만 즐길 수 있는 특별한 체험은 무엇인가요?
+    a: '현미경을 통한 김치 유산균 관찰이 가능하며, 3종류 정도의 김치를 직접 시식해 볼 수 있습니다.'
+  - q: 쇳대박물관 방문 시 미리 알아두어야 할 주의사항이 있나요?
+    a: 언덕길 경사가 가파르며 월요일은 휴관입니다. 내부가 다소 어두울 수 있다는 점도 참고하세요.
+  - q: 소개된 박물관들의 전체적인 입장료 수준은 어느 정도인가요?
+    a: '무료부터 5,000원 안팎으로 저렴하여 인당 커피 한 잔 값으로 부담 없이 관람이 가능합니다.'
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 서울공예박물관에 가려면 반드시 사전 예약을 해야 하나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 주말에는 현장 입장이 금방 마감되므로 무조건 사전 예약을 하고 방문하는 것이 안전합니다.
+      - '@type': Question
+        name: 박물관 방문 시 자동차와 대중교통 중 무엇을 추천하나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 주차비가 입장료보다 비싸게 나올 수 있으므로 지하철 등 대중교통 이용을 강력히 추천합니다.
+      - '@type': Question
+        name: 뮤지엄김치간에서만 즐길 수 있는 특별한 체험은 무엇인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '현미경을 통한 김치 유산균 관찰이 가능하며, 3종류 정도의 김치를 직접 시식해 볼 수 있습니다.'
+      - '@type': Question
+        name: 쇳대박물관 방문 시 미리 알아두어야 할 주의사항이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 언덕길 경사가 가파르며 월요일은 휴관입니다. 내부가 다소 어두울 수 있다는 점도 참고하세요.
+      - '@type': Question
+        name: 소개된 박물관들의 전체적인 입장료 수준은 어느 정도인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '무료부터 5,000원 안팎으로 저렴하여 인당 커피 한 잔 값으로 부담 없이 관람이 가능합니다.'
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천'
+    description: >-
+      뻔한 카페 데이트가 지겹다면? 서울의 매력적인 이색 박물관 5곳을 소개합니다. 가로수길부터 인사동까지, 실내 데이트 코스로 완벽한
+      숨은 명소들을 만나보세요.
+    image: /travel-blog/images/cover-museum-ePa-rlcuwvA.jpg
+    author:
+      '@type': Person
+      name: Blog Author
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: 2026-02-05T12:24:39.000Z
+    dateModified: 2026-02-05T12:24:39.000Z
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-05-seoul-museum/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 문화
+        item: /travel-blog/culture/
+      - '@type': ListItem
+        position: 3
+        name: '서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천'
+        item: /travel-blog/posts//
 ---
 # 이번 주말, 판교 탈출해서 서울 도심 박물관 5곳 털고 온 후기
 
@@ -121,3 +198,25 @@ imageCredit: Photo by Raymond Yeung on Unsplash
 
 **에디터 한마디:** 
 솔직히 '인생샷' 찍으러 가는 곳은 아니에요. 근데 주말에 사람에 치이기 싫고, 적당히 지적인 척하면서 시원한 데 있고 싶다? 그럼 여기만한 데가 없어요. 네이버 지도에 저장해뒀다가 비 오는 날이나 할 거 없을 때 쓱 꺼내 쓰세요.
+
+## 자주 묻는 질문
+
+### 서울공예박물관에 가려면 반드시 사전 예약을 해야 하나요?
+
+주말에는 현장 입장이 금방 마감되므로 무조건 사전 예약을 하고 방문하는 것이 안전합니다.
+
+### 박물관 방문 시 자동차와 대중교통 중 무엇을 추천하나요?
+
+주차비가 입장료보다 비싸게 나올 수 있으므로 지하철 등 대중교통 이용을 강력히 추천합니다.
+
+### 뮤지엄김치간에서만 즐길 수 있는 특별한 체험은 무엇인가요?
+
+현미경을 통한 김치 유산균 관찰이 가능하며, 3종류 정도의 김치를 직접 시식해 볼 수 있습니다.
+
+### 쇳대박물관 방문 시 미리 알아두어야 할 주의사항이 있나요?
+
+언덕길 경사가 가파르며 월요일은 휴관입니다. 내부가 다소 어두울 수 있다는 점도 참고하세요.
+
+### 소개된 박물관들의 전체적인 입장료 수준은 어느 정도인가요?
+
+무료부터 5,000원 안팎으로 저렴하여 인당 커피 한 잔 값으로 부담 없이 관람이 가능합니다.

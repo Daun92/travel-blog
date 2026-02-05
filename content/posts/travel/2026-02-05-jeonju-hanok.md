@@ -34,6 +34,83 @@ ShowWordCount: true
 image: /travel-blog/images/cover-jeonju-JVYIKBT8oDA.jpg
 imageAlt: a close up of a roof made of bricks
 imageCredit: Photo by Minku Kang on Unsplash
+faqs:
+  - q: 서울에서 전주까지 갈 때 가장 추천하는 교통수단은 무엇인가요?
+    a: 용산역에서 KTX를 타면 1시간 40분 만에 도착합니다. 주말 고속도로 정체를 피할 수 있어 기차 이용을 강력 추천합니다.
+  - q: 전주 한옥마을 1박 2일 여행 예산은 어느 정도로 잡아야 할까요?
+    a: '교통비, 숙박비, 식비를 포함해 1인당 약 20만 원에서 22만 원 정도의 예산이 필요합니다.'
+  - q: 한옥마을 내에서 주차하기 편리한가요?
+    a: '공영주차장은 일일 최대 12,000원이지만, 주말에는 진입에만 30분 이상 소요되므로 차를 안 가져가는 것이 좋습니다.'
+  - q: 비빔밥 외에 꼭 먹어봐야 할 가성비 좋은 먹거리가 있나요?
+    a: '5,500원인 길거리아 바게트 버거와 남부시장 야시장의 5,000원짜리 삼겹살 김밥을 추천합니다.'
+  - q: 한옥마을의 전경과 야경을 감상하기 좋은 명소는 어디인가요?
+    a: 10분 정도 걸어 올라가는 오목대와 한옥마을 전체가 내려다보이는 '카페 전망'의 4층 테라스를 추천합니다.
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 서울에서 전주까지 갈 때 가장 추천하는 교통수단은 무엇인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 용산역에서 KTX를 타면 1시간 40분 만에 도착합니다. 주말 고속도로 정체를 피할 수 있어 기차 이용을 강력 추천합니다.
+      - '@type': Question
+        name: 전주 한옥마을 1박 2일 여행 예산은 어느 정도로 잡아야 할까요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '교통비, 숙박비, 식비를 포함해 1인당 약 20만 원에서 22만 원 정도의 예산이 필요합니다.'
+      - '@type': Question
+        name: 한옥마을 내에서 주차하기 편리한가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '공영주차장은 일일 최대 12,000원이지만, 주말에는 진입에만 30분 이상 소요되므로 차를 안 가져가는 것이 좋습니다.'
+      - '@type': Question
+        name: 비빔밥 외에 꼭 먹어봐야 할 가성비 좋은 먹거리가 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '5,500원인 길거리아 바게트 버거와 남부시장 야시장의 5,000원짜리 삼겹살 김밥을 추천합니다.'
+      - '@type': Question
+        name: 한옥마을의 전경과 야경을 감상하기 좋은 명소는 어디인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 10분 정도 걸어 올라가는 오목대와 한옥마을 전체가 내려다보이는 '카페 전망'의 4층 테라스를 추천합니다.
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스'
+    description: >-
+      전주 한옥마을 여행을 위한 완벽한 당일치기 코스를 소개합니다. 전주 비빔밥 맛집, 경기전, 오목대 야경 등 전주 데이트 코스와
+      실용적인 팁을 확인하세요.
+    image: /travel-blog/images/cover-jeonju-JVYIKBT8oDA.jpg
+    author:
+      '@type': Person
+      name: Blog Author
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: 2026-02-05T12:15:39.000Z
+    dateModified: 2026-02-05T12:15:39.000Z
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-05-jeonju-hanok/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 여행
+        item: /travel-blog/travel/
+      - '@type': ListItem
+        position: 3
+        name: '전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스'
+        item: /travel-blog/posts//
 ---
 # 전주 한옥마을, 퇴근하고 냅다 달린 1박 2일 현실 생존기
 
@@ -99,3 +176,25 @@ imageCredit: Photo by Minku Kang on Unsplash
 5. **다시 갈 건가요?** 음, 한 3년 뒤쯤? 전주 비빔밥 맛은 기억 안 나도 바게트 버거 맛은 생각날 것 같네요.
 
 결론은, 한 번쯤은 가볼 만한데 큰 기대 없이 '먹으러 간다'는 마음으로 가야 정신 건강에 이롭습니다. 이상 퇴근하고 냅다 달린 전주 생존기 끝!
+
+## 자주 묻는 질문
+
+### 서울에서 전주까지 갈 때 가장 추천하는 교통수단은 무엇인가요?
+
+용산역에서 KTX를 타면 1시간 40분 만에 도착합니다. 주말 고속도로 정체를 피할 수 있어 기차 이용을 강력 추천합니다.
+
+### 전주 한옥마을 1박 2일 여행 예산은 어느 정도로 잡아야 할까요?
+
+교통비, 숙박비, 식비를 포함해 1인당 약 20만 원에서 22만 원 정도의 예산이 필요합니다.
+
+### 한옥마을 내에서 주차하기 편리한가요?
+
+공영주차장은 일일 최대 12,000원이지만, 주말에는 진입에만 30분 이상 소요되므로 차를 안 가져가는 것이 좋습니다.
+
+### 비빔밥 외에 꼭 먹어봐야 할 가성비 좋은 먹거리가 있나요?
+
+5,500원인 길거리아 바게트 버거와 남부시장 야시장의 5,000원짜리 삼겹살 김밥을 추천합니다.
+
+### 한옥마을의 전경과 야경을 감상하기 좋은 명소는 어디인가요?
+
+10분 정도 걸어 올라가는 오목대와 한옥마을 전체가 내려다보이는 '카페 전망'의 4층 테라스를 추천합니다.

@@ -34,6 +34,83 @@ ShowWordCount: true
 image: /travel-blog/images/cover-gangneung-cJKfMvJGHD0.jpg
 imageAlt: photography of bike near store facade
 imageCredit: Photo by Yonghyun Lee on Unsplash
+faqs:
+  - q: 주말에 방문할 때 주차는 어디에 하는 것이 좋나요?
+    a: 해변 앞 도로 대신 강릉항 여객터미널 무료 주차장을 이용하면 5분 거리로 쾌적합니다.
+  - q: 서울에서 강릉 안목해변까지 소요 시간은 얼마나 걸리나요?
+    a: '금요일 밤은 약 2시간 40분, 토요일 오전은 4시간 이상 소요되니 출발 시간을 잘 잡으세요.'
+  - q: 카페에서 바다가 잘 보이는 창가 자리를 잡는 팁이 있나요?
+    a: 남들이 점심을 먹는 12시에서 1시 사이에 카페를 방문하면 창가 자리 선점이 유리합니다.
+  - q: 1박 2일 2인 기준 예상 여행 경비는 어느 정도인가요?
+    a: '교통비, 숙박비, 식비 등을 모두 포함하여 2인 기준 약 35만 원 정도가 소요됩니다.'
+  - q: 웨이팅이 적고 창가 자리에 앉기 편한 카페는 어디인가요?
+    a: 커피커퍼는 상대적으로 덜 붐비고 분위기가 클래식해 창가 자리를 잡을 확률이 가장 높습니다.
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 주말에 방문할 때 주차는 어디에 하는 것이 좋나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 해변 앞 도로 대신 강릉항 여객터미널 무료 주차장을 이용하면 5분 거리로 쾌적합니다.
+      - '@type': Question
+        name: 서울에서 강릉 안목해변까지 소요 시간은 얼마나 걸리나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '금요일 밤은 약 2시간 40분, 토요일 오전은 4시간 이상 소요되니 출발 시간을 잘 잡으세요.'
+      - '@type': Question
+        name: 카페에서 바다가 잘 보이는 창가 자리를 잡는 팁이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 남들이 점심을 먹는 12시에서 1시 사이에 카페를 방문하면 창가 자리 선점이 유리합니다.
+      - '@type': Question
+        name: 1박 2일 2인 기준 예상 여행 경비는 어느 정도인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '교통비, 숙박비, 식비 등을 모두 포함하여 2인 기준 약 35만 원 정도가 소요됩니다.'
+      - '@type': Question
+        name: 웨이팅이 적고 창가 자리에 앉기 편한 카페는 어디인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 커피커퍼는 상대적으로 덜 붐비고 분위기가 클래식해 창가 자리를 잡을 확률이 가장 높습니다.
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드'
+    description: >-
+      강릉 여행의 필수 코스인 안목해변 강릉 커피거리! 바다 뷰가 환상적인 강릉 카페 추천부터 주차, 교통 정보, 현지인 팁까지 상세히
+      소개해 드립니다.
+    image: /travel-blog/images/cover-gangneung-cJKfMvJGHD0.jpg
+    author:
+      '@type': Person
+      name: Blog Author
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: 2026-02-05T12:19:26.000Z
+    dateModified: 2026-02-05T12:19:26.000Z
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-05-gangneung-cafe/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 여행
+        item: /travel-blog/travel/
+      - '@type': ListItem
+        position: 3
+        name: '강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드'
+        item: /travel-blog/posts//
 ---
 # 금요일 퇴근하고 냅다 쏜 강릉 안목해변, 솔직히 커피 맛보다 주차가 문제임
 
@@ -110,3 +187,25 @@ imageCredit: Photo by Yonghyun Lee on Unsplash
 
 **다시 가실 건가요?**
 솔직히 말하면, 누가 사준다고 하면 가겠지만 제 돈 내고 주말에 또 갈지는 모르겠어요. 그래도 바다 보면서 때리는 아이스 아메리카노 한 잔이 월요일 출근을 버티게 하는 힘이 되긴 하네요. 다음엔 그냥 속초나 양양으로 튈까 봐요.
+
+## 자주 묻는 질문
+
+### 주말에 방문할 때 주차는 어디에 하는 것이 좋나요?
+
+해변 앞 도로 대신 강릉항 여객터미널 무료 주차장을 이용하면 5분 거리로 쾌적합니다.
+
+### 서울에서 강릉 안목해변까지 소요 시간은 얼마나 걸리나요?
+
+금요일 밤은 약 2시간 40분, 토요일 오전은 4시간 이상 소요되니 출발 시간을 잘 잡으세요.
+
+### 카페에서 바다가 잘 보이는 창가 자리를 잡는 팁이 있나요?
+
+남들이 점심을 먹는 12시에서 1시 사이에 카페를 방문하면 창가 자리 선점이 유리합니다.
+
+### 1박 2일 2인 기준 예상 여행 경비는 어느 정도인가요?
+
+교통비, 숙박비, 식비 등을 모두 포함하여 2인 기준 약 35만 원 정도가 소요됩니다.
+
+### 웨이팅이 적고 창가 자리에 앉기 편한 카페는 어디인가요?
+
+커피커퍼는 상대적으로 덜 붐비고 분위기가 클래식해 창가 자리를 잡을 확률이 가장 높습니다.

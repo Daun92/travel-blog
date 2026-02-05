@@ -34,8 +34,84 @@ ShowWordCount: true
 image: /travel-blog/images/cover-daegu-LVeFDJRtwEA.jpg
 imageAlt: A storefront with an open door and colorful umbrella.
 imageCredit: Photo by IRa Kang on Unsplash
+faqs:
+  - q: 대구 도보 여행을 시작하기에 가장 좋은 장소와 가는 방법은 무엇인가요?
+    a: '출발점은 김광석 다시 그리기 길이며, 지하철 2호선 경대병원역 3번 출구에서 도보로 5~10분 거리입니다.'
+  - q: 대구 근대골목과 김광석 거리 탐방 시 입장료가 발생하나요?
+    a: 대부분 무료 개방 구역입니다. 박물관 내부 관람 시에만 약간의 비용이 발생할 수 있어 부담이 적습니다.
+  - q: 전체 도보 코스를 둘러보는 데 소요되는 시간은 어느 정도인가요?
+    a: '사진 촬영과 식사 시간을 포함하여 약 4~6시간 정도 소요되며, 반나절 여행 코스로 추천합니다.'
+  - q: 서문시장에서 꼭 맛보아야 할 대표적인 먹거리는 무엇인가요?
+    a: '진한 육수의 칼제비, 대구 명물인 납작만두, 그리고 달콤한 씨앗호떡이 가장 유명합니다.'
+  - q: 도보 여행을 더 알차게 즐길 수 있는 현지 팁이 있나요?
+    a: '편한 운동화를 착용하고, 관광 안내소에서 스탬프 투어 책자를 받아 기념품에 도전해 보세요.'
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 대구 도보 여행을 시작하기에 가장 좋은 장소와 가는 방법은 무엇인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '출발점은 김광석 다시 그리기 길이며, 지하철 2호선 경대병원역 3번 출구에서 도보로 5~10분 거리입니다.'
+      - '@type': Question
+        name: 대구 근대골목과 김광석 거리 탐방 시 입장료가 발생하나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 대부분 무료 개방 구역입니다. 박물관 내부 관람 시에만 약간의 비용이 발생할 수 있어 부담이 적습니다.
+      - '@type': Question
+        name: 전체 도보 코스를 둘러보는 데 소요되는 시간은 어느 정도인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '사진 촬영과 식사 시간을 포함하여 약 4~6시간 정도 소요되며, 반나절 여행 코스로 추천합니다.'
+      - '@type': Question
+        name: 서문시장에서 꼭 맛보아야 할 대표적인 먹거리는 무엇인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '진한 육수의 칼제비, 대구 명물인 납작만두, 그리고 달콤한 씨앗호떡이 가장 유명합니다.'
+      - '@type': Question
+        name: 도보 여행을 더 알차게 즐길 수 있는 현지 팁이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '편한 운동화를 착용하고, 관광 안내소에서 스탬프 투어 책자를 받아 기념품에 도전해 보세요.'
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스'
+    description: >-
+      대구 여행 필수 코스인 대구 근대골목, 김광석 거리, 서문시장을 잇는 역사 탐방 도보 가이드입니다. 상세한 일정과 현지인 팁, 맛집
+      정보까지 모두 담았습니다.
+    image: /travel-blog/images/cover-daegu-LVeFDJRtwEA.jpg
+    author:
+      '@type': Person
+      name: Blog Author
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: 2026-02-05T12:24:08.000Z
+    dateModified: 2026-02-05T12:24:08.000Z
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-05-daegu-alley/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 여행
+        item: /travel-blog/travel/
+      - '@type': ListItem
+        position: 3
+        name: '대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스'
+        item: /travel-blog/posts//
 ---
-
 # 대구 여행의 정수: 근대골목 역사 탐방부터 김광석 거리, 서문시장까지 완벽 도보 코스
 
 안녕하세요! 오늘은 시간이 멈춘 듯한 풍경과 현대적인 감각이 공존하는 매력적인 도시, 대구로 떠나보려고 합니다. 대구는 흔히 '대프리카'라 불릴 만큼 더운 날씨로 유명하지만, 사실 그보다 더 뜨거운 역사적 열정과 예술적 감성이 살아 숨 쉬는 곳입니다.
@@ -116,3 +192,24 @@ imageCredit: Photo by IRa Kang on Unsplash
 
 이번 주말, 가벼운 가방 하나 메고 대구로 떠나보시는 건 어떨까요? 김광석의 노래를 흥얼거리며 근대골목을 걷고, 서문시장의 따뜻한 국수 한 그릇으로 마무리하는 하루는 여러분의 일상에 새로운 활력을 불어넣어 줄 것입니다. 대구의 골목길이 들려주는 이야기에 귀를 기울여 보세요.
 
+## 자주 묻는 질문
+
+### 대구 도보 여행을 시작하기에 가장 좋은 장소와 가는 방법은 무엇인가요?
+
+출발점은 김광석 다시 그리기 길이며, 지하철 2호선 경대병원역 3번 출구에서 도보로 5~10분 거리입니다.
+
+### 대구 근대골목과 김광석 거리 탐방 시 입장료가 발생하나요?
+
+대부분 무료 개방 구역입니다. 박물관 내부 관람 시에만 약간의 비용이 발생할 수 있어 부담이 적습니다.
+
+### 전체 도보 코스를 둘러보는 데 소요되는 시간은 어느 정도인가요?
+
+사진 촬영과 식사 시간을 포함하여 약 4~6시간 정도 소요되며, 반나절 여행 코스로 추천합니다.
+
+### 서문시장에서 꼭 맛보아야 할 대표적인 먹거리는 무엇인가요?
+
+진한 육수의 칼제비, 대구 명물인 납작만두, 그리고 달콤한 씨앗호떡이 가장 유명합니다.
+
+### 도보 여행을 더 알차게 즐길 수 있는 현지 팁이 있나요?
+
+편한 운동화를 착용하고, 관광 안내소에서 스탬프 투어 책자를 받아 기념품에 도전해 보세요.
