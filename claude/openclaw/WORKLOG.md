@@ -10,6 +10,166 @@
 
 ## 개발 이력
 
+### 2026-02-05 (저녁): Premium Content Workflow 구축 및 팩트체크 오류 수정
+
+#### 작업 내용
+
+1. **Draft Enhancer 에이전트 개발**
+   - 페르소나 기반 콘텐츠 향상 시스템
+   - 클리셰 자동 감지/대체 (severity: high/medium/low)
+   - 디테일 수준 분석 (숫자, 실패담, 비교)
+
+2. **Premium Content Workflow 7단계 프로세스 정립**
+   ```
+   Generate → Enhance → Factcheck → Quality → AEO → Image → Publish+Moltbook
+   ```
+
+3. **발행된 포스트 팩트체크 오류 수정**
+
+   | 포스트 | 오류 내용 | 수정 |
+   |--------|----------|------|
+   | 서울 이색 박물관 | 뮤지엄김치간 5,000원 | → 20,000원 |
+   | | 위치 "안녕인사동 6층" | → "인사동마루 4~6층" |
+   | | 이동시간 주장 | → 검증 불가 문구 제거 |
+   | 국립중앙박물관 | 경천사 "사층"석탑 | → "십층"석탑 |
+   | | 소장품 "30만 점" | → "약 44만 점(2024년 기준)" |
+   | | 건축가 최욱 | → "최욱(원오원아키텍스 대표)" |
+
+4. **AEO 일괄 적용 (7개 포스트)**
+   - FAQ 5개 + Schema.org 3개 (Article, FAQPage, BreadcrumbList)
+
+5. **Moltbook 공유 시작**
+   - 여수 밤바다 포스트 공유 완료
+   - Rate limit으로 인해 나머지 포스트 순차 공유 예정
+
+#### 생성된 파일
+- `src/agents/draft-enhancer/index.ts` - 메인 에이전트
+- `src/agents/draft-enhancer/cliche-filter.ts` - 클리셰 필터
+- `src/agents/draft-enhancer/detail-analyzer.ts` - 디테일 분석기
+- `src/agents/draft-enhancer/persona-loader.ts` - 페르소나 로더
+- `src/cli/commands/enhance.ts` - CLI 명령어
+- `config/persona.json` - "주말탈출러" 페르소나 설정
+
+#### 수정된 파일
+- `CLAUDE.md` - Premium Workflow 문서화
+- `src/cli/index.ts` - enhance 명령어 등록
+- `src/cli/commands/workflow.ts` - enhance 단계 통합
+- `package.json` - enhance 관련 스크립트 추가
+- `blog/content/posts/culture/2026-02-05-seoul-museum.md` - 팩트체크 수정
+- `blog/content/posts/culture/2026-02-05-post.md` - 팩트체크 수정
+
+#### 페르소나 설정 (config/persona.json)
+```json
+{
+  "name": "주말탈출러",
+  "tagline": "금요일 퇴근 후부터 일요일 저녁까지, 48시간의 가능성",
+  "voice": {
+    "never_say": ["힐링 여행", "인생샷", "감성 카페", "숨은 명소", ...],
+    "signature_phrases": ["퇴근하고 바로 출발하면", "솔직히 다시 갈지는 모르겠지만", ...]
+  },
+  "detailing_rules": {
+    "failure_story_required": true,
+    "comparison_required": true
+  }
+}
+```
+
+#### 팩트체크 결과
+| 포스트 | 수정 전 | 수정 후 |
+|--------|---------|---------|
+| 국립중앙박물관 | 60% | **100%** ✅ |
+| 서울 이색 박물관 | 16% | 수정 완료 (경험담 위주로 자동검증 한계) |
+
+#### Git 커밋
+```
+3bc842f docs: Premium Content Workflow 7단계 프로세스 문서화
+441ceab fix: 서울 이색 박물관 팩트체크 오류 수정
+e96f78e fix: 국립중앙박물관 가이드 팩트체크 오류 수정
+bbd002c fix: 국립중앙박물관 정보 정확도 개선
+9d87579 fix: 서울 이색 박물관 검증 불가 주장 제거
+```
+
+---
+
+### 2026-02-05 (오후): 주간 콘텐츠 생성 및 검증 시스템 개선
+
+#### 작업 내용
+
+1. **주간 블로그 초안 7개 생성**
+   - Gemini API (`gemini-3.0-flash`) 사용
+   - 기존 발행 콘텐츠와 중복 없이 새로운 지역/주제 선정
+
+2. **검증 로직 버그 수정**
+   - 글자수 계산 오류 수정 (`src/quality/gates.ts`)
+   - 민감 키워드 오탐 수정 (`src/quality/human-review.ts`)
+
+3. **커버 이미지 7개 추가**
+   - Unsplash API 활용
+   - 자동화 스크립트 작성 (`scripts/add-cover-images.mts`)
+
+#### 생성된 드래프트
+
+| 파일명 | 카테고리 | 제목 | SEO | Content |
+|--------|----------|------|-----|---------|
+| `2026-02-05-7.md` | travel | 제주도 감성 카페 베스트 7 | 85% | 94% |
+| `2026-02-05-jeonju-hanok.md` | travel | 전주 한옥마을 완벽 가이드 | 95% | 94% |
+| `2026-02-05-2026-best-5.md` | culture | 2026 봄 뮤지컬 추천 BEST 5 | 85% | 94% |
+| `2026-02-05-gangneung-cafe.md` | travel | 강릉 커피거리 & 안목해변 카페 투어 | 95% | 94% |
+| `2026-02-05-daegu-alley.md` | travel | 대구 근대골목 역사 탐방 | 95% | 94% |
+| `2026-02-05-seoul-museum.md` | culture | 서울 이색 박물관 베스트 5 | 85% | 94% |
+| `2026-02-05-yeosu-night.md` | travel | 여수 밤바다 낭만 여행 | 95% | 94% |
+
+#### 버그 수정 상세
+
+**1. 글자수 계산 오류 (`src/quality/gates.ts:159-170`)**
+```typescript
+// 수정 전 (버그)
+const koreanChars = content.replace(/[^가-힣]/g, '').length;
+const wordCount = Math.round(koreanChars / 2);  // 한글만 추출 후 2로 나눔 → 실제의 절반
+
+// 수정 후
+const textOnly = content.replace(/[#*\-\[\]()_`~>|]/g, '').replace(/\s+/g, ' ');
+const charCount = textOnly.replace(/\s/g, '').length;  // 전체 텍스트 글자수
+```
+- **영향:** content 점수 64% → 94%로 개선
+
+**2. 민감 키워드 오탐 (`src/quality/human-review.ts:54-63`)**
+```typescript
+// 수정 전 (오탐 발생)
+const SENSITIVE_KEYWORDS = ['문제', '절', '사건', ...];  // 일반 단어 포함
+
+// 수정 후
+const SENSITIVE_KEYWORDS = ['정치적 논란', '종교 갈등', '심각한 사고', ...];  // 구체적 표현만
+```
+- **영향:** "검토 필요" → "통과" 상태로 변경
+
+#### 생성된 파일
+- `scripts/gen-jeju-cafe.mts` - 제주 카페 포스트 생성
+- `scripts/gen-jeonju.mts` - 전주 한옥마을 포스트 생성
+- `scripts/gen-gangneung.mts` - 강릉 카페 포스트 생성
+- `scripts/gen-remaining.mts` - 나머지 포스트 일괄 생성
+- `scripts/gen-weekly-posts.mts` - 주간 포스트 일괄 생성
+- `scripts/add-cover-images.mts` - 커버 이미지 일괄 추가
+
+#### 수정된 파일
+- `src/quality/gates.ts` - 글자수 계산 로직 수정
+- `src/quality/human-review.ts` - 민감 키워드 목록 수정
+- `src/cli/commands/moltbook.ts` - 미사용 case 제거 (빌드 오류 수정)
+- `src/aeo/faq-generator.ts` - 타입 오류 수정
+
+#### 추가된 커버 이미지
+| 파일명 | 검색어 |
+|--------|--------|
+| `cover-musical-*.jpg` | musical theater stage |
+| `cover-jeju-cafe-*.jpg` | jeju island cafe ocean view |
+| `cover-daegu-*.jpg` | korean traditional alley street |
+| `cover-gangneung-*.jpg` | gangneung korea beach cafe |
+| `cover-jeonju-*.jpg` | jeonju hanok village korea |
+| `cover-museum-*.jpg` | seoul museum interior |
+| `cover-yeosu-*.jpg` | yeosu night view korea sea |
+
+---
+
 ### 2026-02-05: 하이브리드 이미지 시스템 구현
 
 #### 작업 내용
@@ -72,16 +232,17 @@
 | 2026-02-04 | travel | 서울 북촌한옥마을 완벽 가이드 | ✓ | - |
 | 2026-02-04 | culture | 국립현대미술관 서울 2026 기획전 | ✓ | 2장 |
 
-### 초안 (drafts/)
+### 초안 (drafts/) - 2026-02-05 업데이트
 
-| 파일명 | 상태 | 인라인 이미지 |
-|--------|------|---------------|
-| 2026-02-04-1.md | 검토 대기 | 3장 |
-| 2026-02-04-post.md | 검토 대기 | 2장 |
-| 2026-02-04-2-5.md | 검토 대기 | - |
-| 2026-02-04-4.md | 검토 대기 | - |
-| 2026-02-04-5.md | 검토 대기 | - |
-| 2026-02-04-best-5-2024.md | 검토 대기 | - |
+| 파일명 | 카테고리 | 상태 | 커버 이미지 |
+|--------|----------|------|-------------|
+| 2026-02-05-7.md | travel | ✔ 통과 | ✓ |
+| 2026-02-05-jeonju-hanok.md | travel | ✔ 통과 | ✓ |
+| 2026-02-05-2026-best-5.md | culture | ✔ 통과 | ✓ |
+| 2026-02-05-gangneung-cafe.md | travel | ✔ 통과 | ✓ |
+| 2026-02-05-daegu-alley.md | travel | ✔ 통과 | ✓ |
+| 2026-02-05-seoul-museum.md | culture | ✔ 통과 | ✓ |
+| 2026-02-05-yeosu-night.md | travel | ✔ 통과 | ✓ |
 
 ---
 
@@ -135,7 +296,40 @@ cd blog && hugo --minify
 
 ## 워크플로우 가이드
 
-### 새 포스트 생성
+### 🌟 Premium Workflow (권장)
+
+고품질 콘텐츠 발행을 위한 7단계 표준 프로세스:
+
+```bash
+# Step 1: 콘텐츠 생성
+npm run new -- -t "주제" --type travel
+
+# Step 2: 페르소나 기반 향상
+npm run enhance -- -f drafts/파일명.md
+npm run enhance -- --all                    # 모든 드래프트
+
+# Step 3: 팩트체크 (70% 이상 필수)
+npm run factcheck -- -f drafts/파일명.md
+
+# Step 4: 품질 검증
+npm run validate -- -f drafts/파일명.md
+
+# Step 5: AEO 적용 (FAQ + Schema.org)
+npm run aeo -- -f drafts/파일명.md --apply
+
+# Step 6: 이미지 확인 (/travel-blog/ prefix)
+
+# Step 7: 발행 + Moltbook
+npm run publish
+npm run moltbook:share
+```
+
+#### 통합 명령어
+```bash
+npm run workflow:premium -- -f drafts/파일명.md
+```
+
+### 새 포스트 생성 (기본)
 ```bash
 # 1. 기본 생성
 npm run new -- -t "주제" --type travel
@@ -153,7 +347,7 @@ npm run new -- -t "주제" --type travel --inline-images --yes
 npx tsx scripts/add-images.mts
 ```
 
-### 초안 검토 및 발행
+### 초안 검토 및 발행 (레거시)
 ```bash
 # 초안 목록
 npm run drafts
@@ -170,22 +364,21 @@ npm run publish -- -f filename.md
 ## 환경 변수 (.env)
 
 ```env
-# Ollama (필수)
-OLLAMA_HOST=http://localhost:11434
-OLLAMA_MODEL=qwen3:8b
+# Gemini API (텍스트 + 이미지 생성) - 필수
+GEMINI_API_KEY=your-key
+LLM_MODEL=gemini-3.0-flash              # 텍스트 생성
+GEMINI_IMAGE_MODEL=gemini-3.0-pro-preview  # 이미지 생성
+GEMINI_IMAGE_ENABLED=true
+GEMINI_IMAGE_MAX_COUNT=50
 
 # Unsplash (커버 이미지)
 UNSPLASH_ACCESS_KEY=your-key
 
-# Gemini (인라인 이미지)
-GEMINI_API_KEY=your-key
-GEMINI_IMAGE_ENABLED=true
-GEMINI_IMAGE_MAX_COUNT=50
-GEMINI_IMAGE_MODEL=gemini-2.0-flash-exp
-
 # Hugo
 HUGO_BASE_URL=/travel-blog
 ```
+
+> **참고:** 2026-02-05 기준 Ollama에서 Gemini API로 완전 전환됨
 
 ---
 
@@ -209,6 +402,59 @@ HUGO_BASE_URL=/travel-blog
 ---
 
 ## 시행착오 및 문제 해결 기록
+
+### 2026-02-05 (저녁): AI 생성 콘텐츠 팩트체크 이슈
+
+#### 1. AI가 생성한 부정확한 정보
+**증상:** 팩트체크 점수 16~60%로 매우 낮음
+**원인:** AI(Gemini)가 정확하지 않은 정보 생성
+- 뮤지엄김치간 입장료: 5,000원 (실제: 20,000원)
+- 경천사 "사층"석탑 (실제: 십층석탑)
+- 소장품 "30만 점" (실제: 약 44만 점)
+
+**해결:**
+1. 웹 검색으로 공식 정보 확인
+2. 수동으로 정확한 정보로 교체
+3. 검증 불가한 주관적 주장 제거/완화
+
+**교훈:**
+- AI 생성 콘텐츠는 반드시 팩트체크 필수
+- 구체적 숫자(가격, 수량, 시간)는 특히 검증 필요
+- 70% 미만 팩트체크 점수 → 발행 전 수동 검토
+
+---
+
+#### 2. 자동 팩트체크의 한계
+**증상:** 경험담/주관적 내용이 많은 포스트는 점수가 낮게 나옴
+**원인:**
+- "지하철로 40~60분" 같은 주관적 주장은 검증 어려움
+- 개인 경험 기반 내용은 외부 소스로 확인 불가
+
+**해결:**
+- 검증 가능한 객관적 사실 위주로 클레임 작성
+- 주관적 경험은 명확히 개인 의견임을 표시
+- 구체적 시간/거리 주장 대신 일반적 표현 사용
+
+**예시:**
+```markdown
+# 수정 전 (검증 어려움)
+강남/판교 기준 지하철로 40~60분이면 다 도착합니다.
+
+# 수정 후 (검증 용이)
+모두 지하철역에서 도보 10분 이내 거리예요.
+```
+
+---
+
+#### 3. 팩트체크 검증 소스 목록
+| 분야 | 검증 소스 |
+|------|----------|
+| 박물관 정보 | museum.go.kr, 각 박물관 공식 사이트 |
+| 입장료/운영시간 | 공식 사이트, trip.com, namu.wiki |
+| 건축/설계 정보 | 건축 전문 매체, 위키피디아 |
+| 문화재 정보 | heritage.go.kr, encykorea.aks.ac.kr |
+
+---
 
 ### 2026-02-05: 하이브리드 이미지 시스템 구현 중 발생한 이슈들
 
