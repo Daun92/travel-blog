@@ -7,9 +7,12 @@ summary: "국립현대미술관 서울관 2026년 전시 정보와 관람 팁, �
 tags: ["문화", "예술", "전시회", "미술관", "서울", "국립현대미술관"]
 categories: ["culture"]
 keywords: ["국립현대미술관", "MMCA 서울", "서울 전시회", "미술관 추천"]
-image: /travel-blog/images/mmca-cover.jpg
-imageAlt: a couple of large sculptures sitting on top of a cement floor
-imageCredit: Photo by Andrea De Santis on Unsplash
+cover:
+  image: /travel-blog/images/mmca-cover.jpg
+  alt: a couple of large sculptures sitting on top of a cement floor
+  caption: Photo by Andrea De Santis on Unsplash
+  relative: false
+  hidden: false
 author: "Blog Author"
 venue: "국립현대미술관 서울"
 eventDate: "상설 전시"
