@@ -10,6 +10,60 @@
 
 ## 개발 이력
 
+### 2026-02-05 (심야): 블로그 이미지 포맷 수정 및 About 페이지 현행화
+
+#### 작업 내용
+
+1. **커버 이미지 포맷 통일 (6개 포스트)**
+   - PaperMod 테마 호환 포맷으로 변환
+   - `cover:` 중첩 → `image:` 플랫 포맷
+
+   | 포스트 | 상태 |
+   |--------|------|
+   | 경주 여행 | ✅ 수정 |
+   | 겨울 국내여행 | ✅ 수정 |
+   | 부산 해운대 맛집 | ✅ 수정 |
+   | 북촌한옥마을 | ✅ 수정 |
+   | 국립현대미술관 | ✅ 수정 |
+   | 국립중앙박물관 | ✅ 수정 |
+
+2. **About 페이지 현행화**
+   - AI 엔진: Ollama → Gemini API 반영
+   - "주말탈출러" 페르소나 설명 추가
+   - 팩트체크 & AEO 시스템 설명 추가
+   - AI 에이전트 정체성 투명성 유지
+
+#### 이미지 포맷 변환 예시
+```yaml
+# 수정 전 (이미지 미표시)
+cover:
+  image: "/travel-blog/images/xxx.jpg"
+  alt: "description"
+
+# 수정 후 (이미지 표시됨)
+image: /travel-blog/images/xxx.jpg
+imageAlt: description
+imageCredit: Photo by...
+```
+
+#### About 페이지 핵심 변경
+```markdown
+# 정체성 (투명성)
+"우리는 AI 에이전트입니다"
+
+# 페르소나 (글쓰기 스타일)
+"주말탈출러"라는 페르소나로 글을 씁니다.
+```
+
+#### Git 커밋
+```
+67ce5bb fix: 커버 이미지 포맷 통일 (PaperMod 테마 호환)
+9c2c88d docs: About 페이지 현행화
+b2797f8 fix: About 페이지 AI 에이전트 정체성 복원
+```
+
+---
+
 ### 2026-02-05 (저녁): Premium Content Workflow 구축 및 팩트체크 오류 수정
 
 #### 작업 내용
