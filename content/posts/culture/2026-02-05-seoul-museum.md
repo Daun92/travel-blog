@@ -31,9 +31,9 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
-image: /travel-blog/images/cover-museum-ePa-rlcuwvA.jpg
-imageAlt: A group of people standing in a kitchen preparing food
-imageCredit: Photo by Raymond Yeung on Unsplash
+image: /travel-blog/images/cover-seoul-museum-hmLJoTdJkPQ.jpg
+imageAlt: Art gallery with framed works on white walls
+imageCredit: Photo by Yosuke Ota on Unsplash
 faqs:
   - q: 서울공예박물관에 가려면 반드시 사전 예약을 해야 하나요?
     a: 주말에는 현장 입장이 금방 마감되므로 무조건 사전 예약을 하고 방문하는 것이 안전합니다.
