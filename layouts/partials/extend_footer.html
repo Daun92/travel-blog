@@ -1,0 +1,165 @@
+{{/* OpenClaw Travel Blog - Footer Extensions */}}
+
+{{/* 스크롤 프로그레스 바 */}}
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+{{/* 라이트박스 오버레이 */}}
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img src="" alt="확대 이미지" id="lightbox-img">
+</div>
+
+{{/* 푸터 확장 영역 */}}
+<div class="footer-extra">
+  {{/* 인기 태그 */}}
+  <div class="footer-section">
+    <h4>인기 태그</h4>
+    <div class="footer-tags">
+      {{- range first 10 site.Taxonomies.tags.ByCount }}
+      <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+      {{- end }}
+    </div>
+  </div>
+
+  {{/* 최근 포스트 */}}
+  <div class="footer-section">
+    <h4>최근 포스트</h4>
+    <ul class="footer-recent-posts">
+      {{- range first 5 (where site.RegularPages "Section" "posts") }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <div class="post-date">{{ .Date.Format "2006.01.02" }}</div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+
+  {{/* 뉴스레터 구독 (선택적) */}}
+  {{/*
+  <div class="footer-section">
+    <h4>뉴스레터 구독</h4>
+    <p style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 1rem;">
+      새로운 여행 정보를 이메일로 받아보세요.
+    </p>
+    <form class="newsletter-form" action="#" method="post">
+      <input type="email" placeholder="이메일 주소" required>
+      <button type="submit">구독</button>
+    </form>
+  </div>
+  */}}
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // 스크롤 프로그레스 바
+  var progressBar = document.getElementById('progressBar');
+  if (progressBar) {
+    window.addEventListener('scroll', function() {
+      var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      progressBar.style.width = scrolled + '%';
+    }, { passive: true });
+  }
+
+  // TOC 활성 상태 추적
+  var tocLinks = document.querySelectorAll('.toc a');
+  if (tocLinks.length > 0) {
+    var headings = [];
+
+    tocLinks.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        var id = href.substring(1);
+        var heading = document.getElementById(id);
+        if (heading) {
+          headings.push({ element: heading, link: link });
+        }
+      }
+    });
+
+    if (headings.length > 0) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(function(l) {
+              l.classList.remove('active');
+            });
+            headings.forEach(function(h) {
+              if (h.element === entry.target) {
+                h.link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -70% 0px',
+        threshold: 0
+      });
+
+      headings.forEach(function(h) {
+        observer.observe(h.element);
+      });
+    }
+  }
+
+  // 부드러운 스크롤 (TOC 링크)
+  document.querySelectorAll('.toc a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var offset = 80;
+          var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+
+  // 라이트박스 기능
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxClose = document.querySelector('.lightbox-close');
+
+  if (lightbox && lightboxImg) {
+    // 포스트 콘텐츠 내 이미지에 클릭 이벤트 추가
+    document.querySelectorAll('.post-content img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        lightboxImg.src = this.src;
+        lightboxImg.alt = this.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // 라이트박스 닫기
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox || e.target === lightboxClose) {
+        closeLightbox();
+      }
+    });
+
+    // ESC 키로 닫기
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+})();
+</script>

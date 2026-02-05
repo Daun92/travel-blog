@@ -62,9 +62,15 @@ enableEmoji = true
 
 # 파라미터 설정 (PaperMod 테마용)
 [params]
+  # 환경 설정
+  env = "production"
+
   # 기본 정보
   description = "한국의 아름다운 여행지와 문화예술을 소개합니다"
   author = "Blog Author"
+
+  # OG 이미지 기본값
+  images = ["/travel-blog/images/og-default.jpg"]
 
   # 메타 설정
   keywords = ["여행", "문화", "예술", "한국", "travel", "culture", "korea"]
@@ -86,6 +92,7 @@ enableEmoji = true
   hideSummary = false
   showtoc = true
   tocopen = false
+  comments = true
 
   # 홈페이지 설정
   [params.homeInfoParams]
@@ -107,6 +114,23 @@ enableEmoji = true
     hiddenInSingle = false
     linkFullImages = true
 
+  # 스키마 설정
+  [params.schema]
+    publisherType = "Organization"
+
+  # 댓글 설정 (Giscus)
+  [params.giscus]
+    repo = "Daun92/travel-blog"
+    repoId = "R_kgDORIgjaA"
+    category = "General"
+    categoryId = "DIC_kwDORIgjaM4C161N"
+    mapping = "pathname"
+    reactionsEnabled = "1"
+    emitMetadata = "0"
+    inputPosition = "top"
+    theme = "preferred_color_scheme"
+    lang = "ko"
+
   # 검색 설정
   [params.fuseOpts]
     isCaseSensitive = false
@@ -117,12 +141,12 @@ enableEmoji = true
     minMatchCharLength = 0
     keys = ["title", "permalink", "summary", "content"]
 
-# SEO 설정 (favicon은 static/ 폴더에 파일 추가 후 활성화)
-# [params.assets]
-#   favicon = "favicon.ico"
-#   favicon16x16 = "favicon-16x16.png"
-#   favicon32x32 = "favicon-32x32.png"
-#   apple_touch_icon = "apple-touch-icon.png"
+# SEO 설정
+[params.assets]
+  favicon = "/favicon.svg"
+  favicon16x16 = "/favicon.svg"
+  favicon32x32 = "/favicon.svg"
+  apple_touch_icon = "/favicon.svg"
 
 # 분류 체계
 [taxonomies]

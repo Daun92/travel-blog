@@ -1,0 +1,25 @@
+{{/* 시리즈 네비게이션 */}}
+{{ with .Params.series }}
+{{ $series := index . 0 }}
+{{ $seriesPages := where site.RegularPages ".Params.series" "intersect" (slice $series) }}
+{{ if gt (len $seriesPages) 1 }}
+<div class="series-nav">
+  <div class="series-header">
+    <span class="series-label">시리즈</span>
+    <h4 class="series-title">{{ $series }}</h4>
+    <span class="series-count">{{ len $seriesPages }}개 포스트</span>
+  </div>
+  <ol class="series-list">
+    {{ range $seriesPages.ByDate }}
+    <li{{ if eq $.Permalink .Permalink }} class="current"{{ end }}>
+      {{ if eq $.Permalink .Permalink }}
+      <span>{{ .Title }}</span>
+      {{ else }}
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ end }}
+    </li>
+    {{ end }}
+  </ol>
+</div>
+{{ end }}
+{{ end }}

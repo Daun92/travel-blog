@@ -1,0 +1,68 @@
+{{/* 댓글 시스템 - Giscus (테마 동기화) */}}
+
+{{ if site.Params.giscus }}
+<div class="comments">
+  <h3>댓글</h3>
+  <script>
+    // 블로그 테마에 따라 Giscus 테마 결정
+    function getGiscusTheme() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      return theme === 'dark' ? 'dark' : 'light';
+    }
+
+    // Giscus 스크립트 동적 로드
+    function loadGiscus() {
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo', '{{ site.Params.giscus.repo }}');
+      script.setAttribute('data-repo-id', '{{ site.Params.giscus.repoId }}');
+      script.setAttribute('data-category', '{{ site.Params.giscus.category | default "Comments" }}');
+      script.setAttribute('data-category-id', '{{ site.Params.giscus.categoryId }}');
+      script.setAttribute('data-mapping', '{{ site.Params.giscus.mapping | default "pathname" }}');
+      script.setAttribute('data-strict', '0');
+      script.setAttribute('data-reactions-enabled', '{{ site.Params.giscus.reactionsEnabled | default "1" }}');
+      script.setAttribute('data-emit-metadata', '{{ site.Params.giscus.emitMetadata | default "0" }}');
+      script.setAttribute('data-input-position', '{{ site.Params.giscus.inputPosition | default "top" }}');
+      script.setAttribute('data-theme', getGiscusTheme());
+      script.setAttribute('data-lang', '{{ site.Params.giscus.lang | default "ko" }}');
+      script.setAttribute('data-loading', 'lazy');
+      script.setAttribute('crossorigin', 'anonymous');
+      script.async = true;
+
+      document.querySelector('.comments').appendChild(script);
+    }
+
+    // 테마 변경 시 Giscus 테마 업데이트
+    function updateGiscusTheme() {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (iframe) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: getGiscusTheme() } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
+    // 초기 로드
+    loadGiscus();
+
+    // 테마 토글 버튼 감지
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        setTimeout(updateGiscusTheme, 100);
+      });
+    }
+
+    // MutationObserver로 data-theme 변경 감지
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'data-theme') {
+          updateGiscusTheme();
+        }
+      });
+    });
+    observer.observe(document.documentElement, { attributes: true });
+  </script>
+</div>
+{{ end }}
