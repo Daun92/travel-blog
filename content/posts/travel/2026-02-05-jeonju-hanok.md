@@ -31,9 +31,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
-image: /travel-blog/images/cover-jeonju-JVYIKBT8oDA.jpg
-imageAlt: a close up of a roof made of bricks
-imageCredit: Photo by Minku Kang on Unsplash
+cover:
+  image: /travel-blog/images/cover-jeonju-JVYIKBT8oDA.jpg
+  alt: a close up of a roof made of bricks
+  caption: Photo by Minku Kang on Unsplash
+  relative: false
+  hidden: false
 faqs:
   - q: 서울에서 전주까지 갈 때 가장 추천하는 교통수단은 무엇인가요?
     a: 용산역에서 KTX를 타면 1시간 40분 만에 도착합니다. 주말 고속도로 정체를 피할 수 있어 기차 이용을 강력 추천합니다.

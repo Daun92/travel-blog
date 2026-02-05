@@ -31,9 +31,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
-image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
-imageAlt: City skyline with bridge and river at night
-imageCredit: Photo by JHANY BLUE on Unsplash
+cover:
+  image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
+  alt: City skyline with bridge and river at night
+  caption: Photo by JHANY BLUE on Unsplash
+  relative: false
+  hidden: false
 faqs:
   - q: 여수 야경을 차로 구경할 때 어디에 주차하는 것이 좋나요?
     a: 돌산공원 공영주차장을 추천합니다. 주말 저녁에는 매우 혼잡하므로 일몰 1시간 전에 도착하는 것이 좋습니다.

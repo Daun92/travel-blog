@@ -31,9 +31,12 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
-image: /travel-blog/images/cover-gangneung-ocean-0dXVrQMsmc8.jpg
-imageAlt: Outdoor cafe seating with ocean view
-imageCredit: Photo by Adam Hlásný on Unsplash
+cover:
+  image: /travel-blog/images/cover-gangneung-ocean-0dXVrQMsmc8.jpg
+  alt: Outdoor cafe seating with ocean view
+  caption: Photo by Adam Hlásný on Unsplash
+  relative: false
+  hidden: false
 faqs:
   - q: 주말에 방문할 때 주차는 어디에 하는 것이 좋나요?
     a: 해변 앞 도로 대신 강릉항 여객터미널 무료 주차장을 이용하면 5분 거리로 쾌적합니다.
