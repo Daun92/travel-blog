@@ -10,6 +10,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
 import matter from 'gray-matter';
+import { canPublish } from '../../quality/index.js';
 
 const execAsync = promisify(exec);
 
@@ -17,6 +18,7 @@ export interface PublishCommandOptions {
   file?: string;
   all?: boolean;
   message?: string;
+  skipValidation?: boolean;
 }
 
 export async function publishCommand(options: PublishCommandOptions): Promise<void> {
@@ -144,6 +146,71 @@ export async function publishCommand(options: PublishCommandOptions): Promise<vo
             category: (info.data.categories as string[])?.[0] || 'travel'
           });
         }
+      }
+    }
+
+    // 품질 게이트 검증 (--skip-validation이 없으면)
+    if (!options.skipValidation) {
+      console.log(chalk.cyan('\n🔍 품질 게이트 검증 중...\n'));
+
+      const blockedFiles: string[] = [];
+      const warningFiles: string[] = [];
+
+      for (const file of filesToPublish) {
+        const publishCheck = await canPublish(file.filepath);
+
+        if (!publishCheck.allowed) {
+          if (publishCheck.reason?.includes('사람 검토')) {
+            warningFiles.push(`${file.title}: ${publishCheck.reason}`);
+          } else {
+            blockedFiles.push(`${file.title}: ${publishCheck.reason}`);
+          }
+        } else {
+          console.log(chalk.green(`  ✓ ${file.title}`));
+        }
+      }
+
+      // 차단된 파일 처리
+      if (blockedFiles.length > 0) {
+        console.log(chalk.red('\n🚫 품질 기준 미달로 발행 차단:'));
+        blockedFiles.forEach(f => console.log(chalk.red(`  • ${f}`)));
+
+        // 차단된 파일 제외
+        filesToPublish = filesToPublish.filter(f =>
+          !blockedFiles.some(b => b.startsWith(f.title))
+        );
+
+        if (filesToPublish.length === 0) {
+          console.log(chalk.red('\n모든 파일이 품질 기준을 통과하지 못했습니다.'));
+          console.log(chalk.dim('품질 검증: npm run validate -f <파일>'));
+          console.log(chalk.dim('팩트체크: npm run factcheck -f <파일>'));
+          return;
+        }
+      }
+
+      // 경고 파일 처리
+      if (warningFiles.length > 0) {
+        console.log(chalk.yellow('\n⚠️ 검토 필요:'));
+        warningFiles.forEach(f => console.log(chalk.yellow(`  • ${f}`)));
+
+        const { continueWithWarnings } = await inquirer.prompt([{
+          type: 'confirm',
+          name: 'continueWithWarnings',
+          message: '경고가 있는 파일도 발행하시겠습니까?',
+          default: false
+        }]);
+
+        if (!continueWithWarnings) {
+          // 경고 파일 제외
+          filesToPublish = filesToPublish.filter(f =>
+            !warningFiles.some(w => w.startsWith(f.title))
+          );
+        }
+      }
+
+      if (filesToPublish.length === 0) {
+        console.log(chalk.dim('발행할 파일이 없습니다.'));
+        return;
       }
     }
 

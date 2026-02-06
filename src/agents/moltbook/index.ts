@@ -52,6 +52,20 @@ export interface ContentStrategy {
   lastUpdated: string;
 }
 
+export interface DraftFeedback {
+  draftId: string;
+  postId: string;
+  blogTitle: string;
+  status: 'pending' | 'collected' | 'applied';
+  sharedAt: string;
+  collectedAt?: string;
+  upvotes: number;
+  downvotes: number;
+  comments: Comment[];
+  suggestions: string[];
+  sentiment: 'positive' | 'neutral' | 'negative';
+}
+
 export interface MoltbookConfig {
   apiKey: string;
   agentName: string;
@@ -169,6 +183,108 @@ export class MoltbookShareAgent {
     await mkdir(DATA_DIR, { recursive: true });
     await writeFile(recordPath, JSON.stringify(records, null, 2));
   }
+
+  /**
+   * 초안을 Moltbook에 공유 (발행 전 피드백 수집용)
+   */
+  async shareDraft(draft: {
+    title: string;
+    summary: string;
+    filePath: string;
+    category: 'travel' | 'culture';
+    topics: string[];
+  }): Promise<DraftFeedback | null> {
+    if (!this.config.apiKey) {
+      console.log('⚠️ Moltbook API 키가 설정되지 않았습니다.');
+      return null;
+    }
+
+    const submolt = draft.category === 'travel' ? 'travel' : 'culture';
+    const draftId = `draft-${Date.now()}`;
+
+    try {
+      const response = await fetch(`${this.config.baseUrl}/posts`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${this.config.apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          submolt,
+          title: `[초안 피드백 요청] ${draft.title}`,
+          content: `📝 **초안 미리보기**\n\n${draft.summary}\n\n---\n\n💬 이 초안에 대한 피드백을 부탁드립니다!\n- 내용이 정확한가요?\n- 추가되었으면 하는 정보가 있나요?\n- 개선할 점이 있다면 알려주세요!\n\n#${draft.topics.join(' #')} #초안피드백`
+        })
+      });
+
+      if (!response.ok) {
+        console.log(`⚠️ Moltbook 초안 공유 실패: ${response.statusText}`);
+        return null;
+      }
+
+      const data = await response.json() as { post: MoltbookPost };
+      console.log(`✅ Moltbook 초안 공유 완료: ${data.post.id}`);
+
+      // 초안 피드백 기록 저장
+      const draftFeedback: DraftFeedback = {
+        draftId,
+        postId: data.post.id,
+        blogTitle: draft.title,
+        status: 'pending',
+        sharedAt: new Date().toISOString(),
+        upvotes: 0,
+        downvotes: 0,
+        comments: [],
+        suggestions: [],
+        sentiment: 'neutral'
+      };
+
+      await this.saveDraftFeedbackRecord(draftFeedback);
+
+      return draftFeedback;
+    } catch (error) {
+      console.log(`⚠️ Moltbook 초안 공유 오류: ${error}`);
+      return null;
+    }
+  }
+
+  /**
+   * 초안 피드백 기록 저장
+   */
+  private async saveDraftFeedbackRecord(feedback: DraftFeedback): Promise<void> {
+    const recordPath = join(DATA_DIR, 'draft-feedback-records.json');
+
+    let records: DraftFeedback[] = [];
+    try {
+      records = JSON.parse(await readFile(recordPath, 'utf-8'));
+    } catch {
+      // 파일 없으면 새로 생성
+    }
+
+    // 기존 레코드 업데이트 또는 추가
+    const existingIndex = records.findIndex(r => r.draftId === feedback.draftId);
+    if (existingIndex >= 0) {
+      records[existingIndex] = feedback;
+    } else {
+      records.push(feedback);
+    }
+
+    await mkdir(DATA_DIR, { recursive: true });
+    await writeFile(recordPath, JSON.stringify(records, null, 2));
+  }
+
+  /**
+   * 대기 중인 초안 피드백 목록 조회
+   */
+  async getPendingDraftFeedback(): Promise<DraftFeedback[]> {
+    const recordPath = join(DATA_DIR, 'draft-feedback-records.json');
+
+    try {
+      const records: DraftFeedback[] = JSON.parse(await readFile(recordPath, 'utf-8'));
+      return records.filter(r => r.status === 'pending');
+    } catch {
+      return [];
+    }
+  }
 }
 
 // ============================================================================
@@ -225,12 +341,25 @@ export class FeedbackCollector {
   }
 
   private async getMyPosts(): Promise<MoltbookPost[]> {
-    const response = await fetch(`${this.config.baseUrl}/agents/me`, {
+    // Get agent ID first
+    const meResponse = await fetch(`${this.config.baseUrl}/agents/me`, {
+      headers: { 'Authorization': `Bearer ${this.config.apiKey}` }
+    });
+    const meData = await meResponse.json() as { agent: { id: string } };
+    const agentId = meData.agent?.id;
+
+    if (!agentId) {
+      console.log('⚠️ 에이전트 ID를 가져올 수 없습니다.');
+      return [];
+    }
+
+    // Get posts using the correct endpoint
+    const postsResponse = await fetch(`${this.config.baseUrl}/posts?author=${agentId}`, {
       headers: { 'Authorization': `Bearer ${this.config.apiKey}` }
     });
 
-    const data = await response.json() as { agent: { recentPosts: MoltbookPost[] } };
-    return data.agent?.recentPosts || [];
+    const postsData = await postsResponse.json() as { posts: MoltbookPost[] };
+    return postsData.posts || [];
   }
 
   private async getComments(postId: string): Promise<Comment[]> {
@@ -301,6 +430,139 @@ export class FeedbackCollector {
       return [];
     }
   }
+
+  /**
+   * 특정 초안의 피드백 수집
+   */
+  async collectDraftFeedback(draftFeedback: DraftFeedback): Promise<DraftFeedback> {
+    if (!this.config.apiKey) {
+      console.log('⚠️ Moltbook API 키가 설정되지 않았습니다.');
+      return draftFeedback;
+    }
+
+    try {
+      // 포스트 정보 조회
+      const postResponse = await fetch(
+        `${this.config.baseUrl}/posts/${draftFeedback.postId}`,
+        { headers: { 'Authorization': `Bearer ${this.config.apiKey}` } }
+      );
+
+      if (!postResponse.ok) {
+        console.log(`⚠️ 포스트 조회 실패: ${postResponse.statusText}`);
+        return draftFeedback;
+      }
+
+      const postData = await postResponse.json() as { post: MoltbookPost };
+      const post = postData.post;
+
+      // 댓글 수집
+      const comments = await this.getComments(draftFeedback.postId);
+
+      // 제안 추출
+      const suggestions = this.extractSuggestions(comments);
+
+      // 감정 분석
+      const sentiment = this.analyzeSentiment(comments);
+
+      // 업데이트된 피드백
+      const updatedFeedback: DraftFeedback = {
+        ...draftFeedback,
+        status: 'collected',
+        collectedAt: new Date().toISOString(),
+        upvotes: post.upvotes,
+        downvotes: post.downvotes,
+        comments,
+        suggestions,
+        sentiment
+      };
+
+      // 기록 업데이트
+      await this.updateDraftFeedbackRecord(updatedFeedback);
+
+      console.log(`📊 초안 피드백 수집 완료: ${draftFeedback.blogTitle}`);
+      console.log(`   - Upvotes: ${updatedFeedback.upvotes}, Downvotes: ${updatedFeedback.downvotes}`);
+      console.log(`   - 댓글: ${comments.length}개, 제안: ${suggestions.length}개`);
+      console.log(`   - 감정: ${sentiment}`);
+
+      return updatedFeedback;
+    } catch (error) {
+      console.log(`⚠️ 초안 피드백 수집 오류: ${error}`);
+      return draftFeedback;
+    }
+  }
+
+  /**
+   * 댓글에서 제안 추출
+   */
+  private extractSuggestions(comments: Comment[]): string[] {
+    const suggestions: string[] = [];
+    const suggestionPatterns = [
+      /추가.*하면/,
+      /더.*있으면/,
+      /포함.*좋을/,
+      /알려.*주세요/,
+      /정보.*필요/,
+      /업데이트.*필요/,
+      /틀렸/,
+      /부정확/,
+      /수정.*필요/
+    ];
+
+    for (const comment of comments) {
+      const content = comment.content;
+      if (suggestionPatterns.some(pattern => pattern.test(content))) {
+        suggestions.push(content.substring(0, 100));
+      }
+    }
+
+    return suggestions;
+  }
+
+  /**
+   * 초안 피드백 기록 업데이트
+   */
+  private async updateDraftFeedbackRecord(feedback: DraftFeedback): Promise<void> {
+    const recordPath = join(DATA_DIR, 'draft-feedback-records.json');
+
+    let records: DraftFeedback[] = [];
+    try {
+      records = JSON.parse(await readFile(recordPath, 'utf-8'));
+    } catch {
+      // 파일 없으면 새로 생성
+    }
+
+    const existingIndex = records.findIndex(r => r.draftId === feedback.draftId);
+    if (existingIndex >= 0) {
+      records[existingIndex] = feedback;
+    } else {
+      records.push(feedback);
+    }
+
+    await mkdir(DATA_DIR, { recursive: true });
+    await writeFile(recordPath, JSON.stringify(records, null, 2));
+  }
+
+  /**
+   * 대기 중인 모든 초안 피드백 수집
+   */
+  async collectAllPendingDraftFeedback(): Promise<DraftFeedback[]> {
+    const recordPath = join(DATA_DIR, 'draft-feedback-records.json');
+
+    try {
+      const records: DraftFeedback[] = JSON.parse(await readFile(recordPath, 'utf-8'));
+      const pending = records.filter(r => r.status === 'pending');
+
+      const collected: DraftFeedback[] = [];
+      for (const record of pending) {
+        const updated = await this.collectDraftFeedback(record);
+        collected.push(updated);
+      }
+
+      return collected;
+    } catch {
+      return [];
+    }
+  }
 }
 
 // ============================================================================
@@ -366,12 +628,14 @@ export class FeedbackAnalyzer {
       const url = fb.blogUrl;
       let type = '기타';
 
-      if (url.includes('비교') || url.includes('총정리')) {
-        type = '데이터 집계형';
-      } else if (url.includes('코스') || url.includes('일정')) {
-        type = '일정 큐레이션형';
-      } else if (url.includes('TOP') || url.includes('순위')) {
-        type = '분석/인사이트형';
+      if (url && typeof url === 'string') {
+        if (url.includes('비교') || url.includes('총정리')) {
+          type = '데이터 집계형';
+        } else if (url.includes('코스') || url.includes('일정')) {
+          type = '일정 큐레이션형';
+        } else if (url.includes('TOP') || url.includes('순위')) {
+          type = '분석/인사이트형';
+        }
       }
 
       types.set(type, (types.get(type) || 0) + fb.engagement);
@@ -402,15 +666,17 @@ export class FeedbackAnalyzer {
     const improvements: string[] = [];
 
     for (const fb of data) {
+      const url = fb.blogUrl || '(제목 없음)';
+
       if (fb.engagement < 5) {
-        improvements.push(`"${fb.blogUrl}" - 낮은 참여도`);
+        improvements.push(`"${url}" - 낮은 참여도`);
       }
       if (fb.sentiment === 'negative') {
-        improvements.push(`"${fb.blogUrl}" - 부정적 피드백`);
+        improvements.push(`"${url}" - 부정적 피드백`);
       }
       for (const comment of fb.comments) {
         if (comment.content.includes('오래됐') || comment.content.includes('업데이트')) {
-          improvements.push(`"${fb.blogUrl}" - 업데이트 필요`);
+          improvements.push(`"${url}" - 업데이트 필요`);
         }
       }
     }
@@ -546,6 +812,96 @@ export class MoltbookFeedbackLoop {
 ├─ 새 요청사항: ${quickAnalysis.requestedInfo.length}개
 └─ 개선 필요: ${quickAnalysis.improvementAreas.length}개
     `.trim());
+  }
+
+  /**
+   * 초안을 Moltbook에 공유하여 피드백 수집
+   */
+  async shareDraft(draft: {
+    title: string;
+    summary: string;
+    filePath: string;
+    category: 'travel' | 'culture';
+    topics: string[];
+  }): Promise<DraftFeedback | null> {
+    console.log(`📝 초안 공유 중: ${draft.title}`);
+    return await this.shareAgent.shareDraft(draft);
+  }
+
+  /**
+   * 대기 중인 초안 피드백 수집
+   */
+  async collectDraftFeedback(): Promise<DraftFeedback[]> {
+    console.log('📊 초안 피드백 수집 중...');
+    return await this.collector.collectAllPendingDraftFeedback();
+  }
+
+  /**
+   * 대기 중인 초안 피드백 목록 조회
+   */
+  async getPendingDrafts(): Promise<DraftFeedback[]> {
+    return await this.shareAgent.getPendingDraftFeedback();
+  }
+
+  /**
+   * 초안 피드백 기반 발행 권장 여부 판단
+   */
+  async evaluateDraftForPublish(draftFeedback: DraftFeedback): Promise<{
+    shouldPublish: boolean;
+    reason: string;
+    improvements: string[];
+  }> {
+    // 피드백이 수집되지 않았으면 수집
+    let feedback = draftFeedback;
+    if (feedback.status === 'pending') {
+      feedback = await this.collector.collectDraftFeedback(draftFeedback);
+    }
+
+    const improvements: string[] = [];
+    let shouldPublish = true;
+    let reason = '피드백 기반 발행 권장';
+
+    // 1. 부정적 감정 체크
+    if (feedback.sentiment === 'negative') {
+      shouldPublish = false;
+      reason = '부정적 피드백 많음 - 수정 후 발행 권장';
+      improvements.push(...feedback.suggestions);
+    }
+
+    // 2. Downvote 비율 체크
+    const totalVotes = feedback.upvotes + feedback.downvotes;
+    if (totalVotes > 0 && feedback.downvotes / totalVotes > 0.3) {
+      shouldPublish = false;
+      reason = 'Downvote 비율 높음 (30% 초과) - 수정 권장';
+    }
+
+    // 3. 제안 사항 체크
+    if (feedback.suggestions.length >= 3) {
+      improvements.push(...feedback.suggestions.slice(0, 5));
+      if (shouldPublish) {
+        reason = '개선 사항 반영 후 발행 권장';
+      }
+    }
+
+    // 4. 댓글 없이 Upvote 없으면 관심 부족
+    if (feedback.comments.length === 0 && feedback.upvotes === 0) {
+      // 충분한 시간이 지났는지 체크 (12시간)
+      const sharedTime = new Date(feedback.sharedAt).getTime();
+      const now = Date.now();
+      const hoursPassed = (now - sharedTime) / (1000 * 60 * 60);
+
+      if (hoursPassed < 12) {
+        reason = '피드백 수집 중 (12시간 미만)';
+      } else {
+        reason = '커뮤니티 관심 낮음 - 주제/제목 검토 권장';
+      }
+    }
+
+    return {
+      shouldPublish,
+      reason,
+      improvements
+    };
   }
 }
 

@@ -16,7 +16,7 @@ import {
 } from '../../agents/moltbook/index.js';
 
 export interface MoltbookCommandOptions {
-  action: 'setup' | 'share' | 'feedback' | 'heartbeat' | 'analyze';
+  action: 'setup' | 'share' | 'feedback' | 'heartbeat' | 'analyze' | 'draft' | 'draft-feedback' | 'draft-status';
   file?: string;
 }
 
@@ -255,17 +255,201 @@ async function showAnalysis(spinner: ReturnType<typeof ora>): Promise<void> {
 }
 
 /**
+ * 초안을 Moltbook에 공유 (피드백 수집용)
+ */
+async function shareDraft(file: string | undefined, spinner: ReturnType<typeof ora>): Promise<void> {
+  const config = await loadMoltbookConfig();
+
+  if (!config || !config.apiKey) {
+    console.log(chalk.yellow('⚠️ Moltbook이 설정되지 않았습니다.'));
+    console.log(chalk.dim('설정하려면: npm run moltbook setup'));
+    return;
+  }
+
+  const { readFile } = await import('fs/promises');
+  const matter = (await import('gray-matter')).default;
+  const { glob } = await import('glob');
+
+  // 파일 선택
+  let filePath = file;
+  if (!filePath) {
+    const draftFiles = await glob('drafts/**/*.md');
+
+    if (draftFiles.length === 0) {
+      console.log(chalk.yellow('초안 파일이 없습니다.'));
+      return;
+    }
+
+    const { selectedFile } = await inquirer.prompt([{
+      type: 'list',
+      name: 'selectedFile',
+      message: '공유할 초안 선택:',
+      choices: draftFiles.map(f => ({ name: f, value: f }))
+    }]);
+
+    filePath = selectedFile;
+  }
+
+  if (!filePath) {
+    console.log(chalk.red('파일을 선택해주세요.'));
+    return;
+  }
+
+  spinner.start('초안 읽는 중...');
+
+  try {
+    const content = await readFile(filePath, 'utf-8');
+    const { data: frontmatter, content: body } = matter(content);
+
+    const title = frontmatter.title as string || 'Untitled';
+    const category = (frontmatter.categories?.includes?.('culture') || frontmatter.type === 'culture') ? 'culture' : 'travel';
+    const topics = [...(frontmatter.tags || []), ...(frontmatter.keywords || [])] as string[];
+
+    // 요약 생성 (본문 첫 500자)
+    const summary = body.replace(/^#.*$/gm, '').trim().slice(0, 500) + '...';
+
+    spinner.text = 'Moltbook에 초안 공유 중...';
+
+    const loop = new MoltbookFeedbackLoop(config);
+    const result = await loop.shareDraft({
+      title,
+      summary,
+      filePath,
+      category: category as 'travel' | 'culture',
+      topics
+    });
+
+    if (result) {
+      spinner.succeed(chalk.green('초안 공유 완료!'));
+      console.log(chalk.dim(`Draft ID: ${result.draftId}`));
+      console.log(chalk.dim(`Post ID: ${result.postId}`));
+      console.log(chalk.yellow('\n💡 12-24시간 후 피드백을 수집하세요:'));
+      console.log(chalk.dim('   npm run moltbook draft-feedback'));
+    } else {
+      spinner.fail('초안 공유 실패');
+    }
+  } catch (error) {
+    spinner.fail(`오류: ${error instanceof Error ? error.message : error}`);
+  }
+}
+
+/**
+ * 초안 피드백 수집
+ */
+async function collectDraftFeedback(spinner: ReturnType<typeof ora>): Promise<void> {
+  const config = await loadMoltbookConfig();
+
+  if (!config || !config.apiKey) {
+    console.log(chalk.yellow('⚠️ Moltbook이 설정되지 않았습니다.'));
+    return;
+  }
+
+  spinner.start('초안 피드백 수집 중...');
+
+  try {
+    const loop = new MoltbookFeedbackLoop(config);
+    const feedbacks = await loop.collectDraftFeedback();
+
+    if (feedbacks.length === 0) {
+      spinner.info('수집할 대기 중인 초안 피드백이 없습니다.');
+      return;
+    }
+
+    spinner.succeed(`${feedbacks.length}개 초안 피드백 수집 완료`);
+
+    console.log(chalk.cyan('\n📊 초안 피드백 요약\n'));
+
+    for (const fb of feedbacks) {
+      const sentimentEmoji = fb.sentiment === 'positive' ? '😊'
+        : fb.sentiment === 'negative' ? '😟'
+          : '😐';
+
+      console.log(chalk.white.bold(`${fb.blogTitle}`));
+      console.log(chalk.dim(`  └ 상태: ${fb.status}`));
+      console.log(chalk.dim(`  └ 투표: 👍 ${fb.upvotes} / 👎 ${fb.downvotes}`));
+      console.log(chalk.dim(`  └ 댓글: ${fb.comments.length}개`));
+      console.log(chalk.dim(`  └ 감정: ${sentimentEmoji} ${fb.sentiment}`));
+
+      if (fb.suggestions.length > 0) {
+        console.log(chalk.yellow(`  └ 제안: ${fb.suggestions.length}개`));
+        fb.suggestions.slice(0, 3).forEach(s => {
+          console.log(chalk.gray(`      - ${s.slice(0, 60)}...`));
+        });
+      }
+
+      // 발행 권장 여부 판단
+      const evaluation = await loop.evaluateDraftForPublish(fb);
+      const evalColor = evaluation.shouldPublish ? 'green' : 'yellow';
+      console.log(chalk[evalColor](`  └ 판정: ${evaluation.reason}`));
+
+      console.log('');
+    }
+  } catch (error) {
+    spinner.fail(`오류: ${error instanceof Error ? error.message : error}`);
+  }
+}
+
+/**
+ * 초안 피드백 상태 확인
+ */
+async function showDraftStatus(spinner: ReturnType<typeof ora>): Promise<void> {
+  const config = await loadMoltbookConfig();
+
+  if (!config || !config.apiKey) {
+    console.log(chalk.yellow('⚠️ Moltbook이 설정되지 않았습니다.'));
+    return;
+  }
+
+  spinner.start('초안 상태 확인 중...');
+
+  try {
+    const loop = new MoltbookFeedbackLoop(config);
+    const pendingDrafts = await loop.getPendingDrafts();
+
+    spinner.stop();
+
+    console.log(chalk.cyan('\n📋 초안 피드백 대기 목록\n'));
+
+    if (pendingDrafts.length === 0) {
+      console.log(chalk.gray('대기 중인 초안이 없습니다.'));
+      return;
+    }
+
+    for (const draft of pendingDrafts) {
+      const sharedDate = new Date(draft.sharedAt);
+      const hoursPassed = Math.round((Date.now() - sharedDate.getTime()) / (1000 * 60 * 60));
+
+      console.log(chalk.white(`${draft.blogTitle}`));
+      console.log(chalk.dim(`  └ 상태: ${draft.status}`));
+      console.log(chalk.dim(`  └ 공유: ${hoursPassed}시간 전`));
+      console.log(chalk.dim(`  └ Draft ID: ${draft.draftId}`));
+      console.log('');
+    }
+
+    console.log(chalk.yellow('💡 피드백 수집: npm run moltbook draft-feedback'));
+  } catch (error) {
+    spinner.fail(`오류: ${error instanceof Error ? error.message : error}`);
+  }
+}
+
+/**
  * 도움말 표시
  */
 function showHelp(): void {
   console.log(`
 ${chalk.white.bold('사용법:')}
 
-  ${chalk.cyan('npm run moltbook setup')}      - Moltbook 초기 설정
-  ${chalk.cyan('npm run moltbook share')}      - 포스트 공유
-  ${chalk.cyan('npm run moltbook feedback')}   - 피드백 수집 & 분석
-  ${chalk.cyan('npm run moltbook heartbeat')}  - 빠른 상태 체크
-  ${chalk.cyan('npm run moltbook analyze')}    - 현재 전략 확인
+  ${chalk.cyan('npm run moltbook setup')}           - Moltbook 초기 설정
+  ${chalk.cyan('npm run moltbook share')}           - 포스트 공유
+  ${chalk.cyan('npm run moltbook feedback')}        - 피드백 수집 & 분석
+  ${chalk.cyan('npm run moltbook heartbeat')}       - 빠른 상태 체크
+  ${chalk.cyan('npm run moltbook analyze')}         - 현재 전략 확인
+
+${chalk.white.bold('초안 피드백 (발행 전 검증):')}
+
+  ${chalk.cyan('npm run moltbook draft')}           - 초안을 Moltbook에 공유
+  ${chalk.cyan('npm run moltbook draft-feedback')}  - 초안 피드백 수집
+  ${chalk.cyan('npm run moltbook draft-status')}    - 초안 피드백 상태 확인
 
 ${chalk.white.bold('Moltbook이란?')}
 

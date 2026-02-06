@@ -37,7 +37,7 @@ module.exports = {
       exec_mode: 'fork',
       autorestart: false,
       watch: false,
-      cron_restart: '0 9 * * *',
+      cron_restart: '0 6,21 * * *',  // 오전 6시, 오후 9시
       env: {
         NODE_ENV: 'production'
       },
