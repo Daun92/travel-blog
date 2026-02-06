@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "schedule": {
+    "dailyRunTime": "09:00",
+    "postsPerDay": 2,
+    "autoDiscover": true
+  },
+  "discovery": {
+    "sources": [
+      "moltbook_trending",
+      "gap_analysis",
+      "community_requests"
+    ],
+    "minScore": 70,
+    "autoPopulateWhenQueueBelow": 5
+  },
+  "validation": {
+    "skipFactCheck": false,
+    "allGates": true,
+    "blockOnFailure": true
+  },
+  "moltbook": {
+    "sharePosts": true,
+    "collectFeedback": true,
+    "useFeedbackForDiscovery": true
+  }
+}

@@ -1,0 +1,634 @@
+{
+  "trending": [
+    {
+      "topic": "제주",
+      "submolt": "travel",
+      "engagementScore": 90,
+      "postCount": 15,
+      "avgUpvotes": 6,
+      "trendDirection": "rising",
+      "keywords": [
+        "제주",
+        "렌터카",
+        "카페"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.286Z"
+    },
+    {
+      "topic": "강릉",
+      "submolt": "travel",
+      "engagementScore": 85,
+      "postCount": 12,
+      "avgUpvotes": 7,
+      "trendDirection": "rising",
+      "keywords": [
+        "강릉",
+        "바다",
+        "카페"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.286Z"
+    },
+    {
+      "topic": "부산",
+      "submolt": "travel",
+      "engagementScore": 78,
+      "postCount": 14,
+      "avgUpvotes": 6,
+      "trendDirection": "stable",
+      "keywords": [
+        "부산",
+        "바다",
+        "맛집"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.286Z"
+    },
+    {
+      "topic": "여수",
+      "submolt": "travel",
+      "engagementScore": 75,
+      "postCount": 8,
+      "avgUpvotes": 9,
+      "trendDirection": "stable",
+      "keywords": [
+        "여수",
+        "야경",
+        "바다"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.286Z"
+    },
+    {
+      "topic": "미술관",
+      "submolt": "culture",
+      "engagementScore": 72,
+      "postCount": 8,
+      "avgUpvotes": 9,
+      "trendDirection": "rising",
+      "keywords": [
+        "미술관",
+        "전시회",
+        "현대미술"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.313Z"
+    },
+    {
+      "topic": "서울",
+      "submolt": "travel",
+      "engagementScore": 70,
+      "postCount": 20,
+      "avgUpvotes": 4,
+      "trendDirection": "stable",
+      "keywords": [
+        "서울",
+        "카페",
+        "맛집"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.286Z"
+    },
+    {
+      "topic": "박물관",
+      "submolt": "culture",
+      "engagementScore": 68,
+      "postCount": 6,
+      "avgUpvotes": 11,
+      "trendDirection": "stable",
+      "keywords": [
+        "박물관",
+        "전시"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.313Z"
+    },
+    {
+      "topic": "서점",
+      "submolt": "culture",
+      "engagementScore": 65,
+      "postCount": 7,
+      "avgUpvotes": 9,
+      "trendDirection": "rising",
+      "keywords": [
+        "서점",
+        "북카페"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.313Z"
+    },
+    {
+      "topic": "공연",
+      "submolt": "culture",
+      "engagementScore": 60,
+      "postCount": 5,
+      "avgUpvotes": 12,
+      "trendDirection": "stable",
+      "keywords": [
+        "공연",
+        "뮤지컬",
+        "연극"
+      ],
+      "lastUpdated": "2026-02-05T14:13:18.313Z"
+    }
+  ],
+  "gaps": [
+    {
+      "topic": "서점",
+      "moltbookEngagement": 65,
+      "blogCoverage": "none",
+      "recommendedPriority": "high",
+      "suggestedAngles": [
+        "서점 입문자 가이드",
+        "서점 숨은 명소",
+        "서점 데이트 코스"
+      ]
+    },
+    {
+      "topic": "제주",
+      "moltbookEngagement": 90,
+      "blogCoverage": "partial",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "제주 1박2일 완벽 코스",
+        "제주 현지인 추천 맛집",
+        "제주 인스타 핫플 투어"
+      ],
+      "lastBlogPost": "제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리",
+      "daysSinceLastPost": 0
+    },
+    {
+      "topic": "강릉",
+      "moltbookEngagement": 85,
+      "blogCoverage": "partial",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "강릉 1박2일 완벽 코스",
+        "강릉 현지인 추천 맛집",
+        "강릉 인스타 핫플 투어"
+      ],
+      "lastBlogPost": "강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드",
+      "daysSinceLastPost": 0
+    },
+    {
+      "topic": "부산",
+      "moltbookEngagement": 78,
+      "blogCoverage": "partial",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "부산 1박2일 완벽 코스",
+        "부산 현지인 추천 맛집",
+        "부산 인스타 핫플 투어"
+      ],
+      "lastBlogPost": "부산 해운대 맛집 베스트 4 추천: 현지인도 줄 서는 로컬 찐맛집 총정리",
+      "daysSinceLastPost": 1
+    },
+    {
+      "topic": "여수",
+      "moltbookEngagement": 75,
+      "blogCoverage": "partial",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "여수 1박2일 완벽 코스",
+        "여수 현지인 추천 맛집",
+        "여수 인스타 핫플 투어"
+      ],
+      "lastBlogPost": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
+      "daysSinceLastPost": 0
+    },
+    {
+      "topic": "미술관",
+      "moltbookEngagement": 72,
+      "blogCoverage": "partial",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "미술관 입문자 가이드",
+        "미술관 숨은 명소",
+        "미술관 데이트 코스"
+      ],
+      "lastBlogPost": "국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁",
+      "daysSinceLastPost": 1
+    },
+    {
+      "topic": "공연",
+      "moltbookEngagement": 60,
+      "blogCoverage": "none",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "공연 입문자 가이드",
+        "공연 숨은 명소",
+        "공연 데이트 코스"
+      ]
+    }
+  ],
+  "recommendations": [
+    {
+      "topic": "서점",
+      "type": "culture",
+      "score": 100,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 65",
+      "suggestedTitle": "서점 입문자 가이드",
+      "keywords": [
+        "서점",
+        "북카페",
+        "독서",
+        "취미"
+      ],
+      "discoveredAt": "2026-02-05T14:13:18.321Z"
+    },
+    {
+      "topic": "속초",
+      "type": "travel",
+      "score": 90,
+      "source": "community_request",
+      "reasoning": "OpenClaw 포스트 댓글 요청 (upvotes: 22)",
+      "suggestedTitle": "속초 완벽 가이드",
+      "keywords": [
+        "속초",
+        "여행",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.364Z"
+    },
+    {
+      "topic": "카페",
+      "type": "travel",
+      "score": 90,
+      "source": "community_request",
+      "reasoning": "OpenClaw 포스트 댓글 요청 (upvotes: 22)",
+      "suggestedTitle": "카페 완벽 가이드",
+      "keywords": [
+        "카페",
+        "여행",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.364Z"
+    },
+    {
+      "topic": "대구",
+      "type": "travel",
+      "score": 87.5,
+      "source": "community_request",
+      "reasoning": "OpenClaw 포스트 댓글 요청 (upvotes: 15)",
+      "suggestedTitle": "대구 완벽 가이드",
+      "keywords": [
+        "대구",
+        "여행",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.364Z"
+    },
+    {
+      "topic": "코스",
+      "type": "travel",
+      "score": 87.5,
+      "source": "community_request",
+      "reasoning": "OpenClaw 포스트 댓글 요청 (upvotes: 15)",
+      "suggestedTitle": "코스 완벽 가이드",
+      "keywords": [
+        "코스",
+        "여행",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.364Z"
+    },
+    {
+      "topic": "미술관",
+      "type": "culture",
+      "score": 87,
+      "source": "moltbook_trending",
+      "reasoning": "rising 트렌드, 평균 9 upvotes",
+      "suggestedTitle": "미술관 숨은 명소 베스트",
+      "keywords": [
+        "미술관",
+        "전시회",
+        "현대미술"
+      ],
+      "discoveredAt": "2026-02-05T14:13:18.321Z"
+    },
+    {
+      "topic": "맛집",
+      "type": "travel",
+      "score": 82.5,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 인기 옵션 (45 votes): \"어떤 주제의 여행 콘텐츠를 원하시나요?\"",
+      "suggestedTitle": "맛집 현지인 추천 맛집 베스트",
+      "keywords": [
+        "맛집",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "topic": "제주",
+      "type": "travel",
+      "score": 80,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 90",
+      "suggestedTitle": "제주 1박2일 완벽 코스",
+      "keywords": [
+        "제주",
+        "렌터카",
+        "카페",
+        "바다",
+        "여행"
+      ],
+      "discoveredAt": "2026-02-05T14:13:18.321Z"
+    },
+    {
+      "topic": "숙소",
+      "type": "travel",
+      "score": 79,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 인기 옵션 (38 votes): \"어떤 주제의 여행 콘텐츠를 원하시나요?\"",
+      "suggestedTitle": "숙소 가성비 숙소 추천",
+      "keywords": [
+        "숙소",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "topic": "강릉",
+      "type": "travel",
+      "score": 78.33333333333333,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 85",
+      "suggestedTitle": "강릉 1박2일 완벽 코스",
+      "keywords": [
+        "강릉",
+        "바다",
+        "카페",
+        "겨울"
+      ],
+      "discoveredAt": "2026-02-05T14:13:18.321Z"
+    },
+    {
+      "topic": "전시회",
+      "type": "culture",
+      "score": 77.5,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 인기 옵션 (35 votes): \"어떤 문화 콘텐츠가 부족하다고 느끼시나요?\"",
+      "suggestedTitle": "전시회 완벽 가이드",
+      "keywords": [
+        "전시회",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.562Z"
+    },
+    {
+      "topic": "부산",
+      "type": "travel",
+      "score": 76,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 78",
+      "suggestedTitle": "부산 1박2일 완벽 코스",
+      "keywords": [
+        "부산",
+        "바다",
+        "맛집",
+        "해운대"
+      ],
+      "discoveredAt": "2026-02-05T14:13:18.321Z"
+    },
+    {
+      "topic": "야경",
+      "type": "travel",
+      "score": 76,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 인기 옵션 (32 votes): \"어떤 주제의 여행 콘텐츠를 원하시나요?\"",
+      "suggestedTitle": "야경 야경 명소 총정리",
+      "keywords": [
+        "야경",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "topic": "여수",
+      "type": "travel",
+      "score": 75,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 75",
+      "suggestedTitle": "여수 1박2일 완벽 코스",
+      "keywords": [
+        "여수"
+      ],
+      "discoveredAt": "2026-02-05T14:13:18.321Z"
+    },
+    {
+      "topic": "공연",
+      "type": "culture",
+      "score": 74,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 인기 옵션 (28 votes): \"어떤 문화 콘텐츠가 부족하다고 느끼시나요?\"",
+      "suggestedTitle": "공연 완벽 가이드",
+      "keywords": [
+        "공연",
+        "추천",
+        "가이드"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.562Z"
+    },
+    {
+      "topic": "캠핑",
+      "type": "travel",
+      "score": 70,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 댓글 요청: \"캠핑장 정보가 부족해요\"",
+      "suggestedTitle": "캠핑 가이드",
+      "keywords": [
+        "캠핑"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "topic": "여행",
+      "type": "travel",
+      "score": 70,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 댓글 요청: \"반려동물 동반 여행 정보도 있으면 좋겠어요\"",
+      "suggestedTitle": "여행 가이드",
+      "keywords": [
+        "여행"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "topic": "가격",
+      "type": "travel",
+      "score": 70,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 댓글 요청: \"가격 정보가 오래된 것 같아요\"",
+      "suggestedTitle": "가격 가이드",
+      "keywords": [
+        "가격"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "topic": "뮤지컬",
+      "type": "culture",
+      "score": 70,
+      "source": "community_request",
+      "reasoning": "Vote 포스트 댓글 요청: \"뮤지컬 후기 더 많이 부탁드려요\"",
+      "suggestedTitle": "뮤지컬 가이드",
+      "keywords": [
+        "뮤지컬"
+      ],
+      "discoveredAt": "2026-02-05T14:13:19.562Z"
+    }
+  ],
+  "discoveredAt": "2026-02-05T14:13:18.321Z",
+  "openclawFeedback": [
+    {
+      "moltbookPostId": "sim-001",
+      "blogUrl": "https://daun92.github.io/travel-blog/posts/2026/02/seoul-museum/",
+      "title": "서울 박물관 추천",
+      "upvotes": 15,
+      "commentsCount": 8,
+      "sentimentScore": 45,
+      "topFeedback": [
+        "사진이 예뻐요",
+        "유용한 정보 감사합니다"
+      ],
+      "topicRequests": [
+        "대구 박물관도 다뤄주세요",
+        "어린이 동반 코스 추천"
+      ],
+      "qualityFeedback": [
+        "입장료 정보 업데이트 필요"
+      ],
+      "lastChecked": "2026-02-05T14:13:19.364Z"
+    },
+    {
+      "moltbookPostId": "sim-002",
+      "blogUrl": "https://daun92.github.io/travel-blog/posts/2026/02/gangneung-cafe/",
+      "title": "강릉 카페 투어",
+      "upvotes": 22,
+      "commentsCount": 12,
+      "sentimentScore": 72,
+      "topFeedback": [
+        "바다뷰 카페 리스트 최고",
+        "덕분에 여행 잘 다녀왔어요"
+      ],
+      "topicRequests": [
+        "속초 카페도 부탁드려요",
+        "양양 서핑 카페 추천"
+      ],
+      "qualityFeedback": [
+        "주차 정보 추가해주세요"
+      ],
+      "lastChecked": "2026-02-05T14:13:19.364Z"
+    }
+  ],
+  "votePosts": [
+    {
+      "postId": "vote-001",
+      "question": "어떤 주제의 여행 콘텐츠를 원하시나요?",
+      "voteType": "topic_request",
+      "options": [
+        {
+          "text": "숨은 맛집 투어",
+          "votes": 45
+        },
+        {
+          "text": "가성비 숙소 리뷰",
+          "votes": 38
+        },
+        {
+          "text": "야경 명소",
+          "votes": 32
+        },
+        {
+          "text": "현지인 추천 코스",
+          "votes": 28
+        }
+      ],
+      "comments": [
+        "대전 맛집도 다뤄주세요",
+        "캠핑장 정보가 부족해요",
+        "반려동물 동반 여행 정보도 있으면 좋겠어요"
+      ],
+      "extractedTopics": [
+        "맛집",
+        "숙소",
+        "야경",
+        "대전",
+        "캠핑"
+      ],
+      "extractedAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "postId": "vote-002",
+      "question": "블로그 콘텐츠 퀄리티 어때요?",
+      "voteType": "quality_feedback",
+      "options": [
+        {
+          "text": "정보가 유용해요",
+          "votes": 52
+        },
+        {
+          "text": "사진이 예뻐요",
+          "votes": 41
+        },
+        {
+          "text": "더 자세했으면",
+          "votes": 18
+        },
+        {
+          "text": "업데이트 필요",
+          "votes": 12
+        }
+      ],
+      "comments": [
+        "가격 정보가 오래된 것 같아요",
+        "영업시간 확인 부탁드려요",
+        "교통편 정보 추가해주세요"
+      ],
+      "extractedTopics": [
+        "가격",
+        "대중교통"
+      ],
+      "extractedAt": "2026-02-05T14:13:19.561Z"
+    },
+    {
+      "postId": "vote-003",
+      "question": "어떤 문화 콘텐츠가 부족하다고 느끼시나요?",
+      "voteType": "content_gap",
+      "options": [
+        {
+          "text": "전시회 리뷰",
+          "votes": 35
+        },
+        {
+          "text": "공연 정보",
+          "votes": 28
+        },
+        {
+          "text": "북카페/서점",
+          "votes": 22
+        },
+        {
+          "text": "페스티벌",
+          "votes": 19
+        }
+      ],
+      "comments": [
+        "뮤지컬 후기 더 많이 부탁드려요",
+        "지방 전시회 정보도 필요해요",
+        "인디밴드 공연 정보 있으면 좋겠어요"
+      ],
+      "extractedTopics": [
+        "전시회",
+        "공연",
+        "서점",
+        "뮤지컬",
+        "페스티벌"
+      ],
+      "extractedAt": "2026-02-05T14:13:19.561Z"
+    }
+  ]
+}

@@ -1,0 +1,247 @@
+{
+  "cases": [
+    {
+      "id": "review-1770294586961-76bawa",
+      "filePath": "drafts\\2026-02-05-yeosu-night.md",
+      "title": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 84.75,
+      "details": "factcheck: 85%",
+      "createdAt": "2026-02-05T12:29:46.961Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294628050-zkh4b5",
+      "filePath": "drafts\\2026-02-05-seoul-museum.md",
+      "title": "서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 83,
+      "details": "factcheck: 88%",
+      "createdAt": "2026-02-05T12:30:28.050Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294688564-htk9xg",
+      "filePath": "drafts\\2026-02-05-jeonju-hanok.md",
+      "title": "전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 84.25,
+      "details": "factcheck: 83%",
+      "createdAt": "2026-02-05T12:31:28.564Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294688575-qhedgj",
+      "filePath": "drafts\\2026-02-05-gangneung-cafe.md",
+      "title": "강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 88.5,
+      "details": "",
+      "createdAt": "2026-02-05T12:31:28.575Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294747778-wfjhnn",
+      "filePath": "drafts\\2026-02-05-daegu-alley.md",
+      "title": "대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스",
+      "trigger": "critical_false",
+      "action": "block",
+      "score": 86.25,
+      "details": "factcheck: 91%",
+      "createdAt": "2026-02-05T12:32:27.778Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294747789-j389ps",
+      "filePath": "drafts\\2026-02-05-7.md",
+      "title": "제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 86,
+      "details": "content: 64%",
+      "createdAt": "2026-02-05T12:32:27.789Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294775333-3958iz",
+      "filePath": "blog\\content\\posts\\travel\\_index.md",
+      "title": "여행",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 60,
+      "details": "seo: 20%, content: 20%",
+      "createdAt": "2026-02-05T12:32:55.333Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294821509-t28ke0",
+      "filePath": "blog\\content\\posts\\travel\\2026-02-04-seoul-hanok-village.md",
+      "title": "서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 84.75,
+      "details": "factcheck: 90%, content: 54%",
+      "createdAt": "2026-02-05T12:33:41.509Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294905253-im3c60",
+      "filePath": "blog\\content\\posts\\travel\\2026-02-04-4.md",
+      "title": "부산 해운대 맛집 베스트 4 추천: 현지인도 줄 서는 로컬 찐맛집 총정리",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 85.75,
+      "details": "factcheck: 84%, content: 64%",
+      "createdAt": "2026-02-05T12:35:05.253Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770294996008-hbssgq",
+      "filePath": "blog\\content\\posts\\travel\\2026-02-04-2-5.md",
+      "title": "2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드",
+      "trigger": "critical_false",
+      "action": "block",
+      "score": 84,
+      "details": "factcheck: 77%, content: 64%",
+      "createdAt": "2026-02-05T12:36:36.008Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295034684-qdxwer",
+      "filePath": "blog\\content\\posts\\travel\\2026-02-04-1.md",
+      "title": "경주 여행 완벽 가이드: 황리단길부터 야경 명소까지 1박 2일 코스 추천",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 90.25,
+      "details": "",
+      "createdAt": "2026-02-05T12:37:14.684Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295034698-dejr2v",
+      "filePath": "blog\\content\\posts\\culture\\_index.md",
+      "title": "문화예술",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 60,
+      "details": "seo: 20%, content: 20%",
+      "createdAt": "2026-02-05T12:37:14.698Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295261888-1ws3qv",
+      "filePath": "drafts/2026-02-05-7.md",
+      "title": "제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 89.5,
+      "details": "",
+      "createdAt": "2026-02-05T12:52:54.521Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295263038-r2m72t",
+      "filePath": "drafts/2026-02-05-daegu-alley.md",
+      "title": "대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 84.5,
+      "details": "",
+      "createdAt": "2026-02-05T12:47:33.440Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295264408-9u1yzs",
+      "filePath": "drafts/2026-02-05-gangneung-cafe.md",
+      "title": "강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 86.33333333333333,
+      "details": "",
+      "createdAt": "2026-02-05T12:50:48.598Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295265943-g0waps",
+      "filePath": "drafts/2026-02-05-jeonju-hanok.md",
+      "title": "전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 84.5,
+      "details": "",
+      "createdAt": "2026-02-05T12:47:36.183Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295267285-1nj5x1",
+      "filePath": "drafts/2026-02-05-seoul-museum.md",
+      "title": "서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 79.5,
+      "details": "",
+      "createdAt": "2026-02-05T12:47:38.108Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770295268425-txxvjg",
+      "filePath": "drafts/2026-02-05-yeosu-night.md",
+      "title": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
+      "trigger": "sensitive_topic",
+      "action": "flag",
+      "score": 84.5,
+      "details": "",
+      "createdAt": "2026-02-05T12:47:39.403Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770296751561-byfsk9",
+      "filePath": "drafts/2026-02-05-post.md",
+      "title": "국립중앙박물관 완벽 가이드: 필수 관람 코스와 숨은 명품 투어",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 66.85714285714286,
+      "details": "duplicate: 57%, tone: 58%, keyword_density: 31%",
+      "createdAt": "2026-02-05T13:43:11.543Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770328729439-ah1cth",
+      "filePath": "drafts/2026-02-06-post.md",
+      "title": "산업의 유산이 예술로 피어나다: 서울 문화비축기지 완벽 가이드",
+      "trigger": "critical_false",
+      "action": "block",
+      "score": 76.33333333333333,
+      "details": "factcheck: 55%",
+      "createdAt": "2026-02-05T21:58:49.439Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770386131008-r8zrg0",
+      "filePath": "drafts\\2026-02-06-5.md",
+      "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행 가이드",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 69.85714285714286,
+      "details": "readability: 66%, tone: 38%, keyword_density: 34%",
+      "createdAt": "2026-02-06T13:55:31.008Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770386640547-hq0isj",
+      "filePath": "drafts\\2026-02-06-post.md",
+      "title": "북한산 주말 등산 코스 가이드: 초보자도 즐기는 서울 근교 트레킹 추천",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 71.66666666666667,
+      "details": "factcheck: 46%",
+      "createdAt": "2026-02-06T14:04:00.547Z",
+      "status": "pending"
+    }
+  ],
+  "lastUpdated": "2026-02-06T14:04:00.547Z"
+}

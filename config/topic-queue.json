@@ -1,0 +1,215 @@
+{
+  "queue": [
+    {
+      "title": "2026 봄 벚꽃 축제 완벽 가이드: 전국 명소와 개화 시기",
+      "type": "culture"
+    },
+    {
+      "title": "경주 템플스테이 체험기: 천년 고도에서 보내는 하룻밤",
+      "type": "travel"
+    },
+    {
+      "title": "제주 1박2일 완벽 코스",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "제주",
+          "렌터카",
+          "카페",
+          "바다",
+          "여행"
+        ]
+      }
+    },
+    {
+      "title": "강릉 1박2일 완벽 코스",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "강릉",
+          "바다",
+          "카페",
+          "겨울"
+        ]
+      }
+    },
+    {
+      "title": "부산 1박2일 완벽 코스",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "부산",
+          "바다",
+          "맛집",
+          "해운대"
+        ]
+      }
+    },
+    {
+      "title": "여수 1박2일 완벽 코스",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "여수"
+        ]
+      }
+    },
+    {
+      "title": "서울 1박2일 추천 일정",
+      "type": "travel",
+      "meta": {
+        "score": 70,
+        "source": "moltbook_trending",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "서울",
+          "카페",
+          "맛집"
+        ]
+      }
+    }
+  ],
+  "completed": [
+    {
+      "title": "강릉 겨울 바다 카페 투어: 오션뷰 감성 카페 베스트 5",
+      "type": "travel"
+    },
+    {
+      "title": "국립중앙박물관 완벽 가이드: 필수 관람 코스와 숨은 명품",
+      "type": "culture"
+    },
+    {
+      "title": "전주 한옥마을 1박2일 코스: 맛집부터 야경까지",
+      "type": "travel"
+    },
+    {
+      "title": "리움미술관 2026 기획전 가이드: 현대미술 입문자를 위한 코스",
+      "type": "culture"
+    },
+    {
+      "title": "여수 밤바다 드라이브 코스: 로맨틱 야경 명소",
+      "type": "travel"
+    },
+    {
+      "title": "서울 독립서점 투어: 취향 저격 숨은 책방 10곳",
+      "type": "culture"
+    },
+    {
+      "title": "속초 중앙시장 먹방 투어: 현지인 추천 맛집",
+      "type": "travel"
+    },
+    {
+      "title": "문화비축기지 겨울 프로그램: 무료 전시와 체험",
+      "type": "culture"
+    },
+    {
+      "title": "대구 근대골목 역사 산책: 100년 전 이야기",
+      "type": "travel"
+    },
+    {
+      "title": "파주 출판도시 북카페 투어: 책 덕후를 위한 성지",
+      "type": "culture"
+    },
+    {
+      "title": "북한산 주말 등산 코스: 초보자도 즐기는 서울 근교 트레킹",
+      "type": "travel"
+    },
+    {
+      "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행",
+      "type": "travel"
+    }
+  ],
+  "settings": {
+    "postsPerDay": 2,
+    "deployDelayHours": 6,
+    "defaultLength": "medium",
+    "enableInlineImages": true,
+    "inlineImageCount": 3
+  },
+  "discovered": [
+    {
+      "topic": "제주",
+      "type": "travel",
+      "score": 100,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 90",
+      "suggestedTitle": "제주 1박2일 완벽 코스",
+      "keywords": [
+        "제주",
+        "렌터카",
+        "카페",
+        "바다",
+        "여행"
+      ],
+      "discoveredAt": "2026-02-06T14:36:16.473Z"
+    },
+    {
+      "topic": "강릉",
+      "type": "travel",
+      "score": 100,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 85",
+      "suggestedTitle": "강릉 1박2일 완벽 코스",
+      "keywords": [
+        "강릉",
+        "바다",
+        "카페",
+        "겨울"
+      ],
+      "discoveredAt": "2026-02-06T14:36:16.473Z"
+    },
+    {
+      "topic": "부산",
+      "type": "travel",
+      "score": 100,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 78",
+      "suggestedTitle": "부산 1박2일 완벽 코스",
+      "keywords": [
+        "부산",
+        "바다",
+        "맛집",
+        "해운대"
+      ],
+      "discoveredAt": "2026-02-06T14:36:16.473Z"
+    },
+    {
+      "topic": "여수",
+      "type": "travel",
+      "score": 100,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 75",
+      "suggestedTitle": "여수 1박2일 완벽 코스",
+      "keywords": [
+        "여수"
+      ],
+      "discoveredAt": "2026-02-06T14:36:16.473Z"
+    },
+    {
+      "topic": "서울",
+      "type": "travel",
+      "score": 70,
+      "source": "moltbook_trending",
+      "reasoning": "stable 트렌드, 평균 4 upvotes",
+      "suggestedTitle": "서울 1박2일 추천 일정",
+      "keywords": [
+        "서울",
+        "카페",
+        "맛집"
+      ],
+      "discoveredAt": "2026-02-06T14:36:16.473Z"
+    }
+  ]
+}

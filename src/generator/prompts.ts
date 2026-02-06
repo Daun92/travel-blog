@@ -2,19 +2,23 @@
  * AI 콘텐츠 생성을 위한 프롬프트 템플릿
  */
 
+import type { Persona } from '../agents/draft-enhancer/persona-loader.js';
+import { buildPersonaPromptSection, getContentTypeGuidance } from '../agents/draft-enhancer/persona-loader.js';
+
 export interface PromptContext {
   topic: string;
   type: 'travel' | 'culture';
   keywords?: string[];
   tone?: string;
   length?: 'short' | 'medium' | 'long';
+  persona?: Persona;
 }
 
 /**
  * 여행 포스트 생성 프롬프트
  */
 export function getTravelPrompt(context: PromptContext): string {
-  const { topic, keywords = [], length = 'medium' } = context;
+  const { topic, keywords = [], length = 'medium', persona } = context;
 
   const lengthGuide = {
     short: '1500-2000자',
@@ -22,7 +26,22 @@ export function getTravelPrompt(context: PromptContext): string {
     long: '4000-5000자'
   };
 
-  return `당신은 한국 여행 블로거입니다. 다음 주제에 대해 SEO에 최적화된 블로그 포스트를 작성해주세요.
+  // 페르소나가 있으면 페르소나 기반 프리앰블 사용
+  const preamble = persona
+    ? `당신은 "${persona.name}"입니다. ${persona.tagline}
+
+${buildPersonaPromptSection(persona)}
+
+${getContentTypeGuidance(persona, 'travel')}
+
+다음 주제에 대해 위 페르소나의 관점과 말투로 SEO에 최적화된 블로그 포스트를 작성해주세요.`
+    : `당신은 한국 여행 블로거입니다. 다음 주제에 대해 SEO에 최적화된 블로그 포스트를 작성해주세요.`;
+
+  const toneGuide = persona
+    ? `${persona.voice.tone} (${persona.voice.formality})`
+    : '친근하고 정보가 풍부한 톤 (개인 경험처럼)';
+
+  return `${preamble}
 
 ## 주제
 ${topic}
@@ -32,7 +51,7 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
 
 ## 작성 지침
 1. **분량**: ${lengthGuide[length]}
-2. **톤**: 친근하고 정보가 풍부한 톤 (개인 경험처럼)
+2. **톤**: ${toneGuide}
 3. **구조**:
    - 매력적인 도입부 (왜 이 장소인가?)
    - 상세한 여행 정보 (위치, 교통, 비용)
@@ -95,7 +114,7 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
  * 문화예술 포스트 생성 프롬프트
  */
 export function getCulturePrompt(context: PromptContext): string {
-  const { topic, keywords = [], length = 'medium' } = context;
+  const { topic, keywords = [], length = 'medium', persona } = context;
 
   const lengthGuide = {
     short: '1500-2000자',
@@ -103,7 +122,22 @@ export function getCulturePrompt(context: PromptContext): string {
     long: '4000-5000자'
   };
 
-  return `당신은 문화예술 전문 블로거입니다. 다음 주제에 대해 SEO에 최적화된 리뷰/소개 글을 작성해주세요.
+  // 페르소나가 있으면 페르소나 기반 프리앰블 사용
+  const preamble = persona
+    ? `당신은 "${persona.name}"입니다. ${persona.tagline}
+
+${buildPersonaPromptSection(persona)}
+
+${getContentTypeGuidance(persona, 'culture')}
+
+다음 주제에 대해 위 페르소나의 관점과 말투로 SEO에 최적화된 리뷰/소개 글을 작성해주세요.`
+    : `당신은 문화예술 전문 블로거입니다. 다음 주제에 대해 SEO에 최적화된 리뷰/소개 글을 작성해주세요.`;
+
+  const toneGuide = persona
+    ? `${persona.voice.tone} (${persona.voice.formality})`
+    : '전문적이면서도 친근한 톤';
+
+  return `${preamble}
 
 ## 주제
 ${topic}
@@ -113,7 +147,7 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
 
 ## 작성 지침
 1. **분량**: ${lengthGuide[length]}
-2. **톤**: 전문적이면서도 친근한 톤
+2. **톤**: ${toneGuide}
 3. **구조**:
    - 흥미로운 도입부 (이 전시/공연의 특별한 점)
    - 상세 소개 (작가, 작품, 내용)

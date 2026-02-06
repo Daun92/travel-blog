@@ -23,6 +23,7 @@ export interface FrontmatterData {
     hidden?: boolean;
   };
   author?: string;
+  personaId?: string;
   // 여행 전용
   location?: string;
   visitDate?: string;
@@ -80,6 +81,11 @@ export function generateFrontmatter(data: FrontmatterData): string {
   // 작성자
   if (data.author) {
     lines.push(`author: "${escapeYaml(data.author)}"`);
+  }
+
+  // 페르소나 ID
+  if (data.personaId) {
+    lines.push(`personaId: "${escapeYaml(data.personaId)}"`);
   }
 
   // 여행 전용 필드

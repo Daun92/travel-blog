@@ -1,0 +1,36 @@
+{
+  "version": "1.0.0",
+  "baseUrl": "/travel-blog",
+  "siteName": "OpenClaw Travel",
+  "locale": "ko_KR",
+  "faq": {
+    "enabled": true,
+    "count": 5,
+    "categories": ["기본정보", "위치/교통", "예약/요금", "추천/팁"]
+  },
+  "schema": {
+    "article": {
+      "enabled": true
+    },
+    "faqPage": {
+      "enabled": true
+    },
+    "touristAttraction": {
+      "enabled": true,
+      "applyTo": ["travel"]
+    },
+    "event": {
+      "enabled": true,
+      "applyTo": ["culture"]
+    },
+    "breadcrumb": {
+      "enabled": true
+    }
+  },
+  "imageValidation": {
+    "enabled": true,
+    "minScore": 70,
+    "checkRelevance": true,
+    "warnOnAiImages": true
+  }
+}

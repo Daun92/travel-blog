@@ -5,6 +5,7 @@
 
 import { writeFile, readFile, mkdir, readdir } from 'fs/promises';
 import { join } from 'path';
+import SurveyInsightsDBManager from './survey-insights-db.js';
 
 // ============================================================================
 // 타입 정의
@@ -730,6 +731,29 @@ export class StrategyAdjuster {
       optimalLength: analysis.successPatterns.optimalLength,
       lastUpdated: new Date().toISOString()
     };
+
+    // 서베이 인사이트 DB 머지
+    try {
+      const surveyDb = new SurveyInsightsDBManager();
+      await surveyDb.load();
+      const surveyRecs = surveyDb.getStrategyRecommendations();
+
+      if (surveyRecs.priorityTopics.length > 0) {
+        // 서베이 주제 우선 배치
+        const merged = [...new Set([...surveyRecs.priorityTopics, ...newStrategy.priorityTopics])].slice(0, 10);
+        newStrategy.priorityTopics = merged;
+      }
+      if (surveyRecs.contentFormat) {
+        newStrategy.contentFormat = surveyRecs.contentFormat;
+      }
+      if (surveyRecs.focusAreas.length > 0) {
+        const mergedFocus = [...new Set([...surveyRecs.focusAreas, ...newStrategy.focusAreas])].slice(0, 10);
+        newStrategy.focusAreas = mergedFocus;
+      }
+      console.log('📊 서베이 인사이트 반영됨');
+    } catch {
+      // 서베이 DB 없어도 정상 동작
+    }
 
     await mkdir(CONFIG_DIR, { recursive: true });
     await writeFile(this.strategyPath, JSON.stringify(newStrategy, null, 2));

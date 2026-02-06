@@ -29,6 +29,7 @@ import { pipelineCommand } from './commands/pipeline.js';
 import { monitorCommand } from './commands/monitor.js';
 import { enhanceCommand } from './commands/enhance.js';
 import { linksCommand } from './commands/links.js';
+import { surveyCommand } from './commands/survey.js';
 
 const program = new Command();
 
@@ -49,6 +50,7 @@ program
   .option('-y, --yes', '모든 프롬프트에 자동 응답 (비대화 모드)')
   .option('--inline-images', 'Gemini AI로 인라인 설명 이미지 생성')
   .option('--image-count <count>', '생성할 인라인 이미지 개수 (기본: 3, 최대: 5)', '3')
+  .option('--agent <id>', '에이전트 페르소나 지정 (viral|friendly|informative)')
   .action((options) => {
     // image-count를 숫자로 변환
     if (options.imageCount) {
@@ -173,6 +175,12 @@ program
   .option('--dry-run', '실제 저장 없이 미리보기')
   .option('-v, --verbose', '상세 출력')
   .action(linksCommand);
+
+// 서베이 인사이트 DB
+program
+  .command('survey [action] [args...]')
+  .description('서베이 인사이트 DB 관리 (ingest|status|boost|apply-strategy)')
+  .action((action = 'status', args, options) => surveyCommand(action, args, options));
 
 // 프로그램 실행
 program.parse();

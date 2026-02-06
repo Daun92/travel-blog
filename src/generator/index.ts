@@ -45,6 +45,7 @@ import {
   getMaxImagesPerPost,
   type ImageStyle
 } from '../images/gemini-imagen.js';
+import { selectPersona } from '../agents/draft-enhancer/persona-loader.js';
 
 export interface GeneratePostOptions {
   topic: string;
@@ -58,6 +59,7 @@ export interface GeneratePostOptions {
   coverCaption?: string;
   inlineImages?: boolean;
   imageCount?: number;
+  persona?: string;
   onProgress?: (message: string) => void;
 }
 
@@ -85,6 +87,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     coverCaption,
     inlineImages = false,
     imageCount = 3,
+    persona: personaOverride,
     onProgress = () => {}
   } = options;
 
@@ -95,9 +98,16 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     throw new Error('Gemini API 키가 설정되지 않았습니다. .env에 GEMINI_API_KEY를 설정하세요.');
   }
 
+  // 페르소나 선택
+  onProgress('에이전트 페르소나 선택 중...');
+  const selectedPersona = await selectPersona(topic, type, keywords, personaOverride);
+  if (selectedPersona) {
+    onProgress(`에이전트 선택: ${selectedPersona.name} (${selectedPersona.id})`);
+  }
+
   // 프롬프트 생성
   onProgress('프롬프트 생성 중...');
-  const context: PromptContext = { topic, type, keywords, length };
+  const context: PromptContext = { topic, type, keywords, length, persona: selectedPersona || undefined };
   const prompt = type === 'travel'
     ? getTravelPrompt(context)
     : getCulturePrompt(context);
@@ -157,6 +167,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
   }
 
   // 프론트매터 데이터 구성
+  const authorName = selectedPersona?.authorLine || 'Blog Author';
   const frontmatter: FrontmatterData = {
     title: finalTitle,
     date: new Date(),
@@ -168,7 +179,8 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
       : ['문화', '예술', ...finalKeywords.slice(0, 3)],
     categories: [type],
     keywords: finalKeywords,
-    author: 'Blog Author',
+    author: authorName,
+    personaId: selectedPersona?.id,
     ...(coverImage && {
       cover: {
         image: coverImage,

@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "gates": {
+    "factcheck": {
+      "minScore": 80,
+      "blockOnFailure": true,
+      "critical": {
+        "minScore": 100,
+        "items": ["venue_exists", "location"]
+      },
+      "major": {
+        "minScore": 85,
+        "items": ["hours", "event_period"]
+      },
+      "minor": {
+        "minScore": 70,
+        "items": ["price", "facilities"]
+      },
+      "overall": {
+        "minScore": 80,
+        "blockOnFailure": true
+      }
+    },
+    "seo": {
+      "minScore": 70,
+      "blockOnFailure": false,
+      "enabled": true
+    },
+    "content": {
+      "minScore": 70,
+      "blockOnFailure": false,
+      "minWordCount": 1500,
+      "enabled": true
+    },
+    "duplicate": {
+      "minScore": 100,
+      "blockOnFailure": false,
+      "similarityThreshold": 80,
+      "enabled": true
+    },
+    "image": {
+      "minScore": 70,
+      "blockOnFailure": false,
+      "enabled": true
+    }
+  },
+  "publishRequirements": {
+    "requiredGates": ["factcheck"],
+    "warningGates": ["seo", "content", "duplicate"]
+  },
+  "humanReview": {
+    "scoreRange": {
+      "min": 50,
+      "max": 70
+    },
+    "triggers": [
+      "score_50_70",
+      "sensitive_topic",
+      "new_venue",
+      "negative_feedback"
+    ]
+  },
+  "retry": {
+    "maxRetries": 3,
+    "backoffMs": [1000, 3000, 10000],
+    "fallbackStrategy": "manual"
+  }
+}

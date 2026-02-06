@@ -20,6 +20,10 @@ blog/.hugo_build.lock
 .DS_Store
 Thumbs.db
 
+# Credentials
+config/ga-credentials.json
+config/moltbook-credentials.json
+
 # IDE
 .idea/
 .vscode/

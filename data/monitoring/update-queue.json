@@ -1,0 +1,141 @@
+{
+  "plans": [
+    {
+      "postPath": "culture\\2026-02-04-mmca-exhibition.md",
+      "title": "국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁",
+      "updateType": "rewrite",
+      "estimatedEffort": "high",
+      "sections": [
+        {
+          "section": "이벤트/행사 정보",
+          "action": "update",
+          "reason": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+          "suggestion": "이벤트가 종료되었다면 해당 섹션을 \"과거 행사\"로 수정하거나, 새로운 행사 정보로 교체하세요."
+        },
+        {
+          "section": "시즌 관련 내용",
+          "action": "add",
+          "reason": "\"추석\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+          "suggestion": "현재 시즌에 맞는 정보를 추가하세요. 예: \"겨울에는...\" 또는 \"봄에는...\" 섹션 추가"
+        },
+        {
+          "section": "본문 콘텐츠",
+          "action": "add",
+          "reason": "체류 시간이 짧습니다.",
+          "suggestion": "이미지, 지도, 팁 박스 등 시각적 요소를 추가하여 콘텐츠를 풍성하게 만드세요."
+        }
+      ],
+      "reshareStrategy": {
+        "recommended": true,
+        "platform": "moltbook",
+        "timing": "after_update",
+        "newAngle": "2024년 완벽 정리",
+        "suggestedTitle": "국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁 (최신 업데이트)"
+      },
+      "priority": 10,
+      "expectedImpact": "high",
+      "generatedAt": "2026-02-05T13:06:46.385Z"
+    },
+    {
+      "postPath": "travel\\2026-02-04-2-5.md",
+      "title": "2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드",
+      "updateType": "rewrite",
+      "estimatedEffort": "high",
+      "sections": [
+        {
+          "section": "이벤트/행사 정보",
+          "action": "update",
+          "reason": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+          "suggestion": "이벤트가 종료되었다면 해당 섹션을 \"과거 행사\"로 수정하거나, 새로운 행사 정보로 교체하세요."
+        },
+        {
+          "section": "시즌 관련 내용",
+          "action": "add",
+          "reason": "\"봄\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+          "suggestion": "현재 시즌에 맞는 정보를 추가하세요. 예: \"겨울에는...\" 또는 \"봄에는...\" 섹션 추가"
+        },
+        {
+          "section": "본문 콘텐츠",
+          "action": "add",
+          "reason": "체류 시간이 짧습니다.",
+          "suggestion": "이미지, 지도, 팁 박스 등 시각적 요소를 추가하여 콘텐츠를 풍성하게 만드세요."
+        }
+      ],
+      "reshareStrategy": {
+        "recommended": true,
+        "platform": "moltbook",
+        "timing": "seasonal",
+        "newAngle": "시즌 특집으로 재포장",
+        "suggestedTitle": "[겨울 특집] 2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드"
+      },
+      "priority": 9,
+      "expectedImpact": "medium",
+      "generatedAt": "2026-02-05T13:06:46.383Z"
+    },
+    {
+      "postPath": "culture\\_index.md",
+      "title": "문화예술",
+      "updateType": "rewrite",
+      "estimatedEffort": "high",
+      "sections": [
+        {
+          "section": "이벤트/행사 정보",
+          "action": "update",
+          "reason": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+          "suggestion": "이벤트가 종료되었다면 해당 섹션을 \"과거 행사\"로 수정하거나, 새로운 행사 정보로 교체하세요."
+        },
+        {
+          "section": "본문 콘텐츠",
+          "action": "add",
+          "reason": "체류 시간이 짧습니다.",
+          "suggestion": "이미지, 지도, 팁 박스 등 시각적 요소를 추가하여 콘텐츠를 풍성하게 만드세요."
+        }
+      ],
+      "reshareStrategy": {
+        "recommended": false,
+        "platform": "moltbook",
+        "timing": "after_update"
+      },
+      "priority": 9,
+      "expectedImpact": "medium",
+      "generatedAt": "2026-02-05T13:06:46.387Z"
+    },
+    {
+      "postPath": "culture\\2026-02-05-2026-best-5.md",
+      "title": "2026 봄 뮤지컬 추천 BEST 5: 꼭 봐야 할 화제작 총정리",
+      "updateType": "rewrite",
+      "estimatedEffort": "high",
+      "sections": [
+        {
+          "section": "이벤트/행사 정보",
+          "action": "update",
+          "reason": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+          "suggestion": "이벤트가 종료되었다면 해당 섹션을 \"과거 행사\"로 수정하거나, 새로운 행사 정보로 교체하세요."
+        },
+        {
+          "section": "시즌 관련 내용",
+          "action": "add",
+          "reason": "\"봄\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+          "suggestion": "현재 시즌에 맞는 정보를 추가하세요. 예: \"겨울에는...\" 또는 \"봄에는...\" 섹션 추가"
+        },
+        {
+          "section": "본문 콘텐츠",
+          "action": "add",
+          "reason": "체류 시간이 짧습니다.",
+          "suggestion": "이미지, 지도, 팁 박스 등 시각적 요소를 추가하여 콘텐츠를 풍성하게 만드세요."
+        }
+      ],
+      "reshareStrategy": {
+        "recommended": true,
+        "platform": "moltbook",
+        "timing": "seasonal",
+        "newAngle": "시즌 특집으로 재포장",
+        "suggestedTitle": "[겨울 특집] 2026 봄 뮤지컬 추천 BEST 5: 꼭 봐야 할 화제작 총정리"
+      },
+      "priority": 9,
+      "expectedImpact": "medium",
+      "generatedAt": "2026-02-05T13:06:46.389Z"
+    }
+  ],
+  "lastUpdated": "2026-02-05T13:06:46.389Z"
+}

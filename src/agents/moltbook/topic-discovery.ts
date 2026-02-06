@@ -6,6 +6,7 @@ import { readFile, writeFile, mkdir, readdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { loadMoltbookConfig, MoltbookConfig } from './index.js';
+import SurveyInsightsDBManager from './survey-insights-db.js';
 
 // ============================================================================
 // 타입 정의
@@ -36,7 +37,7 @@ export interface TopicRecommendation {
   topic: string;
   type: 'travel' | 'culture';
   score: number;  // 0-100
-  source: 'moltbook_trending' | 'gap_analysis' | 'community_request';
+  source: 'moltbook_trending' | 'gap_analysis' | 'community_request' | 'survey_demand';
   reasoning: string;
   suggestedTitle: string;
   keywords: string[];
@@ -396,7 +397,13 @@ export class VotePostScanner {
     const submolts = submolt ? [submolt] : ['travel', 'culture'] as const;
 
     if (!this.config?.apiKey) {
-      console.log('⚠️ Moltbook API 키 없음 - 시뮬레이션 데이터 반환');
+      console.log('⚠️ Moltbook API 키 없음 - 로컬 서베이 데이터 확인');
+      const localResults = await this.loadActualSurveyResults();
+      if (localResults.length > 0) {
+        console.log(`   ✓ 로컬 서베이 데이터 ${localResults.length}건 로드`);
+        return localResults;
+      }
+      console.log('   ℹ️ 로컬 데이터 없음 - 시뮬레이션 데이터 반환');
       return this.generateSimulatedVotePosts();
     }
 
@@ -448,8 +455,13 @@ export class VotePostScanner {
       arr.findIndex(x => x.postId === r.postId) === i
     );
 
-    // API 성공했지만 결과 없으면 시뮬레이션 데이터 사용
+    // API 성공했지만 결과 없으면 로컬 데이터 → 시뮬레이션 순서로 폴백
     if (!apiSuccess || uniqueResults.length === 0) {
+      const localResults = await this.loadActualSurveyResults();
+      if (localResults.length > 0) {
+        console.log(`   ✓ 로컬 서베이 데이터 ${localResults.length}건 로드`);
+        return localResults;
+      }
       console.log('   ℹ️ 실제 데이터 없음 - 시뮬레이션 데이터 사용');
       return this.generateSimulatedVotePosts();
     }
@@ -585,6 +597,48 @@ export class VotePostScanner {
     }
 
     return Array.from(topics).slice(0, 10);
+  }
+
+  /**
+   * 로컬 survey-result.json에서 실제 서베이 데이터 로드
+   */
+  private async loadActualSurveyResults(): Promise<VotePostResult[]> {
+    const surveyPath = join(process.cwd(), 'data', 'feedback', 'survey-result.json');
+    if (!existsSync(surveyPath)) return [];
+
+    try {
+      const raw = await readFile(surveyPath, 'utf-8');
+      const data = JSON.parse(raw) as {
+        postId: string;
+        title: string;
+        totalResponses: number;
+        aggregated: {
+          topicVotes: Record<string, number>;
+          freeTexts: string[];
+        };
+      };
+
+      if (data.totalResponses === 0) return [];
+
+      const options = Object.entries(data.aggregated.topicVotes)
+        .map(([text, votes]) => ({ text, votes }));
+
+      const extractedTopics = options
+        .filter(o => o.votes > 0)
+        .map(o => o.text.replace(/^\d+\.\s*/, ''));
+
+      return [{
+        postId: data.postId,
+        question: data.title,
+        voteType: 'topic_request' as const,
+        options,
+        comments: data.aggregated.freeTexts || [],
+        extractedTopics,
+        extractedAt: new Date().toISOString()
+      }];
+    } catch {
+      return [];
+    }
   }
 
   /**
@@ -1120,7 +1174,8 @@ export class TopicRecommender {
   generateRecommendations(
     trending: MoltbookTrendingTopic[],
     gaps: TopicGap[],
-    communityRequests: string[] = []
+    communityRequests: string[] = [],
+    surveyBoosts?: Record<string, number>
   ): TopicRecommendation[] {
     const recommendations: TopicRecommendation[] = [];
 
@@ -1181,6 +1236,20 @@ export class TopicRecommender {
         keywords: this.extractRelatedKeywords(topic),
         discoveredAt: new Date().toISOString()
       });
+    }
+
+    // 서베이 부스트 적용
+    if (surveyBoosts && Object.keys(surveyBoosts).length > 0) {
+      for (const rec of recommendations) {
+        const allKeywords = [rec.topic, ...rec.keywords].join(' ');
+        for (const [keyword, boost] of Object.entries(surveyBoosts)) {
+          if (allKeywords.includes(keyword)) {
+            rec.score = Math.min(100, rec.score + boost);
+            rec.reasoning += ` | 서베이 수요 반영 (+${boost})`;
+            break; // 키워드당 1회만 부스트
+          }
+        }
+      }
     }
 
     // 점수로 정렬
@@ -1314,6 +1383,7 @@ export class TopicDiscovery {
     submolt?: 'travel' | 'culture';
     includeGaps?: boolean;
     communityRequests?: string[];
+    surveyBoosts?: Record<string, number>;
   } = {}): Promise<DiscoveryResult> {
     console.log('🔍 Moltbook 트렌드 스캔 중...');
 
@@ -1334,7 +1404,8 @@ export class TopicDiscovery {
     const recommendations = this.recommender.generateRecommendations(
       trending,
       gaps,
-      options.communityRequests || []
+      options.communityRequests || [],
+      options.surveyBoosts
     );
     console.log(`   ✓ ${recommendations.length}개 주제 추천`);
 
@@ -1367,11 +1438,20 @@ export class TopicDiscovery {
     console.log('   📡 2차원 강화 주제 발굴 시작');
     console.log('═══════════════════════════════════════════════════\n');
 
-    // 기본 발굴
+    // 서베이 인사이트 DB 로드
+    const surveyDb = new SurveyInsightsDBManager();
+    await surveyDb.load();
+    const surveyBoosts = surveyDb.getSurveyScoreBoosts();
+    if (Object.keys(surveyBoosts).length > 0) {
+      console.log(`📊 서베이 부스트 로드: ${Object.keys(surveyBoosts).length}개 키워드`);
+    }
+
+    // 기본 발굴 (서베이 부스트 포함)
     const baseResult = await this.discover({
       submolt: options.submolt,
       includeGaps: options.includeGaps,
-      communityRequests: options.communityRequests
+      communityRequests: options.communityRequests,
+      surveyBoosts
     });
 
     let openclawFeedback: OpenClawPostFeedback[] = [];
@@ -1436,6 +1516,27 @@ export class TopicDiscovery {
           console.log(`   🔥 인기 투표 옵션:`);
           allOptions.forEach(o => console.log(`      • ${o.text} (${o.votes} votes)`));
         }
+      }
+    }
+
+    // 서베이 고수요 주제 추가 추천 (기존에 없는 것만)
+    const surveyRecs = surveyDb.getStrategyRecommendations();
+    const existingTopics = new Set([
+      ...baseResult.recommendations.map(r => r.topic),
+      ...additionalRecommendations.map(r => r.topic)
+    ]);
+    for (const topicLabel of surveyRecs.priorityTopics.slice(0, 3)) {
+      if (!existingTopics.has(topicLabel)) {
+        additionalRecommendations.push({
+          topic: topicLabel,
+          type: 'culture',
+          score: 70,
+          source: 'survey_demand',
+          reasoning: `서베이 고수요 주제`,
+          suggestedTitle: `${topicLabel} 완벽 가이드`,
+          keywords: topicLabel.split('/').map(k => k.trim()),
+          discoveredAt: new Date().toISOString()
+        });
       }
     }
 
@@ -1573,7 +1674,7 @@ export class TopicDiscovery {
 
     // 큐 로드
     let queue: {
-      queue: Array<{ title: string; type: 'travel' | 'culture' }>;
+      queue: Array<{ title: string; type: 'travel' | 'culture'; meta?: Record<string, unknown> }>;
       discovered?: TopicRecommendation[];
       completed: Array<{ title: string; type: 'travel' | 'culture' }>;
       settings: Record<string, unknown>;
@@ -1613,7 +1714,13 @@ export class TopicDiscovery {
     for (const rec of suitable.slice(0, maxItems)) {
       queue.queue.push({
         title: rec.suggestedTitle,
-        type: rec.type
+        type: rec.type,
+        meta: {
+          score: rec.score,
+          source: rec.source,
+          discoveredAt: rec.discoveredAt,
+          keywords: rec.keywords
+        }
       });
       added++;
     }

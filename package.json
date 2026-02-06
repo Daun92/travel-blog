@@ -71,10 +71,17 @@
     "links:enhance": "tsx src/cli/index.ts links --published --enhance",
     "links:enhance:dry": "tsx src/cli/index.ts links --published --enhance --dry-run",
     "links:dry-run": "tsx src/cli/index.ts links --all --dry-run",
+    "survey": "tsx src/cli/index.ts survey",
+    "survey:ingest": "tsx src/cli/index.ts survey ingest",
+    "survey:status": "tsx src/cli/index.ts survey status",
+    "survey:boost": "tsx src/cli/index.ts survey boost",
+    "survey:strategy": "tsx src/cli/index.ts survey apply-strategy",
     "moltbook:auto": "tsx scripts/moltbook-auto-share.mts auto",
     "moltbook:once": "tsx scripts/moltbook-auto-share.mts once",
     "moltbook:status": "tsx scripts/moltbook-auto-share.mts status",
     "moltbook:scheduler": "tsx scripts/moltbook-scheduler.mts",
+    "popular": "tsx scripts/fetch-popular-posts.mts",
+    "popular:90": "tsx scripts/fetch-popular-posts.mts --days 90",
     "test": "vitest"
   },
   "keywords": [
@@ -88,6 +95,7 @@
   "license": "MIT",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.72.1",
+    "@google-analytics/data": "^5.2.1",
     "@google/generative-ai": "^0.24.1",
     "chalk": "^5.3.0",
     "commander": "^12.1.0",

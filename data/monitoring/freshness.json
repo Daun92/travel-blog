@@ -1,0 +1,359 @@
+[
+  {
+    "postPath": "travel\\2026-02-04-1.md",
+    "title": "경주 여행 완벽 가이드: 황리단길부터 야경 명소까지 1박 2일 코스 추천",
+    "publishedAt": "2026-02-04T14:43:16.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 76,
+    "outdatedIndicators": [
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"봄\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "봄"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"여름\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "여름"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"가을\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "가을"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      },
+      {
+        "type": "check_links",
+        "description": "외부 링크가 여전히 유효한지 확인하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.371Z"
+  },
+  {
+    "postPath": "travel\\2026-02-04-2-5.md",
+    "title": "2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드",
+    "publishedAt": "2026-02-04T13:35:58.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 77,
+    "outdatedIndicators": [
+      {
+        "type": "event_ended",
+        "severity": "high",
+        "message": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+        "location": "축제"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"봄\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "봄"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "refresh_info",
+        "description": "이벤트/행사 기간을 확인하고 종료된 경우 업데이트하세요.",
+        "effort": "low"
+      },
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      },
+      {
+        "type": "check_links",
+        "description": "외부 링크가 여전히 유효한지 확인하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "urgent",
+    "lastChecked": "2026-02-05T13:06:46.372Z"
+  },
+  {
+    "postPath": "travel\\2026-02-04-4.md",
+    "title": "부산 해운대 맛집 베스트 4 추천: 현지인도 줄 서는 로컬 찐맛집 총정리",
+    "publishedAt": "2026-02-04T13:49:49.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 92,
+    "outdatedIndicators": [
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"여름\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "여름"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      },
+      {
+        "type": "check_links",
+        "description": "외부 링크가 여전히 유효한지 확인하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.372Z"
+  },
+  {
+    "postPath": "travel\\2026-02-04-seoul-hanok-village.md",
+    "title": "서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책",
+    "publishedAt": "2026-02-04T01:00:00.000Z",
+    "daysSincePublish": 1,
+    "freshnessScore": 76,
+    "outdatedIndicators": [
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"봄\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "봄"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"여름\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "여름"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"가을\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "가을"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      }
+    ],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.373Z"
+  },
+  {
+    "postPath": "travel\\_index.md",
+    "title": "여행",
+    "publishedAt": "2026-02-05T13:06:46.377Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.377Z"
+  },
+  {
+    "postPath": "culture\\2026-02-04-mmca-exhibition.md",
+    "title": "국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁",
+    "publishedAt": "2026-02-04T02:00:00.000Z",
+    "daysSincePublish": 1,
+    "freshnessScore": 77,
+    "outdatedIndicators": [
+      {
+        "type": "event_ended",
+        "severity": "high",
+        "message": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+        "location": "전시회"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"추석\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "추석"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "refresh_info",
+        "description": "이벤트/행사 기간을 확인하고 종료된 경우 업데이트하세요.",
+        "effort": "low"
+      },
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      },
+      {
+        "type": "check_links",
+        "description": "외부 링크가 여전히 유효한지 확인하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "urgent",
+    "lastChecked": "2026-02-05T13:06:46.378Z"
+  },
+  {
+    "postPath": "culture\\_index.md",
+    "title": "문화예술",
+    "publishedAt": "2026-02-05T13:06:46.380Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 85,
+    "outdatedIndicators": [
+      {
+        "type": "event_ended",
+        "severity": "high",
+        "message": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+        "location": "전시회"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "refresh_info",
+        "description": "이벤트/행사 기간을 확인하고 종료된 경우 업데이트하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "urgent",
+    "lastChecked": "2026-02-05T13:06:46.380Z"
+  },
+  {
+    "postPath": "travel\\2026-02-05-7.md",
+    "title": "제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리",
+    "publishedAt": "2026-02-05T12:07:05.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.374Z"
+  },
+  {
+    "postPath": "travel\\2026-02-05-daegu-alley.md",
+    "title": "대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스",
+    "publishedAt": "2026-02-05T12:24:08.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [
+      {
+        "type": "check_links",
+        "description": "외부 링크가 여전히 유효한지 확인하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.374Z"
+  },
+  {
+    "postPath": "travel\\2026-02-05-gangneung-cafe.md",
+    "title": "강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드",
+    "publishedAt": "2026-02-05T12:19:26.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.375Z"
+  },
+  {
+    "postPath": "travel\\2026-02-05-jeonju-hanok.md",
+    "title": "전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스",
+    "publishedAt": "2026-02-05T12:15:39.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.376Z"
+  },
+  {
+    "postPath": "travel\\2026-02-05-yeosu-night.md",
+    "title": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
+    "publishedAt": "2026-02-05T12:25:04.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 92,
+    "outdatedIndicators": [
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"여름\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "여름"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      },
+      {
+        "type": "check_links",
+        "description": "외부 링크가 여전히 유효한지 확인하세요.",
+        "effort": "low"
+      }
+    ],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.376Z"
+  },
+  {
+    "postPath": "culture\\2026-02-05-2026-best-5.md",
+    "title": "2026 봄 뮤지컬 추천 BEST 5: 꼭 봐야 할 화제작 총정리",
+    "publishedAt": "2026-02-05T12:08:34.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 77,
+    "outdatedIndicators": [
+      {
+        "type": "event_ended",
+        "severity": "high",
+        "message": "이벤트/행사 관련 내용이 있습니다. 기간 확인이 필요합니다.",
+        "location": "공연"
+      },
+      {
+        "type": "seasonal_mismatch",
+        "severity": "medium",
+        "message": "\"봄\" 키워드가 현재 시즌(winter)과 맞지 않을 수 있습니다.",
+        "location": "봄"
+      }
+    ],
+    "updateSuggestions": [
+      {
+        "type": "refresh_info",
+        "description": "이벤트/행사 기간을 확인하고 종료된 경우 업데이트하세요.",
+        "effort": "low"
+      },
+      {
+        "type": "seasonal_update",
+        "description": "시즌에 맞는 내용을 추가하거나 시즌 정보를 업데이트하세요.",
+        "effort": "medium"
+      }
+    ],
+    "priority": "urgent",
+    "lastChecked": "2026-02-05T13:06:46.378Z"
+  },
+  {
+    "postPath": "culture\\2026-02-05-post.md",
+    "title": "국립중앙박물관 완벽 가이드: 필수 관람 코스와 숨은 명품 투어",
+    "publishedAt": "2026-02-05T13:01:23.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.379Z"
+  },
+  {
+    "postPath": "culture\\2026-02-05-seoul-museum.md",
+    "title": "서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천",
+    "publishedAt": "2026-02-05T12:24:39.000Z",
+    "daysSincePublish": 0,
+    "freshnessScore": 100,
+    "outdatedIndicators": [],
+    "updateSuggestions": [],
+    "priority": "low",
+    "lastChecked": "2026-02-05T13:06:46.380Z"
+  }
+]

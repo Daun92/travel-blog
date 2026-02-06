@@ -18,6 +18,7 @@ export interface NewCommandOptions {
   yes?: boolean; // 비대화 모드
   inlineImages?: boolean; // 인라인 이미지 생성
   imageCount?: number; // 인라인 이미지 개수
+  agent?: string; // 에이전트 페르소나 ID (viral|friendly|informative)
 }
 
 export async function newCommand(options: NewCommandOptions): Promise<void> {
@@ -43,6 +44,9 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
     console.log(`  • 유형: ${chalk.white(options.type === 'travel' ? '여행' : '문화예술')}`);
     console.log(`  • 길이: ${chalk.white(options.length)}`);
     console.log(`  • 초안: ${chalk.white(options.draft ? '예' : '아니오')}`);
+    if (options.agent) {
+      console.log(`  • 에이전트: ${chalk.magenta(options.agent)} (수동 지정)`);
+    }
 
     // 3. 키워드 파싱
     const keywords = options.keywords
@@ -185,6 +189,7 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       coverCaption: imageAttribution || undefined,
       inlineImages: useInlineImages,
       imageCount,
+      persona: options.agent,
       onProgress: (msg) => {
         spinner.text = msg;
       }
@@ -197,6 +202,7 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
     console.log(chalk.dim('─'.repeat(50)));
     console.log(`  📄 파일: ${chalk.cyan(result.filepath)}`);
     console.log(`  📝 제목: ${chalk.white(result.frontmatter.title)}`);
+    console.log(`  ✍️  작성: ${chalk.magenta(result.frontmatter.author || 'Blog Author')}${result.frontmatter.personaId ? chalk.dim(` (${result.frontmatter.personaId})`) : ''}`);
     console.log(`  🏷️  태그: ${chalk.dim(result.frontmatter.tags.join(', '))}`);
     console.log(`  📊 상태: ${result.frontmatter.draft ? chalk.yellow('초안') : chalk.green('발행 준비')}`);
 
