@@ -1,0 +1,218 @@
+{{/* OpenClaw Travel Blog - Footer Extensions */}}
+
+{{/* 푸터 소셜 아이콘 (저작권 영역에 삽입) */}}
+<template id="footer-social-template">
+  <span class="footer-social">
+    <a href="{{ site.BaseURL }}index.xml" title="RSS Feed" aria-label="RSS 피드">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>
+    </a>
+    <a href="https://github.com/Daun92/travel-blog" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub 저장소">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+    </a>
+  </span>
+</template>
+
+{{/* 스크롤 프로그레스 바 */}}
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+{{/* 라이트박스 오버레이 */}}
+<div class="lightbox-overlay" id="lightbox">
+  <span class="lightbox-close">&times;</span>
+  <img src="" alt="확대 이미지" id="lightbox-img">
+</div>
+
+{{/* 푸터 확장 영역 */}}
+<div class="footer-extra">
+  {{/* 인기 태그 */}}
+  <div class="footer-section">
+    <h4>인기 태그</h4>
+    <div class="footer-tags">
+      {{- range first 10 site.Taxonomies.tags.ByCount }}
+      <a href="{{ .Page.Permalink }}">{{ .Page.Title }}</a>
+      {{- end }}
+    </div>
+  </div>
+
+  {{/* 최근 포스트 */}}
+  <div class="footer-section">
+    <h4>최근 포스트</h4>
+    <ul class="footer-recent-posts">
+      {{- range first 5 (where site.RegularPages "Section" "posts") }}
+      <li>
+        <a href="{{ .Permalink }}">{{ .Title }}</a>
+        <div class="post-date">{{ .Date.Format "2006.01.02" }}</div>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+
+  {{/* 뉴스레터 구독 (선택적) */}}
+  {{/*
+  <div class="footer-section">
+    <h4>뉴스레터 구독</h4>
+    <p style="font-size: 0.9rem; color: var(--secondary); margin-bottom: 1rem;">
+      새로운 여행 정보를 이메일로 받아보세요.
+    </p>
+    <form class="newsletter-form" action="#" method="post">
+      <input type="email" placeholder="이메일 주소" required>
+      <button type="submit">구독</button>
+    </form>
+  </div>
+  */}}
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  // 푸터에 소셜 아이콘 삽입
+  var footerSocialTemplate = document.getElementById('footer-social-template');
+  var footer = document.querySelector('.footer');
+  if (footerSocialTemplate && footer) {
+    var socialClone = footerSocialTemplate.content.cloneNode(true);
+    footer.appendChild(socialClone);
+  }
+
+  // 스크롤 프로그레스 바
+  var progressBar = document.getElementById('progressBar');
+  if (progressBar) {
+    window.addEventListener('scroll', function() {
+      var winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+      progressBar.style.width = scrolled + '%';
+    }, { passive: true });
+  }
+
+  // TOC 활성 상태 추적
+  var tocLinks = document.querySelectorAll('.toc a');
+  if (tocLinks.length > 0) {
+    var headings = [];
+
+    tocLinks.forEach(function(link) {
+      var href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        var id = href.substring(1);
+        var heading = document.getElementById(id);
+        if (heading) {
+          headings.push({ element: heading, link: link });
+        }
+      }
+    });
+
+    if (headings.length > 0) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(function(l) {
+              l.classList.remove('active');
+            });
+            headings.forEach(function(h) {
+              if (h.element === entry.target) {
+                h.link.classList.add('active');
+              }
+            });
+          }
+        });
+      }, {
+        rootMargin: '-80px 0px -70% 0px',
+        threshold: 0
+      });
+
+      headings.forEach(function(h) {
+        observer.observe(h.element);
+      });
+    }
+  }
+
+  // 부드러운 스크롤 (TOC 링크)
+  document.querySelectorAll('.toc a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        var target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          var offset = 80;
+          var targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+    });
+  });
+
+  // 헤더 스크롤 Glass 효과
+  var header = document.querySelector('.header');
+  if (header) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+
+  // 스크롤 Reveal 애니메이션 (Intersection Observer)
+  var revealElements = document.querySelectorAll('.scroll-reveal, .footer-section, .related-post-card');
+  if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -50px 0px',
+      threshold: 0.1
+    });
+
+    revealElements.forEach(function(el) {
+      el.classList.add('scroll-reveal');
+      revealObserver.observe(el);
+    });
+  }
+
+  // 라이트박스 기능
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+  var lightboxClose = document.querySelector('.lightbox-close');
+
+  if (lightbox && lightboxImg) {
+    // 포스트 콘텐츠 내 이미지에 클릭 이벤트 추가
+    document.querySelectorAll('.post-content img').forEach(function(img) {
+      img.addEventListener('click', function() {
+        lightboxImg.src = this.src;
+        lightboxImg.alt = this.alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // 라이트박스 닫기
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox || e.target === lightboxClose) {
+        closeLightbox();
+      }
+    });
+
+    // ESC 키로 닫기
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        closeLightbox();
+      }
+    });
+  }
+})();
+</script>

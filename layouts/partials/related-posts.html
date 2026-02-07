@@ -1,0 +1,22 @@
+{{/* 관련 포스트 섹션 */}}
+{{ $related := site.RegularPages.Related . | first 4 }}
+{{ with $related }}
+<div class="related-posts">
+  <h3>관련 포스트</h3>
+  <div class="related-posts-grid">
+    {{ range . }}
+    <a href="{{ .Permalink }}" class="related-post-card">
+      {{ with .Params.cover.image }}
+      <div class="related-post-cover">
+        <img src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+      </div>
+      {{ end }}
+      <div class="related-post-content">
+        <h4>{{ .Title }}</h4>
+        <span class="related-post-date">{{ .Date.Format "2006.01.02" }}</span>
+      </div>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

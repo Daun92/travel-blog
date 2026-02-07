@@ -1,0 +1,1865 @@
+/*
+ * OpenClaw Travel Blog - Custom Styles
+ * 여행과 문화예술 블로그 스타일링
+ *
+ * Phase 1: 웹폰트 + 색상 + 카드 호버
+ * Phase 2: 히어로 + 링크 + 이미지
+ * Phase 3: 프로그레스 바 + TOC + 애니메이션
+ */
+
+/* ===========================================
+   PHASE 1: 즉시 효과
+   =========================================== */
+
+/* 1-1. 웹폰트 (Pretendard 통일) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+:root {
+  --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  letter-spacing: -0.02em;
+}
+
+h1, h2, h3, h4, h5, h6,
+.post-title,
+.entry-header h2,
+.first-entry .entry-header h1,
+.home-info-title {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+/* 1-2. 브랜드 색상 팔레트 */
+:root {
+  --brand-primary: #2563eb;
+  --brand-accent: #f59e0b;
+  --brand-primary-light: #3b82f6;
+  --brand-accent-light: #fbbf24;
+
+  /* 기존 테마 변수 오버라이드 */
+  --tertiary: #e2e8f0;
+}
+
+:root[data-theme="dark"] {
+  --brand-primary: #60a5fa;
+  --brand-accent: #fbbf24;
+  --brand-primary-light: #93c5fd;
+  --brand-accent-light: #fcd34d;
+
+  --tertiary: #475569;
+}
+
+/* 1-3. 포스트 카드 호버 효과 */
+.post-entry {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.post-entry:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.post-entry:active {
+  transform: translateY(-2px) scale(0.99);
+}
+
+:root[data-theme="dark"] .post-entry {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+:root[data-theme="dark"] .post-entry:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* 카드 이미지 호버 */
+.entry-cover {
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.entry-cover img {
+  transition: transform 0.4s ease;
+}
+
+.post-entry:hover .entry-cover img {
+  transform: scale(1.03);
+}
+
+/* ===========================================
+   PHASE 2: 첫인상 강화
+   =========================================== */
+
+/* 2-1. 히어로 섹션 - Gallery Spotlight */
+.home-info {
+  /* 다크 베이스 + 스팟라이트 */
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% 40%,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      transparent 70%
+    ),
+    #0a0a0a;
+
+  /* 대문으로서의 존재감 */
+  min-height: 420px;
+  padding: 0 2.5rem;
+  border-radius: 0;
+  color: #fafafa;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  /* 정중앙 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* 깊이감 */
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+  border: none;
+
+  /* 스팟라이트 애니메이션 */
+  transition: background 0.6s ease;
+}
+
+/* 상단 빛 줄기 효과 */
+.home-info::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.02) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0.8;
+  transition: opacity 0.6s ease, width 0.6s ease;
+}
+
+/* 바닥 반사광 */
+.home-info::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+/* 호버 시 스팟라이트 강화 */
+.home-info:hover {
+  background:
+    radial-gradient(
+      ellipse 90% 60% at 50% 40%,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0.08) 40%,
+      transparent 70%
+    ),
+    #0a0a0a;
+}
+
+.home-info:hover::before {
+  opacity: 1;
+  width: 280px;
+}
+
+/* 메인 타이틀 - 스팟라이트 타이포 + Gradient Sweep */
+.home-info .home-info-title,
+.home-info h1 {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  margin: 0 0 2.5rem 0;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+
+  /* Gradient Sweep 텍스트 */
+  background: linear-gradient(
+    90deg,
+    #fafafa 0%,
+    #fafafa 40%,
+    #fff 50%,
+    #fafafa 60%,
+    #fafafa 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+
+  /* 빛 효과 (text-shadow는 투명 텍스트에 적용 안됨, filter 사용) */
+  filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.25))
+          drop-shadow(0 0 80px rgba(255, 255, 255, 0.1));
+
+  /* Sweep 애니메이션 */
+  animation: gradientSweep 4s ease-in-out infinite;
+
+  /* 세련된 렌더링 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  transition: filter 0.4s ease;
+}
+
+/* Gradient Sweep 키프레임 */
+@keyframes gradientSweep {
+  0%, 100% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 0% 50%;
+  }
+}
+
+/* 호버 시 glow 강화 + sweep 가속 */
+.home-info:hover .home-info-title,
+.home-info:hover h1 {
+  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.4))
+          drop-shadow(0 0 120px rgba(255, 255, 255, 0.15));
+  animation-duration: 2.5s;
+}
+
+/* 골드 악센트 라인 */
+.home-info .home-info-title::after,
+.home-info h1::after {
+  content: '';
+  position: absolute;
+  bottom: -1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #c9a962,
+    transparent
+  );
+  transition: width 0.4s ease, opacity 0.4s ease;
+  opacity: 0.8;
+}
+
+.home-info:hover .home-info-title::after,
+.home-info:hover h1::after {
+  width: 6rem;
+  opacity: 1;
+}
+
+/* 서브 텍스트 */
+.home-info .entry-content {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  transition: color 0.4s ease;
+}
+
+.home-info:hover .entry-content {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.home-info .entry-content p {
+  margin: 0;
+}
+
+/* 내부 요소 마진 리셋 */
+.home-info .entry-header {
+  margin: 0;
+  padding: 0;
+}
+
+.home-info .entry-header h1,
+.home-info .entry-header .home-info-title {
+  margin: 0 0 2.5rem 0;
+}
+
+/* ===== 다크 모드: 더 깊은 어둠 ===== */
+:root[data-theme="dark"] .home-info {
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% 40%,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.03) 40%,
+      transparent 70%
+    ),
+    #050505;
+
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+:root[data-theme="dark"] .home-info:hover {
+  background:
+    radial-gradient(
+      ellipse 90% 60% at 50% 40%,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 40%,
+      transparent 70%
+    ),
+    #050505;
+}
+
+:root[data-theme="dark"] .home-info .home-info-title,
+:root[data-theme="dark"] .home-info h1 {
+  /* 다크모드: 더 밝은 sweep 효과 */
+  background: linear-gradient(
+    90deg,
+    #f5f5f5 0%,
+    #f5f5f5 40%,
+    #ffffff 50%,
+    #f5f5f5 60%,
+    #f5f5f5 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+:root[data-theme="dark"] .home-info .entry-content {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+:root[data-theme="dark"] .home-info:hover .entry-content {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* 2-2. 링크 밑줄 애니메이션 */
+.post-content a:not(.anchor):not(.entry-link) {
+  color: var(--brand-primary);
+  text-decoration: none;
+  background-image: linear-gradient(var(--brand-accent), var(--brand-accent));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease, color 0.2s ease;
+  padding-bottom: 1px;
+}
+
+.post-content a:not(.anchor):not(.entry-link):hover {
+  background-size: 100% 2px;
+  color: var(--brand-primary-light);
+}
+
+/* TOC 링크 */
+.toc a {
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+.toc a:hover {
+  color: var(--brand-primary);
+  padding-left: 4px;
+}
+
+/* 2-3. 이미지 스타일 강화 */
+.post-content img {
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-content img:hover {
+  transform: scale(1.01);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] .post-content img {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+:root[data-theme="dark"] .post-content img:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Figure 캡션 */
+.post-content figure {
+  margin: 2rem 0;
+}
+
+.post-content figure > figcaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--secondary);
+  margin-top: 0.75rem;
+}
+
+.post-content figure > figcaption > p {
+  font-style: italic;
+}
+
+/* 커버 이미지 */
+.entry-cover img {
+  border-radius: var(--radius);
+}
+
+/* ===========================================
+   PHASE 3: 경험 고도화
+   =========================================== */
+
+/* 3-1. 스크롤 프로그레스 바 */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 9999;
+  background: transparent;
+}
+
+.progress-bar {
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+  width: 0%;
+  transition: width 0.1s ease-out;
+}
+
+/* 3-2. TOC 활성화 스타일 */
+.toc a.active {
+  color: var(--brand-primary);
+  font-weight: 600;
+  padding-left: 4px;
+}
+
+.toc {
+  border-left: 3px solid var(--brand-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* 3-3. 페이지 전환 애니메이션 */
+.main {
+  animation: fadeInUp 0.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3-4. 버튼 & 태그 호버 */
+.post-tags a {
+  transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.post-tags a:hover {
+  background-color: var(--brand-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.pagination a,
+.paginav a {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pagination a:hover,
+.paginav a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 3-5. 인용문 스타일 */
+.post-content blockquote {
+  border-left: 4px solid var(--brand-primary);
+  background: var(--code-bg);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+:root[data-theme="dark"] .post-content blockquote {
+  background: var(--entry);
+}
+
+.post-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* 3-6. 제목 하단 구분선 */
+.post-content h2 {
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--tertiary);
+}
+
+/* 3-7. 네비게이션 메뉴 활성화 */
+#menu a {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+#menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--brand-primary);
+  transition: width 0.3s ease;
+}
+
+#menu a:hover::after {
+  width: 100%;
+}
+
+#menu .active {
+  border-bottom: none;
+}
+
+#menu .active::after {
+  width: 100%;
+  background: var(--brand-accent);
+}
+
+/* ===========================================
+   추가 개선
+   =========================================== */
+
+/* 소셜 아이콘 호버 */
+.social-icons a {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px);
+  color: var(--brand-primary);
+}
+
+/* 검색창 포커스 */
+#searchbox input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#searchbox input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* 코드 복사 버튼 */
+.copy-code {
+  transition: background-color 0.2s ease;
+}
+
+.copy-code:hover {
+  background: var(--brand-primary);
+}
+
+/* First Entry - 스팟라이트 스타일 */
+.first-entry {
+  border: none;
+  border-radius: 0;
+}
+
+.first-entry.home-info {
+  margin-bottom: 2rem;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+  .home-info {
+    min-height: 320px;
+    padding: 0 1.5rem;
+  }
+
+  .home-info .home-info-title,
+  .home-info h1 {
+    font-size: 2rem;
+    letter-spacing: 0.08em;
+    /* 모바일: 느린 sweep */
+    animation-duration: 5s;
+  }
+
+  .home-info .entry-content {
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .home-info::before {
+    width: 150px;
+  }
+
+  .home-info:hover::before {
+    width: 200px;
+  }
+
+  .post-entry:hover {
+    transform: translateY(-2px);
+  }
+
+  .post-content img {
+    border-radius: 8px;
+  }
+}
+
+/* home-info 푸터 영역 숨기기 (소셜 아이콘 포함) */
+.home-info .entry-footer,
+.home-info .social-icons,
+.first-entry.home-info .entry-footer {
+  display: none !important;
+}
+
+/* 접근성: 포커스 스타일 */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--brand-primary);
+  outline-offset: 2px;
+}
+
+/* 인쇄 스타일 */
+@media print {
+  .progress-container,
+  .social-icons,
+  .share-buttons {
+    display: none !important;
+  }
+}
+
+/* ===========================================
+   PHASE 4: 추가 개선 요청
+   =========================================== */
+
+/* 4-1. TOC 가시성 강화 */
+.toc {
+  background: var(--code-bg);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.toc details summary {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--brand-primary);
+  margin-bottom: 0.5rem;
+}
+
+.toc .inner {
+  padding-top: 0.5rem;
+}
+
+.toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.toc li {
+  padding: 0.35rem 0;
+  border-left: 2px solid transparent;
+  padding-left: 0.75rem;
+  margin-left: 0;
+}
+
+.toc li:has(a.active) {
+  border-left-color: var(--brand-primary);
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.toc a.active {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+/* 4-2. 인포그래픽 이미지 스타일 강화 */
+.post-content img {
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+}
+
+.post-content img:hover {
+  border-color: var(--brand-primary);
+}
+
+/* 라이트박스 오버레이 */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border: none;
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.lightbox-close:hover {
+  opacity: 1;
+}
+
+/* 4-3. 푸터 영역 확장 */
+.footer {
+  padding-top: 2rem;
+}
+
+/* 푸터 상단 섹션 */
+.footer-extra {
+  max-width: calc(var(--nav-width) + var(--gap) * 2);
+  margin: 0 auto 2rem;
+  padding: 0 var(--gap);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section {
+  padding: 1.25rem;
+  background: var(--entry);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.footer-section h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* 인기 태그 */
+.footer-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.footer-tags a {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  background: var(--code-bg);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--secondary);
+  transition: all 0.2s ease;
+}
+
+.footer-tags a:hover {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
+/* 최근 포스트 */
+.footer-recent-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-recent-posts li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.footer-recent-posts li:last-child {
+  border-bottom: none;
+}
+
+.footer-recent-posts a {
+  color: var(--primary);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+  display: block;
+  line-height: 1.4;
+}
+
+.footer-recent-posts a:hover {
+  color: var(--brand-primary);
+}
+
+.footer-recent-posts .post-date {
+  font-size: 0.8rem;
+  color: var(--secondary);
+  margin-top: 0.25rem;
+}
+
+/* 뉴스레터 폼 */
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--theme);
+  color: var(--primary);
+  font-size: 0.9rem;
+}
+
+.newsletter-form input[type="email"]:focus {
+  border-color: var(--brand-primary);
+  outline: none;
+}
+
+.newsletter-form button {
+  padding: 0.6rem 1.25rem;
+  background: var(--brand-primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.newsletter-form button:hover {
+  background: var(--brand-primary-light);
+}
+
+/* 반응형 푸터 */
+@media (max-width: 768px) {
+  .footer-extra {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================================
+   PHASE 5: A,B,C,D 통합 개선
+   =========================================== */
+
+/* 5-1. 읽기 시간 스타일링 (A: SEO/성능) */
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.post-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* 5-2. 관련 포스트 (B: 콘텐츠 경험) */
+.related-posts {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.related-posts h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+  color: var(--primary);
+}
+
+.related-posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.related-post-card {
+  display: block;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.related-post-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.related-post-cover {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+.related-post-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.related-post-card:hover .related-post-cover img {
+  transform: scale(1.05);
+}
+
+.related-post-content {
+  padding: 0.875rem;
+}
+
+.related-post-content h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+  color: var(--primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.related-post-date {
+  font-size: 0.8rem;
+  color: var(--secondary);
+}
+
+/* 5-3. 시리즈 네비게이션 (B: 콘텐츠 경험) */
+.series-nav {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--brand-primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.series-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.series-label {
+  background: var(--brand-primary);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.series-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+  flex: 1;
+}
+
+.series-count {
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+.series-list {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.series-list li {
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+}
+
+.series-list li a {
+  color: var(--secondary);
+  transition: color 0.2s ease;
+}
+
+.series-list li a:hover {
+  color: var(--brand-primary);
+}
+
+.series-list li.current {
+  font-weight: 600;
+}
+
+.series-list li.current span {
+  color: var(--brand-primary);
+}
+
+/* 5-4. 공유 버튼 스타일링 (C: 참여 유도) */
+.share-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--code-bg);
+  border-radius: var(--radius);
+}
+
+.share-buttons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--entry);
+  color: var(--secondary);
+  transition: all 0.2s ease;
+}
+
+.share-buttons a:hover {
+  background: var(--brand-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.share-buttons svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* 5-5. 댓글 섹션 스타일 (C: 참여 유도) */
+.comments {
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Giscus/Utterances 컨테이너 */
+.giscus,
+.utterances {
+  max-width: 100%;
+}
+
+/* 5-6. 반응형 조정 */
+@media (max-width: 768px) {
+  .related-posts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .series-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .share-buttons {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 480px) {
+  .related-posts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===========================================
+   PHASE 5-D: 페이지 완성
+   =========================================== */
+
+/* 404 페이지 */
+.not-found {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.not-found-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.not-found-icon {
+  color: var(--brand-primary);
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.not-found-title {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--brand-primary);
+  margin: 0;
+  line-height: 1;
+}
+
+.not-found-message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin: 1rem 0 0.5rem;
+}
+
+.not-found-description {
+  color: var(--secondary);
+  margin-bottom: 2rem;
+}
+
+.not-found-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.not-found-actions .btn-primary,
+.not-found-actions .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.not-found-actions .btn-primary {
+  background: var(--brand-primary);
+  color: #fff;
+}
+
+.not-found-actions .btn-primary:hover {
+  background: var(--brand-primary-light);
+  transform: translateY(-2px);
+}
+
+.not-found-actions .btn-secondary {
+  background: var(--code-bg);
+  color: var(--primary);
+  border: 1px solid var(--border);
+}
+
+.not-found-actions .btn-secondary:hover {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+}
+
+.not-found-suggestions {
+  text-align: left;
+  background: var(--code-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+}
+
+.not-found-suggestions h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.not-found-suggestions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.not-found-suggestions li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.not-found-suggestions li:last-child {
+  border-bottom: none;
+}
+
+.not-found-suggestions a {
+  color: var(--secondary);
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.not-found-suggestions a:hover {
+  color: var(--brand-primary);
+}
+
+/* 아카이브 페이지 */
+.archive-entry {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.archive-entry:last-child {
+  border-bottom: none;
+}
+
+.archive-entry .entry-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.archive-entry .entry-hint {
+  font-size: 0.85rem;
+}
+
+.archive-year {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--brand-primary);
+}
+
+.archive-month {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--secondary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.archive-count {
+  font-size: 0.85rem;
+  color: var(--secondary);
+  font-weight: normal;
+  margin-left: 0.5rem;
+}
+
+/* 카테고리/태그 페이지 */
+.terms-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.terms-tags a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 25px;
+  font-size: 0.9rem;
+  color: var(--primary);
+  transition: all 0.2s ease;
+}
+
+.terms-tags a:hover {
+  background: var(--brand-primary);
+  border-color: var(--brand-primary);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.terms-tags .count {
+  background: var(--code-bg);
+  color: var(--secondary);
+  font-size: 0.8rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+  margin-left: 0.5rem;
+}
+
+.terms-tags a:hover .count {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* 섹션 리스트 페이지 헤더 */
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-header .term-description {
+  color: var(--secondary);
+  font-size: 1rem;
+}
+
+/* ===========================================
+   PHASE 6: 고급화 (A+B+C+E)
+   =========================================== */
+
+/* ===========================================
+   6-1. 카테고리 색상 시스템 (B)
+   =========================================== */
+
+:root {
+  /* 카테고리 컬러 */
+  --category-travel: #0ea5e9;    /* sky-500 */
+  --category-culture: #a855f7;   /* purple-500 */
+  --category-travel-light: #38bdf8;
+  --category-culture-light: #c084fc;
+  --category-travel-dark: #0284c7;
+  --category-culture-dark: #9333ea;
+}
+
+:root[data-theme="dark"] {
+  --category-travel: #38bdf8;
+  --category-culture: #c084fc;
+  --category-travel-light: #7dd3fc;
+  --category-culture-light: #d8b4fe;
+}
+
+/* 카드 상단 컬러 바 indicator */
+.post-entry {
+  position: relative;
+  overflow: hidden;
+}
+
+.post-entry::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--tertiary);
+  transition: background 0.3s ease;
+}
+
+/* travel 카테고리 */
+.post-entry[data-category="travel"]::before,
+.post-entry:has(a[href*="/travel/"])::before {
+  background: linear-gradient(90deg, var(--category-travel), var(--category-travel-light));
+}
+
+/* culture 카테고리 */
+.post-entry[data-category="culture"]::before,
+.post-entry:has(a[href*="/culture/"])::before {
+  background: linear-gradient(90deg, var(--category-culture), var(--category-culture-light));
+}
+
+/* 카테고리 배지 스타일 */
+.post-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.6rem;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.post-category-badge.travel {
+  background: rgba(14, 165, 233, 0.15);
+  color: var(--category-travel-dark);
+}
+
+.post-category-badge.culture {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--category-culture-dark);
+}
+
+:root[data-theme="dark"] .post-category-badge.travel {
+  background: rgba(56, 189, 248, 0.2);
+  color: var(--category-travel);
+}
+
+:root[data-theme="dark"] .post-category-badge.culture {
+  background: rgba(192, 132, 252, 0.2);
+  color: var(--category-culture);
+}
+
+/* 아카이브 카테고리 구분선 */
+.archive-entry[data-category="travel"] {
+  border-left: 3px solid var(--category-travel);
+  padding-left: 1rem;
+}
+
+.archive-entry[data-category="culture"] {
+  border-left: 3px solid var(--category-culture);
+  padding-left: 1rem;
+}
+
+/* ===========================================
+   6-2. 그림자 계층화 시스템 (E)
+   =========================================== */
+
+:root {
+  /* Elevation 시스템 */
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
+  --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.14), 0 8px 16px rgba(0, 0, 0, 0.08);
+
+  /* 브랜드 컬러 그림자 */
+  --shadow-brand: 0 4px 14px rgba(37, 99, 235, 0.25);
+  --shadow-accent: 0 4px 14px rgba(245, 158, 11, 0.25);
+  --shadow-travel: 0 4px 14px rgba(14, 165, 233, 0.25);
+  --shadow-culture: 0 4px 14px rgba(168, 85, 247, 0.25);
+}
+
+:root[data-theme="dark"] {
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-2: 0 2px 4px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --shadow-3: 0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-4: 0 8px 16px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-5: 0 16px 32px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.25);
+
+  /* 다크모드 Glow 효과 */
+  --glow-brand: 0 0 20px rgba(96, 165, 250, 0.3);
+  --glow-accent: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+/* 이미지: Level 2 */
+.post-content img {
+  box-shadow: var(--shadow-2);
+}
+
+.post-content img:hover {
+  box-shadow: var(--shadow-4);
+}
+
+/* 카드: Level 3 */
+.post-entry {
+  box-shadow: var(--shadow-2);
+}
+
+.post-entry:hover {
+  box-shadow: var(--shadow-4);
+}
+
+/* 호버 시 브랜드 컬러 그림자 */
+.post-entry:has(a[href*="/travel/"]):hover {
+  box-shadow: var(--shadow-travel);
+}
+
+.post-entry:has(a[href*="/culture/"]):hover {
+  box-shadow: var(--shadow-culture);
+}
+
+/* 모달/라이트박스: Level 5 */
+.lightbox-overlay img {
+  box-shadow: var(--shadow-5);
+}
+
+/* First Entry 특별 그림자 (home-info 제외) */
+.first-entry:not(.home-info) {
+  box-shadow: var(--shadow-3);
+}
+
+.first-entry:not(.home-info):hover {
+  box-shadow: var(--shadow-brand);
+}
+
+/* 다크모드 Glow */
+:root[data-theme="dark"] .first-entry:not(.home-info):hover {
+  box-shadow: var(--glow-brand);
+}
+
+:root[data-theme="dark"] .post-entry:hover {
+  box-shadow: var(--shadow-4), var(--glow-brand);
+}
+
+/* ===========================================
+   6-3. 마이크로인터랙션 (A)
+   =========================================== */
+
+/* 카드 진입 Stagger 애니메이션 */
+.post-entry {
+  --stagger-delay: 0;
+  animation: slideUpFade 0.5s ease calc(var(--stagger-delay) * 0.08s) both;
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 첫 번째 ~ 여덟 번째 카드 순차 등장 */
+.post-entry:nth-child(1) { --stagger-delay: 1; }
+.post-entry:nth-child(2) { --stagger-delay: 2; }
+.post-entry:nth-child(3) { --stagger-delay: 3; }
+.post-entry:nth-child(4) { --stagger-delay: 4; }
+.post-entry:nth-child(5) { --stagger-delay: 5; }
+.post-entry:nth-child(6) { --stagger-delay: 6; }
+.post-entry:nth-child(7) { --stagger-delay: 7; }
+.post-entry:nth-child(8) { --stagger-delay: 8; }
+
+/* 버튼/링크 Ripple 효과 */
+.btn-primary,
+.btn-secondary,
+.pagination a,
+.paginav a {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after,
+.btn-secondary::after,
+.pagination a::after,
+.paginav a::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+
+.btn-primary:active::after,
+.btn-secondary:active::after,
+.pagination a:active::after,
+.paginav a:active::after {
+  width: 200px;
+  height: 200px;
+  opacity: 1;
+  transition: width 0s, height 0s, opacity 0s;
+}
+
+/* 태그 호버 확산 효과 */
+.post-tags a {
+  position: relative;
+  z-index: 1;
+}
+
+.post-tags a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--brand-primary);
+  border-radius: inherit;
+  transform: scale(0);
+  transition: transform 0.25s ease;
+  z-index: -1;
+}
+
+.post-tags a:hover::before {
+  transform: scale(1);
+}
+
+.post-tags a:hover {
+  background: transparent;
+}
+
+/* 스크롤 트리거 Fade-in (CSS only, JS 보완) */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===========================================
+   6-4. Glass Morphism (C)
+   =========================================== */
+
+/* TOC Glass 효과 */
+@supports (backdrop-filter: blur(12px)) {
+  .toc {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  :root[data-theme="dark"] .toc {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 라이트박스 Glass 오버레이 */
+@supports (backdrop-filter: blur(8px)) {
+  .lightbox-overlay {
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* 헤더 스크롤 시 Glass 효과 */
+@supports (backdrop-filter: blur(10px)) {
+  .header.scrolled {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  :root[data-theme="dark"] .header.scrolled {
+    background: rgba(15, 23, 42, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* 카드 호버 시 Glass 레이어 */
+@supports (backdrop-filter: blur(4px)) {
+  .post-entry:hover .entry-content {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  :root[data-theme="dark"] .post-entry:hover .entry-content {
+    background: rgba(30, 41, 59, 0.5);
+  }
+}
+
+/* Footer 섹션 Glass */
+@supports (backdrop-filter: blur(8px)) {
+  .footer-section {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  :root[data-theme="dark"] .footer-section {
+    background: rgba(30, 41, 59, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Glass 미지원 브라우저 폴백 */
+@supports not (backdrop-filter: blur(1px)) {
+  .toc {
+    background: var(--code-bg);
+  }
+
+  .lightbox-overlay {
+    background: rgba(0, 0, 0, 0.92);
+  }
+
+  .footer-section {
+    background: var(--entry);
+  }
+}
+
+/* ===========================================
+   6-5. 푸터 소셜 아이콘
+   =========================================== */
+
+/* 푸터 소셜 아이콘 (저작권 영역) */
+.footer-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--secondary);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.footer-social a:hover {
+  color: var(--brand-primary);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.footer-social svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ===========================================
+   6-6. 카드 텍스트 정렬 계층화
+   =========================================== */
+
+/* 카드 내부 레이아웃 */
+.entry-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 제목: 왼쪽 정렬 */
+.entry-header h2 {
+  text-align: left;
+}
+
+/* 요약: 왼쪽 정렬 */
+.entry-content p {
+  text-align: left;
+}
+
+/* 하단 메타 정보: 우측 정렬 */
+.entry-footer {
+  text-align: right;
+  margin-top: auto;
+}
+
+.post-entry .entry-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* 날짜, 읽기 시간 등 */
+.entry-footer time,
+.entry-footer .entry-hint {
+  text-align: right;
+}
+
+/* Post Meta (싱글 페이지) */
+.post-meta {
+  justify-content: flex-end;
+}
+
+/* 리스트 뷰 카드 정렬 */
+.post-entry article {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 태그는 왼쪽 정렬 유지 */
+.post-tags {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+/* 아카이브 엔트리 */
+.archive-entry {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.archive-entry .entry-title {
+  flex: 1;
+  text-align: left;
+}
+
+.archive-entry .entry-hint {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* 반응형에서 스택 레이아웃 */
+@media (max-width: 480px) {
+  .archive-entry {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .archive-entry .entry-hint {
+    text-align: left;
+  }
+}
+
+/* ===========================================
+   접근성: 모션 감소 설정
+   =========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .post-entry,
+  .scroll-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  /* 타이틀 Gradient Sweep 비활성화 */
+  .home-info .home-info-title,
+  .home-info h1 {
+    animation: none;
+    background: none;
+    color: #fafafa;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+
+  :root[data-theme="dark"] .home-info .home-info-title,
+  :root[data-theme="dark"] .home-info h1 {
+    color: #f5f5f5;
+  }
+
+  .btn-primary::after,
+  .btn-secondary::after,
+  .pagination a::after,
+  .paginav a::after,
+  .post-tags a::before {
+    display: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

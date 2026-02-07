@@ -1,0 +1,32 @@
+{{ define "main" }}
+<article class="post-single not-found">
+  <div class="not-found-content">
+    <div class="not-found-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+      </svg>
+    </div>
+    <h1 class="not-found-title">404</h1>
+    <p class="not-found-message">페이지를 찾을 수 없습니다</p>
+    <p class="not-found-description">
+      요청하신 페이지가 존재하지 않거나 이동되었을 수 있습니다.
+    </p>
+    <div class="not-found-actions">
+      <a href="{{ "/" | relLangURL }}" class="btn-primary">홈으로 돌아가기</a>
+      <a href="{{ "/search/" | relLangURL }}" class="btn-secondary">검색하기</a>
+    </div>
+
+    <div class="not-found-suggestions">
+      <h3>인기 포스트</h3>
+      <ul>
+        {{ range first 5 site.RegularPages.ByDate.Reverse }}
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</article>
+{{ end }}
