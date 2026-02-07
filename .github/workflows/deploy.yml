@@ -2,10 +2,11 @@
 name: Deploy Hugo site to Pages
 
 on:
-  # main 브랜치에 푸시될 때 실행
+  # main 또는 master 브랜치에 푸시될 때 실행
   push:
     branches:
       - main
+      - master
 
   # Actions 탭에서 수동 실행 허용
   workflow_dispatch:
@@ -53,7 +54,7 @@ jobs:
 
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-        working-directory: ./blog
+        working-directory: .
 
       - name: Build with Hugo
         env:
@@ -65,12 +66,12 @@ jobs:
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
-        working-directory: ./blog
+        working-directory: .
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./blog/public
+          path: ./public
 
   # 배포 작업
   deploy:
