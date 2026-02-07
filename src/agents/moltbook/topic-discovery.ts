@@ -36,12 +36,30 @@ export interface TopicGap {
 export interface TopicRecommendation {
   topic: string;
   type: 'travel' | 'culture';
-  score: number;  // 0-100
-  source: 'moltbook_trending' | 'gap_analysis' | 'community_request' | 'survey_demand';
+  score: number;  // 0-200 (enhanced) or 0-100 (legacy)
+  source: 'moltbook_trending' | 'gap_analysis' | 'community_request' | 'survey_demand' | 'event_calendar';
   reasoning: string;
   suggestedTitle: string;
   keywords: string[];
   discoveredAt: string;
+  /** 점수 내역 (enhanced scorer 사용 시) */
+  scoreBreakdown?: {
+    base: number;
+    surveyBoost: number;
+    eventBoost: number;
+    seasonalMultiplier: number;
+    timeDecay: number;
+    performanceFeedback: number;
+    final: number;
+  };
+  /** 자동 배정된 페르소나 */
+  personaId?: 'viral' | 'friendly' | 'informative';
+  /** 이벤트 연결 메타데이터 */
+  eventMeta?: {
+    eventId: string;
+    eventTitle: string;
+    contentType: string;
+  };
 }
 
 export interface DiscoveryResult {
@@ -1175,7 +1193,8 @@ export class TopicRecommender {
     trending: MoltbookTrendingTopic[],
     gaps: TopicGap[],
     communityRequests: string[] = [],
-    surveyBoosts?: Record<string, number>
+    surveyBoosts?: Record<string, number>,
+    eventRecommendations?: TopicRecommendation[]
   ): TopicRecommendation[] {
     const recommendations: TopicRecommendation[] = [];
 
@@ -1244,10 +1263,29 @@ export class TopicRecommender {
         const allKeywords = [rec.topic, ...rec.keywords].join(' ');
         for (const [keyword, boost] of Object.entries(surveyBoosts)) {
           if (allKeywords.includes(keyword)) {
-            rec.score = Math.min(100, rec.score + boost);
+            rec.score = Math.min(200, rec.score + boost);
             rec.reasoning += ` | 서베이 수요 반영 (+${boost})`;
             break; // 키워드당 1회만 부스트
           }
+        }
+      }
+    }
+
+    // 이벤트 기반 추천 병합
+    if (eventRecommendations && eventRecommendations.length > 0) {
+      for (const eventRec of eventRecommendations) {
+        const existing = recommendations.find(r => r.topic === eventRec.topic);
+        if (!existing) {
+          recommendations.push(eventRec);
+        } else if (eventRec.score > existing.score) {
+          // 이벤트 점수가 높으면 대체
+          Object.assign(existing, {
+            score: eventRec.score,
+            scoreBreakdown: eventRec.scoreBreakdown,
+            personaId: eventRec.personaId,
+            eventMeta: eventRec.eventMeta,
+            reasoning: `${eventRec.reasoning} | ${existing.reasoning}`
+          });
         }
       }
     }
@@ -1384,6 +1422,7 @@ export class TopicDiscovery {
     includeGaps?: boolean;
     communityRequests?: string[];
     surveyBoosts?: Record<string, number>;
+    eventRecommendations?: TopicRecommendation[];
   } = {}): Promise<DiscoveryResult> {
     console.log('🔍 Moltbook 트렌드 스캔 중...');
 
@@ -1399,13 +1438,14 @@ export class TopicDiscovery {
       console.log(`   ✓ ${gaps.length}개 콘텐츠 갭 발견`);
     }
 
-    // 3. 추천 생성
+    // 3. 추천 생성 (이벤트 추천 포함)
     console.log('💡 추천 생성 중...');
     const recommendations = this.recommender.generateRecommendations(
       trending,
       gaps,
       options.communityRequests || [],
-      options.surveyBoosts
+      options.surveyBoosts,
+      options.eventRecommendations
     );
     console.log(`   ✓ ${recommendations.length}개 주제 추천`);
 

@@ -9,6 +9,7 @@ import { loadMoltbookConfig } from '../../agents/moltbook/index.js';
 import TopicDiscovery, { TopicRecommendation } from '../../agents/moltbook/topic-discovery.js';
 import CommunityRequestExtractor from '../../agents/moltbook/community-requests.js';
 import SurveyInsightsDBManager from '../../agents/moltbook/survey-insights-db.js';
+import { EventCalendarScanner } from '../../agents/events/event-scanner.js';
 
 interface TopicItem {
   title: string;
@@ -67,6 +68,40 @@ async function saveQueue(queue: TopicQueue): Promise<void> {
   await writeFile(queuePath, JSON.stringify(queue, null, 2), 'utf-8');
 }
 
+/**
+ * travel/culture 비율 밸런싱
+ */
+function balanceByRatio(
+  recommendations: TopicRecommendation[],
+  ratio: number,
+  minScore: number,
+  maxItems: number = 5
+): TopicRecommendation[] {
+  // minScore 이상만 필터
+  const eligible = recommendations.filter(r => r.score >= minScore);
+
+  // 이벤트 긴급 주제(D-7 이내)는 비율 무시하고 우선 편입
+  const urgent = eligible.filter(r =>
+    r.eventMeta && r.scoreBreakdown && r.scoreBreakdown.eventBoost >= 40
+  );
+
+  const nonUrgent = eligible.filter(r =>
+    !urgent.includes(r)
+  );
+
+  // 비율 계산
+  const remainingSlots = Math.max(0, maxItems - urgent.length);
+  const travelSlots = Math.round(remainingSlots * ratio);
+  const cultureSlots = remainingSlots - travelSlots;
+
+  const travel = nonUrgent.filter(r => r.type === 'travel').slice(0, travelSlots);
+  const culture = nonUrgent.filter(r => r.type === 'culture').slice(0, cultureSlots);
+
+  return [...urgent, ...travel, ...culture]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, maxItems);
+}
+
 export interface QueueCommandOptions {
   type?: 'travel' | 'culture';
   clear?: boolean;
@@ -74,6 +109,7 @@ export interface QueueCommandOptions {
   gaps?: boolean;
   auto?: boolean;
   minScore?: string;
+  ratio?: string;
 }
 
 export async function queueCommand(
@@ -229,7 +265,7 @@ export async function queueCommand(
     }
 
     case 'discover': {
-      console.log(chalk.cyan('\n🔍 Moltbook 트렌드 기반 주제 발굴\n'));
+      console.log(chalk.cyan('\n🔍 Moltbook 트렌드 + 이벤트 기반 주제 발굴\n'));
 
       // Moltbook 설정 로드
       const moltbookConfig = await loadMoltbookConfig();
@@ -255,11 +291,20 @@ export async function queueCommand(
         console.log(chalk.dim(`서베이 부스트: ${Object.keys(surveyBoosts).length}개 키워드 적용`));
       }
 
+      // 이벤트 스캐너로 이벤트 기반 추천 수집
+      console.log(chalk.dim('📅 이벤트 캘린더 스캔 중...'));
+      const eventScanner = new EventCalendarScanner();
+      const eventRecs = await eventScanner.scan({ surveyBoosts });
+      if (eventRecs.length > 0) {
+        console.log(chalk.dim(`  ${eventRecs.length}개 이벤트 기반 추천 발견`));
+      }
+
       const result = await discovery.discover({
         submolt: options.type,
         includeGaps: options.gaps,
         communityRequests,
-        surveyBoosts
+        surveyBoosts,
+        eventRecommendations: eventRecs
       });
 
       // 결과 출력
@@ -285,30 +330,48 @@ export async function queueCommand(
         }
       }
 
-      console.log(chalk.white.bold('\n💡 추천 주제'));
+      console.log(chalk.white.bold('\n💡 추천 주제 (0-200 스케일)'));
       if (result.recommendations.length === 0) {
         console.log(chalk.dim('  추천 주제 없음'));
       } else {
-        for (const rec of result.recommendations.slice(0, 7)) {
+        for (const rec of result.recommendations.slice(0, 10)) {
           const emoji = rec.type === 'travel' ? '🧳' : '🎨';
-          const source = rec.source === 'gap_analysis' ? '[갭]' :
-                        rec.source === 'moltbook_trending' ? '[트렌드]' :
-                        rec.source === 'survey_demand' ? '[서베이]' : '[요청]';
-          console.log(chalk.white(`  ${emoji} ${chalk.cyan(source)} ${rec.suggestedTitle}`));
-          console.log(chalk.dim(`     점수: ${rec.score}, ${rec.reasoning}`));
+          const source = rec.source === 'gap_analysis' ? '[갭]'
+            : rec.source === 'moltbook_trending' ? '[트렌드]'
+            : rec.source === 'survey_demand' ? '[서베이]'
+            : rec.source === 'event_calendar' ? '[이벤트]'
+            : '[요청]';
+          const personaTag = rec.personaId ? chalk.magenta(`[${rec.personaId}]`) : '';
+          console.log(chalk.white(`  ${emoji} ${chalk.cyan(source)} ${personaTag} ${rec.suggestedTitle}`));
+
+          // 점수 내역 출력
+          if (rec.scoreBreakdown) {
+            const sb = rec.scoreBreakdown;
+            console.log(chalk.dim(`     점수: ${rec.score}/200 (base:${sb.base} + survey:${sb.surveyBoost} × season:${sb.seasonalMultiplier} + event:${sb.eventBoost} + perf:${sb.performanceFeedback})`));
+          } else {
+            console.log(chalk.dim(`     점수: ${rec.score}, ${rec.reasoning}`));
+          }
         }
       }
 
+      // travel/culture 비율 분석
+      const ratio = parseFloat(options.ratio || '0.6');
+      const travelRecs = result.recommendations.filter(r => r.type === 'travel');
+      const cultureRecs = result.recommendations.filter(r => r.type === 'culture');
+      console.log(chalk.dim(`\n📊 비율: travel ${travelRecs.length}개 / culture ${cultureRecs.length}개 (목표: ${Math.round(ratio * 100)}/${Math.round((1 - ratio) * 100)})`));
+
       // 자동 큐 채우기
       if (options.auto) {
-        const minScore = parseInt(options.minScore || '70', 10);
-        console.log(chalk.white.bold(`\n🤖 자동 큐 채우기 (최소 점수: ${minScore})`));
+        const minScore = parseInt(options.minScore || '100', 10); // 0-200 스케일 기본 100
+        console.log(chalk.white.bold(`\n🤖 자동 큐 채우기 (최소 점수: ${minScore}/200, 비율: ${ratio})`));
 
-        const added = await discovery.autoPopulateQueue(result.recommendations, minScore);
+        // 비율 밸런싱 적용
+        const balancedRecs = balanceByRatio(result.recommendations, ratio, minScore);
+
+        const added = await discovery.autoPopulateQueue(balancedRecs, 0); // 이미 필터링됨
 
         if (added > 0) {
           console.log(chalk.green(`  ✅ ${added}개 주제가 큐에 추가되었습니다.`));
-          // autoPopulateQueue가 파일을 직접 저장하므로 다시 로드
           const refreshed = await loadQueue();
           refreshed.discovered = result.recommendations;
           await saveQueue(refreshed);
@@ -319,7 +382,7 @@ export async function queueCommand(
         }
       } else {
         console.log(chalk.dim(`\n💡 --auto 옵션으로 자동 큐 채우기 가능`));
-        // 발견된 주제만 저장
+        console.log(chalk.dim(`   --ratio 0.6 으로 travel/culture 비율 조정`));
         queue.discovered = result.recommendations;
         await saveQueue(queue);
       }
@@ -365,6 +428,7 @@ export async function queueCommand(
       console.log(chalk.dim('  --clear                대기 큐 초기화 (clear)'));
       console.log(chalk.dim('  --gaps                 갭 분석 포함 (discover)'));
       console.log(chalk.dim('  --auto                 자동 큐 채우기 (discover)'));
-      console.log(chalk.dim('  --min-score <n>        최소 점수 (discover --auto)'));
+      console.log(chalk.dim('  --min-score <n>        최소 점수 (discover --auto, 기본 100/200)'));
+      console.log(chalk.dim('  --ratio <n>            travel/culture 비율 (기본 0.6)'));
   }
 }

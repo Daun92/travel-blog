@@ -16,7 +16,7 @@ import {
 } from '../../agents/moltbook/index.js';
 
 export interface MoltbookCommandOptions {
-  action: 'setup' | 'share' | 'feedback' | 'heartbeat' | 'analyze' | 'draft' | 'draft-feedback' | 'draft-status';
+  action: 'setup' | 'share' | 'feedback' | 'heartbeat' | 'analyze' | 'draft' | 'draft-feedback' | 'draft-status' | 'queue';
   file?: string;
 }
 
@@ -44,6 +44,10 @@ export async function moltbookCommand(action: string, options: Record<string, un
 
     case 'analyze':
       await showAnalysis(spinner);
+      break;
+
+    case 'queue':
+      await showQueueDashboard();
       break;
 
     default:
@@ -181,7 +185,7 @@ async function shareToMoltbook(file?: string): Promise<void> {
 }
 
 /**
- * 피드백 사이클 실행
+ * 피드백 사이클 실행 (성과 자동 기록 포함)
  */
 async function runFeedbackCycle(spinner: ReturnType<typeof ora>): Promise<void> {
   const config = await loadMoltbookConfig();
@@ -193,6 +197,54 @@ async function runFeedbackCycle(spinner: ReturnType<typeof ora>): Promise<void> 
 
   const loop = new MoltbookFeedbackLoop(config);
   await loop.runFeedbackCycle();
+
+  // 성과 피드백 자동 기록
+  try {
+    const { PerformanceTracker } = await import('../../agents/events/performance-tracker.js');
+    const { readFile } = await import('fs/promises');
+    const { existsSync } = await import('fs');
+    const { join } = await import('path');
+
+    const shareRecordsPath = join(process.cwd(), 'data', 'feedback', 'share-records.json');
+    if (existsSync(shareRecordsPath)) {
+      const raw = await readFile(shareRecordsPath, 'utf-8');
+      const shareRecords = JSON.parse(raw) as {
+        records?: Array<{
+          title?: string;
+          filePath?: string;
+          blogUrl?: string;
+          upvotes?: number;
+          category?: 'travel' | 'culture';
+          tags?: string[];
+          publishedAt?: string;
+        }>;
+      };
+
+      if (shareRecords.records && shareRecords.records.length > 0) {
+        const tracker = new PerformanceTracker();
+        await tracker.load();
+
+        const posts = shareRecords.records.map(r => ({
+          title: r.title || '',
+          filePath: r.filePath,
+          blogUrl: r.blogUrl,
+          upvotes: r.upvotes || 0,
+          commentsCount: 0,
+          category: r.category,
+          tags: r.tags,
+          publishedAt: r.publishedAt
+        }));
+
+        const recorded = await tracker.recordFromFeedback({ posts });
+        if (recorded > 0) {
+          console.log(chalk.dim(`\n📊 성과 기록: ${recorded}개 포스트 성과 자동 기록됨`));
+        }
+      }
+    }
+  } catch (error) {
+    // 성과 기록 실패는 무시 (피드백 수집이 메인)
+    console.log(chalk.dim(`⚠️ 성과 자동 기록 스킵: ${error instanceof Error ? error.message : error}`));
+  }
 }
 
 /**
@@ -433,6 +485,56 @@ async function showDraftStatus(spinner: ReturnType<typeof ora>): Promise<void> {
 }
 
 /**
+ * 큐 대시보드 표시
+ */
+async function showQueueDashboard(): Promise<void> {
+  const { ShareQueue } = await import('../../agents/moltbook/share-queue.js');
+
+  const queue = new ShareQueue();
+  await queue.load();
+  await queue.loadTimeWindowFromStrategy();
+
+  const status = queue.getStatus();
+
+  console.log(chalk.white.bold('📊 공유 큐 대시보드\n'));
+  console.log(chalk.dim('─'.repeat(50)));
+
+  console.log(`\n📚 전체: ${status.stats.totalPosts}개`);
+  console.log(chalk.green(`  ✓ 공유됨: ${status.stats.shared}개`));
+  console.log(chalk.cyan(`  ⏳ 대기 중: ${status.stats.pending}개`));
+  console.log(chalk.red(`  ✗ 실패: ${status.stats.failed}개`));
+  console.log(chalk.gray(`  ⏭ 스킵: ${status.stats.skipped}개`));
+
+  console.log(`\n⏰ 시간대: ${status.inTimeWindow ? chalk.green('활성') : chalk.yellow('비활성')}`);
+  console.log(`🚦 지금 공유 가능: ${status.canShareNow ? chalk.green('예') : chalk.yellow(`아니오 (${Math.ceil(status.waitMinutes)}분 대기)`)}`);
+
+  if (status.pendingPosts.length > 0) {
+    console.log(chalk.cyan(`\n📋 대기 큐 (상위 5개):`));
+    for (const item of status.pendingPosts.slice(0, 5)) {
+      console.log(`  [${item.priority}점] ${item.title || item.filePath}`);
+    }
+  }
+
+  if (status.recentShared.length > 0) {
+    console.log(chalk.green(`\n✅ 최근 공유:`));
+    for (const item of status.recentShared) {
+      const ago = Math.round((Date.now() - new Date(item.sharedAt || '').getTime()) / (1000 * 60 * 60));
+      console.log(`  ${item.title || item.filePath} (${ago}시간 전)`);
+    }
+  }
+
+  if (status.failedPosts.length > 0) {
+    console.log(chalk.red(`\n❌ 실패 목록:`));
+    for (const item of status.failedPosts) {
+      console.log(`  ${item.title || item.filePath} (재시도 ${item.retryCount}/5)`);
+      if (item.lastError) console.log(chalk.gray(`    └ ${item.lastError}`));
+    }
+  }
+
+  console.log(chalk.dim('\n─'.repeat(50)));
+}
+
+/**
  * 도움말 표시
  */
 function showHelp(): void {
@@ -444,6 +546,11 @@ ${chalk.white.bold('사용법:')}
   ${chalk.cyan('npm run moltbook feedback')}        - 피드백 수집 & 분석
   ${chalk.cyan('npm run moltbook heartbeat')}       - 빠른 상태 체크
   ${chalk.cyan('npm run moltbook analyze')}         - 현재 전략 확인
+
+${chalk.white.bold('공유 큐 (우선순위 기반):')}
+
+  ${chalk.cyan('npm run moltbook:queue')}           - 공유 큐 대시보드
+  ${chalk.cyan('npm run moltbook:once')}            - 1회 공유 (스케줄러용)
 
 ${chalk.white.bold('초안 피드백 (발행 전 검증):')}
 

@@ -930,3 +930,7 @@ export class MoltbookFeedbackLoop {
 }
 
 export default MoltbookFeedbackLoop;
+
+// Re-export ShareQueue for CLI access
+export { ShareQueue, normalizePath } from './share-queue.js';
+export type { ShareQueueItem, ShareQueueConfig, ShareQueueStats, ShareQueueState } from './share-queue.js';

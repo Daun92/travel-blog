@@ -1,33 +1,25 @@
 /**
  * Moltbook 자동 공유 워크플로우
- * Rate limit: 1 post per 30 minutes
+ * ShareQueue 기반 우선순위 공유
  *
- * 워크플로우:
- * 1. 발행된 포스트 목록 수집
- * 2. 30분 간격으로 순차 공유
- * 3. 피드백 수시 수집
- * 4. 반응 확인 후 다음 포스트 진행
+ * 모드:
+ * - auto: 시간대 내 30분 간격 반복
+ * - once: 1회 공유 (Task Scheduler용)
+ * - status: 상태 확인
+ * - queue: 큐 대시보드
  */
 
 import { config } from 'dotenv';
-import { readdir, readFile, writeFile } from 'fs/promises';
+import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
 import { loadMoltbookConfig, MoltbookShareAgent, FeedbackCollector } from '../src/agents/moltbook/index.js';
+import { ShareQueue, normalizePath } from '../src/agents/moltbook/share-queue.js';
 
 // 환경 변수 로드
 config();
 
-const RATE_LIMIT_MINUTES = 30;
 const POSTS_DIR = './blog/content/posts';
-const STATE_FILE = './data/moltbook-share-state.json';
-
-interface ShareState {
-  lastSharedTime: string | null;
-  sharedPosts: string[];
-  pendingPosts: string[];
-  totalShared: number;
-}
 
 interface PostInfo {
   filePath: string;
@@ -37,30 +29,6 @@ interface PostInfo {
   category: string;
   topics: string[];
   date: string;
-}
-
-/**
- * 상태 파일 로드
- */
-async function loadState(): Promise<ShareState> {
-  try {
-    const data = await readFile(STATE_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    return {
-      lastSharedTime: null,
-      sharedPosts: [],
-      pendingPosts: [],
-      totalShared: 0
-    };
-  }
-}
-
-/**
- * 상태 파일 저장
- */
-async function saveState(state: ShareState): Promise<void> {
-  await writeFile(STATE_FILE, JSON.stringify(state, null, 2));
 }
 
 /**
@@ -98,7 +66,7 @@ async function collectPublishedPosts(): Promise<PostInfo[]> {
         }
 
         posts.push({
-          filePath,
+          filePath: normalizePath(filePath),
           title: data.title || filename,
           url: postUrl,
           summary: data.summary || data.description || '',
@@ -108,44 +76,17 @@ async function collectPublishedPosts(): Promise<PostInfo[]> {
         });
       }
     } catch (error) {
-      console.error(`❌ ${category} 폴더 읽기 실패:`, error);
+      console.error(`  ${category} 폴더 읽기 실패:`, error);
     }
   }
 
-  // 날짜 역순 정렬 (최신 먼저)
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-}
-
-/**
- * Rate limit 확인
- */
-function canShare(state: ShareState): boolean {
-  if (!state.lastSharedTime) return true;
-
-  const lastTime = new Date(state.lastSharedTime);
-  const now = new Date();
-  const diffMinutes = (now.getTime() - lastTime.getTime()) / 1000 / 60;
-
-  return diffMinutes >= RATE_LIMIT_MINUTES;
-}
-
-/**
- * 다음 공유까지 남은 시간 (분)
- */
-function getWaitMinutes(state: ShareState): number {
-  if (!state.lastSharedTime) return 0;
-
-  const lastTime = new Date(state.lastSharedTime);
-  const now = new Date();
-  const diffMinutes = (now.getTime() - lastTime.getTime()) / 1000 / 60;
-
-  return Math.max(0, RATE_LIMIT_MINUTES - diffMinutes);
+  return posts;
 }
 
 /**
  * 포스트 공유
  */
-async function sharePost(post: PostInfo, moltbookConfig: any): Promise<boolean> {
+async function sharePost(post: PostInfo, moltbookConfig: any): Promise<{ success: boolean; postId?: string; isClientError?: boolean; error?: string }> {
   console.log('\n🦞 Moltbook 포스트 공유');
   console.log(`📝 제목: ${post.title}`);
   console.log(`🔗 URL: ${post.url}`);
@@ -165,168 +106,179 @@ async function sharePost(post: PostInfo, moltbookConfig: any): Promise<boolean> 
 
     if (result) {
       console.log('✅ 공유 완료!');
-      console.log(`📍 Post ID: ${result.id}`);
-      console.log(`🔗 Moltbook: https://moltbook.com/posts/${result.id}\n`);
-      return true;
+      console.log(`📍 Post ID: ${result.id}\n`);
+      return { success: true, postId: result.id };
     }
-    return false;
+    return { success: false, error: '공유 결과 없음' };
   } catch (error: any) {
+    const isClientError = error.status >= 400 && error.status < 500;
     if (error.message?.includes('Too Many Requests')) {
-      console.log('⚠️ Rate limit 도달 - 나중에 재시도\n');
-    } else {
-      console.error('❌ 공유 실패:', error.message);
+      console.log('⚠️ Rate limit 도달\n');
+      return { success: false, error: 'Rate limit', isClientError: false };
     }
-    return false;
+    console.error('  공유 실패:', error.message);
+    return { success: false, error: error.message, isClientError };
   }
-}
-
-/**
- * 피드백 수집 및 확인
- */
-async function checkFeedback(moltbookConfig: any): Promise<{ hasActivity: boolean; summary: string }> {
-  console.log('\n📊 피드백 확인 중...');
-
-  const collector = new FeedbackCollector(moltbookConfig);
-  const feedback = await collector.collectFeedback();
-
-  const totalUpvotes = feedback.reduce((sum, f) => sum + f.upvotes, 0);
-  const totalComments = feedback.reduce((sum, f) => sum + f.comments.length, 0);
-
-  const hasActivity = totalUpvotes > 0 || totalComments > 0;
-
-  let summary = `피드백: ${feedback.length}개 포스트`;
-  if (totalUpvotes > 0) summary += ` | 👍 ${totalUpvotes}`;
-  if (totalComments > 0) summary += ` | 💬 ${totalComments}`;
-
-  console.log(summary);
-  console.log(hasActivity ? '✅ 반응 있음 - 계속 진행' : '⏸️  아직 반응 없음\n');
-
-  return { hasActivity, summary };
 }
 
 /**
  * 메인 워크플로우
  */
 async function main() {
-  const mode = process.argv[2] || 'auto'; // auto | once | status
+  const mode = process.argv[2] || 'auto'; // auto | once | status | queue
 
-  console.log('🚀 Moltbook 자동 공유 워크플로우\n');
-  console.log(`⏱️  Rate Limit: ${RATE_LIMIT_MINUTES}분당 1개 포스트\n`);
+  console.log('🚀 Moltbook 자동 공유 워크플로우 (v2)\n');
 
   // Moltbook 설정 확인
   const moltbookConfig = await loadMoltbookConfig();
   if (!moltbookConfig || !moltbookConfig.apiKey) {
-    console.error('❌ Moltbook이 설정되지 않았습니다.');
+    console.error('  Moltbook이 설정되지 않았습니다.');
     console.log('설정: npm run moltbook:setup\n');
     process.exit(1);
   }
 
-  // 상태 로드
-  const state = await loadState();
+  // ShareQueue 로드
+  const queue = new ShareQueue();
+  await queue.load();
+  await queue.loadTimeWindowFromStrategy();
 
-  // 발행된 포스트 수집
+  // 발행된 포스트 수집 → 큐에 추가
   const allPosts = await collectPublishedPosts();
-  const unsharedPosts = allPosts.filter(p => !state.sharedPosts.includes(p.filePath));
+  for (const post of allPosts) {
+    queue.addPost({
+      filePath: post.filePath,
+      title: post.title,
+      category: post.category,
+      publishedAt: post.date
+    });
+  }
+  await queue.save();
 
-  console.log(`📚 발행된 포스트: ${allPosts.length}개`);
-  console.log(`✅ 공유 완료: ${state.sharedPosts.length}개`);
-  console.log(`📋 대기 중: ${unsharedPosts.length}개\n`);
+  // 상태/큐 대시보드
+  if (mode === 'status' || mode === 'queue') {
+    const status = queue.getStatus();
 
-  // 상태만 확인
-  if (mode === 'status') {
-    if (!canShare(state)) {
-      const wait = getWaitMinutes(state);
-      console.log(`⏳ 다음 공유까지 ${Math.ceil(wait)}분 대기 필요\n`);
-    } else if (unsharedPosts.length > 0) {
-      console.log(`✅ 지금 공유 가능\n`);
-      console.log('다음 포스트:');
-      console.log(`  ${unsharedPosts[0].title}\n`);
-    } else {
-      console.log('✅ 모든 포스트 공유 완료\n');
+    console.log(`📚 전체 포스트: ${status.stats.totalPosts}개`);
+    console.log(`✅ 공유 완료: ${status.stats.shared}개`);
+    console.log(`📋 대기 중: ${status.stats.pending}개`);
+    console.log(`❌ 실패: ${status.stats.failed}개`);
+    console.log(`⏭️  스킵됨: ${status.stats.skipped}개`);
+    console.log(`⏰ 시간대: ${queue.isInTimeWindow() ? '활성' : '비활성'}`);
+    console.log(`🚦 공유 가능: ${status.canShareNow ? '예' : `아니오 (${Math.ceil(status.waitMinutes)}분 대기)`}\n`);
+
+    if (mode === 'queue' && status.pendingPosts.length > 0) {
+      console.log('📋 대기 큐 (우선순위순):');
+      for (const item of status.pendingPosts.slice(0, 10)) {
+        console.log(`  [${item.priority}점] ${item.title || item.filePath}`);
+      }
+      console.log('');
     }
+
+    if (status.failedPosts.length > 0) {
+      console.log('❌ 실패 목록:');
+      for (const item of status.failedPosts) {
+        console.log(`  ${item.title || item.filePath} (재시도 ${item.retryCount}/${5})`);
+        if (item.lastError) console.log(`    └ ${item.lastError}`);
+      }
+    }
+
     return;
   }
 
-  // 1회만 실행
+  // 1회 실행 (Task Scheduler용)
   if (mode === 'once') {
-    if (!canShare(state)) {
-      const wait = getWaitMinutes(state);
-      console.log(`⏳ Rate limit - ${Math.ceil(wait)}분 후 재시도\n`);
+    const next = queue.getNextPost();
+
+    if (!next) {
+      if (!queue.isInTimeWindow()) {
+        console.log('⏰ 공유 시간대 밖입니다.\n');
+      } else if (!queue.canShare()) {
+        console.log(`⏳ Rate limit - ${Math.ceil(queue.getWaitMinutes())}분 후 재시도\n`);
+      } else {
+        console.log('✅ 공유할 포스트 없음\n');
+      }
       return;
     }
 
-    if (unsharedPosts.length === 0) {
-      console.log('✅ 공유할 포스트 없음\n');
+    const post = allPosts.find(p => normalizePath(p.filePath) === next.filePath);
+    if (!post) {
+      console.log(`  포스트 정보를 찾을 수 없음: ${next.filePath}\n`);
       return;
     }
 
-    const post = unsharedPosts[0];
-    const success = await sharePost(post, moltbookConfig);
-
-    if (success) {
-      state.sharedPosts.push(post.filePath);
-      state.lastSharedTime = new Date().toISOString();
-      state.totalShared++;
-      await saveState(state);
-
-      console.log(`📊 진행률: ${state.sharedPosts.length}/${allPosts.length} (${Math.round(state.sharedPosts.length / allPosts.length * 100)}%)\n`);
+    const result = await sharePost(post, moltbookConfig);
+    if (result.success) {
+      queue.markShared(post.filePath, result.postId);
+    } else {
+      queue.markFailed(post.filePath, result.error || '알 수 없는 오류', result.isClientError);
     }
+
+    await queue.save();
+
+    const status = queue.getStatus();
+    console.log(`📊 진행률: ${status.stats.shared}/${status.stats.totalPosts}\n`);
     return;
   }
 
-  // 자동 모드 (30분 간격 반복)
+  // 자동 모드
   if (mode === 'auto') {
     console.log('🔄 자동 모드 시작 (Ctrl+C로 중지)\n');
 
-    let consecutiveNoFeedback = 0;
+    while (true) {
+      const next = queue.getNextPost();
 
-    while (unsharedPosts.length > 0) {
-      // Rate limit 확인
-      if (!canShare(state)) {
-        const wait = getWaitMinutes(state);
-        console.log(`⏳ ${Math.ceil(wait)}분 대기 중...\n`);
-        await new Promise(resolve => setTimeout(resolve, wait * 60 * 1000));
-      }
-
-      // 피드백 확인
-      const { hasActivity } = await checkFeedback(moltbookConfig);
-
-      if (!hasActivity) {
-        consecutiveNoFeedback++;
-        if (consecutiveNoFeedback >= 3) {
-          console.log('⏸️  3회 연속 반응 없음 - 일시 정지');
-          console.log('수동으로 재시작하거나 피드백 확인 후 계속하세요.\n');
+      if (!next) {
+        // 대기 중인 포스트가 하나도 없으면 종료
+        const status = queue.getStatus();
+        if (status.stats.pending === 0 && status.stats.failed === 0) {
+          console.log('✅ 모든 포스트 공유 완료\n');
           break;
         }
-      } else {
-        consecutiveNoFeedback = 0;
+
+        // 시간대 밖이면 대기
+        if (!queue.isInTimeWindow()) {
+          console.log('⏰ 공유 시간대 밖 - 1시간 대기...\n');
+          await new Promise(resolve => setTimeout(resolve, 60 * 60 * 1000));
+          continue;
+        }
+
+        // Rate limit 대기
+        const waitMs = queue.getWaitMinutes() * 60 * 1000;
+        if (waitMs > 0) {
+          console.log(`⏳ ${Math.ceil(waitMs / 60000)}분 대기...\n`);
+          await new Promise(resolve => setTimeout(resolve, waitMs + 1000));
+          continue;
+        }
+
+        // 다음 재시도까지 대기
+        console.log('⏳ 다음 재시도까지 대기...\n');
+        await new Promise(resolve => setTimeout(resolve, 5 * 60 * 1000));
+        continue;
       }
 
-      // 다음 포스트 공유
-      const post = unsharedPosts.shift();
-      if (!post) break;
-
-      const success = await sharePost(post, moltbookConfig);
-
-      if (success) {
-        state.sharedPosts.push(post.filePath);
-        state.lastSharedTime = new Date().toISOString();
-        state.totalShared++;
-        await saveState(state);
-
-        console.log(`📊 진행률: ${state.sharedPosts.length}/${allPosts.length}\n`);
-      } else {
-        unsharedPosts.unshift(post); // 실패 시 다시 앞에 추가
+      const post = allPosts.find(p => normalizePath(p.filePath) === next.filePath);
+      if (!post) {
+        queue.markFailed(next.filePath, '포스트 정보 없음', true);
+        await queue.save();
+        continue;
       }
+
+      const result = await sharePost(post, moltbookConfig);
+      if (result.success) {
+        queue.markShared(post.filePath, result.postId);
+      } else {
+        queue.markFailed(post.filePath, result.error || '알 수 없는 오류', result.isClientError);
+      }
+
+      await queue.save();
+
+      const status = queue.getStatus();
+      console.log(`📊 진행률: ${status.stats.shared}/${status.stats.totalPosts}\n`);
 
       // 30분 대기
-      if (unsharedPosts.length > 0) {
-        console.log(`⏰ 다음 포스트까지 ${RATE_LIMIT_MINUTES}분 대기...\n`);
-        await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_MINUTES * 60 * 1000));
-      }
+      console.log(`⏰ ${queue['state'].config.rateLimitMinutes}분 대기...\n`);
+      await new Promise(resolve => setTimeout(resolve, queue['state'].config.rateLimitMinutes * 60 * 1000));
     }
-
-    console.log('✅ 자동 공유 완료\n');
   }
 }
 

@@ -22,6 +22,7 @@ const projectRoot = join(__dirname, '..');
 interface TopicItem {
   title: string;
   type: 'travel' | 'culture';
+  personaId?: 'viral' | 'friendly' | 'informative';
   meta?: {
     score?: number;
     source?: string;
@@ -68,11 +69,16 @@ async function generatePost(topic: TopicItem, settings: TopicQueue['settings']):
     const args = [
       'src/cli/index.ts',
       'new',
-      '-t', topic.title,
+      '-t', `"${topic.title}"`,
       '--type', topic.type,
       '-l', settings.defaultLength,
       '-y' // 비대화 모드
     ];
+
+    // 페르소나 지정
+    if (topic.personaId) {
+      args.push('--agent', topic.personaId);
+    }
 
     if (settings.enableInlineImages) {
       args.push('--inline-images');
