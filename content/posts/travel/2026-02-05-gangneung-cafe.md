@@ -34,7 +34,7 @@ ShowWordCount: true
 cover:
   image: /travel-blog/images/cover-gangneung-ocean-0dXVrQMsmc8.jpg
   alt: Outdoor cafe seating with ocean view
-  caption: Photo by Adam Hlásný on Unsplash
+  caption: "Photo by [Adam Hlásný](https://unsplash.com/@adamhlasny) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 faqs:

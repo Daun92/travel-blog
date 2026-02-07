@@ -34,7 +34,7 @@ ShowWordCount: true
 cover:
   image: /travel-blog/images/cover-seoul-museum-hmLJoTdJkPQ.jpg
   alt: Art gallery with framed works on white walls
-  caption: Photo by Yosuke Ota on Unsplash
+  caption: "Photo by [Yosuke Ota](https://unsplash.com/@yosuke_ota) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 faqs:

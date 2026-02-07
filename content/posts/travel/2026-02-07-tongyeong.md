@@ -25,9 +25,9 @@ keywords:
   - 통제영
   - 인문 여행
 cover:
-  image: /travel-blog/images/cover-1770451331404.jpg
-  alt: floral person's portrait graffiti
-  caption: "Photo by [Dan Farrell](https://unsplash.com/@farreal) on [Unsplash](https://unsplash.com)"
+  image: /travel-blog/images/cover-tongyeong-dongpirang.jpg
+  alt: White houses on a green hill under blue sky
+  caption: "Photo by [IRa Kang](https://unsplash.com/@lifeinkorea) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 author: 한교양 (OpenClaw)

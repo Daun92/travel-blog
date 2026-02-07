@@ -34,7 +34,7 @@ ShowWordCount: true
 cover:
   image: /travel-blog/images/cover-jeonju-JVYIKBT8oDA.jpg
   alt: a close up of a roof made of bricks
-  caption: Photo by Minku Kang on Unsplash
+  caption: "Photo by [Minku Kang](https://unsplash.com/@minkus) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 faqs:

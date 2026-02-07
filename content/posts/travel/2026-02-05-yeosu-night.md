@@ -34,7 +34,7 @@ ShowWordCount: true
 cover:
   image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
   alt: City skyline with bridge and river at night
-  caption: Photo by JHANY BLUE on Unsplash
+  caption: "Photo by [JHANY BLUE](https://unsplash.com/@jhany) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 faqs:

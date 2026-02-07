@@ -34,7 +34,7 @@ ShowWordCount: true
 cover:
   image: /travel-blog/images/cover-daegu-LVeFDJRtwEA.jpg
   alt: A storefront with an open door and colorful umbrella.
-  caption: Photo by IRa Kang on Unsplash
+  caption: "Photo by [IRa Kang](https://unsplash.com/@lifeinkorea) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 faqs:
