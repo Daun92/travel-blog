@@ -1,0 +1,59 @@
+/**
+ * data.go.kr API 모듈 공개 인터페이스
+ * 싱글턴 클라이언트 팩토리 + 타입 재-export
+ */
+
+import { DataGoKrClient } from './client.js';
+import { DataGoKrClientConfig } from './types.js';
+
+// 싱글턴 인스턴스
+let clientInstance: DataGoKrClient | null = null;
+
+/**
+ * data.go.kr API 클라이언트 싱글턴
+ * collector, grounding-client 등 모듈 간 공유하여 레이트리밋/쿼터 통합 관리
+ *
+ * @returns DataGoKrClient 인스턴스 (KTO_API_KEY 없으면 null)
+ */
+export function getDataGoKrClient(configOverride?: Partial<DataGoKrClientConfig>): DataGoKrClient | null {
+  const serviceKey = process.env.KTO_API_KEY;
+  if (!serviceKey) return null;
+
+  if (!clientInstance) {
+    clientInstance = new DataGoKrClient({
+      serviceKey,
+      ...configOverride,
+    });
+  }
+
+  return clientInstance;
+}
+
+/**
+ * 싱글턴 리셋 (테스트용)
+ */
+export function resetClient(): void {
+  clientInstance = null;
+}
+
+// 타입 재-export
+export { DataGoKrClient } from './client.js';
+export type {
+  DataGoKrClientConfig,
+  DataGoKrResponse,
+  TourismItem,
+  FestivalItem,
+  DetailCommonItem,
+  DetailImageItem,
+  AreaCodeItem,
+  ApiUsageData,
+  CacheTtlConfig,
+} from './types.js';
+export {
+  CONTENT_TYPE,
+  AREA_CODE,
+  DataGoKrError,
+  QuotaExceededError,
+} from './types.js';
+export { RateLimiter } from './rate-limiter.js';
+export { ApiCache } from './cache.js';

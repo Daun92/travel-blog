@@ -1,0 +1,56 @@
+{
+  "keyword": "경주 역사 산책",
+  "timestamp": "2026-02-07T08:46:09.874Z",
+  "tourismData": [
+    {
+      "title": "경주 역사 산책 명소 1",
+      "address": "대한민국",
+      "overview": "추천 장소"
+    },
+    {
+      "title": "경주 역사 산책 명소 2",
+      "address": "대한민국",
+      "overview": "인기 장소"
+    }
+  ],
+  "cultureEvents": [
+    {
+      "title": "경주 역사 산책 관련 전시회",
+      "place": "국립현대미술관 서울",
+      "startDate": "2026-02-07",
+      "endDate": "2026-03-09",
+      "price": "무료",
+      "url": "https://www.mmca.go.kr"
+    },
+    {
+      "title": "경주 역사 산책 특별전",
+      "place": "예술의전당",
+      "startDate": "2026-02-07",
+      "endDate": "2026-03-09",
+      "price": "15,000원",
+      "url": "https://www.sac.or.kr"
+    }
+  ],
+  "festivals": [
+    {
+      "title": "봄꽃 축제",
+      "address": "서울특별시",
+      "startDate": "2026-02-07",
+      "endDate": "2026-03-09",
+      "place": "여의도 한강공원"
+    }
+  ],
+  "trendKeywords": [
+    "제주도 카페",
+    "서울 야경",
+    "부산 맛집",
+    "강릉 커피",
+    "경주 한옥",
+    "서울 전시회",
+    "미술관 추천",
+    "뮤지컬 예매",
+    "콘서트 일정",
+    "박물관 무료"
+  ],
+  "images": []
+}

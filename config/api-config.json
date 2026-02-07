@@ -1,0 +1,35 @@
+{
+  "dataGoKr": {
+    "quota": {
+      "daily": 1000,
+      "warningPercent": 80
+    },
+    "rateLimit": {
+      "minDelayMs": 200
+    },
+    "retry": {
+      "maxRetries": 2,
+      "retryDelayMs": 1000
+    },
+    "cache": {
+      "enabled": true,
+      "dir": "data/api-cache",
+      "ttl": {
+        "search": 3600,
+        "detail": 21600,
+        "code": 2592000,
+        "festival": 1800
+      }
+    },
+    "contentTypeId": {
+      "12": "관광지",
+      "14": "문화시설",
+      "15": "축제/공연/행사",
+      "25": "여행코스",
+      "28": "레포츠",
+      "32": "숙박",
+      "38": "쇼핑",
+      "39": "음식점"
+    }
+  }
+}
