@@ -172,6 +172,10 @@ npm run new -- -t "서울 핫플 TOP 5" --type travel        # → 조회영 (TO
 npm run new -- -t "경복궁 역사 산책" --type culture       # → 한교양 (역사)
 npm run new -- -t "강릉 주말 1박2일" --type travel        # → 김주말 (주말, 1박2일)
 
+# data.go.kr API 데이터 자동 수집 후 생성 (권장)
+npm run new -- -t "제주도 카페" --type travel --auto-collect   # API 데이터 → 프롬프트 주입
+npm run new -- -t "서울 전시" --type culture --auto-collect -y # 비대화 + 자동 수집
+
 # 수동 지정
 npm run new -- -t "제주도 카페" --type travel --agent viral        # → 조회영 강제
 npm run new -- -t "제주도 카페" --type travel --agent informative  # → 한교양 강제
@@ -372,8 +376,10 @@ npm run workflow full -- -f <file> --enhance --apply
 ### Directory Structure
 ```
 src/                    # TypeScript source
+  api/                  # 외부 API 클라이언트 모듈
+    data-go-kr/         # ⭐ data.go.kr 공유 API 클라이언트 (KorService2)
   agents/               # External integrations
-    collector.ts        # API data collection
+    collector.ts        # API data collection (KorService2 via 공유 클라이언트)
     moltbook/           # Moltbook feedback loop
     draft-enhancer/     # ⭐ 페르소나 기반 콘텐츠 향상
   cli/commands/         # CLI command implementations
@@ -381,7 +387,7 @@ src/                    # TypeScript source
   images/               # Unsplash integration
   seo/                  # SEO optimization utilities
   aeo/                  # AI Engine Optimization (FAQ, Schema)
-  factcheck/            # Fact verification system
+  factcheck/            # Fact verification system (KorService2 via 공유 클라이언트)
   quality/              # Quality validation
 blog/                   # Hugo blog (별도 Git 저장소)
   content/posts/        # Published posts (travel/, culture/)
@@ -396,6 +402,8 @@ config/                 # Runtime config
     friendly.json       #   김주말 (친근감)
     informative.json    #   한교양 (교양)
 data/                   # Collected API data, feedback analysis
+  api-cache/            # data.go.kr API 응답 캐시
+  api-usage.json        # data.go.kr 일일 쿼터 추적
   survey-insights-db.json # 서베이 누적 인사이트 DB
   feedback/             # Moltbook 피드백 데이터
     survey-records.json #   발행된 서베이 메타데이터
@@ -525,6 +533,162 @@ config();  // Load .env at the top
 - `blog/` - Separate repository (Hugo site for GitHub Pages)
 
 Do NOT add `blog/` folder to main git staging.
+
+## 요청 트리아지 프로토콜 (자동 분류)
+
+**모든 작업 요청에 대해** 코드를 수정하기 전에 아래 트리아지를 먼저 수행한다.
+사용자가 명시적으로 분류하지 않아도, 에이전트가 자동으로 분석하여 실행 계획을 제시한다.
+
+### Step 1: 영향 범위 식별
+
+요청을 읽고 아래 모듈 의존성 맵에서 **터치 대상 모듈**을 식별한다.
+
+```
+모듈 의존성 맵 (A → B = A가 B를 import):
+
+cli/commands → workflow, factcheck, quality, aeo, images, generator,
+               moltbook, draft-enhancer, monitoring, events
+workflow     → factcheck, quality, aeo, images, draft-enhancer, moltbook
+generator    → images, draft-enhancer
+quality      → factcheck
+aeo          → generator
+images       → generator
+draft-enhancer → generator
+monitoring   → moltbook
+scripts      → images, generator, moltbook, moltbook/share-queue
+factcheck    → quality/human-review
+moltbook     → (독립 — 외부 import 없음)
+```
+
+### Step 2: 위험 등급 판정
+
+| 등급 | 조건 | 행동 |
+|------|------|------|
+| **GREEN** | 단일 모듈, 데이터 파일 미접근 | 즉시 실행 |
+| **YELLOW** | 2-3개 모듈, 의존 방향 일치 (상류→하류) | 실행 계획 1줄 요약 후 실행 |
+| **RED** | 타입 변경, 공유 데이터 파일 수정, 4+개 모듈, 순환 의존 | 상세 계획 제시 → 승인 후 실행 |
+
+### Step 3: 실행 전략 결정
+
+```
+단일 모듈?
+  └─ YES → 바로 실행 (GREEN)
+  └─ NO → 모듈 간 의존성 확인
+           └─ 독립적? → 병렬 실행
+           └─ A가 B를 import? → B 먼저 수정 (순차)
+           └─ 타입 변경 포함? → types.ts 먼저, 나머지 후속
+           └─ 공유 데이터 파일? → AGENTS.md writer 규칙 확인
+```
+
+### Step 4: 트리아지 결과 출력 형식
+
+```
+📋 트리아지
+  모듈: factcheck, workflow
+  위험: YELLOW (2개 모듈, factcheck → workflow 방향)
+  계획: factcheck 수정 → build 확인 → workflow 연동 수정
+  데이터 파일: 없음
+```
+
+RED인 경우에만 상세 계획을 제시하고 승인을 요청한다. GREEN/YELLOW는 요약만 보여주고 바로 진행한다.
+
+### 멀티 태스크 자동 분리
+
+하나의 요청에 독립적인 작업이 여러 개 포함되어 있으면:
+
+1. 각 작업의 터치 모듈을 식별
+2. 모듈이 겹치지 않으면 → Task 도구로 병렬 서브에이전트 실행
+3. 모듈이 겹치면 → 의존 순서대로 순차 실행
+4. 타입 변경이 포함되면 → 타입 먼저 (Phase 1) → 나머지 (Phase 2)
+
+예시:
+```
+요청: "factcheck에 요약 리포트 추가하고, monitoring 대시보드에 차트 넣어줘"
+
+📋 트리아지
+  작업 A: factcheck (모듈: factcheck)
+  작업 B: monitoring 대시보드 (모듈: monitoring)
+  교차: 없음 → 병렬 실행 가능
+  → Task A, Task B 동시 실행
+```
+
+## Multi-Agent Collaboration Rules
+
+여러 에이전트가 병렬로 작업할 때의 규칙. 자세한 내용은 `AGENTS.md` 참조.
+
+### 작업 전
+- **트리아지 프로토콜 수행** (위 섹션)
+- `AGENTS.md` Active Work Log 확인 — 다른 에이전트가 동일 모듈 작업 중인지 확인
+- `git status` 확인 — 미커밋 변경 사항과 충돌 가능성 확인
+- `npm run build` 통과 확인
+
+### 작업 중
+- **모듈 경계 준수**: `AGENTS.md` 레지스트리의 모듈 스코프를 벗어나지 않기
+- **공유 데이터 파일 1-writer 원칙**: 한 데이터 파일에는 하나의 writer만 (`AGENTS.md` 참조)
+- **CONVENTIONS.md 준수**: 에러 핸들링 패턴, import 규칙, 네이밍 규칙 따르기
+- **타입은 append-only**: 기존 인터페이스 필드 삭제/변경 금지 (새 필드 추가만 허용)
+- **CLI 명령은 additive**: 기존 명령 동작 변경 금지 (새 명령/옵션 추가만 허용)
+
+### 커밋 전
+- `npm run build` 통과 확인
+- `AGENTS.md` Recently Completed에 작업 기록
+- 새 모듈이나 export 추가 시 `AGENTS.md` 레지스트리 업데이트
+
+### 충돌 방지 원칙
+- 데이터 파일(`data/`)은 1-writer 원칙 — 동시 수정 금지
+- 타입 파일(`types.ts`)은 append-only — 기존 필드 삭제 금지
+- CLI 명령(`src/cli/commands/`)은 additive — 기존 동작 변경 금지
+- `config/content-strategy.json`은 StrategyAdjuster만 수정
+
+## data.go.kr 공공 API 사용 규칙
+
+### API 키 처리 (CRITICAL - 반드시 준수)
+- **ServiceKey를 URLSearchParams에 넣지 마세요**: data.go.kr 키에 +, =, / 문자가 포함되어 이중 인코딩 오류 발생
+- URL 문자열에 직접 삽입: `?serviceKey=${rawKey}&${otherParams}`
+- 다른 파라미터는 URLSearchParams 사용 가능
+- 공유 클라이언트 사용: `import { getDataGoKrClient } from '../api/data-go-kr/index.js'`
+
+### 일일 쿼터 (CRITICAL)
+- 개발 계정: **1,000건/일** (자정 KST 리셋)
+- `npm run api:usage`로 사용량 확인 후 배치 작업 실행
+- 80%(800건)에서 경고, 100%에서 차단
+- factcheck --drafts, collect 등 대량 호출 시 쿼터 소진 주의
+
+### 레이트 리밋
+- 요청 간 최소 200ms 딜레이 (DataGoKrClient가 자동 관리)
+- 병렬 호출 금지 → 순차 처리만 허용
+- 싱글턴 클라이언트(`getDataGoKrClient()`)로 모듈 간 공유
+
+### 응답 처리 주의사항
+- resultCode === '0000' 확인 필수
+- 빈 결과: items가 빈 문자열('') → 빈 배열 아님
+- 단일 결과: items.item이 객체 → 배열이 아님 → `normalizeItems()` 사용
+- contentTypeId: 12=관광지, 14=문화시설, 15=축제, 25=여행코스, 32=숙박, 39=음식점
+
+### 캐싱
+- 모든 API 응답은 data/api-cache/에 파일 캐시
+- 기본 TTL: 검색 60분, 상세정보 6시간, 지역코드 30일, 축제 30분
+- `npm run api:cache-clear`로 수동 삭제
+
+### 데이터 정확성 경고
+- 축제/행사 일정: API 데이터 지연 가능 → detailCommon2로 최신 확인 후 발행
+- 가격 정보: 변동 잦음 → factcheck에서 minor severity로 취급
+- 운영시간: 계절별 변경 → "확인 필요" 문구 권장
+
+### 출처 표기 (법적 의무)
+- 관광 데이터 사용 시: "출처: 한국관광공사" 표기
+- 문화 데이터 사용 시: "출처: 문화체육관광부" 표기
+- frontmatter의 dataSources 필드에 기록
+
+### API 모듈 구조
+```
+src/api/data-go-kr/
+  types.ts          # 응답/요청 인터페이스, 에러 클래스, 상수
+  rate-limiter.ts   # 일일 쿼터 추적 (data/api-usage.json)
+  cache.ts          # 파일 기반 응답 캐시 (data/api-cache/)
+  client.ts         # 핵심 API 클라이언트 (DataGoKrClient)
+  index.ts          # getDataGoKrClient() 싱글턴 팩토리
+```
 
 ## Troubleshooting Reference
 

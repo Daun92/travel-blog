@@ -30,6 +30,7 @@ import { monitorCommand } from './commands/monitor.js';
 import { enhanceCommand } from './commands/enhance.js';
 import { linksCommand } from './commands/links.js';
 import { surveyCommand } from './commands/survey.js';
+import { eventsCommand } from './commands/events.js';
 
 const program = new Command();
 
@@ -51,6 +52,7 @@ program
   .option('--inline-images', 'Gemini AI로 인라인 설명 이미지 생성')
   .option('--image-count <count>', '생성할 인라인 이미지 개수 (기본: 3, 최대: 5)', '3')
   .option('--agent <id>', '에이전트 페르소나 지정 (viral|friendly|informative)')
+  .option('--auto-collect', 'data.go.kr API로 주제 관련 데이터 자동 수집 후 프롬프트에 주입')
   .action((options) => {
     // image-count를 숫자로 변환
     if (options.imageCount) {
@@ -121,7 +123,8 @@ program
   .option('--clear', '큐 초기화')
   .option('--gaps', '갭 분석 포함 (discover)')
   .option('--auto', '자동 큐 채우기 (discover)')
-  .option('--min-score <n>', '최소 점수 (discover --auto)')
+  .option('--min-score <n>', '최소 점수 (discover --auto, 기본 100/200)')
+  .option('--ratio <n>', 'travel/culture 비율 (기본 0.6)')
   .action((action = 'list', args, options) => queueCommand(action, args, options));
 
 // 일일 자동화
@@ -181,6 +184,17 @@ program
   .command('survey [action] [args...]')
   .description('서베이 인사이트 DB 관리 (ingest|status|boost|apply-strategy)')
   .action((action = 'status', args, options) => surveyCommand(action, args, options));
+
+// 이벤트 캘린더
+program
+  .command('events [action] [args...]')
+  .description('이벤트 캘린더 관리 (sync|list|timing|angles)')
+  .option('--month <n>', '특정 월 수집')
+  .option('--year <n>', '특정 년도')
+  .option('--days <n>', '조회 범위 일수 (기본 60)')
+  .option('--skip-api', 'API 수집 건너뛰기')
+  .option('--skip-gemini', 'Gemini AI 발굴 건너뛰기')
+  .action((action = 'list', args, options) => eventsCommand(action, args, options));
 
 // 프로그램 실행
 program.parse();

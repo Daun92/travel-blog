@@ -20,6 +20,10 @@ blog/.hugo_build.lock
 .DS_Store
 Thumbs.db
 
+# 파이프라인 산출물
+drafts/
+reports/
+
 # Credentials
 config/ga-credentials.json
 config/moltbook-credentials.json
@@ -38,6 +42,10 @@ blog/
 
 # Claude Code
 .claude/
+
+# API 캐시/사용량 (런타임 데이터)
+data/api-cache/
+data/api-usage.json
 
 # 기타
 nul

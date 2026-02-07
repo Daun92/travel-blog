@@ -4,11 +4,187 @@
 
 **프로젝트명:** OpenClaw - AI 기반 여행/문화 블로그 자동화 시스템
 **목표:** 월 1,000명 방문자 달성 (4개월 내)
-**기술 스택:** TypeScript, Hugo, Ollama (로컬 LLM), Gemini API, Unsplash API
+**기술 스택:** TypeScript, Hugo, Gemini API (텍스트/이미지), Unsplash API, Windows Task Scheduler
 
 ---
 
 ## 개발 이력
+
+### 2026-02-07: 5대 핵심 개선사항 구현 (링크/팩트체크/큐잉/리라이트/스케줄러)
+
+#### 개요
+평균 54점 저성과 포스트 문제와 운영 안정성 병목 5가지를 해결하는 대규모 개선 작업.
+16개 발행 포스트의 품질 향상과 무인 자동화 인프라 안정화가 목표.
+
+#### 개선 1: 링크 프로세서 AI 장소 추출 재설계
+
+**문제점:**
+- AI 장소 추출 실패 시 빈 배열 반환 (에러 로깅 없음)
+- 한국어 `\b` 워드 바운더리가 CJK에서 미동작 → 부분 매칭 발생
+- frontmatter 파싱이 `---\n` 고정 → Windows `\r\n`에서 깨짐
+
+**수정 내용 (`src/generator/link-processor.ts`):**
+- gray-matter 기반 frontmatter 파싱 (크로스플랫폼 호환)
+- 마커 정규식에 `gi` 플래그 추가 (대소문자 무관 매칭)
+- `isValidUrl()` URL 검증 헬퍼 추가
+- `processAllLinks()` 에러 격리: 각 단계 try-catch, `errors: string[]` 반환
+- AI 추출 재설계: `safeParseJSON()`, `parseAIResponse()` 3단계 파싱, `deduplicatePlaces()`
+- `extractPlacesWithAIInternal()` → `AIExtractionResult` 반환 (places, truncated, error)
+- 기존 `extractPlacesWithAI()` 래퍼로 유지 (하위호환)
+- `isInsideMarkdownLink()` — `[text](url)` 내부 매칭 방지
+- `addLinkToPlace()` 재설계: 위치 기반 스캔 (한국어 호환), frontmatter 제외, 2자 미만 스킵
+- `enhanceWithLinks()` — `truncated?`, `error?` 필드 추가, 개별 장소 try-catch
+- temperature 0.3→0.2, 프롬프트에 중복 금지 규칙 추가
+
+#### 개선 2: 팩트체크 자동 수정 (`--auto-fix`)
+
+**문제점:**
+- `FactCheckReport.corrections[]`에 수정 제안 생성되지만 실제 적용 안 됨
+- `--auto-fix` 플래그가 미구현 상태
+
+**수정 내용:**
+
+| 파일 | 변경 |
+|------|------|
+| `src/factcheck/types.ts` | `AppliedCorrection`, `DiffEntry`, `AutoFixReport`, `AutoFixAuditLog` 인터페이스 추가 |
+| `src/factcheck/auto-fixer.ts` | **신규** — `applyAutoFix()` 엔진 + `formatDiff()` |
+| `src/factcheck/index.ts` | 신규 타입/함수 export |
+| `src/cli/commands/factcheck.ts` | `--auto-fix`, `--dry-run` 플래그 추가 |
+| `src/workflow/stages.ts` | `autoFix` 옵션 실제 연결 |
+
+**안전 장치:**
+- critical 심각도 → 절대 자동 수정 안 함 → `addReviewCase()` 경유
+- `--dry-run`: 파일 쓰기 생략, diff만 출력
+- 매칭 0회 → 스킵, 매칭 2회+ → 첫 번째만 적용 + 경고
+- 감사 로그: `data/factcheck-fixes/{date}-{slug}.json` (before/after 해시 기록)
+- 수정 순서: lineNumber 역순 (하단→상단, 오프셋 밀림 방지)
+
+#### 개선 3: Moltbook 배치 공유 큐잉 시스템
+
+**문제점:**
+- 우선순위 없는 단순 순차 공유
+- 실패 시 재시도 없음
+- 경로 구분자 혼재 (`/` vs `\`) → 중복 감지 실패
+
+**수정 내용:**
+
+| 파일 | 변경 |
+|------|------|
+| `src/agents/moltbook/share-queue.ts` | **신규** — `ShareQueue` 클래스 (~350줄) |
+| `scripts/moltbook-auto-share.mts` | ShareQueue 기반 리팩터링 |
+| `src/cli/commands/moltbook.ts` | `queue` 액션 + 대시보드 |
+
+**우선순위 점수 (0-100):**
+| 요소 | 배점 | 산출 |
+|------|------|------|
+| 신선도 | 0-30 | 24시간 내 30점, 14일에 걸쳐 0으로 감소 |
+| 품질 점수 | 0-30 | quality gates 점수 반영 |
+| 카테고리 다양성 | 0-20 | 최근 공유에서 부족한 카테고리 보너스 |
+| 서베이 관련성 | 0-20 | survey-insights-db 부스트 반영 |
+
+**재시도:** 지수 백오프 [30, 60, 120, 240, 480분], 최대 5회, 4xx 에러는 재시도 안 함
+**경로 정규화:** `normalizePath()` — 모든 경로 `replace(/\\/g, '/')`
+**V1→V2 마이그레이션:** 첫 로드 시 자동 변환, 기존 `sharedPosts[]` 보존
+
+#### 개선 4: 저성과 포스트 리라이트 자동화
+
+**대상:** performance.json에서 score ≤ 51점 포스트 (5개: 48~51점)
+
+**수정 내용:**
+
+| 파일 | 변경 |
+|------|------|
+| `scripts/rewrite-low-performers.mts` | **신규** — 저성과 감지 + 리라이트 파이프라인 (~200줄) |
+
+**파이프라인:** enhance → factcheck --auto-fix → validate → aeo --apply → links --enhance
+**CLI:** `--threshold` (기본 51), `--dry-run`, `--file` 옵션
+**리포트:** `reports/rewrite-{date}.md` 마크다운 생성 (포스트별 단계 성공/실패 추적)
+
+#### 개선 5: Windows Task Scheduler 연동
+
+**문제점:**
+- PM2가 Windows에서 불안정 (리부트 후 수동 재시작 필요)
+- 헬스체크/장애 알림 없음
+
+**생성된 파일 구조:**
+```
+scheduler/
+  tasks/
+    openclaw-daily-morning.xml        # 매일 06:00 포스트 생성
+    openclaw-daily-evening.xml        # 매일 21:00 포스트 생성
+    openclaw-moltbook-share.xml       # 30분 간격 (09:00-22:00)
+    openclaw-survey-weekly.xml        # 일요일 10:00 서베이
+    openclaw-monitor-daily.xml        # 매일 23:00 모니터링
+    openclaw-health-check.xml         # 2시간 간격 헬스체크
+  scripts/
+    run-daily-posts.ps1               # pipeline --schedule
+    run-moltbook-share.ps1            # once 모드 공유
+    run-survey-collect.ps1            # 서베이 전체 파이프라인
+    run-monitor.ps1                   # 성과 모니터링
+    health-check.ps1                  # 헬스체크 + Windows Toast 알림
+  install.ps1                         # 태스크 등록 (-Force, -NoPM2)
+  uninstall.ps1                       # 태스크 제거
+  status.ps1                          # 상태 대시보드
+```
+
+**주요 설계:**
+- `StartWhenAvailable: true` — 부팅 후 놓친 스케줄 자동 실행
+- `RunOnlyIfNetworkAvailable: true` — 네트워크 없으면 건너뜀
+- `MultipleInstancesPolicy: IgnoreNew` — 중복 실행 방지
+- `%PROJECT_DIR%` 플레이스홀더 → install 시 실제 경로 치환
+- health-check: Node.js, .env, 로그, 공유 상태, 태스크 등록, 디스크 확인 + Toast 알림
+
+#### 검증 결과
+
+| # | 항목 | 결과 |
+|---|------|------|
+| 1 | TypeScript 컴파일 (`npx tsc --noEmit`) | ✅ 0 errors |
+| 2 | 기존 테스트 (18개) | ✅ 전체 통과 |
+| 3 | 하위호환성 (기존 인터페이스 유지) | ✅ |
+
+#### 생성/수정 파일 총괄
+
+**신규 파일 (15개):**
+```
+src/factcheck/auto-fixer.ts           (~200줄) 자동 수정 엔진
+src/agents/moltbook/share-queue.ts    (~350줄) 공유 큐 시스템
+scripts/rewrite-low-performers.mts    (~200줄) 저성과 리라이트
+scheduler/tasks/*.xml                 (6개) Task Scheduler 정의
+scheduler/scripts/*.ps1               (5개) PowerShell 래퍼
+scheduler/install.ps1                 태스크 등록
+scheduler/uninstall.ps1               태스크 제거
+scheduler/status.ps1                  상태 대시보드
+```
+
+**수정 파일 (8개):**
+```
+src/generator/link-processor.ts       링크 프로세서 전면 재설계
+src/factcheck/types.ts                4개 인터페이스 추가
+src/factcheck/index.ts                신규 export 추가
+src/cli/commands/factcheck.ts         --auto-fix, --dry-run 플래그
+src/workflow/stages.ts                autoFix 옵션 연결
+scripts/moltbook-auto-share.mts       ShareQueue 기반 리팩터링
+src/cli/commands/moltbook.ts          queue 액션 추가
+package.json                          4개 스크립트 추가
+```
+
+#### 추가된 npm 스크립트
+```json
+"moltbook:queue": "tsx src/cli/index.ts moltbook queue",
+"factcheck:fix": "tsx src/cli/index.ts factcheck --auto-fix",
+"factcheck:fix:dry": "tsx src/cli/index.ts factcheck --auto-fix --dry-run",
+"rewrite:low": "tsx scripts/rewrite-low-performers.mts"
+```
+
+#### 교훈
+- 한국어(CJK) 텍스트에서 `\b` 워드 바운더리 사용 금지 → 위치 기반 스캔으로 대체
+- 파일 경로 정규화는 모든 경로 입출력 지점에서 적용 필수 (Windows `\` ↔ POSIX `/`)
+- 자동 수정 시 반드시 역순 적용 (하단→상단) — 오프셋 밀림 방지
+- critical 심각도 claims는 자동화 대상에서 무조건 제외 → human review 필수
+- Task Scheduler XML에서 `%PROJECT_DIR%` 플레이스홀더 패턴이 이식성에 유리
+- V1→V2 마이그레이션은 첫 로드 시 자동 수행이 가장 자연스러움
+
+---
 
 ### 2026-02-06 (심야): 서베이 인사이트 DB 구축 및 워크플로우 통합
 
@@ -759,13 +935,21 @@ HUGO_BASE_URL=/travel-blog
 
 ### 단기 (1-2주)
 - [x] 이미지 없는 포스트에 인라인 이미지 추가 ✅ (2026-02-05 완료)
+- [x] 링크 프로세서 AI 장소 추출 재설계 ✅ (2026-02-07 완료)
+- [x] 팩트체크 자동 수정 시스템 구현 ✅ (2026-02-07 완료)
+- [x] Moltbook 배치 공유 큐잉 시스템 ✅ (2026-02-07 완료)
+- [x] 저성과 포스트 리라이트 자동화 ✅ (2026-02-07 완료)
+- [x] Windows Task Scheduler 연동 ✅ (2026-02-07 완료)
+- [ ] 저성과 포스트 실제 리라이트 실행 (`npm run rewrite:low`)
+- [ ] Task Scheduler 설치 및 검증 (`.\scheduler\install.ps1`)
 - [ ] SEO 최적화 검토
 - [ ] GitHub Pages 자동 배포 설정
 
 ### 중기 (1개월)
-- [ ] Moltbook 피드백 시스템 활성화
+- [x] Moltbook 피드백 시스템 활성화 ✅
 - [ ] 키워드 기반 자동 포스트 생성
 - [ ] 방문자 분석 연동
+- [ ] PM2 → Task Scheduler 완전 마이그레이션
 
 ### 장기 (3-4개월)
 - [ ] 월 1,000 방문자 목표 달성

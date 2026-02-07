@@ -50,59 +50,155 @@
       "type": "travel"
     },
     {
-      "title": "제주 1박2일 완벽 코스",
-      "type": "travel",
-      "meta": {
-        "score": 100,
-        "source": "gap_analysis",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "제주",
-          "렌터카",
-          "카페",
-          "바다",
-          "여행"
-        ]
-      }
-    },
-    {
-      "title": "부산 1박2일 완벽 코스",
-      "type": "travel",
-      "meta": {
-        "score": 100,
-        "source": "gap_analysis",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "부산",
-          "바다",
-          "맛집",
-          "해운대"
-        ]
-      }
-    },
-    {
-      "title": "2026 봄 벚꽃 축제 완벽 가이드: 전국 명소와 개화 시기",
-      "type": "culture"
-    },
-    {
-      "title": "경주 템플스테이 체험기: 천년 고도에서 보내는 하룻밤",
+      "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행",
       "type": "travel"
     },
     {
-      "title": "성수동 갤러리 호핑 TOP 7: SNS에서 난리 난 전시 vs 진짜 볼만한 전시",
-      "type": "culture"
+      "title": "대한민국 오지 탐험: 접근 불가에 가까운 비경 5곳",
+      "type": "travel",
+      "personaId": "viral",
+      "meta": {
+        "score": 95,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "울릉도",
+          "나리분지",
+          "지리산",
+          "뱀사골",
+          "태백",
+          "검룡소",
+          "무의도",
+          "영월",
+          "동강",
+          "오지"
+        ]
+      }
     },
     {
-      "title": "서울 인디 음악 씬 완벽 가이드: 홍대부터 성수까지 라이브 클럽 순례",
-      "type": "culture"
+      "title": "2월 한국 현대무용 공연 3선: 국립무용단부터 독립안무가까지",
+      "type": "culture",
+      "personaId": "informative",
+      "meta": {
+        "score": 95,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "현대무용",
+          "국립무용단",
+          "예술의전당",
+          "대학로",
+          "아르코",
+          "공연"
+        ]
+      }
     },
     {
-      "title": "2026 봄 뮤지컬·연극 기대작 비교: 티켓값 아깝지 않은 공연은?",
-      "type": "culture"
+      "title": "서울 독립서점 순례: 해방촌→을지로→연남동 책방 7곳",
+      "type": "culture",
+      "personaId": "informative",
+      "meta": {
+        "score": 93,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "독립서점",
+          "해방촌",
+          "을지로",
+          "연남동",
+          "북카페",
+          "책방"
+        ]
+      }
     },
     {
-      "title": "서울에서 즐기는 전통문화 체험 프로그램: 도자기부터 한지까지",
-      "type": "culture"
+      "title": "통영 동피랑·서피랑 벽화마을 1박2일: 예술가 마을의 진짜 속살",
+      "type": "travel",
+      "personaId": "informative",
+      "meta": {
+        "score": 92,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "통영",
+          "동피랑",
+          "서피랑",
+          "벽화마을",
+          "예술",
+          "꿀잠숙소"
+        ]
+      }
+    },
+    {
+      "title": "직장인 템플스테이 체험기: 주말 1박으로 충분한 절 3곳",
+      "type": "travel",
+      "personaId": "friendly",
+      "meta": {
+        "score": 91,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "템플스테이",
+          "봉은사",
+          "수덕사",
+          "해인사",
+          "체험",
+          "주말"
+        ]
+      }
+    },
+    {
+      "title": "수원 화성 야간탐방: 성곽 위 2시간 코스 완전정복",
+      "type": "travel",
+      "personaId": "friendly",
+      "meta": {
+        "score": 90,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "수원",
+          "화성",
+          "야간",
+          "성곽",
+          "행궁동",
+          "야경"
+        ]
+      }
+    },
+    {
+      "title": "2월 강추위 슬기롭게 극복하는 직장인 주말 여가 TOP 5",
+      "type": "travel",
+      "personaId": "friendly",
+      "meta": {
+        "score": 90,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "겨울",
+          "실내",
+          "온천",
+          "클라이밍",
+          "한증막",
+          "야간스키"
+        ]
+      }
+    },
+    {
+      "title": "성수동 팝업스토어 생존기: 이번 주 가볼 만한 곳 vs 시간낭비",
+      "type": "culture",
+      "personaId": "viral",
+      "meta": {
+        "score": 88,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-07T08:00:00.000Z",
+        "keywords": [
+          "성수동",
+          "팝업스토어",
+          "SNS",
+          "웨이팅",
+          "브랜드"
+        ]
+      }
     }
   ],
   "settings": {
@@ -112,78 +208,5 @@
     "enableInlineImages": true,
     "inlineImageCount": 3
   },
-  "discovered": [
-    {
-      "topic": "제주",
-      "type": "travel",
-      "score": 100,
-      "source": "gap_analysis",
-      "reasoning": "블로그 커버리지 none, Moltbook engagement 90",
-      "suggestedTitle": "제주 1박2일 완벽 코스",
-      "keywords": [
-        "제주",
-        "렌터카",
-        "카페",
-        "바다",
-        "여행"
-      ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
-    },
-    {
-      "topic": "강릉",
-      "type": "travel",
-      "score": 100,
-      "source": "gap_analysis",
-      "reasoning": "블로그 커버리지 none, Moltbook engagement 85",
-      "suggestedTitle": "강릉 1박2일 완벽 코스",
-      "keywords": [
-        "강릉",
-        "바다",
-        "카페",
-        "겨울"
-      ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
-    },
-    {
-      "topic": "부산",
-      "type": "travel",
-      "score": 100,
-      "source": "gap_analysis",
-      "reasoning": "블로그 커버리지 none, Moltbook engagement 78",
-      "suggestedTitle": "부산 1박2일 완벽 코스",
-      "keywords": [
-        "부산",
-        "바다",
-        "맛집",
-        "해운대"
-      ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
-    },
-    {
-      "topic": "여수",
-      "type": "travel",
-      "score": 100,
-      "source": "gap_analysis",
-      "reasoning": "블로그 커버리지 none, Moltbook engagement 75",
-      "suggestedTitle": "여수 1박2일 완벽 코스",
-      "keywords": [
-        "여수"
-      ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
-    },
-    {
-      "topic": "서울",
-      "type": "travel",
-      "score": 70,
-      "source": "moltbook_trending",
-      "reasoning": "stable 트렌드, 평균 4 upvotes",
-      "suggestedTitle": "서울 1박2일 추천 일정",
-      "keywords": [
-        "서울",
-        "카페",
-        "맛집"
-      ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
-    }
-  ]
+  "discovered": []
 }

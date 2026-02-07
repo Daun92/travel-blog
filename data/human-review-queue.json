@@ -74,18 +74,18 @@
       "action": "queue",
       "score": 60,
       "details": "seo: 20%, content: 20%",
-      "createdAt": "2026-02-05T12:32:55.333Z",
+      "createdAt": "2026-02-07T07:24:09.409Z",
       "status": "pending"
     },
     {
       "id": "review-1770294821509-t28ke0",
       "filePath": "blog\\content\\posts\\travel\\2026-02-04-seoul-hanok-village.md",
       "title": "서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책",
-      "trigger": "sensitive_topic",
-      "action": "flag",
-      "score": 84.75,
-      "details": "factcheck: 90%, content: 54%",
-      "createdAt": "2026-02-05T12:33:41.509Z",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 68.5,
+      "details": "factcheck: 50%, content: 44%",
+      "createdAt": "2026-02-07T07:27:43.256Z",
       "status": "pending"
     },
     {
@@ -105,9 +105,9 @@
       "title": "2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드",
       "trigger": "critical_false",
       "action": "block",
-      "score": 84,
-      "details": "factcheck: 77%, content: 64%",
-      "createdAt": "2026-02-05T12:36:36.008Z",
+      "score": 78.25,
+      "details": "factcheck: 69%, content: 64%",
+      "createdAt": "2026-02-07T07:29:15.840Z",
       "status": "pending"
     },
     {
@@ -129,7 +129,7 @@
       "action": "queue",
       "score": 60,
       "details": "seo: 20%, content: 20%",
-      "createdAt": "2026-02-05T12:37:14.698Z",
+      "createdAt": "2026-02-07T07:29:49.693Z",
       "status": "pending"
     },
     {
@@ -226,9 +226,9 @@
       "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행 가이드",
       "trigger": "score_50_70",
       "action": "queue",
-      "score": 69.85714285714286,
-      "details": "readability: 66%, tone: 38%, keyword_density: 34%",
-      "createdAt": "2026-02-06T13:55:31.008Z",
+      "score": 62.75,
+      "details": "factcheck: 60%, duplicate: 2%",
+      "createdAt": "2026-02-07T07:24:09.398Z",
       "status": "pending"
     },
     {
@@ -241,7 +241,84 @@
       "details": "factcheck: 46%",
       "createdAt": "2026-02-06T14:04:00.547Z",
       "status": "pending"
+    },
+    {
+      "id": "review-1770448821681-3wpkiz",
+      "filePath": "drafts\\2026-02-07-2026-ktx-1.md",
+      "title": "2026 강릉 미리보기: 퇴근 후 KTX 타고 떠난 1박 2일 현실 여행기",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 84.75,
+      "details": "factcheck: 60%",
+      "createdAt": "2026-02-07T07:20:21.681Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770448851564-0vylm6",
+      "filePath": "drafts\\2026-02-07-2026-ddp-2026.md",
+      "title": "2026년 미리 보기: DDP '미래도시 2026' 전시 솔직 후기 - 김주말의 퇴근 후 48시간",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 91.25,
+      "details": "factcheck: 70%",
+      "createdAt": "2026-02-07T07:20:51.564Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770448908140-mm475y",
+      "filePath": "drafts\\2026-02-07-2-3.md",
+      "title": "제주도 2박 3일 직장인 현실 지출과 동선, 김주말의 솔직한 후기",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 88.25,
+      "details": "factcheck: 68%",
+      "createdAt": "2026-02-07T07:21:48.140Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770448954682-97xt6o",
+      "filePath": "drafts\\2026-02-07-1-2-kt.md",
+      "title": "경주 여행 1박 2일 솔직 후기: 황리단길 웨이팅과 KTX 비용 총정리",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 91.75,
+      "details": "factcheck: 72%",
+      "createdAt": "2026-02-07T07:22:34.682Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770449004257-3m1ka6",
+      "filePath": "drafts\\2026-02-07-1-2-30.md",
+      "title": "부산 1박 2일 현실 후기: 30만 원으로 버틴 직장인의 금토일 생존 여행",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 83.25,
+      "details": "factcheck: 38%",
+      "createdAt": "2026-02-07T07:23:24.257Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770449095242-cobsff",
+      "filePath": "blog\\content\\posts\\travel\\2026-02-06-bukhansan.md",
+      "title": "북한산 주말 등산 코스 가이드: 초보자도 즐기는 서울 근교 트레킹 추천",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 71.75,
+      "details": "factcheck: 38%, content: 54%",
+      "createdAt": "2026-02-07T07:24:55.242Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770449227090-juffnu",
+      "filePath": "blog\\content\\posts\\travel\\2026-02-05-daegu-alley.md",
+      "title": "대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스",
+      "trigger": "critical_false",
+      "action": "block",
+      "score": 88.25,
+      "details": "factcheck: 84%",
+      "createdAt": "2026-02-07T07:27:07.090Z",
+      "status": "pending"
     }
   ],
-  "lastUpdated": "2026-02-06T14:04:00.547Z"
+  "lastUpdated": "2026-02-07T07:29:49.693Z"
 }

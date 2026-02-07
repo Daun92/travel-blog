@@ -1,0 +1,15 @@
+# Line ending normalization
+*.ts text eol=lf
+*.mts text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.toml text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+
+# Shell scripts
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.xml text eol=crlf

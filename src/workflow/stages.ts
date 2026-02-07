@@ -9,7 +9,7 @@ import { readFile } from 'fs/promises';
 import matter from 'gray-matter';
 
 // 각 모듈 임포트
-import { factCheckFile, FactCheckReport } from '../factcheck/index.js';
+import { factCheckFile, applyAutoFix, FactCheckReport } from '../factcheck/index.js';
 import { validateFile as runQualityGates, ValidationResult as QualityResult } from '../quality/gates.js';
 import { processAEO, applyAEOToFile, AEOResult } from '../aeo/index.js';
 import { validatePostImages, PostImageValidationResult } from '../images/image-validator.js';
@@ -158,8 +158,27 @@ export async function runFullValidation(
         warnings.push(`팩트체크 검토 필요 (${factcheckResult.overallScore}%)`);
       }
 
+      // 자동 수정 적용 (autoFix 옵션 활성화 시)
+      if (opts.autoFix && factcheckResult.corrections.length > 0) {
+        try {
+          onProgress('factcheck', '자동 수정 적용 중...');
+          const fixReport = await applyAutoFix(filePath, factcheckResult, {
+            dryRun: false,
+            verbose: opts.verbose
+          });
+          if (fixReport.stats.applied > 0) {
+            recommendations.push(`[팩트체크] 자동 수정 ${fixReport.stats.applied}개 적용됨`);
+          }
+          if (fixReport.stats.criticalQueued > 0) {
+            warnings.push(`[팩트체크] Critical ${fixReport.stats.criticalQueued}개 → human-review 대기열`);
+          }
+        } catch (fixError) {
+          warnings.push(`[팩트체크] 자동 수정 실패: ${fixError instanceof Error ? fixError.message : fixError}`);
+        }
+      }
+
       // 수정 제안 추가
-      if (factcheckResult.corrections.length > 0) {
+      if (factcheckResult.corrections.length > 0 && !opts.autoFix) {
         recommendations.push(...factcheckResult.corrections.map(c =>
           `[팩트체크] ${c.originalText} → ${c.suggestedText}`
         ));

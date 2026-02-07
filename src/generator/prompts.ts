@@ -12,13 +12,15 @@ export interface PromptContext {
   tone?: string;
   length?: 'short' | 'medium' | 'long';
   persona?: Persona;
+  /** dataToPromptContext()로 생성된 수집 데이터 텍스트 */
+  collectedData?: string;
 }
 
 /**
  * 여행 포스트 생성 프롬프트
  */
 export function getTravelPrompt(context: PromptContext): string {
-  const { topic, keywords = [], length = 'medium', persona } = context;
+  const { topic, keywords = [], length = 'medium', persona, collectedData } = context;
 
   const lengthGuide = {
     short: '1500-2000자',
@@ -48,7 +50,9 @@ ${topic}
 
 ## 키워드 (자연스럽게 포함)
 ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 선정'}
-
+${collectedData ? `
+${collectedData}
+` : ''}
 ## 작성 지침
 1. **분량**: ${lengthGuide[length]}
 2. **톤**: ${toneGuide}
@@ -65,7 +69,8 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
    - 메타 디스크립션용 요약 문장 제공
 
 5. **주의사항**:
-   - 실제 장소명, 주소, 가격 정보 포함
+   - ${collectedData ? '위 수집 데이터의 장소명, 주소, 전화번호를 그대로 사용' : '실제 장소명, 주소, 가격 정보 포함'}
+   - ${collectedData ? '수집되지 않은 정보(가격, 메뉴 등)는 "확인 필요"로 표기' : '"~습니다"체 사용'}
    - "~습니다"체 사용
    - 이모지 최소화
    - 링크 플레이스홀더: [장소명](링크)
@@ -114,7 +119,7 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
  * 문화예술 포스트 생성 프롬프트
  */
 export function getCulturePrompt(context: PromptContext): string {
-  const { topic, keywords = [], length = 'medium', persona } = context;
+  const { topic, keywords = [], length = 'medium', persona, collectedData } = context;
 
   const lengthGuide = {
     short: '1500-2000자',
@@ -144,7 +149,9 @@ ${topic}
 
 ## 키워드 (자연스럽게 포함)
 ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 선정'}
-
+${collectedData ? `
+${collectedData}
+` : ''}
 ## 작성 지침
 1. **분량**: ${lengthGuide[length]}
 2. **톤**: ${toneGuide}
@@ -162,7 +169,8 @@ ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 
    - 메타 디스크립션용 요약 문장 제공
 
 5. **주의사항**:
-   - 실제 정보 (장소, 날짜, 가격) 포함
+   - ${collectedData ? '위 수집 데이터의 장소, 날짜, 전화번호를 그대로 사용' : '실제 정보 (장소, 날짜, 가격) 포함'}
+   - ${collectedData ? '수집되지 않은 정보는 "확인 필요"로 표기' : '"~습니다"체 사용'}
    - "~습니다"체 사용
    - 이모지 최소화
    - 사진 위치 표시: ![설명](이미지URL)

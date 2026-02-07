@@ -1,76 +1,5 @@
 {
-  "trending": [
-    {
-      "topic": "제주",
-      "submolt": "travel",
-      "engagementScore": 90,
-      "postCount": 15,
-      "avgUpvotes": 6,
-      "trendDirection": "rising",
-      "keywords": [
-        "제주",
-        "렌터카",
-        "카페"
-      ],
-      "lastUpdated": "2026-02-06T14:36:16.462Z"
-    },
-    {
-      "topic": "강릉",
-      "submolt": "travel",
-      "engagementScore": 85,
-      "postCount": 12,
-      "avgUpvotes": 7,
-      "trendDirection": "rising",
-      "keywords": [
-        "강릉",
-        "바다",
-        "카페"
-      ],
-      "lastUpdated": "2026-02-06T14:36:16.462Z"
-    },
-    {
-      "topic": "부산",
-      "submolt": "travel",
-      "engagementScore": 78,
-      "postCount": 14,
-      "avgUpvotes": 6,
-      "trendDirection": "stable",
-      "keywords": [
-        "부산",
-        "바다",
-        "맛집"
-      ],
-      "lastUpdated": "2026-02-06T14:36:16.462Z"
-    },
-    {
-      "topic": "여수",
-      "submolt": "travel",
-      "engagementScore": 75,
-      "postCount": 8,
-      "avgUpvotes": 9,
-      "trendDirection": "stable",
-      "keywords": [
-        "여수",
-        "야경",
-        "바다"
-      ],
-      "lastUpdated": "2026-02-06T14:36:16.462Z"
-    },
-    {
-      "topic": "서울",
-      "submolt": "travel",
-      "engagementScore": 70,
-      "postCount": 20,
-      "avgUpvotes": 4,
-      "trendDirection": "stable",
-      "keywords": [
-        "서울",
-        "카페",
-        "맛집"
-      ],
-      "lastUpdated": "2026-02-06T14:36:16.462Z"
-    }
-  ],
+  "trending": [],
   "gaps": [
     {
       "topic": "제주",
@@ -115,6 +44,17 @@
         "여수 현지인 추천 맛집",
         "여수 인스타 핫플 투어"
       ]
+    },
+    {
+      "topic": "서울",
+      "moltbookEngagement": 70,
+      "blogCoverage": "none",
+      "recommendedPriority": "high",
+      "suggestedAngles": [
+        "서울 1박2일 완벽 코스",
+        "서울 현지인 추천 맛집",
+        "서울 인스타 핫플 투어"
+      ]
     }
   ],
   "recommendations": [
@@ -132,7 +72,7 @@
         "바다",
         "여행"
       ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
+      "discoveredAt": "2026-02-07T06:59:51.191Z"
     },
     {
       "topic": "강릉",
@@ -147,7 +87,7 @@
         "카페",
         "겨울"
       ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
+      "discoveredAt": "2026-02-07T06:59:51.191Z"
     },
     {
       "topic": "부산",
@@ -162,7 +102,7 @@
         "맛집",
         "해운대"
       ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
+      "discoveredAt": "2026-02-07T06:59:51.191Z"
     },
     {
       "topic": "여수",
@@ -174,22 +114,20 @@
       "keywords": [
         "여수"
       ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
+      "discoveredAt": "2026-02-07T06:59:51.191Z"
     },
     {
       "topic": "서울",
       "type": "travel",
-      "score": 70,
-      "source": "moltbook_trending",
-      "reasoning": "stable 트렌드, 평균 4 upvotes",
-      "suggestedTitle": "서울 1박2일 추천 일정",
+      "score": 100,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 70",
+      "suggestedTitle": "서울 1박2일 완벽 코스",
       "keywords": [
-        "서울",
-        "카페",
-        "맛집"
+        "서울"
       ],
-      "discoveredAt": "2026-02-06T14:36:16.473Z"
+      "discoveredAt": "2026-02-07T06:59:51.191Z"
     }
   ],
-  "discoveredAt": "2026-02-06T14:36:16.473Z"
+  "discoveredAt": "2026-02-07T06:59:51.191Z"
 }

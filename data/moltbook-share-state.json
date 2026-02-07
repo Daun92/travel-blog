@@ -1,24 +1,349 @@
 {
-  "lastSharedTime": "2026-02-05T22:14:50.464Z",
-  "sharedPosts": [
-    "blog/content/posts/culture/2026-02-04-mmca-exhibition.md",
-    "blog\\content\\posts\\travel\\2026-02-04-1.md",
-    "blog\\content\\posts\\travel\\2026-02-04-4.md",
-    "blog\\content\\posts\\travel\\2026-02-04-2-5.md",
-    "blog\\content\\posts\\culture\\2026-02-04-mmca-exhibition.md",
-    "blog\\content\\posts\\travel\\2026-02-04-seoul-hanok-village.md",
-    "blog\\content\\posts\\travel\\2026-02-05-yeosu-night.md",
-    "blog\\content\\posts\\culture\\2026-02-05-seoul-museum.md",
-    "blog/content/posts/culture/2026-02-05-post.md",
-    "blog\\content\\posts\\culture\\2026-02-05-post.md",
-    "blog\\content\\posts\\travel\\2026-02-05-daegu-alley.md",
-    "blog\\content\\posts\\travel\\2026-02-05-gangneung-cafe.md",
-    "blog\\content\\posts\\travel\\2026-02-05-jeonju-hanok.md",
-    "blog\\content\\posts\\culture\\2026-02-05-2026-best-5.md",
-    "blog\\content\\posts\\travel\\2026-02-05-7.md",
-    "blog\\content\\posts\\culture\\2026-02-06-post.md"
+  "version": "2.0",
+  "queue": [
+    {
+      "filePath": "blog/content/posts/culture/2026-02-04-mmca-exhibition.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-04-1.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-04-4.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-04-2-5.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-04-mmca-exhibition.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-04-seoul-hanok-village.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-05-yeosu-night.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-05-seoul-museum.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-05-post.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-05-post.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-05-daegu-alley.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-05-gangneung-cafe.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-05-jeonju-hanok.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-05-2026-best-5.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-05-7.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-06-post.md",
+      "title": "",
+      "category": "",
+      "publishedAt": "",
+      "priority": 0,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-05T22:14:50.464Z"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-06-5.md",
+      "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행 가이드",
+      "category": "travel",
+      "publishedAt": "2026-02-06T13:52:07.000Z",
+      "priority": 65,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T06:56:24.269Z",
+      "moltbookPostId": "45dffdd2-5a1d-4961-9c4e-559a219feb8d"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-1-2-30.md",
+      "title": "부산 1박 2일 현실 후기: 30만 원으로 버틴 직장인의 금토일 생존 여행",
+      "category": "travel",
+      "publishedAt": "2026-02-06T15:06:02.000Z",
+      "priority": 65,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T07:26:25.088Z",
+      "moltbookPostId": "b41e2eb0-66fd-4f09-8bea-33fe2920d61d"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-1-2-kt.md",
+      "title": "경주 여행 1박 2일 솔직 후기: 황리단길 웨이팅과 KTX 비용 총정리",
+      "category": "travel",
+      "publishedAt": "2026-02-06T15:11:30.000Z",
+      "priority": 65,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T07:56:25.732Z",
+      "moltbookPostId": "e150be8b-d9a7-465b-b826-badbe9022653"
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-2-3.md",
+      "title": "제주도 2박 3일 직장인 현실 지출과 동선, 김주말의 솔직한 후기",
+      "category": "travel",
+      "publishedAt": "2026-02-06T15:03:53.000Z",
+      "priority": 65,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T08:26:26.381Z",
+      "moltbookPostId": "c302fcd7-3dec-4642-83f5-dde239a1c1b4"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-2026-ddp-2026.md",
+      "title": "2026년 미리 보기: DDP '미래도시 2026' 전시 솔직 후기 - 김주말의 퇴근 후 48시간",
+      "category": "culture",
+      "publishedAt": "2026-02-06T15:09:32.000Z",
+      "priority": 65,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T08:56:27.018Z",
+      "moltbookPostId": "0c63e3e4-0919-44dd-ae82-a5d3e1d5da77"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-2026-ktx-1.md",
+      "title": "2026 강릉 미리보기: 퇴근 후 KTX 타고 떠난 1박 2일 현실 여행기",
+      "category": "culture",
+      "publishedAt": "2026-02-06T15:20:24.000Z",
+      "priority": 65,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-post.md",
+      "title": "서울 국립현대미술관 정영선 전시 리뷰: 직장인의 현실적인 주말 문화생활 가이드",
+      "category": "culture",
+      "publishedAt": "2026-02-06T15:22:19.000Z",
+      "priority": 65,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-06-bukhansan.md",
+      "title": "북한산 주말 등산 코스 가이드: 초보자도 즐기는 서울 근교 트레킹 추천",
+      "category": "travel",
+      "publishedAt": "2026-02-06T13:50:03.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-06-seoul-travel.md",
+      "title": "서울 여행 완벽 가이드: 전통과 현대가 공존하는 2박 3일 추천 코스와 꿀팁",
+      "category": "travel",
+      "publishedAt": "2026-02-06T13:49:04.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-1.md",
+      "title": "직장인 템플스테이 추천: 금요일 퇴근 후 떠나는 주말 1박 2일 사찰 3곳 솔직 후기",
+      "category": "travel",
+      "publishedAt": "2026-02-07T08:06:35.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-2-7.md",
+      "title": "수원 화성 야간 탐방: 성곽 위 2시간 코스, 7만원으로 버틴 솔직 후기",
+      "category": "travel",
+      "publishedAt": "2026-02-07T07:52:21.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-2-top-5.md",
+      "title": "2월 강추위 피하는 직장인 주말 여가 TOP 5: 김주말의 현실적인 내돈내산 가이드",
+      "category": "travel",
+      "publishedAt": "2026-02-07T07:55:56.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-tongyeong.md",
+      "title": "통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다",
+      "category": "travel",
+      "publishedAt": "2026-02-07T08:04:06.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-07-top-5.md",
+      "title": "공유 안 하면 손해, 대한민국 오지 탐험 TOP 5: 접근 불가 비경 전격 공개",
+      "category": "travel",
+      "publishedAt": "2026-02-07T07:39:11.000Z",
+      "priority": 45,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-2-3.md",
+      "title": "2월 한국 현대무용 공연 3선: 국립무용단부터 독립안무가까지 깊이 읽기",
+      "category": "culture",
+      "publishedAt": "2026-02-07T07:41:03.000Z",
+      "priority": 60,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-7.md",
+      "title": "서울 독립서점 순례: 해방촌, 을지로, 연남동에서 만나는 7곳의 문화적 기록",
+      "category": "culture",
+      "publishedAt": "2026-02-07T07:44:48.000Z",
+      "priority": 60,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-vs.md",
+      "title": "성수동 팝업스토어 생존기: 이번 주 꼭 가야 할 곳 vs 시간낭비 TOP 3",
+      "category": "culture",
+      "publishedAt": "2026-02-07T07:57:41.000Z",
+      "priority": 60,
+      "status": "pending",
+      "retryCount": 0
+    }
   ],
-  "pendingPosts": [],
-  "totalShared": 16,
-  "note": "첫 공유: 2026-02-04 국립현대미술관 포스트"
+  "config": {
+    "rateLimitMinutes": 30,
+    "maxRetries": 5,
+    "timeWindowStart": 8,
+    "timeWindowEnd": 22,
+    "backoffMinutes": [
+      30,
+      60,
+      120,
+      240,
+      480
+    ]
+  },
+  "stats": {
+    "totalPosts": 33,
+    "shared": 21,
+    "pending": 12,
+    "failed": 0,
+    "skipped": 0,
+    "lastShareTime": "2026-02-07T08:56:27.018Z"
+  }
 }
