@@ -402,10 +402,16 @@ export {
   clearVerificationCache
 };
 
+export { applyAutoFix, formatDiff } from './auto-fixer.js';
+
 export type {
   FactCheckReport,
   FactCheckConfig,
   ExtractedClaim,
   VerificationResult,
-  Correction
-};
+  Correction,
+  AutoFixReport,
+  AppliedCorrection,
+  DiffEntry,
+  AutoFixAuditLog
+} from './types.js';

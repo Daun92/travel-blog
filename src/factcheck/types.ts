@@ -183,3 +183,76 @@ export interface OfficialApiResult {
   source: string;
   checkedAt: string;
 }
+
+// ============================================================
+// Auto-Fix 관련 타입
+// ============================================================
+
+/**
+ * 적용된 수정 결과
+ */
+export interface AppliedCorrection {
+  claimId: string;
+  originalText: string;
+  suggestedText: string;
+  reason: string;
+  applied: boolean;
+  skippedReason?: string;
+}
+
+/**
+ * Diff 엔트리
+ */
+export interface DiffEntry {
+  lineNumber?: number;
+  original: string;
+  modified: string;
+  type: 'body' | 'frontmatter';
+}
+
+/**
+ * 자동 수정 보고서
+ */
+export interface AutoFixReport {
+  filePath: string;
+  title: string;
+  fixedAt: string;
+
+  // 통계
+  stats: {
+    totalCorrections: number;
+    applied: number;
+    skipped: number;
+    criticalQueued: number;
+  };
+
+  // 적용 결과
+  appliedCorrections: AppliedCorrection[];
+
+  // Diff
+  diffs: DiffEntry[];
+
+  // 감사 로그
+  auditLogPath?: string;
+
+  // 무결성
+  beforeHash: string;
+  afterHash?: string;
+
+  // 드라이런
+  dryRun: boolean;
+}
+
+/**
+ * 감사 로그
+ */
+export interface AutoFixAuditLog {
+  filePath: string;
+  title: string;
+  fixedAt: string;
+  beforeHash: string;
+  afterHash: string;
+  corrections: AppliedCorrection[];
+  factcheckScore: number;
+  version: string;
+}

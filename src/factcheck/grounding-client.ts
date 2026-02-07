@@ -1,6 +1,6 @@
 /**
  * 하이브리드 팩트체크 클라이언트
- * 1차: 공식 API (한국관광공사, 문화포털)
+ * 1차: 공식 API (한국관광공사 KorService2, 문화포털)
  * 2차: Gemini Grounding (웹 검색 기반)
  */
 
@@ -8,10 +8,10 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import {
   ExtractedClaim,
   VerificationResult,
-  VerificationSource,
   GroundingResponse,
   OfficialApiResult
 } from './types.js';
+import { getDataGoKrClient } from '../api/data-go-kr/index.js';
 
 interface GroundingClientConfig {
   apiKey: string;
@@ -25,41 +25,22 @@ const verificationCache = new Map<string, VerificationResult>();
 
 /**
  * 공식 API로 장소 검증
+ * KorService2 공유 클라이언트 사용 (레이트리밋/쿼터 통합 관리)
  */
 async function verifyWithOfficialApi(
   claim: ExtractedClaim
 ): Promise<OfficialApiResult | null> {
-  const ktoApiKey = process.env.KTO_API_KEY;
   const cultureApiKey = process.env.CULTURE_API_KEY;
 
-  // 장소/관광지 검증 (한국관광공사 API)
+  // 장소/관광지 검증 (한국관광공사 KorService2)
   if (claim.type === 'venue_exists' || claim.type === 'location') {
-    if (!ktoApiKey) return null;
+    const client = getDataGoKrClient();
+    if (!client) return null;
 
     try {
-      const searchKeyword = encodeURIComponent(claim.value);
-      const url = `http://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey=${ktoApiKey}&MobileApp=OpenClaw&MobileOS=WIN&_type=json&keyword=${searchKeyword}&numOfRows=5`;
+      const items = await client.searchKeyword(claim.value, { numOfRows: 5 });
 
-      const response = await fetch(url);
-      if (!response.ok) return null;
-
-      const data = await response.json() as {
-        response?: {
-          body?: {
-            items?: {
-              item?: Array<{
-                title?: string;
-                addr1?: string;
-                tel?: string;
-              }>;
-            };
-            totalCount?: number;
-          };
-        };
-      };
-
-      const items = data.response?.body?.items?.item;
-      if (items && items.length > 0) {
+      if (items.length > 0) {
         return {
           found: true,
           data: {
@@ -67,14 +48,14 @@ async function verifyWithOfficialApi(
             address: items[0].addr1,
             tel: items[0].tel
           },
-          source: 'korean_tourism_api',
+          source: 'korean_tourism_api_v2',
           checkedAt: new Date().toISOString()
         };
       }
 
       return {
         found: false,
-        source: 'korean_tourism_api',
+        source: 'korean_tourism_api_v2',
         checkedAt: new Date().toISOString()
       };
     } catch {

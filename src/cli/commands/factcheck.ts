@@ -11,6 +11,8 @@ import {
   factCheckFile,
   factCheckFiles,
   summarizeReport,
+  applyAutoFix,
+  formatDiff,
   FactCheckReport
 } from '../../factcheck/index.js';
 
@@ -24,6 +26,8 @@ export const factcheckCommand = new Command('factcheck')
   .option('--json', 'JSON 형식으로 출력')
   .option('--threshold <number>', '최소 점수 기준 (기본: 80)', '80')
   .option('--no-block', '점수 미달 시에도 발행 차단하지 않음')
+  .option('--auto-fix', '검증 실패 항목 자동 수정 (critical 제외)')
+  .option('--dry-run', '자동 수정 미리보기 (파일 변경 없음)')
   .action(async (options) => {
     console.log(chalk.cyan('\n🔍 팩트체크 시작...\n'));
 
@@ -56,6 +60,7 @@ export const factcheckCommand = new Command('factcheck')
       let blockedCount = 0;
       let passedCount = 0;
       let reviewCount = 0;
+      let autoFixCount = 0;
 
       for (const filePath of filePaths) {
         const spinner = ora(`검증 중: ${filePath}`).start();
@@ -87,6 +92,38 @@ export const factcheckCommand = new Command('factcheck')
             console.log(summarizeReport(report));
           }
 
+          // 자동 수정 (--auto-fix 또는 --dry-run)
+          if ((options.autoFix || options.dryRun) && report.corrections.length > 0) {
+            const fixSpinner = ora(`자동 수정 ${options.dryRun ? '미리보기' : '적용 중'}: ${filePath}`).start();
+
+            try {
+              const fixReport = await applyAutoFix(filePath, report, {
+                dryRun: options.dryRun,
+                verbose: options.verbose
+              });
+
+              if (fixReport.stats.applied > 0) {
+                fixSpinner.succeed(
+                  chalk.green(`${options.dryRun ? '(DRY-RUN) ' : ''}수정 ${fixReport.stats.applied}개 적용`)
+                );
+                autoFixCount += fixReport.stats.applied;
+              } else {
+                fixSpinner.info(chalk.gray('적용 가능한 수정 없음'));
+              }
+
+              if (fixReport.stats.criticalQueued > 0) {
+                console.log(chalk.yellow(`  ⚠ Critical ${fixReport.stats.criticalQueued}개 → human-review 대기열`));
+              }
+
+              // diff 출력 (verbose 또는 dry-run)
+              if ((options.verbose || options.dryRun) && fixReport.diffs.length > 0) {
+                console.log(formatDiff(fixReport));
+              }
+            } catch (fixError) {
+              fixSpinner.fail(chalk.red(`자동 수정 오류: ${fixError instanceof Error ? fixError.message : fixError}`));
+            }
+          }
+
         } catch (error) {
           spinner.fail(chalk.red(`오류: ${filePath}`));
           console.error(chalk.red(`  ${error instanceof Error ? error.message : error}`));
@@ -102,6 +139,10 @@ export const factcheckCommand = new Command('factcheck')
       console.log(chalk.green(`  ✓ 통과: ${passedCount}개`));
       console.log(chalk.yellow(`  ⚠ 검토 필요: ${reviewCount}개`));
       console.log(chalk.red(`  ✗ 차단: ${blockedCount}개`));
+
+      if (autoFixCount > 0) {
+        console.log(chalk.blue(`  🔧 자동 수정: ${autoFixCount}개`));
+      }
 
       // 전체 통계
       const totalClaims = reports.reduce((sum, r) => sum + r.claims.total, 0);

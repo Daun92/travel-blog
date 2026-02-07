@@ -1,0 +1,25 @@
+{
+  "filePath": "drafts\\2026-02-06-5.md",
+  "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행 가이드",
+  "fixedAt": "2026-02-07T07:12:46.216Z",
+  "beforeHash": "3d5c743ba5d9ab5d",
+  "afterHash": "d1feb6b677afbdaa",
+  "corrections": [
+    {
+      "claimId": "ct-12",
+      "originalText": "18,000원",
+      "suggestedText": "한국민속촌 자유이용권으로 모든 시설 이용 가능 (가격은 변동 가능)",
+      "reason": "한국민속촌은 박물관별 개별 입장료를 받지 않으며, 자유이용권으로 모든 시설을 이용할 수 있습니다.",
+      "applied": true
+    },
+    {
+      "claimId": "ct-6",
+      "originalText": "입장료 1,500원",
+      "suggestedText": "입장료 2,000원 (개인), 1,500원 (단체)",
+      "reason": "2026년 2월 7일 현재 화성행궁 개인 입장료는 2,000원이며, 단체 입장료는 1,500원입니다. 인용된 텍스트에서 언급된 1,500원은 단체 입장료에 해당될 수 있습니다.",
+      "applied": true
+    }
+  ],
+  "factcheckScore": 60,
+  "version": "1.0.0"
+}
