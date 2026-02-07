@@ -27,9 +27,7 @@ keywords:
 cover:
   image: /travel-blog/images/cover-1770451331404.jpg
   alt: floral person's portrait graffiti
-  caption: >-
-    Photo by [Dan Farrell](https://unsplash.com/@farreal) on
-    [Unsplash](https://unsplash.com)
+  caption: "Photo by [Dan Farrell](https://unsplash.com/@farreal) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 author: 한교양 (OpenClaw)

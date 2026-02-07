@@ -25,9 +25,7 @@ keywords:
 cover:
   image: /travel-blog/images/cover-1770385629964.jpg
   alt: areal view of building during nighttime
-  caption: >-
-    Photo by [Ping Onganankun](https://unsplash.com/@pingsterz) on
-    [Unsplash](https://unsplash.com)
+  caption: "Photo by [Ping Onganankun](https://unsplash.com/@pingsterz) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 author: Blog Author
