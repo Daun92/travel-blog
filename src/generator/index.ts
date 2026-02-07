@@ -15,9 +15,9 @@ import {
 import {
   generate,
   generateStream,
-  checkOllamaStatus,
+  checkGeminiStatus,
   listModels
-} from './ollama.js';
+} from './gemini.js';
 import {
   generateFrontmatter,
   generateSlug,
@@ -60,6 +60,8 @@ export interface GeneratePostOptions {
   inlineImages?: boolean;
   imageCount?: number;
   persona?: string;
+  /** dataToPromptContext()로 생성된 수집 데이터 텍스트 */
+  collectedData?: string;
   onProgress?: (message: string) => void;
 }
 
@@ -88,12 +90,13 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     inlineImages = false,
     imageCount = 3,
     persona: personaOverride,
+    collectedData,
     onProgress = () => {}
   } = options;
 
   // LLM API 상태 확인
   onProgress('Gemini API 연결 확인 중...');
-  const isOnline = await checkOllamaStatus();
+  const isOnline = await checkGeminiStatus();
   if (!isOnline) {
     throw new Error('Gemini API 키가 설정되지 않았습니다. .env에 GEMINI_API_KEY를 설정하세요.');
   }
@@ -107,7 +110,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
 
   // 프롬프트 생성
   onProgress('프롬프트 생성 중...');
-  const context: PromptContext = { topic, type, keywords, length, persona: selectedPersona || undefined };
+  const context: PromptContext = { topic, type, keywords, length, persona: selectedPersona || undefined, collectedData };
   const prompt = type === 'travel'
     ? getTravelPrompt(context)
     : getCulturePrompt(context);
@@ -358,7 +361,7 @@ export async function recommendKeywords(
   difficulty: string;
   reason: string;
 }>> {
-  const isOnline = await checkOllamaStatus();
+  const isOnline = await checkGeminiStatus();
   if (!isOnline) {
     throw new Error('Gemini API 키가 설정되지 않았습니다.');
   }
@@ -389,7 +392,7 @@ export async function suggestTitles(
   topic: string,
   type: 'travel' | 'culture'
 ): Promise<string[]> {
-  const isOnline = await checkOllamaStatus();
+  const isOnline = await checkGeminiStatus();
   if (!isOnline) {
     throw new Error('Gemini API 키가 설정되지 않았습니다.');
   }
@@ -442,7 +445,7 @@ function extractDescriptionFromContent(content: string): string | null {
 
 // 모듈 내보내기
 export {
-  checkOllamaStatus,
+  checkGeminiStatus,
   listModels,
   generateFrontmatter,
   generateSlug,

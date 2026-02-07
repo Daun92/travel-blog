@@ -4,7 +4,7 @@
 
 import chalk from 'chalk';
 import ora from 'ora';
-import { recommendKeywords, checkOllamaStatus } from '../../generator/index.js';
+import { recommendKeywords, checkGeminiStatus } from '../../generator/index.js';
 
 export interface KeywordsCommandOptions {
   category: 'travel' | 'culture' | 'all';
@@ -16,16 +16,16 @@ export async function keywordsCommand(options: KeywordsCommandOptions): Promise<
   const spinner = ora();
 
   try {
-    // Ollama 상태 확인
-    spinner.start('Ollama 서버 연결 확인 중...');
-    const isOnline = await checkOllamaStatus();
+    // Gemini API 상태 확인
+    spinner.start('Gemini API 연결 확인 중...');
+    const isOnline = await checkGeminiStatus();
 
     if (!isOnline) {
-      spinner.fail('Ollama 서버에 연결할 수 없습니다.');
-      console.log(chalk.yellow('\n💡 Ollama를 시작하려면: ollama serve'));
+      spinner.fail('Gemini API에 연결할 수 없습니다.');
+      console.log(chalk.yellow('\n💡 .env에 GEMINI_API_KEY를 설정하세요.'));
       process.exit(1);
     }
-    spinner.succeed('Ollama 서버 연결됨');
+    spinner.succeed('Gemini API 연결됨');
 
     // 카테고리 표시
     const categoryName = options.category === 'all'

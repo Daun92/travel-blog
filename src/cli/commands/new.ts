@@ -5,9 +5,10 @@
 import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
-import { generatePost, suggestTitles, checkOllamaStatus } from '../../generator/index.js';
+import { generatePost, suggestTitles, checkGeminiStatus } from '../../generator/index.js';
 import { findImageForTopic, UnsplashClient } from '../../images/unsplash.js';
 import { GeminiImageClient } from '../../images/gemini-imagen.js';
+import { collectData, dataToPromptContext } from '../../agents/collector.js';
 
 export interface NewCommandOptions {
   topic: string;
@@ -19,6 +20,7 @@ export interface NewCommandOptions {
   inlineImages?: boolean; // 인라인 이미지 생성
   imageCount?: number; // 인라인 이미지 개수
   agent?: string; // 에이전트 페르소나 ID (viral|friendly|informative)
+  autoCollect?: boolean; // 자동 데이터 수집 후 프롬프트에 주입
 }
 
 export async function newCommand(options: NewCommandOptions): Promise<void> {
@@ -27,16 +29,16 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
   const spinner = ora();
 
   try {
-    // 1. Ollama 상태 확인
-    spinner.start('Ollama 서버 연결 확인 중...');
-    const isOnline = await checkOllamaStatus();
+    // 1. Gemini API 상태 확인
+    spinner.start('Gemini API 연결 확인 중...');
+    const isOnline = await checkGeminiStatus();
 
     if (!isOnline) {
-      spinner.fail('Ollama 서버에 연결할 수 없습니다.');
-      console.log(chalk.yellow('\n💡 Ollama를 시작하려면: ollama serve'));
+      spinner.fail('Gemini API에 연결할 수 없습니다.');
+      console.log(chalk.yellow('\n💡 .env에 GEMINI_API_KEY를 설정하세요.'));
       process.exit(1);
     }
-    spinner.succeed('Ollama 서버 연결됨');
+    spinner.succeed('Gemini API 연결됨');
 
     // 2. 옵션 확인
     console.log(chalk.dim('\n입력된 옵션:'));
@@ -173,7 +175,27 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       console.log(chalk.dim('UNSPLASH_ACCESS_KEY가 설정되지 않아 커버 이미지 검색을 건너뜁니다.'));
     }
 
-    // 7. 콘텐츠 생성
+    // 7. 데이터 자동 수집 (--auto-collect)
+    let collectedDataContext: string | undefined;
+    if (options.autoCollect) {
+      console.log('');
+      spinner.start(`"${options.topic}" 관련 데이터 수집 중 (data.go.kr)...`);
+      try {
+        const collected = await collectData(options.topic);
+        collectedDataContext = dataToPromptContext(collected);
+        const stats = [
+          collected.tourismData.length > 0 ? `관광지 ${collected.tourismData.length}` : '',
+          collected.festivals.length > 0 ? `축제 ${collected.festivals.length}` : '',
+          collected.cultureEvents.length > 0 ? `문화행사 ${collected.cultureEvents.length}` : '',
+        ].filter(Boolean).join(', ');
+        spinner.succeed(`데이터 수집 완료: ${stats}`);
+      } catch (error) {
+        spinner.warn(`데이터 수집 실패: ${error instanceof Error ? error.message : error}`);
+        console.log(chalk.dim('  수집 데이터 없이 계속 진행합니다.'));
+      }
+    }
+
+    // 8. 콘텐츠 생성
     console.log('');
     spinner.start('AI가 콘텐츠 생성 중... (약 1-2분 소요)');
 
@@ -190,6 +212,7 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       inlineImages: useInlineImages,
       imageCount,
       persona: options.agent,
+      collectedData: collectedDataContext,
       onProgress: (msg) => {
         spinner.text = msg;
       }

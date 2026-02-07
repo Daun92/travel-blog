@@ -7,7 +7,7 @@ import { join } from 'path';
 import chalk from 'chalk';
 import ora from 'ora';
 import matter from 'gray-matter';
-import { checkOllamaStatus, listModels } from '../../generator/index.js';
+import { checkGeminiStatus, listModels } from '../../generator/index.js';
 
 interface TopicQueue {
   queue: { title: string; type: string }[];
@@ -27,11 +27,11 @@ export async function statusCommand(): Promise<void> {
   console.log(chalk.white.bold('🤖 LLM (Gemini API)'));
   spinner.start('API 키 확인 중...');
 
-  const ollamaOnline = await checkOllamaStatus();
+  const geminiOnline = await checkGeminiStatus();
   const llmModel = process.env.LLM_MODEL || 'gemini-3.0-flash';
   const geminiImageModel = process.env.GEMINI_IMAGE_MODEL || 'gemini-3.0-pro-preview';
 
-  if (ollamaOnline) {
+  if (geminiOnline) {
     spinner.succeed(chalk.green('API 키 설정됨'));
 
     // 사용 가능한 모델 목록

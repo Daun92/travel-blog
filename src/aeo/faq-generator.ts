@@ -3,7 +3,7 @@
  * 콘텐츠 기반 FAQ 생성 (AI 엔진 최적화)
  */
 
-import { generate } from '../generator/ollama.js';
+import { generate } from '../generator/gemini.js';
 
 /**
  * FAQ 항목

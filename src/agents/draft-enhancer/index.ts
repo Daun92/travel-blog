@@ -6,7 +6,7 @@
 import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
-import { generate } from '../../generator/ollama.js';
+import { generate } from '../../generator/gemini.js';
 import { loadPersona, Persona } from './persona-loader.js';
 import { detectCliches, ClicheReport } from './cliche-filter.js';
 import { analyzeDetailLevel, DetailAnalysis } from './detail-analyzer.js';

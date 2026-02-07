@@ -76,6 +76,7 @@ export async function collectCommand(options: CollectCommandOptions): Promise<vo
 
     console.log(`• 키워드: ${chalk.cyan(data.keyword)}`);
     console.log(`• 관광지: ${chalk.green(data.tourismData.length)}개`);
+    console.log(`• 축제/행사: ${chalk.green(data.festivals?.length ?? 0)}개`);
     console.log(`• 문화행사: ${chalk.green(data.cultureEvents.length)}개`);
     console.log(`• 트렌드 키워드: ${chalk.green(data.trendKeywords.length)}개`);
 
@@ -124,7 +125,7 @@ export async function collectCommand(options: CollectCommandOptions): Promise<vo
         console.log(chalk.dim('─'.repeat(50)));
         console.log(context);
         console.log(chalk.dim('─'.repeat(50)));
-        console.log(chalk.dim('\n위 내용을 Ollama 프롬프트에 포함하여 사용하세요.'));
+        console.log(chalk.dim('\n위 내용을 Gemini 프롬프트에 포함하여 사용하세요.'));
         break;
 
       case 'another':

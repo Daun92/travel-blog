@@ -4,7 +4,8 @@
  * AI 기반 장소명 추출 및 자동 링크 추가
  */
 
-import { generate } from './ollama.js';
+import { generate } from './gemini.js';
+import matter from 'gray-matter';
 
 export interface LinkMarker {
   marker: string;
@@ -30,6 +31,15 @@ export interface ProcessedLink {
 }
 
 /**
+ * AI 추출 결과 (내부 상세 타입)
+ */
+export interface AIExtractionResult {
+  places: ExtractedPlace[];
+  truncated: boolean;
+  error?: string;
+}
+
+/**
  * 링크 타입별 URL 템플릿
  */
 const URL_TEMPLATES: Record<LinkType, (query: string) => string> = {
@@ -41,21 +51,84 @@ const URL_TEMPLATES: Record<LinkType, (query: string) => string> = {
 };
 
 /**
- * 링크 마커 정규식
+ * 링크 마커 정규식 (대소문자 무관 — gi 플래그)
  * 형식: [LINK:type:query] 또는 [LINK:type:query:표시텍스트]
- * official 타입은 URL을 포함하므로 특수 처리 필요
- *
- * 패턴 설명:
- * - official: [LINK:official:https://...] 또는 [LINK:official:https://...:텍스트]
- * - 기타: [LINK:type:검색어] 또는 [LINK:type:검색어:텍스트]
  */
-const LINK_MARKER_OFFICIAL_REGEX = /\[LINK:official:(https?:\/\/[^\]:\s]+)(?::([^\]\n]+))?\]/g;
-const LINK_MARKER_STANDARD_REGEX = /\[LINK:(map|place|booking|yes24):([^\]:\n]+)(?::([^\]\n]+))?\]/g;
+const LINK_MARKER_OFFICIAL_REGEX = /\[LINK:official:(https?:\/\/[^\]:\s]+)(?::([^\]\n]+))?\]/gi;
+const LINK_MARKER_STANDARD_REGEX = /\[LINK:(map|place|booking|yes24):([^\]:\n]+)(?::([^\]\n]+))?\]/gi;
 
 /**
  * 유효한 링크 타입 목록
  */
 const VALID_LINK_TYPES: LinkType[] = ['map', 'place', 'booking', 'yes24', 'official'];
+
+const CONTENT_TRUNCATION_LIMIT = 8000;
+
+// ============================================================
+// URL 검증
+// ============================================================
+
+/**
+ * URL 유효성 검증
+ */
+export function isValidUrl(url: string): boolean {
+  try {
+    new URL(url);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// ============================================================
+// Frontmatter 파싱 (gray-matter 기반 + fallback)
+// ============================================================
+
+/**
+ * frontmatter 영역 분리 (크로스플랫폼 호환)
+ * gray-matter 사용으로 \r\n, BOM 등 처리
+ */
+function separateFrontmatter(content: string): {
+  frontmatter: string;
+  body: string;
+} {
+  try {
+    const parsed = matter(content);
+    // gray-matter가 파싱에 성공하면 원본 frontmatter를 재구성
+    if (parsed.data && Object.keys(parsed.data).length > 0) {
+      return {
+        frontmatter: parsed.matter ? `---\n${parsed.matter}\n---\n` : '',
+        body: parsed.content
+      };
+    }
+  } catch {
+    // gray-matter 실패 시 fallback
+  }
+
+  // Fallback: 수동 파싱 (\r\n 호환)
+  const normalized = content.replace(/\r\n/g, '\n');
+  const frontmatterMatch = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (frontmatterMatch) {
+    return {
+      frontmatter: `---\n${frontmatterMatch[1]}\n---\n`,
+      body: frontmatterMatch[2]
+    };
+  }
+  return { frontmatter: '', body: content };
+}
+
+/**
+ * 텍스트가 frontmatter 영역 내부인지 확인
+ */
+function getFrontmatterEndIndex(content: string): number {
+  const normalized = content.replace(/\r\n/g, '\n');
+  const match = normalized.match(/^---\n[\s\S]*?\n---\n/);
+  return match ? match[0].length : 0;
+}
+
+// ============================================================
+// 링크 마커 추출 및 변환
+// ============================================================
 
 /**
  * 콘텐츠에서 링크 마커 추출
@@ -69,8 +142,8 @@ export function extractLinkMarkers(content: string): LinkMarker[] {
     const line = lines[lineNum];
     let match: RegExpExecArray | null;
 
-    // official 타입 마커 찾기 (URL 포함)
-    const officialRegex = new RegExp(LINK_MARKER_OFFICIAL_REGEX.source, 'g');
+    // official 타입 마커 찾기 (URL 포함, 대소문자 무관)
+    const officialRegex = new RegExp(LINK_MARKER_OFFICIAL_REGEX.source, 'gi');
     while ((match = officialRegex.exec(line)) !== null) {
       const [fullMatch, url, displayText] = match;
       markers.push({
@@ -83,8 +156,8 @@ export function extractLinkMarkers(content: string): LinkMarker[] {
       });
     }
 
-    // 일반 타입 마커 찾기 (map, place, booking, yes24)
-    const standardRegex = new RegExp(LINK_MARKER_STANDARD_REGEX.source, 'g');
+    // 일반 타입 마커 찾기 (대소문자 무관)
+    const standardRegex = new RegExp(LINK_MARKER_STANDARD_REGEX.source, 'gi');
     while ((match = standardRegex.exec(line)) !== null) {
       const [fullMatch, typeStr, query, displayText] = match;
       const type = typeStr.toLowerCase() as LinkType;
@@ -109,14 +182,21 @@ export function extractLinkMarkers(content: string): LinkMarker[] {
 }
 
 /**
- * 링크 마커를 실제 URL로 변환
+ * 링크 마커를 실제 URL로 변환 (URL 검증 포함)
  */
 export function generateUrl(type: LinkType, query: string): string {
   const template = URL_TEMPLATES[type];
   if (!template) {
     throw new Error(`Unknown link type: ${type}`);
   }
-  return template(query);
+  const url = template(query);
+
+  // official 타입은 사용자 제공 URL이므로 검증
+  if (type === 'official' && !isValidUrl(url)) {
+    throw new Error(`Invalid URL for official link: ${query}`);
+  }
+
+  return url;
 }
 
 /**
@@ -163,14 +243,20 @@ export function processLinks(content: string): string {
  */
 export function removeLinkMarkers(content: string): string {
   // official 타입 마커 제거
-  let result = content.replace(LINK_MARKER_OFFICIAL_REGEX, (match, url, displayText) => {
-    return displayText?.trim() || url.trim();
-  });
+  let result = content.replace(
+    new RegExp(LINK_MARKER_OFFICIAL_REGEX.source, 'gi'),
+    (_match: string, url: string, displayText?: string) => {
+      return displayText?.trim() || url.trim();
+    }
+  );
 
   // 일반 타입 마커 제거
-  result = result.replace(LINK_MARKER_STANDARD_REGEX, (match, type, query, displayText) => {
-    return displayText?.trim() || query.trim();
-  });
+  result = result.replace(
+    new RegExp(LINK_MARKER_STANDARD_REGEX.source, 'gi'),
+    (_match: string, _type: string, query: string, displayText?: string) => {
+      return displayText?.trim() || query.trim();
+    }
+  );
 
   return result;
 }
@@ -339,26 +425,45 @@ export function processPlaceholderLinks(content: string): {
 }
 
 /**
- * 모든 링크 처리 (마커 + 플레이스홀더)
+ * 모든 링크 처리 (마커 + 플레이스홀더) — 에러 격리
  */
 export function processAllLinks(content: string): {
   content: string;
   markers: { processed: ProcessedLink[]; failed: LinkMarker[] };
   placeholders: Array<{ text: string; url: string }>;
+  errors: string[];
 } {
-  // 1. [LINK:type:query] 마커 처리
-  const markerResult = processLinksWithInfo(content);
+  const errors: string[] = [];
+  let currentContent = content;
 
-  // 2. (링크) 플레이스홀더 처리
-  const placeholderResult = processPlaceholderLinks(markerResult.content);
+  // 1. [LINK:type:query] 마커 처리 (에러 격리)
+  let markerResult: { content: string; processed: ProcessedLink[]; failed: LinkMarker[] };
+  try {
+    markerResult = processLinksWithInfo(currentContent);
+    currentContent = markerResult.content;
+  } catch (error) {
+    errors.push(`마커 처리 실패: ${error instanceof Error ? error.message : error}`);
+    markerResult = { content: currentContent, processed: [], failed: [] };
+  }
+
+  // 2. (링크) 플레이스홀더 처리 (에러 격리)
+  let placeholderResult: { content: string; processed: Array<{ text: string; url: string }> };
+  try {
+    placeholderResult = processPlaceholderLinks(currentContent);
+    currentContent = placeholderResult.content;
+  } catch (error) {
+    errors.push(`플레이스홀더 처리 실패: ${error instanceof Error ? error.message : error}`);
+    placeholderResult = { content: currentContent, processed: [] };
+  }
 
   return {
-    content: placeholderResult.content,
+    content: currentContent,
     markers: {
       processed: markerResult.processed,
       failed: markerResult.failed
     },
-    placeholders: placeholderResult.processed
+    placeholders: placeholderResult.processed,
+    errors
   };
 }
 
@@ -380,9 +485,73 @@ export interface ExtractedPlace {
 }
 
 /**
- * AI를 사용하여 콘텐츠에서 장소명 추출
+ * JSON 안전 파싱 (필드 검증 포함)
  */
-export async function extractPlacesWithAI(content: string): Promise<ExtractedPlace[]> {
+function safeParseJSON(text: string): ExtractedPlace[] {
+  try {
+    const parsed = JSON.parse(text);
+    if (!Array.isArray(parsed)) return [];
+
+    return parsed
+      .filter((item: unknown): item is Record<string, unknown> =>
+        typeof item === 'object' && item !== null &&
+        typeof (item as Record<string, unknown>).name === 'string' &&
+        ((item as Record<string, unknown>).name as string).trim().length > 0
+      )
+      .map((item: Record<string, unknown>) => ({
+        name: (item.name as string).trim(),
+        type: (item.type as ExtractedPlace['type']) || 'other',
+        context: typeof item.context === 'string' ? item.context : ''
+      }));
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * AI 응답 파싱 (3단계: JSON코드블록 → 배어배열 → 빈배열)
+ */
+function parseAIResponse(response: string): ExtractedPlace[] {
+  // 1단계: JSON 코드블록
+  const jsonMatch = response.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (jsonMatch) {
+    const result = safeParseJSON(jsonMatch[1]);
+    if (result.length > 0) return result;
+  }
+
+  // 2단계: 배어 JSON 배열
+  const directMatch = response.match(/\[[\s\S]*\]/);
+  if (directMatch) {
+    const result = safeParseJSON(directMatch[0]);
+    if (result.length > 0) return result;
+  }
+
+  // 3단계: 빈 배열 반환
+  return [];
+}
+
+/**
+ * 장소 중복 제거 (대소문자 무관)
+ */
+function deduplicatePlaces(places: ExtractedPlace[]): ExtractedPlace[] {
+  const seen = new Set<string>();
+  return places.filter(place => {
+    const key = place.name.toLowerCase().trim();
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+/**
+ * AI를 사용하여 콘텐츠에서 장소명 추출 (내부 상세 버전)
+ */
+async function extractPlacesWithAIInternal(content: string): Promise<AIExtractionResult> {
+  const truncated = content.length > CONTENT_TRUNCATION_LIMIT;
+  if (truncated) {
+    console.warn(`[link-processor] 콘텐츠 ${content.length}자 → ${CONTENT_TRUNCATION_LIMIT}자로 절단됨`);
+  }
+
   const prompt = `다음 블로그 포스트에서 네이버 지도에서 검색 가능한 실제 장소명을 추출해주세요.
 
 ## 추출 대상
@@ -396,6 +565,10 @@ export async function extractPlacesWithAI(content: string): Promise<ExtractedPla
 - 지역명만 단독으로 (예: "강릉", "서울")
 - 이미 링크가 걸려있는 장소 (예: [장소명](http...))
 
+## 주의사항
+- 중복된 장소명을 절대 포함하지 마세요
+- 2자 미만의 장소명은 제외하세요
+
 ## 출력 형식
 JSON 배열로 출력하세요. 장소가 없으면 빈 배열 []을 반환하세요.
 
@@ -406,34 +579,30 @@ JSON 배열로 출력하세요. 장소가 없으면 빈 배열 []을 반환하�
 \`\`\`
 
 ## 블로그 포스트
-${content.slice(0, 8000)}
+${content.slice(0, CONTENT_TRUNCATION_LIMIT)}
 `;
 
   try {
     const response = await generate(prompt, {
-      temperature: 0.3,
+      temperature: 0.2,
       max_tokens: 2048
     });
 
-    // JSON 추출
-    const jsonMatch = response.match(/```json\s*([\s\S]*?)```/);
-    if (jsonMatch) {
-      const parsed = JSON.parse(jsonMatch[1]) as ExtractedPlace[];
-      return Array.isArray(parsed) ? parsed : [];
-    }
-
-    // JSON 블록 없이 직접 배열인 경우
-    const directMatch = response.match(/\[[\s\S]*\]/);
-    if (directMatch) {
-      const parsed = JSON.parse(directMatch[0]) as ExtractedPlace[];
-      return Array.isArray(parsed) ? parsed : [];
-    }
-
-    return [];
+    const places = deduplicatePlaces(parseAIResponse(response));
+    return { places, truncated };
   } catch (error) {
-    console.error('AI 장소 추출 실패:', error);
-    return [];
+    const errorMsg = error instanceof Error ? error.message : String(error);
+    console.error('[link-processor] AI 장소 추출 실패:', errorMsg);
+    return { places: [], truncated, error: errorMsg };
   }
+}
+
+/**
+ * AI를 사용하여 콘텐츠에서 장소명 추출 (하위호환 래퍼)
+ */
+export async function extractPlacesWithAI(content: string): Promise<ExtractedPlace[]> {
+  const result = await extractPlacesWithAIInternal(content);
+  return result.places;
 }
 
 /**
@@ -453,59 +622,93 @@ function escapeRegex(str: string): string {
 }
 
 /**
+ * 텍스트 위치가 마크다운 링크 내부인지 확인
+ * [text](url) 패턴 내부이면 true
+ */
+function isInsideMarkdownLink(content: string, matchIndex: number, matchLength: number): boolean {
+  // 매치 이전 텍스트에서 가장 가까운 [ 와 ]( 찾기
+  const before = content.slice(0, matchIndex);
+  const after = content.slice(matchIndex + matchLength);
+
+  // [text](url) 패턴에서 text 부분에 있는지 확인
+  const lastOpenBracket = before.lastIndexOf('[');
+  const lastCloseBracket = before.lastIndexOf(']');
+
+  if (lastOpenBracket > lastCloseBracket) {
+    // [ 이후에 ] 없이 매치가 발생 → 링크 텍스트 내부일 가능성
+    const afterMatch = content.slice(matchIndex + matchLength);
+    if (/^\s*\]\(/.test(afterMatch) || /\]\([^)]+\)/.test(afterMatch.slice(0, 200))) {
+      return true;
+    }
+  }
+
+  // ](url) 패턴에서 url 부분에 있는지 확인
+  const parenBefore = before.lastIndexOf('](');
+  const closeParen = after.indexOf(')');
+  if (parenBefore >= 0 && closeParen >= 0) {
+    const afterParen = before.slice(parenBefore);
+    if (!afterParen.includes(')')) {
+      return true; // URL 내부
+    }
+  }
+
+  return false;
+}
+
+/**
  * 장소명에 링크 추가 (첫 번째 등장에만)
+ * 한국어 호환: 위치 기반 스캔, frontmatter/마크다운 링크 내부 방지
  */
 export function addLinkToPlace(content: string, place: ExtractedPlace): {
   content: string;
   added: boolean;
 } {
+  // 2자 미만 장소명 스킵
+  if (place.name.trim().length < 2) {
+    return { content, added: false };
+  }
+
   // 이미 링크가 있으면 스킵
   if (isAlreadyLinked(content, place.name)) {
     return { content, added: false };
   }
 
-  // 장소명 찾기 (단어 경계 고려)
-  const placePattern = new RegExp(
-    `(?<!\\[)${escapeRegex(place.name)}(?!\\]\\()`,
-    'g'
-  );
+  const frontmatterEnd = getFrontmatterEndIndex(content);
+  const searchContent = content.slice(frontmatterEnd);
 
-  const matches = content.match(placePattern);
-  if (!matches || matches.length === 0) {
+  // 위치 기반 스캔으로 장소명 찾기 (한국어 호환)
+  const escapedName = escapeRegex(place.name);
+  const placePattern = new RegExp(escapedName, 'g');
+
+  let match: RegExpExecArray | null;
+  let firstValidIndex = -1;
+
+  while ((match = placePattern.exec(searchContent)) !== null) {
+    const absIndex = frontmatterEnd + match.index;
+
+    // 마크다운 링크 내부인지 확인
+    if (isInsideMarkdownLink(content, absIndex, match[0].length)) {
+      continue;
+    }
+
+    firstValidIndex = absIndex;
+    break;
+  }
+
+  if (firstValidIndex < 0) {
     return { content, added: false };
   }
 
-  // 첫 번째 등장만 링크로 변환
+  // 첫 번째 유효 위치에 링크 삽입
   const url = generateUrl('map', place.name);
   const linkedText = `[${place.name}](${url})`;
 
-  let replaced = false;
-  const newContent = content.replace(placePattern, (match) => {
-    if (!replaced) {
-      replaced = true;
-      return linkedText;
-    }
-    return match;
-  });
+  const newContent =
+    content.slice(0, firstValidIndex) +
+    linkedText +
+    content.slice(firstValidIndex + place.name.length);
 
-  return { content: newContent, added: replaced };
-}
-
-/**
- * frontmatter 영역 분리
- */
-function separateFrontmatter(content: string): {
-  frontmatter: string;
-  body: string;
-} {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-  if (frontmatterMatch) {
-    return {
-      frontmatter: `---\n${frontmatterMatch[1]}\n---\n`,
-      body: frontmatterMatch[2]
-    };
-  }
-  return { frontmatter: '', body: content };
+  return { content: newContent, added: true };
 }
 
 /**
@@ -517,33 +720,54 @@ export async function enhanceWithLinks(content: string): Promise<{
   places: ExtractedPlace[];
   added: string[];
   skipped: string[];
+  truncated?: boolean;
+  error?: string;
 }> {
   // frontmatter와 본문 분리
   const { frontmatter, body } = separateFrontmatter(content);
 
-  // 1. AI로 장소 추출 (본문만 전달)
-  const places = await extractPlacesWithAI(body);
+  // 1. AI로 장소 추출 (본문만 전달, 상세 결과)
+  const extraction = await extractPlacesWithAIInternal(body);
 
-  if (places.length === 0) {
-    return { content, places: [], added: [], skipped: [] };
+  if (extraction.places.length === 0) {
+    return {
+      content,
+      places: [],
+      added: [],
+      skipped: [],
+      truncated: extraction.truncated,
+      error: extraction.error
+    };
   }
 
-  // 2. 본문에만 링크 추가
+  // 2. 본문에만 링크 추가 (개별 try-catch로 격리)
   let result = body;
   const added: string[] = [];
   const skipped: string[] = [];
 
-  for (const place of places) {
-    const { content: newContent, added: wasAdded } = addLinkToPlace(result, place);
-    result = newContent;
+  for (const place of extraction.places) {
+    try {
+      const { content: newContent, added: wasAdded } = addLinkToPlace(result, place);
+      result = newContent;
 
-    if (wasAdded) {
-      added.push(place.name);
-    } else {
+      if (wasAdded) {
+        added.push(place.name);
+      } else {
+        skipped.push(place.name);
+      }
+    } catch (error) {
+      console.warn(`[link-processor] 장소 링크 추가 실패 (${place.name}):`, error);
       skipped.push(place.name);
     }
   }
 
   // frontmatter + 수정된 본문 합치기
-  return { content: frontmatter + result, places, added, skipped };
+  return {
+    content: frontmatter + result,
+    places: extraction.places,
+    added,
+    skipped,
+    truncated: extraction.truncated,
+    error: extraction.error
+  };
 }

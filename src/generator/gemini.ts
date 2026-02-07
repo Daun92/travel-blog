@@ -48,7 +48,7 @@ function getClient(config?: LLMConfig): GoogleGenerativeAI {
 /**
  * LLM 서버 상태 확인
  */
-export async function checkOllamaStatus(config?: LLMConfig): Promise<boolean> {
+export async function checkGeminiStatus(config?: LLMConfig): Promise<boolean> {
   try {
     const cfg = config || getDefaultConfig();
     if (!cfg.apiKey) {
@@ -95,7 +95,7 @@ export async function generate(
     }
   });
 
-  // /no_think 접미사 제거 (Ollama용이었음)
+  // /no_think 접미사 제거 (레거시)
   const cleanPrompt = prompt.replace(/\s*\/no_think\s*$/, '');
 
   const result = await model.generateContent(cleanPrompt);

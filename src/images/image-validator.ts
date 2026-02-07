@@ -6,7 +6,7 @@
 import { readFile } from 'fs/promises';
 import { existsSync } from 'fs';
 import matter from 'gray-matter';
-import { generate } from '../generator/ollama.js';
+import { generate } from '../generator/gemini.js';
 
 /**
  * 이미지 검증 결과
