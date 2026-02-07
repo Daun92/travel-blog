@@ -394,6 +394,17 @@ export function summarizeReport(report: FactCheckReport): string {
   return lines.join('\n');
 }
 
+// Scoring functions (used by factcheck-report.mts)
+export {
+  calculateCategoryScore,
+  calculateOverallScore,
+  calculateSeverityStats,
+  generateCorrections,
+  evaluateQualityGate,
+  loadConfig,
+  DEFAULT_CONFIG
+};
+
 // Re-export types and utilities
 export {
   extractClaims,

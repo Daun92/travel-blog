@@ -85,6 +85,8 @@
     "moltbook:once": "tsx scripts/moltbook-auto-share.mts once",
     "moltbook:status": "tsx scripts/moltbook-auto-share.mts status",
     "moltbook:queue": "tsx src/cli/index.ts moltbook queue",
+    "factcheck:extract": "tsx scripts/factcheck-extract.mts",
+    "factcheck:report": "tsx scripts/factcheck-report.mts",
     "factcheck:fix": "tsx src/cli/index.ts factcheck --auto-fix",
     "factcheck:fix:dry": "tsx src/cli/index.ts factcheck --auto-fix --dry-run",
     "moltbook:scheduler": "tsx scripts/moltbook-scheduler.mts",

@@ -62,6 +62,14 @@ npm run aeo -- -f <file>           # Add FAQ & Schema.org
 npm run aeo -- -f <file> --apply   # Apply AEO to file
 ```
 
+### Claude Code 네이티브 팩트체크 (API 키 불필요)
+```bash
+npm run factcheck:extract -- -f <file>   # Step 1: 클레임 추출 (JSON 출력)
+npm run factcheck:report -- -i <file>    # Step 3: 보고서 생성
+npm run factcheck:report -- -i <file> --auto-fix         # 자동 수정 포함
+npm run factcheck:report -- -i <file> --auto-fix --dry-run  # 미리보기
+```
+
 ### Integrated Workflow (NEW)
 ```bash
 npm run workflow full              # Full pipeline (factcheck + SEO + AEO + image)
@@ -689,6 +697,76 @@ src/api/data-go-kr/
   client.ts         # 핵심 API 클라이언트 (DataGoKrClient)
   index.ts          # getDataGoKrClient() 싱글턴 팩토리
 ```
+
+## Claude Code 팩트체크 워크플로우
+
+API 키 없이 Claude Code 세션 내에서 팩트체크를 수행하는 3단계 프로토콜입니다.
+기존 `npm run factcheck` (Gemini API 방식)과 병행 사용 가능합니다.
+
+### Step 1: 클레임 추출
+
+```bash
+npm run factcheck:extract -- -f drafts/2026-02-07-post.md
+```
+
+stdout에 JSON 출력 — `claims[]` 배열에 검증 대상 목록이 포함됩니다.
+
+### Step 2: Claude Code가 직접 검증
+
+추출된 각 claim을 WebSearch + Claude 지식으로 검증합니다.
+
+**claim.type별 검증 전략**:
+| type | 전략 | 이유 |
+|------|------|------|
+| venue_exists | WebSearch | 장소 존재 확인 |
+| location | WebSearch | 주소 정확성 |
+| hours | WebSearch | 시의성 중요 |
+| event_period | WebSearch | 전시/이벤트 기간 |
+| price | WebSearch | 현재 가격 |
+| contact | WebSearch | 연락처 |
+| transport | Claude 지식 | 안정적 정보 (지하철역 등) |
+| facilities | Claude 지식 + WebSearch | 시설 정보 |
+
+**검증 결과 JSON 형식** (`data/factcheck-claude/<slug>-results.json`):
+
+```json
+{
+  "filePath": "drafts/2026-02-07-post.md",
+  "title": "포스트 제목",
+  "claims": [],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://example.com",
+      "details": "검증 근거 설명"
+    }
+  ]
+}
+```
+
+`claims` 필드는 Step 1에서 출력된 `claims` 배열을 그대로 복사합니다.
+
+**confidence 기준**:
+- 90-100: 공식 사이트에서 직접 확인
+- 70-89: 신뢰할 수 있는 출처에서 확인
+- 50-69: 간접적 출처 또는 부분 일치
+- 0-49: 확인 불가능
+
+**status 값**: `"verified"` | `"false"` | `"unknown"`
+- `"false"`인 경우 `correctValue` 필드에 정확한 값을 기록
+
+### Step 3: 보고서 생성
+
+```bash
+npm run factcheck:report -- -i data/factcheck-claude/results.json
+npm run factcheck:report -- -i data/factcheck-claude/results.json --auto-fix
+```
+
+기존 scoring/quality-gate 로직을 그대로 적용하여 FactCheckReport를 생성합니다.
+`--auto-fix` 옵션으로 자동 수정도 지원합니다.
 
 ## Troubleshooting Reference
 
