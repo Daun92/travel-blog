@@ -32,3 +32,13 @@ config/moltbook-credentials.json
 
 # 빌드 결과물
 *.tsbuildinfo
+
+# Hugo blog (별도 Git 저장소)
+blog/
+
+# Claude Code
+.claude/
+
+# 기타
+nul
+workspace/

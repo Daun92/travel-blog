@@ -70,11 +70,22 @@ npm run workflow full --draft      # Include Moltbook draft feedback
 npm run workflow full --apply      # Auto-apply AEO elements
 ```
 
-### Moltbook Draft Feedback (NEW)
+### Moltbook Draft Feedback
 ```bash
 npm run moltbook:draft             # Share draft for feedback (before publish)
 npm run moltbook:draft-feedback    # Collect draft feedback
 npm run moltbook:draft-status      # Check pending drafts
+```
+
+### Survey & Topic Discovery
+```bash
+npm run moltbook:culture-survey           # Moltbook에 서베이 발행
+npm run moltbook:survey-scheduler         # 응답 수집 (30분 간격, 최대 3시간)
+npm run survey ingest                     # 수집 결과 → 인사이트 DB 적재
+npm run survey status                     # 누적 인사이트 현황 조회
+npm run survey boost                      # 주제 발굴 점수 부스트 확인
+npm run survey apply-strategy             # content-strategy.json 자동 갱신
+npm run queue discover --auto --gaps      # 서베이 반영된 주제 자동 발굴
 ```
 
 ### Legacy Combined Workflows
@@ -86,15 +97,70 @@ npm run workflow:feedback # moltbook:feedback + moltbook:analyze
 
 ## 🌟 Premium Content Workflow (권장)
 
-고품질 콘텐츠 발행을 위한 **7단계 표준 프로세스**입니다. 단계를 건너뛰지 마세요.
+고품질 콘텐츠 발행을 위한 **완전한 콘텐츠 라이프사이클**입니다. 단계를 건너뛰지 마세요.
 
 ### 전체 파이프라인 개요
 ```
-1. Agent+Generate → 2. Enhance → 3. Factcheck → 4. Quality → 5. AEO → 6. Image → 7. Publish+Moltbook
-       ↑
-  에이전트 자동/수동 배정
-  (조회영 | 김주말 | 한교양)
+┌─ Phase A: 주제 발굴 ──────────────────────────────────────────────────┐
+│  0. Survey → Topic Discovery → Queue                                  │
+│     (서베이 수집 → 인사이트 분석 → 주제 큐 자동 편성)                 │
+└───────────────────────────────────────────────────────────────────────┘
+        ↓
+┌─ Phase B: 콘텐츠 생산 ──────────────────────────────────────────────────┐
+│  1. Agent+Generate → 2. Enhance → 3. Factcheck → 4. Quality → 5. AEO  │
+│         ↑                                                               │
+│    에이전트 자동/수동 배정                                               │
+│    (조회영 | 김주말 | 한교양)                                            │
+└───────────────────────────────────────────────────────────────────────┘
+        ↓
+┌─ Phase C: 발행 + 피드백 루프 ─────────────────────────────────────────┐
+│  6. Image → 7. Publish → 8. Moltbook Share → 9. Feedback+Survey      │
+│                                                      ↓                │
+│                                           content-strategy.json 갱신  │
+│                                                      ↓                │
+│                                           → Phase A로 순환 ───────────┘
+└───────────────────────────────────────────────────────────────────────┘
 ```
+
+### Step 0: 주제 발굴 (Survey + Topic Discovery)
+
+서베이로 커뮤니티 수요를 파악하고, 주제 큐를 데이터 기반으로 편성합니다.
+**이 단계는 주기적(주 1회 권장)으로 실행하며, 매 포스트마다 필수는 아닙니다.**
+
+```bash
+# 0-1. 서베이 발행 (Moltbook 커뮤니티에 설문 게시)
+npm run moltbook:culture-survey
+
+# 0-2. 응답 수집 (30분 간격, 최대 3시간 자동 폴링)
+npm run moltbook:survey-scheduler
+
+# 0-3. 인사이트 DB 적재 (누적 데이터 축적, 중복 방지)
+npm run survey ingest
+
+# 0-4. 현황 확인 + 전략 반영
+npm run survey status                     # 인기 주제/포맷/지역 확인
+npm run survey boost                      # 주제별 점수 부스트 확인
+npm run survey apply-strategy             # content-strategy.json 자동 갱신
+
+# 0-5. 주제 큐 편성 (서베이 부스트 반영)
+npm run queue discover --auto --gaps      # 갭 분석 + 서베이 반영 자동 발굴
+npm run queue list                        # 편성된 주제 큐 확인
+```
+
+**서베이 인사이트가 주제 발굴에 미치는 영향**:
+- 서베이에서 인기 높은 키워드 → 주제 발굴 점수 +0~30점 부스트
+- 인기 포맷(리뷰/큐레이션/코스/비교) → 콘텐츠 전략에 반영
+- 관심 지역 → focusAreas로 자동 설정
+- 부스트된 주제에 `[서베이]` 태그 자동 부여
+
+**서베이 수집 데이터 구조**:
+| 수집 항목 | 설명 | 저장 위치 |
+|-----------|------|-----------|
+| 주제 수요 (8개 문화 카테고리) | 가중 투표 집계 | `data/survey-insights-db.json` |
+| 포맷 선호 (리뷰/큐레이션/코스/비교) | A-D 선택 집계 | `data/survey-insights-db.json` |
+| 지역 관심 (40+ 지역) | 언급 빈도 집계 | `data/survey-insights-db.json` |
+| 자유 의견 | 원문 보존 | `data/survey-insights-db.json` |
+| 수집 원본 | 파싱된 응답 | `data/feedback/survey-result.json` |
 
 ### Step 1: 에이전트 배정 + 콘텐츠 생성 (Agent + Generate)
 
@@ -186,11 +252,23 @@ npm run aeo -- -f <file> --apply           # AEO 자동 적용
 # 이미지 경로가 /travel-blog/ prefix를 포함하는지 검증
 ```
 
-### Step 7: 발행 + Moltbook (Publish)
+### Step 7: 발행 (Publish)
 ```bash
 npm run publish                            # Hugo 블로그에 발행
-npm run moltbook:share                     # Moltbook 커뮤니티 공유
 ```
+
+### Step 8: Moltbook 공유 + 피드백 수집 (Share + Feedback Loop)
+발행 후 커뮤니티에 공유하고, 피드백을 수집하여 다음 콘텐츠 전략에 반영합니다.
+```bash
+npm run moltbook:share                     # Moltbook 커뮤니티 공유
+npm run moltbook:feedback                  # 피드백 수집
+npm run moltbook:analyze                   # 전략 자동 조정
+```
+
+**피드백 루프 → Phase A 순환**:
+- 발행 포스트에 대한 커뮤니티 반응 수집
+- `config/content-strategy.json` 자동 갱신
+- 다음 서베이/주제 발굴에 반영 → Step 0으로 순환
 
 ### 🚀 통합 명령어 (추천)
 ```bash
@@ -216,19 +294,37 @@ npm run workflow full -- -f <file> --enhance --apply
 3. **AEO 스킵 금지**: 검색 엔진 최적화 필수
 4. **Moltbook 스킵 금지**: 커뮤니티 피드백 → 전략 자동 조정
 5. **에이전트 무시 금지**: 반드시 에이전트 필명으로 발행 (author 필드)
+6. **서베이 무시 금지**: 주기적 서베이 → 데이터 기반 주제 발굴의 핵심
 
 ### 워크플로우 체크리스트
+
+**Phase A: 주제 발굴 (주 1회 권장)**
 ```
-□ 1. npm run new -- -t "주제" --type travel    (에이전트 자동 배정 확인)
-      또는 --agent viral|friendly|informative   (수동 지정)
-□ 2. npm run enhance -- -f <file>              (에이전트 페르소나 기반 향상)
-□ 3. npm run factcheck -- -f <file>            (70% 이상 확인)
-□ 4. npm run validate -- -f <file>             (품질 검증)
-□ 5. npm run aeo -- -f <file> --apply          (FAQ/Schema 추가)
-□ 6. 이미지 경로 확인                           (/travel-blog/ prefix)
-□ 7. frontmatter 확인                           (author, personaId 올바른지)
-□ 8. npm run publish                            (발행)
-□ 9. npm run moltbook:share                     (커뮤니티 공유)
+□ 0-1. npm run moltbook:culture-survey         (서베이 발행)
+□ 0-2. npm run moltbook:survey-scheduler        (응답 수집, 자동 3시간)
+□ 0-3. npm run survey ingest                    (인사이트 DB 적재)
+□ 0-4. npm run survey apply-strategy            (전략 자동 갱신)
+□ 0-5. npm run queue discover --auto --gaps     (주제 큐 편성)
+```
+
+**Phase B: 콘텐츠 생산 (매 포스트)**
+```
+□ 1. npm run new -- -t "주제" --type travel     (에이전트 자동 배정 확인)
+     또는 --agent viral|friendly|informative    (수동 지정)
+□ 2. npm run enhance -- -f <file>               (에이전트 페르소나 기반 향상)
+□ 3. npm run factcheck -- -f <file>             (70% 이상 확인)
+□ 4. npm run validate -- -f <file>              (품질 검증)
+□ 5. npm run aeo -- -f <file> --apply           (FAQ/Schema 추가)
+□ 6. 이미지 경로 확인                            (/travel-blog/ prefix)
+□ 7. frontmatter 확인                            (author, personaId 올바른지)
+```
+
+**Phase C: 발행 + 피드백 (매 포스트)**
+```
+□ 8. npm run publish                             (발행)
+□ 9. npm run moltbook:share                      (커뮤니티 공유)
+□ 10. npm run moltbook:feedback                  (피드백 수집)
+□ 11. npm run moltbook:analyze                   (전략 자동 조정 → Phase A 순환)
 ```
 
 ## Architecture
@@ -264,6 +360,11 @@ npm run workflow full -- -f <file> --enhance --apply
 - `friendly.json` - 김주말: 솔직 체험, 주말 여행, 해요체
 - `informative.json` - 한교양: 교양/해설, 역사/문화, 합니다체
 
+**Survey & Topic Discovery** (`src/agents/moltbook/`)
+- `survey-insights-db.ts` - 서베이 인사이트 누적 DB (가중 투표, 부스트 점수 계산)
+- `topic-discovery.ts` - 주제 발굴 (서베이 부스트 반영, 갭 분석)
+- 서베이 파이프라인: 발행 → 수집(30분x6) → 적재 → 전략 갱신 → 주제 큐 편성
+
 **CLI** (`src/cli/`)
 - Commander.js-based with commands in `src/cli/commands/`
 - Entry point: `src/cli/index.ts`
@@ -295,24 +396,42 @@ config/                 # Runtime config
     friendly.json       #   김주말 (친근감)
     informative.json    #   한교양 (교양)
 data/                   # Collected API data, feedback analysis
+  survey-insights-db.json # 서베이 누적 인사이트 DB
+  feedback/             # Moltbook 피드백 데이터
+    survey-records.json #   발행된 서베이 메타데이터
+    survey-result.json  #   최근 수집 결과
 drafts/                 # Posts awaiting review
 ```
 
 ### Data Flow
 ```
-                      config/personas/index.json
-                              ↓ (자동배정 규칙)
-External APIs → data/collected/ → [Agent 선택] → src/generator → drafts/
-                                  조회영|김주말|한교양              ↓
-                                                          [Enhance] 에이전트 페르소나 적용
-                                                                   ↓
-                                                          [Factcheck] 사실 검증
-                                                                   ↓
-                                                          [AEO] FAQ + Schema
-                                                                   ↓
-                                                          blog/content/posts/
-                                                                   ↓
-                                          Moltbook feedback → config/content-strategy.json
+┌─────────────────────── Phase A: 주제 발굴 ───────────────────────────┐
+│  Moltbook 서베이 → data/feedback/survey-result.json                   │
+│        ↓                                                              │
+│  survey ingest → data/survey-insights-db.json (누적)                  │
+│        ↓                                                              │
+│  survey apply-strategy → config/content-strategy.json                 │
+│        ↓                                                              │
+│  queue discover → 주제 큐 (서베이 부스트 +0~30점 반영)                │
+└───────────────────────────────────────────────────────────────────────┘
+        ↓
+┌─────────────────────── Phase B: 콘텐츠 생산 ─────────────────────────┐
+│  config/personas/index.json                                           │
+│        ↓ (자동배정 규칙)                                              │
+│  External APIs → data/collected/ → [Agent 선택] → src/generator       │
+│                                    조회영|김주말|한교양     ↓          │
+│                                                         drafts/       │
+│                                                           ↓           │
+│                                                  Enhance → Factcheck  │
+│                                                           ↓           │
+│                                                    Quality → AEO      │
+└───────────────────────────────────────────────────────────────────────┘
+        ↓
+┌─────────────────────── Phase C: 발행 + 피드백 ───────────────────────┐
+│  blog/content/posts/ → Moltbook share                                 │
+│        ↓                                                              │
+│  Moltbook feedback → config/content-strategy.json → Phase A 순환      │
+└───────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Environment Variables
@@ -346,6 +465,8 @@ Length options: short (1500-2000), medium (2500-3500), long (4000-5000) characte
 - 에이전트 자동 배정: 주제 키워드 매칭 → 조회영/김주말/한교양 중 선택 (기본값: 김주말)
 - 에이전트 수동 지정: `--agent viral|friendly|informative` CLI 플래그
 - Moltbook feedback automatically adjusts content strategy without manual intervention
+- 서베이 인사이트 누적 DB: 중복 방지(surveyId), 가중 투표(upvote x0.5), 부스트 점수(0~30)
+- 서베이 → 전략 → 주제 발굴 → 콘텐츠 생산 → 피드백 순환 루프
 
 ## Image System (Hybrid)
 

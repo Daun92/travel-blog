@@ -1,86 +1,5 @@
 {
-  "queue": [
-    {
-      "title": "2026 봄 벚꽃 축제 완벽 가이드: 전국 명소와 개화 시기",
-      "type": "culture"
-    },
-    {
-      "title": "경주 템플스테이 체험기: 천년 고도에서 보내는 하룻밤",
-      "type": "travel"
-    },
-    {
-      "title": "제주 1박2일 완벽 코스",
-      "type": "travel",
-      "meta": {
-        "score": 100,
-        "source": "gap_analysis",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "제주",
-          "렌터카",
-          "카페",
-          "바다",
-          "여행"
-        ]
-      }
-    },
-    {
-      "title": "강릉 1박2일 완벽 코스",
-      "type": "travel",
-      "meta": {
-        "score": 100,
-        "source": "gap_analysis",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "강릉",
-          "바다",
-          "카페",
-          "겨울"
-        ]
-      }
-    },
-    {
-      "title": "부산 1박2일 완벽 코스",
-      "type": "travel",
-      "meta": {
-        "score": 100,
-        "source": "gap_analysis",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "부산",
-          "바다",
-          "맛집",
-          "해운대"
-        ]
-      }
-    },
-    {
-      "title": "여수 1박2일 완벽 코스",
-      "type": "travel",
-      "meta": {
-        "score": 100,
-        "source": "gap_analysis",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "여수"
-        ]
-      }
-    },
-    {
-      "title": "서울 1박2일 추천 일정",
-      "type": "travel",
-      "meta": {
-        "score": 70,
-        "source": "moltbook_trending",
-        "discoveredAt": "2026-02-06T14:34:35.642Z",
-        "keywords": [
-          "서울",
-          "카페",
-          "맛집"
-        ]
-      }
-    }
-  ],
+  "queue": [],
   "completed": [
     {
       "title": "강릉 겨울 바다 카페 투어: 오션뷰 감성 카페 베스트 5",
@@ -129,6 +48,61 @@
     {
       "title": "서울 근교 당일치기 여행지 베스트 5: 퇴근 후 떠나는 소확행",
       "type": "travel"
+    },
+    {
+      "title": "제주 1박2일 완벽 코스",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "제주",
+          "렌터카",
+          "카페",
+          "바다",
+          "여행"
+        ]
+      }
+    },
+    {
+      "title": "부산 1박2일 완벽 코스",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-06T14:34:35.642Z",
+        "keywords": [
+          "부산",
+          "바다",
+          "맛집",
+          "해운대"
+        ]
+      }
+    },
+    {
+      "title": "2026 봄 벚꽃 축제 완벽 가이드: 전국 명소와 개화 시기",
+      "type": "culture"
+    },
+    {
+      "title": "경주 템플스테이 체험기: 천년 고도에서 보내는 하룻밤",
+      "type": "travel"
+    },
+    {
+      "title": "성수동 갤러리 호핑 TOP 7: SNS에서 난리 난 전시 vs 진짜 볼만한 전시",
+      "type": "culture"
+    },
+    {
+      "title": "서울 인디 음악 씬 완벽 가이드: 홍대부터 성수까지 라이브 클럽 순례",
+      "type": "culture"
+    },
+    {
+      "title": "2026 봄 뮤지컬·연극 기대작 비교: 티켓값 아깝지 않은 공연은?",
+      "type": "culture"
+    },
+    {
+      "title": "서울에서 즐기는 전통문화 체험 프로그램: 도자기부터 한지까지",
+      "type": "culture"
     }
   ],
   "settings": {
