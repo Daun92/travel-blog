@@ -23,11 +23,9 @@ keywords:
   - 백운대 등산코스
   - 주말 등산 추천
 cover:
-  image: /travel-blog/images/cover-1770385689677.jpg
-  alt: aerial view of city buildings during daytime
-  caption: >-
-    Photo by [Jules Marvin Eguilos](https://unsplash.com/@jmeguilos) on
-    [Unsplash](https://unsplash.com)
+  image: /travel-blog/images/cover-bukhansan-hiking.jpg
+  alt: person in red jacket standing on rocky mountain during daytime
+  caption: "Photo by [Chinh Le Duc](https://unsplash.com/@mero_dnt) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
 author: Blog Author

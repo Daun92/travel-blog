@@ -8,7 +8,7 @@ tags: ["문화", "예술", "전시회", "미술관", "서울", "국립현대미�
 categories: ["culture"]
 keywords: ["국립현대미술관", "MMCA 서울", "서울 전시회", "미술관 추천"]
 cover:
-  image: "/images/mmca-cover.jpg"
+  image: "/travel-blog/images/mmca-cover.jpg"
   alt: "a couple of large sculptures sitting on top of a cement floor"
   caption: "Photo by [Andrea De Santis](https://unsplash.com/@santesson89) on [Unsplash](https://unsplash.com)"
   relative: false
