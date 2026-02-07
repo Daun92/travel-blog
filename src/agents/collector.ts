@@ -83,7 +83,13 @@ export async function searchTourism(keyword: string, opts?: {
   }
 
   try {
-    const items = await client.searchKeyword(keyword, { numOfRows: 20 });
+    // 복합 키워드 처리: "경주 역사 산책" → 먼저 전체 검색, 없으면 핵심어로 재시도
+    let items = await client.searchKeyword(keyword, { numOfRows: 20 });
+    if (items.length === 0 && keyword.includes(' ')) {
+      const coreKeyword = keyword.split(/\s+/)[0]; // 첫 번째 단어 (지명이 보통 맨 앞)
+      console.log(`  📎 "${keyword}" 결과 없음 → "${coreKeyword}"로 재검색`);
+      items = await client.searchKeyword(coreKeyword, { numOfRows: 20 });
+    }
 
     const results: TourismData[] = items.map(item => ({
       title: item.title,
@@ -147,8 +153,10 @@ export async function searchFestivals(opts?: {
   }
 
   try {
+    // eventStartDate 필수 — 미지정 시 오늘 날짜 사용
+    const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
     const items = await client.searchFestival({
-      eventStartDate: opts?.startDate,
+      eventStartDate: opts?.startDate ?? today,
       eventEndDate: opts?.endDate,
       areaCode: opts?.areaCode,
       numOfRows: 20,

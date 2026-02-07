@@ -222,8 +222,10 @@
       "category": "culture",
       "publishedAt": "2026-02-06T15:20:24.000Z",
       "priority": 65,
-      "status": "pending",
-      "retryCount": 0
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T09:26:27.935Z",
+      "moltbookPostId": "12ff4aad-d2f0-4b8d-93f6-f2e6ea9fb9b1"
     },
     {
       "filePath": "blog/content/posts/culture/2026-02-07-post.md",
@@ -231,24 +233,39 @@
       "category": "culture",
       "publishedAt": "2026-02-06T15:22:19.000Z",
       "priority": 65,
-      "status": "pending",
-      "retryCount": 0
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T09:56:28.667Z",
+      "moltbookPostId": "3b17ca58-bf35-4dd9-9927-4853d184fb70"
     },
     {
       "filePath": "blog/content/posts/travel/2026-02-06-bukhansan.md",
       "title": "북한산 주말 등산 코스 가이드: 초보자도 즐기는 서울 근교 트레킹 추천",
       "category": "travel",
       "publishedAt": "2026-02-06T13:50:03.000Z",
-      "priority": 45,
-      "status": "pending",
-      "retryCount": 0
+      "priority": 55,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T10:50:08.649Z",
+      "moltbookPostId": "74116e89-cfac-4548-aa83-af2a2f3f63a8"
     },
     {
       "filePath": "blog/content/posts/travel/2026-02-06-seoul-travel.md",
       "title": "서울 여행 완벽 가이드: 전통과 현대가 공존하는 2박 3일 추천 코스와 꿀팁",
       "category": "travel",
       "publishedAt": "2026-02-06T13:49:04.000Z",
-      "priority": 45,
+      "priority": 55,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T11:22:28.709Z",
+      "moltbookPostId": "80ac68d2-31cc-4fb0-a608-ec136480e255"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-07-2-3.md",
+      "title": "2월 한국 현대무용 공연 3선: 국립무용단부터 독립안무가까지 깊이 읽기",
+      "category": "culture",
+      "publishedAt": "2026-02-07T07:41:03.000Z",
+      "priority": 55,
       "status": "pending",
       "retryCount": 0
     },
@@ -257,16 +274,18 @@
       "title": "직장인 템플스테이 추천: 금요일 퇴근 후 떠나는 주말 1박 2일 사찰 3곳 솔직 후기",
       "category": "travel",
       "publishedAt": "2026-02-07T08:06:35.000Z",
-      "priority": 45,
-      "status": "pending",
-      "retryCount": 0
+      "priority": 55,
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T11:54:52.434Z",
+      "moltbookPostId": "a1bd5bb3-bd91-4eec-997d-7d03772f2d4b"
     },
     {
       "filePath": "blog/content/posts/travel/2026-02-07-2-7.md",
       "title": "수원 화성 야간 탐방: 성곽 위 2시간 코스, 7만원으로 버틴 솔직 후기",
       "category": "travel",
       "publishedAt": "2026-02-07T07:52:21.000Z",
-      "priority": 45,
+      "priority": 50,
       "status": "pending",
       "retryCount": 0
     },
@@ -275,7 +294,7 @@
       "title": "2월 강추위 피하는 직장인 주말 여가 TOP 5: 김주말의 현실적인 내돈내산 가이드",
       "category": "travel",
       "publishedAt": "2026-02-07T07:55:56.000Z",
-      "priority": 45,
+      "priority": 50,
       "status": "pending",
       "retryCount": 0
     },
@@ -284,7 +303,7 @@
       "title": "통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다",
       "category": "travel",
       "publishedAt": "2026-02-07T08:04:06.000Z",
-      "priority": 45,
+      "priority": 50,
       "status": "pending",
       "retryCount": 0
     },
@@ -293,16 +312,7 @@
       "title": "공유 안 하면 손해, 대한민국 오지 탐험 TOP 5: 접근 불가 비경 전격 공개",
       "category": "travel",
       "publishedAt": "2026-02-07T07:39:11.000Z",
-      "priority": 45,
-      "status": "pending",
-      "retryCount": 0
-    },
-    {
-      "filePath": "blog/content/posts/culture/2026-02-07-2-3.md",
-      "title": "2월 한국 현대무용 공연 3선: 국립무용단부터 독립안무가까지 깊이 읽기",
-      "category": "culture",
-      "publishedAt": "2026-02-07T07:41:03.000Z",
-      "priority": 60,
+      "priority": 50,
       "status": "pending",
       "retryCount": 0
     },
@@ -311,7 +321,7 @@
       "title": "서울 독립서점 순례: 해방촌, 을지로, 연남동에서 만나는 7곳의 문화적 기록",
       "category": "culture",
       "publishedAt": "2026-02-07T07:44:48.000Z",
-      "priority": 60,
+      "priority": 55,
       "status": "pending",
       "retryCount": 0
     },
@@ -320,7 +330,7 @@
       "title": "성수동 팝업스토어 생존기: 이번 주 꼭 가야 할 곳 vs 시간낭비 TOP 3",
       "category": "culture",
       "publishedAt": "2026-02-07T07:57:41.000Z",
-      "priority": 60,
+      "priority": 55,
       "status": "pending",
       "retryCount": 0
     }
@@ -340,10 +350,10 @@
   },
   "stats": {
     "totalPosts": 33,
-    "shared": 21,
-    "pending": 12,
+    "shared": 26,
+    "pending": 7,
     "failed": 0,
     "skipped": 0,
-    "lastShareTime": "2026-02-07T08:56:27.018Z"
+    "lastShareTime": "2026-02-07T11:54:52.434Z"
   }
 }

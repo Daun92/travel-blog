@@ -163,7 +163,8 @@ async function toggleDraftStatus(
 
   data.draft = newDraft;
 
-  const newContent = matter.stringify(body, data);
+  const { normalizeFrontmatterCaption } = await import('../../generator/frontmatter.js');
+  const newContent = normalizeFrontmatterCaption(matter.stringify(body, data));
   await writeFile(filepath, newContent, 'utf-8');
 
   if (newDraft) {

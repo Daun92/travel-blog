@@ -1,0 +1,190 @@
+{
+  "filePath": "drafts/2026-02-07-post.md",
+  "title": "[김주말의 부산] 해운대 겨울 바다 산책? 솔직히 춥고 사람 많지만 가게 되는 이유 (비용/웨이팅/동선)",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "광복로 72-1",
+      "value": "광복로 72-1",
+      "severity": "critical",
+      "context": "- **주소**: 부산광역시 중구 광복로 72-1 (광복동2가)",
+      "lineNumber": 23
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "묘봉산로 40",
+      "value": "묘봉산로 40",
+      "severity": "critical",
+      "context": "- **주소**: 부산광역시 연제구 묘봉산로 40",
+      "lineNumber": 34
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "기장해안로 147",
+      "value": "기장해안로 147",
+      "severity": "critical",
+      "context": "- **주소**: 부산광역시 기장군 기장해안로 147",
+      "lineNumber": 46
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "해운대해변로 302",
+      "value": "해운대해변로 302",
+      "severity": "critical",
+      "context": "- **주소**: 부산광역시 해운대구 해운대해변로 302 (중동, 대림맨션)",
+      "lineNumber": 54
+    },
+    {
+      "id": "ct-4",
+      "type": "location",
+      "text": "광안해변로 219",
+      "value": "광안해변로 219",
+      "severity": "critical",
+      "context": "- **주소**: 부산광역시 수영구 광안해변로 219 (광안동)",
+      "lineNumber": 66
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "284,600원",
+      "value": "284,600원",
+      "severity": "minor",
+      "context": "- **총 지출**: 284,600원 (1인 기준)",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "119,600원",
+      "value": "119,600원",
+      "severity": "minor",
+      "context": "- KTX 왕복: 119,600원",
+      "lineNumber": 13
+    },
+    {
+      "id": "ct-11",
+      "type": "contact",
+      "text": "051-714-4758",
+      "value": "051-714-4758",
+      "severity": "minor",
+      "context": "- **전화**: 051-714-4758",
+      "lineNumber": 24
+    },
+    {
+      "id": "ct-12",
+      "type": "contact",
+      "text": "051-901-2513",
+      "value": "051-901-2513",
+      "severity": "minor",
+      "context": "- **전화**: 051-901-2513 (갤럭시)",
+      "lineNumber": 47
+    },
+    {
+      "id": "ct-13",
+      "type": "contact",
+      "text": "070-4115-0419",
+      "value": "070-4115-0419",
+      "severity": "minor",
+      "context": "- **전화**: 070-4115-0419",
+      "lineNumber": 55
+    },
+    {
+      "id": "ct-17",
+      "type": "transport",
+      "text": "광안리 M 드론 라이트쇼",
+      "value": "광안리 M 드론 라이트쇼",
+      "severity": "minor",
+      "context": "해운대에서 광안리까지는 택시를 타려다가 주말 정체가 겁나서 지하철을 탔습니다. **광안리 M 드론 라이트쇼**를 보기 위해서였죠.",
+      "lineNumber": 63
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/kfes/detail/fstvlDetail.do",
+      "details": "부산 중구 광복로 72-1 (광복동2가) 주소 확인. 광복로 겨울빛 트리축제 위치와 일치. data.go.kr API 데이터 기반."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "unknown",
+      "confidence": 40,
+      "source": "web_search",
+      "details": "부산 연제구 묘봉산로 40 주소를 직접 확인하는 검색 결과 없음. 도로명주소 시스템에서 정확한 일치 미확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://dorojuso.kr/2671025032100640000000001",
+      "details": "부산 기장군 기장읍 기장해안로 147 = 롯데프리미엄아울렛 동부산점. 도로명주소 공식 데이터 확인."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://dorojuso.kr/2635010600114050010025849",
+      "details": "부산 해운대구 해운대해변로 302 (중동, 대림맨션) 확인. 도로명주소 공식 데이터."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.visitbusan.net/index.do",
+      "details": "부산 수영구 광안해변로 219(광안동) = 광안리 관광안내소/광안리해수욕장 주소. 비짓부산 공식 데이터."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "unknown",
+      "confidence": 50,
+      "source": "claude_knowledge",
+      "details": "총 지출 284,600원은 각 항목 합산값. 개별 항목(KTX 119,600 + 숙소 75,000 + 식비 80,000 + 교통 10,000)은 284,600원. 산술 정확하나 개별 가격의 정확성은 별도 검증 필요."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://www.letskorail.com/ebizprd/stationKtxList.do",
+      "details": "KTX 서울-부산 편도 약 59,800원. 왕복 119,600원은 정상요금 기준으로 정확. 2026년 가격 인상 가능성 있으나 현재 기준 일치."
+    },
+    {
+      "claimId": "ct-11",
+      "status": "unknown",
+      "confidence": 45,
+      "source": "web_search",
+      "details": "051-714-4758은 부산 중구청 대표번호(051-600-4000)와 불일치. 특정 부서 번호일 수 있으나 공식 확인 불가."
+    },
+    {
+      "claimId": "ct-12",
+      "status": "unknown",
+      "confidence": 50,
+      "source": "web_search",
+      "details": "051-901-2513 (갤럭시) — 롯데몰 동부산점 관련 번호로 추정되나 직접 확인 불가."
+    },
+    {
+      "claimId": "ct-13",
+      "status": "unknown",
+      "confidence": 40,
+      "source": "web_search",
+      "details": "070-4115-0419 전화번호 직접 확인 불가."
+    },
+    {
+      "claimId": "ct-17",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.gwangallimdrone.co.kr/",
+      "details": "광안리 M 드론라이트쇼 실존 확인. 2026년 매주 토요일 광안리 해변 개최. 공식 사이트 gwangallimdrone.co.kr."
+    }
+  ]
+}

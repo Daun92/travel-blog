@@ -16,8 +16,12 @@ let clientInstance: DataGoKrClient | null = null;
  * @returns DataGoKrClient 인스턴스 (KTO_API_KEY 없으면 null)
  */
 export function getDataGoKrClient(configOverride?: Partial<DataGoKrClientConfig>): DataGoKrClient | null {
-  const serviceKey = process.env.KTO_API_KEY;
-  if (!serviceKey) return null;
+  const rawKey = process.env.KTO_API_KEY;
+  if (!rawKey) return null;
+
+  // data.go.kr 포털에서 "Encoding" 키를 복사한 경우 %가 포함됨
+  // URL에 직접 삽입하므로 디코딩된(원본) 키를 사용해야 이중 인코딩 방지
+  const serviceKey = rawKey.includes('%') ? decodeURIComponent(rawKey) : rawKey;
 
   if (!clientInstance) {
     clientInstance = new DataGoKrClient({

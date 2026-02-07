@@ -6,7 +6,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
 import { generatePost, suggestTitles, checkGeminiStatus } from '../../generator/index.js';
-import { findImageForTopic, UnsplashClient } from '../../images/unsplash.js';
+import { findImageForTopic, UnsplashClient, registerImage } from '../../images/unsplash.js';
 import { GeminiImageClient } from '../../images/gemini-imagen.js';
 import { collectData, dataToPromptContext } from '../../agents/collector.js';
 
@@ -146,8 +146,12 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       }
 
       if (shouldSearch) {
-        spinner.start('커버 이미지 검색 중...');
-        const photo = await findImageForTopic(options.topic);
+        spinner.start('커버 이미지 검색 중 (스코어링 적용)...');
+        const photo = await findImageForTopic(options.topic, undefined, {
+          type: options.type,
+          persona: options.agent as 'viral' | 'friendly' | 'informative' | undefined,
+          keywords: keywords.length > 0 ? keywords : undefined,
+        });
         spinner.stop();
 
         if (photo) {
@@ -159,6 +163,10 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
             './blog/static/images',
             `cover-${Date.now()}.jpg`
           );
+
+          // 이미지 레지스트리에 등록 (중복 방지)
+          const slug = selectedTitle.replace(/\s+/g, '-').toLowerCase();
+          await registerImage(photo.id, slug, options.topic);
 
           // Windows/Unix 경로 호환성 처리
           coverImage = '/' + filepath

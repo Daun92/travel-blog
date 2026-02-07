@@ -173,7 +173,8 @@ export async function applyAutoFix(
   }
 
   // 6. 결과 재조립
-  const newContent = matter.stringify(body, frontmatterData);
+  const { normalizeFrontmatterCaption } = await import('../generator/frontmatter.js');
+  const newContent = normalizeFrontmatterCaption(matter.stringify(body, frontmatterData));
   const afterHash = computeHash(newContent);
 
   // 7. 파일 쓰기 (dry-run이 아닌 경우만)

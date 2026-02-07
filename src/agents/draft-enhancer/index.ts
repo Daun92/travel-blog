@@ -179,7 +179,8 @@ export class DraftEnhancerAgent {
     // 8. 파일 저장 (dry-run이 아닐 때)
     if (!dryRun) {
       onProgress('향상된 콘텐츠 저장 중...');
-      const newFileContent = matter.stringify(cleanedContent, frontmatter);
+      const { normalizeFrontmatterCaption } = await import('../../generator/frontmatter.js');
+      const newFileContent = normalizeFrontmatterCaption(matter.stringify(cleanedContent, frontmatter));
       await writeFile(filePath, newFileContent, 'utf-8');
       onProgress(`저장 완료: ${filePath}`);
     } else {

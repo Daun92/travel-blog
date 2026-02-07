@@ -243,7 +243,8 @@ export async function applyAEOToFile(
   }
 
   // 파일 저장
-  const newContent = matter.stringify(updatedBody, updatedFrontmatter);
+  const { normalizeFrontmatterCaption } = await import('../generator/frontmatter.js');
+  const newContent = normalizeFrontmatterCaption(matter.stringify(updatedBody, updatedFrontmatter));
   await writeFile(filePath, newContent);
 }
 

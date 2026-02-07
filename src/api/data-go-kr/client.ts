@@ -133,15 +133,14 @@ export class DataGoKrClient {
   /** 공통 상세정보 (detailCommon2) */
   async detailCommon(
     contentId: string,
-    opts?: { defaultYN?: string; firstImageYN?: string; addrinfoYN?: string; overviewYN?: string }
+    opts?: { numOfRows?: number }
   ): Promise<DetailCommonItem[]> {
+    // KorService2에서는 defaultYN/addrinfoYN/overviewYN/firstImageYN 파라미터 제거됨
+    // 최소 파라미터(contentId)만으로 모든 필드 반환
     const params: Record<string, string> = {
       contentId,
-      defaultYN: opts?.defaultYN ?? 'Y',
-      firstImageYN: opts?.firstImageYN ?? 'Y',
-      addrinfoYN: opts?.addrinfoYN ?? 'Y',
-      overviewYN: opts?.overviewYN ?? 'Y',
     };
+    if (opts?.numOfRows) params.numOfRows = String(opts.numOfRows);
 
     return this.request<DetailCommonItem>('/detailCommon2', params, 'detail');
   }
@@ -149,13 +148,13 @@ export class DataGoKrClient {
   /** 이미지 목록 (detailImage2) */
   async detailImage(
     contentId: string,
-    opts?: { imageYN?: string; subImageYN?: string }
+    opts?: { numOfRows?: number }
   ): Promise<DetailImageItem[]> {
+    // KorService2에서는 imageYN/subImageYN 파라미터 제거됨
     const params: Record<string, string> = {
       contentId,
-      imageYN: opts?.imageYN ?? 'Y',
-      subImageYN: opts?.subImageYN ?? 'Y',
     };
+    if (opts?.numOfRows) params.numOfRows = String(opts.numOfRows);
 
     return this.request<DetailImageItem>('/detailImage2', params, 'detail');
   }

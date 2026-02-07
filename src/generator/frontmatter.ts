@@ -167,6 +167,21 @@ export function parseSeoMeta(content: string): {
 }
 
 /**
+ * matter.stringify 후 >- 블록 스칼라 caption을 단일 라인으로 정규화
+ * gray-matter/js-yaml은 Markdown 링크 []() 포함 시 >- 형식을 사용하는데,
+ * Hugo PaperMod 테마에서 .markdownify 렌더링을 위해 단일 라인 필요
+ */
+export function normalizeFrontmatterCaption(content: string): string {
+  return content.replace(
+    /caption: >-\n((?:[ \t]+.+\n)+)/g,
+    (_, block: string) => {
+      const text = block.replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+      return `caption: "${text}"\n`;
+    }
+  );
+}
+
+/**
  * YAML 특수문자 이스케이프
  */
 function escapeYaml(str: string): string {
