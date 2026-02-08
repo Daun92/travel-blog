@@ -1,0 +1,11 @@
+# Hugo build output
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Windows artifacts
+NUL
+
+# OS files
+Thumbs.db
+.DS_Store
