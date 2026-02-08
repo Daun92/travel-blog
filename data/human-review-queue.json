@@ -340,7 +340,18 @@
       "details": "factcheck: 45%",
       "createdAt": "2026-02-07T09:30:09.743Z",
       "status": "pending"
+    },
+    {
+      "id": "review-1770542712574-jc7u39",
+      "filePath": "blog/content/posts/culture/2026-02-07-post.md",
+      "title": "서울 익선동 한옥 카페 골목 주말 방문기: 웨이팅 지옥 피하는 현실적인 방법",
+      "trigger": "critical_false",
+      "action": "block",
+      "score": 63,
+      "details": "[자동수정 불가] 신분당선은 2026년 기준 강남~광교 구간만 운행. 종로3가역까지 직결 불가. 강남역에서 3호선 환승 필요.: \"판교에서 신분당선 타고 종로3가역까지 한 번에\" → \"판교에서 신분당선 타고 강남역에서 환승하여 종로3가역까지\"",
+      "createdAt": "2026-02-08T09:25:12.574Z",
+      "status": "pending"
     }
   ],
-  "lastUpdated": "2026-02-07T10:04:36.328Z"
+  "lastUpdated": "2026-02-08T09:25:12.574Z"
 }

@@ -326,7 +326,22 @@ export async function validatePostImages(
     recommendations.push('커버 이미지 수동 확인 권장');
   }
 
-  // 인라인 이미지 점수
+  // 인라인 이미지 최소 기준 패널티
+  const categories = (frontmatter.categories as string[]) || [];
+  const contentType = categories.includes('culture') ? 'culture' : 'travel';
+  const minInlineImages = contentType === 'travel' ? 2 : 1;
+  const penaltyPerMissing = contentType === 'travel' ? 15 : 10;
+  const inlineCount = inlineImages.length;
+
+  if (inlineCount < minInlineImages) {
+    const missing = minInlineImages - inlineCount;
+    totalScore -= missing * penaltyPerMissing;
+    recommendations.push(
+      `인라인 이미지 ${missing}개 추가 필요 (현재 ${inlineCount}개, ${contentType} 최소 ${minInlineImages}개)`
+    );
+  }
+
+  // 인라인 이미지 품질 점수
   const invalidInlineCount = inlineImages.filter(img => !img.isValid).length;
   const replaceCount = inlineImages.filter(img => img.recommendation === 'replace').length;
 

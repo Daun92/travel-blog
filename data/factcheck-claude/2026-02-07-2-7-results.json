@@ -1,0 +1,246 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-07-2-7.md",
+  "title": "수원 화성 야간 탐방: 성곽 위 2시간 코스, 7만원으로 버틴 솔직 후기",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "성곽길 2",
+      "value": "성곽길 2",
+      "severity": "critical",
+      "context": "이번 글에서는 서울/판교 직장인 관점에서 수원 화성 성곽길 2시간 코스를 돌면서 느낀 현실적인 부분들을 다뤄볼게요. 주말 물가랑 웨이팅 때문에 겪은 시행착오 위주로 썼으니까 참고하세요.",
+      "lineNumber": 5
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "도어로 50",
+      "value": "도어로 50",
+      "severity": "critical",
+      "context": "*   **소요시간**: 판교에서 출발하면 도어 투 도어로 50분 정도 걸려요. 강남에서 출발하면 1시간 10분 정도 잡아야 하고요.",
+      "lineNumber": 14
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "12,000원",
+      "value": "12,000원",
+      "severity": "minor",
+      "context": "*   **교통비**: 왕복 약 12,000원 (광역버스+지하철 환승)",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "45,000원",
+      "value": "45,000원",
+      "severity": "minor",
+      "context": "*   **저녁 식사**: 45,000원 (행리단길 파스타/리조또 - 주말 물가라 비싸요)",
+      "lineNumber": 19
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "14,000원",
+      "value": "14,000원",
+      "severity": "minor",
+      "context": "*   **커피/디저트**: 14,000원 (루프탑 있는 곳은 아메리카노가 6천 원씩 하더라고요)",
+      "lineNumber": 20
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "71,000원",
+      "value": "71,000원",
+      "severity": "minor",
+      "context": "*   **총계**: 71,000원 (인당 35,500원꼴)",
+      "lineNumber": 22
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "35,500원",
+      "value": "35,500원",
+      "severity": "minor",
+      "context": "*   **총계**: 71,000원 (인당 35,500원꼴)",
+      "lineNumber": 22
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "3,000원",
+      "value": "3,000원",
+      "severity": "minor",
+      "context": "개인적으로는 조명이 생각보다 아주 밝지는 않아서 실망했어요. 성곽 바깥쪽에서 보는 건 예쁜데, 정작 성곽 위를 걸을 때는 발밑이 잘 안 보여서 휴대폰 손전등 켜고 걷는 사람들도 꽤 있더라고요. 3,000원 아끼려다 운동화 흙먼지 다 묻고 무릎 나가는 줄 알았네요.",
+      "lineNumber": 57
+    },
+    {
+      "id": "ct-8",
+      "type": "transport",
+      "text": "버스 한 번에 가는 수원을 골랐죠. 결론부터 말하면, 7만 원 정도로 토요일 저녁 아주 꽉 채워서 보내고 왔는데, 무릎은 좀 아프네요.",
+      "value": "한 번에 가는 수원을 골랐죠. 결론부터 말하면, 7만 원 정도로 토요일 저녁 아주 꽉 채워서 보내고 왔는데, 무릎은 좀 아프네요.",
+      "severity": "minor",
+      "context": "솔직히 말하면, 이번 주말엔 멀리 가고 싶지 않았어요. 금요일에 야근하고 토요일 오전에 뻗어 있다 보니 어디 강원도나 전라도까지 갈 엄두가 안 나더라고요. 근데 또 집에만 있자니 주말이 삭제되는 기분이라, 판교에서 버스 한 번에 가는 수원을 골랐죠. 결론부터 말하면, 7만 원 정도로 토요일 저녁 아주 꽉 채워서 보내고 왔는데, 무릎은 좀 아프네요.",
+      "lineNumber": 3
+    },
+    {
+      "id": "ct-9",
+      "type": "transport",
+      "text": "버스를 탔어요.",
+      "value": "를 탔어요.",
+      "severity": "minor",
+      "context": "개인적으로는 차 끌고 가는 거 비추천해요. 주말에 수원 행궁동 주차장 들어가는 건 거의 전쟁이거든요. 공영주차장 줄 서다가 해 다 지는 꼴 보기 싫어서 저는 버스를 탔어요.",
+      "lineNumber": 9
+    },
+    {
+      "id": "ct-10",
+      "type": "transport",
+      "text": "버스 3000번 또는 4000번대 이용 (신분당선 타고 광교중앙역에서 버스 갈아타는 게 제일 빨라요)",
+      "value": "3000번 또는 4000번대 이용 (신분당선 타고 광교중앙역에서 버스 갈아타는 게 제일 빨라요)",
+      "severity": "minor",
+      "context": "*   **이동 수단**: 광역버스 3000번 또는 4000번대 이용 (신분당선 타고 광교중앙역에서 버스 갈아타는 게 제일 빨라요)",
+      "lineNumber": 13
+    },
+    {
+      "id": "ct-11",
+      "type": "transport",
+      "text": "버스+지하철 환승)",
+      "value": "+지하철 환승)",
+      "severity": "minor",
+      "context": "*   **교통비**: 왕복 약 12,000원 (광역버스+지하철 환승)",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-12",
+      "type": "transport",
+      "text": "버스를 탔지만, 주차장 들어가는 차들이 줄을 500m 넘게 서 있는 걸 봤거든요. [화성행궁 노상 공영주차장](https://map.naver.com/v5/search/%ED%99%94%EC%84%B1%ED%96%89%EA%B6%81%20%EB%85%B8%EC%83%81%20%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5) 여기 들어가려다 주말 1시간 버리는 분들 많아요.",
+      "value": "를 탔지만, 주차장 들어가는 차들이 줄을 500m 넘게 서 있는 걸 봤거든요. [화성행궁 노상 공영주차장](https://map.naver.com/v5/search/%ED%99%94%EC%84%B1%ED%96%89%EA%B6%81%20%EB%85%B8%EC%83%81%20%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5) 여기 들어가려다 주말 1시간 버리는 분들 많아요.",
+      "severity": "minor",
+      "context": "진짜 문제는 주차랑 식당이에요. 저는 버스를 탔지만, 주차장 들어가는 차들이 줄을 500m 넘게 서 있는 걸 봤거든요. [화성행궁 노상 공영주차장](https://map.naver.com/v5/search/%ED%99%94%EC%84%B1%ED%96%89%EA%B6%81%20%EB%85%B8%EC%83%81%20%EA%B3%B5%EC%98%81%EC%A3%BC%EC%B0%A8%EC%9E%A5) 여기 들어가려다 주말 1시간 버리는 분들 많아요.",
+      "lineNumber": 47
+    },
+    {
+      "id": "ct-13",
+      "type": "transport",
+      "text": "버스로 환승해 '장안문'이나 '화성행궁' 정류장에서 내리는 것이 가장 빠릅니다.",
+      "value": "로 환승해 '장안문'이나 '화성행궁' 정류장에서 내리는 것이 가장 빠릅니다.",
+      "severity": "minor",
+      "context": "신분당선을 타고 광교중앙역에서 버스로 환승해 '장안문'이나 '화성행궁' 정류장에서 내리는 것이 가장 빠릅니다.",
+      "lineNumber": 83
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.786Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

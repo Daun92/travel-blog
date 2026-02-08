@@ -1,0 +1,144 @@
+{
+  "filePath": "blog\\content\\posts\\culture\\2026-02-07-7.md",
+  "title": "서울 독립서점 순례: 해방촌, 을지로, 연남동에서 만나는 6곳의 문화적 기록",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "비용으로 8",
+      "value": "비용으로 8",
+      "severity": "critical",
+      "context": "가성비 따지면 그냥 인터넷으로 주문하는 게 맞아요. 10% 할인도 되고 포인트도 쌓이니까요. 근데 주말에 집구석에만 있으면 월요일에 출근할 때 너무 억울하잖아요? \"나 주말에 이런 책도 들여다보는 사람이었지\"라는 기분 전환 비용으로 8만 원 썼다고 생각하면 나쁘지 않은 선택입니다.",
+      "lineNumber": 69
+    },
+    {
+      "id": "ct-1",
+      "type": "price",
+      "text": "16,000원",
+      "value": "16,000원",
+      "severity": "minor",
+      "context": "*   **현실적인 후기**: 매장은 생각보다 좁습니다. 성인 4명만 들어가도 꽉 차는 느낌? 근데 이게 핵심인데, 서점원이 직접 쓴 코멘트 읽다 보면 나도 모르게 16,000원짜리 소설책을 결제하게 됩니다.",
+      "lineNumber": 16
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "3,000원",
+      "value": "3,000원",
+      "severity": "minor",
+      "context": "*   **비교**: 대형 서점이 텍스트 위주라면, 여긴 디자인 위주예요. 종이 질감이나 제본 방식이 특이한 게 많아서 눈은 즐거운데, 가격은 일반 도서보다 2,000~3,000원 정도 더 비쌉니다.",
+      "lineNumber": 35
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "45,000원",
+      "value": "45,000원",
+      "severity": "minor",
+      "context": "그림책이라길래 가벼운 마음으로 갔는데, 가격 보고 놀랐습니다. 팝업북 하나에 45,000원 하더라고요.",
+      "lineNumber": 52
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "87,000원",
+      "value": "87,000원",
+      "severity": "minor",
+      "context": "책 3권 사고, 중간에 커피 마시고 저녁 먹으니까 딱 87,000원 나갔습니다. 주말 물가 무시 못 해요.",
+      "lineNumber": 62
+    },
+    {
+      "id": "ct-5",
+      "type": "transport",
+      "text": "버스 02번 안 타면 서점 들어가기 전에 체력 방전돼요.",
+      "value": "02번 안 타면 서점 들어가기 전에 체력 방전돼요.",
+      "severity": "minor",
+      "context": "결론부터 말하면 해방촌 서점 투어는 '등산'입니다. 마을버스 02번 안 타면 서점 들어가기 전에 체력 방전돼요.",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-6",
+      "type": "transport",
+      "text": "버스랑 마을버스 환승해서 1시간 20분 걸렸습니다. 주말 낮에 가면 강남에서 1시간이면 충분해요.",
+      "value": "랑 마을버스 환승해서 1시간 20분 걸렸습니다. 주말 낮에 가면 강남에서 1시간이면 충분해요.",
+      "severity": "minor",
+      "context": "판교 퇴근길 기준, 해방촌까지 광역버스랑 마을버스 환승해서 1시간 20분 걸렸습니다. 주말 낮에 가면 강남에서 1시간이면 충분해요.",
+      "lineNumber": 60
+    },
+    {
+      "id": "ct-7",
+      "type": "transport",
+      "text": "버스 02번을 이용해 이동하는 것을 강력히 추천합니다.",
+      "value": "02번을 이용해 이동하는 것을 강력히 추천합니다.",
+      "severity": "minor",
+      "context": "언덕이 매우 가파르기 때문에 마을버스 02번을 이용해 이동하는 것을 강력히 추천합니다.",
+      "lineNumber": 79
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.813Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

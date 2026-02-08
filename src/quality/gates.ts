@@ -269,14 +269,14 @@ export async function validateFile(
           warnings: factCheckReport.corrections.map(c => c.reason)
         });
       } else {
-        errors.push('팩트체크 실패');
+        errors.push('팩트체크 실패 — GEMINI_API_KEY 확인 또는 --skip-validation 사용');
         gates.push({
           name: 'factcheck',
           score: 0,
           passed: false,
           threshold: config.gates.factcheck.overall?.minScore || 80,
-          blockOnFailure: false,  // 실패 시 차단하지 않음
-          details: '팩트체크 API 오류'
+          blockOnFailure: true,
+          details: '팩트체크 API 오류 — GEMINI_API_KEY 확인 또는 --skip-validation 사용'
         });
       }
     } catch (error) {

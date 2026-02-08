@@ -1,0 +1,189 @@
+{
+  "filePath": "drafts/2026-02-08-90.md",
+  "title": "인천 개항장 차이나타운 감성 투어 비교: 90%가 모르는 역대급 반전 코스 TOP 3",
+  "checkedAt": "2026-02-08T13:47:54.872Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 8,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 7,
+      "verified": 7,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 1,
+      "verified": 1,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.lotteshopping.com/store/main?cstrCd=0344",
+      "details": "롯데백화점 인천점(인천터미널점) 주소는 인천광역시 미추홀구 연남로 35(관교동)로 확인됨. 공식 홈페이지 및 다수 매장 안내에서 동일 주소 확인.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e6cc5787-0eab-40e7-a55e-3fa8db0ab87c",
+      "details": "개떼놀이터 인천점 주소는 인천광역시 계양구 다남로 278로 확인됨. 한국관광공사 및 다이닝코드 등 다수 사이트에서 동일 주소 확인.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://guesskorea.com/article/%EB%A7%A4%EC%9E%A5%EC%95%88%EB%82%B4/3001/321/",
+      "details": "게스 모다아울렛 인천점 주소는 인천광역시 서구 북항로 32번 안길 50 모다아울렛 3층으로 확인됨. 게스코리아 공식 매장안내에서 동일 주소 확인.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://guesskorea.com/article/%EB%A7%A4%EC%9E%A5%EC%95%88%EB%82%B4/3001/321/",
+      "details": "북항로32번안길 50 주소는 게스코리아 공식 매장안내에서 동일하게 확인됨.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.goldentulipyj.com/en",
+      "details": "골든튤립 인천공항 호텔&스위트 주소는 인천광역시 중구 흰바위로59번길 8로 확인됨. 공식 홈페이지 및 다수 호텔 예약 사이트에서 동일 주소 확인.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.goldentulipyj.com/en",
+      "details": "흰바위로59번길 8 주소는 골든튤립 인천공항 호텔 공식 사이트에서 동일하게 확인됨.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://store.kyobobook.co.kr/store-info/025",
+      "details": "교보문고 인천점 주소는 인천광역시 남동구 예술로 138 이토타워 지하1층으로 확인됨. 교보문고 공식 홈페이지에서 동일 주소 확인.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "15,000원은 일반적인 전시회 입장료 가격대에 부합. 다만 해당 전시는 AI 생성 콘텐츠로 실제 전시 여부 확인 불가.",
+      "checkedAt": "2026-02-08T13:47:54.872Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "연남로 35",
+      "value": "연남로 35",
+      "severity": "critical",
+      "context": "- **갤럭시 롯데백화점 인천점**: [인천광역시 미추홀구 연남로 35]",
+      "lineNumber": 19
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "다남로 278",
+      "value": "다남로 278",
+      "severity": "critical",
+      "context": "- **주소**: 인천광역시 계양구 다남로 278 (목상동) [개떼놀이터 인천점]",
+      "lineNumber": 37
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "북항로32",
+      "value": "북항로32",
+      "severity": "critical",
+      "context": "- **주소**: 인천광역시 서구 북항로32번안길 50 (원창동) [게스 모다 아울렛 인천점]",
+      "lineNumber": 56
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "번안길 50",
+      "value": "번안길 50",
+      "severity": "critical",
+      "context": "- **주소**: 인천광역시 서구 북항로32번안길 50 (원창동) [게스 모다 아울렛 인천점]",
+      "lineNumber": 56
+    },
+    {
+      "id": "ct-4",
+      "type": "location",
+      "text": "흰바위로59",
+      "value": "흰바위로59",
+      "severity": "critical",
+      "context": "- **장소**: 골든튤립인천에어포트호텔 [인천광역시 중구 흰바위로59번길 8]",
+      "lineNumber": 65
+    },
+    {
+      "id": "ct-5",
+      "type": "location",
+      "text": "번길 8",
+      "value": "번길 8",
+      "severity": "critical",
+      "context": "- **장소**: 골든튤립인천에어포트호텔 [인천광역시 중구 흰바위로59번길 8]",
+      "lineNumber": 65
+    },
+    {
+      "id": "ct-6",
+      "type": "location",
+      "text": "예술로 138",
+      "value": "예술로 138",
+      "severity": "critical",
+      "context": "1. **교보문고 인천점 들르기**: [인천광역시 남동구 예술로 138]",
+      "lineNumber": 92
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "- **가격**: 15,000원",
+      "lineNumber": 81
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

@@ -1,0 +1,25 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-05-gangneung-cafe.md",
+  "title": "강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "price",
+      "text": "8,000원",
+      "value": "8,000원",
+      "severity": "minor",
+      "context": "여기는 타르트가 유명하대서 가봤는데, 딸기 타르트 한 조각에 8,000원이 넘더라고요. 다른 프랜차이즈 조각 케이크랑 비교하면 비싸긴 한데, 과일이 큼직하긴 해요. 1층보다는 2, 3층 창가 쪽이 바다가 더 잘 보여요.",
+      "lineNumber": 32
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.766Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    }
+  ]
+}

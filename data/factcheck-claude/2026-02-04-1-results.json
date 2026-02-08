@@ -1,0 +1,229 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-04-1.md",
+  "title": "경주 여행 완벽 가이드: 황리단길부터 야경 명소까지 1박 2일 코스 추천",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "포석로 1080",
+      "value": "포석로 1080",
+      "severity": "critical",
+      "context": "**1) 황리단길 (경상북도 경주시 포석로 1080)**",
+      "lineNumber": 32
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "계림로 9",
+      "value": "계림로 9",
+      "severity": "critical",
+      "context": "**2) 대릉원과 천마총 (경상북도 경주시 계림로 9)**",
+      "lineNumber": 35
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "원화로 102",
+      "value": "원화로 102",
+      "severity": "critical",
+      "context": "**3) 동궁과 월지 (경상북도 경주시 원화로 102)**",
+      "lineNumber": 38
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "- **KTX/SRT 이용 시**: 경주역(신경주역)에서 하차합니다. 시내까지는 50번, 51번, 700번 버스를 이용하면 약 20~30분 정도 소요됩니다. 택시를 이용할 경우 약 15,000원~20,000원 내외의 비용이 발생합니다.",
+      "lineNumber": 11
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "20,000원",
+      "value": "20,000원",
+      "severity": "minor",
+      "context": "- **KTX/SRT 이용 시**: 경주역(신경주역)에서 하차합니다. 시내까지는 50번, 51번, 700번 버스를 이용하면 약 20~30분 정도 소요됩니다. 택시를 이용할 경우 약 15,000원~20,000원 내외의 비용이 발생합니다.",
+      "lineNumber": 11
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "90,000원",
+      "value": "90,000원",
+      "severity": "minor",
+      "context": "- **교통비**: KTX 왕복 약 90,000원 (서울 기준)",
+      "lineNumber": 15
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "70,000원",
+      "value": "70,000원",
+      "severity": "minor",
+      "context": "- **숙박비**: 한옥 스테이 또는 게스트하우스 1박 약 70,000원~150,000원",
+      "lineNumber": 16
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "150,000원",
+      "value": "150,000원",
+      "severity": "minor",
+      "context": "- **숙박비**: 한옥 스테이 또는 게스트하우스 1박 약 70,000원~150,000원",
+      "lineNumber": 16
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "50,000원",
+      "value": "50,000원",
+      "severity": "minor",
+      "context": "- **식비 및 카페**: 1일 약 50,000원",
+      "lineNumber": 17
+    },
+    {
+      "id": "ct-9",
+      "type": "price",
+      "text": "3,000원",
+      "value": "3,000원",
+      "severity": "minor",
+      "context": "- **입장료**: 대릉원 무료 (천마총 내부 3,000원), 동궁과 월지 3,000원",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-10",
+      "type": "transport",
+      "text": "버스를 이용하면 약 20~30분 정도 소요됩니다. 택시를 이용할 경우 약 15,000원~20,000원 내외의 비용이 발생합니다.",
+      "value": "를 이용하면 약 20~30분 정도 소요됩니다. 택시를 이용할 경우 약 15,000원~20,000원 내외의 비용이 발생합니다.",
+      "severity": "minor",
+      "context": "- **KTX/SRT 이용 시**: 경주역(신경주역)에서 하차합니다. 시내까지는 50번, 51번, 700번 버스를 이용하면 약 20~30분 정도 소요됩니다. 택시를 이용할 경우 약 15,000원~20,000원 내외의 비용이 발생합니다.",
+      "lineNumber": 11
+    },
+    {
+      "id": "ct-11",
+      "type": "transport",
+      "text": "버스 이용 시**: 경주 고속버스터미널이나 시외버스터미널에서 하차합니다. 이곳은 황리단길과 도보로 이동 가능한 거리에 있어 접근성이 매우 좋습니다.",
+      "value": "이용 시**: 경주 고속버스터미널이나 시외버스터미널에서 하차합니다. 이곳은 황리단길과 도보로 이동 가능한 거리에 있어 접근성이 매우 좋습니다.",
+      "severity": "minor",
+      "context": "- **고속/시외버스 이용 시**: 경주 고속버스터미널이나 시외버스터미널에서 하차합니다. 이곳은 황리단길과 도보로 이동 가능한 거리에 있어 접근성이 매우 좋습니다.",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-12",
+      "type": "transport",
+      "text": "버스터미널 내 물품보관함 외에도 황리단길 초입에 위치한 사설 보관소를 이용하면 편리합니다. 일부 카페에서도 짐 보관 서비스를 제공하니 미리 확인해 보세요.",
+      "value": "터미널 내 물품보관함 외에도 황리단길 초입에 위치한 사설 보관소를 이용하면 편리합니다. 일부 카페에서도 짐 보관 서비스를 제공하니 미리 확인해 보세요.",
+      "severity": "minor",
+      "context": "뚜벅이 여행자라면 짐이 가장 큰 고민일 텐데, 경주역이나 고속버스터미널 내 물품보관함 외에도 황리단길 초입에 위치한 사설 보관소를 이용하면 편리합니다. 일부 카페에서도 짐 보관 서비스를 제공하니 미리 확인해 보세요.",
+      "lineNumber": 69
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.744Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

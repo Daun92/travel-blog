@@ -1,0 +1,204 @@
+{
+  "filePath": "blog/content/posts/travel/2026-02-07-2-3.md",
+  "title": "전주 한옥마을 여행, 직장인 김주말의 솔직한 2박 3일 생존기 (비용/웨이팅/코스)",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "transport",
+      "text": "KTX 타면 용산역 기준으로 1시간 40분이면 도착",
+      "value": "용산-전주 1시간 40분",
+      "severity": "minor",
+      "lineNumber": 129
+    },
+    {
+      "id": "ct-1",
+      "type": "price",
+      "text": "KTX 왕복 69,200원 (용산-전주)",
+      "value": "69,200원",
+      "severity": "critical",
+      "lineNumber": 141
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "전주역에서 한옥마을까지 약 7,000원",
+      "value": "7,000원",
+      "severity": "minor",
+      "lineNumber": 142
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "고궁 전주본점 - 전북특별자치도 전주시 덕진구 송천중앙로 33",
+      "value": "고궁 전주본점 주소",
+      "severity": "critical",
+      "lineNumber": 156
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "전주전통비빔밥 13,000원 / 돌솥비빔밥 15,000원",
+      "value": "13,000원 / 15,000원",
+      "severity": "critical",
+      "lineNumber": 160
+    },
+    {
+      "id": "ct-5",
+      "type": "facilities",
+      "text": "고궁 - 50년 전통, 놋그릇, 황포묵 무침, 2층 전시실",
+      "value": "고궁 특징",
+      "severity": "minor",
+      "lineNumber": 158
+    },
+    {
+      "id": "ct-6",
+      "type": "venue_exists",
+      "text": "김판쇠전주우족탕 본점 - 전북특별자치도 전주시 덕진구 태진로 132",
+      "value": "김판쇠 주소",
+      "severity": "critical",
+      "lineNumber": 175
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "우족탕 15,000원(일반) / 19,000원(특)",
+      "value": "15,000원 / 19,000원",
+      "severity": "critical",
+      "lineNumber": 178
+    },
+    {
+      "id": "ct-8",
+      "type": "facilities",
+      "text": "김판쇠 - 60년 전통의 우족탕 전문점",
+      "value": "60년 전통",
+      "severity": "minor",
+      "lineNumber": 176
+    },
+    {
+      "id": "ct-9",
+      "type": "venue_exists",
+      "text": "국립전주박물관 - 전북특별자치도 전주시 완산구 쑥고개로 249",
+      "value": "국립전주박물관 주소",
+      "severity": "critical",
+      "lineNumber": 185
+    },
+    {
+      "id": "ct-10",
+      "type": "price",
+      "text": "국립전주박물관 입장료 무료(특별전 제외)",
+      "value": "무료",
+      "severity": "critical",
+      "lineNumber": 186
+    },
+    {
+      "id": "ct-11",
+      "type": "facilities",
+      "text": "전라북도 문화유산 4만여 점 소장",
+      "value": "4만여 점",
+      "severity": "minor",
+      "lineNumber": 186
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "KTX 용산-전주 약 1시간 40분 소요 확인. 코레일 기준 정확."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "KTX 편도 약 34,600원, 왕복 69,200원. 일반석 기준 합리적 금액."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "전주역→한옥마을 택시비 6,000~8,000원. 포스트의 7,000원은 합리적 범위."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://map.naver.com",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "고궁 전주본점 주소 '전주시 덕진구 송천중앙로 33' 네이버 지도에서 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "전주전통비빔밥 13,000원, 돌솥비빔밥 15,000원 네이버 메뉴판에서 확인."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "50년 전통, 놋그릇 비빔밥, 황포묵무침 반찬, 2층 비빔밥 전시실 모두 확인."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://map.naver.com",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "김판쇠전주우족탕 본점 주소 '전주시 덕진구 태진로 132' 네이버 지도에서 확인."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "우족탕 15,000원(일반), 19,000원(특) 메뉴 가격 확인."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "60년 전통의 우족탕 전문점 — 다수 리뷰/블로그에서 확인."
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://jeonju.museum.go.kr",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "국립전주박물관 주소 '전주시 완산구 쑥고개로 249' 공식 사이트에서 확인."
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://jeonju.museum.go.kr",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "상설전시 무료, 특별전은 별도 확인 필요. 공식 사이트 확인."
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T22:00:00.000Z",
+      "details": "국립전주박물관 소장 유물 4만여 점 — 공식 자료 기준."
+    }
+  ]
+}

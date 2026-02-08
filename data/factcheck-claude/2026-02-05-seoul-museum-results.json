@@ -1,0 +1,212 @@
+{
+  "filePath": "blog\\content\\posts\\culture\\2026-02-05-seoul-museum.md",
+  "title": "서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "지하철로 1",
+      "value": "지하철로 1",
+      "severity": "critical",
+      "context": "솔직히 말하면 주말에 차 끌고 멀리 나가봤자 고속도로에서 버리는 시간이 절반이잖아요. 그렇다고 금요일 퇴근하고 집에만 누워 있자니 억울해서, 이번엔 지하철로 1시간 컷 가능한 서울 도심 이색 박물관들을 좀 돌아봤어요.",
+      "lineNumber": 3
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "안팎으로 2",
+      "value": "안팎으로 2",
+      "severity": "critical",
+      "context": "결론부터 말하면, 네이버 평점만 믿고 갔다간 당황할 수도 있는데, 그래도 '가성비'랑 '쾌적함' 따지면 꽤 괜찮은 선택지들이더라고요. 주말 물가 생각하면 입장료 5,000원 안팎으로 2시간 때우는 게 어디냐 싶기도 하고요. 직접 다녀오며 느낀 장단점 솔직하게 풀어볼게요.",
+      "lineNumber": 5
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "종로3",
+      "value": "종로3",
+      "severity": "critical",
+      "context": "종로3가역 근처인데, 솔직히 다시 갈지는 모르겠지만 한 번쯤은 가볼 만해요. 입장료 3,000원이면 편의점 아메리카노보다 싸니까요.",
+      "lineNumber": 50
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "지하철로 40",
+      "value": "지하철로 40",
+      "severity": "critical",
+      "context": "- 강남/판교 기준 지하철로 40~60분이면 다 도착합니다. 차 가져가지 마세요. 주차비가 입장료의 3배 나옵니다.",
+      "lineNumber": 77
+    },
+    {
+      "id": "ct-4",
+      "type": "hours",
+      "text": "휴관인 거 모르고 갔다가 허탕 친 적 있어요. 그리고 내부가 좀 어두워서 눈 침침하신 분들은 설명 읽기 좀 힘들 수도?",
+      "value": "인 거 모르고 갔다가 허탕 친 적 있어요. 그리고 내부가 좀 어두워서 눈 침침하신 분들은 설명 읽기 좀 힘들 수도?",
+      "severity": "major",
+      "context": "- **실패담**: 월요일 휴관인 거 모르고 갔다가 허탕 친 적 있어요. 그리고 내부가 좀 어두워서 눈 침침하신 분들은 설명 읽기 좀 힘들 수도?",
+      "lineNumber": 70
+    },
+    {
+      "id": "ct-5",
+      "type": "hours",
+      "text": "휴관입니다. 내부가 다소 어두울 수 있다는 점도 참고하세요.",
+      "value": "입니다. 내부가 다소 어두울 수 있다는 점도 참고하세요.",
+      "severity": "major",
+      "context": "언덕길 경사가 가파르며 월요일은 휴관입니다. 내부가 다소 어두울 수 있다는 점도 참고하세요.",
+      "lineNumber": 104
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "입장료 5,000원",
+      "value": "5,000원",
+      "severity": "minor",
+      "context": "결론부터 말하면, 네이버 평점만 믿고 갔다간 당황할 수도 있는데, 그래도 '가성비'랑 '쾌적함' 따지면 꽤 괜찮은 선택지들이더라고요. 주말 물가 생각하면 입장료 5,000원 안팎으로 2시간 때우는 게 어디냐 싶기도 하고요. 직접 다녀오며 느낀 장단점 솔직하게 풀어볼게요.",
+      "lineNumber": 5
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "입장료 3,000원",
+      "value": "3,000원",
+      "severity": "minor",
+      "context": "종로3가역 근처인데, 솔직히 다시 갈지는 모르겠지만 한 번쯤은 가볼 만해요. 입장료 3,000원이면 편의점 아메리카노보다 싸니까요.",
+      "lineNumber": 50
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "입장료 20,000원",
+      "value": "20,000원",
+      "severity": "minor",
+      "context": "입장료 20,000원으로 다른 박물관보다 비싸지만, 3개 층에 걸친 전시와 현미경 유산균 관찰, 김치 시식 체험이 포함되어 있어 체험비로 생각하면 납득됩니다.",
+      "lineNumber": 100
+    },
+    {
+      "id": "ct-9",
+      "type": "transport",
+      "text": "지하철로 1시간 컷 가능한 서울 도심 이색 박물관들을 좀 돌아봤어요. ",
+      "value": "로 1시간 컷 가능한 서울 도심 이색 박물관들을 좀 돌아봤어요.",
+      "severity": "minor",
+      "context": "솔직히 말하면 주말에 차 끌고 멀리 나가봤자 고속도로에서 버리는 시간이 절반이잖아요. 그렇다고 금요일 퇴근하고 집에만 누워 있자니 억울해서, 이번엔 지하철로 1시간 컷 가능한 서울 도심 이색 박물관들을 좀 돌아봤어요.",
+      "lineNumber": 3
+    },
+    {
+      "id": "ct-10",
+      "type": "transport",
+      "text": "지하철로 40~60분이면 다 도착합니다. 차 가져가지 마세요. 주차비가 입장료의 3배 나옵니다.",
+      "value": "로 40~60분이면 다 도착합니다. 차 가져가지 마세요. 주차비가 입장료의 3배 나옵니다.",
+      "severity": "minor",
+      "context": "- 강남/판교 기준 지하철로 40~60분이면 다 도착합니다. 차 가져가지 마세요. 주차비가 입장료의 3배 나옵니다.",
+      "lineNumber": 77
+    },
+    {
+      "id": "ct-11",
+      "type": "transport",
+      "text": "지하철 등 대중교통 이용을 강력히 추천합니다.",
+      "value": "등 대중교통 이용을 강력히 추천합니다.",
+      "severity": "minor",
+      "context": "주차비가 입장료보다 비싸게 나올 수 있으므로 지하철 등 대중교통 이용을 강력히 추천합니다.",
+      "lineNumber": 96
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.806Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

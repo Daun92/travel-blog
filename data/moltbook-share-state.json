@@ -266,8 +266,10 @@
       "category": "culture",
       "publishedAt": "2026-02-07T07:41:03.000Z",
       "priority": 55,
-      "status": "pending",
-      "retryCount": 0
+      "status": "shared",
+      "retryCount": 0,
+      "sharedAt": "2026-02-07T12:27:11.397Z",
+      "moltbookPostId": "2f46db98-5e6b-4686-b1da-4745c0c1aea1"
     },
     {
       "filePath": "blog/content/posts/travel/2026-02-07-1.md",
@@ -333,6 +335,78 @@
       "priority": 55,
       "status": "pending",
       "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-08-top-5.md",
+      "title": "속초 양양 겨울 바다 카페 핫플 TOP 5",
+      "category": "travel",
+      "publishedAt": "2026-02-08T13:14:11.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-08-2.md",
+      "title": "2월 서울 갤러리 신규 전시 깊이 읽기",
+      "category": "culture",
+      "publishedAt": "2026-02-08T13:17:18.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-08-12.md",
+      "title": "군산 시간여행 1박2일 현실 비용 후기",
+      "category": "travel",
+      "publishedAt": "2026-02-08T13:19:34.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-08-indie-club.md",
+      "title": "서울 인디 공연장 라이브 클럽 베스트 순위",
+      "category": "culture",
+      "publishedAt": "2026-02-08T13:26:34.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-08-andong-hahoe.md",
+      "title": "안동 하회마을 유교 문화 산책",
+      "category": "travel",
+      "publishedAt": "2026-02-08T13:23:57.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-08-craft-experience.md",
+      "title": "직장인 전통공예 도자기 한지 체험 주말 코스",
+      "category": "culture",
+      "publishedAt": "2026-02-08T13:28:50.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-08-90.md",
+      "title": "인천 개항장 차이나타운 감성 투어 비교",
+      "category": "travel",
+      "publishedAt": "2026-02-08T13:31:16.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-08-traditional-liquor.md",
+      "title": "한국 전통주 양조장 탐방 및 막걸리 가이드",
+      "category": "culture",
+      "publishedAt": "2026-02-08T13:33:48.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
     }
   ],
   "config": {
@@ -350,10 +424,10 @@
   },
   "stats": {
     "totalPosts": 33,
-    "shared": 26,
-    "pending": 7,
+    "shared": 27,
+    "pending": 6,
     "failed": 0,
     "skipped": 0,
-    "lastShareTime": "2026-02-07T11:54:52.434Z"
+    "lastShareTime": "2026-02-07T12:27:11.397Z"
   }
 }

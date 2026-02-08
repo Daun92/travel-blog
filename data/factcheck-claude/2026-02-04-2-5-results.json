@@ -1,0 +1,331 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-04-2-5.md",
+  "title": "2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "올림픽로 715",
+      "value": "올림픽로 715",
+      "severity": "critical",
+      "context": "- **위치**: 강원특별자치도 평창군 대관령면 올림픽로 715 (모나용평)",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "덕구온천로 924-17",
+      "value": "덕구온천로 924-17",
+      "severity": "critical",
+      "context": "- **위치**: 경상북도 울진군 북면 덕구온천로 924-17",
+      "lineNumber": 35
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "천장호길 175",
+      "value": "천장호길 175",
+      "severity": "critical",
+      "context": "- **위치**: 충청남도 청양군 정산면 천장호길 175",
+      "lineNumber": 52
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "자작나무숲길 760",
+      "value": "자작나무숲길 760",
+      "severity": "critical",
+      "context": "- **위치**: 강원특별자치도 인제군 인제읍 자작나무숲길 760",
+      "lineNumber": 86
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "25,000원",
+      "value": "25,000원",
+      "severity": "minor",
+      "context": "- **비용**: 발왕산 관광 케이블카 대인 왕복 25,000원, 소인 21,000원",
+      "lineNumber": 20
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "21,000원",
+      "value": "21,000원",
+      "severity": "minor",
+      "context": "- **비용**: 발왕산 관광 케이블카 대인 왕복 25,000원, 소인 21,000원",
+      "lineNumber": 20
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "26,000원",
+      "value": "26,000원",
+      "severity": "minor",
+      "context": "- **비용**: 스파월드 대인 기준 주중 26,000원, 주말 32,000원, 성수기 38,000원 (투숙객 할인 시 주중 13,000원, 주말 19,200원)",
+      "lineNumber": 37
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "32,000원",
+      "value": "32,000원",
+      "severity": "minor",
+      "context": "- **비용**: 스파월드 대인 기준 주중 26,000원, 주말 32,000원, 성수기 38,000원 (투숙객 할인 시 주중 13,000원, 주말 19,200원)",
+      "lineNumber": 37
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "38,000원",
+      "value": "38,000원",
+      "severity": "minor",
+      "context": "- **비용**: 스파월드 대인 기준 주중 26,000원, 주말 32,000원, 성수기 38,000원 (투숙객 할인 시 주중 13,000원, 주말 19,200원)",
+      "lineNumber": 37
+    },
+    {
+      "id": "ct-9",
+      "type": "price",
+      "text": "13,000원",
+      "value": "13,000원",
+      "severity": "minor",
+      "context": "- **비용**: 스파월드 대인 기준 주중 26,000원, 주말 32,000원, 성수기 38,000원 (투숙객 할인 시 주중 13,000원, 주말 19,200원)",
+      "lineNumber": 37
+    },
+    {
+      "id": "ct-10",
+      "type": "price",
+      "text": "19,200원",
+      "value": "19,200원",
+      "severity": "minor",
+      "context": "- **비용**: 스파월드 대인 기준 주중 26,000원, 주말 32,000원, 성수기 38,000원 (투숙객 할인 시 주중 13,000원, 주말 19,200원)",
+      "lineNumber": 37
+    },
+    {
+      "id": "ct-11",
+      "type": "price",
+      "text": "9,000원",
+      "value": "9,000원",
+      "severity": "minor",
+      "context": "- **비용**: 입장권 9,000원, 썰매 이용권 포함 패키지 약 28,000원",
+      "lineNumber": 54
+    },
+    {
+      "id": "ct-12",
+      "type": "price",
+      "text": "28,000원",
+      "value": "28,000원",
+      "severity": "minor",
+      "context": "- **비용**: 입장권 9,000원, 썰매 이용권 포함 패키지 약 28,000원",
+      "lineNumber": 54
+    },
+    {
+      "id": "ct-13",
+      "type": "price",
+      "text": "1,800원",
+      "value": "1,800원",
+      "severity": "minor",
+      "context": "- **비용**: 입장료 무료, 주차비 소형 기준 1,800원",
+      "lineNumber": 71
+    },
+    {
+      "id": "ct-14",
+      "type": "transport",
+      "text": "버스 이용 가능, 자차 이용 시 서울 기준 약 2시간 30분 소요",
+      "value": "이용 가능, 자차 이용 시 서울 기준 약 2시간 30분 소요",
+      "severity": "minor",
+      "context": "- **교통**: KTX 진부역에서 셔틀버스 이용 가능, 자차 이용 시 서울 기준 약 2시간 30분 소요",
+      "lineNumber": 19
+    },
+    {
+      "id": "ct-15",
+      "type": "transport",
+      "text": "버스 이용 후 시내버스 환승",
+      "value": "이용 후 시내버스 환승",
+      "severity": "minor",
+      "context": "- **교통**: 동서울터미널에서 부구터미널행 버스 이용 후 시내버스 환승",
+      "lineNumber": 36
+    },
+    {
+      "id": "ct-16",
+      "type": "transport",
+      "text": "버스 이용 후 청양에서 시내버스 환승 권장",
+      "value": "이용 후 청양에서 시내버스 환승 권장",
+      "severity": "minor",
+      "context": "- **교통**: 대전이나 공주에서 시외버스 이용 후 청양에서 시내버스 환승 권장",
+      "lineNumber": 53
+    },
+    {
+      "id": "ct-17",
+      "type": "transport",
+      "text": "버스터미널에서 240번 버스 이용, 어리목 입구 하차",
+      "value": "터미널에서 240번 버스 이용, 어리목 입구 하차",
+      "severity": "minor",
+      "context": "- **교통**: 제주시외버스터미널에서 240번 버스 이용, 어리목 입구 하차",
+      "lineNumber": 70
+    },
+    {
+      "id": "ct-18",
+      "type": "transport",
+      "text": "버스터미널에서 택시 이용 시 약 20분 소요",
+      "value": "터미널에서 택시 이용 시 약 20분 소요",
+      "severity": "minor",
+      "context": "- **교통**: 인제시외버스터미널에서 택시 이용 시 약 20분 소요",
+      "lineNumber": 87
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-14",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-15",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-16",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-17",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-18",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.749Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

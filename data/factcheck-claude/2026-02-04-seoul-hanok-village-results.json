@@ -1,0 +1,227 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-04-seoul-hanok-village.md",
+  "title": "서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책",
+  "claims": [
+    {
+      "id": "fm-0",
+      "type": "location",
+      "text": "주소: 서울 종로구 북촌",
+      "value": "서울 종로구 북촌",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "서울 종로구 계동길 37 일대 ",
+      "value": "서울 종로구 계동길 37 일대",
+      "severity": "critical",
+      "context": "| **위치** | 서울 종로구 계동길 37 일대 |",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "서울 종로구 북촌로 47\r",
+      "value": "서울 종로구 북촌로 47",
+      "severity": "critical",
+      "context": "- **주소**: 서울 종로구 북촌로 47",
+      "lineNumber": 47
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "서울 종로구 삼청로 101-1\r",
+      "value": "서울 종로구 삼청로 101-1",
+      "severity": "critical",
+      "context": "- **주소**: 서울 종로구 삼청로 101-1",
+      "lineNumber": 55
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "서울 종로구 계동길 89\r",
+      "value": "서울 종로구 계동길 89",
+      "severity": "critical",
+      "context": "- **주소**: 서울 종로구 계동길 89",
+      "lineNumber": 62
+    },
+    {
+      "id": "ct-4",
+      "type": "location",
+      "text": "계동길 37",
+      "value": "계동길 37",
+      "severity": "critical",
+      "context": "| **위치** | 서울 종로구 계동길 37 일대 |",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-5",
+      "type": "location",
+      "text": "북촌로 47",
+      "value": "북촌로 47",
+      "severity": "critical",
+      "context": "- **주소**: 서울 종로구 북촌로 47",
+      "lineNumber": 47
+    },
+    {
+      "id": "ct-6",
+      "type": "location",
+      "text": "삼청로 101-1",
+      "value": "삼청로 101-1",
+      "severity": "critical",
+      "context": "- **주소**: 서울 종로구 삼청로 101-1",
+      "lineNumber": 55
+    },
+    {
+      "id": "ct-7",
+      "type": "location",
+      "text": "계동길 89",
+      "value": "계동길 89",
+      "severity": "critical",
+      "context": "- **주소**: 서울 종로구 계동길 89",
+      "lineNumber": 62
+    },
+    {
+      "id": "ct-8",
+      "type": "hours",
+      "text": "10:00 - 21:00",
+      "value": "10:00 - 21:00",
+      "severity": "major",
+      "context": "- **영업시간**: 10:00 - 21:00",
+      "lineNumber": 48
+    },
+    {
+      "id": "ct-9",
+      "type": "hours",
+      "text": "11:00 - 20:30",
+      "value": "11:00 - 20:30",
+      "severity": "major",
+      "context": "- **영업시간**: 11:00 - 20:30",
+      "lineNumber": 56
+    },
+    {
+      "id": "ct-10",
+      "type": "hours",
+      "text": "10:00 - 22:00",
+      "value": "10:00 - 22:00",
+      "severity": "major",
+      "context": "- **영업시간**: 10:00 - 22:00",
+      "lineNumber": 63
+    },
+    {
+      "id": "ct-11",
+      "type": "transport",
+      "text": "안국역 2번 출구",
+      "value": "안국역",
+      "severity": "minor",
+      "context": "| **가는 방법** | 3호선 안국역 2번 출구에서 도보 5분 |",
+      "lineNumber": 13
+    }
+  ],
+  "results": [
+    {
+      "claimId": "fm-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.755Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

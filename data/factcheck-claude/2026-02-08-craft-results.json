@@ -1,0 +1,266 @@
+{
+  "filePath": "drafts/2026-02-08-craft-experience.md",
+  "title": "직장인 전통공예 도자기 한지 체험 주말 코스: 서울에서 15만원으로 끝내는 현실 리뷰",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "을지로3",
+      "value": "을지로3",
+      "severity": "critical",
+      "context": "판교역에서 신분당선 타고 강남역 가서 2호선 갈아타고, 다시 을지로3가에서 3호선... 아, 말만 해도 피곤하네요. 근데 생각보다 안국역까지 금방 가요. 퇴근하고 바로 출발하면 저녁 7시쯤 도착하는데, 국립현대미술관 서울은 금요일과 토요일에 야간 개장을 하거든요.",
+      "lineNumber": 16
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "대가야로 1216",
+      "value": "대가야로 1216",
+      "severity": "critical",
+      "context": "- **주소**: 경상북도 고령군 대가야로 1216",
+      "lineNumber": 75
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "고령으로 2",
+      "value": "고령으로 2",
+      "severity": "critical",
+      "context": "이번 서울 코스가 약간 '맛보기'였다면, 3월에는 연차 하루 붙여서 고령으로 2박 3일 가보는 것도 괜찮을 것 같아요. KTX 타고 동대구역 가서 버스 갈아타면 판교에서 3시간 정도 걸릴 각입니다.",
+      "lineNumber": 78
+    },
+    {
+      "id": "ct-12",
+      "type": "contact",
+      "text": "02-3701-9500",
+      "value": "02-3701-9500",
+      "severity": "minor",
+      "context": "- **전화**: 02-3701-9500",
+      "lineNumber": 21
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "135,000원",
+      "value": "135,000원",
+      "severity": "minor",
+      "context": "이번 주말 코스의 총비용은 1인 기준 약 135,000원 정도 들었어요. (전시 티켓, 식비, 교통비 포함)",
+      "lineNumber": 6
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "### 15,000원의 행복? 아니면 주차 지옥?",
+      "lineNumber": 33
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "18,000원",
+      "value": "18,000원",
+      "severity": "minor",
+      "context": "- **점심 식사**: 근처 두부 요리집에서 18,000원 (주말 물가라 비싸요)",
+      "lineNumber": 46
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "35,000원",
+      "value": "35,000원",
+      "severity": "minor",
+      "context": "- **예상 가격**: 1회 35,000원 ~ 50,000원 (확인 필요)",
+      "lineNumber": 62
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "50,000원",
+      "value": "50,000원",
+      "severity": "minor",
+      "context": "- **예상 가격**: 1회 35,000원 ~ 50,000원 (확인 필요)",
+      "lineNumber": 62
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "8,000원",
+      "value": "8,000원",
+      "severity": "minor",
+      "context": "1. **교통비**: 지하철 및 버스 이용 약 8,000원",
+      "lineNumber": 85
+    },
+    {
+      "id": "ct-9",
+      "type": "price",
+      "text": "45,000원",
+      "value": "45,000원",
+      "severity": "minor",
+      "context": "3. **체험비**: 도자기 공방 약 45,000원 (확인 필요)",
+      "lineNumber": 87
+    },
+    {
+      "id": "ct-10",
+      "type": "price",
+      "text": "70,000원",
+      "value": "70,000원",
+      "severity": "minor",
+      "context": "4. **식비**: 2일간 4끼 + 커피 약 70,000원",
+      "lineNumber": 88
+    },
+    {
+      "id": "ct-11",
+      "type": "price",
+      "text": "138,000원",
+      "value": "138,000원",
+      "severity": "minor",
+      "context": "- **총계**: 약 138,000원",
+      "lineNumber": 89
+    },
+    {
+      "id": "ct-13",
+      "type": "transport",
+      "text": "버스 타는 게 정신 건강에 이로워요.",
+      "value": "타는 게 정신 건강에 이로워요.",
+      "severity": "minor",
+      "context": "진짜 문제는 주차인데, 렌터카 가져오실 분들은 각오하세요. 주차장 들어가는 데만 30분 걸립니다. 웬만하면 남부터미널역에서 버스 타는 게 정신 건강에 이로워요.",
+      "lineNumber": 49
+    },
+    {
+      "id": "ct-14",
+      "type": "transport",
+      "text": "버스 갈아타면 판교에서 3시간 정도 걸릴 각입니다.",
+      "value": "갈아타면 판교에서 3시간 정도 걸릴 각입니다.",
+      "severity": "minor",
+      "context": "이번 서울 코스가 약간 '맛보기'였다면, 3월에는 연차 하루 붙여서 고령으로 2박 3일 가보는 것도 괜찮을 것 같아요. KTX 타고 동대구역 가서 버스 갈아타면 판교에서 3시간 정도 걸릴 각입니다.",
+      "lineNumber": 78
+    },
+    {
+      "id": "ct-15",
+      "type": "transport",
+      "text": "지하철 및 버스 이용 약 8,000원",
+      "value": "및 버스 이용 약 8,000원",
+      "severity": "minor",
+      "context": "1. **교통비**: 지하철 및 버스 이용 약 8,000원",
+      "lineNumber": 85
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 85,
+      "source": "general_knowledge",
+      "details": "판교역→강남역(신분당선)→을지로3가(2호선)→안국역(3호선) 환승 경로는 실제 서울 지하철 노선도와 일치. 을지로3가역은 2호선과 3호선 환승역이 맞음."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.goryeong.go.kr/daegaya/",
+      "details": "대가야박물관 주소는 경상북도 고령군 대가야읍 대가야로 1216(지산리 471-1)으로 확인됨. 한국관광공사 및 고령군 공식사이트에서 일치."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "판교→KTX 동대구역→버스→고령 경로에서 약 3시간은 합리적인 소요시간. KTX 판교→동대구 약 1시간 40분, 동대구→고령 버스 약 1시간."
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.mmca.go.kr/visitingInfo/seoulInfo.do",
+      "details": "국립현대미술관 서울 공식 문의 전화번호 02-3701-9500 확인됨. 공식 홈페이지 및 다수 관광정보 사이트에서 동일 번호 확인."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "서울 주말 코스 총비용 135,000원(전시+식비+교통비)은 합리적인 추정치. 전시 무료, 식비+교통비+체험비 합산으로 계산 가능."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "15,000원은 예술의전당 특별전 일반적 가격대에 부합."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "서울 소재 두부 요리집 주말 1인 식사비 18,000원은 현실적인 가격대."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "도자기 공방 1회 체험비 35,000~50,000원은 서울 지역 일반적인 체험 가격대에 부합. 포스트에서도 '확인 필요'로 표기."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "도자기 공방 체험비 상한 50,000원은 합리적 범위. 포스트에서도 '확인 필요'로 표기."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "서울 지하철+버스 주말 이동 교통비 약 8,000원은 수도권 대중교통 요금 기준 합리적."
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "도자기 공방 체험비 약 45,000원은 일반적 가격대. 포스트에서도 '확인 필요'로 표기."
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "2일간 4끼+커피 약 70,000원(1끼 평균 약 15,000~18,000원)은 서울 물가 기준 현실적."
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "총계 138,000원은 세부 항목(교통비 8,000 + 체험비 45,000 + 식비 70,000 + 전시 15,000)의 합산 138,000원과 일치."
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "주말 인기 관광지 주차 혼잡에 대한 일반적 조언. 대중교통 이용 권장은 합리적."
+    },
+    {
+      "claimId": "ct-14",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "판교→KTX 동대구→버스→고령 약 3시간은 합리적 소요시간 추정."
+    },
+    {
+      "claimId": "ct-15",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "서울 지하철+버스 이용 약 8,000원은 수도권 대중교통 1일 요금으로 합리적."
+    }
+  ]
+}

@@ -68,7 +68,7 @@ export class DraftEnhancerAgent {
   async initialize(): Promise<void> {
     this.persona = await loadPersona();
     if (!this.persona) {
-      throw new Error('페르소나 설정을 로드할 수 없습니다. config/persona.json을 확인하세요.');
+      throw new Error('페르소나 설정을 로드할 수 없습니다. config/personas/ 디렉토리를 확인하세요.');
     }
   }
 

@@ -1,0 +1,221 @@
+{
+  "filePath": "blog\\content\\posts\\culture\\2026-02-04-mmca-exhibition.md",
+  "title": "국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "서울 종로구 삼청로 30 ",
+      "value": "서울 종로구 삼청로 30",
+      "severity": "critical",
+      "context": "| **장소** | 서울 종로구 삼청로 30 |",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "삼청로 30",
+      "value": "삼청로 30",
+      "severity": "critical",
+      "context": "| **장소** | 서울 종로구 삼청로 30 |",
+      "lineNumber": 12
+    },
+    {
+      "id": "fm-0",
+      "type": "venue_exists",
+      "text": "장소: 국립현대미술관 서울",
+      "value": "국립현대미술관 서울",
+      "severity": "critical"
+    },
+    {
+      "id": "fm-3",
+      "type": "event_period",
+      "text": "기간: 상설 전시",
+      "value": "상설 전시",
+      "severity": "major"
+    },
+    {
+      "id": "fm-1",
+      "type": "hours",
+      "text": "운영시간: 10:00 - 18:00 (수, 토 21:00까지)",
+      "value": "10:00 - 18:00 (수, 토 21:00까지)",
+      "severity": "major"
+    },
+    {
+      "id": "ct-2",
+      "type": "hours",
+      "text": "10:00-18:00",
+      "value": "10:00-18:00",
+      "severity": "major",
+      "context": "| **운영시간** | 10:00-18:00 (수, 토 21:00까지) |",
+      "lineNumber": 13
+    },
+    {
+      "id": "ct-3",
+      "type": "hours",
+      "text": "18:00-21:00",
+      "value": "18:00-21:00",
+      "severity": "major",
+      "context": "| **야간 무료** | 수·토 18:00-21:00 |",
+      "lineNumber": 16
+    },
+    {
+      "id": "ct-4",
+      "type": "hours",
+      "text": "휴관일** | 매주 월요일, 1월 1일, 설/추석 당일 |",
+      "value": "일** | 매주 월요일, 1월 1일, 설/추석 당일 |",
+      "severity": "major",
+      "context": "| **휴관일** | 매주 월요일, 1월 1일, 설/추석 당일 |",
+      "lineNumber": 14
+    },
+    {
+      "id": "fm-2",
+      "type": "price",
+      "text": "가격: 통합권 10,000원 (야간/청년 무료)",
+      "value": "통합권 10,000원 (야간/청년 무료)",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "10,000원",
+      "value": "10,000원",
+      "severity": "minor",
+      "context": "| **입장료** | 통합권 10,000원 (4관 전시 모두 관람) |",
+      "lineNumber": 15
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "2,000원",
+      "value": "2,000원",
+      "severity": "minor",
+      "context": "- 개별 전시: 2,000원~5,000원",
+      "lineNumber": 95
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "5,000원",
+      "value": "5,000원",
+      "severity": "minor",
+      "context": "- 개별 전시: 2,000원~5,000원",
+      "lineNumber": 95
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "free",
+      "value": "free",
+      "severity": "minor",
+      "context": "- [서울 무료 전시회 모음](/posts/culture/seoul-free-exhibitions/)",
+      "lineNumber": 139
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "fm-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (venue_exists)"
+    },
+    {
+      "claimId": "fm-3",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (event_period)"
+    },
+    {
+      "claimId": "fm-1",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "fm-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.798Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    }
+  ]
+}

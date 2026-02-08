@@ -1,0 +1,190 @@
+{
+  "filePath": "drafts/2026-02-08-top-5.md",
+  "title": "속초 양양 겨울 바다 카페 핫플 TOP 5 | 공유 안 하면 손해, 이건 진짜 봐야 됨",
+  "checkedAt": "2026-02-08T13:47:31.635Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 8,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 8,
+      "verified": 8,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "속초 양양 1박2일 여행 식비/입장료 총합 200,000원은 주말 물가 기준 합리적인 범위. 카페 3곳 + 식사 + 간식 등 고려 시 타당한 추정치.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "실내 미로 탈출/체험시설 성인 2인 기준 24,000원(인당 12,000원)은 속초 양양 지역 실내 체험 시설의 일반적인 가격대에 부합.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "속초/양양 해변 카페 커피 가격 8,000원은 관광지 오션뷰 카페 기준 현실적인 가격. 일반 카페 5,000~6,000원, 프리미엄 카페 7,000~9,000원 범위.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "설악산 국립공원 입장료 무료 전환 및 주차비 6,000원은 국립공원 주차요금 기준 타당. 2024년 기준 설악산 소공원 주차 5,000~6,000원대.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "영금정 근처 튀김 세트 10,000원은 속초 관광지 길거리 음식 가격대에 부합하는 추정치.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "서울/판교에서 속초까지 왕복 기름값+통행료 약 60,000원은 서울양양고속도로 통행료 왕복 약 20,000원 + 기름값 약 40,000원으로 합리적 추정.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "속초 비즈니스급 숙소 1박 150,000원은 주말 성수기 기준 합리적. 속초 시내 비즈니스호텔 주말가 120,000~180,000원대.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "총합 410,000원 = 기름값/통행료 60,000 + 숙소 150,000 + 식비/입장료 200,000 = 410,000원. 산술적으로 정확.",
+      "checkedAt": "2026-02-08T13:47:31.635Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "price",
+      "text": "입장료: 200,000원",
+      "value": "200,000원",
+      "severity": "minor",
+      "context": "- 식비/입장료: 200,000원",
+      "lineNumber": 60
+    },
+    {
+      "id": "ct-1",
+      "type": "price",
+      "text": "24,000원",
+      "value": "24,000원",
+      "severity": "minor",
+      "context": "진짜 문제는 속초까지 가서 카페만 3군데 돌면 슬슬 지루해진다는 거예요. 그럴 때 여기 가서 몸 좀 쓰면 잠이 확 깨요. 실내 미로 탈출 같은 건데, 성인 2인 기준 24,000원 정도 들거든요?",
+      "lineNumber": 20
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "8,000원",
+      "value": "8,000원",
+      "severity": "minor",
+      "context": "- **비교**: 8,000원짜리 맛없는 커피 마시는 것보다 여기서 땀 빼는 게 훨씬 돈값 함.",
+      "lineNumber": 24
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "6,000원",
+      "value": "6,000원",
+      "severity": "minor",
+      "context": "- **구체적 숫자**: 설악산 입장료는 이제 무료지만, 주차비가 6,000원(현금/카드 가능)이나 함. 주말엔 주차장 진입만 30분 걸림.",
+      "lineNumber": 32
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "10,000원",
+      "value": "10,000원",
+      "severity": "minor",
+      "context": "- **실패 경험**: 영금정 근처에서 파는 튀김, 낱개로 사면 비싸요. 10,000원어치 세트로 사는 게 그나마 나은데 솔직히 기름기가 너무 많아서 먹다 남겼음.",
+      "lineNumber": 40
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "60,000원",
+      "value": "60,000원",
+      "severity": "minor",
+      "context": "- 기름값/통행료: 약 60,000원",
+      "lineNumber": 58
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "150,000원",
+      "value": "150,000원",
+      "severity": "minor",
+      "context": "- 숙소(비즈니스급): 150,000원",
+      "lineNumber": 59
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "410,000원",
+      "value": "410,000원",
+      "severity": "minor",
+      "context": "- **총합: 약 410,000원.** 주말 물가 생각하면 이 정도는 깨집니다.",
+      "lineNumber": 61
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

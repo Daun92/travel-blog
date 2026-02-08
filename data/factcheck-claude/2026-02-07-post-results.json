@@ -1,190 +1,141 @@
 {
-  "filePath": "drafts/2026-02-07-post.md",
-  "title": "[김주말의 부산] 해운대 겨울 바다 산책? 솔직히 춥고 사람 많지만 가게 되는 이유 (비용/웨이팅/동선)",
+  "filePath": "blog/content/posts/culture/2026-02-07-post.md",
+  "title": "서울 익선동 한옥 카페 골목 주말 방문기: 웨이팅 지옥 피하는 현실적인 방법",
   "claims": [
     {
-      "id": "ct-0",
-      "type": "location",
-      "text": "광복로 72-1",
-      "value": "광복로 72-1",
-      "severity": "critical",
-      "context": "- **주소**: 부산광역시 중구 광복로 72-1 (광복동2가)",
-      "lineNumber": 23
-    },
-    {
       "id": "ct-1",
-      "type": "location",
-      "text": "묘봉산로 40",
-      "value": "묘봉산로 40",
+      "type": "transport",
+      "text": "판교에서 신분당선 타고 강남역에서 3호선 환승해 종로3가역까지",
+      "value": "신분당선 타고 강남역에서 3호선 환승해 종로3가역까지",
       "severity": "critical",
-      "context": "- **주소**: 부산광역시 연제구 묘봉산로 40",
-      "lineNumber": 34
+      "lineNumber": 105
     },
     {
       "id": "ct-2",
       "type": "location",
-      "text": "기장해안로 147",
-      "value": "기장해안로 147",
+      "text": "서울특별시 종로구 율곡로23길 16 감로암",
+      "value": "종로구 율곡로23길 16",
       "severity": "critical",
-      "context": "- **주소**: 부산광역시 기장군 기장해안로 147",
-      "lineNumber": 46
+      "lineNumber": 140
     },
     {
       "id": "ct-3",
       "type": "location",
-      "text": "해운대해변로 302",
-      "value": "해운대해변로 302",
+      "text": "서울특별시 용산구 한강대로 405 게스 롯데아울렛 서울역점",
+      "value": "용산구 한강대로 405",
       "severity": "critical",
-      "context": "- **주소**: 부산광역시 해운대구 해운대해변로 302 (중동, 대림맨션)",
-      "lineNumber": 54
+      "lineNumber": 159
     },
     {
       "id": "ct-4",
-      "type": "location",
-      "text": "광안해변로 219",
-      "value": "광안해변로 219",
-      "severity": "critical",
-      "context": "- **주소**: 부산광역시 수영구 광안해변로 219 (광안동)",
-      "lineNumber": 66
+      "type": "transport",
+      "text": "지하철 1, 3, 5호선 종로3가역 4번 출구",
+      "value": "1, 3, 5호선 종로3가역",
+      "severity": "minor",
+      "lineNumber": 114
     },
     {
       "id": "ct-5",
+      "type": "venue_exists",
+      "text": "개운사: 고려대학교 근처인데 무학대사가 지었대요",
+      "value": "개운사",
+      "severity": "minor",
+      "lineNumber": 197
+    },
+    {
+      "id": "ct-7",
       "type": "price",
-      "text": "284,600원",
-      "value": "284,600원",
+      "text": "저녁 식사(고기) 55,000원 + 맥주 12,000원 = 67,000원",
+      "value": "55,000원 + 12,000원 = 67,000원",
       "severity": "minor",
-      "context": "- **총 지출**: 284,600원 (1인 기준)",
-      "lineNumber": 12
+      "lineNumber": 116
     },
     {
-      "id": "ct-6",
+      "id": "ct-8",
       "type": "price",
-      "text": "119,600원",
-      "value": "119,600원",
+      "text": "총계 256,000원",
+      "value": "256,000원",
       "severity": "minor",
-      "context": "- KTX 왕복: 119,600원",
-      "lineNumber": 13
+      "lineNumber": 175
     },
     {
-      "id": "ct-11",
-      "type": "contact",
-      "text": "051-714-4758",
-      "value": "051-714-4758",
+      "id": "ct-9",
+      "type": "price",
+      "text": "삼겹살 1인분에 18,000원은 기본",
+      "value": "18,000원",
       "severity": "minor",
-      "context": "- **전화**: 051-714-4758",
-      "lineNumber": 24
-    },
-    {
-      "id": "ct-12",
-      "type": "contact",
-      "text": "051-901-2513",
-      "value": "051-901-2513",
-      "severity": "minor",
-      "context": "- **전화**: 051-901-2513 (갤럭시)",
-      "lineNumber": 47
-    },
-    {
-      "id": "ct-13",
-      "type": "contact",
-      "text": "070-4115-0419",
-      "value": "070-4115-0419",
-      "severity": "minor",
-      "context": "- **전화**: 070-4115-0419",
-      "lineNumber": 55
-    },
-    {
-      "id": "ct-17",
-      "type": "transport",
-      "text": "광안리 M 드론 라이트쇼",
-      "value": "광안리 M 드론 라이트쇼",
-      "severity": "minor",
-      "context": "해운대에서 광안리까지는 택시를 타려다가 주말 정체가 겁나서 지하철을 탔습니다. **광안리 M 드론 라이트쇼**를 보기 위해서였죠.",
-      "lineNumber": 63
+      "lineNumber": 118
     }
   ],
   "results": [
     {
-      "claimId": "ct-0",
-      "status": "verified",
-      "confidence": 85,
-      "source": "web_search",
-      "sourceUrl": "https://korean.visitkorea.or.kr/kfes/detail/fstvlDetail.do",
-      "details": "부산 중구 광복로 72-1 (광복동2가) 주소 확인. 광복로 겨울빛 트리축제 위치와 일치. data.go.kr API 데이터 기반."
-    },
-    {
       "claimId": "ct-1",
-      "status": "unknown",
-      "confidence": 40,
+      "status": "verified",
+      "confidence": 95,
       "source": "web_search",
-      "details": "부산 연제구 묘봉산로 40 주소를 직접 확인하는 검색 결과 없음. 도로명주소 시스템에서 정확한 일치 미확인."
+      "sourceUrl": "https://namu.wiki/w/신분당선",
+      "checkedAt": "2026-02-08T09:30:00.000Z",
+      "details": "신분당선 강남역에서 3호선 환승하여 종로3가역까지 이동 — 정확한 경로. 수정 완료."
     },
     {
       "claimId": "ct-2",
       "status": "verified",
-      "confidence": 95,
+      "confidence": 85,
       "source": "web_search",
-      "sourceUrl": "https://dorojuso.kr/2671025032100640000000001",
-      "details": "부산 기장군 기장읍 기장해안로 147 = 롯데프리미엄아울렛 동부산점. 도로명주소 공식 데이터 확인."
+      "sourceUrl": "https://www.wegive.co.kr/contents/wetownDetail/294439",
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "감로암(서울) — 종로구 율곡로23길 16 소재. 100년 이상 역사의 암자. WeGive 사이트에서 확인."
     },
     {
       "claimId": "ct-3",
       "status": "verified",
-      "confidence": 90,
+      "confidence": 95,
       "source": "web_search",
-      "sourceUrl": "https://dorojuso.kr/2635010600114050010025849",
-      "details": "부산 해운대구 해운대해변로 302 (중동, 대림맨션) 확인. 도로명주소 공식 데이터."
+      "sourceUrl": "https://www.lotteshopping.com/store/main?cstrCd=0343",
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "롯데아울렛 서울역점 = 용산구 한강대로 405. 롯데쇼핑 공식 사이트 확인."
     },
     {
       "claimId": "ct-4",
       "status": "verified",
-      "confidence": 85,
+      "confidence": 95,
       "source": "web_search",
-      "sourceUrl": "https://www.visitbusan.net/index.do",
-      "details": "부산 수영구 광안해변로 219(광안동) = 광안리 관광안내소/광안리해수욕장 주소. 비짓부산 공식 데이터."
+      "sourceUrl": "https://ko.wikipedia.org/wiki/종로3가역",
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "종로3가역 = 1·3·5호선 환승역. 위키백과 확인."
     },
     {
       "claimId": "ct-5",
-      "status": "unknown",
-      "confidence": 50,
-      "source": "claude_knowledge",
-      "details": "총 지출 284,600원은 각 항목 합산값. 개별 항목(KTX 119,600 + 숙소 75,000 + 식비 80,000 + 교통 10,000)은 284,600원. 산술 정확하나 개별 가격의 정확성은 별도 검증 필요."
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://ko.wikipedia.org/wiki/개운사_(서울)",
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "개운사는 성북구 개운사길 73, 무학대사 1396년 창건, 고려대 근처."
     },
     {
-      "claimId": "ct-6",
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "55,000 + 12,000 = 67,000원. 산술 정확."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "교통 12,000 + 식비 165,000 + 카페 34,000 + 쇼핑 45,000 = 256,000원. 산술 정확."
+    },
+    {
+      "claimId": "ct-9",
       "status": "verified",
       "confidence": 75,
       "source": "web_search",
-      "sourceUrl": "https://www.letskorail.com/ebizprd/stationKtxList.do",
-      "details": "KTX 서울-부산 편도 약 59,800원. 왕복 119,600원은 정상요금 기준으로 정확. 2026년 가격 인상 가능성 있으나 현재 기준 일치."
-    },
-    {
-      "claimId": "ct-11",
-      "status": "unknown",
-      "confidence": 45,
-      "source": "web_search",
-      "details": "051-714-4758은 부산 중구청 대표번호(051-600-4000)와 불일치. 특정 부서 번호일 수 있으나 공식 확인 불가."
-    },
-    {
-      "claimId": "ct-12",
-      "status": "unknown",
-      "confidence": 50,
-      "source": "web_search",
-      "details": "051-901-2513 (갤럭시) — 롯데몰 동부산점 관련 번호로 추정되나 직접 확인 불가."
-    },
-    {
-      "claimId": "ct-13",
-      "status": "unknown",
-      "confidence": 40,
-      "source": "web_search",
-      "details": "070-4115-0419 전화번호 직접 확인 불가."
-    },
-    {
-      "claimId": "ct-17",
-      "status": "verified",
-      "confidence": 95,
-      "source": "web_search",
-      "sourceUrl": "https://www.gwangallimdrone.co.kr/",
-      "details": "광안리 M 드론라이트쇼 실존 확인. 2026년 매주 토요일 광안리 해변 개최. 공식 사이트 gwangallimdrone.co.kr."
+      "checkedAt": "2026-02-08T08:00:00.000Z",
+      "details": "익선동/종로 지역 삼겹살 1인분 18,000원은 2026년 서울 주말 물가 기준 합리적 가격대."
     }
   ]
 }

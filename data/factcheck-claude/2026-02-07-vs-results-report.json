@@ -1,0 +1,178 @@
+{
+  "filePath": "blog/content/posts/culture/2026-02-07-vs.md",
+  "title": "성수동 팝업스토어 생존기: 이번 주 꼭 가야 할 곳 vs 시간낭비 TOP 3",
+  "checkedAt": "2026-02-08T12:43:11.360Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 8,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 5,
+      "verified": 5,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "판교→성수: 신분당선+2호선 환승 약 40-50분. 합리적 소요시간."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.musinsa.com/products/4310232",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "무신사 뷰티 페스타 입장 티켓 15,000원 확인. 무신사 공식 판매 페이지에서 확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.musinsa.com/cms/news/view/13260",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "무신사 뷰티 페스타 성수동(성동구 성수이로20길 51) 개최 확인. 매년 성수동에서 개최."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.eyesmag.com/posts/155253/tamburins-new-perfume-collection-seongsu-store",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "탬버린즈 성수 플래그십 스토어 존재 확인. 상시 운영 매장(팝업 아님)."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%ED%83%AC%EB%B2%84%EB%A6%B0%EC%A6%88",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "탬버린즈 국내 플래그십 스토어 5곳(도산, 신사, 성수, 삼청, 한남) 확인. 나무위키에서 확인."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "1.5만 + 2만 + 0.7만 = 4.2만원. 산술 정확."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "캐치테이블(CatchTable)은 실제 존재하는 레스토랑 예약 앱. 일부 팝업/카페도 예약 지원."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:20:00.000Z",
+      "details": "판교→성수: 신분당선 강남역→2호선 성수역 환승 경로 정확."
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "판교/강남권에서 대중교통으로 40~50분",
+      "value": "대중교통 40~50분",
+      "severity": "minor",
+      "lineNumber": 72
+    },
+    {
+      "id": "ct-1",
+      "type": "price",
+      "text": "무신사 뷰티 페스타 입장료 15,000원",
+      "value": "15,000원",
+      "severity": "critical",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-2",
+      "type": "venue_exists",
+      "text": "무신사 뷰티 페스타 성수동 개최",
+      "value": "성수동",
+      "severity": "critical",
+      "lineNumber": 10
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "탬버린즈 성수 플래그십 스토어",
+      "value": "탬버린즈 성수 플래그십",
+      "severity": "critical",
+      "lineNumber": 26
+    },
+    {
+      "id": "ct-4",
+      "type": "venue_exists",
+      "text": "탬버린즈 국내 5개 플래그십(도산, 신사, 성수, 삼청, 한남)",
+      "value": "5개 매장",
+      "severity": "minor",
+      "lineNumber": 26
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "무신사 1.5만 + 밥값 2만 + 커피 0.7만 = 약 4.2만 원",
+      "value": "약 4.2만 원",
+      "severity": "minor",
+      "lineNumber": 73
+    },
+    {
+      "id": "ct-6",
+      "type": "facilities",
+      "text": "캐치테이블 앱으로 사전 예약",
+      "value": "캐치테이블",
+      "severity": "minor",
+      "lineNumber": 57
+    },
+    {
+      "id": "ct-7",
+      "type": "transport",
+      "text": "판교에서 신분당선 타고 성수동",
+      "value": "신분당선→성수",
+      "severity": "minor",
+      "lineNumber": 6
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

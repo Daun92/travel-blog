@@ -1,0 +1,93 @@
+{
+  "filePath": "blog\\content\\posts\\culture\\2026-02-05-post.md",
+  "title": "리움미술관 완벽 가이드: 한남동에서 만나는 고미술과 현대미술의 정수",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "서울 용산구 한남동",
+      "value": "서울 용산구 한남동",
+      "severity": "critical",
+      "context": "서울 용산구 한남동, 번잡한 도심의 소음을 뒤로하고 언덕을 오르다 보면 현대적인 건축미가 돋보이는 거대한 예술의 요새를 마주하게 됩니다. 바로 삼성문화재단이 운영하는 **리움미술관**입니다. 이곳은 단순히 작품을 전시하는 공간을 넘어, 건축 그 자체가 하나의 예술 작품이자 한국 고미술과 전 세계 현대미술이 조화롭게 공존하는 특별한 장소입니다.",
+      "lineNumber": 4
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "이태원로55",
+      "value": "이태원로55",
+      "severity": "critical",
+      "context": "*   **위치**: 서울특별시 용산구 이태원로55길 60-16",
+      "lineNumber": 60
+    },
+    {
+      "id": "ct-2",
+      "type": "hours",
+      "text": "10:00 ~ 18:00",
+      "value": "10:00 ~ 18:00",
+      "severity": "major",
+      "context": "*   **운영 시간**: 화요일 – 일요일 10:00 ~ 18:00 (매주 월요일 휴관)",
+      "lineNumber": 61
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "12,000원",
+      "value": "12,000원",
+      "severity": "minor",
+      "context": "*   기획전: 유료 (전시별 상이, 보통 12,000원~18,000원)",
+      "lineNumber": 64
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "18,000원",
+      "value": "18,000원",
+      "severity": "minor",
+      "context": "*   기획전: 유료 (전시별 상이, 보통 12,000원~18,000원)",
+      "lineNumber": 64
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.803Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.803Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.803Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.803Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.803Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    }
+  ]
+}

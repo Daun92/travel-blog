@@ -49,11 +49,18 @@ for draft in $DRAFTS; do
   npm run enhance -- -f "$draft" 2>&1 | tee -a "$LOG" || true
   sleep 45
 
-  # Step 3: Factcheck
+  # Step 3: Factcheck (≥70% 필수 — 미달 시 발행 건너뜀)
   log "[Factcheck] $filename"
-  FCHECK=$(npm run factcheck -- -f "$draft" 2>&1 | tee -a "$LOG")
+  FCHECK=$(npm run factcheck -- -f "$draft" 2>&1 | tee -a "$LOG") || true
   FC_RESULT=$(echo "$FCHECK" | grep -oP '\d+%' | head -1 || echo "0%")
+  FC_SCORE=$(echo "$FC_RESULT" | grep -oP '\d+' || echo "0")
   log "Factcheck result: $FC_RESULT"
+
+  if [ "$FC_SCORE" -lt 70 ] 2>/dev/null; then
+    log "[SKIP] $filename — 팩트체크 점수 미달 ($FC_RESULT < 70%)"
+    FAILED="$FAILED $filename(factcheck:$FC_RESULT)"
+    continue
+  fi
   sleep 45
 
   # Step 4: Fix cover image path (missing /travel-blog/ prefix)

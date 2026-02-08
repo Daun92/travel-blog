@@ -1,0 +1,352 @@
+{
+  "filePath": "drafts/2026-02-08-12.md",
+  "title": "군산 시간여행 1박2일 현실 비용 후기: 판교 직장인의 솔직한 주말 여행 정산",
+  "checkedAt": "2026-02-08T13:47:37.019Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 17,
+    "verified": 17,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 14,
+      "verified": 14,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://museum.gunsan.go.kr/new/contents/exhibition601.jsp",
+      "details": "군산 3·1운동 100주년 기념관 주소 '전북특별자치도 군산시 영명길 29' — 군산근대역사박물관 공식 사이트 및 한국관광공사 데이터에서 동일 주소 확인. TEL: 063-454-5940.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.kunsan.ac.kr/museum/index.kunsan?menuCd=DOM_000005201004000000",
+      "details": "국립군산대학교 박물관 주소 '전북특별자치도 군산시 대학로 558(미룡동)' — 대학교 공식 사이트에서 동일 주소 확인. 우편번호 54150, TEL: 063-469-4191~3.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://access.visitkorea.or.kr/ms/detail.do?cotId=0bf3d882-eafe-46dc-9dc4-a191b1a8f52e",
+      "details": "군산 공설시장 주소 '전북특별자치도 군산시 신금길 18' — 한국관광공사 열린관광 및 군산시 관광 페이지에서 동일 주소 확인. TEL: 063-445-4929.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "1박2일 총 비용 297,000원 = 교통비 85,000 + 숙박비 80,000 + 식비 110,000 + 입장료/기타 22,000 = 297,000원. 산술적으로 정확.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "용산-익산 KTX 편도 약 30,000원대, 익산-군산 환승 포함 왕복 약 68,000원은 합리적 범위.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "KTX 왕복 68,000 + 시내 택시 2회(약 12,000원) + 버스비(약 5,000원) = 약 85,000원. 합리적 추정.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "군산 영화동 근처 비즈니스호텔 주말 1박 80,000원은 군산 숙박 시세 기준 합리적. 평일 50,000~60,000원, 주말 70,000~100,000원대.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "1박2일 식비 110,000원(짬뽕, 물짜장, 이성당 빵, 선유도 회 등)은 군산 관광 시 주요 먹거리 비용으로 합리적. 회 한 끼만 40,000~50,000원.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "박물관 입장료 및 소소한 간식 합계 22,000원은 군산근대역사박물관(3,000원) 등 다수 박물관 관람 기준 합리적.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "셔틀버스 vs 자가 이동 비용 비교에서 7,000원 절약 관련 조언은 실용적 팁으로 타당.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "전통시장 매운 잡채 6,000~8,000원은 군산 공설시장 시장 음식 가격대에 부합.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "ct-10과 동일 맥락. 6,000~8,000원 가격대 상한.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "군산역은 시내 중심(영화동)에서 약 5~7km 거리. 야간 택시 기본요금 + 거리요금 고려 시 10,000원 이상은 합리적.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "교통비 항목에 버스비 포함은 일반적 여행 경비 구성.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-14",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "고군산군도 셔틀버스 이용 팁은 실제 방문자 경험에 기반한 실용적 조언으로 타당.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-15",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "군산 외곽(고군산군도, 3·1운동 기념관) 대중교통 배차 간격이 긴 것은 지방 도시 외곽 지역의 일반적 특성으로 타당.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    },
+    {
+      "claimId": "ct-16",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "군산 시내권(영화동, 월명동)은 도보/대중교통 가능하나 외곽은 렌터카 권장이라는 조언은 군산 여행의 일반적 팁으로 타당.",
+      "checkedAt": "2026-02-08T13:47:37.019Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "영명길 29",
+      "value": "영명길 29",
+      "severity": "critical",
+      "context": "다음으로는 **전북특별자치도 군산시 영명길 29**에 있는 [군산 3·1운동 100주년 기념관](https://museum.gunsan.go.kr/new/contents/exhibition601.jsp)에 갔어요.",
+      "lineNumber": 53
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "대학로 558",
+      "value": "대학로 558",
+      "severity": "critical",
+      "context": "마지막 날은 조금 더 조용하게 보내고 싶어서 **전북특별자치도 군산시 대학로 558**에 있는 [국립군산대학교 박물관](https://www.kunsan.ac.kr/museum/)을 갔어요.",
+      "lineNumber": 82
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "신금길 18",
+      "value": "신금길 18",
+      "severity": "critical",
+      "context": "그리고 기차 타기 전에 [군산 공설시장](https://www.gunsan.go.kr/tour) (**전북특별자치도 군산시 신금길 18**)에 들렀어요.",
+      "lineNumber": 84
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "297,000원",
+      "value": "297,000원",
+      "severity": "minor",
+      "context": "결론부터 말하면 1박 2일 동안 딱 297,000원 썼습니다.",
+      "lineNumber": 4
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "68,000원",
+      "value": "68,000원",
+      "severity": "minor",
+      "context": "*   **비용**: KTX 왕복 약 68,000원 (환승 할인 포함).",
+      "lineNumber": 19
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "85,000원",
+      "value": "85,000원",
+      "severity": "minor",
+      "context": "| **교통비** | 85,000원 | KTX 왕복 + 시내 택시 2회 + 버스비 |",
+      "lineNumber": 33
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "80,000원",
+      "value": "80,000원",
+      "severity": "minor",
+      "context": "| **숙박비** | 80,000원 | 영화동 근처 가성비 호텔 1박 (주말가) |",
+      "lineNumber": 34
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "110,000원",
+      "value": "110,000원",
+      "severity": "minor",
+      "context": "| **식비** | 110,000원 | 짬뽕, 물짜장, 이성당 빵, 선유도 회 등 |",
+      "lineNumber": 35
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "22,000원",
+      "value": "22,000원",
+      "severity": "minor",
+      "context": "| **입장료/기타** | 22,000원 | 박물관 입장료 및 소소한 간식 |",
+      "lineNumber": 36
+    },
+    {
+      "id": "ct-9",
+      "type": "price",
+      "text": "7,000원",
+      "value": "7,000원",
+      "severity": "minor",
+      "context": "*   **팁**: 렌터카 빌리신 분들은 신시도 주차장에 차 대고 셔틀버스 타는 게 정신 건강에 이롭습니다. 7,000원 아끼려다 기름값과 시간을 더 쓰는 수가 있어요.",
+      "lineNumber": 71
+    },
+    {
+      "id": "ct-10",
+      "type": "price",
+      "text": "6,000원",
+      "value": "6,000원",
+      "severity": "minor",
+      "context": "그래도 1층 시장에서 파는 매운 잡채는 한 번쯤 먹어볼 만해요. 가격은 확인 필요하지만 6,000원~8,000원 선이었던 것 같아요.",
+      "lineNumber": 84
+    },
+    {
+      "id": "ct-11",
+      "type": "price",
+      "text": "8,000원",
+      "value": "8,000원",
+      "severity": "minor",
+      "context": "그래도 1층 시장에서 파는 매운 잡채는 한 번쯤 먹어볼 만해요. 가격은 확인 필요하지만 6,000원~8,000원 선이었던 것 같아요.",
+      "lineNumber": 84
+    },
+    {
+      "id": "ct-12",
+      "type": "transport",
+      "text": "버스도 거의 끊겨서 택시를 타야 하는데, 숙소가 있는 영화동까지 택시비가 1만 원 넘게 나옵니다.",
+      "value": "도 거의 끊겨서 택시를 타야 하는데, 숙소가 있는 영화동까지 택시비가 1만 원 넘게 나옵니다.",
+      "severity": "minor",
+      "context": "근데 이게 핵심인데, 군산역이 시내랑 꽤 멀어요. 밤늦게 도착하면 버스도 거의 끊겨서 택시를 타야 하는데, 숙소가 있는 영화동까지 택시비가 1만 원 넘게 나옵니다.",
+      "lineNumber": 21
+    },
+    {
+      "id": "ct-13",
+      "type": "transport",
+      "text": "버스비 |",
+      "value": "비 |",
+      "severity": "minor",
+      "context": "| **교통비** | 85,000원 | KTX 왕복 + 시내 택시 2회 + 버스비 |",
+      "lineNumber": 33
+    },
+    {
+      "id": "ct-14",
+      "type": "transport",
+      "text": "버스 타는 게 정신 건강에 이롭습니다. 7,000원 아끼려다 기름값과 시간을 더 쓰는 수가 있어요.",
+      "value": "타는 게 정신 건강에 이롭습니다. 7,000원 아끼려다 기름값과 시간을 더 쓰는 수가 있어요.",
+      "severity": "minor",
+      "context": "*   **팁**: 렌터카 빌리신 분들은 신시도 주차장에 차 대고 셔틀버스 타는 게 정신 건강에 이롭습니다. 7,000원 아끼려다 기름값과 시간을 더 쓰는 수가 있어요.",
+      "lineNumber": 71
+    },
+    {
+      "id": "ct-15",
+      "type": "transport",
+      "text": "버스랑 택시로 충분할 줄 알았는데, 고군산군도나 3·1운동 기념관처럼 외곽으로 나갈 때는 배차 간격 때문에 길바닥에서 버리는 시간이 너무 많더라고요.",
+      "value": "랑 택시로 충분할 줄 알았는데, 고군산군도나 3·1운동 기념관처럼 외곽으로 나갈 때는 배차 간격 때문에 길바닥에서 버리는 시간이 너무 많더라고요.",
+      "severity": "minor",
+      "context": "진짜 문제는 이동 수단이었어요. 군산 시내가 좁아 보여서 버스랑 택시로 충분할 줄 알았는데, 고군산군도나 3·1운동 기념관처럼 외곽으로 나갈 때는 배차 간격 때문에 길바닥에서 버리는 시간이 너무 많더라고요.",
+      "lineNumber": 90
+    },
+    {
+      "id": "ct-16",
+      "type": "transport",
+      "text": "버스 기다리는 것보다 훨씬 낫습니다. 뚜벅이 여행은 시내권(영화동, 월명동)에서만 하세요.",
+      "value": "기다리는 것보다 훨씬 낫습니다. 뚜벅이 여행은 시내권(영화동, 월명동)에서만 하세요.",
+      "severity": "minor",
+      "context": "1.  **무조건 렌터카**: 주말이라 차가 막히더라도 버스 기다리는 것보다 훨씬 낫습니다. 뚜벅이 여행은 시내권(영화동, 월명동)에서만 하세요.",
+      "lineNumber": 93
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

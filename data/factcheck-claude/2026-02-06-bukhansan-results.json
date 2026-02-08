@@ -1,0 +1,110 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-06-bukhansan.md",
+  "title": "북한산 주말 등산 코스 가이드: 초보자도 즐기는 서울 근교 트레킹 추천",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "자차로 1",
+      "value": "자차로 1",
+      "severity": "critical",
+      "context": "*   **서울에서 얼마나 걸리나?** 강남/판교 기준 자차로 1시간, 대중교통 1시간 30분 (주말 정체 포함).",
+      "lineNumber": 53
+    },
+    {
+      "id": "ct-1",
+      "type": "price",
+      "text": "13,000원",
+      "value": "13,000원",
+      "severity": "minor",
+      "context": "근데 생각보다 주차 문제가 심각해요. 북한산성 제1주차장 종일 주차비가 13,000원 정도 하거든요? 주말 물가라지만 솔직히 좀 아깝죠. 게다가 오전 9시만 넘어도 만차라 입구에서 20분 넘게 공회전하면서 대기해야 합니다.",
+      "lineNumber": 9
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "45,000원",
+      "value": "45,000원",
+      "severity": "minor",
+      "context": "*   **총 얼마 들었나?** 주차비 13,000원 + 식비 45,000원(2인) = 약 6만 원.",
+      "lineNumber": 54
+    },
+    {
+      "id": "ct-3",
+      "type": "transport",
+      "text": "구파발역 1번 출구",
+      "value": "구파발역",
+      "severity": "minor",
+      "context": "*   **대중교통:** 3호선 구파발역 1번 출구로 나오면 등산복 입은 사람들 줄이 50m는 서 있을 거예요. 704번 버스 배차 간격이 15분 정도인데, 한두 대는 그냥 보내야 탈 수 있습니다.",
+      "lineNumber": 11
+    },
+    {
+      "id": "ct-4",
+      "type": "transport",
+      "text": "버스 배차 간격이 15분 정도인데, 한두 대는 그냥 보내야 탈 수 있습니다. \r",
+      "value": "배차 간격이 15분 정도인데, 한두 대는 그냥 보내야 탈 수 있습니다.",
+      "severity": "minor",
+      "context": "*   **대중교통:** 3호선 구파발역 1번 출구로 나오면 등산복 입은 사람들 줄이 50m는 서 있을 거예요. 704번 버스 배차 간격이 15분 정도인데, 한두 대는 그냥 보내야 탈 수 있습니다.",
+      "lineNumber": 11
+    },
+    {
+      "id": "ct-5",
+      "type": "transport",
+      "text": "버스 대기 20분, 주차 대기 20분, 정상 인증샷 대기 40분.\r",
+      "value": "대기 20분, 주차 대기 20분, 정상 인증샷 대기 40분.",
+      "severity": "minor",
+      "context": "*   **주말 웨이팅 있나?** 버스 대기 20분, 주차 대기 20분, 정상 인증샷 대기 40분.",
+      "lineNumber": 55
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.778Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.778Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.778Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.778Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.778Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.778Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

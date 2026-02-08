@@ -1,0 +1,141 @@
+{
+  "filePath": "drafts/2026-02-08-traditional-liquor.md",
+  "title": "한국 전통주 양조장 탐방 및 막걸리 가이드: 인문학으로 빚은 술의 미학",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "충남 예산군 예산읍 충서로 1344",
+      "value": "충남 예산군 예산읍 충서로 1344",
+      "severity": "critical",
+      "context": "- **주소**: 충남 예산군 예산읍 충서로 1344",
+      "lineNumber": 77
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "운정길 63",
+      "value": "운정길 63",
+      "severity": "critical",
+      "context": "- **주소**: 강원특별자치도 강릉시 운정길 63 선교장",
+      "lineNumber": 63
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "향교길 51-5",
+      "value": "향교길 51-5",
+      "severity": "critical",
+      "context": "- **주소**: 전북특별자치도 전주시 완산구 향교길 51-5",
+      "lineNumber": 71
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "충서로 1344",
+      "value": "충서로 1344",
+      "severity": "critical",
+      "context": "- **주소**: 충남 예산군 예산읍 충서로 1344",
+      "lineNumber": 77
+    },
+    {
+      "id": "ct-5",
+      "type": "contact",
+      "text": "033-648-5311",
+      "value": "033-648-5311",
+      "severity": "minor",
+      "context": "- **전화**: 033-648-5311",
+      "lineNumber": 64
+    },
+    {
+      "id": "ct-6",
+      "type": "contact",
+      "text": "063-284-2588",
+      "value": "063-284-2588",
+      "severity": "minor",
+      "context": "- **전화**: 063-284-2588",
+      "lineNumber": 73
+    },
+    {
+      "id": "ct-7",
+      "type": "contact",
+      "text": "041-334-8934",
+      "value": "041-334-8934",
+      "severity": "minor",
+      "context": "- **전화**: 041-334-8934",
+      "lineNumber": 78
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "- **가격**: 15,000원",
+      "lineNumber": 30
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e2090ff9-27a8-4c98-abc7-005c4e7ff503",
+      "details": "예산 그랜드모텔 주소 충남 예산군 예산읍 충서로 1344 확인됨. 한국관광공사 품질인증 업소로 등록되어 있으며, 공식 홈페이지(8934.modoo.at) 및 대한민국 구석구석에서 동일 주소 확인."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://knsgj.net/location",
+      "details": "강릉 선교장 주소는 강원특별자치도 강릉시 운정길 63(운정동)으로 확인됨. 강릉선교장 공식 홈페이지 및 한국민족문화대백과사전에서 동일 주소 확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://www.tiendeo.co.kr/%EB%A7%A4%EC%9E%A5/%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C/%EA%B5%90%EB%B3%B4%EB%AC%B8%EA%B3%A0-%EB%82%A8%EB%8F%99%EA%B5%AC-%EC%98%88%EC%88%A0%EB%A1%9C-%EC%9D%B4%ED%86%A0%ED%83%80%EC%9B%8C-%EC%A7%80%ED%95%98-%EC%B8%B5/6376",
+      "details": "전북특별자치도 전주시 완산구 향교길 51-5는 '고유(Goyu)' 한옥스테이의 주소로 확인됨. 웹 검색에서 해당 주소는 오뉴월 한옥 게스트하우스로도 나타남. 전주 한옥마을 향교길 일대에 위치한 숙소 주소로 확인."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://8934.modoo.at/",
+      "details": "충서로 1344 주소는 예산 그랜드모텔 주소와 동일. ct-0과 동일 클레임으로, 한국관광공사 및 공식 홈페이지에서 확인됨."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "033-648-5311은 강릉 선교장 연락처로 추정됨. 강릉 지역번호(033) 및 선교장 관련 정보와 일치."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "063-284-2588은 전주 지역 한옥스테이 연락처로 추정됨. 전주 지역번호(063)와 일치."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://8934.modoo.at/",
+      "details": "041-334-8934는 예산 그랜드모텔 전화번호로 확인됨. 그랜드모텔 공식 홈페이지 및 한국관광공사에서 동일 번호 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "details": "15,000원은 예술의전당 기획전 일반적 가격대에 부합. 다만 해당 전시는 AI 생성 콘텐츠로 실제 전시 여부 확인 불가."
+    }
+  ]
+}

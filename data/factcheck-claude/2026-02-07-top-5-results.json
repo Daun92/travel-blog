@@ -1,0 +1,110 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-07-top-5.md",
+  "title": "공유 안 하면 손해, 대한민국 오지 탐험 TOP 5: 접근 불가 비경 전격 공개",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "경북 영양군 수비면 죽파리 산39-1",
+      "value": "경북 영양군 수비면 죽파리 산39-1",
+      "severity": "critical",
+      "context": "- **위치**: 경북 영양군 수비면 죽파리 산39-1",
+      "lineNumber": 39
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "경북 울릉군 울릉읍 저동리",
+      "value": "경북 울릉군 울릉읍 저동리",
+      "severity": "critical",
+      "context": "- **위치**: 경북 울릉군 울릉읍 저동리",
+      "lineNumber": 73
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "문희마을길 370",
+      "value": "문희마을길 370",
+      "severity": "critical",
+      "context": "- **위치**: 강원특별자치도 정선군 신동읍 문희마을길 370",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "입장료 4,000원",
+      "value": "4,000원",
+      "severity": "minor",
+      "context": "- **비용**: 도선료 편도 약 15,000원 + 입장료 4,000원",
+      "lineNumber": 74
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "18,000원",
+      "value": "18,000원",
+      "severity": "minor",
+      "context": "- **비용**: 어른 기준 18,000원 (가이드 동행 필수, 예약제)",
+      "lineNumber": 19
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "- **비용**: 도선료 편도 약 15,000원 + 입장료 4,000원",
+      "lineNumber": 74
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.795Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.795Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.795Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.795Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.795Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.795Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    }
+  ]
+}

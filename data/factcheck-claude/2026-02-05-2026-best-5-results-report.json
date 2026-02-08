@@ -1,0 +1,230 @@
+{
+  "filePath": "blog/content/posts/culture/2026-02-05-2026-best-5.md",
+  "title": "서울 대형 뮤지컬 관람 가이드: 판교 퇴근러가 골라본 5편",
+  "checkedAt": "2026-02-08T12:39:39.113Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 11,
+    "verified": 11,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 5,
+      "verified": 5,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "예술의전당은 3호선 남부터미널역 5번 출구에서 마을버스 또는 도보 15분. 마을버스 배차 간격이 길어 대기 시간 발생 가능."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://tickets.interpark.com/goods/23012526",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "레미제라블 블루스퀘어 신한카드홀 공연 확인. 인터파크 티켓 공식 예매 페이지에서 확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://tickets.interpark.com/goods/23012526",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "2025.11.27~2026.02.22 공연 기간 확인."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.bluesquare.kr/pages/whatson/view.php?id=777",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "물랑루즈! 블루스퀘어 신한카드홀 공연 확인. 블루스퀘어 공식 사이트에서 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://tickets.interpark.com/goods/25013315",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "VIP석 180,000원 확인. 보헤미안(OP) 180,000원, R석 150,000원, S석 120,000원, A석 90,000원."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://tickets.interpark.com/goods/25013315",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "2025.11.27~2026.02.22 공연 기간 확인. 러닝타임 160분(인터미션 20분 포함)."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%ED%95%98%EB%8D%B0%EC%8A%A4%ED%83%80%EC%9A%B4",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "하데스타운 한국 초연 2021.08.24~2022.02.27 LG아트센터(역삼) 확인. 포스트에 과거 공연 기준 명시 완료."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/show/show_view?SN=73233",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "웃는 남자 예술의전당 오페라극장 공연 확인. 예술의전당 공식 사이트에서 확인."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/show/show_view?SN=73233",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "2025.01.09~2025.03.09 예술의전당 오페라극장 공연 기간 확인. 포스트에 과거 시즌 기준 명시 완료."
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "VIP 18만원 + 식사 2.5만 + 부대비용 1.5만 = 22만원 산술 정확. 물랑루즈 VIP 가격 기준 합리적 추정."
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T21:00:00.000Z",
+      "details": "블루스퀘어(용산구 이태원로 294) 주차장은 한강진역 인근에 위치. 공연 시간대 주차 혼잡 일반적."
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "transport",
+      "text": "3호선 남부터미널역에서 내려서 마을버스 기다리는 시간만 10분 넘게",
+      "value": "남부터미널역에서 마을버스 10분 대기",
+      "severity": "minor",
+      "lineNumber": 14
+    },
+    {
+      "id": "ct-1",
+      "type": "venue_exists",
+      "text": "레미제라블 블루스퀘어 신한카드홀 공연",
+      "value": "블루스퀘어 신한카드홀",
+      "severity": "critical",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-2",
+      "type": "event_period",
+      "text": "레미제라블 ~2026.02.22까지 공연",
+      "value": "2025.11.27~2026.02.22",
+      "severity": "critical",
+      "lineNumber": 18
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "물랑루즈! 블루스퀘어 신한카드홀 공연",
+      "value": "블루스퀘어 신한카드홀",
+      "severity": "critical",
+      "lineNumber": 30
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "물랑루즈! VIP석 180,000원",
+      "value": "180,000원",
+      "severity": "critical",
+      "lineNumber": 30
+    },
+    {
+      "id": "ct-5",
+      "type": "event_period",
+      "text": "물랑루즈! ~2026.02.22까지 공연",
+      "value": "2025.11.27~2026.02.22",
+      "severity": "critical",
+      "lineNumber": 30
+    },
+    {
+      "id": "ct-6",
+      "type": "venue_exists",
+      "text": "하데스타운 한국 공연 (LG아트센터)",
+      "value": "LG아트센터(역삼)",
+      "severity": "major",
+      "lineNumber": 24
+    },
+    {
+      "id": "ct-7",
+      "type": "venue_exists",
+      "text": "웃는 남자 예술의전당 오페라극장",
+      "value": "예술의전당 오페라극장",
+      "severity": "major",
+      "lineNumber": 36
+    },
+    {
+      "id": "ct-8",
+      "type": "event_period",
+      "text": "웃는 남자 2025년 1-3월 공연",
+      "value": "2025.01.09~2025.03.09",
+      "severity": "major",
+      "lineNumber": 36
+    },
+    {
+      "id": "ct-9",
+      "type": "price",
+      "text": "VIP석 티켓(18만 원) + 식사(2만5천) + 주차/프로그램(1만5천) = 인당 22만 원",
+      "value": "22만 원",
+      "severity": "minor",
+      "lineNumber": 50
+    },
+    {
+      "id": "ct-10",
+      "type": "venue_exists",
+      "text": "블루스퀘어 주차장 입구 좁은 편",
+      "value": "블루스퀘어 주차장",
+      "severity": "minor",
+      "lineNumber": 21
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

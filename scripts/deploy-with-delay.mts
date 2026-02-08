@@ -49,7 +49,18 @@ async function getApprovedDrafts(): Promise<string[]> {
     const { data } = matter(content);
 
     // draft: false인 파일만 배포 대상
-    // 또는 모든 초안 배포 (주석 해제로 변경 가능)
+    if (data.draft !== false) {
+      console.log(chalk.yellow(`  ⏭️  건너뜀 (draft: ${data.draft ?? 'undefined'}): ${filename}`));
+      continue;
+    }
+
+    // 팩트체크 점수 확인 (≥70 필수)
+    const fcScore = typeof data.factcheckScore === 'number' ? data.factcheckScore : 0;
+    if (fcScore < 70) {
+      console.log(chalk.yellow(`  ⏭️  건너뜀 (factcheckScore: ${fcScore}): ${filename}`));
+      continue;
+    }
+
     approvedFiles.push(filename);
   }
 

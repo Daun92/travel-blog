@@ -47,6 +47,9 @@ blog/
 data/api-cache/
 data/api-usage.json
 
+# 참조/레거시 코드
+ref/
+
 # 기타
 nul
 workspace/

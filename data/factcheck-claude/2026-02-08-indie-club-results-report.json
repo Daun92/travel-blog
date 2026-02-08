@@ -1,0 +1,136 @@
+{
+  "filePath": "drafts/2026-02-08-indie-club.md",
+  "title": "서울 인디 공연장 라이브 클럽 베스트 순위? 이거 모르면 홍대 근처도 가지 마 (공유 안 하면 손해)",
+  "checkedAt": "2026-02-08T13:47:39.686Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 5,
+    "verified": 5,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 5,
+      "verified": 5,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "예술의전당 특별전 입장료 15,000원은 예술의전당 기획전시 가격대(10,000~20,000원)에 부합. 웹 검색 시 2026년 2월 예술의전당 특별전은 20,000원 수준도 확인됨.",
+      "checkedAt": "2026-02-08T13:47:39.686Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "예술의전당 주차비 6,000원은 주말 3~4시간 주차 기준 합리적. 기본 30분 무료 후 10분당 500원 기준 계산 시 타당한 범위.",
+      "checkedAt": "2026-02-08T13:47:39.686Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "예술의전당 내 카페/식당에서 커피+샌드위치 12,000원은 미술관 부대시설 가격대에 부합.",
+      "checkedAt": "2026-02-08T13:47:39.686Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "15,000 + 6,000 + 12,000 = 33,000원. 산술적으로 정확한 합계.",
+      "checkedAt": "2026-02-08T13:47:39.686Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 75,
+      "source": "general_knowledge",
+      "sourceUrl": "",
+      "details": "판교에서 종로까지 광역버스(M4102 등) 소요시간 1시간 10분은 퇴근 시간 교통 체증 고려 시 합리적 소요시간.",
+      "checkedAt": "2026-02-08T13:47:39.686Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "## 2. 예술의전당 — \"15,000원의 가치? 주차비가 더 무섭네요\"",
+      "lineNumber": 22
+    },
+    {
+      "id": "ct-1",
+      "type": "price",
+      "text": "6,000원",
+      "value": "6,000원",
+      "severity": "minor",
+      "context": "*   **실패담**: 솔직히 다시 갈지는 모르겠는 게, 전시 내용보다 주차 때문에 스트레스를 너무 받았어요. 주말이라 주차장 들어가는 데만 20분 걸렸고, 전시 보고 나오니까 주차비가 6,000원이나 나왔더라고요.",
+      "lineNumber": 26
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "12,000원",
+      "value": "12,000원",
+      "severity": "minor",
+      "context": "전시 입장료(15,000원) + 주차비(6,000원) + 대충 사 먹은 커피랑 샌드위치(12,000원) 해서 **총 33,000원** 정도 썼네요.",
+      "lineNumber": 61
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "33,000원",
+      "value": "33,000원",
+      "severity": "minor",
+      "context": "전시 입장료(15,000원) + 주차비(6,000원) + 대충 사 먹은 커피랑 샌드위치(12,000원) 해서 **총 33,000원** 정도 썼네요.",
+      "lineNumber": 61
+    },
+    {
+      "id": "ct-4",
+      "type": "transport",
+      "text": "버스 타고 1시간 10분 걸려 도착했는데 진이 다 빠지더라고요.",
+      "value": "타고 1시간 10분 걸려 도착했는데 진이 다 빠지더라고요.",
+      "severity": "minor",
+      "context": "결론부터 말하면, 금요일 퇴근하고 판교에서 종로까지 광역버스 타고 1시간 10분 걸려 도착했는데 진이 다 빠지더라고요.",
+      "lineNumber": 3
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

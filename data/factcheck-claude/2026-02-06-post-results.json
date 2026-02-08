@@ -1,0 +1,178 @@
+{
+  "filePath": "blog\\content\\posts\\culture\\2026-02-06-post.md",
+  "title": "파주 예술 여행 가이드: 출판도시부터 헤이리까지, 문학과 예술이 숨 쉬는 공간",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "경기도 파주시 문발로",
+      "value": "경기도 파주시 문발로",
+      "severity": "critical",
+      "context": "*   **위치**: 경기도 파주시 문발로(출판도시) 및 탄현면 헤이리마을길(헤이리)",
+      "lineNumber": 61
+    },
+    {
+      "id": "ct-1",
+      "type": "hours",
+      "text": "10:00 ~ 20:00",
+      "value": "10:00 ~ 20:00",
+      "severity": "major",
+      "context": "*   지혜의 숲: 매일 10:00 ~ 20:00 (구역별 상이)",
+      "lineNumber": 66
+    },
+    {
+      "id": "ct-2",
+      "type": "hours",
+      "text": "09:00 ~ 18:00",
+      "value": "09:00 ~ 18:00",
+      "severity": "major",
+      "context": "*   미메시스 아트 뮤지엄: 09:00 ~ 18:00 (휴관일은 홈페이지 참고)",
+      "lineNumber": 67
+    },
+    {
+      "id": "ct-3",
+      "type": "hours",
+      "text": "11:00 ~ 18:00",
+      "value": "11:00 ~ 18:00",
+      "severity": "major",
+      "context": "*   헤이리 예술마을: 개별 갤러리마다 상이하나 보통 11:00 ~ 18:00 (월요일 휴관인 곳이 많음)",
+      "lineNumber": 68
+    },
+    {
+      "id": "ct-4",
+      "type": "hours",
+      "text": "휴관일은 홈페이지 참고)",
+      "value": "일은 홈페이지 참고)",
+      "severity": "major",
+      "context": "*   미메시스 아트 뮤지엄: 09:00 ~ 18:00 (휴관일은 홈페이지 참고)",
+      "lineNumber": 67
+    },
+    {
+      "id": "ct-5",
+      "type": "hours",
+      "text": "휴관인 곳이 많음)",
+      "value": "인 곳이 많음)",
+      "severity": "major",
+      "context": "*   헤이리 예술마을: 개별 갤러리마다 상이하나 보통 11:00 ~ 18:00 (월요일 휴관인 곳이 많음)",
+      "lineNumber": 68
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "10,000원",
+      "value": "10,000원",
+      "severity": "minor",
+      "context": "*   미메시스 아트 뮤지엄: 성인 기준 약 10,000원",
+      "lineNumber": 71
+    },
+    {
+      "id": "ct-7",
+      "type": "transport",
+      "text": "합정역 1번 출구",
+      "value": "합정역",
+      "severity": "minor",
+      "context": "*   대중교통: 서울 합정역 1번 출구에서 2200번 광역버스를 타면 출판도시와 헤이리까지 한 번에 이동 가능합니다. (약 40~60분 소요)",
+      "lineNumber": 63
+    },
+    {
+      "id": "ct-8",
+      "type": "transport",
+      "text": "버스와 같습니다.",
+      "value": "와 같습니다.",
+      "severity": "minor",
+      "context": "출판도시에서 차로 약 15분 정도 이동하면 '헤이리 예술마을'에 도착합니다. 이곳은 작가, 미술가, 음악가 등 예술인들이 모여 만든 공동체 마을로, 마을 전체가 하나의 거대한 캔버스와 같습니다.",
+      "lineNumber": 30
+    },
+    {
+      "id": "ct-9",
+      "type": "transport",
+      "text": "버스를 타면 출판도시와 헤이리까지 한 번에 이동 가능합니다. (약 40~60분 소요)",
+      "value": "를 타면 출판도시와 헤이리까지 한 번에 이동 가능합니다. (약 40~60분 소요)",
+      "severity": "minor",
+      "context": "*   대중교통: 서울 합정역 1번 출구에서 2200번 광역버스를 타면 출판도시와 헤이리까지 한 번에 이동 가능합니다. (약 40~60분 소요)",
+      "lineNumber": 63
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (location)"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (hours)"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (price)"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.809Z",
+      "details": "Claude Code 네이티브 검증 완료 (transport)"
+    }
+  ]
+}

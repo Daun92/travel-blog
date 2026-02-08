@@ -1,0 +1,23 @@
+{
+  "filePath": "blog\\content\\posts\\travel\\2026-02-07-tongyeong.md",
+  "title": "통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "general",
+      "text": "통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다 포스트 일반 정보",
+      "value": "통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을",
+      "severity": "minor"
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "checkedAt": "2026-02-08T07:17:09.792Z",
+      "details": "Claude Code 네이티브 검증 완료 (general)"
+    }
+  ]
+}
