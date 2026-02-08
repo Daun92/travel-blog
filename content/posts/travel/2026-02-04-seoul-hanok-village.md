@@ -20,8 +20,8 @@ keywords:
   - 북촌 포토스팟
 cover:
   image: /travel-blog/images/bukchon-cover.jpg
-  alt: a room with a wooden ceiling and a clock on the wall
-  caption: "Photo by [Clark Gu](https://unsplash.com/@atluminon) on [Unsplash](https://unsplash.com)"
+  alt: 북촌한옥마을 야경 골목 (한옥 기와지붕과 남산타워)
+  caption: "출처: 한국관광공사"
   relative: false
   hidden: false
 author: Blog Author

@@ -20,8 +20,8 @@ keywords:
   - 미술관 추천
 cover:
   image: /travel-blog/images/mmca-cover.jpg
-  alt: a couple of large sculptures sitting on top of a cement floor
-  caption: "Photo by [Andrea De Santis](https://unsplash.com/@santesson89) on [Unsplash](https://unsplash.com)"
+  alt: 국립현대미술관 서울관 정면 외관 (스테인드글라스와 건물명 간판)
+  caption: "출처: 한국관광공사"
   relative: false
   hidden: false
 author: Blog Author
