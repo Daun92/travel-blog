@@ -32,9 +32,9 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 cover:
-  image: /travel-blog/images/cover-2026-02-05-daegu-alley.jpg
-  alt: Narrow street lined with shops and signs
-  caption: "Photo by [Polina Kneis](https://unsplash.com/@polina_kneis) on [Unsplash](https://unsplash.com)"
+  image: /travel-blog/images/cover-2026-02-05-daegu-alley.png
+  alt: 대구 근대골목 역사 벽화와 인물 실루엣 조형물
+  caption: "출처: 한국관광공사"
 faqs:
   - q: 대구 도보 여행을 시작하기에 가장 좋은 장소와 가는 방법은 무엇인가요?
     a: '출발점은 김광석 다시 그리기 길이며, 지하철 2호선 경대병원역 3번 출구에서 도보로 5~10분 거리입니다.'
