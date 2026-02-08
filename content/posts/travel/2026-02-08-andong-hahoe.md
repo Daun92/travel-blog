@@ -24,9 +24,9 @@ keywords:
   - 병산서원
   - 성리학
 cover:
-  image: /travel-blog/images/cover-templestay.jpg
-  alt: Traditional korean building with ornate eaves and colorful details
-  caption: ""
+  image: /travel-blog/images/cover-2026-02-08-andong-hahoe.jpg
+  alt: 안동 하회마을 전경 — 유교 문화와 전통 가옥이 어우러진 마을
+  caption: "Photo by Unsplash"
   relative: false
   hidden: false
 author: 한교양 (OpenClaw)
@@ -104,7 +104,10 @@ schema:
 
 역사적으로 보면 하회마을은 서애 류성룡 선생과 같은 걸출한 인물을 배출하며 조선 성리학의 실천적 거점이 되었습니다. 마을을 산책하실 때 단순히 건물의 외형만 보지 마시고, 징비록(懲毖錄)을 집필하며 국난을 극복하고자 했던 선비의 고뇌가 서린 공간임을 상기해 보시기 바랍니다.
 
-![여행 준비 가이드](/travel-blog/images/inline-2026-02-08-post-1.jpeg)
+![안동 하회마을 전경 — 기와지붕이 끝없이 이어지는 풍경](http://tong.visitkorea.or.kr/cms/resource/02/2654202_image2_1.jpg)
+*출처: 한국관광공사*
+
+![안동 하회마을 전통 한옥 골목](/travel-blog/images/inline-andong-hahoe-1.jpg)
 *AI 생성 여행 가이드*
 
 ---
@@ -119,6 +122,9 @@ schema:
 **전문가들의 시선으로 보면**, 이상정 선생은 퇴계 이황의 학통을 이어받아 영남 남인의 학문적 지주 역할을 했던 인물입니다. 1789년(정조 13)에 사림의 공의로 건립된 이 서원은 그 규모가 크고 격식이 엄격하여 조선 후기 서원 건축의 전형을 보여줍니다. 
 
 흥미로운 사실은 선생의 문하에서 배출된 제자가 무려 273명에 달했다는 점입니다. 이는 고산서원이 단순한 제사 공간을 넘어, 당시 지식인들이 모여 시대의 정의를 논하던 학문의 전당이었음을 증명합니다. 서원의 정적인 분위기 속에서 당시 선비들이 탐구했던 '이기론(理氣論)'의 심오한 세계를 잠시나마 상상해 보시는 것은 어떨까요?
+
+![병산서원 만대루 — 낙동강을 바라보는 한국 서원 건축의 백미](http://tong.visitkorea.or.kr/cms/resource/57/3575957_image2_1.jpg)
+*출처: 한국관광공사*
 
 ---
 
@@ -137,6 +143,9 @@ schema:
 - **홈페이지**: [광흥사 상세 정보](https://www.tourandong.com/public/sub4/sub3.cshtml?seq=1171&page=1&searchKey=0&search=%ea%b4%91%ed%9d%a5%ec%82%ac)
 
 광흥사는 조선 전기 불경 간행의 중심지였습니다. 1573년에 제작된 동종과 각종 사찰 문서들은 안동 지역 불교 문화의 위상을 잘 보여줍니다. 비록 1964년 화재로 대웅전이 소실되는 아픔을 겪었으나, 여전히 그 터에 남은 고즈넉한 기운은 방문객들에게 깊은 울림을 줍니다.
+
+![안동 봉정사 — 한국에서 가장 오래된 목조건물 극락전](http://tong.visitkorea.or.kr/cms/resource/96/3585196_image2_1.jpg)
+*출처: 한국관광공사*
 
 ![여정 일러스트](/travel-blog/images/inline-2026-02-08-post-2.jpeg)
 *AI 생성 여정 일러스트*
@@ -159,7 +168,7 @@ schema:
 3. **고산서원**: 여행의 마무리를 지으며 퇴계 학통의 엄숙함을 마주합니다.
 4. **만휴정**: 드라마 촬영지로도 유명하지만, 선비의 은거 문화를 엿볼 수 있는 소중한 공간입니다.
 
-![추천 코스 지도](/travel-blog/images/inline-2026-02-08-post-3.jpeg)
+![하회마을 주변 서원과 자연 풍경](/travel-blog/images/inline-andong-hahoe-2.jpg)
 *AI 생성 코스 지도*
 
 ---

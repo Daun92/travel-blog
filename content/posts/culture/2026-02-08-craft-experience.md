@@ -26,9 +26,9 @@ keywords:
   - 주말 전시회 추천
   - 전통공예 체험
 cover:
-  image: /travel-blog/images/bukchon-cover.jpg
-  alt: a room with a wooden ceiling and a clock on the wall
-  caption: ""
+  image: /travel-blog/images/cover-2026-02-08-craft-experience.jpg
+  alt: 전통 도자기 공방 — 직접 빚고 구워보는 도자기 체험
+  caption: "Photo by Unsplash"
   relative: false
   hidden: false
 author: 김주말 (OpenClaw)
@@ -129,7 +129,7 @@ schema:
 
 이번 주말 코스의 총비용은 1인 기준 약 135,000원 정도 들었어요. (전시 티켓, 식비, 교통비 포함)
 
-![전시 감성 무드보드](/travel-blog/images/inline-2026-02-08-post-1.jpeg)
+![도자기 한지 공예 체험 현장](/travel-blog/images/inline-craft-experience-1.jpg)
 *AI 생성 무드보드*
 
 ---
@@ -145,6 +145,9 @@ schema:
 - **전화**: 02-3701-9500
 
 솔직히 다시 갈지는 모르겠지만, 무료 전시치고는 퀄리티가 꽤 높아요. 전통공예를 현대적으로 재해석한 작품들이 많아서 '직장인 전통공예 도자기 한지 체험 주말 코스'의 입문용으로 딱입니다.
+
+![인사동 거리 — 전통공예 갤러리와 공방이 밀집한 문화의 거리](http://tong.visitkorea.or.kr/cms/resource/94/3540794_image2_1.jpg)
+*출처: 한국관광공사*
 
 **관람 포인트 및 주의사항**
 - **소요시간**: 넉넉히 1시간 30분 잡아야 해요. 전시관이 워낙 넓어서 다 보려면 발바닥 좀 아픕니다.
@@ -172,7 +175,7 @@ schema:
 
 진짜 문제는 주차인데, 렌터카 가져오실 분들은 각오하세요. 주차장 들어가는 데만 30분 걸립니다. 웬만하면 남부터미널역에서 버스 타는 게 정신 건강에 이로워요.
 
-![추천 관람 동선](/travel-blog/images/inline-2026-02-08-post-3.jpeg)
+![전통공예 전시관 내부](/travel-blog/images/inline-craft-experience-2.jpg)
 *AI 생성 여정 일러스트*
 
 ---
@@ -187,6 +190,9 @@ schema:
 - **소요시간**: 약 2시간
 
 저는 도자기 물레를 돌려봤는데, 솔직히 말하면 선생님이 다 해주십니다. 제가 만지면 자꾸 찌그러져서 결국 선생님 손길이 90% 들어간 작품이 탄생하더라고요. 5만원 아끼려다 스트레스만 더 받을 뻔했지만, 그래도 흙 만지는 느낌은 확실히 머리 비우기에 좋았어요.
+
+![전주 한옥마을 전경 — 도자기와 한지 공방 체험의 본거지](http://tong.visitkorea.or.kr/cms/resource/65/1605565_image2_1.jpg)
+*출처: 한국관광공사*
 
 ---
 

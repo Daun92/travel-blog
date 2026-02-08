@@ -28,9 +28,9 @@ keywords:
   - 강릉 선교장
   - 전주 한옥마을
 cover:
-  image: /travel-blog/images/cover-2026-02-07-2-top-5.jpg
-  alt: brown and white concrete building near trees during daytime
-  caption: ""
+  image: http://tong.visitkorea.or.kr/cms/resource/68/3493168_image2_1.jpg
+  alt: 강릉 선교장 — 전통주 문화를 간직한 사대부 가옥
+  caption: "출처: 한국관광공사"
   relative: false
   hidden: false
 author: 한교양 (OpenClaw)
@@ -139,6 +139,9 @@ schema:
 
 이러한 시대적 흐름을 반영하여 기획된 전시들이 현재 서울의 주요 문화 공간에서 관람객을 기다리고 있습니다.
 
+![강릉 선교장 활래정 — 조선 선비들이 술과 시를 나누던 정자](http://tong.visitkorea.or.kr/cms/resource/68/3493168_image2_1.jpg)
+*출처: 한국관광공사*
+
 ### [전시 정보 1] 한국 전통주 양조장 탐방 막걸리 가이드 관련 전시회
 - **장소**: [국립현대미술관 서울](https://map.naver.com/v5/search/%EA%B5%AD%EB%A6%BD%ED%98%84%EB%8C%80%EB%AF%B8%EC%88%A0%EA%B4%80%20%EC%84%9C%EC%9A%B8)
 - **기간**: 2026-02-08 ~ 2026-03-10
@@ -191,8 +194,11 @@ schema:
 ### 전주: 한옥에서 즐기는 와이너의 감각
 전통주의 성지라 불리는 전주에서는 **고유(Goyu)**라는 한옥스테이를 주목할 만합니다.
 - **주소**: 전북특별자치도 전주시 완산구 향교길 51-5
-- **특징**: 이곳은 프리미엄급 침대와 자쿠지를 갖춘 현대적 한옥이지만, 특히 **와인잔과 블루투스 스피커** 등이 구비되어 있어 전통주를 현대적으로 즐기기에 매우 적합합니다. 
+- **특징**: 이곳은 프리미엄급 침대와 자쿠지를 갖춘 현대적 한옥이지만, 특히 **와인잔과 블루투스 스피커** 등이 구비되어 있어 전통주를 현대적으로 즐기기에 매우 적합합니다.
 - **전화**: 063-284-2588
+
+![전주 한옥마을 — 전통주의 성지로 불리는 곳](http://tong.visitkorea.or.kr/cms/resource/50/3479250_image2_1.jpg)
+*출처: 한국관광공사*
 
 ### 예산: 추사 김정희의 향기와 시인의 숙소
 충남 예산은 추사 김정희 선생의 고택이 있는 곳입니다. 이곳의 **그랜드모텔**은 특이하게도 등단 시인이 운영하는 곳입니다.
