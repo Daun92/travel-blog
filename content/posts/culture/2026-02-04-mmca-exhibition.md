@@ -1,29 +1,41 @@
 ---
-title: "국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁"
-date: 2026-02-04T11:00:00+09:00
+title: '국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁'
+date: 2026-02-04T02:00:00.000Z
 draft: false
-description: "국립현대미술관 서울관의 2026년 주요 전시회 소개와 알뜰하게 관람하는 팁을 정리했습니다. 야간 무료 입장 정보와 주변 볼거리까지!"
-summary: "국립현대미술관 서울관 2026년 전시 정보와 관람 팁, 주변 볼거리를 소개합니다."
-tags: ["문화", "예술", "전시회", "미술관", "서울", "국립현대미술관"]
-categories: ["culture"]
-keywords: ["국립현대미술관", "MMCA 서울", "서울 전시회", "미술관 추천"]
+description: 국립현대미술관 서울관의 2026년 주요 전시회 소개와 알뜰하게 관람하는 팁을 정리했습니다. 야간 무료 입장 정보와 주변 볼거리까지!
+summary: '국립현대미술관 서울관 2026년 전시 정보와 관람 팁, 주변 볼거리를 소개합니다.'
+tags:
+  - 문화
+  - 예술
+  - 전시회
+  - 미술관
+  - 서울
+  - 국립현대미술관
+categories:
+  - culture
+keywords:
+  - 국립현대미술관
+  - MMCA 서울
+  - 서울 전시회
+  - 미술관 추천
 cover:
-  image: "/travel-blog/images/mmca-cover.jpg"
-  alt: "a couple of large sculptures sitting on top of a cement floor"
+  image: /travel-blog/images/mmca-cover.jpg
+  alt: a couple of large sculptures sitting on top of a cement floor
   caption: "Photo by [Andrea De Santis](https://unsplash.com/@santesson89) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
-author: "Blog Author"
-venue: "국립현대미술관 서울"
-eventDate: "상설 전시"
-ticketPrice: "통합권 10,000원 (야간/청년 무료)"
-openingHours: "10:00 - 18:00 (수, 토 21:00까지)"
+author: Blog Author
+venue: 국립현대미술관 서울
+eventDate: 상설 전시
+ticketPrice: '통합권 7,000원 (야간/청년 무료)'
+openingHours: '10:00 - 18:00 (수, 토 21:00까지)'
 showToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
+factcheckScore: 83
 ---
 
 ## 소개
@@ -39,7 +51,7 @@ ShowWordCount: true
 | **장소** | 서울 종로구 삼청로 30 |
 | **운영시간** | 10:00-18:00 (수, 토 21:00까지) |
 | **휴관일** | 매주 월요일, 1월 1일, 설/추석 당일 |
-| **입장료** | 통합권 10,000원 (4관 전시 모두 관람) |
+| **입장료** | 통합권 7,000원 (4관 전시 모두 관람) |
 | **야간 무료** | 수·토 18:00-21:00 |
 | **청년 무료** | 24세 미만 무료 (신분증 제시) |
 | **예매** | [국립현대미술관 공식 홈페이지](https://www.mmca.go.kr) |
@@ -90,7 +102,7 @@ ShowWordCount: true
 ## 관람 포인트
 
 ### 1. 건축물 자체가 작품
-서울관 건물은 민현식 건축가의 작품으로, 한옥의 마당 개념을 현대적으로 재해석했습니다. 지하1층부터 지상3층까지 총 4개 층으로 구성되어 있으며, 전시와 별개로 건축 투어도 추천드려요.
+서울관 건물은 민현준 건축가의 작품으로, 한옥의 마당 개념을 현대적으로 재해석했습니다. 지하1층부터 지상3층까지 총 4개 층으로 구성되어 있으며, 전시와 별개로 건축 투어도 추천드려요.
 
 ### 2. 경복궁 마당 (3층)
 3층에 위치한 '경복궁 마당'에서는 경복궁과 인왕산을 조망할 수 있습니다. 한옥의 마당을 현대적으로 재해석한 공간으로, 날씨 좋은 날 잠시 쉬어가기 좋습니다.
@@ -118,7 +130,7 @@ ShowWordCount: true
    - 야간 무료: 수·토 18:00-21:00
    - 24세 미만: 무료 (신분증 제시)
    - 65세 이상: 무료
-   - 통합권: 10,000원 (국립현대미술관 4개관 모두 관람)
+   - 통합권: 7,000원 (국립현대미술관 4개관 모두 관람)
    - 개별 전시: 2,000원~5,000원
 
 4. **짐 보관**: 1층 무료 물품보관함 이용 가능

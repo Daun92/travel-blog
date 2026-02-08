@@ -32,11 +32,9 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 cover:
-  image: /travel-blog/images/cover-daegu-LVeFDJRtwEA.jpg
-  alt: A storefront with an open door and colorful umbrella.
-  caption: "Photo by [IRa Kang](https://unsplash.com/@lifeinkorea) on [Unsplash](https://unsplash.com)"
-  relative: false
-  hidden: false
+  image: /travel-blog/images/cover-2026-02-05-daegu-alley.jpg
+  alt: Narrow street lined with shops and signs
+  caption: "Photo by [Polina Kneis](https://unsplash.com/@polina_kneis) on [Unsplash](https://unsplash.com)"
 faqs:
   - q: 대구 도보 여행을 시작하기에 가장 좋은 장소와 가는 방법은 무엇인가요?
     a: '출발점은 김광석 다시 그리기 길이며, 지하철 2호선 경대병원역 3번 출구에서 도보로 5~10분 거리입니다.'
@@ -114,6 +112,7 @@ schema:
         position: 3
         name: '대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스'
         item: /travel-blog/posts//
+factcheckScore: 88
 ---
 # 대구 여행의 정수: 근대골목 역사 탐방부터 김광석 거리, 서문시장까지 완벽 도보 코스
 

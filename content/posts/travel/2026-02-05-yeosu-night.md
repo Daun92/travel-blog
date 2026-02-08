@@ -114,6 +114,7 @@ schema:
         position: 3
         name: '여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스'
         item: /travel-blog/posts//
+factcheckScore: 78
 ---
 # 여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스
 

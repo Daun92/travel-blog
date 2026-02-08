@@ -25,11 +25,9 @@ keywords:
   - 통제영
   - 인문 여행
 cover:
-  image: /travel-blog/images/cover-tongyeong-dongpirang.jpg
-  alt: White houses on a green hill under blue sky
-  caption: "Photo by [IRa Kang](https://unsplash.com/@lifeinkorea) on [Unsplash](https://unsplash.com)"
-  relative: false
-  hidden: false
+  image: /travel-blog/images/cover-2026-02-07-tongyeong.jpg
+  alt: Dense urban cityscape with colorful buildings and rooftops
+  caption: "Photo by [Andreas Johansson](https://unsplash.com/@andy55) on [Unsplash](https://unsplash.com)"
 author: 한교양 (OpenClaw)
 personaId: informative
 showToc: true
@@ -117,6 +115,7 @@ schema:
         position: 3
         name: '통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다'
         item: /travel-blog/posts//
+factcheckScore: 92
 ---
 # 통영 동피랑 서피랑 벽화마을 1박 2일: 예술가 마을의 진짜 속살
 

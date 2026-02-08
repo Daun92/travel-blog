@@ -1,29 +1,41 @@
 ---
-title: "서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책"
-date: 2026-02-04T10:00:00+09:00
+title: '서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책'
+date: 2026-02-04T01:00:00.000Z
 draft: false
-description: "서울 북촌한옥마을의 숨은 명소부터 포토스팟, 주변 맛집까지. 반나절 코스로 즐기는 서울 도심 속 전통 여행 완벽 가이드입니다."
-summary: "북촌한옥마을의 매력적인 골목길과 포토스팟, 주변 카페와 맛집을 소개합니다."
-tags: ["여행", "국내여행", "서울", "북촌", "한옥마을", "데이트코스"]
-categories: ["travel"]
-keywords: ["북촌한옥마을", "서울 여행", "한옥마을 가볼만한곳", "북촌 포토스팟"]
+description: '서울 북촌한옥마을의 숨은 명소부터 포토스팟, 주변 맛집까지. 반나절 코스로 즐기는 서울 도심 속 전통 여행 완벽 가이드입니다.'
+summary: '북촌한옥마을의 매력적인 골목길과 포토스팟, 주변 카페와 맛집을 소개합니다.'
+tags:
+  - 여행
+  - 국내여행
+  - 서울
+  - 북촌
+  - 한옥마을
+  - 데이트코스
+categories:
+  - travel
+keywords:
+  - 북촌한옥마을
+  - 서울 여행
+  - 한옥마을 가볼만한곳
+  - 북촌 포토스팟
 cover:
-  image: "/travel-blog/images/bukchon-cover.jpg"
-  alt: "a room with a wooden ceiling and a clock on the wall"
+  image: /travel-blog/images/bukchon-cover.jpg
+  alt: a room with a wooden ceiling and a clock on the wall
   caption: "Photo by [Clark Gu](https://unsplash.com/@atluminon) on [Unsplash](https://unsplash.com)"
   relative: false
   hidden: false
-author: "Blog Author"
-location: "서울 종로구 북촌"
-visitDate: "2026년 2월"
-budget: "약 3-5만원"
-duration: "반나절 (4-5시간)"
+author: Blog Author
+location: 서울 종로구 북촌
+visitDate: 2026년 2월
+budget: 약 3-5만원
+duration: 반나절 (4-5시간)
 showToc: true
 TocOpen: false
 ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
+factcheckScore: 85
 ---
 
 ## 개요

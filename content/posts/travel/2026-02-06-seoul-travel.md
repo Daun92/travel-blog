@@ -42,49 +42,50 @@ faqs:
   - q: 서울 2박 3일 여행 예산은 얼마나 잡아야 하나요?
     a: 숙박비 포함 1인당 약 25~33만 원 정도 예상하세요. 주말 숙소비가 평일 대비 1.5배 정도 비쌉니다.
   - q: 서울 여행 시 교통수단은 뭐가 좋나요?
-    a: 기후동행카드 3일권(10,000원, 1일권 5,000원)으로 지하철 무제한 이용을 추천합니다. 주말에는 택시 잡기 어려워요.
+    a: '기후동행카드 3일권(10,000원, 1일권 5,000원)으로 지하철 무제한 이용을 추천합니다. 주말에는 택시 잡기 어려워요.'
   - q: 광장시장 맛집 웨이팅 시간은 얼마나 되나요?
     a: 주말 기준 인기 맛집은 30분~1시간 웨이팅이 기본입니다. 캐치테이블 앱으로 원격 줄서기를 추천해요.
   - q: 성수동 주말에 사람 많나요?
-    a: 네, 특히 디올 성수 같은 핫플은 줄이 20m 이상 될 수 있습니다. 오전 일찍 방문하면 좀 낫습니다.
+    a: '네, 특히 디올 성수 같은 핫플은 줄이 20m 이상 될 수 있습니다. 오전 일찍 방문하면 좀 낫습니다.'
   - q: 서울 여행 시 짐 보관은 어떻게 하나요?
-    a: 지하철역 T-Locker를 이용하세요. 소형 기준 4시간에 2,000원 정도이며, 캐리어 끌고 다니는 것보다 훨씬 편합니다.
+    a: '지하철역 T-Locker를 이용하세요. 소형 기준 4시간에 2,000원 정도이며, 캐리어 끌고 다니는 것보다 훨씬 편합니다.'
 schema:
-  - "@context": https://schema.org
-    "@type": FAQPage
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
     mainEntity:
-      - "@type": Question
+      - '@type': Question
         name: 서울 2박 3일 여행 예산은 얼마나 잡아야 하나요?
         acceptedAnswer:
-          "@type": Answer
+          '@type': Answer
           text: 숙박비 포함 1인당 약 25~33만 원 정도 예상하세요. 주말 숙소비가 평일 대비 1.5배 정도 비쌉니다.
-      - "@type": Question
+      - '@type': Question
         name: 서울 여행 시 교통수단은 뭐가 좋나요?
         acceptedAnswer:
-          "@type": Answer
-          text: 기후동행카드 3일권(10,000원, 1일권 5,000원)으로 지하철 무제한 이용을 추천합니다.
-      - "@type": Question
+          '@type': Answer
+          text: '기후동행카드 3일권(10,000원, 1일권 5,000원)으로 지하철 무제한 이용을 추천합니다.'
+      - '@type': Question
         name: 광장시장 맛집 웨이팅 시간은 얼마나 되나요?
         acceptedAnswer:
-          "@type": Answer
+          '@type': Answer
           text: 주말 기준 인기 맛집은 30분~1시간 웨이팅이 기본입니다. 캐치테이블 앱으로 원격 줄서기를 추천해요.
-  - "@context": https://schema.org
-    "@type": Article
+  - '@context': 'https://schema.org'
+    '@type': Article
     name: 서울 여행 완벽 가이드 - 2박 3일 추천 코스
     author:
-      "@type": Person
+      '@type': Person
       name: Blog Author
-  - "@context": https://schema.org
-    "@type": BreadcrumbList
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
     itemListElement:
-      - "@type": ListItem
+      - '@type': ListItem
         position: 1
         name: 홈
-        item: https://daun92.github.io/travel-blog/
-      - "@type": ListItem
+        item: 'https://daun92.github.io/travel-blog/'
+      - '@type': ListItem
         position: 2
         name: 여행
-        item: https://daun92.github.io/travel-blog/categories/travel/
+        item: 'https://daun92.github.io/travel-blog/categories/travel/'
+factcheckScore: 85
 ---
 # 판교 탈출해서 서울 한복판으로: 48시간 굴려본 현실적인 서울 2박 3일 동선
 

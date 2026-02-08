@@ -42,49 +42,50 @@ faqs:
   - q: 북한산 초보자 추천 코스는 어디인가요?
     a: 비봉~사모바위 코스(왕복 2시간 30분)가 가장 무난합니다. 경사가 완만하고 능선 조망이 좋아요.
   - q: 북한산 주차비는 얼마인가요?
-    a: 북한산성 제1주차장 기준 종일 주차 약 13,000원이며, 주말 오전 9시면 만차됩니다. 대중교통 추천해요.
+    a: '북한산성 제1주차장 기준 종일 주차 약 13,000원이며, 주말 오전 9시면 만차됩니다. 대중교통 추천해요.'
   - q: 북한산 등산 시 운동화로 가도 되나요?
     a: 안 됩니다. 북한산은 바위 구간이 많아 일반 운동화는 미끄러져 위험합니다. 접지력 좋은 등산화 필수예요.
   - q: 백운대 정상까지 소요 시간은 얼마나 되나요?
-    a: 백운대 탐방지원센터에서 출발 시 왕복 약 3시간 30분이며, 주말에는 정상 인증샷 대기 시간이 추가됩니다.
+    a: '백운대 탐방지원센터에서 출발 시 왕복 약 3시간 30분이며, 주말에는 정상 인증샷 대기 시간이 추가됩니다.'
   - q: 북한산 등산로에 화장실이 있나요?
     a: 탐방지원센터 입구에 있는 화장실이 사실상 마지막입니다. 비봉 코스는 금선사 부근에 하나 더 있어요.
 schema:
-  - "@context": https://schema.org
-    "@type": FAQPage
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
     mainEntity:
-      - "@type": Question
+      - '@type': Question
         name: 북한산 초보자 추천 코스는 어디인가요?
         acceptedAnswer:
-          "@type": Answer
+          '@type': Answer
           text: 비봉~사모바위 코스(왕복 2시간 30분)가 가장 무난합니다.
-      - "@type": Question
+      - '@type': Question
         name: 북한산 주차비는 얼마인가요?
         acceptedAnswer:
-          "@type": Answer
-          text: 북한산성 제1주차장 기준 종일 주차 약 13,000원이며, 주말 오전 9시면 만차됩니다.
-      - "@type": Question
+          '@type': Answer
+          text: '북한산성 제1주차장 기준 종일 주차 약 13,000원이며, 주말 오전 9시면 만차됩니다.'
+      - '@type': Question
         name: 북한산 등산 시 운동화로 가도 되나요?
         acceptedAnswer:
-          "@type": Answer
+          '@type': Answer
           text: 안 됩니다. 바위 구간이 많아 접지력 좋은 등산화가 필수입니다.
-  - "@context": https://schema.org
-    "@type": Article
+  - '@context': 'https://schema.org'
+    '@type': Article
     name: 북한산 주말 등산 코스 가이드
     author:
-      "@type": Person
+      '@type': Person
       name: Blog Author
-  - "@context": https://schema.org
-    "@type": BreadcrumbList
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
     itemListElement:
-      - "@type": ListItem
+      - '@type': ListItem
         position: 1
         name: 홈
-        item: https://daun92.github.io/travel-blog/
-      - "@type": ListItem
+        item: 'https://daun92.github.io/travel-blog/'
+      - '@type': ListItem
         position: 2
         name: 여행
-        item: https://daun92.github.io/travel-blog/categories/travel/
+        item: 'https://daun92.github.io/travel-blog/categories/travel/'
+factcheckScore: 90
 ---
 # 북한산 주말 등산: 40분 줄 서서 인증샷 찍을 자신 없으면 읽어보세요
 

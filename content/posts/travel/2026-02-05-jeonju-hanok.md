@@ -32,11 +32,9 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 cover:
-  image: /travel-blog/images/cover-jeonju-JVYIKBT8oDA.jpg
-  alt: a close up of a roof made of bricks
-  caption: "Photo by [Minku Kang](https://unsplash.com/@minkus) on [Unsplash](https://unsplash.com)"
-  relative: false
-  hidden: false
+  image: /travel-blog/images/cover-2026-02-05-jeonju-hanok.jpg
+  alt: A traditional korean gate against a clear blue sky.
+  caption: "Photo by [IRa Kang](https://unsplash.com/@lifeinkorea) on [Unsplash](https://unsplash.com)"
 faqs:
   - q: 서울에서 전주까지 갈 때 가장 추천하는 교통수단은 무엇인가요?
     a: 용산역에서 KTX를 타면 1시간 40분 만에 도착합니다. 주말 고속도로 정체를 피할 수 있어 기차 이용을 강력 추천합니다.
@@ -114,6 +112,7 @@ schema:
         position: 3
         name: '전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스'
         item: /travel-blog/posts//
+factcheckScore: 82
 ---
 # 전주 한옥마을, 퇴근하고 냅다 달린 1박 2일 현실 생존기
 

@@ -32,11 +32,9 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 cover:
-  image: /travel-blog/images/cover-gangneung-ocean-0dXVrQMsmc8.jpg
-  alt: Outdoor cafe seating with ocean view
-  caption: "Photo by [Adam Hlásný](https://unsplash.com/@adamhlasny) on [Unsplash](https://unsplash.com)"
-  relative: false
-  hidden: false
+  image: /travel-blog/images/cover-2026-02-05-gangneung-cafe.jpg
+  alt: A view of a beach with a city in the background
+  caption: "Photo by [Hoyoun Lee](https://unsplash.com/@icedcocoa) on [Unsplash](https://unsplash.com)"
 faqs:
   - q: 주말에 방문할 때 주차는 어디에 하는 것이 좋나요?
     a: 해변 앞 도로 대신 강릉항 여객터미널 무료 주차장을 이용하면 5분 거리로 쾌적합니다.
@@ -47,7 +45,7 @@ faqs:
   - q: 1박 2일 2인 기준 예상 여행 경비는 어느 정도인가요?
     a: '교통비, 숙박비, 식비 등을 모두 포함하여 2인 기준 약 35만 원 정도가 소요됩니다.'
   - q: 웨이팅이 적고 창가 자리에 앉기 편한 카페는 어디인가요?
-    a: '커피커퍼는 상대적으로 덜 붐비고 분위기가 클래식해 창가 자리를 잡을 확률이 가장 높습니다.'
+    a: 커피커퍼는 상대적으로 덜 붐비고 분위기가 클래식해 창가 자리를 잡을 확률이 가장 높습니다.
 schema:
   - '@context': 'https://schema.org'
     '@type': FAQPage
@@ -114,6 +112,7 @@ schema:
         position: 3
         name: '강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드'
         item: /travel-blog/posts//
+factcheckScore: 85
 ---
 # 금요일 퇴근하고 냅다 쏜 강릉 안목해변, 솔직히 커피 맛보다 주차가 문제임
 
