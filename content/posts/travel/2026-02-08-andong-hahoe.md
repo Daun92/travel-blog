@@ -148,8 +148,8 @@ schema:
 ![안동 봉정사 — 한국에서 가장 오래된 목조건물 극락전](http://tong.visitkorea.or.kr/cms/resource/96/3585196_image2_1.jpg)
 *출처: 한국관광공사*
 
-![여정 일러스트](/travel-blog/images/inline-2026-02-08-post-2.jpeg)
-*AI 생성 여정 일러스트*
+![안동 전통 마을 풍경](/travel-blog/images/inline-andong-hahoe-2.jpg)
+*안동 전통 마을의 고즈넉한 풍경*
 
 ---
 

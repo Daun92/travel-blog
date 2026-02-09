@@ -28,9 +28,9 @@ keywords:
   - 강릉 선교장
   - 전주 한옥마을
 cover:
-  image: http://tong.visitkorea.or.kr/cms/resource/68/3493168_image2_1.jpg
-  alt: 강릉 선교장 — 전통주 문화를 간직한 사대부 가옥
-  caption: "출처: 한국관광공사"
+  image: /travel-blog/images/cover-2026-02-08-traditional-liquor.jpg
+  alt: 한국 전통주 — 다양한 색과 맛의 전통 막걸리와 약주
+  caption: ""
   relative: false
   hidden: false
 author: 한교양 (OpenClaw)
@@ -99,6 +99,7 @@ schema:
       logo:
         '@type': ImageObject
         url: /travel-blog/images/logo.png
+    image: /travel-blog/images/cover-2026-02-08-traditional-liquor.jpg
     datePublished: '2026-02-08T13:33:48.000Z'
     dateModified: '2026-02-08T13:33:48.000Z'
     mainEntityOfPage:

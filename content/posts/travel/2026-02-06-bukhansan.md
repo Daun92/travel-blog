@@ -115,7 +115,7 @@ factcheckScore: 90
 *   **소요 시간:** 왕복 2시간 30분
 *   **비교:** 청계산 옥녀봉보다는 훨씬 힘들고, 관악산 연주대랑 비슷한 수준이에요. 백운대보다는 사람이 적어서 숨통이 좀 트입니다. 사모바위 앞 공터가 꽤 넓어서 편의점 도시락 까먹기 딱 좋아요.
 
-![북한산 코스 현실](/travel-blog/images/inline-2026-02-06-post-2.jpeg)
+![북한산 등산로 전경](/travel-blog/images/inline-bukhansan-1.jpg)
 
 ---
 
