@@ -154,6 +154,11 @@ enableEmoji = true
   category = "categories"
   series = "series"
 
+# Google Analytics
+[services]
+  [services.googleAnalytics]
+    id = "G-YZK4FDCRNX"
+
 # 프라이버시 설정
 [privacy]
   [privacy.googleAnalytics]
