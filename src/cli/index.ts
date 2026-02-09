@@ -31,6 +31,7 @@ import { enhanceCommand } from './commands/enhance.js';
 import { linksCommand } from './commands/links.js';
 import { surveyCommand } from './commands/survey.js';
 import { eventsCommand } from './commands/events.js';
+import { editCommand } from './commands/edit.js';
 
 const program = new Command();
 
@@ -195,6 +196,9 @@ program
   .option('--skip-api', 'API 수집 건너뛰기')
   .option('--skip-gemini', 'Gemini AI 발굴 건너뛰기')
   .action((action = 'list', args, options) => eventsCommand(action, args, options));
+
+// 로컬 에디터
+program.addCommand(editCommand);
 
 // 프로그램 실행
 program.parse();
