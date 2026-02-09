@@ -1,0 +1,279 @@
+{
+  "filePath": "drafts/2026-02-08-indie-venue.md",
+  "title": "서울 인디 공연장 순위 TOP 6: 롤링홀이 1위? 진짜 가본 사람만 아는 현실 랭킹",
+  "checkedAt": "2026-02-08T22:18:20.938Z",
+  "overallScore": 84,
+  "categoryScores": {
+    "critical": 86,
+    "major": 100,
+    "minor": 71
+  },
+  "claims": {
+    "total": 14,
+    "verified": 11,
+    "false": 1,
+    "unknown": 2
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 7,
+      "verified": 6,
+      "false": 1,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 7,
+      "verified": 5,
+      "false": 0,
+      "unknown": 2
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureSpace/view.do?facCode=101472",
+      "details": "서울문화포털에서 동일 주소 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/KT&G%20%EC%83%81%EC%83%81%EB%A7%88%EB%8B%B9%20%ED%99%8D%EB%8C%80%20%EB%9D%BC%EC%9D%B4%EB%B8%8C%ED%99%80",
+      "details": "나무위키 및 공식 사이트에서 동일 주소 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://place.map.kakao.com/13494735",
+      "details": "카카오맵에서 지번주소 서교동 407-8 확인. 도로명은 와우산로17길 12",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EC%A0%9C%EB%B9%84%EB%8B%A4%EB%B0%A9",
+      "details": "나무위키, 인디스트릿 등에서 동일 주소 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%ED%81%B4%EB%9F%BD%20%EB%B9%B5",
+      "details": "나무위키에서 동일 주소 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "false",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EB%AC%B4%EC%8B%A0%EC%82%AC%20%EA%B0%9C%EB%9F%AC%EC%A7%80",
+      "details": "정확한 주소는 서울시 마포구 잔다리로 32 (서문빌딩) B1. 포스트에 정확한 주소 누락",
+      "correctValue": "서울시 마포구 잔다리로 32 (서문빌딩) B1",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.rollinghall.co.kr/",
+      "details": "공식 홈페이지 및 문화포털에서 동일 전화번호 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.sangsangmadang.com/main/HD",
+      "details": "공식 사이트에서 동일 전화번호 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://culture.seoul.go.kr/culture/culture/cultureSpace/view.do?facCode=101472",
+      "details": "서울문화포털에서 스탠딩 400명, 좌석 200석 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://kopis.or.kr/por/db/prfplc/prfplcView.do?menuId=MNU_00021&mt10Id=FC000328",
+      "details": "KOPIS 공연예술통합전산망에서 동일 수용인원 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-10",
+      "status": "unknown",
+      "confidence": 60,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EB%AC%B4%EC%8B%A0%EC%82%AC%20%EA%B0%9C%EB%9F%AC%EC%A7%80",
+      "details": "스탠딩 550명 확인. 좌석 수는 출처마다 230명~280석으로 상이. 공식 사이트 기준 280석 표기",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-11",
+      "status": "unknown",
+      "confidence": 55,
+      "source": "web_search",
+      "sourceUrl": "https://polle.com/place/5nec14/%EC%A0%9C%EB%B9%84%EB%8B%A4%EB%B0%A9",
+      "details": "일부 출처에서 10:00 개점으로 표기. 포스트의 11:30은 확인 어려움 — 변동 가능",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%ED%81%B4%EB%9F%BD%20%EB%B9%B5",
+      "details": "수~일 영업 확인. 구체적 시간은 변동 가능",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EB%A1%A4%EB%A7%81%ED%99%80",
+      "details": "1995년 6월 개관 확인",
+      "checkedAt": "2026-02-08T22:18:20.938Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "서울시 마포구 어울마당로 35 지하 1·2층",
+      "value": "서울시 마포구 어울마당로 35 지하 1·2층",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "서울시 마포구 어울마당로 65 지하 1~2층",
+      "value": "서울시 마포구 어울마당로 65 지하 1~2층",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "서울시 마포구 서교동 407-8 지하1층",
+      "value": "서울시 마포구 서교동 407-8 지하1층",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "서울시 마포구 와우산로 24 (상수동)",
+      "value": "서울시 마포구 와우산로 24",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-4",
+      "type": "location",
+      "text": "서울시 마포구 와우산로29길 12 지하 1층",
+      "value": "서울시 마포구 와우산로29길 12 지하 1층",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-5",
+      "type": "location",
+      "text": "무신사 개러지 주소 미기재 (홍대입구역-합정역 사이)",
+      "value": "서울시 마포구 잔다리로 32",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-6",
+      "type": "contact",
+      "text": "02-325-6071",
+      "value": "02-325-6071",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-7",
+      "type": "contact",
+      "text": "02-330-6200",
+      "value": "02-330-6200",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-8",
+      "type": "facilities",
+      "text": "롤링홀 스탠딩 400명 / 좌석 200석",
+      "value": "400/200",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-9",
+      "type": "facilities",
+      "text": "상상마당 스탠딩 400명 / 좌석 189석",
+      "value": "400/189",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-10",
+      "type": "facilities",
+      "text": "무신사 개러지 스탠딩 550명 / 좌석 280석",
+      "value": "550/280",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-11",
+      "type": "hours",
+      "text": "제비다방 매일 11:30~새벽 2시",
+      "value": "11:30~02:00",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-12",
+      "type": "hours",
+      "text": "클럽빵 수~일 18시~익일 2시",
+      "value": "수~일 18:00~02:00",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-13",
+      "type": "venue_exists",
+      "text": "롤링홀 1995년 개관",
+      "value": "1995",
+      "severity": "critical"
+    }
+  ],
+  "corrections": [
+    {
+      "claimId": "ct-5",
+      "originalText": "무신사 개러지 주소 미기재 (홍대입구역-합정역 사이)",
+      "suggestedText": "무신사 개러지 주소 미기재 (홍대입구역-합정역 사이)",
+      "reason": "정확한 주소는 서울시 마포구 잔다리로 32 (서문빌딩) B1. 포스트에 정확한 주소 누락",
+      "autoApplicable": false
+    }
+  ],
+  "passesGate": false,
+  "needsHumanReview": true,
+  "blockPublish": true,
+  "version": "1.0.0-claude"
+}

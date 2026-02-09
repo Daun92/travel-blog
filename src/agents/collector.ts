@@ -447,6 +447,9 @@ export function dataToPromptContext(data: CollectedData): string {
   context += `⚠️ 위 데이터는 공공 API에서 수집한 실제 정보입니다. `;
   context += `장소명, 주소, 전화번호, 운영시간 등을 그대로 사용하세요. `;
   context += `수집되지 않은 정보(가격, 메뉴 등)는 "확인 필요"로 표기하세요.\n`;
+  context += `⚠️ 주의: API 검색 결과에 미술관·공연장(문화시설)이 포함될 수 있으나, `;
+  context += `이는 지역 검색 결과일 뿐 주제와 관련된 특별 전시가 열리고 있다는 의미가 아닙니다. `;
+  context += `데이터에 명시된 전시/행사 정보만 사용하고, 전시명·기간·가격을 절대 만들어내지 마세요.\n`;
 
   return context;
 }
