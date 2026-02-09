@@ -136,8 +136,8 @@ schema:
 ![안동 하회마을 전경 — 낙동강이 감싸 안은 600년 전통 마을](/travel-blog/images/vk-hahoe-village.jpg)
 *출처: 한국관광공사*
 
-![안동 하회마을 전통 한옥 골목](/travel-blog/images/inline-andong-hahoe-1.jpg)
-*AI 생성 여행 가이드*
+![안동 하회마을 전통 한옥 건물 — 기와지붕과 나무 기둥이 어우러진 전경](/travel-blog/images/inline-andong-hahoe-1.jpg)
+*전통 한옥 건물 전경*
 
 ---
 
@@ -176,8 +176,6 @@ schema:
 ![안동 봉정사 — 한국에서 가장 오래된 목조건물 극락전](/travel-blog/images/vk-bongjeongsa.jpg)
 *출처: 한국관광공사*
 
-![안동 전통 마을 풍경](/travel-blog/images/inline-andong-hahoe-2.jpg)
-*안동 전통 마을의 고즈넉한 풍경*
 
 ---
 
@@ -197,8 +195,6 @@ schema:
 3. **고산서원**: 여행의 마무리를 지으며 퇴계 학통의 엄숙함을 마주합니다.
 4. **만휴정**: 드라마 촬영지로도 유명하지만, 선비의 은거 문화를 엿볼 수 있는 소중한 공간입니다.
 
-![하회마을 주변 서원과 자연 풍경](/travel-blog/images/inline-andong-hahoe-2.jpg)
-*AI 생성 코스 지도*
 
 ---
 
