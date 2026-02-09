@@ -158,8 +158,8 @@ schema:
 ### 셋째, 주례(酒禮)와 기물
 사대부 집안에서 술은 취하기 위해 마시는 것이 아니라, 예를 갖추기 위한 도구였습니다. 전시된 술잔과 주전자의 곡선을 유심히 살펴보십시오. 절제미가 강조된 백자 주병은 술을 따르는 이의 마음가짐을 투영합니다.
 
-![막걸리 시음 체험](/travel-blog/images/inline-traditional-liquor-2.jpg)
-*AI 생성 여정 일러스트*
+![전통 한옥마을의 장독대 풍경 — 가을빛 속 옹기가 가지런히 놓인 양조 공간](/travel-blog/images/inline-traditional-liquor-1.jpg)
+*전통 장독대 풍경*
 
 ---
 
@@ -216,8 +216,8 @@ schema:
 - **양조장 방문 시**: 많은 양조장이 사전 예약을 통해 견학 프로그램을 운영합니다. 방문 전 반드시 전화로 확인하시기 바랍니다.
 - **숙소 예약**: 강릉선교장이나 전주 고유와 같은 인기 숙소는 품질인증(Korea Quality)을 받은 곳으로 예약이 일찍 마감될 수 있습니다. 
 
-![전통주 양조 과정](/travel-blog/images/inline-traditional-liquor-3.jpg)
-*AI 생성 버킷리스트*
+![발효 옹기 — 전통 양조에 쓰이는 항아리 전시](/travel-blog/images/inline-traditional-liquor-3.jpg)
+*전통 발효 옹기 전시*
 
 ---
 
