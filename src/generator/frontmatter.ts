@@ -24,6 +24,7 @@ export interface FrontmatterData {
   };
   author?: string;
   personaId?: string;
+  framingType?: string;
   // 여행 전용
   location?: string;
   visitDate?: string;
@@ -86,6 +87,11 @@ export function generateFrontmatter(data: FrontmatterData): string {
   // 페르소나 ID
   if (data.personaId) {
     lines.push(`personaId: "${escapeYaml(data.personaId)}"`);
+  }
+
+  // 프레이밍 유형
+  if (data.framingType) {
+    lines.push(`framingType: "${escapeYaml(data.framingType)}"`);
   }
 
   // 여행 전용 필드

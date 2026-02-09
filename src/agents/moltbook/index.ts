@@ -4,6 +4,7 @@
  */
 
 import { writeFile, readFile, mkdir, readdir } from 'fs/promises';
+import { existsSync } from 'fs';
 import { join } from 'path';
 import SurveyInsightsDBManager from './survey-insights-db.js';
 
@@ -43,6 +44,15 @@ export interface FeedbackData {
   timestamp: string;
 }
 
+export interface DiversityTargets {
+  agentRatio: Record<string, number>;
+  typeMix: { travel: number; culture: number };
+  regionPriority: string[];
+  regionCovered: string[];
+  /** 프레이밍 유형별 목표 비율 (합계 1.0) */
+  framingMix?: Record<string, number>;
+}
+
 export interface ContentStrategy {
   priorityTopics: string[];
   contentFormat: string;
@@ -51,6 +61,7 @@ export interface ContentStrategy {
   optimalPostingTime: string;
   optimalLength: number;
   lastUpdated: string;
+  diversityTargets?: DiversityTargets;
 }
 
 export interface DraftFeedback {
@@ -722,6 +733,9 @@ export class StrategyAdjuster {
   }
 
   async adjust(analysis: ReturnType<FeedbackAnalyzer['analyze']>): Promise<ContentStrategy> {
+    // 기존 전략에서 diversityTargets 보존
+    const existing = await this.load();
+
     const newStrategy: ContentStrategy = {
       priorityTopics: analysis.topTopics,
       contentFormat: analysis.topContentTypes[0] || '데이터 집계형',
@@ -729,7 +743,8 @@ export class StrategyAdjuster {
       improvementPlan: analysis.improvementAreas,
       optimalPostingTime: analysis.successPatterns.bestPostingTime,
       optimalLength: analysis.successPatterns.optimalLength,
-      lastUpdated: new Date().toISOString()
+      lastUpdated: new Date().toISOString(),
+      ...(existing?.diversityTargets ? { diversityTargets: existing.diversityTargets } : {})
     };
 
     // 서베이 인사이트 DB 머지
@@ -755,11 +770,72 @@ export class StrategyAdjuster {
       // 서베이 DB 없어도 정상 동작
     }
 
+    // 발행 포스트의 framing 분포 분석 → diversityTargets.framingMix 갱신
+    try {
+      const framingDist = await this.analyzeFramingDistribution();
+      if (framingDist && Object.keys(framingDist).length > 0) {
+        if (!newStrategy.diversityTargets) {
+          newStrategy.diversityTargets = {
+            agentRatio: { viral: 0.33, friendly: 0.34, informative: 0.33 },
+            typeMix: { travel: 0.6, culture: 0.4 },
+            regionPriority: [],
+            regionCovered: []
+          };
+        }
+        newStrategy.diversityTargets.framingMix = framingDist;
+        console.log('📊 프레이밍 분포 반영됨:', Object.entries(framingDist).map(([k, v]) => `${k}:${Math.round(v * 100)}%`).join(', '));
+      }
+    } catch {
+      // framing 분석 실패해도 정상 동작
+    }
+
     await mkdir(CONFIG_DIR, { recursive: true });
     await writeFile(this.strategyPath, JSON.stringify(newStrategy, null, 2));
 
     console.log('✅ 콘텐츠 전략 업데이트 완료');
     return newStrategy;
+  }
+
+  /**
+   * 발행된 포스트에서 framingType 분포 분석
+   * blog/content/posts/ 하위의 frontmatter에서 framingType 필드를 집계
+   */
+  private async analyzeFramingDistribution(): Promise<Record<string, number> | null> {
+    const blogPostsDir = join(process.cwd(), 'blog/content/posts');
+    if (!existsSync(blogPostsDir)) return null;
+
+    const counts: Record<string, number> = {};
+    let total = 0;
+
+    for (const category of ['travel', 'culture']) {
+      const catDir = join(blogPostsDir, category);
+      if (!existsSync(catDir)) continue;
+
+      try {
+        const files = await readdir(catDir);
+        for (const file of files) {
+          if (!file.endsWith('.md')) continue;
+          const content = await readFile(join(catDir, file), 'utf-8');
+          const match = content.match(/framingType:\s*["']?(\w+)["']?/);
+          if (match) {
+            counts[match[1]] = (counts[match[1]] || 0) + 1;
+            total++;
+          }
+        }
+      } catch {
+        // 디렉토리 읽기 실패 무시
+      }
+    }
+
+    if (total === 0) return null;
+
+    // 비율로 변환
+    const distribution: Record<string, number> = {};
+    for (const [key, count] of Object.entries(counts)) {
+      distribution[key] = Math.round((count / total) * 100) / 100;
+    }
+
+    return distribution;
   }
 
   async load(): Promise<ContentStrategy | null> {

@@ -118,7 +118,7 @@ program
 // 주제 큐 관리
 program
   .command('queue [action] [args...]')
-  .description('주제 큐 관리 (list|add|remove|move|clear|discover|discovered)')
+  .description('주제 큐 관리 (list|add|remove|move|next|clear|discover|discovered)')
   .option('--type <type>', '주제 유형 (travel|culture)', 'travel')
   .option('--completed', '완료된 주제 표시')
   .option('--clear', '큐 초기화')

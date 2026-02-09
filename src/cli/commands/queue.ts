@@ -20,6 +20,8 @@ interface TopicItem {
     surveyRelevance?: number;
     discoveredAt?: string;
     keywords?: string[];
+    personaId?: string;
+    framingType?: string;
   };
 }
 
@@ -149,6 +151,8 @@ export async function queueCommand(
             const parts: string[] = [];
             if (topic.meta.score != null) parts.push(`점수:${topic.meta.score}`);
             if (topic.meta.source) parts.push(topic.meta.source);
+            if (topic.meta.personaId) parts.push(chalk.magenta(topic.meta.personaId));
+            if (topic.meta.framingType) parts.push(chalk.blue(topic.meta.framingType));
             if (topic.meta.surveyRelevance != null && topic.meta.surveyRelevance > 0) {
               parts.push(`서베이:${topic.meta.surveyRelevance}%`);
             }
@@ -342,7 +346,8 @@ export async function queueCommand(
             : rec.source === 'event_calendar' ? '[이벤트]'
             : '[요청]';
           const personaTag = rec.personaId ? chalk.magenta(`[${rec.personaId}]`) : '';
-          console.log(chalk.white(`  ${emoji} ${chalk.cyan(source)} ${personaTag} ${rec.suggestedTitle}`));
+          const framingTag = rec.framingType ? chalk.blue(`[${rec.framingType}]`) : '';
+          console.log(chalk.white(`  ${emoji} ${chalk.cyan(source)} ${personaTag}${framingTag} ${rec.suggestedTitle}`));
 
           // 점수 내역 출력
           if (rec.scoreBreakdown) {
@@ -390,6 +395,42 @@ export async function queueCommand(
       break;
     }
 
+    case 'next': {
+      // 큐 첫 항목을 pop하여 new 명령어로 전달
+      if (queue.queue.length === 0) {
+        console.log(chalk.yellow('\n⚠️ 큐가 비어있습니다.'));
+        console.log(chalk.dim('  npm run queue discover --auto 로 주제를 발굴하세요.'));
+        process.exit(1);
+      }
+
+      const nextItem = queue.queue.shift()!;
+      queue.completed.push(nextItem);
+      await saveQueue(queue);
+
+      const emoji = nextItem.type === 'travel' ? '🧳' : '🎨';
+      const agent = nextItem.meta?.personaId;
+      const framing = nextItem.meta?.framingType;
+      console.log(chalk.cyan(`\n🚀 다음 주제 실행: ${emoji} [${nextItem.type}] ${nextItem.title}`));
+      if (agent) console.log(chalk.dim(`  에이전트: ${agent}`));
+      if (framing) console.log(chalk.dim(`  프레이밍: ${framing}`));
+      console.log('');
+
+      // new 명령어 호출
+      const { newCommand } = await import('./new.js');
+      await newCommand({
+        topic: nextItem.title,
+        type: nextItem.type,
+        length: 'medium',
+        draft: true,
+        yes: true,
+        inlineImages: true,
+        imageCount: 3,
+        ...(agent ? { agent } : {}),
+        ...(framing ? { framingType: framing } : {})
+      });
+      break;
+    }
+
     case 'discovered': {
       // 발견된 주제 목록 표시
       console.log(chalk.cyan('\n🔍 발견된 주제 목록\n'));
@@ -419,6 +460,7 @@ export async function queueCommand(
       console.log(chalk.dim('  add "주제"        주제 추가'));
       console.log(chalk.dim('  remove <번호>     주제 제거'));
       console.log(chalk.dim('  move <from> <to>  순서 변경'));
+      console.log(chalk.dim('  next              큐 첫 항목으로 포스트 생성'));
       console.log(chalk.dim('  clear             큐 초기화'));
       console.log(chalk.dim('  discover          Moltbook 기반 주제 발굴'));
       console.log(chalk.dim('  discovered        발견된 주제 목록 보기'));

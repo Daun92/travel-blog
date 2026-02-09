@@ -20,6 +20,7 @@ export interface NewCommandOptions {
   inlineImages?: boolean; // 인라인 이미지 생성
   imageCount?: number; // 인라인 이미지 개수
   agent?: string; // 에이전트 페르소나 ID (viral|friendly|informative)
+  framingType?: string; // 콘텐츠 프레이밍 유형 (list_ranking|deep_dive|experience|...)
   autoCollect?: boolean; // 자동 데이터 수집 후 프롬프트에 주입
 }
 
@@ -48,6 +49,9 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
     console.log(`  • 초안: ${chalk.white(options.draft ? '예' : '아니오')}`);
     if (options.agent) {
       console.log(`  • 에이전트: ${chalk.magenta(options.agent)} (수동 지정)`);
+    }
+    if (options.framingType) {
+      console.log(`  • 프레이밍: ${chalk.blue(options.framingType)}`);
     }
 
     // 3. 키워드 파싱
@@ -220,6 +224,7 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       inlineImages: useInlineImages,
       imageCount,
       persona: options.agent,
+      framingType: options.framingType,
       collectedData: collectedDataContext,
       onProgress: (msg) => {
         spinner.text = msg;

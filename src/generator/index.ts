@@ -60,6 +60,8 @@ export interface GeneratePostOptions {
   inlineImages?: boolean;
   imageCount?: number;
   persona?: string;
+  /** 콘텐츠 프레이밍 유형 (list_ranking, deep_dive, experience, ...) */
+  framingType?: string;
   /** dataToPromptContext()로 생성된 수집 데이터 텍스트 */
   collectedData?: string;
   onProgress?: (message: string) => void;
@@ -90,6 +92,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     inlineImages = false,
     imageCount = 3,
     persona: personaOverride,
+    framingType,
     collectedData,
     onProgress = () => {}
   } = options;
@@ -110,7 +113,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
 
   // 프롬프트 생성
   onProgress('프롬프트 생성 중...');
-  const context: PromptContext = { topic, type, keywords, length, persona: selectedPersona || undefined, collectedData };
+  const context: PromptContext = { topic, type, keywords, length, persona: selectedPersona || undefined, framingType, collectedData };
   const prompt = type === 'travel'
     ? getTravelPrompt(context)
     : getCulturePrompt(context);
@@ -184,6 +187,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     keywords: finalKeywords,
     author: authorName,
     personaId: selectedPersona?.id,
+    ...(framingType ? { framingType } : {}),
     ...(coverImage && {
       cover: {
         image: coverImage,

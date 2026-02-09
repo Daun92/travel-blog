@@ -12,15 +12,58 @@ export interface PromptContext {
   tone?: string;
   length?: 'short' | 'medium' | 'long';
   persona?: Persona;
+  /** 콘텐츠 프레이밍 유형 (list_ranking, deep_dive, experience, ...) */
+  framingType?: string;
   /** dataToPromptContext()로 생성된 수집 데이터 텍스트 */
   collectedData?: string;
+}
+
+/**
+ * 프레이밍 유형에 따른 콘텐츠 가이던스 생성
+ */
+function getFramingGuidance(framingType?: string): string {
+  if (!framingType) return '';
+
+  const guidance: Record<string, string> = {
+    list_ranking: `**프레이밍: 순위/리스트형**
+- TOP N, 베스트, 순위 비교 형식으로 작성
+- 명확한 순위 기준을 제시하고 각 항목에 한줄 평가
+- 공유하고 싶은 "리스트형 콘텐츠" 느낌으로`,
+
+    deep_dive: `**프레이밍: 심층 탐구형**
+- 역사, 의미, 배경 해설 중심으로 작성
+- "알고 가면 다르게 보인다" 식의 깊이 있는 정보 제공
+- 교양/지식 전달에 초점, 단순 나열 지양`,
+
+    experience: `**프레이밍: 체험/후기형**
+- 실제 다녀온 듯한 생생한 체험기 형식
+- 시간순 또는 동선순으로 구성, 실제 비용/소요시간 포함
+- 솔직한 장단점, 기대 vs 현실 비교`,
+
+    seasonal: `**프레이밍: 시즌/시의성형**
+- 현재 시기에 특히 좋은 이유를 강조
+- "지금 가야 하는" 시의성 있는 포인트 부각
+- 계절감, 한정 이벤트, 시기별 차이점 설명`,
+
+    comparison: `**프레이밍: 비교/분석형**
+- A vs B, 기대 vs 현실, 과대평가 vs 진짜 등 비교 구조
+- 객관적 기준으로 양쪽을 공정하게 비교
+- 결론에서 상황별 추천 제시`,
+
+    local_story: `**프레이밍: 로컬 스토리형**
+- 현지인 시점, 숨은 골목, 동네 이야기 중심
+- 관광 가이드에 없는 로컬 정보 강조
+- 사람과 장소의 이야기로 풀어내기`
+  };
+
+  return guidance[framingType] || '';
 }
 
 /**
  * 여행 포스트 생성 프롬프트
  */
 export function getTravelPrompt(context: PromptContext): string {
-  const { topic, keywords = [], length = 'medium', persona, collectedData } = context;
+  const { topic, keywords = [], length = 'medium', persona, framingType, collectedData } = context;
 
   const lengthGuide = {
     short: '1500-2000자',
@@ -43,6 +86,8 @@ ${getContentTypeGuidance(persona, 'travel')}
     ? `${persona.voice.tone} (${persona.voice.formality})`
     : '친근하고 정보가 풍부한 톤 (개인 경험처럼)';
 
+  const framingGuide = getFramingGuidance(framingType);
+
   return `${preamble}
 
 ## 주제
@@ -50,7 +95,10 @@ ${topic}
 
 ## 키워드 (자연스럽게 포함)
 ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 선정'}
-${collectedData ? `
+${framingGuide ? `
+## 콘텐츠 프레이밍
+${framingGuide}
+` : ''}${collectedData ? `
 ${collectedData}
 ` : ''}
 ## 작성 지침
@@ -121,7 +169,7 @@ ${collectedData}
  * 문화예술 포스트 생성 프롬프트
  */
 export function getCulturePrompt(context: PromptContext): string {
-  const { topic, keywords = [], length = 'medium', persona, collectedData } = context;
+  const { topic, keywords = [], length = 'medium', persona, framingType, collectedData } = context;
 
   const lengthGuide = {
     short: '1500-2000자',
@@ -144,6 +192,8 @@ ${getContentTypeGuidance(persona, 'culture')}
     ? `${persona.voice.tone} (${persona.voice.formality})`
     : '전문적이면서도 친근한 톤';
 
+  const framingGuide = getFramingGuidance(framingType);
+
   return `${preamble}
 
 ## 주제
@@ -151,7 +201,10 @@ ${topic}
 
 ## 키워드 (자연스럽게 포함)
 ${keywords.length > 0 ? keywords.join(', ') : '주제에서 적절한 키워드 선정'}
-${collectedData ? `
+${framingGuide ? `
+## 콘텐츠 프레이밍
+${framingGuide}
+` : ''}${collectedData ? `
 ${collectedData}
 ` : ''}
 ## 작성 지침

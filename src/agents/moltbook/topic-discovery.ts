@@ -6,7 +6,9 @@ import { readFile, writeFile, mkdir, readdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import { loadMoltbookConfig, MoltbookConfig } from './index.js';
+import type { DiversityTargets } from './index.js';
 import SurveyInsightsDBManager from './survey-insights-db.js';
+import { ContentBalancer } from './content-balancer.js';
 
 // ============================================================================
 // 타입 정의
@@ -33,6 +35,15 @@ export interface TopicGap {
   daysSinceLastPost?: number;
 }
 
+/** 콘텐츠 프레이밍 유형 — 제목/앵글의 접근 방식 분류 */
+export type FramingType =
+  | 'list_ranking'   // 순위/리스트 (TOP N, 베스트, vs)
+  | 'deep_dive'      // 심층 탐구 (역사, 의미, 해설)
+  | 'experience'     // 체험/후기 (1박2일, 솔직 후기, 비용)
+  | 'seasonal'       // 시즌/시의성 (2월, 겨울, 벚꽃)
+  | 'comparison'     // 비교/분석 (vs, 장단점, 현실 vs 기대)
+  | 'local_story';   // 로컬 스토리 (주민 인터뷰, 숨은 골목, 동네 이야기)
+
 export interface TopicRecommendation {
   topic: string;
   type: 'travel' | 'culture';
@@ -54,6 +65,8 @@ export interface TopicRecommendation {
   };
   /** 자동 배정된 페르소나 */
   personaId?: 'viral' | 'friendly' | 'informative';
+  /** 콘텐츠 프레이밍 유형 */
+  framingType?: FramingType;
   /** 이벤트 연결 메타데이터 */
   eventMeta?: {
     eventId: string;
@@ -367,7 +380,7 @@ export class OpenClawPostScanner {
             score: 80 + Math.min(10, fb.upvotes / 2),
             source: 'community_request',
             reasoning: `OpenClaw 포스트 댓글 요청 (upvotes: ${fb.upvotes})`,
-            suggestedTitle: `${topic} 완벽 가이드`,
+            suggestedTitle: `${topic} 솔직 탐방기`,
             keywords: this.extractRelatedKeywords(topic),
             discoveredAt: new Date().toISOString()
           });
@@ -1147,34 +1160,49 @@ export class TopicGapAnalyzer {
   }
 
   /**
-   * 콘텐츠 앵글 제안
+   * 콘텐츠 앵글 제안 — 프레이밍 유형별 다양한 앵글
    */
   private suggestAngles(trend: MoltbookTrendingTopic): string[] {
+    const t = trend.topic;
     const angles: string[] = [];
 
     if (trend.submolt === 'travel') {
-      angles.push(
-        `${trend.topic} 1박2일 완벽 코스`,
-        `${trend.topic} 현지인 추천 맛집`,
-        `${trend.topic} 인스타 핫플 투어`
-      );
-
+      // 6가지 프레이밍 유형별 1개씩 → 셔플 후 3개 선택
+      const pool = [
+        `${t} 현지인만 아는 골목 맛집과 뷰포인트`,              // local_story
+        `${t} 1박2일 실제 다녀온 비용과 솔직 후기`,             // experience
+        `${t}의 숨은 역사: 알고 가면 3배 재미`,                 // deep_dive
+        `${t} 겨울에 오히려 좋은 이유`,                         // seasonal
+        `${t} 기대 vs 현실: 과대평가된 곳 vs 진짜 명소`,       // comparison
+      ];
       if (trend.keywords.includes('카페')) {
-        angles.push(`${trend.topic} 감성 카페 베스트`);
+        pool.push(`${t} 로컬 카페 vs SNS 핫플: 진짜 갈 만한 곳`);
       }
       if (trend.keywords.includes('야경')) {
-        angles.push(`${trend.topic} 로맨틱 야경 명소`);
+        pool.push(`${t} 야경 명소 비교: 어디서 봐야 가장 예쁠까`);
       }
+      // 셔플
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      angles.push(...pool);
     } else {
-      angles.push(
-        `${trend.topic} 입문자 가이드`,
-        `${trend.topic} 숨은 명소`,
-        `${trend.topic} 데이트 코스`
-      );
-
+      const pool = [
+        `${t}, 처음 가는 사람이 알아야 할 배경지식`,            // deep_dive
+        `${t} 다녀온 솔직 후기: 기대 이상 vs 기대 이하`,       // comparison
+        `${t} 숨은 동네에서 만난 예술가 이야기`,                // local_story
+        `${t} 이번 달 놓치면 안 되는 프로그램`,                 // seasonal
+        `${t} 첫 방문 체험기: 2시간이면 충분할까?`,             // experience
+      ];
       if (trend.keywords.includes('전시회')) {
-        angles.push(`${trend.topic} 현재 진행 전시 총정리`);
+        pool.push(`${t} 현재 전시 비교: 어디가 더 볼 만할까`);
       }
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      angles.push(...pool);
     }
 
     return angles.slice(0, 3);
@@ -1209,7 +1237,7 @@ export class TopicRecommender {
           score,
           source: 'gap_analysis',
           reasoning: `블로그 커버리지 ${gap.blogCoverage}, Moltbook engagement ${gap.moltbookEngagement}`,
-          suggestedTitle: gap.suggestedAngles[0] || `${gap.topic} 완벽 가이드`,
+          suggestedTitle: gap.suggestedAngles[0] || `${gap.topic} 첫 방문 전 알아야 할 것들`,
           keywords: this.extractRelatedKeywords(gap.topic),
           discoveredAt: new Date().toISOString()
         });
@@ -1251,7 +1279,7 @@ export class TopicRecommender {
         score: 75, // 커뮤니티 요청은 기본 75점
         source: 'community_request',
         reasoning: `커뮤니티 요청: "${request.substring(0, 50)}"`,
-        suggestedTitle: `${topic} 가이드: 커뮤니티 추천`,
+        suggestedTitle: `${topic}: 커뮤니티가 궁금해한 이야기`,
         keywords: this.extractRelatedKeywords(topic),
         discoveredAt: new Date().toISOString()
       });
@@ -1356,19 +1384,26 @@ export class TopicRecommender {
   }
 
   /**
-   * 제목 생성
+   * 제목 생성 — 프레이밍 유형별 다양한 템플릿
    */
   private generateTitle(trend: MoltbookTrendingTopic): string {
+    const t = trend.topic;
     const templates = trend.submolt === 'travel'
       ? [
-          `${trend.topic} 여행 완벽 가이드: 현지인 추천 코스`,
-          `${trend.topic} 가볼 만한 곳 베스트 10`,
-          `${trend.topic} 1박2일 추천 일정`,
+          `${t} 1박2일 실제 비용과 솔직 후기`,                   // experience
+          `${t}의 역사 산책: 알고 가면 다르게 보인다`,           // deep_dive
+          `${t} 현지인 단골 가게와 숨은 골목`,                   // local_story
+          `${t} 기대 vs 현실: 진짜 가볼 만한 곳`,               // comparison
+          `이번 달 ${t}이 특별한 이유`,                          // seasonal
+          `${t} 여행 체크리스트: 놓치기 쉬운 5가지`,             // list_ranking (mild)
         ]
       : [
-          `${trend.topic} 입문자를 위한 완벽 가이드`,
-          `${trend.topic} 숨은 명소 베스트`,
-          `${trend.topic} 데이트 코스 추천`,
+          `${t} 첫 방문 체험기: 2시간이면 충분할까?`,            // experience
+          `${t}이 특별한 이유: 배경을 알면 3배 재미`,            // deep_dive
+          `${t} 숨은 공간에서 만난 예술가 이야기`,               // local_story
+          `${t} 기대 이상 vs 기대 이하: 솔직 비교`,             // comparison
+          `이번 달 ${t} 놓치면 안 되는 프로그램`,                // seasonal
+          `${t} 입문 체크리스트: 미리 알면 좋은 것들`,           // list_ranking (mild)
         ];
 
     return templates[Math.floor(Math.random() * templates.length)];
@@ -1423,6 +1458,7 @@ export class TopicDiscovery {
     communityRequests?: string[];
     surveyBoosts?: Record<string, number>;
     eventRecommendations?: TopicRecommendation[];
+    diversityTargets?: DiversityTargets;
   } = {}): Promise<DiscoveryResult> {
     console.log('🔍 Moltbook 트렌드 스캔 중...');
 
@@ -1448,6 +1484,30 @@ export class TopicDiscovery {
       options.eventRecommendations
     );
     console.log(`   ✓ ${recommendations.length}개 주제 추천`);
+
+    // 4. 콘텐츠 다양성 밸런싱
+    const targets = options.diversityTargets || await this.loadDiversityTargets();
+    const balancer = new ContentBalancer(targets);
+    const analysis = await balancer.analyzeDistribution();
+    const boosts = balancer.calculateBoosts(analysis);
+    balancer.applyBoosts(recommendations, boosts);
+
+    // 5. 미커버 지역 추천 자동 생성
+    const regionGapRecs = balancer.generateRegionGapRecommendations(boosts);
+    if (regionGapRecs.length > 0) {
+      // 기존 추천과 중복되지 않는 것만 추가
+      const existingTopics = new Set(recommendations.map(r => r.topic));
+      for (const rec of regionGapRecs) {
+        if (!existingTopics.has(rec.topic)) {
+          recommendations.push(rec);
+          existingTopics.add(rec.topic);
+        }
+      }
+      recommendations.sort((a, b) => b.score - a.score);
+      console.log(`   ✓ 미커버 지역 추천 ${regionGapRecs.length}개 추가`);
+    }
+
+    balancer.printAnalysis(boosts);
 
     const result: DiscoveryResult = {
       trending,
@@ -1573,7 +1633,7 @@ export class TopicDiscovery {
           score: 70,
           source: 'survey_demand',
           reasoning: `서베이 고수요 주제`,
-          suggestedTitle: `${topicLabel} 완벽 가이드`,
+          suggestedTitle: `${topicLabel} 깊이 있게 들여다보기`,
           keywords: topicLabel.split('/').map(k => k.trim()),
           discoveredAt: new Date().toISOString()
         });
@@ -1586,6 +1646,22 @@ export class TopicDiscovery {
       baseResult.recommendations,
       additionalRecommendations
     );
+
+    // 추가 추천 중 에이전트 미배정 건에 사전 배정
+    const targets = await this.loadDiversityTargets();
+    const postMergeBalancer = new ContentBalancer(targets);
+    const postAnalysis = await postMergeBalancer.analyzeDistribution();
+    const postBoosts = postMergeBalancer.calculateBoosts(postAnalysis);
+    // agentBoosts에서 가장 부족한 에이전트 찾기
+    const mostNeededAgent = (
+      Object.entries(postBoosts.agentBoosts)
+        .sort(([, a], [, b]) => b - a)[0]?.[0] || 'informative'
+    ) as 'viral' | 'friendly' | 'informative';
+    for (const rec of allRecommendations) {
+      if (!rec.personaId) {
+        rec.personaId = mostNeededAgent;
+      }
+    }
     console.log(`   ✓ 총 ${allRecommendations.length}개 통합 추천 생성`);
 
     const enhancedResult: EnhancedDiscoveryResult = {
@@ -1675,6 +1751,20 @@ export class TopicDiscovery {
   }
 
   /**
+   * content-strategy.json에서 diversityTargets 로드
+   */
+  private async loadDiversityTargets(): Promise<DiversityTargets | undefined> {
+    try {
+      const strategyPath = join(process.cwd(), 'config/content-strategy.json');
+      const raw = await readFile(strategyPath, 'utf-8');
+      const strategy = JSON.parse(raw) as { diversityTargets?: DiversityTargets };
+      return strategy.diversityTargets;
+    } catch {
+      return undefined;
+    }
+  }
+
+  /**
    * 캐시 저장
    */
   private async saveCache(result: DiscoveryResult): Promise<void> {
@@ -1759,7 +1849,9 @@ export class TopicDiscovery {
           score: rec.score,
           source: rec.source,
           discoveredAt: rec.discoveredAt,
-          keywords: rec.keywords
+          keywords: rec.keywords,
+          ...(rec.personaId ? { personaId: rec.personaId } : {}),
+          ...(rec.framingType ? { framingType: rec.framingType } : {})
         }
       });
       added++;

@@ -68,6 +68,8 @@ export interface PipelineConfig {
 export interface TopicItem {
   title: string;
   type: 'travel' | 'culture';
+  agent?: string;
+  framingType?: string;
 }
 
 export interface GeneratedPost {
@@ -367,7 +369,10 @@ export class ContentPipeline {
   async stageSelect(recommendations: TopicRecommendation[]): Promise<TopicItem[]> {
     // 큐 로드
     const queuePath = join(CONFIG_DIR, 'topic-queue.json');
-    let queue: { queue: TopicItem[]; completed: TopicItem[]; settings: { postsPerDay: number } };
+    interface QueueEntry extends TopicItem {
+      meta?: { personaId?: string; framingType?: string };
+    }
+    let queue: { queue: QueueEntry[]; completed: QueueEntry[]; settings: { postsPerDay: number } };
 
     try {
       const content = await readFile(queuePath, 'utf-8');
@@ -390,7 +395,9 @@ export class ContentPipeline {
         if (!exists) {
           queue.queue.push({
             title: rec.suggestedTitle,
-            type: rec.type
+            type: rec.type,
+            ...(rec.personaId ? { agent: rec.personaId } : {}),
+            ...(rec.framingType ? { framingType: rec.framingType } : {})
           });
         }
       }
@@ -399,8 +406,16 @@ export class ContentPipeline {
       await writeFile(queuePath, JSON.stringify(queue, null, 2));
     }
 
-    // 오늘 생성할 주제 선택
-    const selected = queue.queue.slice(0, neededCount);
+    // 오늘 생성할 주제 선택 — agent/framingType 메타 포함
+    const selected: TopicItem[] = queue.queue.slice(0, neededCount).map(item => {
+      const meta = (item as { meta?: { personaId?: string; framingType?: string } }).meta;
+      return {
+        title: item.title,
+        type: item.type,
+        ...(item.agent || meta?.personaId ? { agent: item.agent || meta?.personaId } : {}),
+        ...(item.framingType || meta?.framingType ? { framingType: item.framingType || meta?.framingType } : {})
+      };
+    });
 
     return selected;
   }
@@ -426,7 +441,9 @@ export class ContentPipeline {
           inlineImages: true,
           imageCount: 3,
           yes: true,  // 비대화 모드
-          draft: true
+          draft: true,
+          ...(topic.agent ? { agent: topic.agent } : {}),
+          ...(topic.framingType ? { framingType: topic.framingType } : {})
         });
 
         // 생성된 파일 경로 추정 (날짜 기반)
