@@ -28,8 +28,8 @@ keywords:
   - 클럽빵
   - 인디밴드 공연 추천
 cover:
-  image: ''
-  alt: ''
+  image: /travel-blog/images/cover-2026-02-08-indie-venue.jpg
+  alt: '서울 홍대 인디 라이브 공연장 — 어두운 조명 속 열기 가득한 무대'
   caption: ''
   relative: false
   hidden: false
@@ -99,6 +99,7 @@ schema:
       logo:
         '@type': ImageObject
         url: /travel-blog/images/logo.png
+    image: /travel-blog/images/cover-2026-02-08-indie-venue.jpg
     datePublished: '2026-02-08T14:30:00.000Z'
     dateModified: '2026-02-08T14:30:00.000Z'
     mainEntityOfPage:

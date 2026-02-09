@@ -94,6 +94,7 @@ schema:
       logo:
         '@type': ImageObject
         url: /travel-blog/images/logo.png
+    image: /travel-blog/images/cover-2026-02-07-tongyeong.jpg
     datePublished: '2026-02-07T08:04:06.000Z'
     dateModified: '2026-02-07T08:04:06.000Z'
     mainEntityOfPage:
