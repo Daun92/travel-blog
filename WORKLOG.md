@@ -10,6 +10,126 @@
 
 ## 개발 이력
 
+### 2026-02-09: 2월 9일 포스트 2편 발행 + 이미지 정합성 수정
+
+#### 콘텐츠 생산 (Premium Workflow 전체 사이클)
+
+**포스트 큐 편성:**
+- 갭 분석: 미다룬 지역(충청도·남해·담양), 미다룬 카테고리(연극), 에이전트 분포(조회영6·김주말8·한교양5)
+- Travel: "발렌타인 데이트 국내 여행지 TOP 5" (조회영/viral) — 시즌 밸런타인 콘텐츠
+- Culture: "서울 소극장 연극 입문 가이드" (한교양/informative) — 연극 카테고리 신규
+
+**Phase B 실행 (매 포스트):**
+| 단계 | Travel (top-5) | Culture (post) |
+|------|----------------|----------------|
+| Generate | `--auto-collect --inline-images -y` ✅ | 동일 ✅ |
+| Enhance | 70→100%, 클리셰 1건 제거 | 65→100% |
+| Factcheck (Gemini) | 38% BLOCKED | 52% BLOCKED |
+| Factcheck (Claude native) | 100% ✅ | 85% ✅ |
+| Validate (`--skip-factcheck`) | SEO 95%, Content 94% | 동일 |
+| AEO | FAQ 5 + Schema 3 적용 | 동일 |
+
+**Gemini 팩트체크 저점수 → Claude native 전환:**
+- Gemini factcheck가 38%, 52%로 BLOCKED → Claude Code native 3단계 프로토콜로 전환
+- WebSearch로 6+11개 클레임 직접 검증 → 최종 100%, 85% 달성
+
+**수동 수정 사항:**
+- 커버 이미지 경로 `/images/` → `/travel-blog/images/` (두 포스트 모두)
+- 페르소나 불일치: "김주말의 총평" → "조회영의 총평" / "한교양의 총평"
+- 미검증 클레임: 특정 전시 기간 → 일반 정보로 수정
+- 인라인 이미지 본문 삽입 누락 → 마크다운 태그 수동 삽입
+- `factcheckScore`, `draft: false` frontmatter 추가
+
+**Phase C 실행:**
+- `blog/` 레포 직접 커밋+푸시 (10 files: 2 posts + 2 covers + 6 inline images)
+- GitHub Pages 배포 확인 (Actions: success, 1m 7s)
+- Moltbook 피드백 수집: 25 posts, 평균 upvotes 1121.7
+- `daily:deploy` 스크립트 회귀 문제 발견 → drafts/ 원본으로 blog/ 덮어쓰기 시도 → 취소 처리
+
+#### 이미지-본문 맥락 정합성 수정
+
+**문제:** Gemini 인라인 이미지 생성 시 본문에 없는 여행지(경주·전주·제주도·여수)를 표시하는 이미지가 생성됨. 커버도 주제와 무관한 사진(크루즈선, 서울역 간판).
+
+**Travel 포스트 (4장 전부 교체):**
+| 항목 | Before | After |
+|------|--------|-------|
+| 커버 | 크루즈선 항구 | 부산 야경 도시 (Unsplash) |
+| 인라인1 | 경주·전주·제주도·부산·서울 | 본문 5곳(광복로·광안리·국현미·양양·고령) 인포그래픽 |
+| 인라인2 | 한옥마을·돌담길·전통찻집 | 국립현대미술관 vs 예술의전당 비교 카드 |
+| 인라인3 | 제주도·경주·강원도·여수 | 양양 펜션 + 고령 대가야 무드보드 |
+
+**Culture 포스트 (커버만 교체):**
+| 항목 | Before | After |
+|------|--------|-------|
+| 커버 | "Seoul Station 서울역" 간판 | 서울 야간 거리 네온 (극장가 분위기) |
+| 인라인1-3 | 소극장 무드보드·관람 가이드·체크리스트 | 맥락 부합 → 변경 없음 |
+
+**커밋:**
+- `27d85d4` feat: 2월 9일 포스트 2편 발행
+- `576bd58` fix: 발렌타인 TOP 5 포스트 이미지-본문 맥락 정합성 수정
+- `4619be0` fix: 소극장 연극 포스트 커버 이미지 교체
+
+#### 교훈
+- **Gemini 인라인 이미지 생성 시 본문 맥락 주입 필수**: `--auto-collect` + `--inline-images` 조합 시, 이미지 프롬프트에 본문의 실제 여행지/내용이 반영되지 않고 제목만으로 생성되어 맥락 불일치 발생
+- **Enhance 단계에서 인라인 이미지 참조 제거됨**: enhance 후 이미지 마크다운 태그가 사라지는 문제 → 수동 재삽입 필요
+- **`daily:deploy`가 수동 배포와 충돌**: drafts/ 원본을 blog/에 복사하므로, 직접 blog/에서 수정한 내용을 되돌리는 회귀 발생 → 수동 배포 시 deploy 스크립트 사용 주의
+- **Gemini factcheck vs Claude native**: Gemini factcheck 저점수(38-52%) 시 Claude native 프로토콜이 더 정확한 결과(85-100%) 제공
+- **페르소나 불일치 반복 발생**: 생성기가 기본값 "김주말" 관련 텍스트를 삽입하는 경향 → enhance/수동 검수 시 author 필드와 본문 일관성 확인 필요
+- **커버 이미지 Unsplash 검색**: 한국어 주제를 영문 검색어로 변환 시 구체적 키워드(Busan night lights Korea) 사용이 generic 검색보다 적합도 높음
+
+---
+
+### 2026-02-09: `npm run edit` 로컬 에디터 명령어 추가
+
+#### 배경
+포스트 생성이 `npm run new` (Gemini API 필수)로만 가능하여, API 없이 수동으로 포스트를 작성/등록/편집하려면 frontmatter 구조를 외워서 직접 파일을 만들어야 하는 불편함이 있었음.
+
+#### 구현
+| 서브커맨드 | 기능 |
+|-----------|------|
+| `npm run edit:new` | 대화형 프롬프트 → frontmatter 템플릿 생성 → VS Code 열기 |
+| `npm run edit:register <path>` | 기존 .md 파일을 drafts/에 등록 (누락 필드 자동 보완) |
+| `npm run edit` | 드래프트 선택 → 메타데이터 수정 / 에디터 열기 / 검증 |
+
+#### 기술 상세
+- 기존 `generateFrontmatter()`, `selectPersona()` 재사용
+- 에이전트 자동 배정(키워드 매칭) 또는 수동 선택 지원
+- travel/culture 유형별 본문 템플릿 내장
+- `$EDITOR` 환경변수 지원 (기본값 `code --wait`)
+- 경량 frontmatter 검증 (필수 필드 + SEO 힌트, API 호출 없음)
+- PaperMod 테마 기본값 자동 추가 (register 시)
+
+#### 변경 파일
+- `src/cli/commands/edit.ts` (신규)
+- `src/cli/index.ts` (import + addCommand)
+- `package.json` (scripts 3개 추가)
+
+---
+
+### 2026-02-09: Google Analytics GA4 연결
+
+#### 배경
+GA 콘솔에서 활성 사용자 수 0명 표시 → 조사 결과 GA 추적 코드가 사이트에 아예 삽입되지 않은 상태였음.
+
+#### 진단
+1. `hugo.toml`에 GA 측정 ID(`services.googleAnalytics.id`) 미설정
+2. PaperMod 테마 `head.html`이 `partial "google_analytics.html"` 호출하지만 해당 파일 부재
+3. Hugo v0.155.2에서 `_internal/google_analytics.html` 내부 템플릿이 제거됨
+
+#### 수정 (3 commits)
+| 커밋 | 내용 | 결과 |
+|------|------|------|
+| `55cce3e` | `hugo.toml`에 `[services.googleAnalytics] id = "G-YZK4FDCRNX"` 추가 | 빌드 성공, 태그 미렌더링 |
+| `fc1f108` | `google_analytics.html` 파트셜 생성 (`_internal/` 호출) | **빌드 실패** — Hugo 0.155에서 내부 템플릿 제거됨 |
+| `23e73a3` | `extend_head.html`에 gtag.js 직접 삽입 + 빈 파트셜로 PaperMod 에러 방지 | **빌드 성공, 태그 정상 렌더링** |
+
+#### 교훈
+- Hugo 최신 버전(v0.128+)에서 `_internal/google_analytics.html` 제거됨 — PaperMod 테마가 이를 아직 참조하므로 빈 파트셜 오버라이드 필요
+- GA 설정은 `extend_head.html`에 직접 gtag.js 삽입이 가장 안정적
+- `site.Config.Services.GoogleAnalytics.ID` Hugo 템플릿 변수로 ID를 동적 참조 가능
+
+---
+
 ### 2026-02-08: 기존 26개 포스트 WebSearch 기반 팩트체크 전수 재검증
 
 #### 배경
