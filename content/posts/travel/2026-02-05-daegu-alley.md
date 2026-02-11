@@ -179,6 +179,9 @@ factcheckScore: 88
 
 ![서문시장 먹거리 가이드](/travel-blog/images/inline-daegu-food-guide.jpeg)
 
+![대구 근대골목 가이드](/travel-blog/images/inline-daegu-alley-info.jpeg)
+
+
 ---
 
 ## 5. 현지인이 전하는 실용적인 여행 팁

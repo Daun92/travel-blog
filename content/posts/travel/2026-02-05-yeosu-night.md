@@ -32,9 +32,9 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 cover:
-  image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
-  alt: City skyline with bridge and river at night
-  caption: "Photo by [JHANY BLUE](https://unsplash.com/@jhany) on [Unsplash](https://unsplash.com)"
+  image: /travel-blog/images/cover-refresh-2026-02-05-yeosu-night.jpg
+  alt: '여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스'
+  caption: '작성자: 김주말 · 여수 밤바다 낭만 여행 직접 다녀왔어요'
   relative: false
   hidden: false
 faqs:
@@ -164,6 +164,9 @@ factcheckScore: 78
 *   **옷차림**: 바닷가라 밤에는 생각보다 바람이 차고 기온이 낮습니다. 여름이라도 얇은 겉옷 하나쯤은 챙기는 것이 건강한 여행을 돕습니다.
 
 ## 4. 여행을 마치며: 여수가 주는 위로
+
+![여수 밤바다 감성 무드보드](/travel-blog/images/inline-yeosu-night-mood.jpeg)
+
 
 **여수 여행**을 마치고 돌아오는 길에는 항상 마음 한구석이 따뜻해지는 기분을 느낍니다. 화려한 도시의 야경과는 또 다른, 바다와 조명이 주는 특유의 차분함과 낭만이 있기 때문입니다. 소중한 사람과 함께 걷는 종포해양공원의 산책로, 케이블카에서 내려다본 반짝이는 바다, 그리고 포차에서 나누는 정겨운 대화들은 단순한 관광 이상의 가치를 지닙니다.
 

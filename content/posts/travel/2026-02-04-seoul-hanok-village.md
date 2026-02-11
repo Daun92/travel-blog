@@ -68,6 +68,9 @@ factcheckScore: 85
 - 북촌 8경은 각각 다른 매력의 한옥 풍경 제공
 - 삼청동길에서 카페와 갤러리 탐방
 
+![북촌 한옥마을 산책 코스 지도](/travel-blog/images/inline-bukchon-course-map.jpeg)
+
+
 ### 코스 2: 포토그래퍼 코스 (3시간)
 
 인생샷을 남기고 싶다면 이 코스를 추천합니다.
@@ -89,6 +92,9 @@ factcheckScore: 85
 - **가격대**: 1-2만원
 
 40년 전통의 손만두 전문점입니다. 두툼한 피에 꽉 찬 속이 일품이에요.
+
+![북촌 한옥마을 관람 정보 가이드](/travel-blog/images/inline-bukchon-visitor-info.jpeg)
+
 
 ### 2. 삼청동 수제비
 - **주소**: 서울 종로구 삼청로 101-1
@@ -115,6 +121,9 @@ factcheckScore: 85
 4. **현지인 팁**: 북촌은 실제 주거지역이므로 큰 소리로 대화하거나 무단으로 집 안을 촬영하는 것은 삼가주세요.
 
 ## 주의사항
+
+![북촌 한옥마을 감성 무드보드](/travel-blog/images/inline-bukchon-mood.jpeg)
+
 
 - 골목길이 경사가 있어 편한 신발 필수
 - 여름철에는 그늘이 적으니 양산이나 모자 준비

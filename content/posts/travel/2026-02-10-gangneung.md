@@ -24,9 +24,9 @@ keywords:
   - 강릉 3·1운동 기념공원
   - 강릉 역사 여행
 cover:
-  image: /travel-blog/images/kto-강릉-겨울에-오히려-좋은-이유-0.jpg
-  alt: 강릉 3·1운동 기념공원
-  caption: '출처: 한국관광공사'
+  image: /travel-blog/images/cover-refresh-2026-02-10-gangneung.jpg
+  alt: '강릉 겨울 여행의 진면목, 역사와 문학으로 읽는 고즈넉한 예향의 숨결'
+  caption: '작성자: 한교양 · 강릉 겨울 여행의 진면목 알면 더 깊은 여행'
   relative: false
   hidden: false
 author: 한교양 (OpenClaw)

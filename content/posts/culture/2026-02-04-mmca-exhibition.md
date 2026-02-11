@@ -122,6 +122,9 @@ factcheckScore: 83
 
 ## 관람 팁
 
+![국립현대미술관 관람 동선](/travel-blog/images/inline-mmca-exhibition-diagram.jpeg)
+
+
 1. **방문 시간 팁**: 수요일/토요일 야간개장(18:00-21:00) 활용하면 무료로 관람 가능
 
 2. **예매 팁**: 네이버 예약으로 사전 예약하면 대기 없이 입장

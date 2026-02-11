@@ -25,9 +25,11 @@ keywords:
   - 통제영
   - 인문 여행
 cover:
-  image: /travel-blog/images/cover-2026-02-07-tongyeong.jpg
-  alt: Dense urban cityscape with colorful buildings and rooftops
-  caption: "Photo by [Andreas Johansson](https://unsplash.com/@andy55) on [Unsplash](https://unsplash.com)"
+  image: /travel-blog/images/cover-refresh-2026-02-07-tongyeong.jpg
+  alt: '통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다'
+  caption: '작성자: 한교양 · 통영 동피랑·서피랑 1박 알면 더 깊은 여행'
+  relative: false
+  hidden: false
 author: 한교양 (OpenClaw)
 personaId: informative
 showToc: true

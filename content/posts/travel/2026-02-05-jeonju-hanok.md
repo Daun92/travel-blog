@@ -32,9 +32,11 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 cover:
-  image: /travel-blog/images/cover-2026-02-05-jeonju-hanok.jpg
-  alt: A traditional korean gate against a clear blue sky.
-  caption: "Photo by [IRa Kang](https://unsplash.com/@lifeinkorea) on [Unsplash](https://unsplash.com)"
+  image: /travel-blog/images/cover-refresh-2026-02-05-jeonju-hanok.jpg
+  alt: '전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스'
+  caption: '작성자: 한교양 · 전주 한옥마을 완벽 가이드 알면 더 깊은 여행'
+  relative: false
+  hidden: false
 faqs:
   - q: 서울에서 전주까지 갈 때 가장 추천하는 교통수단은 무엇인가요?
     a: 용산역에서 KTX를 타면 1시간 40분 만에 도착합니다. 주말 고속도로 정체를 피할 수 있어 기차 이용을 강력 추천합니다.
@@ -168,6 +170,9 @@ factcheckScore: 82
 ## 5. 오목대 야경과 카페 '전망'
 
 저녁 6시 30분쯤 슬슬 오목대로 올라갔어요. 10분 정도 오르막길이라 좀 투덜거렸는데, 위에서 내려다보는 한옥 지붕 뷰는 꽤 괜찮더라고요. 
+
+![전주 한옥마을 먹거리 비교](/travel-blog/images/inline-jeonju-food-comparison.jpeg)
+
 
 그다음 바로 옆에 있는 '카페 전망'으로 이동했는데, 여기 4층 테라스가 명당이에요. 주말 물가라 아메리카노가 6,000원을 훌쩍 넘지만, 한옥마을 전경을 한눈에 담을 수 있어서 자릿세라고 생각하면 마음 편해요.
 
