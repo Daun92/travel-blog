@@ -89,3 +89,28 @@
 }
 </script>
 {{ end }}
+
+{{/* FAQ Schema (FAQPage) - frontmatter에 faqs 필드가 있으면 자동 생성 */}}
+{{ if .IsPage }}
+{{ with .Params.faqs }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {{ range $i, $faq := . }}
+    {{ if $i }},{{ end }}
+    {
+      "@type": "Question",
+      "name": {{ $faq.q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ $faq.a | jsonify }}
+      }
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
+{{ end }}
