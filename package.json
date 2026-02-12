@@ -99,6 +99,11 @@
     "precommit": "tsx scripts/pre-commit-check.mts",
     "api:usage": "tsx scripts/api-usage.mts",
     "api:cache-clear": "tsx scripts/api-cache-clear.mts",
+    "covers:refresh": "tsx scripts/refresh-covers.mts",
+    "covers:sample": "tsx scripts/refresh-covers.mts --sample",
+    "covers:dry-run": "tsx scripts/refresh-covers.mts --sample --dry-run",
+    "covers:all": "tsx scripts/refresh-covers.mts --all",
+    "covers:overlay-only": "tsx scripts/refresh-covers.mts --sample --overlay-only",
     "test": "vitest"
   },
   "keywords": [
@@ -124,12 +129,14 @@
     "inquirer": "^9.2.15",
     "node-fetch": "^3.3.2",
     "ora": "^8.0.1",
+    "sharp": "^0.34.5",
     "slugify": "^1.6.6",
     "yaml": "^2.4.1"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.11.24",
+    "@types/sharp": "^0.31.1",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2",
     "vitest": "^1.3.1"

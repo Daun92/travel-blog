@@ -4,7 +4,6 @@
 
 import { writeFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
-import { format } from 'date-fns';
 import {
   getTravelPrompt,
   getCulturePrompt,
@@ -14,7 +13,6 @@ import {
 } from './prompts.js';
 import {
   generate,
-  generateStream,
   checkGeminiStatus,
   listModels
 } from './gemini.js';
@@ -26,26 +24,21 @@ import {
   type FrontmatterData
 } from './frontmatter.js';
 import {
-  parseContent,
-  insertImages,
   removeImageMarkers,
-  insertAutoMarkers,
-  extractImageMarkers,
-  type ImageResult
 } from './content-parser.js';
-import { generatePromptFromMarker, type ImageContext } from './image-prompts.js';
 import {
   processLinks,
   processLinksWithInfo,
   analyzeLinkMarkers
 } from './link-processor.js';
 import {
-  GeminiImageClient,
-  saveImage,
   getMaxImagesPerPost,
-  type ImageStyle
 } from '../images/gemini-imagen.js';
 import { selectPersona } from '../agents/draft-enhancer/persona-loader.js';
+import {
+  processInlineImages,
+} from '../images/image-orchestrator.js';
+import type { KtoImageCandidate } from '../images/kto-images.js';
 
 export interface GeneratePostOptions {
   topic: string;
@@ -64,6 +57,10 @@ export interface GeneratePostOptions {
   framingType?: string;
   /** dataToPromptContext()로 생성된 수집 데이터 텍스트 */
   collectedData?: string;
+  /** KTO API에서 추출된 이미지 후보 목록 */
+  collectedImages?: KtoImageCandidate[];
+  /** KTO 이미지가 커버에 사용되었는지 여부 */
+  ktoImagesUsed?: boolean;
   onProgress?: (message: string) => void;
 }
 
@@ -94,6 +91,8 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     persona: personaOverride,
     framingType,
     collectedData,
+    collectedImages,
+    ktoImagesUsed = false,
     onProgress = () => {}
   } = options;
 
@@ -134,8 +133,8 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
   const finalDescription = description || extractDescriptionFromContent(parsedContent) || topic;
   const finalKeywords = seoKeywords || keywords;
 
-  // 슬러그 생성 (이미지 파일명에도 사용)
-  const slug = generateSlug(finalTitle);
+  // 슬러그 생성 (이미지 파일명에도 사용) — outputDir 전달로 충돌 방지
+  const slug = generateSlug(finalTitle, outputDir);
 
   // 인라인 이미지 처리
   let finalContent = parsedContent;
@@ -149,6 +148,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
       type,
       slug,
       imageCount: Math.min(imageCount, getMaxImagesPerPost()),
+      collectedImages,
       onProgress
     });
     finalContent = imageResult.content;
@@ -188,6 +188,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     author: authorName,
     personaId: selectedPersona?.id,
     ...(framingType ? { framingType } : {}),
+    ...(ktoImagesUsed ? { dataSources: ['한국관광공사'] } : {}),
     ...(coverImage && {
       cover: {
         image: coverImage,
@@ -218,139 +219,6 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     frontmatter,
     content: finalContent,
     ...(generatedImagePaths.length > 0 && { inlineImages: generatedImagePaths })
-  };
-}
-
-/**
- * 인라인 이미지 처리
- */
-interface ProcessInlineImagesOptions {
-  content: string;
-  topic: string;
-  type: 'travel' | 'culture';
-  slug: string;
-  imageCount: number;
-  onProgress: (message: string) => void;
-}
-
-interface ProcessInlineImagesResult {
-  content: string;
-  imagePaths: string[];
-}
-
-async function processInlineImages(
-  options: ProcessInlineImagesOptions
-): Promise<ProcessInlineImagesResult> {
-  const { content, topic, type, slug, imageCount, onProgress } = options;
-
-  const geminiClient = new GeminiImageClient();
-
-  // Gemini 이미지 생성 가능 여부 확인
-  if (!geminiClient.isConfigured() || !geminiClient.isEnabled()) {
-    onProgress('Gemini 이미지 생성이 비활성화되어 있습니다. 마커를 제거합니다.');
-    return {
-      content: removeImageMarkers(content),
-      imagePaths: []
-    };
-  }
-
-  // 사용량 확인
-  const usageCheck = await geminiClient.checkUsageLimit(imageCount);
-  if (!usageCheck.allowed) {
-    onProgress(`${usageCheck.warning} 마커를 제거합니다.`);
-    return {
-      content: removeImageMarkers(content),
-      imagePaths: []
-    };
-  }
-
-  if (usageCheck.warning) {
-    onProgress(`주의: ${usageCheck.warning}`);
-  }
-
-  // 콘텐츠에서 마커 추출 또는 자동 삽입
-  let processedContent = content;
-  let markers = extractImageMarkers(content);
-
-  // 마커가 없으면 자동 삽입
-  if (markers.length === 0) {
-    onProgress('이미지 마커가 없습니다. 적절한 위치에 자동 삽입합니다.');
-    processedContent = insertAutoMarkers(content, type, imageCount);
-    markers = extractImageMarkers(processedContent);
-  }
-
-  // 요청된 이미지 수만큼만 처리
-  const markersToProcess = markers.slice(0, imageCount);
-
-  if (markersToProcess.length === 0) {
-    onProgress('이미지 삽입 위치를 찾을 수 없습니다.');
-    return {
-      content: removeImageMarkers(processedContent),
-      imagePaths: []
-    };
-  }
-
-  onProgress(`${markersToProcess.length}개의 인라인 이미지 생성 중...`);
-
-  // 이미지 출력 디렉토리
-  const imageOutputDir = join(process.cwd(), 'blog', 'static', 'images');
-
-  // 이미지 생성
-  const imageResults: ImageResult[] = [];
-  const imagePaths: string[] = [];
-  const imageContext: ImageContext = { topic, type };
-
-  for (let i = 0; i < markersToProcess.length; i++) {
-    const marker = markersToProcess[i];
-    onProgress(`  [${i + 1}/${markersToProcess.length}] ${marker.style} 이미지 생성 중...`);
-
-    try {
-      // 마커에서 프롬프트 생성
-      const promptInfo = generatePromptFromMarker(marker.marker, imageContext);
-      if (!promptInfo) {
-        onProgress(`    스킵: 잘못된 마커 형식`);
-        continue;
-      }
-
-      // 이미지 생성
-      const generatedImage = await geminiClient.generateImage({
-        prompt: promptInfo.prompt,
-        style: promptInfo.style,
-        aspectRatio: '16:9',
-        topic
-      });
-
-      // 이미지 저장
-      const filename = `inline-${slug}-${i + 1}`;
-      const savedImage = await saveImage(generatedImage, imageOutputDir, filename);
-
-      imageResults.push({
-        marker,
-        relativePath: savedImage.relativePath,
-        alt: marker.description,
-        caption: savedImage.caption
-      });
-
-      imagePaths.push(savedImage.filepath);
-      onProgress(`    완료: ${savedImage.relativePath}`);
-    } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-      onProgress(`    실패: ${errorMessage}`);
-    }
-  }
-
-  // 이미지 삽입
-  let finalContent = processedContent;
-  if (imageResults.length > 0) {
-    finalContent = insertImages(processedContent, imageResults);
-  }
-
-  // 처리되지 않은 마커 제거
-  finalContent = removeImageMarkers(finalContent);
-
-  return {
-    content: finalContent,
-    imagePaths
   };
 }
 

@@ -57,7 +57,10 @@ const IMAGE_REGISTRY_PATH = 'data/image-registry.json';
 // ─── 이미지 레지스트리 (중복 방지) ──────────────────────────────
 
 interface ImageRegistryEntry {
-  unsplashId: string;
+  unsplashId?: string;
+  ktoContentId?: string;
+  ktoUrl?: string;
+  source?: 'unsplash' | 'kto';
   postSlug: string;
   query: string;
   usedAt: string;
@@ -95,7 +98,30 @@ export async function registerImage(unsplashId: string, postSlug: string, query:
 
 async function getUsedImageIds(): Promise<Set<string>> {
   const registry = await loadRegistry();
-  return new Set(registry.entries.map(e => e.unsplashId));
+  return new Set(registry.entries.filter(e => e.unsplashId).map(e => e.unsplashId!));
+}
+
+export async function getUsedKtoContentIds(): Promise<Set<string>> {
+  const registry = await loadRegistry();
+  return new Set(registry.entries.filter(e => e.ktoContentId).map(e => e.ktoContentId!));
+}
+
+export async function registerKtoImage(
+  contentId: string | undefined,
+  url: string,
+  postSlug: string,
+  topic: string
+): Promise<void> {
+  const registry = await loadRegistry();
+  registry.entries.push({
+    ktoContentId: contentId,
+    ktoUrl: url,
+    source: 'kto',
+    postSlug,
+    query: topic,
+    usedAt: new Date().toISOString()
+  });
+  await saveRegistry(registry);
 }
 
 // ─── Unsplash API 클라이언트 ────────────────────────────────────
@@ -385,6 +411,84 @@ const KOREAN_TO_ENGLISH: Record<string, string> = {
   '해설': '',
 };
 
+// ─── 장소/개념 → 시각적 연상 키워드 (사진작가가 실제 태그할 용어) ──
+
+const LOCATION_ASSOCIATIONS: Record<string, string[]> = {
+  // ─── 도시 ───
+  '서울': ['Seoul skyline cityscape', 'neon lights urban night Korea', 'palace traditional architecture', 'Han River bridge sunset'],
+  '부산': ['harbor port ocean Korea', 'colorful village hillside Busan', 'seafood market coastal', 'beach urban skyline Korea'],
+  '제주': ['volcanic landscape Jeju', 'stone wall tangerine grove', 'black basalt coast ocean', 'crater lake emerald Jeju'],
+  '경주': ['ancient temple pagoda Korea', 'cherry blossom historic park', 'royal tomb grass mound', 'stone Buddha statue'],
+  '전주': ['hanok village traditional roof', 'Korean bibimbap food', 'paper craft traditional art', 'old town alley Korea'],
+  '강릉': ['ocean beach sunrise Korea', 'coffee cafe coastal town', 'pine tree seaside', 'traditional village mountain coast'],
+  '대구': ['modern city Korea alley', 'market traditional Daegu', 'Apsan mountain view urban'],
+  '대전': ['science city Korea expo', 'hot spring nature', 'modern architecture bridge'],
+  '광주': ['art biennale contemporary', 'democracy memorial Korea', 'food alley night market'],
+  '인천': ['Chinatown colorful gate', 'harbor island ferry Korea', 'modern architecture Songdo'],
+  '수원': ['fortress wall gate historic', 'Korean palace architecture stone', 'traditional market lantern'],
+  '여수': ['night sea bridge illuminated', 'cable car ocean view', 'port sunset fishing boat'],
+  '통영': ['harbor island panorama Korea', 'mural village art', 'oyster seafood coastal'],
+  '안동': ['Hahoe village mask Korea', 'traditional house Confucian', 'river cliff mountain heritage'],
+  '속초': ['Seoraksan mountain rock peak', 'seafood port fishing Korea', 'beach resort east coast'],
+  '춘천': ['lake mountain scenic Korea', 'dakgalbi chicken food', 'rail bike nature trail'],
+  '목포': ['harbor sunset port Korea', 'Japanese colonial architecture', 'Yudalsan mountain view', 'Korean port city coastal'],
+  '군산': ['retro Japanese colonial street', 'bakery old town vintage', 'port industrial heritage Korea'],
+  '파주': ['DMZ border bridge Korea', 'book city library', 'Provence village colorful'],
+  '성수동': ['industrial loft cafe Seoul', 'trendy brick building', 'popup store modern design'],
+  '해운대': ['beach highrise skyline Busan', 'ocean wave sand Korea', 'night market seafood coast'],
+  '광안리': ['diamond bridge night Busan', 'beach sunset urban Korea'],
+  '홍대': ['street art mural graffiti', 'indie music live club Seoul', 'youth culture night'],
+  '이태원': ['multicultural street food Seoul', 'hillside cafe urban', 'diverse nightlife'],
+  '인사동': ['traditional crafts pottery', 'calligraphy art gallery Seoul', 'tea house hanok'],
+  '익선동': ['hanok cafe retro Seoul', 'narrow alley traditional Korea'],
+  '을지로': ['retro industrial Seoul neon', 'old workshop craftsman', 'vintage sign night alley'],
+  '남산': ['Seoul tower panorama city', 'mountain park observation', 'love lock viewpoint'],
+  '한강': ['river bridge city night Seoul', 'cycling path park', 'sunset riverside urban'],
+  '명동': ['shopping neon street crowd Seoul', 'street food stall Korea'],
+
+  // ─── 랜드마크 ───
+  '경복궁': ['palace gate guard ceremony', 'hanbok traditional dress Korea', 'royal garden pavilion'],
+  '북촌': ['hanok rooftop village alley Seoul', 'traditional house narrow street'],
+  '한라산': ['mountain peak crater lake Jeju', 'hiking trail alpine meadow', 'cloud forest moss'],
+  '성산일출봉': ['volcanic crater ocean sunrise', 'cliff coast dramatic Jeju'],
+  '불국사': ['temple stone pagoda Korea', 'Buddhist architecture autumn', 'historic stone bridge'],
+  '감천문화마을': ['colorful houses hillside Busan', 'mural art village steps', 'rainbow rooftop ocean view'],
+
+  // ─── 개념 ───
+  '오름': ['volcanic hill grassland Jeju', 'crater hiking panorama', 'parasite cone green meadow'],
+  '지질학': ['basalt column formation', 'volcanic rock layer', 'geological cliff coast'],
+  '근대역사': ['colonial architecture vintage Korea', 'retro street heritage building', 'old town preservation'],
+  '한옥': ['traditional roof tile curve', 'wooden house courtyard Korea', 'hanok interior warm floor'],
+  '사찰': ['temple bell lantern', 'Buddhist monk meditation Korea', 'mountain temple morning mist'],
+  '궁': ['palace courtyard ceremony Korea', 'royal architecture night illuminated', 'traditional gate entrance'],
+  '맛집': ['Korean food table colorful', 'restaurant interior cozy', 'street food steam night'],
+  '카페': ['coffee interior design cozy', 'latte art window light', 'bookshelf warm cafe'],
+  '야경': ['city lights reflection river', 'bridge illuminated night Korea', 'skyline neon glow'],
+  '해변': ['beach sunrise calm wave', 'sand ocean horizon Korea', 'coastal cliff scenic'],
+  '산': ['mountain peak trail hiker', 'forest path morning Korea', 'ridge cloud dramatic'],
+  '축제': ['lantern festival colorful Korea', 'crowd celebration parade', 'traditional dance performance'],
+  '전시회': ['gallery white wall art', 'modern installation space', 'exhibition visitor perspective'],
+  '미술관': ['museum interior architecture', 'contemporary art space', 'gallery lighting artwork'],
+  '박물관': ['museum exhibit artifact', 'historical display collection', 'heritage interior hall'],
+  '공연': ['stage spotlight performer', 'theater audience dark', 'concert live music'],
+  '템플스테이': ['meditation zen peaceful Korea', 'temple dawn mountain', 'Buddhist ceremony prayer'],
+  '서점': ['bookstore shelves cozy', 'indie bookshop interior', 'reading corner warm light'],
+  '벚꽃': ['cherry blossom pink spring Korea', 'sakura tree path', 'flower tunnel romantic'],
+  '단풍': ['autumn foliage red orange Korea', 'maple leaf mountain', 'fall color forest path'],
+};
+
+// ─── 계절 키워드 ────────────────────────────────────────────────
+
+const SEASON_KEYWORDS: Record<string, string> = {
+  '봄': 'spring blossom',
+  '여름': 'summer green',
+  '가을': 'autumn foliage',
+  '겨울': 'winter snow',
+  '벚꽃': 'spring cherry blossom',
+  '단풍': 'autumn maple leaves',
+  '눈': 'winter snow',
+};
+
 // ─── 에이전트 페르소나별 이미지 스타일 힌트 ─────────────────────
 
 const PERSONA_STYLE_HINTS: Record<string, string[]> = {
@@ -482,6 +586,91 @@ export function buildContextualQuery(ctx: ImageSearchContext): string[] {
   return queries;
 }
 
+// ─── 다양한 연관 검색 쿼리 생성 ──────────────────────────────────
+
+const MAX_QUERY_BUDGET = 5;
+
+/**
+ * 6~8가지 전략으로 개념적으로 다른 쿼리를 생성
+ * buildContextualQuery의 상위 호환 — 연관 확장 + 계절 + CLI 키워드
+ */
+export function generateDiverseQueries(ctx: ImageSearchContext): string[] {
+  const base = optimizeSearchQuery(ctx.topic);
+  const queries = new Set<string>();
+
+  // Strategy 1: 직역 (기존 optimizeSearchQuery 결과)
+  queries.add(base);
+
+  // topic에서 연관 키워드 추출
+  const topicWords = ctx.topic.split(/[\s\-·,]+/).filter(w => w.length >= 2);
+  const associations: string[] = [];
+  for (const word of topicWords) {
+    const assoc = LOCATION_ASSOCIATIONS[word];
+    if (assoc) {
+      associations.push(...assoc);
+    }
+  }
+
+  // Strategy 2 & 3: 연관 확장 (서로 다른 시각적 개념 2개)
+  if (associations.length > 0) {
+    queries.add(associations[0]);
+    if (associations.length > 1) {
+      queries.add(associations[1]);
+    }
+  }
+
+  // 주요 지명 추출 (Korea가 포함된 번역 결과에서 첫 단어)
+  const locationKeys = Object.keys(KOREAN_TO_ENGLISH).filter(k =>
+    ctx.topic.includes(k) && KOREAN_TO_ENGLISH[k].toLowerCase().includes('korea')
+  );
+  const primaryLocation = locationKeys.length > 0
+    ? translateKeyword(locationKeys[0]).split(' ')[0]
+    : '';
+
+  // Strategy 4: 페르소나 + 주요 지명
+  if (ctx.persona && primaryLocation) {
+    const personaHint = PERSONA_STYLE_HINTS[ctx.persona]?.[0] || '';
+    if (personaHint) {
+      queries.add(`${primaryLocation} ${personaHint}`);
+    }
+  }
+
+  // Strategy 5: 타입별 장면
+  if (ctx.type && primaryLocation) {
+    const sceneMap: Record<string, string> = {
+      travel: 'landscape scenery destination',
+      culture: 'heritage art museum',
+    };
+    queries.add(`${primaryLocation} ${sceneMap[ctx.type] || ''}`);
+  }
+
+  // Strategy 6: Korea 부스트
+  if (primaryLocation && !base.toLowerCase().includes('korea')) {
+    queries.add(`${primaryLocation} Korea`);
+  }
+
+  // Strategy 7: 계절/시간 (topic에서 감지)
+  for (const [ko, eng] of Object.entries(SEASON_KEYWORDS)) {
+    if (ctx.topic.includes(ko)) {
+      queries.add(primaryLocation ? `${primaryLocation} ${eng}` : `Korea ${eng}`);
+      break;
+    }
+  }
+
+  // Strategy 8: CLI 키워드
+  if (ctx.keywords && ctx.keywords.length > 0) {
+    for (const kw of ctx.keywords.slice(0, 2)) {
+      const translated = translateKeyword(kw);
+      if (translated !== kw && translated.trim().length > 0) {
+        queries.add(translated);
+      }
+    }
+  }
+
+  // 빈 쿼리 제거 + 최대 8개
+  return [...queries].filter(q => q.trim().length > 0).slice(0, 8);
+}
+
 // ─── 관련성 스코어링 ────────────────────────────────────────────
 
 /**
@@ -549,7 +738,33 @@ export function scoreImageRelevance(
     reasons.push('상세 설명 존재 (+5)');
   }
 
-  // 5. 부정적 시그널 감지 (감점)
+  // 5. 연관 키워드 보너스 (LOCATION_ASSOCIATIONS 매칭, 최대 +15)
+  const topicParts = ctx.topic.split(/[\s\-·,]+/).filter(w => w.length >= 2);
+  const assocTerms: string[] = [];
+  for (const part of topicParts) {
+    const assoc = LOCATION_ASSOCIATIONS[part];
+    if (assoc) {
+      for (const a of assoc) {
+        assocTerms.push(...a.toLowerCase().split(' '));
+      }
+    }
+  }
+  if (assocTerms.length > 0) {
+    const uniqueAssoc = [...new Set(assocTerms)];
+    let assocHits = 0;
+    for (const term of uniqueAssoc) {
+      if (term.length > 2 && combined.includes(term)) {
+        assocHits++;
+      }
+    }
+    if (assocHits > 0) {
+      const assocScore = Math.min(15, assocHits * 5);
+      score += assocScore;
+      reasons.push(`연관 키워드 ${assocHits}건 매칭 (+${assocScore})`);
+    }
+  }
+
+  // 6. 부정적 시그널 감지 (감점)
   const negativePatterns = [
     { pattern: /politic|protest|rally|demonstration/i, label: '정치/시위', penalty: -40 },
     { pattern: /military|weapon|war|soldier/i, label: '군사/무기', penalty: -40 },
@@ -566,7 +781,7 @@ export function scoreImageRelevance(
     }
   }
 
-  // 6. 페르소나 스타일 매칭 (최대 +5)
+  // 7. 페르소나 스타일 매칭 (최대 +5)
   if (ctx.persona) {
     const hints = PERSONA_STYLE_HINTS[ctx.persona] || [];
     for (const hint of hints) {
@@ -585,12 +800,67 @@ export function scoreImageRelevance(
   };
 }
 
+// ─── 후보 풀에서 최적 이미지 선택 ─────────────────────────────────
+
+/**
+ * 후보 풀에서 최종 1장을 선택 — 다양성 반영
+ * 1. score 내림차순 정렬
+ * 2. 최근 레지스트리(20개)와 겹침 → diversity penalty
+ * 3. 상위 3개 후보 진단 로그
+ */
+async function selectBestCandidate(
+  candidates: ScoredPhoto[]
+): Promise<ScoredPhoto | null> {
+  if (candidates.length === 0) return null;
+
+  // 점수 내림차순 정렬
+  candidates.sort((a, b) => b.score - a.score);
+
+  // 최근 레지스트리 사용 이력으로 다양성 페널티 적용
+  const registry = await loadRegistry();
+  const recentEntries = registry.entries.slice(-20);
+  const recentTexts = recentEntries.map(e => e.query.toLowerCase()).join(' ');
+
+  for (const cand of candidates) {
+    const desc = (
+      (cand.photo.description || '') + ' ' + (cand.photo.alt_description || '')
+    ).toLowerCase();
+    const descWords = desc.split(/\s+/).filter(w => w.length > 3);
+    let overlapCount = 0;
+    for (const word of descWords) {
+      if (recentTexts.includes(word)) overlapCount++;
+    }
+    const diversityPenalty = Math.min(10, Math.floor(overlapCount / 2));
+    if (diversityPenalty > 0) {
+      cand.score = Math.max(0, cand.score - diversityPenalty);
+      cand.reasons.push(`다양성 감점 (-${diversityPenalty})`);
+    }
+  }
+
+  // 페널티 후 재정렬
+  candidates.sort((a, b) => b.score - a.score);
+
+  // 상위 3개 후보 진단 로그
+  const top3 = candidates.slice(0, 3);
+  console.log(`  후보 ${candidates.length}장 중 상위 ${top3.length}개:`);
+  for (let i = 0; i < top3.length; i++) {
+    const c = top3[i];
+    const desc = c.photo.alt_description || c.photo.description || c.photo.id;
+    console.log(`    ${i + 1}. [${c.score}점] ${desc.slice(0, 60)}`);
+  }
+
+  return candidates[0];
+}
+
 // ─── 스마트 이미지 검색 (메인 진입점) ───────────────────────────
 
 const MIN_ACCEPTABLE_SCORE = 45;
 
 /**
- * 맥락 인식 이미지 검색 — 스코어링 + 중복 방지 + 다단계 폴백
+ * 맥락 인식 이미지 검색 — 다양한 쿼리 → 후보 풀 수집 → 최적 선택
+ *
+ * 개선: 기존 first-fit(score>=70 early-exit) 대신
+ * 모든 쿼리(예산 내) 실행 → 전체 후보 스코어링 → 최고점 선택
  */
 export async function findImageForTopic(
   topic: string,
@@ -612,41 +882,46 @@ export async function findImageForTopic(
   };
 
   const usedIds = await getUsedImageIds();
-  const queries = buildContextualQuery(ctx);
+  const queries = generateDiverseQueries(ctx);
+  const queryBudget = Math.min(queries.length, MAX_QUERY_BUDGET);
 
-  console.log(`  검색 쿼리 후보: ${queries.map(q => `"${q}"`).join(', ')}`);
+  console.log(`  다양한 검색 쿼리 ${queries.length}개 (실행: ${queryBudget}개):`);
+  for (const q of queries.slice(0, queryBudget)) {
+    console.log(`    -> "${q}"`);
+  }
 
   try {
-    let bestCandidate: ScoredPhoto | null = null;
+    // 모든 쿼리로 후보 수집
+    const allCandidates: ScoredPhoto[] = [];
+    const seenPhotoIds = new Set<string>();
 
-    // 각 쿼리 후보로 순차 검색, 최고 점수 후보를 추적
-    for (const query of queries) {
+    for (const query of queries.slice(0, queryBudget)) {
       const results = await client.search(query, {
-        perPage: 10,
+        perPage: 8,
         orientation: 'landscape'
       });
 
       if (results.results.length === 0) continue;
 
-      // 전체 결과 스코어링
       for (const photo of results.results) {
-        // 중복 제외
-        if (usedIds.has(photo.id)) continue;
+        // 쿼리 간 중복 + 이전 사용 이력 제외
+        if (seenPhotoIds.has(photo.id) || usedIds.has(photo.id)) continue;
+        seenPhotoIds.add(photo.id);
 
         const scored = scoreImageRelevance(photo, ctx);
-
-        if (!bestCandidate || scored.score > bestCandidate.score) {
-          bestCandidate = scored;
+        if (scored.score >= MIN_ACCEPTABLE_SCORE) {
+          allCandidates.push(scored);
         }
       }
-
-      // 현재 최고점이 충분히 높으면 더 검색하지 않음
-      if (bestCandidate && bestCandidate.score >= 70) break;
     }
 
-    // 결과 로깅
-    if (bestCandidate) {
-      const { photo, score, reasons } = bestCandidate;
+    console.log(`  후보 수집: ${seenPhotoIds.size}장 검토, ${allCandidates.length}장 통과 (>= ${MIN_ACCEPTABLE_SCORE}점)`);
+
+    // 후보 풀에서 최적 선택
+    const best = await selectBestCandidate(allCandidates);
+
+    if (best) {
+      const { photo, score, reasons } = best;
       const label = score >= 70 ? '✓ 높은 관련성' :
                     score >= MIN_ACCEPTABLE_SCORE ? '△ 보통 관련성' :
                     '✗ 낮은 관련성';
@@ -656,7 +931,7 @@ export async function findImageForTopic(
       }
 
       if (score < MIN_ACCEPTABLE_SCORE) {
-        console.warn(`  ⚠️ 스코어 ${score}점 < ${MIN_ACCEPTABLE_SCORE}점 — 주제와 무관할 수 있음`);
+        console.warn(`  스코어 ${score}점 < ${MIN_ACCEPTABLE_SCORE}점 — 주제와 무관할 수 있음`);
       }
 
       return photo;

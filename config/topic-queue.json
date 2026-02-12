@@ -1,6 +1,182 @@
 {
-  "queue": [],
+  "queue": [
+    {
+      "title": "제천 청풍호 겨울 커플 데이트: 호수 위 케이블카에서 본 풍경",
+      "type": "travel",
+      "meta": {
+        "score": 115,
+        "source": "manual_curation",
+        "discoveredAt": "2026-02-12T10:00:00.000Z",
+        "keywords": [
+          "제천",
+          "청풍호",
+          "커플",
+          "데이트",
+          "케이블카",
+          "호수"
+        ],
+        "personaId": "friendly",
+        "framingType": "experience"
+      }
+    },
+    {
+      "title": "공주 백제유적 디깅: 무령왕릉 벽돌 한 장에서 시작되는 1,500년 탐구",
+      "type": "culture",
+      "meta": {
+        "score": 115,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-12T10:00:00.000Z",
+        "keywords": [
+          "공주",
+          "백제",
+          "무령왕릉",
+          "공산성",
+          "디깅",
+          "숨은"
+        ],
+        "personaId": "niche",
+        "framingType": "niche_digging"
+      }
+    },
+    {
+      "title": "서울의 역사 산책: 알고 가면 다르게 보인다",
+      "type": "travel",
+      "meta": {
+        "score": 108,
+        "source": "moltbook_trending",
+        "discoveredAt": "2026-02-10T07:45:09.565Z",
+        "keywords": [
+          "서울",
+          "카페",
+          "맛집"
+        ],
+        "personaId": "informative",
+        "framingType": "deep_dive"
+      }
+    },
+    {
+      "title": "강릉 기대 vs 현실: 진짜 가볼 만한 곳",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "moltbook_trending",
+        "discoveredAt": "2026-02-11T12:06:10.322Z",
+        "keywords": [
+          "강릉",
+          "바다",
+          "카페"
+        ],
+        "personaId": "viral",
+        "framingType": "comparison"
+      }
+    },
+    {
+      "title": "제주 기대 vs 현실: 과대평가된 곳 vs 진짜 명소",
+      "type": "travel",
+      "meta": {
+        "score": 100,
+        "source": "gap_analysis",
+        "discoveredAt": "2026-02-11T12:06:10.322Z",
+        "keywords": [
+          "제주",
+          "렌터카",
+          "카페",
+          "바다",
+          "여행"
+        ],
+        "personaId": "viral",
+        "framingType": "comparison"
+      }
+    },
+    {
+      "title": "제주 1박2일 실제 비용과 솔직 후기",
+      "type": "travel",
+      "meta": {
+        "score": 110,
+        "source": "moltbook_trending",
+        "discoveredAt": "2026-02-12T09:30:59.969Z",
+        "keywords": [
+          "제주",
+          "렌터카",
+          "카페"
+        ],
+        "personaId": "friendly",
+        "framingType": "experience"
+      }
+    },
+    {
+      "title": "강릉 현지인 단골 가게와 숨은 골목",
+      "type": "travel",
+      "meta": {
+        "score": 110,
+        "source": "moltbook_trending",
+        "discoveredAt": "2026-02-12T09:30:59.969Z",
+        "keywords": [
+          "강릉",
+          "바다",
+          "카페"
+        ],
+        "personaId": "viral",
+        "framingType": "local_story"
+      }
+    }
+  ],
   "completed": [
+    {
+      "title": "을지로 공구골목 디깅: 세 번 가야 보이는 것들",
+      "type": "travel",
+      "meta": {
+        "score": 115,
+        "source": "manual_curation",
+        "completedAt": "2026-02-12",
+        "personaId": "niche",
+        "framingType": "niche_digging"
+      }
+    },
+    {
+      "title": "강릉 겨울에 오히려 좋은 이유",
+      "type": "travel",
+      "meta": {
+        "score": 119.33,
+        "source": "gap_analysis",
+        "completedAt": "2026-02-10",
+        "personaId": "informative",
+        "framingType": "seasonal"
+      }
+    },
+    {
+      "title": "부산 현지인만 아는 골목 맛집과 뷰포인트",
+      "type": "travel",
+      "meta": {
+        "score": 112,
+        "source": "gap_analysis",
+        "completedAt": "2026-02-10",
+        "personaId": "informative",
+        "framingType": "local_story"
+      }
+    },
+    {
+      "title": "제주 오름의 지질학: 368개 오름이 만든 풍경",
+      "type": "travel",
+      "meta": {
+        "score": 105,
+        "source": "gap_analysis",
+        "completedAt": "2026-02-11",
+        "personaId": "informative",
+        "framingType": "deep_dive"
+      }
+    },
+    {
+      "title": "목포 근대역사 산책: 개항장에서 유달산까지",
+      "type": "culture",
+      "meta": {
+        "score": 105,
+        "source": "gap_analysis",
+        "completedAt": "2026-02-11",
+        "personaId": "informative",
+        "framingType": "deep_dive"
+      }
+    },
     {
       "title": "강릉 겨울 바다 카페 투어: 오션뷰 감성 카페 베스트 5",
       "type": "travel"
@@ -208,5 +384,118 @@
     "enableInlineImages": true,
     "inlineImageCount": 3
   },
-  "discovered": []
+  "discovered": [
+    {
+      "topic": "제주",
+      "type": "travel",
+      "score": 110,
+      "source": "moltbook_trending",
+      "reasoning": "rising 트렌드, 평균 6 upvotes | 지역다양성(제주) +10",
+      "suggestedTitle": "제주 1박2일 실제 비용과 솔직 후기",
+      "keywords": [
+        "제주",
+        "렌터카",
+        "카페"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "personaId": "friendly",
+      "framingType": "experience"
+    },
+    {
+      "topic": "강릉",
+      "type": "travel",
+      "score": 110,
+      "source": "moltbook_trending",
+      "reasoning": "rising 트렌드, 평균 7 upvotes | 에이전트밸런스(viral) +10",
+      "suggestedTitle": "강릉 현지인 단골 가게와 숨은 골목",
+      "keywords": [
+        "강릉",
+        "바다",
+        "카페"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "personaId": "viral",
+      "framingType": "local_story"
+    },
+    {
+      "topic": "공주 백제문화",
+      "type": "culture",
+      "score": 105,
+      "source": "gap_analysis",
+      "reasoning": "미커버 지역(충청) 자동 생성 | deep_dive 프레이밍",
+      "suggestedTitle": "공주 백제유적 산책: 무령왕릉에서 공산성까지",
+      "keywords": [
+        "공주",
+        "백제",
+        "무령왕릉",
+        "공산성"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.997Z",
+      "personaId": "informative",
+      "framingType": "deep_dive"
+    },
+    {
+      "topic": "여수",
+      "type": "travel",
+      "score": 95,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 75 | 에이전트밸런스(viral) +10 | 지역다양성(전남) +10",
+      "suggestedTitle": "여수 야경 명소 비교: 어디서 봐야 가장 예쁠까",
+      "keywords": [
+        "여수"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "personaId": "viral",
+      "framingType": "comparison"
+    },
+    {
+      "topic": "대전 빵집 투어",
+      "type": "travel",
+      "score": 95,
+      "source": "gap_analysis",
+      "reasoning": "미커버 지역(충청) 보조 추천 | experience 프레이밍",
+      "suggestedTitle": "대전 성심당만? 현지인이 가는 진짜 빵집 3곳",
+      "keywords": [
+        "대전",
+        "성심당",
+        "빵집",
+        "맛집"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.997Z",
+      "personaId": "friendly",
+      "framingType": "experience"
+    },
+    {
+      "topic": "부산",
+      "type": "travel",
+      "score": 88,
+      "source": "moltbook_trending",
+      "reasoning": "stable 트렌드, 평균 6 upvotes | 에이전트밸런스(viral) +10",
+      "suggestedTitle": "부산 기대 vs 현실: 진짜 가볼 만한 곳",
+      "keywords": [
+        "부산",
+        "바다",
+        "맛집"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "personaId": "viral",
+      "framingType": "comparison"
+    },
+    {
+      "topic": "서울",
+      "type": "travel",
+      "score": 80,
+      "source": "moltbook_trending",
+      "reasoning": "stable 트렌드, 평균 4 upvotes | 에이전트밸런스(viral) +10",
+      "suggestedTitle": "서울 여행 체크리스트: 놓치기 쉬운 5가지",
+      "keywords": [
+        "서울",
+        "카페",
+        "맛집"
+      ],
+      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "personaId": "viral",
+      "framingType": "list_ranking"
+    }
+  ]
 }

@@ -41,7 +41,7 @@ export interface PostImageValidationResult {
 /**
  * 이미지 소스 타입
  */
-type ImageSource = 'unsplash' | 'gemini' | 'local' | 'external' | 'unknown';
+type ImageSource = 'unsplash' | 'gemini' | 'kto' | 'local' | 'external' | 'unknown';
 
 /**
  * 이미지 경로에서 소스 타입 추론
@@ -50,6 +50,16 @@ function inferImageSource(imagePath: string): ImageSource {
   // Unsplash URL
   if (imagePath.includes('unsplash.com') || imagePath.includes('unsplash')) {
     return 'unsplash';
+  }
+
+  // KTO 한국관광공사 이미지
+  if (imagePath.includes('kto-') || imagePath.includes('visitkorea')) {
+    return 'kto';
+  }
+
+  // Refreshed cover (Gemini cover_photo)
+  if (imagePath.includes('cover-refresh-')) {
+    return 'gemini';
   }
 
   // AI 생성 이미지 (파일명 패턴)
@@ -163,7 +173,7 @@ export async function validateImage(
   const source = inferImageSource(imagePath);
 
   // 2. 저작권 안전성
-  const isCopyrightSafe = source === 'unsplash' || source === 'gemini' || source === 'local';
+  const isCopyrightSafe = source === 'unsplash' || source === 'gemini' || source === 'kto' || source === 'local';
   if (!isCopyrightSafe) {
     issues.push('저작권 확인 필요 (외부 이미지)');
     recommendation = 'manual_check';
@@ -354,12 +364,15 @@ export async function validatePostImages(
     recommendations.push(`${replaceCount}개의 이미지 교체 필요`);
   }
 
-  // AI 생성 이미지 경고
+  // AI 생성 이미지 경고 (KTO 실사진이 이미 있으면 불필요)
   const aiGeneratedCount = inlineImages.filter(img =>
     img.imagePath.includes('gemini-') || img.imagePath.includes('inline-')
   ).length;
+  const ktoImageCount = inlineImages.filter(img =>
+    img.imagePath.includes('kto-')
+  ).length;
 
-  if (aiGeneratedCount > 0 && venue) {
+  if (aiGeneratedCount > 0 && ktoImageCount === 0 && venue) {
     recommendations.push(`${aiGeneratedCount}개의 AI 생성 이미지 - 실제 장소 사진으로 교체 고려`);
   }
 

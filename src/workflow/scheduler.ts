@@ -7,6 +7,7 @@ import { readFile, writeFile, mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 import { join } from 'path';
 import ContentPipeline, { loadPipelineConfig, PipelineRun } from './pipeline.js';
+import { getEventBus, type WorkflowEventBus } from './event-bus.js';
 
 // ============================================================================
 // 타입 정의
@@ -79,12 +80,15 @@ const DEFAULT_TASKS: ScheduledTask[] = [
 export class PipelineScheduler {
   private state: SchedulerState;
   private intervalHandles: Map<string, NodeJS.Timeout> = new Map();
+  private eventBus: WorkflowEventBus;
+  private _subscribed = false;
 
   constructor() {
     this.state = {
       tasks: [...DEFAULT_TASKS],
       lastUpdated: new Date().toISOString()
     };
+    this.eventBus = getEventBus();
   }
 
   /**
@@ -93,6 +97,76 @@ export class PipelineScheduler {
   async initialize(): Promise<void> {
     await this.loadState();
     this.updateNextRunTimes();
+    this.subscribeToEvents();
+  }
+
+  /**
+   * 이벤트 버스 구독 — 피드백 루프 연결
+   *
+   * 1. content:published → 24시간 후 feedback 태스크 자동 등록
+   * 2. quality:gate-failed → 치유 실패 시 human-review 알림
+   * 3. feedback:received → 전략 갱신 트리거
+   */
+  private subscribeToEvents(): void {
+    if (this._subscribed) return;
+    this._subscribed = true;
+
+    // Publish → Monitor 루프: 발행 후 24시간 뒤 피드백 수집
+    this.eventBus.on('content:published', (data) => {
+      const taskId = `feedback-${Date.now()}`;
+      const feedbackTask: ScheduledTask = {
+        id: taskId,
+        name: `피드백 수집: ${data.filePath.split('/').pop() || data.filePath}`,
+        schedule: {
+          type: 'daily',
+          time: this.getTimeAfterHours(24),
+        },
+        action: 'feedback',
+        enabled: true,
+      };
+
+      this.state.tasks.push(feedbackTask);
+      this.saveState().catch(() => {});
+
+      if (this.eventBus.listenerCount('content:published') > 0) {
+        console.log(`   📅 피드백 수집 태스크 등록: ${feedbackTask.name}`);
+      }
+    });
+
+    // Quality → Escalation: 치유 실패 시 human-review 알림
+    this.eventBus.on('quality:gate-failed', (data) => {
+      if (!data.remediation) {
+        // 치유 불가 → human-review 큐에 등록 (별도 알림)
+        console.log(`   ⚠️ [human-review] ${data.gate} 실패 (${data.score}%) — 수동 검토 필요: ${data.filePath}`);
+      }
+    });
+
+    // Feedback → Strategy: 피드백 수신 시 로그 + 발굴 순환 힌트
+    this.eventBus.on('feedback:strategy-updated', (data) => {
+      console.log(`   📊 전략 갱신: ${data.changes.join(', ')}`);
+      console.log(`   🔄 npm run queue discover --auto 실행 권장 (갱신된 전략 반영)`);
+    });
+
+    // Discovery → 발굴 완료 로깅
+    this.eventBus.on('discovery:complete', (data) => {
+      console.log(`   🔍 발굴 완료: ${data.totalRecommendations}개 (${data.mode}, ${data.duration}ms)`);
+    });
+
+    // Discovery → 큐 편성 로깅 + 생성 힌트
+    this.eventBus.on('discovery:queue-populated', (data) => {
+      console.log(`   📬 큐 편성: ${data.added}개 추가 (총 ${data.queueSize}개)`);
+      if (data.queueSize >= 3) {
+        console.log(`   💡 큐 충분 — npm run pipeline generate 실행 가능`);
+      }
+    });
+  }
+
+  /**
+   * 현재 시간에서 N시간 후의 HH:MM 문자열 반환
+   */
+  private getTimeAfterHours(hours: number): string {
+    const future = new Date(Date.now() + hours * 60 * 60 * 1000);
+    return `${String(future.getHours()).padStart(2, '0')}:${String(future.getMinutes()).padStart(2, '0')}`;
   }
 
   /**

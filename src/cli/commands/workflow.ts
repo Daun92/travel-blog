@@ -35,6 +35,9 @@ export const workflowCommand = new Command('workflow')
   .option('--draft', 'Moltbook Draft 포함')
   .option('--apply', 'AEO 요소 자동 적용')
   .option('--auto-fix', '자동 수정 가능한 항목 수정')
+  .option('--parallel-gates', '품질 게이트 병렬 실행 (기본: 활성화)')
+  .option('--no-parallel-gates', '품질 게이트 순차 실행')
+  .option('--remediate', '실패 게이트 자동 치유')
   .option('-v, --verbose', '상세 출력')
   .option('--json', 'JSON 형식 출력')
   .action(async (mode, options) => {
@@ -94,6 +97,8 @@ export const workflowCommand = new Command('workflow')
           includeImage: true,
           applyAEO: options.apply,
           autoFix: options.autoFix,
+          parallelGates: options.parallelGates,
+          remediate: options.remediate,
           verbose: options.verbose,
           onProgress: (stage, msg) => {
             spinner.text = `[${stage}] ${msg}`;

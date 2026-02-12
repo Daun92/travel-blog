@@ -6,9 +6,11 @@ import chalk from 'chalk';
 import ora from 'ora';
 import inquirer from 'inquirer';
 import { generatePost, suggestTitles, checkGeminiStatus } from '../../generator/index.js';
-import { findImageForTopic, UnsplashClient, registerImage } from '../../images/unsplash.js';
 import { GeminiImageClient } from '../../images/gemini-imagen.js';
-import { collectData, dataToPromptContext } from '../../agents/collector.js';
+import { selectCoverImage } from '../../images/image-orchestrator.js';
+import { extractKtoImages } from '../../images/kto-images.js';
+import { collectData, dataToPromptContext, type CollectedData } from '../../agents/collector.js';
+import { factCheckFile, summarizeReport } from '../../factcheck/index.js';
 
 export interface NewCommandOptions {
   topic: string;
@@ -19,9 +21,10 @@ export interface NewCommandOptions {
   yes?: boolean; // 비대화 모드
   inlineImages?: boolean; // 인라인 이미지 생성
   imageCount?: number; // 인라인 이미지 개수
-  agent?: string; // 에이전트 페르소나 ID (viral|friendly|informative)
+  agent?: string; // 에이전트 페르소나 ID (viral|friendly|informative|niche)
   framingType?: string; // 콘텐츠 프레이밍 유형 (list_ranking|deep_dive|experience|...)
   autoCollect?: boolean; // 자동 데이터 수집 후 프롬프트에 주입
+  autoFactcheck?: boolean; // 생성 후 자동 팩트체크 실행
 }
 
 export async function newCommand(options: NewCommandOptions): Promise<void> {
@@ -131,69 +134,15 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       console.log(chalk.dim('\n비대화 모드: 제목 추천 스킵'));
     }
 
-    // 6. 이미지 검색 (Unsplash 키가 있는 경우) - 비대화 모드에서도 자동 검색
-    let coverImage = '';
-    let imageAttribution = '';
-    let imageAlt = '';
-
-    if (process.env.UNSPLASH_ACCESS_KEY) {
-      let shouldSearch = true;
-
-      if (!options.yes) {
-        const { wantImage } = await inquirer.prompt([{
-          type: 'confirm',
-          name: 'wantImage',
-          message: 'Unsplash에서 커버 이미지를 검색하시겠습니까?',
-          default: true
-        }]);
-        shouldSearch = wantImage;
-      }
-
-      if (shouldSearch) {
-        spinner.start('커버 이미지 검색 중 (스코어링 적용)...');
-        const photo = await findImageForTopic(options.topic, undefined, {
-          type: options.type,
-          persona: options.agent as 'viral' | 'friendly' | 'informative' | undefined,
-          keywords: keywords.length > 0 ? keywords : undefined,
-        });
-        spinner.stop();
-
-        if (photo) {
-          console.log(chalk.green(`✓ 커버 이미지 찾음: ${photo.alt_description || '이미지'}`));
-
-          const client = new UnsplashClient();
-          const { filepath, attribution } = await client.download(
-            photo,
-            './blog/static/images',
-            `cover-${Date.now()}.jpg`
-          );
-
-          // 이미지 레지스트리에 등록 (중복 방지)
-          const slug = selectedTitle.replace(/\s+/g, '-').toLowerCase();
-          await registerImage(photo.id, slug, options.topic);
-
-          // Windows/Unix 경로 호환성 처리
-          coverImage = '/' + filepath
-            .replace(/\\/g, '/')
-            .replace(/^\.\/blog\/static\//, '')
-            .replace(/^blog\/static\//, '');
-          imageAttribution = attribution;
-          imageAlt = photo.alt_description || options.topic;
-        } else {
-          console.log(chalk.yellow('커버 이미지를 찾지 못했습니다.'));
-        }
-      }
-    } else {
-      console.log(chalk.dim('UNSPLASH_ACCESS_KEY가 설정되지 않아 커버 이미지 검색을 건너뜁니다.'));
-    }
-
-    // 7. 데이터 자동 수집 (--auto-collect)
+    // 6. 데이터 자동 수집 (--auto-collect) — 커버 이미지 전에 실행
     let collectedDataContext: string | undefined;
+    let collectedDataRaw: CollectedData | undefined;
     if (options.autoCollect) {
       console.log('');
       spinner.start(`"${options.topic}" 관련 데이터 수집 중 (data.go.kr)...`);
       try {
         const collected = await collectData(options.topic);
+        collectedDataRaw = collected;
         collectedDataContext = dataToPromptContext(collected);
         const stats = [
           collected.tourismData.length > 0 ? `관광지 ${collected.tourismData.length}` : '',
@@ -204,6 +153,53 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       } catch (error) {
         spinner.warn(`데이터 수집 실패: ${error instanceof Error ? error.message : error}`);
         console.log(chalk.dim('  수집 데이터 없이 계속 진행합니다.'));
+      }
+    }
+
+    // 7. 커버 이미지 검색 — KTO 우선, Unsplash 폴백
+    let coverImage = '';
+    let imageAttribution = '';
+    let imageAlt = '';
+    let ktoImagesUsed = false;
+
+    // 대화 모드에서 Unsplash 검색 여부 확인
+    let shouldSearchCover = true;
+    if (!options.yes && !collectedDataRaw && process.env.UNSPLASH_ACCESS_KEY) {
+      const { wantImage } = await inquirer.prompt([{
+        type: 'confirm',
+        name: 'wantImage',
+        message: 'Unsplash에서 커버 이미지를 검색하시겠습니까?',
+        default: true
+      }]);
+      shouldSearchCover = wantImage;
+    }
+
+    if (shouldSearchCover) {
+      const coverSlug = selectedTitle.replace(/\s+/g, '-').toLowerCase();
+      spinner.start('커버 이미지 검색 중...');
+      const coverResult = await selectCoverImage({
+        topic: selectedTitle,
+        type: options.type,
+        collectedData: collectedDataRaw,
+        persona: options.agent,
+        keywords,
+        slug: coverSlug,
+        interactive: !options.yes,
+        onProgress: (msg) => { spinner.text = msg; }
+      });
+      spinner.stop();
+
+      if (coverResult) {
+        const sourceLabel = coverResult.ktoImagesUsed ? 'KTO' : 'Unsplash';
+        console.log(chalk.green(`✓ ${sourceLabel} 커버 이미지: ${coverResult.imageAlt}`));
+        coverImage = coverResult.coverImage;
+        imageAttribution = coverResult.imageAttribution;
+        imageAlt = coverResult.imageAlt;
+        ktoImagesUsed = coverResult.ktoImagesUsed;
+      } else if (!process.env.UNSPLASH_ACCESS_KEY && !collectedDataRaw) {
+        console.log(chalk.dim('UNSPLASH_ACCESS_KEY가 설정되지 않아 커버 이미지 검색을 건너뜁니다.'));
+      } else {
+        console.log(chalk.yellow('커버 이미지를 찾지 못했습니다.'));
       }
     }
 
@@ -226,6 +222,10 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       persona: options.agent,
       framingType: options.framingType,
       collectedData: collectedDataContext,
+      collectedImages: collectedDataRaw
+        ? extractKtoImages(collectedDataRaw)
+        : undefined,
+      ktoImagesUsed,
       onProgress: (msg) => {
         spinner.text = msg;
       }
@@ -253,10 +253,41 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
       console.log(chalk.dim(`\n커버 이미지 출처: ${imageAttribution}`));
     }
 
-    // 9. 다음 단계 안내
+    // 9. 자동 팩트체크 (옵션)
+    if (options.autoFactcheck) {
+      console.log('');
+      spinner.start('자동 팩트체크 실행 중...');
+      try {
+        const report = await factCheckFile(result.filepath, {
+          onProgress: (current, total) => {
+            spinner.text = `팩트체크 중... (${current}/${total})`;
+          }
+        });
+        spinner.stop();
+        console.log(summarizeReport(report));
+
+        if (report.overallScore < 70) {
+          console.log(chalk.red(`⚠️  팩트체크 점수 ${report.overallScore}%로 70% 미만입니다.`));
+          console.log(chalk.yellow('   발행 전 반드시 사실 관계를 확인하세요.'));
+        }
+      } catch (fcError) {
+        spinner.warn('팩트체크 실패 (생성된 포스트는 정상 저장됨)');
+        console.log(chalk.dim(`  사유: ${fcError instanceof Error ? fcError.message : String(fcError)}`));
+      }
+    }
+
+    // 10. 다음 단계 안내
     console.log(chalk.cyan('\n📌 다음 단계:'));
-    console.log(`  1. 초안 검토: ${chalk.white(`npm run review -- -f ${result.filename}`)}`);
-    console.log(`  2. 발행: ${chalk.white(`npm run publish -- -f ${result.filename}`)}`);
+    if (!options.autoFactcheck) {
+      console.log(`  1. 향상: ${chalk.white(`npm run enhance -- -f ${result.filepath}`)}`);
+      console.log(`  2. 팩트체크: ${chalk.white(`npm run factcheck -- -f ${result.filepath}`)}`);
+      console.log(`  3. AEO 적용: ${chalk.white(`npm run aeo -- -f ${result.filepath} --apply`)}`);
+      console.log(`  4. 발행: ${chalk.white(`npm run publish -- -f ${result.filename}`)}`);
+    } else {
+      console.log(`  1. 향상: ${chalk.white(`npm run enhance -- -f ${result.filepath}`)}`);
+      console.log(`  2. AEO 적용: ${chalk.white(`npm run aeo -- -f ${result.filepath} --apply`)}`);
+      console.log(`  3. 발행: ${chalk.white(`npm run publish -- -f ${result.filename}`)}`);
+    }
 
   } catch (error) {
     spinner.fail('오류 발생');

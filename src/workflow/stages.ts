@@ -14,6 +14,7 @@ import { validateFile as runQualityGates, ValidationResult as QualityResult } fr
 import { processAEO, applyAEOToFile, AEOResult } from '../aeo/index.js';
 import { validatePostImages, PostImageValidationResult } from '../images/image-validator.js';
 import { enhanceDraft, analyzeDraft, EnhanceResult } from '../agents/draft-enhancer/index.js';
+import { runQualityMesh } from './quality-mesh.js';
 
 // ============================================================================
 // 타입 정의
@@ -26,6 +27,8 @@ export interface StageResult {
   details?: string;
   blocked?: boolean;
   data?: unknown;
+  /** 치유 루프에 의해 자동 수정이 적용되었는지 여부 */
+  remediationApplied?: boolean;
 }
 
 export interface ValidationStageOptions {
@@ -43,6 +46,12 @@ export interface ValidationStageOptions {
   applyAEO?: boolean;
   autoFix?: boolean;
   verbose?: boolean;
+
+  // 병렬/치유 옵션 (QualityMesh)
+  /** 품질 게이트 병렬 실행 (기본: true) */
+  parallelGates?: boolean;
+  /** 자동 치유 활성화 (기본: false) */
+  remediate?: boolean;
 
   // 콜백
   onProgress?: (stage: string, message: string) => void;
@@ -89,6 +98,8 @@ const DEFAULT_OPTIONS: ValidationStageOptions = {
   applyAEO: false,
   autoFix: false,
   verbose: false,
+  parallelGates: true,
+  remediate: false,
   onProgress: () => {}
 };
 
@@ -131,74 +142,126 @@ export async function runFullValidation(
   onProgress('init', `검증 시작: ${title}`);
 
   // ========================================================================
-  // Stage 1: Factcheck (필수)
+  // Stage 1: Factcheck + Quality + Image (QualityMesh 병렬 또는 순차)
   // ========================================================================
-  if (opts.includeFactcheck !== false) {
-    onProgress('factcheck', '팩트체크 실행 중...');
+  // Quick 모드에서는 factcheck만 실행, full 모드에서는 QualityMesh 사용
+  if (opts.mode === 'quick') {
+    // Quick 모드: factcheck만 순차 실행
+    if (opts.includeFactcheck !== false) {
+      onProgress('factcheck', '팩트체크 실행 중...');
+
+      try {
+        factcheckResult = await factCheckFile(filePath, { verbose: opts.verbose });
+
+        const stage: StageResult = {
+          name: 'factcheck',
+          status: factcheckResult.passesGate ? 'passed' : (factcheckResult.blockPublish ? 'failed' : 'warning'),
+          score: factcheckResult.overallScore,
+          details: `검증: ${factcheckResult.claims.verified}/${factcheckResult.claims.total}`,
+          blocked: factcheckResult.blockPublish,
+          data: factcheckResult
+        };
+
+        stages.push(stage);
+
+        if (factcheckResult.blockPublish) {
+          canPublish = false;
+          errors.push(`팩트체크 실패 (${factcheckResult.overallScore}%)`);
+        } else if (factcheckResult.needsHumanReview) {
+          needsReview = true;
+          warnings.push(`팩트체크 검토 필요 (${factcheckResult.overallScore}%)`);
+        }
+      } catch (error) {
+        stages.push({
+          name: 'factcheck',
+          status: 'failed',
+          details: `오류: ${error instanceof Error ? error.message : error}`
+        });
+        errors.push(`팩트체크 오류: ${error instanceof Error ? error.message : error}`);
+      }
+    }
+
+    return buildResult(filePath, title, contentType, stages, {
+      factcheck: factcheckResult
+    }, { canPublish, needsReview, recommendations, warnings, errors });
+  }
+
+  // Full 모드: QualityMesh로 factcheck + quality gates + image 병렬 실행
+  const useMesh = opts.includeFactcheck !== false || opts.includeQuality !== false || opts.includeImage !== false;
+  let meshRan = false;
+
+  if (useMesh) {
+    onProgress('mesh', '품질 메시 실행 중 (factcheck + quality + image)...');
 
     try {
-      factcheckResult = await factCheckFile(filePath, { verbose: opts.verbose });
+      const meshResult = await runQualityMesh(filePath, {
+        parallel: opts.parallelGates !== false,
+        remediate: opts.remediate || opts.autoFix,
+        verbose: opts.verbose,
+        contentType,
+        onProgress,
+      });
 
-      const stage: StageResult = {
-        name: 'factcheck',
-        status: factcheckResult.passesGate ? 'passed' : (factcheckResult.blockPublish ? 'failed' : 'warning'),
-        score: factcheckResult.overallScore,
-        details: `검증: ${factcheckResult.claims.verified}/${factcheckResult.claims.total}`,
-        blocked: factcheckResult.blockPublish,
-        data: factcheckResult
-      };
+      meshRan = true;
 
-      stages.push(stage);
+      // Mesh 결과를 stages에 병합
+      stages.push(...meshResult.stages);
+      warnings.push(...meshResult.warnings);
+      errors.push(...meshResult.errors);
+      recommendations.push(...meshResult.recommendations);
 
-      if (factcheckResult.blockPublish) {
-        canPublish = false;
-        errors.push(`팩트체크 실패 (${factcheckResult.overallScore}%)`);
-      } else if (factcheckResult.needsHumanReview) {
-        needsReview = true;
-        warnings.push(`팩트체크 검토 필요 (${factcheckResult.overallScore}%)`);
-      }
+      factcheckResult = meshResult.factcheck;
+      qualityResult = meshResult.quality;
+      imageResult = meshResult.image;
 
-      // 자동 수정 적용 (autoFix 옵션 활성화 시)
-      if (opts.autoFix && factcheckResult.corrections.length > 0) {
-        try {
-          onProgress('factcheck', '자동 수정 적용 중...');
-          const fixReport = await applyAutoFix(filePath, factcheckResult, {
-            dryRun: false,
-            verbose: opts.verbose
-          });
-          if (fixReport.stats.applied > 0) {
-            recommendations.push(`[팩트체크] 자동 수정 ${fixReport.stats.applied}개 적용됨`);
-          }
-          if (fixReport.stats.criticalQueued > 0) {
-            warnings.push(`[팩트체크] Critical ${fixReport.stats.criticalQueued}개 → human-review 대기열`);
-          }
-        } catch (fixError) {
-          warnings.push(`[팩트체크] 자동 수정 실패: ${fixError instanceof Error ? fixError.message : fixError}`);
-        }
-      }
+      if (!meshResult.canPublish) canPublish = false;
+      if (meshResult.needsReview) needsReview = true;
 
-      // 수정 제안 추가
-      if (factcheckResult.corrections.length > 0 && !opts.autoFix) {
+      // autoFix용 추가 수정 제안 (mesh의 remediate와 별개로 기존 호환)
+      if (!opts.autoFix && factcheckResult && factcheckResult.corrections.length > 0) {
         recommendations.push(...factcheckResult.corrections.map(c =>
           `[팩트체크] ${c.originalText} → ${c.suggestedText}`
         ));
       }
 
     } catch (error) {
-      stages.push({
-        name: 'factcheck',
-        status: 'failed',
-        details: `오류: ${error instanceof Error ? error.message : error}`
-      });
-      errors.push(`팩트체크 오류: ${error instanceof Error ? error.message : error}`);
+      // Mesh 실패 시 기존 순차 경로로 폴백
+      onProgress('mesh', '메시 실패, 순차 실행으로 폴백...');
+      meshRan = false;
     }
   }
 
-  // Quick 모드면 여기서 종료
-  if (opts.mode === 'quick') {
-    return buildResult(filePath, title, contentType, stages, {
-      factcheck: factcheckResult
-    }, { canPublish, needsReview, recommendations, warnings, errors });
+  // Mesh가 실행되지 않았으면 기존 순차 로직으로 폴백
+  if (!meshRan) {
+    // 기존 Stage 1: Factcheck
+    if (opts.includeFactcheck !== false) {
+      onProgress('factcheck', '팩트체크 실행 중...');
+
+      try {
+        factcheckResult = await factCheckFile(filePath, { verbose: opts.verbose });
+
+        stages.push({
+          name: 'factcheck',
+          status: factcheckResult.passesGate ? 'passed' : (factcheckResult.blockPublish ? 'failed' : 'warning'),
+          score: factcheckResult.overallScore,
+          details: `검증: ${factcheckResult.claims.verified}/${factcheckResult.claims.total}`,
+          blocked: factcheckResult.blockPublish,
+          data: factcheckResult
+        });
+
+        if (factcheckResult.blockPublish) {
+          canPublish = false;
+          errors.push(`팩트체크 실패 (${factcheckResult.overallScore}%)`);
+        }
+      } catch (error) {
+        stages.push({
+          name: 'factcheck',
+          status: 'failed',
+          details: `오류: ${error instanceof Error ? error.message : error}`
+        });
+        errors.push(`팩트체크 오류: ${error instanceof Error ? error.message : error}`);
+      }
+    }
   }
 
   // ========================================================================
@@ -273,9 +336,9 @@ export async function runFullValidation(
   }
 
   // ========================================================================
-  // Stage 3: Quality (SEO, Content, Duplicate)
+  // Stage 3: Quality (SEO, Content, Duplicate) — meshRan이면 건너뜀
   // ========================================================================
-  if (opts.includeQuality !== false) {
+  if (!meshRan && opts.includeQuality !== false) {
     onProgress('quality', '품질 검증 실행 중...');
 
     try {
@@ -379,9 +442,9 @@ export async function runFullValidation(
   }
 
   // ========================================================================
-  // Stage 5: Image Validation
+  // Stage 5: Image Validation — meshRan이면 건너뜀
   // ========================================================================
-  if (opts.includeImage !== false) {
+  if (!meshRan && opts.includeImage !== false) {
     onProgress('image', '이미지 검증 중...');
 
     try {

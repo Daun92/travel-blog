@@ -19,6 +19,7 @@ export interface PublishCommandOptions {
   all?: boolean;
   message?: string;
   skipValidation?: boolean;
+  keepDraft?: boolean;
 }
 
 export async function publishCommand(options: PublishCommandOptions): Promise<void> {
@@ -149,6 +150,28 @@ export async function publishCommand(options: PublishCommandOptions): Promise<vo
       }
     }
 
+    // 프론트매터 필수 필드 프리체크 (빠르고 API 비용 없음)
+    {
+      const preflight: string[] = [];
+      for (const file of filesToPublish) {
+        const raw = await readFile(file.filepath, 'utf-8');
+        const { data } = matter(raw);
+        const missing: string[] = [];
+        if (!data.author) missing.push('author');
+        if (!data.personaId) missing.push('personaId');
+        if (!data.description) missing.push('description');
+        if (!data.tags || (data.tags as string[]).length === 0) missing.push('tags');
+        if (missing.length > 0) {
+          preflight.push(`${file.title}: 누락 필드 — ${missing.join(', ')}`);
+        }
+      }
+      if (preflight.length > 0) {
+        console.log(chalk.yellow('\n⚠️ 프론트매터 필수 필드 누락:'));
+        preflight.forEach(p => console.log(chalk.yellow(`  • ${p}`)));
+        console.log(chalk.dim('  → npm run edit 으로 프론트매터를 보완하세요.\n'));
+      }
+    }
+
     // 품질 게이트 검증 (--skip-validation이 없으면)
     if (!options.skipValidation) {
       console.log(chalk.cyan('\n🔍 품질 게이트 검증 중...\n'));
@@ -241,9 +264,6 @@ export async function publishCommand(options: PublishCommandOptions): Promise<vo
 
       // 파일 복사
       await copyFile(file.filepath, targetPath);
-
-      // 원본 삭제 (선택적)
-      // await unlink(file.filepath);
     }
 
     spinner.succeed('파일 이동 완료');
@@ -284,6 +304,25 @@ export async function publishCommand(options: PublishCommandOptions): Promise<vo
         console.log(chalk.dim('나중에 푸시하려면: git push'));
       }
 
+      // 발행 후 드래프트 자동 삭제
+      if (!options.keepDraft) {
+        const deletedDrafts: string[] = [];
+        for (const file of filesToPublish) {
+          try {
+            await unlink(file.filepath);
+            deletedDrafts.push(file.filename);
+          } catch {
+            // 이미 삭제되었거나 접근 불가 — 무시
+          }
+        }
+        if (deletedDrafts.length > 0) {
+          console.log(chalk.dim(`\n🗑️  드래프트 ${deletedDrafts.length}개 정리 완료`));
+        }
+      }
+
+      // 큐 완료 자동 연동
+      await markQueueCompleted(filesToPublish.map(f => f.title));
+
     } catch (gitError) {
       spinner.fail('Git 작업 실패');
       console.error(chalk.yellow('\n⚠️  Git 오류 (파일은 이동되었습니다):'));
@@ -298,5 +337,48 @@ export async function publishCommand(options: PublishCommandOptions): Promise<vo
     spinner.fail('오류 발생');
     console.error(chalk.red('\n❌ 오류:'), error instanceof Error ? error.message : error);
     process.exit(1);
+  }
+}
+
+/**
+ * 발행된 포스트 제목과 매칭되는 큐 항목을 completed로 이동
+ */
+async function markQueueCompleted(publishedTitles: string[]): Promise<void> {
+  try {
+    const queuePath = './config/topic-queue.json';
+    const raw = await readFile(queuePath, 'utf-8');
+    const queue = JSON.parse(raw);
+
+    if (!queue.queue || queue.queue.length === 0) return;
+
+    const movedItems: string[] = [];
+    const remaining = queue.queue.filter((item: { title: string }) => {
+      // 제목의 핵심 키워드가 발행 제목에 포함되는지 확인
+      const matched = publishedTitles.some(pubTitle => {
+        const pubNorm = pubTitle.replace(/[:\s\-–—]/g, '').toLowerCase();
+        const queueNorm = item.title.replace(/[:\s\-–—]/g, '').toLowerCase();
+        // 큐 제목이 발행 제목에 포함되거나 유사한 경우
+        return pubNorm.includes(queueNorm) || queueNorm.includes(pubNorm) ||
+          // 첫 6글자 매칭 (핵심 키워드)
+          pubNorm.slice(0, 6) === queueNorm.slice(0, 6);
+      });
+      if (matched) movedItems.push(item.title);
+      return !matched;
+    });
+
+    if (movedItems.length > 0) {
+      const completed = queue.completed || [];
+      for (const title of movedItems) {
+        const item = queue.queue.find((q: { title: string }) => q.title === title);
+        if (item) completed.push(item);
+      }
+      queue.queue = remaining;
+      queue.completed = completed;
+      const { writeFile: writeFileFs } = await import('fs/promises');
+      await writeFileFs(queuePath, JSON.stringify(queue, null, 2) + '\n', 'utf-8');
+      console.log(chalk.dim(`📋 큐 완료 처리: ${movedItems.length}개 (${movedItems.join(', ')})`));
+    }
+  } catch {
+    // 큐 파일 접근 실패 — 발행에는 영향 없음
   }
 }

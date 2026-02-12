@@ -48,6 +48,7 @@ export interface FestivalData {
   place?: string;
   tel?: string;
   image?: string;
+  images?: string[];
   contentId?: string;
   overview?: string;
   homepage?: string;
@@ -185,6 +186,12 @@ export async function searchFestivals(opts?: {
             const d = details[0];
             if (d.overview) fest.overview = d.overview;
             if (d.homepage) fest.homepage = d.homepage;
+          }
+
+          // detailImage2: 추가 이미지
+          const festImages = await client.detailImage(fest.contentId);
+          if (festImages.length > 0) {
+            fest.images = festImages.slice(0, 3).map(img => img.originimgurl);
           }
         } catch {
           // 상세 실패 무시
@@ -374,6 +381,28 @@ export function dataToPromptContext(data: CollectedData): string {
   let context = `## 수집된 실제 데이터 — 반드시 이 정보를 기반으로 작성하세요\n`;
   context += `검색 키워드: "${data.keyword}" | 수집 시각: ${data.timestamp}\n`;
   context += `출처: 한국관광공사 (data.go.kr KorService2)\n\n`;
+
+  // ── 허용 장소 목록 (Allowlist) ──
+  const allowedVenues: string[] = [];
+  for (const item of data.tourismData.slice(0, 7)) {
+    allowedVenues.push(`${item.title} (${item.address})`);
+  }
+  for (const fest of data.festivals.slice(0, 5)) {
+    allowedVenues.push(`${fest.title} (${fest.address})`);
+  }
+  for (const event of data.cultureEvents.slice(0, 5)) {
+    allowedVenues.push(`${event.title} (${event.place})`);
+  }
+
+  if (allowedVenues.length > 0) {
+    context += `### ⛔ 허용된 장소/시설 목록 (ALLOWLIST)\n`;
+    context += `포스트에서 언급할 수 있는 장소는 아래 목록으로 **한정**됩니다.\n`;
+    context += `이 목록에 없는 장소, 전시, 행사, 갤러리, 카페를 만들어내면 **날조**입니다.\n\n`;
+    for (const venue of allowedVenues) {
+      context += `- ${venue}\n`;
+    }
+    context += `\n일반 상식(지하철역, 공항, 터미널 등 교통 시설)은 허용 목록 외에도 사용 가능합니다.\n\n`;
+  }
 
   if (data.tourismData.length > 0) {
     context += '### 관광지/장소 정보 (공식 데이터)\n';

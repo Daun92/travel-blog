@@ -6,10 +6,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 OpenClaw is an AI-powered travel/culture blog automation system. It generates SEO-optimized content using Gemini API, integrates community feedback via Moltbook, and publishes to a Hugo static site hosted on GitHub Pages.
 
-3인 에이전트 필명 시스템으로 운영되는 팀 블로그 형태:
+4인 에이전트 필명 시스템으로 운영되는 팀 블로그 형태:
 - **조회영** (viral) - 바이럴/공유 유도, 순위/비교 콘텐츠
 - **김주말** (friendly) - 직장인 주말 여행, 솔직 체험 후기
 - **한교양** (informative) - 교양/해설, 깊이 있는 문화 콘텐츠
+- **오덕우** (niche) - 취향 디깅, 숨은 발견, 다층 탐구 콘텐츠
 
 **Goal**: Achieve 1,000 monthly visitors within 4 months through data-driven content curation.
 
@@ -103,248 +104,109 @@ npm run workflow:publish  # publish + moltbook:share
 npm run workflow:feedback # moltbook:feedback + moltbook:analyze
 ```
 
-## 🌟 Premium Content Workflow (권장)
+## 포스트 관리 레이어
 
-고품질 콘텐츠 발행을 위한 **완전한 콘텐츠 라이프사이클**입니다. 단계를 건너뛰지 마세요.
+고품질 콘텐츠 발행을 위한 **4-Layer 라이프사이클**. 단계를 건너뛰지 마세요.
 
-### 전체 파이프라인 개요
-```
-┌─ Phase A: 주제 발굴 ──────────────────────────────────────────────────┐
-│  0. Survey → Topic Discovery → Queue                                  │
-│     (서베이 수집 → 인사이트 분석 → 주제 큐 자동 편성)                 │
-└───────────────────────────────────────────────────────────────────────┘
-        ↓
-┌─ Phase B: 콘텐츠 생산 ──────────────────────────────────────────────────┐
-│  1. Agent+Generate → 2. Enhance → 3. Factcheck → 4. Quality → 5. AEO  │
-│         ↑                                                               │
-│    에이전트 자동/수동 배정                                               │
-│    (조회영 | 김주말 | 한교양)                                            │
-└───────────────────────────────────────────────────────────────────────┘
-        ↓
-┌─ Phase C: 발행 + 피드백 루프 ─────────────────────────────────────────┐
-│  6. Image → 7. Publish → 8. Moltbook Share → 9. Feedback+Survey      │
-│                                                      ↓                │
-│                                           content-strategy.json 갱신  │
-│                                                      ↓                │
-│                                           → Phase A로 순환 ───────────┘
-└───────────────────────────────────────────────────────────────────────┘
-```
-
-### Step 0: 주제 발굴 (Survey + Topic Discovery)
-
-서베이로 커뮤니티 수요를 파악하고, 주제 큐를 데이터 기반으로 편성합니다.
-**이 단계는 주기적(주 1회 권장)으로 실행하며, 매 포스트마다 필수는 아닙니다.**
-
+### Layer 1: Discovery (주제 발굴) — 주 1회 권장
 ```bash
-# 0-1. 서베이 발행 (Moltbook 커뮤니티에 설문 게시)
-npm run moltbook:culture-survey
-
-# 0-2. 응답 수집 (30분 간격, 최대 3시간 자동 폴링)
-npm run moltbook:survey-scheduler
-
-# 0-3. 인사이트 DB 적재 (누적 데이터 축적, 중복 방지)
-npm run survey ingest
-
-# 0-4. 현황 확인 + 전략 반영
-npm run survey status                     # 인기 주제/포맷/지역 확인
-npm run survey boost                      # 주제별 점수 부스트 확인
-npm run survey apply-strategy             # content-strategy.json 자동 갱신
-
-# 0-5. 주제 큐 편성 (서베이 부스트 반영)
-npm run queue discover --auto --gaps      # 갭 분석 + 서베이 반영 자동 발굴
-npm run queue list                        # 편성된 주제 큐 확인
+npm run moltbook:culture-survey           # 서베이 발행
+npm run moltbook:survey-scheduler         # 응답 수집 (30분x6)
+npm run survey ingest                     # 인사이트 DB 적재
+npm run survey apply-strategy             # content-strategy.json 갱신
+npm run queue discover --auto --gaps      # 주제 큐 편성 (서베이 부스트 +0~30)
 ```
 
-**서베이 인사이트가 주제 발굴에 미치는 영향**:
-- 서베이에서 인기 높은 키워드 → 주제 발굴 점수 +0~30점 부스트
-- 인기 포맷(리뷰/큐레이션/코스/비교) → 콘텐츠 전략에 반영
-- 관심 지역 → focusAreas로 자동 설정
-- 부스트된 주제에 `[서베이]` 태그 자동 부여
+서베이 인사이트: 인기 키워드 → 점수 부스트, 인기 포맷 → 전략 반영, 관심 지역 → focusAreas
 
-**서베이 수집 데이터 구조**:
-| 수집 항목 | 설명 | 저장 위치 |
-|-----------|------|-----------|
-| 주제 수요 (8개 문화 카테고리) | 가중 투표 집계 | `data/survey-insights-db.json` |
-| 포맷 선호 (리뷰/큐레이션/코스/비교) | A-D 선택 집계 | `data/survey-insights-db.json` |
-| 지역 관심 (40+ 지역) | 언급 빈도 집계 | `data/survey-insights-db.json` |
-| 자유 의견 | 원문 보존 | `data/survey-insights-db.json` |
-| 수집 원본 | 파싱된 응답 | `data/feedback/survey-result.json` |
-
-### Step 1: 에이전트 배정 + 콘텐츠 생성 (Agent + Generate)
-
-주제와 프레이밍에 따라 에이전트가 자동 배정됩니다. `--agent` 플래그로 수동 지정도 가능합니다.
-
+### Layer 2: Generation (콘텐츠 생산) — 매 포스트
 ```bash
-# 자동 배정 (키워드 매칭으로 에이전트 결정)
-npm run new -- -t "서울 핫플 TOP 5" --type travel        # → 조회영 (TOP, 핫플)
-npm run new -- -t "경복궁 역사 산책" --type culture       # → 한교양 (역사)
-npm run new -- -t "강릉 주말 1박2일" --type travel        # → 김주말 (주말, 1박2일)
-
-# data.go.kr API 데이터 자동 수집 후 생성 (권장)
-npm run new -- -t "제주도 카페" --type travel --auto-collect   # API 데이터 → 프롬프트 주입
-npm run new -- -t "서울 전시" --type culture --auto-collect -y # 비대화 + 자동 수집
-
-# 수동 지정
-npm run new -- -t "제주도 카페" --type travel --agent viral        # → 조회영 강제
-npm run new -- -t "제주도 카페" --type travel --agent informative  # → 한교양 강제
-npm run new -- -t "제주도 카페" --type travel --agent friendly     # → 김주말 강제
-
-# 이미지 포함 생성
-npm run new -- -t "주제" --type travel --inline-images --image-count 3
-
-npm run drafts                             # 드래프트 목록 확인
+# 풀 옵션 권장: 에이전트 자동배정 + KTO 실사진 + AI 일러스트
+npm run new -- -t "경주 불국사" --type travel --auto-collect --inline-images --image-count 4 -y
+# 수동 에이전트: --agent viral|friendly|informative|niche
 ```
 
-**에이전트 자동 배정 알고리즘** - 주제가 아니라 **프레이밍**으로 결정:
+**에이전트 자동 배정** — **프레이밍**으로 결정 (기본값: 김주말):
 | 에이전트 | 트리거 키워드 | 프레이밍 |
 |----------|--------------|----------|
-| 조회영 (viral) | TOP, BEST, 순위, 비교, vs, 최고, 최악, 핫플, 트렌드, SNS, 난리, 화제, 논란, 꼭, 필수 | 순위/비교/화제성 |
-| 한교양 (informative) | 역사, 건축, 미술사, 작가, 작품, 해설, 교양, 유네스코, 의미, 배경, 유래, 입문, 가이드, 에티켓 | 깊이/교양/해설 |
-| 김주말 (friendly) | 주말, 1박2일, 2박3일, 당일치기, 가성비, 퇴근, 후기, 코스, 웨이팅, 솔직, 실제, 비용 | 체험/실용/주말 |
+| 조회영 (viral) | TOP, BEST, 순위, 비교, vs, 핫플, 트렌드, 난리, 화제, 필수 | 순위/비교/화제성 |
+| 한교양 (informative) | 역사, 건축, 미술사, 해설, 교양, 유네스코, 배경, 유래, 입문, 에티켓 | 깊이/교양/해설 |
+| 오덕우 (niche) | 숨은, 로컬, 골목, 현지인, 비밀, 디깅, 취향, 덕질, 찐, 인디, 동네, 소문, 발견 | 취향 디깅/숨은 발견 |
+| 김주말 (friendly) | 주말, 1박2일, 당일치기, 가성비, 퇴근, 후기, 코스, 웨이팅, 솔직, 비용 | 체험/실용/주말 |
 
-매칭 없으면 **김주말** 기본값. 같은 "제주도 카페"도 프레이밍에 따라 다른 에이전트가 배정됩니다.
+**4인 페르소나** (`config/personas/`):
+| 필명 | 톤 | 문체 |
+|------|-----|------|
+| **조회영** | 도발적, 단정적, 흥분 | 해요체+반말 혼용 |
+| **김주말** | 솔직, 현실적, 투덜 | 해요체 |
+| **한교양** | 차분, 지적, 해설사 | 합니다체 |
+| **오덕우** | 속삭임+흥분 폭주, 덕질 에너지 | 해요체+흥분시 반말 |
 
-**생성 결과 frontmatter 예시**:
-```yaml
-author: "조회영 (OpenClaw)"
-personaId: "viral"
+### Layer 3: Validation (품질 검증) — 매 포스트
+```bash
+npm run enhance -- -f <file>               # 페르소나 기반 향상 (클리셰 제거, 디테일 강화)
+npm run factcheck -- -f <file>             # 팩트체크 (70% 이상 필수)
+npm run validate -- -f <file>              # 품질+이미지 검증
+npm run aeo -- -f <file> --apply           # FAQ/Schema.org 추가
+# 통합: npm run workflow full -- -f <file> --enhance --apply
 ```
 
-### Step 2: 콘텐츠 향상 (Enhance)
-에이전트 페르소나 기반 품질 향상 - 클리셰 제거, 디테일 강화, 개성 부여
+### Layer 4: Publish + Feedback (발행 + 피드백 루프) — 매 포스트
 ```bash
-npm run enhance:analyze -- -f <file>       # 분석만 (변경 없음)
-npm run enhance -- -f <file>               # 향상 적용
-npm run enhance -- --all                   # 모든 드래프트 향상
-npm run enhance:dry-run -- -f <file>       # 미리보기 (저장 안함)
-```
-
-**3인 에이전트 페르소나** (`config/personas/`):
-
-| 필명 | 역할 | 톤 | 문체 |
-|------|------|-----|------|
-| **조회영** | 바이럴, 공유 유도 | 도발적, 단정적, 흥분 | 해요체+반말 혼용 |
-| **김주말** | 친근감, 장기 팬층 | 솔직, 현실적, 투덜 | 해요체 |
-| **한교양** | 유익함, 교양 | 차분, 지적, 해설사 | 합니다체 |
-
-- 클리셰 자동 감지: 각 에이전트별 `never_say` 목록에 따라 감지 및 대체
-- 디테일 강화: 에이전트별 `detailing_rules`에 맞춰 숫자, 비교, 구조 강화
-
-### Step 3: 팩트체크 (Factcheck)
-AI 생성 콘텐츠의 사실 검증 - **70% 이상 통과 필수**
-```bash
-npm run factcheck -- -f <file>             # 단일 파일 검증
-npm run factcheck -- --drafts              # 모든 드래프트 검증
-```
-
-⚠️ **70% 미만 점수**: 부정확한 정보 포함 가능성 높음 → 수동 검토 필요
-
-### Step 4: 품질 검증 (Quality)
-SEO, 가독성, 구조 종합 검증
-```bash
-npm run validate -- -f <file>              # 품질 검증
-npm run review                             # SEO 리뷰
-```
-
-### Step 5: AEO 적용 (AI Engine Optimization)
-FAQ 섹션 + Schema.org 구조화 데이터 추가
-```bash
-npm run aeo -- -f <file>                   # AEO 분석
-npm run aeo -- -f <file> --apply           # AEO 자동 적용
-```
-
-**AEO 요소**:
-- FAQ 5개 (자주 묻는 질문)
-- Schema.org: Article, FAQPage, BreadcrumbList
-
-### Step 6: 이미지 검증/생성 (Image)
-커버 이미지 + 인라인 이미지 확인
-```bash
-# Step 1에서 --inline-images로 이미 생성했으면 경로만 확인
-# 이미지 경로가 /travel-blog/ prefix를 포함하는지 검증
-```
-
-### Step 7: 발행 (Publish)
-```bash
-npm run publish                            # Hugo 블로그에 발행
-```
-
-### Step 8: Moltbook 공유 + 피드백 수집 (Share + Feedback Loop)
-발행 후 커뮤니티에 공유하고, 피드백을 수집하여 다음 콘텐츠 전략에 반영합니다.
-```bash
-npm run moltbook:share                     # Moltbook 커뮤니티 공유
+npm run publish                            # Hugo 블로그 발행
+npm run moltbook:share                     # 커뮤니티 공유
 npm run moltbook:feedback                  # 피드백 수집
-npm run moltbook:analyze                   # 전략 자동 조정
+npm run moltbook:analyze                   # 전략 자동 조정 → Layer 1 순환
 ```
-
-**피드백 루프 → Phase A 순환**:
-- 발행 포스트에 대한 커뮤니티 반응 수집
-- `config/content-strategy.json` 자동 갱신
-- 다음 서베이/주제 발굴에 반영 → Step 0으로 순환
-
-### 🚀 통합 명령어 (추천)
-```bash
-# 프리미엄 워크플로우 (전체 파이프라인)
-npm run workflow:premium -- -f <file>
-
-# 또는 개별 실행
-npm run workflow full -- -f <file> --enhance --apply
-```
-
-### 📅 에이전트별 콘텐츠 편성 예시
-같은 주제라도 에이전트에 따라 완전히 다른 콘텐츠가 됩니다:
-
-| 주제 | 조회영 | 김주말 | 한교양 |
-|------|--------|--------|--------|
-| 제주도 카페 | "제주 카페 TOP 10, 인스타 vs 현실" | "퇴근 후 비행기 타고 간 제주 카페 실제 비용" | "제주 카페 건축 이야기, 알면 3배 재미" |
-| 국립현대미술관 | "입장료 아깝지 않은 전시 vs 돈낭비 전시" | "퇴근 후 야간개장으로 본 전시, 솔직 후기" | "이건희 컬렉션 핵심 작품 5점의 미술사적 의미" |
-| 전주 한옥마을 | "전주 맛집 현지인 vs 관광객, 진짜 승자는?" | "전주 1박2일 총 비용, 웨이팅 포함 현실 후기" | "전주 비빔밥의 역사: 왜 전주여야 하는가" |
-
-### ⚠️ 절대 하지 말 것
-1. **드래프트 직접 발행 금지**: enhance, factcheck 없이 publish 실행
-2. **팩트체크 스킵 금지**: AI 생성 정보는 오류 가능성 있음
-3. **AEO 스킵 금지**: 검색 엔진 최적화 필수
-4. **Moltbook 스킵 금지**: 커뮤니티 피드백 → 전략 자동 조정
-5. **에이전트 무시 금지**: 반드시 에이전트 필명으로 발행 (author 필드)
-6. **서베이 무시 금지**: 주기적 서베이 → 데이터 기반 주제 발굴의 핵심
 
 ### 워크플로우 체크리스트
 
-**Phase A: 주제 발굴 (주 1회 권장)**
+**Layer 1: Discovery (주 1회)**
 ```
-□ 0-1. npm run moltbook:culture-survey         (서베이 발행)
-□ 0-2. npm run moltbook:survey-scheduler        (응답 수집, 자동 3시간)
-□ 0-3. npm run survey ingest                    (인사이트 DB 적재)
-□ 0-4. npm run survey apply-strategy            (전략 자동 갱신)
-□ 0-5. npm run queue discover --auto --gaps     (주제 큐 편성)
+□ npm run moltbook:culture-survey → survey-scheduler → survey ingest
+□ npm run survey apply-strategy → queue discover --auto --gaps
 ```
 
-**Phase B: 콘텐츠 생산 (매 포스트)**
+**Layer 2+3: Generation + Validation (매 포스트)**
 ```
-□ 1. npm run new -- -t "주제" --type travel     (에이전트 자동 배정 확인)
-     또는 --agent viral|friendly|informative    (수동 지정)
-□ 2. npm run enhance -- -f <file>               (에이전트 페르소나 기반 향상)
-□ 3. npm run factcheck -- -f <file>             (70% 이상 확인)
-□ 4. npm run validate -- -f <file>              (품질 검증)
-□ 5. npm run aeo -- -f <file> --apply           (FAQ/Schema 추가)
-□ 6. 이미지 경로 확인                            (/travel-blog/ prefix)
-□ 7. frontmatter 확인                            (author, personaId 올바른지)
+□ npm run new -- -t "주제" --type travel --auto-collect --inline-images -y
+□ npm run enhance -- -f <file>
+□ npm run factcheck -- -f <file>             (70% 이상)
+□ npm run validate -- -f <file>
+□ npm run aeo -- -f <file> --apply
+□ 커버 이미지 9-Point 평가 (5+ FAIL → npm run covers:refresh --posts <file>)
+□ 인라인 이미지 역할 확인: 도입/마감=일러스트, 본문=스틸컷 또는 KTO
+□ 마커 잔존 검사: [LINK: / [IMAGE: 패턴이 본문에 남아있으면 안 됨
+□ 이미지 파일 존재 검증: ![](path)의 모든 경로가 blog/static/images/에 실존
+□ KTO 이미지-컨텍스트 매칭: 본문 시점/계절/장면과 KTO 자동 선택 이미지가 일치하는지 확인
+□ 캡션 품질: "AI 생성 ~" 기계적 표현 → 맥락 연결 내러티브로 교체
+□ 페르소나 이름 교차 오염: 본문 내 필명이 해당 포스트의 personaId와 일치하는지 확인
+□ frontmatter 확인: author, personaId, dataSources, cover.caption
 ```
 
-**Phase C: 발행 + 피드백 (매 포스트)**
+**Layer 4: Publish + Feedback (매 포스트)**
 ```
-□ 8. npm run publish                             (발행)
-□ 9. npm run moltbook:share                      (커뮤니티 공유)
-□ 10. npm run moltbook:feedback                  (피드백 수집)
-□ 11. npm run moltbook:analyze                   (전략 자동 조정 → Phase A 순환)
+□ npm run publish → moltbook:share → moltbook:feedback → moltbook:analyze
 ```
+
+### 절대 하지 말 것
+1. enhance/factcheck 없이 publish 실행 금지
+2. 팩트체크 70% 미만 발행 금지
+3. AEO/Moltbook 스킵 금지
+4. 에이전트 필명(author) 누락 금지
+5. 주기적 서베이 생략 금지
+6. `[LINK:` / `[IMAGE:` 미처리 마커가 남은 채 발행 금지
+7. 본문 `![]()` 참조 이미지가 실제 파일로 존재하지 않는 채 발행 금지
+8. 본문 섹션에 맥락 무관한 범용 일러스트 사용 금지 (스틸컷 또는 KTO 실사 사용)
+9. 프롬프트 few-shot 예시에 실존 장소/기관/공연명 하드코딩 금지 (`{플레이스홀더}` 사용)
+10. 다른 페르소나 필명이 본문에 혼입되는 것 금지 (personaId와 필명 1:1 매칭 확인)
 
 ## Architecture
 
 ### Core Systems
 
 **Content Generation Pipeline** (`src/generator/`)
-- `index.ts` - Orchestrates: select persona → create prompt → generate → parse SEO → write markdown
+- `index.ts` - Orchestrates: select persona → create prompt → generate → parse SEO → inline images → write markdown
 - `ollama.ts` - Gemini API client (파일명은 레거시, 실제 Gemini API 사용)
 - `prompts.ts` - 에이전트 페르소나 기반 프롬프트 (travel/culture x persona 조합)
 - `frontmatter.ts` - Hugo-compatible YAML frontmatter (author, personaId 포함)
@@ -371,6 +233,7 @@ npm run workflow full -- -f <file> --enhance --apply
 - `viral.json` - 조회영: 바이럴, 순위/비교, 해요체+반말
 - `friendly.json` - 김주말: 솔직 체험, 주말 여행, 해요체
 - `informative.json` - 한교양: 교양/해설, 역사/문화, 합니다체
+- `niche.json` - 오덕우: 취향 디깅, 숨은 발견, 해요체+흥분시 반말
 
 **Survey & Topic Discovery** (`src/agents/moltbook/`)
 - `survey-insights-db.ts` - 서베이 인사이트 누적 DB (가중 투표, 부스트 점수 계산)
@@ -392,7 +255,7 @@ src/                    # TypeScript source
     draft-enhancer/     # ⭐ 페르소나 기반 콘텐츠 향상
   cli/commands/         # CLI command implementations
   generator/            # Content generation (Gemini API)
-  images/               # Unsplash integration
+  images/               # 이미지 오케스트레이터 + 소스 (KTO + Unsplash + Gemini AI)
   seo/                  # SEO optimization utilities
   aeo/                  # AI Engine Optimization (FAQ, Schema)
   factcheck/            # Fact verification system (KorService2 via 공유 클라이언트)
@@ -484,23 +347,208 @@ Length options: short (1500-2000), medium (2500-3500), long (4000-5000) characte
 - 서베이 인사이트 누적 DB: 중복 방지(surveyId), 가중 투표(upvote x0.5), 부스트 점수(0~30)
 - 서베이 → 전략 → 주제 발굴 → 콘텐츠 생산 → 피드백 순환 루프
 
-## Image System (Hybrid)
+## 이미지 생성 원칙
 
-**Cover Images**: Unsplash API (real photos)
-**Inline Images**: Gemini AI generation (illustrated infographics)
+### 3-Source Hybrid 우선순위
+1. **KTO 실사진** — `--auto-collect` 시 최우선, 출처 표기 법적 의무
+2. **Unsplash** — KTO 없을 때 커버 폴백, scoring+registry 기반
+3. **Gemini AI** — 인라인 나머지 슬롯, 역할별 스타일 분리
 
-```bash
-# Generate post with inline images
-npm run new -- -t "주제" --type travel --inline-images --image-count 3
+### 이미지 역할 분리 원칙 (Image Role Separation)
+
+| 영역 | 적합 타입 | 스타일 | 이유 |
+|------|-----------|--------|------|
+| **커버** | AI 포토리얼리스틱 + 관인 | `cover_photo` | 첫인상, 에이전트 브랜딩 |
+| **도입/마감** | AI 일러스트 | `diagram`/`bucketlist`/`moodboard` | 구조 시각화, 감성 요약 |
+| **본문 섹션** | 스틸컷 또는 KTO 실사 | `cover_photo` (포토리얼) | 맥락 연결, 디테일 증거 |
+
+**스틸컷 프롬프트 설계 프로토콜** (페르소나×포스트 타입 공통):
+
+1. **피사체 추출** — 해당 섹션 본문에서 구체적 피사체를 추출한다. 추출 전략은 페르소나별로 다름 (아래 표 참조)
+2. **`cover_photo` 스타일** 사용 (포토리얼리즘 강제)
+3. **프롬프트 3파트 구조**: SUBJECT (피사체) → ATMOSPHERE (분위기) → PHOTOGRAPHY STYLE (촬영)
+4. **페르소나 비주얼 아이덴티티** 적용 — `cover-styles.ts`의 `AGENT_VISUAL_IDENTITIES`에서 촬영 지시 참조
+5. 섹션의 핵심 "한 장면"을 포착 — 페르소나의 시선으로 본 순간
+
+**페르소나별 피사체 추출 전략**:
+
+| 페르소나 | 추출 대상 | 예시 |
+|---------|----------|------|
+| **조회영** (viral) | 화제성·임팩트 장면: 인파, 대비되는 요소, "이건 봐야 해" 순간 | 줄 선 맛집, 야경 뷰포인트, 비교 대상 나란히 |
+| **김주말** (friendly) | 체험 현장: 음식, 길거리, 숙소, "직접 해봤다" 순간 | 테이블 위 음식, 산책로 풍경, 체크인 장면 |
+| **한교양** (informative) | 구조·디테일: 건축 요소, 문양, 전시 작품, 해설 대상 | 기둥 양식, 단청 패턴, 전시실 전경 |
+| **오덕우** (niche) | 발견한 디테일: 미시적 관찰, 시간 흔적, 숨겨진 패턴 | 맨홀 뚜껑 각인, 간판 글씨체, 바닥 타일 |
+
+**페르소나별 촬영 스타일** (`cover-styles.ts` 기반):
+
+| 페르소나 | 촬영 스타일 | 구도 | 색감 |
+|---------|-----------|------|------|
+| **조회영** | 에디토리얼 매거진 — 강한 그림자, 극적 조명 | 대각선, 히어로 프레이밍, 과감한 원근 | 고대비, 강한 채도, 깊은 블랙 |
+| **김주말** | 라이프스타일 — 골든아워 온기, 소프트 보케 | 눈높이, 따뜻한 비네팅, 중심 배치 | 웜톤, 골든 하이라이트, 부드러운 섀도 |
+| **한교양** | 건축 사진 — 균일 조명, 디테일 주의 | 좌우 대칭, 삼분할, 기하학적 프레이밍 | 균형 노출, 쿨 섀도, 뉴트럴 미드톤 |
+| **오덕우** | 인디 스트릿 — 필름 그레인, 클로즈업, 캔디드 | 타이트 클로즈업, 비중심 피사체, 얕은 심도 | 뮤트 톤, 필름 에뮬레이션, 비네팅 |
+
+**포스트 타입별 ATMOSPHERE 방향**:
+
+| 타입 | 분위기 키워드 | 시간대 |
+|------|-------------|--------|
+| **travel** | 현장감, 공간의 공기, 계절감, 빛의 변화 | 본문에서 묘사된 시간대 반영 |
+| **culture** | 고요함, 집중, 지적 호기심, 전시장 조명 | 실내 인공조명 또는 자연광 혼합 |
+
+**캡션 가이드라인**:
+- "AI 생성 여정 일러스트" 같은 기계적 표현 금지
+- 맥락 연결 내러티브: *{장소/소재}의 {시간/감성} — {본문 디테일 요약}*
+- 페르소나 톤 반영:
+  - 조회영: 짧고 강렬 — *한옥마을 야경 — 이 뷰, 리얼임*
+  - 김주말: 솔직 체험 — *시장통 점심 — 8,000원에 이 정도면 인정*
+  - 한교양: 해설적 — *종묘 어칸 구조 — 19칸 연속 배치의 건축적 의미*
+  - 오덕우: 발견 서사 — *철제가구거리의 시간 — 장인의 손끝에서 태어나는 1mm의 정밀함*
+
+### 핵심 규칙
+- 모든 이미지 경로: `/travel-blog/images/` prefix 필수
+- KTO 사용 시: frontmatter `dataSources: ["한국관광공사"]` 필수
+- 인라인 최소: travel 2개, culture 1개
+- 중복 방지: `data/image-registry.json`으로 관리
+
+### 모듈 구조
+- `image-orchestrator.ts` — 커버+인라인 통합 진입점
+- `kto-images.ts` — 관광공사 API 연동
+- `unsplash.ts` — 스코어링+후보풀 기반 검색
+- `gemini-imagen.ts` — AI 일러스트 생성 (6스타일)
+- `image-validator.ts` — 품질 게이트
+
+### 커버 이미지 시스템 (Gemini AI 생성)
+- `cover-styles.ts` — 에이전트 시각 아이덴티티 + 3-Layer 커버 프롬프트 빌더
+- `cover-overlay.ts` — 관인(落款) 스타일 워터마크 오버레이 (Sharp SVG 합성)
+- `reference-analyzer.ts` — Unsplash→Gemini Flash 레퍼런스 시각 분석
+
+## 이미지 시스템 상세
+
+### 시나리오별 결과 매트릭스
+
+| CLI 플래그 | 커버 | 인라인 |
+|-----------|------|--------|
+| `--auto-collect --inline-images` | KTO → Unsplash | KTO + AI 하이브리드 |
+| `--auto-collect` (inline 미사용) | KTO → Unsplash | 없음 |
+| `--inline-images` (auto-collect 없음) | Unsplash | AI 100% |
+| (둘 다 없음) | Unsplash | 없음 |
+
+### AI 이미지 스타일 (Gemini)
+
+**일러스트 (도입/마감용)**: `infographic` (다이어리), `diagram` (보물지도), `map` (약도), `comparison` (칠판 메뉴), `moodboard` (콜라주), `bucketlist` (체크리스트)
+**스틸컷 (본문 섹션용)**: `cover_photo` 스타일로 생성 — 페르소나별 피사체 추출 전략 + 비주얼 아이덴티티 촬영 지시 (위 프로토콜 참조)
+
+### 이미지 레지스트리 (`data/image-registry.json`)
+KTO와 Unsplash 이미지를 통합 관리하여 중복 사용 방지:
+```json
+{ "source": "kto", "ktoContentId": "12345", "ktoUrl": "...", "postSlug": "...", "query": "..." }
+{ "source": "unsplash", "unsplashId": "abc123", "postSlug": "...", "query": "..." }
 ```
 
-### Image Styles
-- `infographic` - 여행 다이어리 페이지 스타일
-- `diagram` - 보물지도 여정 스타일
-- `map` - 친구가 그려준 약도 스타일
-- `comparison` - 카페 칠판 메뉴판 스타일
-- `moodboard` - 감성 콜라주
-- `bucketlist` - 게이미피케이션 체크리스트
+### 파일 출력 구조
+```
+blog/static/images/
+  kto-{slug}-0.jpg          ← 커버 (KTO)
+  kto-{slug}-1.jpg          ← 인라인 (KTO 실사진)
+  inline-{slug}-1.png       ← 인라인 (AI 일러스트)
+```
+
+### API 쿼터 영향
+- KTO 이미지 다운로드: API call 아님 (순수 HTTP fetch)
+- 총: ~38-48 API 호출/포스트 (검색 + detail enrichment + 축제 이미지)
+
+## 커버 이미지 생성 시스템 (Gemini AI)
+
+기존 포스트 또는 신규 포스트의 커버 이미지를 Gemini 포토리얼리스틱 생성 + 관인 오버레이로 처리합니다.
+
+### CLI 명령
+```bash
+npm run covers:dry-run                     # 샘플 포스트 미리보기 (변경 없음)
+npm run covers:sample                      # 샘플 8개 포스트 커버 재생성
+npm run covers:all                         # 전체 포스트 커버 재생성
+npm run covers:overlay-only                # 기존 이미지에 관인만 재적용 (API 0)
+npx tsx scripts/refresh-covers.mts --posts travel/2026-02-09-top-5.md  # 특정 포스트
+```
+
+### 3-Layer 프롬프트 구조 (`cover-styles.ts`)
+
+| 레이어 | 역할 | 예시 |
+|--------|------|------|
+| **Layer 1: WHAT TO SHOW** | 구체적 피사체 지시 + **본문 contentHints** | "성수동 리퍼브 공장 건물" + 본문 ## 헤딩 목록 |
+| **Layer 2: CREATIVE DIRECTION** | 에이전트별 크리에이티브 방향 | viral→매거진 표지, friendly→브이로그 썸네일, informative→다큐 포스터 |
+| **Layer 3: PHOTOGRAPHY STYLE** | 에이전트별 촬영 스타일 | 조명, 컬러 그레이딩, 구도, 분위기 |
+
+**contentHints** (CRITICAL): `refresh-covers.mts`가 포스트 본문의 `##` 헤딩을 파싱하여 실제 장소/키워드 목록을 Layer 1에 주입합니다. 제목만으로는 TOP 5 리스티클 등에서 Gemini가 스테레오타입 이미지를 생성하므로, **반드시 본문 힌트를 전달**해야 포스트 내용과 일치하는 커버가 나옵니다.
+
+에이전트별 크리에이티브 디렉션:
+- **조회영 (viral)**: 매거진 표지 / 인기 유튜브 썸네일 — 강렬한 히어로 샷, "멈춰서 봐야 하는" 구도
+- **김주말 (friendly)**: 여행 브이로거 썸네일 — 눈높이 시점, 현장감, 따뜻한 일상 분위기
+- **한교양 (informative)**: 다큐멘터리 포스터 / 전시 도록 — 건축적 우아함, 시네마틱 프레이밍
+- **오덕우 (niche)**: 인디 zine / 스트릿 스냅 — 디테일 클로즈업, 필름 그레인, 발견의 순간
+
+### 관인(落款) 오버레이 (`cover-overlay.ts`)
+
+동양 미술의 낙관 스타일 워터마크. 에이전트별 식별 스탬프.
+
+```
+위치: 우하단, 패딩 30px | 크기: 70×70px | 회전: -5° | 불투명도: 0.82
+이중 테두리: 외곽 3px + 내곽 1.5px (gap 3px)
+배경: 반투명 흰색 (0.12) | 폰트: Batang, Nanum Myeongjo, serif 24px
+```
+
+| 에이전트 | 컬러 | 관인 텍스트 |
+|---------|------|-----------|
+| 조회영 (viral) | `#FF3B30` 레드 | 회영 |
+| 김주말 (friendly) | `#FF9500` 오렌지 | 주말 |
+| 한교양 (informative) | `#007AFF` 블루 | 교양 |
+| 오덕우 (niche) | `#0D9488` 틸 | 소문 |
+
+### 캡션 시스템
+
+| 이미지 소스 | caption 형식 | 예시 |
+|------------|-------------|------|
+| KTO 실사진 | `출처: 한국관광공사` | 기존 그대로 |
+| AI 생성 | `작성자: {에이전트} · {주제≤15자} {한마디}` | `작성자: 조회영 · 발렌타인 여행지 이건 꼭 봐야 됨` |
+
+에이전트별 한마디:
+- 조회영: "이건 꼭 봐야 됨"
+- 김주말: "직접 다녀왔어요"
+- 한교양: "알면 더 깊은 여행"
+- 오덕우: "파면 팔수록 빠져들어요"
+
+### 커버 이미지 평가 기준 (9-Point Checklist)
+
+발행 전 커버 이미지 품질을 다음 9개 항목으로 평가합니다. 5개 이상 FAIL이면 재생성 권장.
+
+| # | 항목 | 기준 |
+|---|------|------|
+| 1 | **포토리얼리즘** | 실제 사진과 구분 불가, 일러스트/3D/카툰 아님 |
+| 2 | **한국 분위기** | 한글 간판, 한국 건축, 한국적 풍경이 보임 |
+| 3 | **관인 오버레이** | 우하단에 에이전트 컬러 관인 스탬프 존재 |
+| 4 | **에이전트 스타일** | 조회영=드라마틱, 김주말=따뜻, 한교양=정갈, 오덕우=인디/캔디드 |
+| 5 | **크리에이티브 느낌** | 매거진/썸네일/다큐/인디zine 느낌이 전달됨 |
+| 6 | **주제 적합성** | 포스트 제목과 이미지가 직접적으로 연결됨 |
+| 7 | **계절 일치** | 발행 시기와 이미지 계절감이 맞음 |
+| 8 | **장소 인식** | 특정 장소가 즉시 인식 가능 (범용 풍경 ✗) |
+| 9 | **분위기 일치** | 포스트 톤(로맨틱/활기/차분)과 이미지 무드 일치 |
+
+### 파이프라인 흐름
+```
+포스트 본문 → ## 헤딩 파싱 → contentHints[]
+    ↓
+analyzeReference() → getCoverPhotoPrompt(title, type, agent, ref, contentHints)
+    → Gemini 이미지 생성 → applyOverlayToBase64() (관인 합성)
+    → frontmatter 업데이트 (cover.image, cover.caption)
+```
+
+### 커버 이미지 문제 해결 가이드
+
+| 증상 | 원인 | 해결 |
+|------|------|------|
+| 포스트에 없는 장소가 커버에 표시 | contentHints 미전달 또는 ## 헤딩 부재 | 본문에 ## 헤딩 확인, refresh-covers 재실행 |
+| 범용적인 "예쁜 한국 풍경" | Layer 1 피사체 지시 약함 | 제목에 구체적 장소명 포함 or contentHints 의존 |
+| 일러스트/카툰 스타일 | Gemini 프롬프트 가드레일 미작동 | CRITICAL REQUIREMENTS 확인, 재생성 |
+| 관인이 안 보임 | overlay skip 또는 파일 누락 | `--skip-overlay` 없이 재실행 |
 
 ## Critical Development Rules
 
@@ -509,7 +557,9 @@ All image paths MUST include the Hugo baseURL prefix:
 ```markdown
 # CORRECT
 image: "/travel-blog/images/cover-xxx.jpg"
+image: "/travel-blog/images/kto-slug-0.jpg"
 ![alt](/travel-blog/images/inline-xxx.jpeg)
+![alt](/travel-blog/images/kto-slug-1.jpg)
 
 # WRONG - will cause 404
 image: "/images/cover-xxx.jpg"

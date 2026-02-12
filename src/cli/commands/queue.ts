@@ -10,6 +10,7 @@ import TopicDiscovery, { TopicRecommendation } from '../../agents/moltbook/topic
 import CommunityRequestExtractor from '../../agents/moltbook/community-requests.js';
 import SurveyInsightsDBManager from '../../agents/moltbook/survey-insights-db.js';
 import { EventCalendarScanner } from '../../agents/events/event-scanner.js';
+import { getEventBus } from '../../workflow/event-bus.js';
 
 interface TopicItem {
   title: string;
@@ -271,11 +272,16 @@ export async function queueCommand(
     case 'discover': {
       console.log(chalk.cyan('\n🔍 Moltbook 트렌드 + 이벤트 기반 주제 발굴\n'));
 
+      // 이벤트 버스 연결
+      const bus = getEventBus();
+      const discoverStart = Date.now();
+      bus.emit('discovery:phase-start', { phase: 'queue-discover', mode: 'standard' });
+
       // Moltbook 설정 로드
       const moltbookConfig = await loadMoltbookConfig();
 
-      // 발굴 실행
-      const discovery = new TopicDiscovery(moltbookConfig);
+      // 발굴 실행 (EventBus 전달)
+      const discovery = new TopicDiscovery(moltbookConfig, bus);
 
       // 커뮤니티 요청 수집
       let communityRequests: string[] = [];
@@ -380,6 +386,12 @@ export async function queueCommand(
           const refreshed = await loadQueue();
           refreshed.discovered = result.recommendations;
           await saveQueue(refreshed);
+
+          bus.emit('discovery:queue-populated', {
+            added,
+            queueSize: refreshed.queue.length,
+            topTitle: refreshed.queue[0]?.title || '',
+          });
         } else {
           console.log(chalk.yellow(`  ⚠️ 추가할 적합한 주제가 없습니다.`));
           queue.discovered = result.recommendations;
@@ -391,6 +403,12 @@ export async function queueCommand(
         queue.discovered = result.recommendations;
         await saveQueue(queue);
       }
+
+      bus.emit('discovery:complete', {
+        totalRecommendations: result.recommendations.length,
+        mode: 'standard',
+        duration: Date.now() - discoverStart,
+      });
 
       break;
     }

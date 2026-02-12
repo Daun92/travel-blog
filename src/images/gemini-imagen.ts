@@ -7,7 +7,7 @@ import { writeFile, mkdir, readFile } from 'fs/promises';
 import { join, dirname } from 'path';
 import { existsSync } from 'fs';
 
-export type ImageStyle = 'infographic' | 'diagram' | 'map' | 'comparison' | 'moodboard' | 'bucketlist';
+export type ImageStyle = 'infographic' | 'diagram' | 'map' | 'comparison' | 'moodboard' | 'bucketlist' | 'cover_photo';
 export type AspectRatio = '16:9' | '4:3' | '1:1';
 
 export interface ImageGenerationOptions {
@@ -326,8 +326,26 @@ Elements: Mini illustrated scenes (not just text), "unlock achievement" badges.
 Mix: Obvious highlights AND hidden gems, "bonus" secret items.
 Interaction: Empty checkboxes invite engagement - looks printable.
 Mood: Make visitors want to complete the FULL list.
-Do NOT create plain text checklists or boring todo lists.`
+Do NOT create plain text checklists or boring todo lists.`,
+
+      cover_photo: `Generate a photorealistic photograph for a Korean travel blog cover.
+Style: Professional travel photography, authentic Korean atmosphere.
+Composition: Fill the ENTIRE frame edge-to-edge with the photograph. No margins, no white space, no empty areas.
+Quality: DSLR-quality, sharp focus, professional color grading.
+CRITICAL: Must look like a REAL photograph. NO illustration, NO digital art, NO cartoon.
+Do NOT include any text, watermark, logo, caption, title, description, or overlay. Pure photograph only.
+The image must extend to ALL four edges — top, bottom, left, right. No border, no padding.`
     };
+
+    // cover_photo는 getCoverPhotoPrompt()에서 자체 CRITICAL REQUIREMENTS를 포함하므로
+    // 일반 스타일 가이드와 공통 요구사항이 충돌하지 않도록 분기
+    if (style === 'cover_photo') {
+      return `${styleGuides[style]}
+
+Aspect ratio: ${aspectGuide[aspectRatio]}
+
+${prompt}`;
+    }
 
     return `${styleGuides[style]}
 
@@ -387,7 +405,8 @@ function getStyleKorean(style: ImageStyle): string {
     map: '코스 지도',
     comparison: '비교 가이드',
     moodboard: '무드보드',
-    bucketlist: '버킷리스트'
+    bucketlist: '버킷리스트',
+    cover_photo: '커버 사진'
   };
   return styleMap[style] || '일러스트';
 }

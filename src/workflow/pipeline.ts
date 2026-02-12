@@ -10,6 +10,8 @@ import { loadMoltbookConfig, MoltbookFeedbackLoop } from '../agents/moltbook/ind
 import TopicDiscovery, { TopicRecommendation, DiscoveryResult } from '../agents/moltbook/topic-discovery.js';
 import CommunityRequestExtractor from '../agents/moltbook/community-requests.js';
 import { runFullValidation, FullValidationResult, calculateAverageScore } from './stages.js';
+import { DAGExecutor, createDefaultPipelineStages, type PipelineContext as DAGPipelineContext, type DAGExecutionResult } from './dag-executor.js';
+import { getEventBus } from './event-bus.js';
 
 // ============================================================================
 // 타입 정의
@@ -141,6 +143,8 @@ export class ContentPipeline {
     dryRun?: boolean;
     stages?: string[];
     verbose?: boolean;
+    /** 자동 치유 활성화 */
+    remediate?: boolean;
   } = {}): Promise<PipelineRun> {
     const runId = `run-${Date.now()}`;
 
@@ -161,78 +165,16 @@ export class ContentPipeline {
 
     const stagesToRun = options.stages || ['discover', 'select', 'generate', 'validate', 'publish', 'monitor'];
 
-    console.log(`\n🚀 파이프라인 시작 (${runId})\n`);
+    console.log(`\n🚀 파이프라인 시작 (${runId}) [DAG 모드]\n`);
+
+    // 이벤트 버스 verbose 설정
+    const eventBus = getEventBus();
+    if (options.verbose) {
+      eventBus.setVerbose(true);
+    }
 
     try {
-      // 1. 발굴 단계
-      if (stagesToRun.includes('discover')) {
-        const discoverResult = await this.runStage('discover', async () => {
-          return this.stageDiscover();
-        }, options.verbose);
-
-        if (discoverResult) {
-          this.currentRun.summary.topicsDiscovered = discoverResult.recommendations?.length || 0;
-        }
-      }
-
-      // 2. 선택 단계
-      let selectedTopics: TopicItem[] = [];
-      if (stagesToRun.includes('select')) {
-        const selectResult = await this.runStage('select', async () => {
-          const discovery = this.getStageResult<DiscoveryResult>('discover');
-          return this.stageSelect(discovery?.recommendations || []);
-        }, options.verbose);
-
-        if (selectResult) {
-          selectedTopics = selectResult;
-          this.currentRun.summary.topicsSelected = selectResult.length;
-        }
-      }
-
-      // 3. 생성 단계
-      let generatedPosts: GeneratedPost[] = [];
-      if (stagesToRun.includes('generate') && !options.dryRun) {
-        const generateResult = await this.runStage('generate', async () => {
-          return this.stageGenerate(selectedTopics);
-        }, options.verbose);
-
-        if (generateResult) {
-          generatedPosts = generateResult;
-          this.currentRun.summary.postsGenerated = generateResult.filter(p => p.success).length;
-        }
-      }
-
-      // 4. 검증 단계 (통합 파이프라인: Factcheck → Enhance → Quality → AEO → Image)
-      let validatedPosts: { post: GeneratedPost; validation: FullValidationResult }[] = [];
-      if (stagesToRun.includes('validate') && !options.dryRun) {
-        const validateResult = await this.runStage('validate', async () => {
-          return this.stageValidate(generatedPosts);
-        }, options.verbose);
-
-        if (validateResult) {
-          validatedPosts = validateResult.filter(v => v.validation.canPublish);
-          this.currentRun.summary.postsValidated = validatedPosts.length;
-        }
-      }
-
-      // 5. 발행 단계
-      if (stagesToRun.includes('publish') && !options.dryRun) {
-        const publishResult = await this.runStage('publish', async () => {
-          const postsToPublish = validatedPosts.map(v => v.post);
-          return this.stagePublish(postsToPublish);
-        }, options.verbose);
-
-        if (publishResult) {
-          this.currentRun.summary.postsPublished = publishResult.filter(p => p.success).length;
-        }
-      }
-
-      // 6. 모니터링 단계
-      if (stagesToRun.includes('monitor')) {
-        await this.runStage('monitor', async () => {
-          return this.stageMonitor();
-        }, options.verbose);
-      }
+      await this.runWithDAG(runId, stagesToRun, options);
 
       // 완료
       this.currentRun.status = this.currentRun.errors.length > 0 ? 'partial' : 'completed';
@@ -243,6 +185,12 @@ export class ContentPipeline {
 
       console.log(`\n✅ 파이프라인 완료`);
       this.printSummary();
+
+      // 파이프라인 완료 이벤트 발행
+      eventBus.emit('pipeline:complete', {
+        runId,
+        summary: this.currentRun.summary as unknown as Record<string, number>,
+      });
 
       return this.currentRun;
 
@@ -259,61 +207,96 @@ export class ContentPipeline {
   }
 
   /**
-   * 단일 스테이지 실행
+   * DAG 모드 실행 — 독립 스테이지 병렬 실행
    */
-  private async runStage<T>(
-    name: string,
-    executor: () => Promise<T>,
-    verbose?: boolean
-  ): Promise<T | null> {
-    const stage: PipelineStage = {
-      name,
-      status: 'running',
-      startedAt: new Date().toISOString()
+  private async runWithDAG(
+    runId: string,
+    stagesToRun: string[],
+    options: { dryRun?: boolean; verbose?: boolean; remediate?: boolean }
+  ): Promise<void> {
+    // 공유 상태 (DAG 스테이지 간 데이터 전달용)
+    let selectedTopics: TopicItem[] = [];
+    let generatedPosts: GeneratedPost[] = [];
+    let validatedPosts: { post: GeneratedPost; validation: FullValidationResult }[] = [];
+
+    // 스테이지 실행기 맵
+    const executors: Record<string, (ctx: DAGPipelineContext) => Promise<unknown>> = {
+      discover: async (ctx) => {
+        const result = await this.stageDiscover();
+        this.currentRun!.summary.topicsDiscovered = result.recommendations?.length || 0;
+        return result;
+      },
+      select: async (ctx) => {
+        const discovery = ctx.results.get('discover') as DiscoveryResult | undefined;
+        const result = await this.stageSelect(discovery?.recommendations || []);
+        selectedTopics = result;
+        this.currentRun!.summary.topicsSelected = result.length;
+        return result;
+      },
+      generate: async (ctx) => {
+        if (options.dryRun) return [];
+        const topics = (ctx.results.get('select') as TopicItem[] | undefined) || selectedTopics;
+        const result = await this.stageGenerate(topics);
+        generatedPosts = result;
+        this.currentRun!.summary.postsGenerated = result.filter(p => p.success).length;
+        return result;
+      },
+      validate: async (ctx) => {
+        if (options.dryRun) return [];
+        const posts = (ctx.results.get('generate') as GeneratedPost[] | undefined) || generatedPosts;
+        const result = await this.stageValidate(posts);
+        validatedPosts = result.filter(v => v.validation.canPublish);
+        this.currentRun!.summary.postsValidated = validatedPosts.length;
+        return result;
+      },
+      publish: async (ctx) => {
+        if (options.dryRun) return [];
+        const validated = (ctx.results.get('validate') as Array<{ post: GeneratedPost; validation: FullValidationResult }> | undefined) || validatedPosts;
+        const postsToPublish = validated.filter(v => v.validation.canPublish).map(v => v.post);
+        const result = await this.stagePublish(postsToPublish);
+        this.currentRun!.summary.postsPublished = result.filter(p => p.success).length;
+        return result;
+      },
+      monitor: async () => {
+        return this.stageMonitor();
+      },
     };
 
-    this.currentRun!.stages.push(stage);
+    // DAG 정의 생성 (요청된 스테이지만 포함)
+    const allStages = createDefaultPipelineStages(executors);
+    const filteredStages = allStages.filter(s => stagesToRun.includes(s.name));
 
-    if (verbose) {
-      console.log(`\n📌 스테이지: ${name}`);
+    // 필터링 시 의존성 조정 (필터된 스테이지의 dependsOn에서 포함되지 않은 것 제거)
+    const includedNames = new Set(filteredStages.map(s => s.name));
+    for (const stage of filteredStages) {
+      stage.dependsOn = stage.dependsOn.filter(dep => includedNames.has(dep));
     }
 
-    try {
-      const startTime = Date.now();
-      const result = await executor();
+    // DAG 실행
+    const dag = new DAGExecutor({
+      parallel: true,
+      verbose: options.verbose,
+      maxConcurrency: 3,
+    });
+    dag.addStages(filteredStages);
 
-      stage.status = 'completed';
-      stage.completedAt = new Date().toISOString();
-      stage.duration = Date.now() - startTime;
-      stage.result = result;
+    const dagResult = await dag.execute(runId);
 
-      if (verbose) {
-        console.log(`   ✓ 완료 (${stage.duration}ms)`);
-      }
-
-      return result;
-
-    } catch (error) {
-      stage.status = 'failed';
-      stage.completedAt = new Date().toISOString();
-      stage.error = error instanceof Error ? error.message : String(error);
-
-      this.currentRun!.errors.push(`[${name}] ${stage.error}`);
-
-      if (verbose) {
-        console.log(`   ✗ 실패: ${stage.error}`);
-      }
-
-      return null;
+    // DAG 결과를 PipelineRun에 매핑
+    for (const stageResult of dagResult.stages) {
+      this.currentRun!.stages.push({
+        name: stageResult.name,
+        status: stageResult.status === 'completed' ? 'completed' :
+                stageResult.status === 'skipped' ? 'skipped' : 'failed',
+        startedAt: stageResult.startedAt,
+        completedAt: stageResult.completedAt,
+        duration: stageResult.duration,
+        result: stageResult.result,
+        error: stageResult.error,
+      });
     }
-  }
 
-  /**
-   * 스테이지 결과 가져오기
-   */
-  private getStageResult<T>(stageName: string): T | null {
-    const stage = this.currentRun?.stages.find(s => s.name === stageName);
-    return (stage?.result as T) || null;
+    this.currentRun!.errors.push(...dagResult.errors);
   }
 
   // ========================================================================
@@ -328,7 +311,9 @@ export class ContentPipeline {
    */
   async stageDiscover(): Promise<DiscoveryResult> {
     const moltbookConfig = await loadMoltbookConfig();
-    const discovery = new TopicDiscovery(moltbookConfig);
+    const bus = getEventBus();
+    const discoverStart = Date.now();
+    const discovery = new TopicDiscovery(moltbookConfig, bus);
 
     // 커뮤니티 요청 수집
     let communityRequests: string[] = [];
@@ -341,6 +326,11 @@ export class ContentPipeline {
     // 강화 발굴 사용 여부 확인
     const useEnhanced = this.config.discovery.sources.includes('openclaw_feedback') ||
                         this.config.discovery.sources.includes('vote_posts');
+
+    bus.emit('discovery:phase-start', {
+      phase: 'discover',
+      mode: useEnhanced ? 'enhanced' : 'standard',
+    });
 
     if (useEnhanced) {
       // 2차원 강화 발굴 사용
@@ -358,6 +348,12 @@ export class ContentPipeline {
     const result = await discovery.discover({
       includeGaps: this.config.discovery.sources.includes('gap_analysis'),
       communityRequests
+    });
+
+    bus.emit('discovery:complete', {
+      totalRecommendations: result.recommendations.length,
+      mode: 'standard',
+      duration: Date.now() - discoverStart,
     });
 
     return result;

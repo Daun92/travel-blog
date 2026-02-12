@@ -52,8 +52,9 @@ program
   .option('-y, --yes', '모든 프롬프트에 자동 응답 (비대화 모드)')
   .option('--inline-images', 'Gemini AI로 인라인 설명 이미지 생성')
   .option('--image-count <count>', '생성할 인라인 이미지 개수 (기본: 3, 최대: 5)', '3')
-  .option('--agent <id>', '에이전트 페르소나 지정 (viral|friendly|informative)')
+  .option('--agent <id>', '에이전트 페르소나 지정 (viral|friendly|informative|niche)')
   .option('--auto-collect', 'data.go.kr API로 주제 관련 데이터 자동 수집 후 프롬프트에 주입')
+  .option('--auto-factcheck', '생성 후 자동 팩트체크 실행 (70% 미만 시 경고)')
   .action((options) => {
     // image-count를 숫자로 변환
     if (options.imageCount) {
@@ -85,6 +86,7 @@ program
   .option('--all', '모든 승인된 초안 발행')
   .option('-m, --message <message>', '커밋 메시지')
   .option('--skip-validation', '품질 검증 건너뛰기')
+  .option('--keep-draft', '발행 후 드래프트 파일 유지 (기본: 자동 삭제)')
   .action(publishCommand);
 
 // 키워드 추천

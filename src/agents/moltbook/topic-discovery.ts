@@ -9,6 +9,7 @@ import { loadMoltbookConfig, MoltbookConfig } from './index.js';
 import type { DiversityTargets } from './index.js';
 import SurveyInsightsDBManager from './survey-insights-db.js';
 import { ContentBalancer } from './content-balancer.js';
+import type { WorkflowEventBus } from '../../workflow/event-bus.js';
 
 // ============================================================================
 // 타입 정의
@@ -42,7 +43,8 @@ export type FramingType =
   | 'experience'     // 체험/후기 (1박2일, 솔직 후기, 비용)
   | 'seasonal'       // 시즌/시의성 (2월, 겨울, 벚꽃)
   | 'comparison'     // 비교/분석 (vs, 장단점, 현실 vs 기대)
-  | 'local_story';   // 로컬 스토리 (주민 인터뷰, 숨은 골목, 동네 이야기)
+  | 'local_story'    // 로컬 스토리 (주민 인터뷰, 숨은 골목, 동네 이야기)
+  | 'niche_digging'; // 취향 디깅 (다층 탐구, 숨은 디테일, 매니아 시점)
 
 export interface TopicRecommendation {
   topic: string;
@@ -1440,13 +1442,15 @@ export class TopicDiscovery {
   private recommender: TopicRecommender;
   private openclawScanner: OpenClawPostScanner;
   private voteScanner: VotePostScanner;
+  private eventBus?: WorkflowEventBus;
 
-  constructor(config?: MoltbookConfig | null) {
+  constructor(config?: MoltbookConfig | null, eventBus?: WorkflowEventBus) {
     this.scanner = new MoltbookTrendScanner(config);
     this.gapAnalyzer = new TopicGapAnalyzer();
     this.recommender = new TopicRecommender();
     this.openclawScanner = new OpenClawPostScanner(config);
     this.voteScanner = new VotePostScanner(config);
+    this.eventBus = eventBus;
   }
 
   /**
@@ -1465,6 +1469,10 @@ export class TopicDiscovery {
     // 1. 트렌딩 스캔
     const trending = await this.scanner.scanTrending(options.submolt);
     console.log(`   ✓ ${trending.length}개 트렌딩 토픽 발견`);
+    this.eventBus?.emit('discovery:trending-complete', {
+      count: trending.length,
+      submolt: options.submolt,
+    });
 
     // 2. 갭 분석 (옵션)
     let gaps: TopicGap[] = [];
@@ -1472,6 +1480,10 @@ export class TopicDiscovery {
       console.log('📊 갭 분석 중...');
       gaps = await this.gapAnalyzer.analyzeGaps(trending);
       console.log(`   ✓ ${gaps.length}개 콘텐츠 갭 발견`);
+      this.eventBus?.emit('discovery:gap-complete', {
+        gapCount: gaps.length,
+        uncoveredCount: gaps.filter(g => g.blogCoverage === 'none').length,
+      });
     }
 
     // 3. 추천 생성 (이벤트 추천 포함)
@@ -1484,13 +1496,23 @@ export class TopicDiscovery {
       options.eventRecommendations
     );
     console.log(`   ✓ ${recommendations.length}개 주제 추천`);
+    this.eventBus?.emit('discovery:recommendations', {
+      count: recommendations.length,
+      topScore: recommendations[0]?.score ?? 0,
+      sources: [...new Set(recommendations.map(r => r.source))],
+    });
 
     // 4. 콘텐츠 다양성 밸런싱
     const targets = options.diversityTargets || await this.loadDiversityTargets();
-    const balancer = new ContentBalancer(targets);
+    const balancer = new ContentBalancer(targets, this.eventBus);
     const analysis = await balancer.analyzeDistribution();
     const boosts = balancer.calculateBoosts(analysis);
     balancer.applyBoosts(recommendations, boosts);
+    this.eventBus?.emit('discovery:balance-applied', {
+      agentBoosts: boosts.agentBoosts,
+      regionBoosts: boosts.regionBoosts,
+      framingBoosts: boosts.framingBoosts,
+    });
 
     // 5. 미커버 지역 추천 자동 생성
     const regionGapRecs = balancer.generateRegionGapRecommendations(boosts);
@@ -1534,9 +1556,11 @@ export class TopicDiscovery {
     includeVotePosts?: boolean;
     communityRequests?: string[];
   } = {}): Promise<EnhancedDiscoveryResult> {
+    const discoverStart = Date.now();
     console.log('\n═══════════════════════════════════════════════════');
     console.log('   📡 2차원 강화 주제 발굴 시작');
     console.log('═══════════════════════════════════════════════════\n');
+    this.eventBus?.emit('discovery:phase-start', { phase: 'discoverEnhanced', mode: 'enhanced' });
 
     // 서베이 인사이트 DB 로드
     const surveyDb = new SurveyInsightsDBManager();
@@ -1565,6 +1589,13 @@ export class TopicDiscovery {
 
       openclawFeedback = await this.openclawScanner.scanOpenClawPosts();
       console.log(`   ✓ ${openclawFeedback.length}개 OpenClaw 포스트 피드백 수집`);
+      this.eventBus?.emit('discovery:enhanced-phase', {
+        dimension: 'openclaw',
+        count: openclawFeedback.length,
+        details: openclawFeedback.length > 0
+          ? `평균 감성: ${(openclawFeedback.reduce((s, f) => s + f.sentimentScore, 0) / openclawFeedback.length).toFixed(0)}`
+          : undefined,
+      });
 
       // 피드백에서 추천 생성
       const openclawRecs = this.openclawScanner.extractTopicRecommendations(openclawFeedback);
@@ -1591,6 +1622,13 @@ export class TopicDiscovery {
 
       votePosts = await this.voteScanner.scanVotePosts(options.submolt);
       console.log(`   ✓ ${votePosts.length}개 Vote 포스트 분석`);
+      this.eventBus?.emit('discovery:enhanced-phase', {
+        dimension: 'vote',
+        count: votePosts.length,
+        details: votePosts.length > 0
+          ? `유형: ${votePosts.map(v => v.voteType).join(', ')}`
+          : undefined,
+      });
 
       // Vote에서 추천 생성
       const voteRecs = this.voteScanner.generateRecommendationsFromVotes(votePosts);
@@ -1649,7 +1687,7 @@ export class TopicDiscovery {
 
     // 추가 추천 중 에이전트 미배정 건에 사전 배정
     const targets = await this.loadDiversityTargets();
-    const postMergeBalancer = new ContentBalancer(targets);
+    const postMergeBalancer = new ContentBalancer(targets, this.eventBus);
     const postAnalysis = await postMergeBalancer.analyzeDistribution();
     const postBoosts = postMergeBalancer.calculateBoosts(postAnalysis);
     // agentBoosts에서 가장 부족한 에이전트 찾기
@@ -1684,6 +1722,12 @@ export class TopicDiscovery {
     console.log(`   • Vote 포스트: ${enhancedResult.votePosts.length}개`);
     console.log(`   • 최종 추천: ${enhancedResult.recommendations.length}개`);
     console.log('═══════════════════════════════════════════════════\n');
+
+    this.eventBus?.emit('discovery:complete', {
+      totalRecommendations: enhancedResult.recommendations.length,
+      mode: 'enhanced',
+      duration: Date.now() - discoverStart,
+    });
 
     return enhancedResult;
   }

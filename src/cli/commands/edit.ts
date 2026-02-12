@@ -300,8 +300,8 @@ async function editNew(): Promise<void> {
   const bodyTemplate = answers.type === 'travel' ? BODY_TEMPLATE_TRAVEL : BODY_TEMPLATE_CULTURE;
   const fullContent = `${frontmatter}\n${bodyTemplate}`;
 
-  // 파일 저장
-  const slug = generateSlug(answers.title);
+  // 파일 저장 (충돌 방지: DRAFTS_DIR 전달)
+  const slug = generateSlug(answers.title, DRAFTS_DIR);
   const filename = `${slug}.md`;
   const filepath = join(DRAFTS_DIR, filename);
 
@@ -459,9 +459,9 @@ async function editRegister(sourcePath: string): Promise<void> {
     ShowWordCount: data.ShowWordCount ?? true,
   };
 
-  // 파일 저장
+  // 파일 저장 (충돌 방지: DRAFTS_DIR 전달)
   const title = (merged.title as string) || basename(resolved, '.md');
-  const slug = generateSlug(title);
+  const slug = generateSlug(title, DRAFTS_DIR);
   const destFilename = `${slug}.md`;
   const destPath = join(DRAFTS_DIR, destFilename);
 

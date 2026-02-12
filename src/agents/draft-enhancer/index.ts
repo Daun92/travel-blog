@@ -149,7 +149,19 @@ export class DraftEnhancerAgent {
     });
 
     // 5. 향상된 콘텐츠 정리
-    const cleanedContent = this.cleanEnhancedContent(enhancedContent);
+    let cleanedContent = this.cleanEnhancedContent(enhancedContent);
+
+    // 5a. 이미지 복원 안전장치: AI가 이미지를 제거했을 경우 원본에서 복원
+    cleanedContent = this.restoreMissingImages(content, cleanedContent);
+
+    // 5b. 장소 날조 감지: 원본에 없던 고유명사(장소명) 경고
+    const newVenues = this.detectNewVenues(content, cleanedContent);
+    if (newVenues.length > 0) {
+      warnings.push(`enhance에서 원본에 없던 장소명 추가됨 (날조 가능성): ${newVenues.join(', ')}`);
+      if (verbose) {
+        onProgress(`  ⚠️ 새로 등장한 장소명: ${newVenues.join(', ')}`);
+      }
+    }
 
     // 6. 향상 후 분석
     onProgress('향상된 콘텐츠 검증 중...');
@@ -295,6 +307,7 @@ ${detailAnalysis.missingDetails.map(d => `- ${d}`).join('\n')}
 4. **비교 추가**: 다른 곳과의 비교, 기대 vs 현실 비교
 5. **페르소나 톤**: "${persona.voice.tone}" 유지
 6. **필수 답변**: ${variant.must_answer.join(' / ')}
+7. **⛔ 장소/시설 날조 금지**: 원본 초안에 이미 등장하는 장소, 전시, 행사, 카페, 레스토랑만 사용하세요. 새로운 장소를 추가하지 마세요. 없는 갤러리, 카페, 매장 이름을 만들어내면 날조입니다. 일반 상식(지하철역, 공항 등)은 허용됩니다.
 
 ## 원본 초안
 
@@ -304,12 +317,101 @@ ${content}
 
 리라이팅된 본문만 출력하세요. 프론트매터나 설명 없이 마크다운 본문만 출력합니다.
 기존 구조(제목, 소제목)는 유지하되, 내용을 페르소나에 맞게 전면 수정하세요.
+
+**중요: 이미지 보존**
+- 본문에 포함된 이미지 마크다운(\`![alt](path)\`)을 절대 삭제하지 마세요.
+- 이미지 아래의 캡션(*출처: ...* 등)도 그대로 유지하세요.
+- 이미지 위치를 변경하지 말고 원래 위치에 그대로 두세요.
 `;
   }
 
   /**
    * 향상된 콘텐츠 정리
    */
+  /**
+   * AI가 제거한 이미지 마크다운을 원본에서 복원
+   */
+  private restoreMissingImages(original: string, enhanced: string): string {
+    // 원본에서 이미지 마크다운 + 바로 아래 캡션 추출
+    const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)(?:\n\*[^*]+\*)?/g;
+    const originalImages: { full: string; path: string }[] = [];
+    let match;
+
+    while ((match = imagePattern.exec(original)) !== null) {
+      originalImages.push({ full: match[0], path: match[2] });
+    }
+
+    if (originalImages.length === 0) return enhanced;
+
+    // enhanced에 이미 존재하는 이미지 경로 수집
+    const enhancedImagePaths = new Set<string>();
+    const enhancedImagePattern = /!\[[^\]]*\]\(([^)]+)\)/g;
+    while ((match = enhancedImagePattern.exec(enhanced)) !== null) {
+      enhancedImagePaths.add(match[1]);
+    }
+
+    // 누락된 이미지 찾기
+    const missingImages = originalImages.filter(img => !enhancedImagePaths.has(img.path));
+    if (missingImages.length === 0) return enhanced;
+
+    // 누락된 이미지를 H2/H3 섹션 뒤에 재삽입
+    const lines = enhanced.split('\n');
+    const headingIndices: number[] = [];
+    for (let i = 0; i < lines.length; i++) {
+      if (/^#{2,3}\s/.test(lines[i])) {
+        headingIndices.push(i);
+      }
+    }
+
+    for (let i = 0; i < missingImages.length; i++) {
+      const img = missingImages[i];
+      // 헤딩 뒤 적절한 위치에 삽입
+      if (headingIndices.length > 0) {
+        const targetIdx = headingIndices[Math.min(i, headingIndices.length - 1)];
+        // 헤딩 다음 빈 줄 뒤에 삽입
+        let insertAt = targetIdx + 1;
+        while (insertAt < lines.length && lines[insertAt].trim() !== '') {
+          insertAt++;
+        }
+        lines.splice(insertAt + 1, 0, '', img.full, '');
+        // 이후 인덱스 조정
+        for (let j = 0; j < headingIndices.length; j++) {
+          if (headingIndices[j] > targetIdx) headingIndices[j] += 3;
+        }
+      } else {
+        // 헤딩 없으면 끝에 추가
+        lines.push('', img.full);
+      }
+    }
+
+    return lines.join('\n');
+  }
+
+  /**
+   * 원본에 없던 장소명(고유명사 패턴)이 enhanced에 등장하면 감지
+   */
+  private detectNewVenues(original: string, enhanced: string): string[] {
+    // 굵은 글씨(**text**) 중 장소/시설 패턴 추출
+    const venuePattern = /\*\*([^*]{2,20})\*\*/g;
+    const locationSuffix = /(?:[관점원장역사당궁각실집루대탑문교산천호섬항포곶]|해변|해수욕장|시장|거리|마을|길|골목|카페|갤러리)$/;
+
+    const extractVenues = (text: string): Set<string> => {
+      const venues = new Set<string>();
+      let match;
+      const regex = new RegExp(venuePattern.source, 'g');
+      while ((match = regex.exec(text)) !== null) {
+        const name = match[1].trim();
+        if (locationSuffix.test(name)) venues.add(name);
+      }
+      return venues;
+    };
+
+    const originalVenues = extractVenues(original);
+    const enhancedVenues = extractVenues(enhanced);
+
+    return [...enhancedVenues].filter(v => !originalVenues.has(v));
+  }
+
   private cleanEnhancedContent(content: string): string {
     let cleaned = content.trim();
 

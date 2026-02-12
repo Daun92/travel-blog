@@ -16,6 +16,7 @@ export const pipelineCommand = new Command('pipeline')
   .option('-v, --verbose', '상세 출력')
   .option('--auto', '완전 자동 모드')
   .option('--enhanced', '2차원 강화 발굴 사용 (OpenClaw피드백 + Vote포스트)')
+  .option('--remediate', '실패 게이트 자동 치유')
   .option('--history [count]', '실행 기록 조회', '10')
   .option('--config', '설정 확인')
   .option('--schedule', '스케줄러 상태 확인')
@@ -137,7 +138,8 @@ export const pipelineCommand = new Command('pipeline')
         const result = await pipeline.runFull({
           dryRun: options.dryRun,
           stages,
-          verbose: options.verbose
+          verbose: options.verbose,
+          remediate: options.remediate
         });
 
         spinner.stop();
@@ -194,6 +196,7 @@ pipelineCommand.on('--help', () => {
   npm run pipeline generate           # 생성만 실행
   npm run pipeline --dry-run          # 미리보기 모드
   npm run pipeline --enhanced         # 강화 발굴로 전체 파이프라인 실행
+  npm run pipeline --remediate        # 실패 게이트 자동 치유
   npm run pipeline --history 5        # 최근 5개 실행 기록
   npm run pipeline --schedule         # 스케줄러 상태 확인
   npm run pipeline --config           # 설정 확인

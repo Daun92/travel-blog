@@ -1,6 +1,6 @@
 {
   "defaultPersona": "friendly",
-  "personas": ["viral", "friendly", "informative"],
+  "personas": ["viral", "friendly", "informative", "niche"],
   "assignmentRules": {
     "viral": {
       "keywords": ["TOP", "BEST", "순위", "비교", "vs", "최고", "최악", "핫플", "트렌드", "SNS", "난리", "화제", "기대", "현실", "논란", "꼭", "필수"],
@@ -12,6 +12,10 @@
     },
     "friendly": {
       "keywords": ["주말", "1박2일", "2박3일", "당일치기", "가성비", "퇴근", "후기", "코스", "웨이팅", "솔직", "실제", "비용"],
+      "weight": 1.0
+    },
+    "niche": {
+      "keywords": ["숨은", "로컬", "골목", "현지인", "비밀", "숨겨진", "뒷골목", "간판없는", "디깅", "파고", "취향", "덕질", "심화", "매니아", "마니아", "찐", "언더", "인디", "동네", "아는사람", "소문", "발견", "로컬맛집"],
       "weight": 1.0
     }
   }

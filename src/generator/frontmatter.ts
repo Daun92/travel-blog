@@ -2,6 +2,8 @@
  * Hugo 프론트매터 생성 및 처리
  */
 
+import { existsSync } from 'fs';
+import { join } from 'path';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import slugify from 'slugify';
@@ -25,6 +27,7 @@ export interface FrontmatterData {
   author?: string;
   personaId?: string;
   framingType?: string;
+  dataSources?: string[];
   // 여행 전용
   location?: string;
   visitDate?: string;
@@ -94,6 +97,11 @@ export function generateFrontmatter(data: FrontmatterData): string {
     lines.push(`framingType: "${escapeYaml(data.framingType)}"`);
   }
 
+  // 데이터 출처
+  if (data.dataSources && data.dataSources.length > 0) {
+    lines.push(`dataSources: [${data.dataSources.map(s => `"${escapeYaml(s)}"`).join(', ')}]`);
+  }
+
   // 여행 전용 필드
   if (data.location) lines.push(`location: "${escapeYaml(data.location)}"`);
   if (data.visitDate) lines.push(`visitDate: "${escapeYaml(data.visitDate)}"`);
@@ -124,8 +132,10 @@ export function generateFrontmatter(data: FrontmatterData): string {
 
 /**
  * 파일명용 슬러그 생성
+ * @param title 포스트 제목
+ * @param outputDir 출력 디렉토리 경로 — 제공 시 기존 파일과 충돌 검사하여 카운터 부여
  */
-export function generateSlug(title: string): string {
+export function generateSlug(title: string, outputDir?: string): string {
   // 한글 제목을 영문으로 변환하지 않고 날짜+간략화된 형태로 사용
   const date = format(new Date(), 'yyyy-MM-dd');
   const cleaned = title
@@ -139,7 +149,20 @@ export function generateSlug(title: string): string {
     locale: 'ko'
   });
 
-  return `${date}-${slug || 'post'}`;
+  const baseSlug = `${date}-${slug || 'post'}`;
+
+  // outputDir이 제공되면 기존 파일과 충돌 검사
+  if (outputDir) {
+    let candidate = baseSlug;
+    let counter = 1;
+    while (existsSync(join(outputDir, `${candidate}.md`))) {
+      candidate = `${baseSlug}-${counter}`;
+      counter++;
+    }
+    return candidate;
+  }
+
+  return baseSlug;
 }
 
 /**
