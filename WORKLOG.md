@@ -10,6 +10,916 @@
 
 ## 개발 이력
 
+### 2026-02-12: 공주 백제유적 + 제천 청풍호 포스트 — 이미지 레이아웃 + 콘텐츠 교정 + 프롬프트 오염 근절
+
+#### 발행 포스트
+
+| 포스트 | 에이전트 | 타입 | 팩트체크 | AEO |
+|--------|---------|------|---------|-----|
+| 공주 백제유적 디깅 가이드: 왕릉의 벽돌부터 경비행기까지 | 오덕우 (niche) | culture | 100% | ✅ |
+| 제천 청풍호 1박2일 겨울 여행 — 리솜포레스트부터 케이블카까지 | 김주말 (friendly) | travel | 100% | ✅ |
+
+#### Phase 1: 을지로 7-Image 레이아웃 패턴 적용
+
+이전 세션에서 수립한 을지로 7장 패턴(커버 + 도입 일러스트 + KTO×2 + 스틸컷×2~3 + 마감 일러스트)을 두 포스트에 적용.
+
+**이미지 생성** (`scripts/gen-0212-images.mts`): Gemini API 5회 호출
+
+| 이미지 | 포스트 | 스타일 | 용량 |
+|--------|--------|--------|------|
+| stillcut-12-1 (왕릉원 능선, 안개+필름그레인) | 공주 | cover_photo (오덕우 인디) | 858KB |
+| stillcut-12-2 (무령왕릉 벽돌 연꽃 매크로) | 공주 | cover_photo (오덕우 인디) | 856KB |
+| closing-12 (디깅 레벨 체크리스트) | 공주 | bucketlist (일러스트) | 820KB |
+| stillcut-post-1 (리솜포레스트 야간 전동카트) | 제천 | cover_photo (김주말 라이프) | 925KB |
+| stillcut-post-2 (케이블카 안 청풍호 파노라마) | 제천 | cover_photo (김주말 라이프) | 742KB |
+
+**도입 일러스트 재배치**: 두 포스트 모두 기존 섹션 1 인라인에 있던 일러스트를 타이틀 직후 도입부로 이동.
+
+**최종 이미지 레이아웃 (각 6 inline + 1 cover = 7장)**:
+
+공주 백제유적 (culture, 오덕우):
+
+| # | 위치 | 타입 | 파일 |
+|---|------|------|------|
+| 0 | 커버 | AI 포토+관인(틸) | cover-2026-02-12-12 |
+| 1 | 도입부 | 일러스트 (moodboard) | inline-12-1 |
+| 2 | 1층 능선 | **스틸컷** | stillcut-12-1 |
+| 3 | 2층 벽돌 | **스틸컷** | stillcut-12-2 |
+| K2 | 3층 금강변 | KTO 실사 | kto-12-2 |
+| K1 | 4층 공산성 | KTO 실사 (**교체됨**) | kto-12-1 |
+| 4 | 마감부 | 일러스트 (bucketlist) | closing-12 |
+
+제천 청풍호 (travel, 김주말):
+
+| # | 위치 | 타입 | 파일 |
+|---|------|------|------|
+| 0 | 커버 | AI 포토+관인(오렌지) | cover-2026-02-12-post |
+| 1 | 도입부 | 일러스트 (여행가이드) | inline-post-1 |
+| 2 | 리솜포레스트 | **스틸컷** | stillcut-post-1 |
+| 3 | 케이블카 | **스틸컷** | stillcut-post-2 |
+| K1 | 치유의숲 | KTO 실사 | kto-post-1 |
+| K2 | 덕주사 | KTO 실사 | kto-post-2 |
+| 4 | 마감부 | 일러스트 (코스맵) | inline-post-2 |
+
+**Gemini 이미지 쿼터**: 6 → 11/50
+
+#### Phase 2: KTO 이미지-컨텍스트 불일치 교체
+
+**문제**: 공주 4층(경비행기) 섹션의 KTO 이미지가 **지상에서 올려다 본 경비행기** — 본문은 "위에서 내려다보는" 시점으로 금강이 공산성을 휘감는 구도를 묘사.
+
+**조사**: KTO API 캐시에서 경비행기(contentId 3038514) 4장, 공산성(contentId 125949) 10장을 검토.
+- 경비행기 4장: 전부 지상 촬영 (활주로, 격납고, 주기 장면)
+- 공산성 10장 중 castle-8 (contentId 3084170): 높은 시점에서 금강+정자+성곽이 보이는 구도 → 본문 "금강이 공산성을 휘감아 도는 구도"와 직접 일치
+
+**수정**: `kto-2026-02-12-12-1.jpg`를 castle-8로 교체. 캡션: "공주 경비행기 — 하늘에서 읽는 백제의 레이아웃" → "공산성과 금강 — 위에서 내려다본 백제의 방어 구도"
+
+#### Phase 3: 날조된 전시회 정보 수정
+
+**문제**: 공주 포스트 "서울에서 예습하기" 섹션에 **국립현대미술관 서울**과 **예술의전당** 전시회 링크가 포함됨. 실제 백제 관련 전시는 해당 기관에서 열리지 않음 — Gemini가 날조.
+
+**수정 3건**:
+
+| 위치 | Before (날조) | After (검증) |
+|------|--------------|-------------|
+| L177-186 | 국립현대미술관 서울 + 예술의전당 특별전 | 국립중앙박물관 백제실 + 국립공주박물관 |
+| L26-27 (keywords) | 국립현대미술관 서울, 예술의전당 특별전 | 국립중앙박물관 백제실, 국립공주박물관 |
+| L188 | 김주말의 현실적인 총평 | 오덕우의 현실적인 총평 (페르소나 이름 오류) |
+
+#### Phase 4: 프롬프트 Few-shot 오염 근절 (근본 원인)
+
+**근본 원인**: `src/generator/prompts.ts`의 LINK 마커 사용 예시에 **구체적인 실존 장소/공연명**이 하드코딩되어 있었음. Gemini가 이를 few-shot 예시가 아닌 **콘텐츠 제안**으로 해석하여 본문에 삽입.
+
+**Travel 프롬프트 (L151-157)**:
+
+| Before (오염 소스) | After (추상 플레이스홀더) |
+|-------------------|------------------------|
+| `[LINK:map:성산일출봉]` | `[LINK:map:{장소명}]` |
+| `[LINK:search:제주 올레길 코스]` | `[LINK:search:{검색어}]` |
+| `[LINK:official:https://www.visitjeju.net:비짓제주]` | `[LINK:official:{URL}:{표시텍스트}]` |
+
+**Culture 프롬프트 (L258-266)**:
+
+| Before (오염 소스) | After (추상 플레이스홀더) |
+|-------------------|------------------------|
+| `[LINK:map:국립현대미술관 서울]` | `[LINK:map:{장소명}]` |
+| `[LINK:booking:뮤지컬 오페라의 유령]` | `[LINK:booking:{공연/전시명}]` |
+| `[LINK:yes24:라이온 킹 뮤지컬]` | `[LINK:yes24:{공연/전시명}]` |
+| `[LINK:official:https://www.mmca.go.kr:국립현대미술관]` | `[LINK:official:{URL}:{표시텍스트}]` |
+
+#### 도출된 워크플로우 개선사항
+
+**개선 1: KTO 이미지-컨텍스트 매칭 검증**
+
+KTO API 이미지는 검색어 기반으로 자동 선택되므로, 본문의 시점/맥락과 불일치할 수 있음.
+→ Layer 3 체크리스트에 추가: "KTO 이미지가 본문 묘사(시점, 계절, 장면)와 일치하는지 확인"
+
+**개선 2: 프롬프트 예시 추상화 원칙**
+
+LLM 프롬프트 내 few-shot 예시에 실존 장소/기관/공연명을 사용하면 콘텐츠 오염 발생.
+→ 프롬프트의 모든 예시는 `{플레이스홀더}` 형태로 작성. 구체적 이름 하드코딩 금지.
+
+**개선 3: 페르소나 이름 교차 오염 방지**
+
+오덕우 포스트에 "김주말의 총평"이 혼입됨 — 프롬프트 생성 시 `personaId`에 매핑된 필명만 사용하도록 검증 필요.
+
+#### 수정 파일 요약
+
+| 파일 | 작업 |
+|------|------|
+| `blog/content/posts/culture/2026-02-12-12.md` | 도입부 일러스트 이동 + 스틸컷 2장 삽입 + 마감 일러스트 삽입 + KTO 이미지 교체 + 날조 전시회 수정 + 페르소나 이름 수정 + 키워드 수정 |
+| `blog/content/posts/travel/2026-02-12-post.md` | 도입부 일러스트 이동 + 스틸컷 2장 삽입 |
+| `drafts/2026-02-12-12.md` | blog 동기화 |
+| `drafts/2026-02-12-post.md` | blog 동기화 |
+| `src/generator/prompts.ts` | Travel/Culture 프롬프트 LINK 예시 → 추상 플레이스홀더 교체 |
+| `scripts/gen-0212-images.mts` | 신규 — 5장 이미지 생성 스크립트 |
+| `blog/static/images/stillcut-*`, `closing-*` | 신규 — Gemini 생성 이미지 5장 |
+| `blog/static/images/kto-2026-02-12-12-1.jpg` | castle-8 (금강 뷰)로 교체 |
+
+---
+
+### 2026-02-12: KTO 인라인 이미지 전수 오딧 — 맥락 불일치 3건 교정
+
+#### 배경
+
+전체 7개 포스트에 사용된 KTO 인라인 이미지 16장을 전수 점검. 자동 배치 시 검색 순서 기반이므로 섹션 주제와 이미지 내용이 불일치하는 경우가 발생.
+
+#### 오딧 프로세스
+
+1. `grep`으로 전체 포스트 KTO 이미지 사용 현황 수집 (16장, 7포스트)
+2. 각 이미지 alt text와 섹션 본문 대조 → 3건 mismatch 식별
+3. `scripts/kto-image-audit.mts` 작성 — detailImage API + 캐시 데이터로 후보 이미지 수집
+4. `blog/static/images/audit/index.html` 비교 갤러리 생성 → 브라우저에서 시각 비교
+5. 최적 후보 선택 → 이미지 교체 + alt text 갱신
+
+#### 교체 내역
+
+| 포스트 | 파일 | Before | After | 근거 |
+|--------|------|--------|-------|------|
+| 부산 골목 | kto-busan-2 | 갤럭시 롯데프리미엄아울렛 동부산점 | 광복로 겨울빛 트리축제 (festival-4) | 섹션3: 트리축제 → 아울렛 이미지 mismatch |
+| 강릉 겨울 | kto-gangneung-2 | 경포로 누정 시·문학 기행 | 굴산사지 당간지주 (gulsan-13) | 섹션3: 굴산사지 → 경포 누정 mismatch |
+| 을지로 디깅 | kto-12-2 | 을지로 철제가구거리 | 세운상가 지하 공구 골목 (sewoon-detail-3) | 섹션3: 지하상가 → 철제가구거리 mismatch |
+
+#### 확인된 정상 매칭 (13장)
+
+감천사(busan-1), 경포대(gangneung-1), 노가리골목(12-1), 성수동·미술관·문래동·서촌·을지로·신당동(9 posts), 고마나루(공주-1, 이전 세션 교정 완료), 치유의숲·덕주사(제천)
+
+#### API 쿼터
+
+- 사용: 31/1000 (오딧 시작) → 약 45/1000 (완료)
+- 캐시 활용: 굴산사지 이미지 7장 전부 캐시 URL 직접 다운로드 (API 0)
+
+#### 수정 파일
+
+| 파일 | 작업 |
+|------|------|
+| `blog/content/posts/travel/2026-02-10-busan.md` | alt text 갱신 (트리축제) |
+| `blog/content/posts/travel/2026-02-10-gangneung.md` | alt text 갱신 (굴산사지 당간지주) |
+| `blog/content/posts/travel/2026-02-11-12.md` | alt text 갱신 (세운상가 공구골목) |
+| `drafts/2026-02-11-12.md` | blog 동기화 |
+| `blog/static/images/kto-2026-02-10-busan-2.jpg` | festival-4로 교체 (490→138KB) |
+| `blog/static/images/kto-2026-02-10-gangneung-2.jpg` | gulsan-13으로 교체 (609→552KB) |
+| `blog/static/images/kto-2026-02-11-12-2.jpg` | sewoon-detail-3으로 교체 (441→152KB) |
+| `data/image-registry.json` | 교체 이미지 3건 등록 |
+| `scripts/kto-image-audit.mts` | 신규 — 오딧용 이미지 수집 스크립트 |
+
+---
+
+### 2026-02-12: 인라인 이미지 최소 기준 포스트 KTO 실사진 보강
+
+#### 배경
+
+전체 47개 포스트 인라인 이미지 수 점검 → 3개 포스트가 최소 기준(travel 2개, culture 1개)의 경계선에 위치. 모두 AI 일러스트만 2장씩 보유하고 KTO 실사진이 0장이어서, 콘텐츠 신뢰도 향상을 위해 KTO 이미지를 추가.
+
+#### 대상 포스트 및 추가 이미지
+
+| 포스트 | 타입 | Before | After | 추가 이미지 |
+|--------|------|--------|-------|------------|
+| 직장인 템플스테이 (2026-02-07-1) | travel | 2 (AI×2) | **5** | 묘각사, 마곡사 천연송림, 전등사 (KTO×3) |
+| 제주 오름 지질학 (2026-02-11-368) | travel | 2 (AI×2) | **4** | 성산일출봉, 산방산유채꽃밭 (KTO×2) |
+| 목포 근대역사 산책 (2026-02-11-post) | culture | 2 (AI×2) | **3** | 달성사(목포) (KTO×1) |
+
+#### KTO API 이미지 소싱
+
+3단계 스크립트로 점진적 탐색:
+
+1. `kto-image-boost.mts` — 직접 키워드 검색: 6곳 중 3곳 성공 (묘각사, 성산일출봉, 산방산)
+2. `kto-image-boost-2.mts` — 실패 장소 대체 검색: 마곡사→천연송림욕장(126849), 유달산(606003), 달성사(299979), 전등사(125534)
+3. `kto-image-boost-3.mts` — 최종 다운로드: 5장 추가 다운로드
+
+**시각 검증**: Chrome MCP로 각 이미지를 열어 본문 맥락과 일치 확인. 유달산 이미지(상가 거리 사진)는 부적합하여 삭제.
+
+#### 캡션 품질 개선
+
+3개 포스트의 기존 AI 일러스트 캡션 "AI 생성 ~" → 맥락 연결 내러티브 캡션으로 교체:
+
+| 포스트 | Before | After |
+|--------|--------|-------|
+| 템플스테이 | AI 생성 코스 지도 / AI 생성 비교 가이드 | 강화도 전등사 주변 산책 동선 / 묘각사·전등사·마곡사 한눈 비교 |
+| 제주 오름 | AI 생성 여행 가이드 / AI 생성 오름 분포 지도 | 세 가지 오름 형성 원리 한 장 / 368개 오름 동서 분포 패턴 |
+| 목포 | AI 생성 무드보드 / AI 생성 여행 가이드 | 서산동 언덕에서 내려다본 원도심 / 목포 5미 한눈 정리 |
+
+#### API 쿼터
+
+- 시작: 36/1000 → 완료: 약 55/1000
+- KTO 이미지 다운로드 자체는 API call 아님 (HTTP fetch)
+
+#### 수정 파일
+
+| 파일 | 작업 |
+|------|------|
+| `blog/content/posts/travel/2026-02-07-1.md` | KTO 이미지 3장 삽입 + dataSources 추가 + 캡션 교체 |
+| `blog/content/posts/travel/2026-02-11-368.md` | KTO 이미지 2장 삽입 + dataSources 추가 + 캡션 교체 |
+| `blog/content/posts/culture/2026-02-11-post.md` | KTO 이미지 1장 삽입 + dataSources 추가 + 캡션 교체 |
+| `data/image-registry.json` | KTO 이미지 6건 등록 |
+| `blog/static/images/kto-2026-02-07-1-*.jpg` | 신규 — 묘각사, 마곡사, 전등사 (3장) |
+| `blog/static/images/kto-2026-02-11-368-*.jpg` | 신규(368-3) + 교체(368-4) — 성산일출봉, 산방산 (2장) |
+| `blog/static/images/kto-2026-02-11-post-4.jpg` | 신규 — 달성사 |
+| `blog/static/images/kto-2026-02-11-post-3.jpg` | 삭제 — 유달산 (부적합) |
+| `scripts/kto-image-boost-*.mts` | 신규 — 3단계 이미지 탐색 스크립트 |
+
+---
+
+### 2026-02-11: 을지로 디깅 포스트 이미지 전면 재설계 + 마커 후처리 수정 + 워크플로우 개선
+
+#### 배경
+
+오덕우(niche) 첫 포스트 "을지로 공구골목 디깅" 발행 후, 3가지 품질 이슈 발견:
+1. AI 생성 일러스트가 본문 섹션의 구체적 디테일과 맥락 불일치
+2. 수동 편집 과정에서 `[LINK:map:...]` / `[IMAGE:moodboard:...]` 마커가 미처리된 채 발행
+3. 인라인 이미지 3번(inline-...-3.jpeg)이 생성되지 않아 404 발생
+
+#### Phase 1: 미처리 마커 수정
+
+**문제**: `generator/index.ts`의 마커 처리 파이프라인(`processLinksWithInfo`, `processInlineImages`)은 최초 생성 시에만 실행됨. 수동 편집 후 재생성 없이 발행하면 raw 마커가 그대로 노출.
+
+| 마커 | 위치 | 수정 |
+|------|------|------|
+| `[LINK:map:을지로 노가리골목]` | L122 | → 네이버 지도 URL |
+| `[LINK:map:을지로 철제가구거리]` | L137 | → 네이버 지도 URL |
+| `[IMAGE:moodboard:을지로 골목 감성 무드보드]` | L184 | 제거 (인라인 이미지 3장 존재) |
+
+**근본 원인**: `link-processor.ts`와 `content-parser.ts`의 마커 처리가 `generator/index.ts` 파이프라인에만 연결되어 있고, 수동 편집 → 발행 경로에서는 마커 검증 단계가 없음.
+
+커밋: `0c2bf36`
+
+#### Phase 2: 누락 인라인 이미지 생성
+
+**문제**: `inline-2026-02-11-12-3.jpeg`가 생성되지 않아 본문의 `![을지로 골목의 시간 흔적]` 이미지가 404.
+
+**수정**: 별도 스크립트로 인라인 이미지 생성 → `infographic` 스타일 (1987 맨홀, 간판 글씨체 변화, 전단지 아카이브).
+
+커밋: `74cdde5`
+
+#### Phase 3: AI 일러스트 → 섹션별 맥락 스틸컷 교체
+
+**문제**: 기존 AI 일러스트(`infographic`/`diagram` 스타일)가 범용적이어서 본문의 구체적 디테일과 연결되지 않음.
+
+| 섹션 | Before (일러스트) | After (스틸컷) |
+|------|-------------------|----------------|
+| 1층 노가리골목 | 맥락 없는 "디깅 루트" | 좁은 골목 플라스틱 의자+노가리+맥주, 35mm 필름 톤 |
+| 2층 철제가구거리 | 맥락 없는 "공정 디테일" | 용접 자국 클로즈업+도면+철가루 빛 반사 |
+| 4층 시간 흔적 | 맥락 없는 "시간 다이어리" | 맨홀 뚜껑 "1987" 조감+갈라진 아스팔트 |
+
+**스틸컷 프롬프트 설계 원칙**:
+- 본문의 "발견한 디테일" 항목에서 구체적 피사체 추출
+- `cover_photo` 스타일 사용 (포토리얼리즘 강제)
+- 35mm 필름 그레인, 다큐멘터리 색감, 얕은 심도
+- 섹션의 핵심 "한 장면"을 스틸컷처럼 포착
+
+**캡션 개선**: "AI 생성 여정 일러스트" → 맥락 연결 내러티브로 변경
+- *노가리골목의 밤 — 플라스틱 의자 사이로 흐르는 을지로의 리듬*
+- *철제가구거리의 시간 — 장인의 손끝에서 태어나는 1mm의 정밀함*
+- *1987년이 새겨진 맨홀 — 을지로 골목 바닥에 잠든 시간의 지층*
+
+커밋: `2acb4fa`
+
+#### Phase 4: 도입부/마감부 일러스트 추가
+
+**설계 판단**: 본문 섹션은 스틸컷(사실적, 맥락 연결)이 적합하지만, 도입부/마감부는 일러스트(구조 시각화, 감성 요약)가 역할에 맞음.
+
+| 위치 | 스타일 | 컨셉 |
+|------|--------|------|
+| 도입부 (타이틀 직후) | `diagram` (보물지도) | 을지로 4-Layer 단면도: 표면→단골→인사이더→덕질 |
+| 마감부 (디깅 메모 직후) | `bucketlist` (체크리스트) | 오덕우의 을지로 디깅 체크리스트: BEGINNER→MASTER |
+
+커밋: `bc85a93`
+
+#### 최종 이미지 레이아웃 (7장)
+
+| # | 위치 | 타입 | 역할 |
+|---|------|------|------|
+| 0 | 커버 | AI 포토+관인 | 오덕우 틸 관인 + 을지로 골목 |
+| 4 | 도입부 | **일러스트** | 4-Layer 보물지도 단면도 |
+| K1 | 1층 노가리 | KTO 실사 | 한국관광공사 제공 |
+| 1 | 1층 노가리 | **스틸컷** | 노가리+맥주 다큐 풍경 |
+| 2 | 2층 철제 | **스틸컷** | 용접 작업장 클로즈업 |
+| K2 | 3층 지하상가 | KTO 실사 | 한국관광공사 제공 |
+| 3 | 4층 시간 | **스틸컷** | 맨홀 "1987" 조감 |
+| 5 | 마감부 | **일러스트** | 디깅 체크리스트 게이미피케이션 |
+
+#### 도출된 워크플로우 개선사항
+
+**개선 1: 이미지 역할 분리 원칙 (Image Role Separation)**
+
+| 영역 | 적합 타입 | 이유 |
+|------|-----------|------|
+| 커버 | AI 포토리얼리스틱 + 관인 | 첫인상, 브랜딩 |
+| 도입/마감 | 일러스트 (diagram/bucketlist/moodboard) | 구조 시각화, 감성 요약 |
+| 본문 섹션 | 스틸컷 (cover_photo 스타일) 또는 KTO 실사 | 맥락 연결, 디테일 증거 |
+
+→ CLAUDE.md 이미지 생성 원칙에 추가
+
+**개선 2: 스틸컷 프롬프트 설계 프로토콜**
+
+본문 "발견한 디테일" → 피사체 추출 → 다큐멘터리 스틸컷 프롬프트:
+- `cover_photo` 스타일 (포토리얼리즘 강제)
+- 구체적 피사체 + 분위기 + 촬영 스타일 3파트 구조
+- 35mm 필름 그레인, 얕은 심도, 자연광
+
+**개선 3: 마커 잔존 검증 — publish 전 필수**
+
+수동 편집 후에도 `[LINK:` / `[IMAGE:` 패턴이 남아있으면 발행 차단.
+→ Layer 3 체크리스트에 추가, pre-commit-check.mts에 검증 규칙 추가 권장
+
+**개선 4: 이미지 파일 존재 검증 — publish 전 필수**
+
+본문의 `![](path)` 경로가 실제 `blog/static/images/`에 대응 파일이 있는지 확인.
+→ Layer 3 체크리스트에 추가
+
+**개선 5: 캡션 가이드라인**
+
+| Before | After |
+|--------|-------|
+| "AI 생성 여정 일러스트" (기계적) | 맥락 연결 내러티브 (본문 디테일 요약) |
+| 모든 AI 이미지에 동일 패턴 | 이미지가 전달하는 메시지를 em dash(—)로 연결 |
+
+#### 수정 파일 요약
+
+| 파일 | 작업 |
+|------|------|
+| `blog/content/posts/travel/2026-02-11-12.md` | 마커 수정 + 스틸컷 3장 교체 + 도입/마감 일러스트 2장 추가 + 캡션 변경 |
+| `drafts/2026-02-11-12.md` | 동일 |
+| `blog/static/images/inline-...-{1,2,3}.jpeg` | 스틸컷으로 교체 (기존 파일 덮어씀) |
+| `blog/static/images/inline-...-{4,5}.jpeg` | 도입/마감 일러스트 신규 |
+| `scripts/gen-stillcut-images.mts` | 스틸컷 생성 스크립트 (재사용 가능) |
+| `scripts/gen-illust-intro-outro.mts` | 도입/마감 일러스트 생성 스크립트 |
+| `CLAUDE.md` | 이미지 역할 분리 원칙 + Layer 3 체크리스트 강화 |
+
+**Gemini 이미지 쿼터**: 45 → 50/50 (5장 생성: 스틸컷 3 + 일러스트 2)
+
+---
+
+### 2026-02-11: 스틸컷 프롬프트 프로토콜 범용화 (페르소나×타입 매트릭스)
+
+#### 배경
+
+이전 세션에서 수립한 스틸컷 프롬프트 프로토콜이 오덕우(niche) 전용으로 작성됨:
+- "발견한 디테일" 추출 → 오덕우의 미시적 관찰 관점에 한정
+- 35mm 필름 그레인, 다큐멘터리 색감 → 오덕우의 인디 스트릿 촬영 스타일에 한정
+- 다른 3인 에이전트(조회영/김주말/한교양)에게 적용 시 톤 불일치 발생
+
+#### 변경 내용
+
+**1. 페르소나별 피사체 추출 전략 분화**
+
+| 페르소나 | 추출 대상 | 예시 |
+|---------|----------|------|
+| 조회영 (viral) | 화제성·임팩트 장면 | 줄 선 맛집, 야경 뷰포인트, 비교 대상 |
+| 김주말 (friendly) | 체험 현장 | 테이블 위 음식, 산책로, 체크인 장면 |
+| 한교양 (informative) | 구조·디테일 | 기둥 양식, 단청 패턴, 전시실 전경 |
+| 오덕우 (niche) | 발견한 디테일 | 맨홀 각인, 간판 글씨체, 바닥 타일 |
+
+**2. 촬영 스타일 — `cover-styles.ts` AGENT_VISUAL_IDENTITIES와 1:1 매핑**
+
+| 페르소나 | 촬영 스타일 | 구도 | 색감 |
+|---------|-----------|------|------|
+| 조회영 | 에디토리얼 매거진 | 대각선, 히어로 프레이밍 | 고대비, 강한 채도 |
+| 김주말 | 라이프스타일 | 눈높이, 중심 배치 | 웜톤, 골든 하이라이트 |
+| 한교양 | 건축 사진 | 대칭, 삼분할 | 균형 노출, 쿨 섀도 |
+| 오덕우 | 인디 스트릿 | 타이트 클로즈업, 비중심 | 뮤트 톤, 필름 에뮬레이션 |
+
+**3. 포스트 타입별 ATMOSPHERE 분리**
+- travel: 현장감, 공간의 공기, 계절감, 빛의 변화
+- culture: 고요함, 집중, 지적 호기심, 전시장 조명
+
+**4. 캡션 톤 페르소나별 분화**
+- 조회영: 짧고 강렬 — *한옥마을 야경 — 이 뷰, 리얼임*
+- 김주말: 솔직 체험 — *시장통 점심 — 8,000원에 이 정도면 인정*
+- 한교양: 해설적 — *종묘 어칸 구조 — 19칸 연속 배치의 건축적 의미*
+- 오덕우: 발견 서사 — *철제가구거리의 시간 — 장인의 손끝에서 1mm의 정밀함*
+
+#### 수정 파일
+
+| 파일 | 작업 |
+|------|------|
+| `CLAUDE.md` | 스틸컷 프로토콜 전면 교체 (단일→4인 매트릭스), 캡션 가이드라인 확장 |
+| `MEMORY.md` | 페르소나별 스틸컷 분화 요약 추가 |
+
+#### 설계 판단
+
+커버 이미지 시스템(`cover-styles.ts`)과 인라인 스틸컷 프로토콜(`CLAUDE.md`)이 동일한 비주얼 아이덴티티 소스를 공유하게 됨. 에이전트별 시각적 일관성이 커버 → 본문 스틸컷 → 캡션까지 관통하는 구조.
+
+---
+
+### 2026-02-11: 커버 이미지 시스템 복원 + 프롬프트 충돌 수정 + 7포스트 커버 재생성
+
+#### 배경
+
+이전 세션에서 삭제된 cover-styles.ts / cover-overlay.ts / reference-analyzer.ts를 dist/ 컴파일 JS에서 복원. 이후 커버 이미지 품질 평가 → 7포스트 재생성.
+
+#### Phase 1: 파일 복원 (dist/ → src/)
+
+| 파일 | 줄수 | 복원 방법 |
+|------|------|-----------|
+| `src/images/cover-styles.ts` | 285 | dist/images/cover-styles.js → TS 재구성 |
+| `src/images/cover-overlay.ts` | 147 | dist/images/cover-overlay.js → TS 재구성 |
+| `src/images/reference-analyzer.ts` | 153 | dist/images/reference-analyzer.js → TS 재구성 |
+
+#### Phase 2: contentHints 시스템 추가 (피사체 정확도 개선)
+
+**문제**: "발렌타인 데이트 국내 여행지 TOP 5" 커버에 남산타워 생성 — 포스트 본문에는 부산/광안리/양양/고령만 포함, 남산 없음.
+**원인**: `getCoverPhotoPrompt()`가 제목만 사용하고 본문 내용을 프롬프트에 반영하지 않음.
+
+**수정**:
+- `cover-styles.ts`: `getSubjectDirection()`에 `contentHints?: string[]` 파라미터 추가
+- `refresh-covers.mts`: `readPostMeta()`에서 `## 헤딩` 파싱 → `contentHints` 배열로 전달
+- 프롬프트에 "ACTUAL CONTENT of this post covers these specific places/topics" 블록 주입
+
+#### Phase 3: 프롬프트 충돌 수정 (하단 흰색/텍스트 문제)
+
+**문제**: 제주 오름 커버 하단 ~15% 흰색 바, 목포 근대역사 커버 하단 ~40% 흰색 + AI 생성 텍스트 캡션.
+**근본 원인**: `gemini-imagen.ts`의 `cover_photo` 스타일과 `cover-styles.ts`의 3-Layer 프롬프트가 충돌.
+
+| 충돌 지점 | 기존 (문제) | 수정 후 |
+|-----------|------------|---------|
+| `gemini-imagen.ts` cover_photo | "leave bottom area clean for text overlay" | "Fill ENTIRE frame edge-to-edge" |
+| `gemini-imagen.ts` 공통 CRITICAL | "All Korean text READABLE" + "Vector-style" → 텍스트/벡터 지시가 사진에 적용 | `cover_photo`일 때 공통 CRITICAL 스킵 |
+| `cover-styles.ts` CRITICAL | "Use full frame" (약한 표현) | "NO white space at bottom" + "zero text of any kind" 강화 |
+
+#### Phase 4: 7포스트 커버 재생성 결과
+
+| 포스트 | 에이전트 | Before | After | 핵심 개선 |
+|--------|---------|--------|-------|-----------|
+| 발렌타인 TOP 5 | 김주말 | 1/9 (남산타워) | 8/9 | 광안리 드론쇼+광안대교 (본문 반영) |
+| 제주 오름의 지질학 | 한교양 | 2/9 → 6/9 (흰색바) | **8/9** | 오름+돌담 프레임 꽉 채움 |
+| 목포 근대역사 산책 | 한교양 | 1/9 → 3/9 (텍스트) | **9/9** | 근대 벽돌 골목+유달산 원경, 텍스트 0 |
+| 부산의 결 (산복도로) | 한교양 | 2/9 | 8/9 | 산복도로 계단+항구 뷰 |
+| 겨울 강릉 여행 | 한교양 | 1/9 | 7/9 | 눈 덮인 석주+겨울 산안개 |
+| 부산 맥락 (문화공간) | 한교양 | 2/9 | 8/9 | 산업유산 문화공간+조각 설치 |
+
+**평균 점수**: Before 1.6/9 → After **8.0/9** (+400%)
+**Gemini 사용량**: 34 → 41/50 (일일 한도 내)
+
+#### 수정 파일 요약
+
+| 파일 | 작업 |
+|------|------|
+| `src/images/cover-styles.ts` | 복원 + contentHints + CRITICAL 강화 |
+| `src/images/cover-overlay.ts` | 복원 (관인 오버레이) |
+| `src/images/reference-analyzer.ts` | 복원 + 타입 호환성 수정 |
+| `src/images/gemini-imagen.ts` | cover_photo 프롬프트 충돌 해소 |
+| `scripts/refresh-covers.mts` | contentHints 파싱 + overlay-only 모드 |
+
+---
+
+### 2026-02-11: 이미지 오케스트레이터 통합 + 미사용 코드 제거 + 파이프라인 단순화
+
+#### 배경
+
+이미지 처리 로직이 `new.ts`(78줄)와 `generator/index.ts`(175줄)에 산재하고, 미사용 모듈 3개(495줄)가 방치된 상태. 파이프라인도 DAG/sequential 이중 경로가 병존하여 불필요한 복잡도 존재.
+
+#### Phase 1: 이미지 오케스트레이터 생성
+
+`src/images/image-orchestrator.ts` (373줄) 신규 생성 — 산재한 이미지 로직을 단일 진입점으로 통합.
+
+| 추출 원본 | 함수 | 역할 |
+|-----------|------|------|
+| `new.ts:164~242` | `selectCoverImage()` | KTO→Unsplash 커버 폴백 |
+| `generator/index.ts:288~409` | `processInlineImages()` | KTO+AI 하이브리드 인라인 |
+| `generator/index.ts:240~268` | `extractContentContext()` | 헤딩/장소명 추출 |
+| `generator/index.ts:414~476` | `insertKtoImages()` | H2/H3 뒤 실사진 삽입 |
+
+#### Phase 2: 호출부 간소화
+
+- **`new.ts`**: 6개 직접 import → `selectCoverImage` 1개로 교체, 78줄 인라인 로직 → ~30줄
+- **`generator/index.ts`**: `processInlineImages` + 3개 헬퍼 함수 제거 (총 ~175줄), 오케스트레이터 호출로 교체
+- 미사용 import 정리: `format`(date-fns), `generateStream`(gemini.js) 등
+
+#### Phase 3: 미사용 모듈 삭제 (총 495줄)
+
+| 파일 | 줄수 | 삭제 근거 |
+|------|------|-----------|
+| `cover-overlay.ts` | 149 | 외부 import 0건 (페르소나 도장 오버레이, 미통합) |
+| `cover-styles.ts` | 189 | cover-overlay + reference-analyzer에서만 사용 |
+| `reference-analyzer.ts` | 157 | unsplash.ts 스코어링 개선으로 대체됨 |
+
+#### Phase 4: 파이프라인 단순화
+
+- `pipeline.ts`: `runSequential()` (~75줄), `runStage()` (~45줄), `getStageResult()` (~5줄) 제거
+- `parallel?: boolean` 옵션 제거 → DAG 모드만 사용
+- CLI `--parallel`/`--no-parallel` 옵션 제거
+
+#### Phase 5: CLAUDE.md 재정리
+
+- "Image System (3-Source Hybrid)" (~106줄) → "이미지 생성 원칙" (~30줄) + "이미지 시스템 상세" (~40줄)로 분리
+- "Premium Content Workflow" (~250줄) → "포스트 관리 레이어" 4계층 구조로 재편
+  - Layer 1: Discovery / Layer 2: Generation / Layer 3: Validation / Layer 4: Publish+Feedback
+- Architecture 섹션에 오케스트레이터 반영
+
+#### 수정 파일 요약
+
+| 파일 | 작업 | 줄수 변화 |
+|------|------|-----------|
+| `src/images/image-orchestrator.ts` | **신규** | +373 |
+| `src/cli/commands/new.ts` | 간소화 | -68 |
+| `src/generator/index.ts` | 간소화 | -175 |
+| `src/workflow/pipeline.ts` | sequential 제거 | -125 |
+| `src/cli/commands/pipeline.ts` | --parallel 옵션 제거 | -5 |
+| `src/images/cover-overlay.ts` | **삭제** | -149 |
+| `src/images/cover-styles.ts` | **삭제** | -189 |
+| `src/images/reference-analyzer.ts` | **삭제** | -157 |
+| `CLAUDE.md` | 이미지 원칙 + 레이어 구조 | -200 (압축) |
+
+**순 변화**: 약 -500줄 (미사용 코드 제거 + 산재 로직 통합)
+
+#### 검증
+
+빌드 4회 통과 (Phase 1~4 각 단계 후). 최종 워크플로우 검증:
+
+| 포스트 | 워크플로우 | 평균 점수 | 상태 |
+|--------|-----------|----------|------|
+| 제주 오름의 지질학 (travel) | `workflow full --apply` | 65% | ✅ 발행 가능 |
+| 목포 근대역사 산책 (culture) | `workflow full --apply` | 62% | ⚠️ 검토 필요 (factcheck 60%) |
+
+- 두 포스트 모두 이미지 검증 80% 통과 (인라인 2개 확인)
+- 오케스트레이터 통합 및 DAG-only 전환 후 기존 워크플로우 정상 동작 확인
+
+---
+
+### 2026-02-10: 2편 추가 발행 — 강릉 겨울 인문학 + 부산 골목 여행
+
+#### 파이프라인 실행 (DAG 모드)
+
+`npm run pipeline -- all --verbose`로 Discovery→EventBus 통합 검증 겸 콘텐츠 생산.
+
+| Stage | Duration | 결과 |
+|-------|----------|------|
+| discover | 241s | 12 topics (9 trending + 5 gaps), balance: informative +19 부스트 |
+| monitor | 241s | 100 posts, avg 910.8 upvotes |
+| select | 1ms | 2 topics selected |
+| generate | 258s | 2 posts (한교양/informative) |
+| validate | 0ms | (draft mode) |
+| publish | 0ms | (draft mode) |
+
+#### 발행 포스트
+
+| 포스트 | 에이전트 | 프레이밍 | 팩트체크 | AEO |
+|--------|---------|---------|---------|-----|
+| 겨울 강릉 여행, 인문학적 시선으로 바라본 동해의 깊은 정취 | 한교양 | seasonal | 100% (6/6) | FAQ 5 + Schema 3 |
+| 부산의 결을 읽다: 산복도로의 애환과 동래의 전통이 깃든 골목 여행 | 한교양 | local_story | 84% (3건 수정) | FAQ 5 + Schema 3 |
+
+#### 팩트체크 수정 내역 — 부산 포스트
+
+| 원본 (AI 생성) | 수정값 (검증) | 검증 소스 |
+|---------------|-------------|----------|
+| 왔다식당 주소: 남항서로 97 | **하나길 811** (청학동 386-197) | diningcode.com |
+| 초량밀면 가격: 6,000원 | **6,500원** | triple.guide |
+| 스지전골 가격: 12,000원 | **14,000원** | diningcode.com |
+
+#### 추가 수정
+
+- 커버 이미지 경로 누락: `/images/` → `/travel-blog/images/` (두 포스트 모두)
+- Post 2 frontmatter 손상 복구: AEO 도구가 `relative: false hidden: false`를 caption에 병합 → 원래 구조로 복원
+
+#### 배포
+
+- blog repo: `git commit + push` → GitHub Actions 빌드
+- 커밋: `9db884e` (10 files: 2 posts + 2 covers + 6 inline images)
+
+---
+
+### 2026-02-10: Discovery 파이프라인 → EventBus/DAG 유기적 통합
+
+#### 배경
+
+Phase 1-5 워크플로우 아키텍처(EventBus, QualityMesh, DAG)는 구현 완료되었으나,
+**주제 발굴(Discovery) 파이프라인이 이벤트 레이어에 연결되지 않은 상태**였음.
+
+- `TopicDiscovery` 6개 내부 단계가 console.log만 사용 → EventBus 이벤트 0개
+- `ContentBalancer` 분석/부스트 계산이 외부에 보이지 않음
+- `queue discover` CLI와 `pipeline discover` DAG가 별도 경로
+- 발굴 → 생성 → 검증 → 발행 → 피드백 → 발굴 순환 루프 끊김
+
+#### 변경 사항
+
+**Phase 1: EventBus에 Discovery 이벤트 8개 추가** (`src/workflow/event-bus.ts`)
+- `discovery:phase-start`, `trending-complete`, `gap-complete`, `recommendations`
+- `balance-applied`, `enhanced-phase`, `queue-populated`, `complete`
+- WorkflowEvents 인터페이스 append-only 확장
+
+**Phase 2: TopicDiscovery에 EventBus 주입** (`src/agents/moltbook/topic-discovery.ts`)
+- 생성자에 optional `eventBus` 파라미터 추가
+- `discover()`: 트렌딩/갭/추천/밸런스 각 단계에서 이벤트 emit
+- `discoverEnhanced()`: OpenClaw 스캔, Vote 스캔, 완료 이벤트 emit
+- 미전달 시 기존과 100% 동일 동작 (optional chaining)
+
+**Phase 3: Pipeline stageDiscover에서 EventBus 전달** (`src/workflow/pipeline.ts`)
+- `stageDiscover()`에서 `getEventBus()` → `TopicDiscovery` 생성자로 전달
+- `discovery:phase-start` / `discovery:complete` 이벤트 발행
+
+**Phase 4: Queue CLI를 EventBus에 연결** (`src/cli/commands/queue.ts`)
+- `queue discover` 핸들러에서 EventBus → TopicDiscovery 전달
+- autoPopulateQueue 후 `discovery:queue-populated` 이벤트 발행
+- 시작/종료 시 `phase-start` / `complete` 이벤트 발행
+
+**Phase 5: Scheduler 피드백 루프 완성** (`src/workflow/scheduler.ts`)
+- `discovery:complete` 구독 → 발굴 결과 로깅
+- `discovery:queue-populated` 구독 → 큐 크기 로깅 + 생성 힌트
+- `feedback:strategy-updated` 확장 → 발굴 재실행 힌트 추가
+
+**Phase 6: ContentBalancer 이벤트 발행** (`src/agents/moltbook/content-balancer.ts`)
+- 생성자에 optional `eventBus` 파라미터 추가
+- TopicDiscovery가 ContentBalancer 생성 시 자신의 eventBus 전달
+
+#### 수정 파일
+
+| 파일 | 변경 | 위험도 |
+|------|------|--------|
+| `src/workflow/event-bus.ts` | discovery 이벤트 8개 추가 | GREEN |
+| `src/agents/moltbook/topic-discovery.ts` | EventBus optional + emit 7곳 | GREEN |
+| `src/agents/moltbook/content-balancer.ts` | EventBus optional 파라미터 | GREEN |
+| `src/workflow/pipeline.ts` | stageDiscover에 EventBus 전달 | GREEN |
+| `src/cli/commands/queue.ts` | EventBus 연결 + queue-populated emit | GREEN |
+| `src/workflow/scheduler.ts` | discovery 이벤트 구독 2개 + 기존 확장 | GREEN |
+
+#### 결과
+
+유기적 순환 흐름 완성:
+```
+발굴 → 큐 편성 → 생성 → 검증 → 발행 → 피드백 수집 → 전략 갱신 → 발굴 (순환)
+  ↑                                                              ↓
+  └──────── discovery:queue-populated ←── feedback:strategy-updated
+```
+
+- `npm run pipeline all --verbose`와 `npm run queue discover` 모두 동일한 EventBus로 이벤트 발행
+- 스케줄러가 발굴/큐 편성 이벤트를 구독하여 피드백 루프 연결
+- 모든 변경이 append-only / optional parameter → 기존 동작 100% 유지
+
+---
+
+### 2026-02-10: 2월 10일 포스트 2편 발행 + 파이프라인 품질 분석
+
+#### 콘텐츠 생산
+
+**생성 포스트:**
+- Travel: "강릉 겨울에 오히려 좋은 이유" (김주말/friendly) — `--auto-collect --inline-images`
+- Travel: "부산 감천사에서 F1963까지" (한교양/informative) — `--auto-collect --inline-images`
+
+**Phase B 실행:**
+| 단계 | 강릉 | 부산 |
+|------|------|------|
+| Generate | `--auto-collect --inline-images -y` ✅ | 동일 ✅ |
+| Factcheck (Claude native) | 90% → 100% ✅ | 57% BLOCKED → 100% ✅ |
+| AEO | FAQ 5 + Schema 3 ✅ | 동일 ✅ |
+| Publish | `--skip-validation` ✅ | 동일 ✅ |
+
+#### AI 날조(Hallucination) 수정 — 부산 포스트
+
+**문제:** Gemini가 존재하지 않는 장소/전시를 생성함
+| 날조된 정보 | 실제 대체 | 검증 방법 |
+|-------------|----------|-----------|
+| "갤러리이알디" (Gallery IARD) | F1963 (부산 수영구 구락로123번길 20) | WebSearch: 존재하지 않는 갤러리 |
+| "예술의전당 부산 전시" | F1963 국제갤러리 + 부산현대미술관 | WebSearch: 부산에 예술의전당 없음 |
+
+- 제목 변경: `감천사에서 갤러리이알디까지` → `감천사에서 F1963까지`
+- 섹션 2 전체 재작성 (F1963 실제 정보 기반)
+- keywords, frontmatter 전부 갱신
+- 수정 후 factcheck 재실행: 5/5 verified, 100%
+
+**특이사항:** KTO API에는 "갤러리이알디 부산"이 contentId로 존재하나, 실제 웹검색에서 확인 불가 → API 데이터도 100% 신뢰 불가
+
+#### 이미지 slug 충돌 수정
+
+**문제:** 같은 날짜 포스트 2편이 동일 slug(`2026-02-10-post`)로 생성 → 이미지 파일명 충돌
+- `kto-2026-02-10-post-1.jpg` — 강릉용으로 생성 후 부산이 덮어씀
+- `inline-2026-02-10-post-1.jpeg` — AI 이미지도 동일 현상
+
+**수정:**
+| 파일 | Before (공유) | After (고유) |
+|------|--------------|-------------|
+| KTO 커버 | `kto-2026-02-10-post-{1,2}.jpg` | `kto-2026-02-10-gangneung-{1,2}.jpg` / `kto-2026-02-10-busan-{1,2}.jpg` |
+| AI 인라인 | `inline-2026-02-10-post-1.jpeg` | `inline-2026-02-10-gangneung-1.jpeg` / `inline-2026-02-10-busan-1.jpeg` |
+
+- KTO 이미지: 수집 데이터에서 포스트별 관련 사진 재다운로드
+- AI 인라인: `scripts/gen-inline-images-0210.mts` 스크립트로 포스트별 고유 생성
+- `tsx -e` 인라인 스크립트가 ESM import 시 무출력 → `.mts` 파일로 우회
+
+#### 2월 9일 성수동 포스트 KTO 실사진 보강
+
+**문제:** 2월 9일 성수동 포스트 2편에 AI 일러스트만 있고 KTO 실사진이 없음 (이전 세션에서 다운로드만 하고 삽입 안 됨)
+
+**수정:**
+| 포스트 | 추가된 KTO 이미지 |
+|--------|------------------|
+| 성수동은 왜 떴나 (김주말) | 성수동 거리 + 국립현대미술관 전경 (2장) |
+| 문화 핫플 TOP 5 (조회영) | 문래동 + 서촌 + 을지로 + 신당동 (4장) |
+
+- 총 6개 KTO 실사진 삽입 + `*출처: 한국관광공사*` 캡션
+- `dataSources: ["한국관광공사"]` frontmatter 추가
+
+**커밋:**
+- `e0645e0` feat: 강릉 겨울 여행 + 부산 F1963 포스트 발행
+- `2a91422` fix: 인라인 이미지 slug 충돌 수정 — 포스트별 고유 파일명 적용
+- `8a59abb` fix: 포스트별 고유 AI 인라인 이미지 생성 및 적용
+- `a1e54ef` feat: 2월 9일 성수동 포스트 2편에 KTO 실사진 인라인 이미지 추가
+
+---
+
+### 2026-02-10: 파이프라인 품질 갭 분석 — 왜 수동 수정이 반복되는가
+
+2월 9일, 2월 10일 포스트 발행 과정에서 **매번 동일한 유형의 수동 수정이 반복**됨. 근본 원인을 분석한다.
+
+#### 반복된 수동 수정 패턴
+
+| # | 문제 유형 | 2/9 발생 | 2/10 발생 | 파이프라인 단계 |
+|---|----------|----------|-----------|----------------|
+| 1 | AI 날조 (존재하지 않는 장소/전시) | 미검증 클레임 수동 수정 | 갤러리이알디, 예술의전당 부산 | Generate → Factcheck 사이 |
+| 2 | 이미지-본문 맥락 불일치 | 4장 교체 (경주·전주·제주도) | — | Generate (이미지 프롬프트) |
+| 3 | 이미지 slug 충돌/공유 | — | 같은 날짜 2포스트 이미지 덮어씀 | Generate (slug 생성) |
+| 4 | KTO 실사진 미삽입 | — | 다운로드만 하고 본문 삽입 누락 | Generate → Publish 사이 |
+| 5 | 페르소나 불일치 | 김주말→조회영/한교양 수동 수정 | — | Generate (프롬프트) |
+| 6 | 이미지 경로 prefix 누락 | `/images/` → `/travel-blog/images/` | — | Generate (frontmatter) |
+| 7 | factcheckScore 미설정 | 수동 추가 | 수동 추가 | Publish 전 |
+| 8 | enhance 후 이미지 마크다운 삭제 | 수동 재삽입 | — | Enhance |
+
+#### 근본 원인 분석
+
+**원인 1: 사후 검증만 존재, 사전 예방 없음**
+
+현재 파이프라인: `Generate → (수동) Factcheck → (수동) Validate → (수동) Publish`
+
+- Factcheck는 **파일 생성 후** 별도 단계로 실행
+- 생성 시점에 collected data와 교차 검증하는 로직이 없음
+- AI가 수집 데이터에 없는 장소를 자유롭게 생성 가능
+
+**기대**: Generate 단계 자체가 hallucination을 방지해야 함
+**현실**: Generate가 자유 생성 → Factcheck가 사후 적발 → 수동 수정
+
+**원인 2: 이미지 파이프라인에 고유성 보장 없음**
+
+- slug 생성 (`generateSlug`)이 날짜 + 제목 기반이라 같은 날 유사 제목 = 충돌
+- 이미지 파일명이 slug에 종속되어 있어 slug 충돌 = 이미지 덮어씀
+- KTO 이미지 다운로드 → 본문 삽입이 분리되어 있어 삽입 누락 가능
+- cross-post 이미지 중복 체크 없음
+
+**원인 3: 워크플로우 단계가 독립적이고 수동 실행**
+
+Premium Workflow가 8단계로 정의되어 있지만:
+- 각 단계가 별도 CLI 명령 (`npm run new`, `npm run enhance`, `npm run factcheck`, ...)
+- 단계 간 데이터 흐름이 끊김 (e.g. collected data → generate 연결, factcheck → auto-fix 연결)
+- 사람이 직접 순서대로 실행해야 하므로 단계 누락 발생
+- `npm run workflow full`이 존재하나 모든 케이스를 커버하지 못함
+
+**원인 4: 품질 기대치와 자동화 수준의 괴리**
+
+| 기대 | 현실 |
+|------|------|
+| 초안이 80% 이상 완성도 | 초안이 50-60% (날조, 이미지 불일치 포함) |
+| factcheck가 생성 중 차단 | factcheck가 생성 후 별도 실행 |
+| 이미지가 본문 맥락과 정합 | 이미지 프롬프트에 본문 내용 미반영 |
+| 같은 날 복수 포스트 독립 | slug 충돌로 이미지 공유/덮어씀 |
+| enhance가 품질만 높임 | enhance가 이미지 삭제, 새 날조 도입 가능 |
+
+#### 개선 방향: 초안 품질 80%+ / 최종본 95%+ 달성 로드맵
+
+##### Phase 1: Generate 단계 강화 (초안 품질 → 80%)
+
+**1-A. 프롬프트에 collected data 제약 주입**
+```
+현재: "부산 여행 포스트를 작성해주세요" + context
+개선: "아래 수집된 장소만 사용하세요. 수집 데이터에 없는 장소/전시를
+       절대 만들지 마세요." + collectedData JSON 원본 주입
+```
+- `generator/prompts.ts`에 collected data 기반 장소 허용 목록(allowlist) 삽입
+- 프롬프트에 "허용 목록 외 장소 언급 시 [미확인] 태그 부착" 지시
+
+**1-B. slug에 고유 식별자 추가**
+```
+현재: 2026-02-10-post (날짜+제목)
+개선: 2026-02-10-gangneung-1707123456 (날짜+키워드+timestamp)
+```
+- `frontmatter.ts`의 `generateSlug()`에 timestamp suffix 또는 기존 파일 검사 추가
+- 이미지 파일명도 slug 기반이므로 자동으로 고유해짐
+
+**1-C. KTO 이미지 자동 삽입**
+- `processInlineImages()`에서 KTO 다운로드 → 즉시 본문 삽입 (현재 분리됨)
+- 삽입 위치: 관련 H2/H3 섹션 직후 자동 배치
+- `*출처: 한국관광공사*` 캡션 자동 추가
+
+**1-D. 이미지 프롬프트에 본문 섹션 요약 주입**
+```
+현재: 제목만으로 이미지 생성 ("부산 여행 가이드 인포그래픽")
+개선: 본문 각 섹션의 핵심 장소/키워드를 이미지 프롬프트에 포함
+      ("감천사 등산길 → F1963 갤러리 → 광복로 트리축제 코스 가이드")
+```
+
+##### Phase 2: Validate 단계 자동화 (최종본 → 95%)
+
+**2-A. 생성 직후 자동 factcheck (blocking)**
+```
+현재: npm run new → (수동) npm run factcheck
+개선: npm run new 내부에서 generate → factcheck → 70% 미만이면 재생성/경고
+```
+- `new.ts`에 factcheck 자동 호출 옵션 (`--auto-factcheck`)
+- 70% 미만: 날조 의심 클레임 목록 출력 + 재생성 또는 중단 선택
+
+**2-B. enhance 후 자동 재검증**
+```
+현재: enhance → (끝)
+개선: enhance → diff 추출 → 새로 추가된 클레임만 factcheck → 날조 시 rollback
+```
+
+**2-C. 발행 전 통합 게이트 (`npm run publish` 강화)**
+```
+✅ factcheckScore ≥ 70
+✅ 인라인 이미지 ≥ 2 (travel) / ≥ 1 (culture)
+✅ 이미지 경로 /travel-blog/ prefix 확인
+✅ author-personaId 일관성 확인
+✅ KTO 이미지 출처 표기 확인 (dataSources)
+✅ slug 고유성 확인 (기존 포스트와 충돌 없음)
+```
+
+##### Phase 3: 피드백 루프 자동화 (지속적 개선)
+
+**3-A. 반복 수정 패턴 자동 감지**
+- WORKLOG에서 반복되는 수동 수정 패턴을 추적
+- 3회 이상 반복되면 파이프라인 자동화 대상으로 플래그
+
+**3-B. 포스트별 품질 대시보드**
+```json
+{
+  "slug": "2026-02-10-busan",
+  "initialFactcheck": 57,
+  "finalFactcheck": 100,
+  "manualFixes": ["hallucination", "image-slug", "image-missing"],
+  "autoFixable": true
+}
+```
+
+#### 구현 우선순위
+
+| 우선순위 | 항목 | 영향 | 난이도 | 예상 효과 |
+|---------|------|------|--------|----------|
+| **P0** | slug 고유성 (1-B) | 데이터 손실 방지 | 낮음 | 이미지 충돌 100% 차단 |
+| **P0** | 프롬프트 allowlist (1-A) | 날조 80% 감소 | 중간 | 초안 factcheck 70%+ 보장 |
+| **P1** | KTO 이미지 자동 삽입 (1-C) | 수동 삽입 제거 | 중간 | KTO 보강 자동화 |
+| **P1** | 이미지 본문 맥락 주입 (1-D) | 이미지 교체 제거 | 중간 | 이미지 정합성 90%+ |
+| **P1** | 생성 후 자동 factcheck (2-A) | 수동 factcheck 제거 | 중간 | 발행 전 차단 자동화 |
+| **P2** | enhance 재검증 (2-B) | enhance 날조 방지 | 높음 | enhance 안전성 보장 |
+| **P2** | 통합 publish 게이트 (2-C) | 누락 방지 | 중간 | 발행 전 최종 점검 |
+| **P3** | 반복 패턴 감지 (3-A) | 장기 개선 | 높음 | 파이프라인 자가 진화 |
+
+#### P0-P2 구현 완료
+
+**P0-A: slug 충돌 방지** ✅
+- `generateSlug(title, outputDir?)` — outputDir 지정 시 `existsSync` 루프로 카운터 부여
+- 수정 파일: `frontmatter.ts`, `generator/index.ts`, `cli/commands/edit.ts` (2곳)
+- 효과: 같은 날 동일 slug 포스트 생성 시 `-1`, `-2` 접미사 자동 부여
+
+**P0-B: 프롬프트 allowlist 주입** ✅
+- `dataToPromptContext()`에서 수집 데이터의 장소명을 `⛔ ALLOWLIST` 섹션으로 추출
+- `getTravelPrompt`, `getCulturePrompt`에 조건부 날조 방지 지시문 추가
+- 수정 파일: `collector.ts`, `prompts.ts`
+- 효과: `--auto-collect` 사용 시 AI가 수집된 장소만 사용하도록 강제
+
+**P1-A: 이미지 프롬프트 본문 맥락 주입** ✅
+- `extractContentContext(content)` 함수 추가: H2/H3 헤딩 + 장소명 패턴 추출
+- `processInlineImages()`에서 `ImageContext`에 `locations`, `items` 전달
+- 수정 파일: `generator/index.ts`
+- 효과: map/diagram/comparison 스타일 이미지가 실제 본문 장소명으로 생성
+
+**P1-B: `--auto-factcheck` 옵션** ✅
+- CLI에 `--auto-factcheck` 플래그 추가
+- 생성 직후 `factCheckFile()` 자동 실행, 70% 미만 시 경고 표시
+- 팩트체크 실패해도 포스트 파일은 정상 저장 (graceful)
+- 다음 단계 안내에 팩트체크 미실행 시 factcheck 단계 표시
+- 수정 파일: `cli/index.ts`, `cli/commands/new.ts`
+
+**P2-A: enhance 날조 방지** ✅
+- `buildEnhancePrompt()`에 "장소/시설 날조 금지" 지시문 추가 (규칙 7번)
+- `detectNewVenues(original, enhanced)` 메서드: enhance 후 새로 등장한 장소명 감지
+- 경고 메시지로 날조 가능성 알림 (warnings 배열에 추가)
+- 수정 파일: `agents/draft-enhancer/index.ts`
+
+**P2-B: publish 프론트매터 프리체크** ✅
+- 품질 게이트 전에 경량 프론트매터 검사: author, personaId, description, tags 누락 감지
+- API 비용 없이 즉시 실행되는 프리체크
+- 수정 파일: `cli/commands/publish.ts`
+
+**전체 빌드 검증**: P0, P1, P2 각각 `npm run build` 통과 ✅
+
+---
+
 ### 2026-02-09: 2월 9일 포스트 2편 발행 + 이미지 정합성 수정
 
 #### 콘텐츠 생산 (Premium Workflow 전체 사이클)
