@@ -351,7 +351,62 @@
       "details": "[자동수정 불가] 신분당선은 2026년 기준 강남~광교 구간만 운행. 종로3가역까지 직결 불가. 강남역에서 3호선 환승 필요.: \"판교에서 신분당선 타고 종로3가역까지 한 번에\" → \"판교에서 신분당선 타고 강남역에서 환승하여 종로3가역까지\"",
       "createdAt": "2026-02-08T09:25:12.574Z",
       "status": "pending"
+    },
+    {
+      "id": "review-1770648565913-zuwu38",
+      "filePath": "drafts/2026-02-09-top-5.md",
+      "title": "성수동 다음은 어디? 문화로 뜨는 동네 TOP 5 (공유 안 하면 손해)",
+      "trigger": "critical_false",
+      "action": "block",
+      "score": 70,
+      "details": "[자동수정 불가] 뉴스뮤지엄은 실재하나 신당동이 아닌 을지로(중구 을지로 127)에 위치.: \"뉴스뮤지엄 신당동 소재\" → \"뉴스뮤지엄 뉴스뮤지엄 을지로점은 을지로3가역 인근. 신당동 소재 아님. 소재\"",
+      "createdAt": "2026-02-09T15:14:16.282Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770715792728-4spyhj",
+      "filePath": "drafts\\2026-02-10-gangneung.md",
+      "title": "강릉 겨울 여행의 진면목, 역사와 문학으로 읽는 고즈넉한 예향의 숨결",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 86.33333333333333,
+      "details": "factcheck: 70%",
+      "createdAt": "2026-02-10T09:29:52.728Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770817649883-nuxozb",
+      "filePath": "blog/content/posts/travel/2026-02-11-368.md",
+      "title": "제주 오름의 지질학: 368개 오름이 빚어낸 화산섬의 경이로운 서사",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 58,
+      "details": "duplicate: 0%, readability: 54%, tone: 50%, keyword_density: 26%",
+      "createdAt": "2026-02-11T13:47:29.884Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770817650829-2pzbwl",
+      "filePath": "blog/content/posts/culture/2026-02-11-post.md",
+      "title": "목포 근대역사 산책: 개항장에서 유달산까지, 한교양의 깊이 있는 해설",
+      "trigger": "score_50_70",
+      "action": "queue",
+      "score": 59.285714285714285,
+      "details": "duplicate: 0%, tone: 51%, keyword_density: 14%",
+      "createdAt": "2026-02-11T13:47:30.829Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1770819803558-rnb87r",
+      "filePath": "drafts/2026-02-11-12.md",
+      "title": "을지로 공구골목 디깅: 12번 방문 끝에 찾아낸 '진짜' 을지로의 4가지 레이어",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 82.33333333333333,
+      "details": "factcheck: 58%",
+      "createdAt": "2026-02-11T14:23:52.038Z",
+      "status": "pending"
     }
   ],
-  "lastUpdated": "2026-02-08T09:25:12.574Z"
+  "lastUpdated": "2026-02-11T14:23:52.038Z"
 }

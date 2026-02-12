@@ -1,0 +1,128 @@
+{
+  "filePath": "drafts/2026-02-12-12.md",
+  "title": "무령왕릉 벽돌 한 장의 소름 돋는 디테일, 12번 가서 알아낸 공주 백제유적 디깅",
+  "checkedAt": "2026-02-12T10:17:48.540Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 5,
+    "verified": 5,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 4,
+      "verified": 4,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 1,
+      "verified": 1,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3f9b3cd3-5eae-4ea5-b278-266077aab232",
+      "details": "한국관광공사 공식 데이터 확인: 충남 공주시 왕릉로 37",
+      "checkedAt": "2026-02-12T10:17:48.540Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.gongju.go.kr/prog/tursmCn/tour/sub02_01_04/view.do?cntno=14",
+      "details": "공주시 공식 관광 페이지 확인: 충남 공주시 웅진로 280",
+      "checkedAt": "2026-02-12T10:17:48.540Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 75,
+      "source": "claude_knowledge",
+      "details": "계룡산 중악단은 공주시 계룡면 소재. KTO API 데이터 기반 도로명 주소",
+      "checkedAt": "2026-02-12T10:17:48.540Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 70,
+      "source": "claude_knowledge",
+      "details": "공주시 의당면 수촌리 경비행기 체험장. KTO API 데이터 기반",
+      "checkedAt": "2026-02-12T10:17:48.540Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 65,
+      "source": "claude_knowledge",
+      "details": "가격은 시기별 변동 가능, KTO API 데이터 기반 합리적 범위",
+      "checkedAt": "2026-02-12T10:17:48.540Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "충남 공주시 왕릉로 37",
+      "value": "충남 공주시 왕릉로 37",
+      "severity": "critical",
+      "lineNumber": 77
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "충남 공주시 웅진로 280",
+      "value": "충남 공주시 웅진로 280",
+      "severity": "critical",
+      "lineNumber": 78
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "충남 공주시 계룡면 신원사동길 1",
+      "value": "충남 공주시 계룡면 신원사동길 1",
+      "severity": "critical",
+      "lineNumber": 79
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "충남 공주시 의당면 수촌리",
+      "value": "충남 공주시 의당면 수촌리",
+      "severity": "critical",
+      "lineNumber": 80
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "lineNumber": 58
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

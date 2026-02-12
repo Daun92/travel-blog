@@ -1,12 +1,19 @@
 {
   "version": 1,
-  "lastUpdated": "2026-02-06T14:36:39.462Z",
+  "lastUpdated": "2026-02-09T17:10:04.784Z",
   "surveys": [
     {
       "surveyId": "d534dc80-2e82-4c52-a8d8-aa91f83af3ce",
       "title": "[주제 서베이] 2026 문화예술 블로그, 어떤 콘텐츠가 필요할까요?",
       "totalResponses": 4,
       "ingestedAt": "2026-02-06T14:36:39.462Z",
+      "source": "survey-result.json"
+    },
+    {
+      "surveyId": "106b0a9c-06c0-4962-8f93-7bea7506b459",
+      "title": "[주제 서베이] 2026 문화예술 블로그, 어떤 콘텐츠가 필요할까요?",
+      "totalResponses": 0,
+      "ingestedAt": "2026-02-09T14:39:59.341Z",
       "source": "survey-result.json"
     }
   ],
@@ -131,8 +138,8 @@
   },
   "cumulative": {
     "totalResponses": 4,
-    "totalSurveys": 1,
+    "totalSurveys": 2,
     "firstSurveyDate": "2026-02-06T14:36:39.462Z",
-    "lastSurveyDate": "2026-02-06T14:36:39.462Z"
+    "lastSurveyDate": "2026-02-09T14:39:59.341Z"
   }
 }

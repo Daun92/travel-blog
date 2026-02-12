@@ -1,5 +1,977 @@
 [
   {
+    "id": "run-1770729220740",
+    "startedAt": "2026-02-10T13:13:40.740Z",
+    "status": "completed",
+    "stages": [
+      {
+        "name": "discover",
+        "status": "completed",
+        "startedAt": "2026-02-10T13:13:40.742Z",
+        "completedAt": "2026-02-10T13:17:42.170Z",
+        "duration": 241428,
+        "result": {
+          "trending": [
+            {
+              "topic": "제주",
+              "submolt": "travel",
+              "engagementScore": 90,
+              "postCount": 15,
+              "avgUpvotes": 6,
+              "trendDirection": "rising",
+              "keywords": [
+                "제주",
+                "렌터카",
+                "카페"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.111Z"
+            },
+            {
+              "topic": "강릉",
+              "submolt": "travel",
+              "engagementScore": 85,
+              "postCount": 12,
+              "avgUpvotes": 7,
+              "trendDirection": "rising",
+              "keywords": [
+                "강릉",
+                "바다",
+                "카페"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.111Z"
+            },
+            {
+              "topic": "부산",
+              "submolt": "travel",
+              "engagementScore": 78,
+              "postCount": 14,
+              "avgUpvotes": 6,
+              "trendDirection": "stable",
+              "keywords": [
+                "부산",
+                "바다",
+                "맛집"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.111Z"
+            },
+            {
+              "topic": "여수",
+              "submolt": "travel",
+              "engagementScore": 75,
+              "postCount": 8,
+              "avgUpvotes": 9,
+              "trendDirection": "stable",
+              "keywords": [
+                "여수",
+                "야경",
+                "바다"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.111Z"
+            },
+            {
+              "topic": "미술관",
+              "submolt": "culture",
+              "engagementScore": 72,
+              "postCount": 8,
+              "avgUpvotes": 9,
+              "trendDirection": "rising",
+              "keywords": [
+                "미술관",
+                "전시회",
+                "현대미술"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.140Z"
+            },
+            {
+              "topic": "서울",
+              "submolt": "travel",
+              "engagementScore": 70,
+              "postCount": 20,
+              "avgUpvotes": 4,
+              "trendDirection": "stable",
+              "keywords": [
+                "서울",
+                "카페",
+                "맛집"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.111Z"
+            },
+            {
+              "topic": "박물관",
+              "submolt": "culture",
+              "engagementScore": 68,
+              "postCount": 6,
+              "avgUpvotes": 11,
+              "trendDirection": "stable",
+              "keywords": [
+                "박물관",
+                "전시"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.140Z"
+            },
+            {
+              "topic": "서점",
+              "submolt": "culture",
+              "engagementScore": 65,
+              "postCount": 7,
+              "avgUpvotes": 9,
+              "trendDirection": "rising",
+              "keywords": [
+                "서점",
+                "북카페"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.140Z"
+            },
+            {
+              "topic": "공연",
+              "submolt": "culture",
+              "engagementScore": 60,
+              "postCount": 5,
+              "avgUpvotes": 12,
+              "trendDirection": "stable",
+              "keywords": [
+                "공연",
+                "뮤지컬",
+                "연극"
+              ],
+              "lastUpdated": "2026-02-10T13:17:42.140Z"
+            }
+          ],
+          "gaps": [
+            {
+              "topic": "제주",
+              "moltbookEngagement": 90,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "제주 현지인만 아는 골목 맛집과 뷰포인트",
+                "제주 로컬 카페 vs SNS 핫플: 진짜 갈 만한 곳",
+                "제주 겨울에 오히려 좋은 이유"
+              ],
+              "lastBlogPost": "제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리",
+              "daysSinceLastPost": 5
+            },
+            {
+              "topic": "여수",
+              "moltbookEngagement": 75,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "여수의 숨은 역사: 알고 가면 3배 재미",
+                "여수 현지인만 아는 골목 맛집과 뷰포인트",
+                "여수 기대 vs 현실: 과대평가된 곳 vs 진짜 명소"
+              ],
+              "lastBlogPost": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
+              "daysSinceLastPost": 5
+            },
+            {
+              "topic": "박물관",
+              "moltbookEngagement": 68,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "박물관 다녀온 솔직 후기: 기대 이상 vs 기대 이하",
+                "박물관 이번 달 놓치면 안 되는 프로그램",
+                "박물관 숨은 동네에서 만난 예술가 이야기"
+              ],
+              "lastBlogPost": "서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천",
+              "daysSinceLastPost": 5
+            },
+            {
+              "topic": "서점",
+              "moltbookEngagement": 65,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "서점 숨은 동네에서 만난 예술가 이야기",
+                "서점 이번 달 놓치면 안 되는 프로그램",
+                "서점, 처음 가는 사람이 알아야 할 배경지식"
+              ],
+              "lastBlogPost": "서울 독립서점 6곳 솔직 후기: 해방촌 언덕부터 을지로 4층 계단까지 생존기",
+              "daysSinceLastPost": 3
+            },
+            {
+              "topic": "공연",
+              "moltbookEngagement": 60,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "공연 숨은 동네에서 만난 예술가 이야기",
+                "공연 첫 방문 체험기: 2시간이면 충분할까?",
+                "공연, 처음 가는 사람이 알아야 할 배경지식"
+              ],
+              "lastBlogPost": "현대무용 공연 3곳 솔직 후기: 판교 직장인이 퇴근 후 다녀온 무대 비교",
+              "daysSinceLastPost": 3
+            }
+          ],
+          "recommendations": [
+            {
+              "topic": "여수",
+              "type": "travel",
+              "score": 123,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 75 | 에이전트밸런스(informative) +19 | 지역다양성(전남) +20 | 프레이밍다양성(deep_dive) +9",
+              "suggestedTitle": "여수의 숨은 역사: 알고 가면 3배 재미",
+              "keywords": [
+                "여수"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "informative",
+              "framingType": "deep_dive"
+            },
+            {
+              "topic": "제주",
+              "type": "travel",
+              "score": 119,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 90 | 에이전트밸런스(informative) +19 | 지역다양성(제주) +10 | 프레이밍다양성(local_story) +10",
+              "suggestedTitle": "제주 현지인만 아는 골목 맛집과 뷰포인트",
+              "keywords": [
+                "제주",
+                "렌터카",
+                "카페",
+                "바다",
+                "여행"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "informative",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "미술관",
+              "type": "culture",
+              "score": 115,
+              "source": "moltbook_trending",
+              "reasoning": "rising 트렌드, 평균 9 upvotes | 에이전트밸런스(informative) +19 | 프레이밍다양성(deep_dive) +9",
+              "suggestedTitle": "미술관이 특별한 이유: 배경을 알면 3배 재미",
+              "keywords": [
+                "미술관",
+                "전시회",
+                "현대미술"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "informative",
+              "framingType": "deep_dive"
+            },
+            {
+              "topic": "공주 백제문화",
+              "type": "culture",
+              "score": 105,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(충청) 자동 생성 | deep_dive 프레이밍",
+              "suggestedTitle": "공주 백제유적 산책: 무령왕릉에서 공산성까지",
+              "keywords": [
+                "공주",
+                "백제",
+                "무령왕릉",
+                "공산성"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.169Z",
+              "personaId": "informative",
+              "framingType": "deep_dive"
+            },
+            {
+              "topic": "순천만 습지",
+              "type": "travel",
+              "score": 105,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(전남) 자동 생성 | seasonal 프레이밍",
+              "suggestedTitle": "겨울 순천만 갈대밭: 계절별로 달라지는 풍경",
+              "keywords": [
+                "순천",
+                "순천만",
+                "갈대",
+                "겨울"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.169Z",
+              "personaId": "informative",
+              "framingType": "seasonal"
+            },
+            {
+              "topic": "서점",
+              "type": "culture",
+              "score": 100.66666666666667,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 65 | 에이전트밸런스(informative) +19 | 프레이밍다양성(local_story) +10",
+              "suggestedTitle": "서점 숨은 동네에서 만난 예술가 이야기",
+              "keywords": [
+                "서점",
+                "북카페",
+                "독서",
+                "취미"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "informative",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "강릉",
+              "type": "travel",
+              "score": 100,
+              "source": "moltbook_trending",
+              "reasoning": "rising 트렌드, 평균 7 upvotes",
+              "suggestedTitle": "강릉 1박2일 실제 비용과 솔직 후기",
+              "keywords": [
+                "강릉",
+                "바다",
+                "카페"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            },
+            {
+              "topic": "공연",
+              "type": "culture",
+              "score": 99,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 60 | 에이전트밸런스(informative) +19 | 프레이밍다양성(local_story) +10",
+              "suggestedTitle": "공연 숨은 동네에서 만난 예술가 이야기",
+              "keywords": [
+                "공연"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "informative",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "대전 빵집 투어",
+              "type": "travel",
+              "score": 95,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(충청) 보조 추천 | experience 프레이밍",
+              "suggestedTitle": "대전 성심당만? 현지인이 가는 진짜 빵집 3곳",
+              "keywords": [
+                "대전",
+                "성심당",
+                "빵집",
+                "맛집"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.169Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            },
+            {
+              "topic": "담양 죽녹원",
+              "type": "travel",
+              "score": 95,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(전남) 보조 추천 | local_story 프레이밍",
+              "suggestedTitle": "담양 죽녹원 너머: 주민이 추천하는 진짜 담양",
+              "keywords": [
+                "담양",
+                "죽녹원",
+                "메타세쿼이아",
+                "로컬"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.169Z",
+              "personaId": "friendly",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "부산",
+              "type": "travel",
+              "score": 78,
+              "source": "moltbook_trending",
+              "reasoning": "stable 트렌드, 평균 6 upvotes",
+              "suggestedTitle": "부산 기대 vs 현실: 진짜 가볼 만한 곳",
+              "keywords": [
+                "부산",
+                "바다",
+                "맛집"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "viral",
+              "framingType": "comparison"
+            },
+            {
+              "topic": "박물관",
+              "type": "culture",
+              "score": 72.66666666666667,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 68",
+              "suggestedTitle": "박물관 다녀온 솔직 후기: 기대 이상 vs 기대 이하",
+              "keywords": [
+                "박물관",
+                "전시",
+                "역사",
+                "문화"
+              ],
+              "discoveredAt": "2026-02-10T13:17:42.155Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            }
+          ],
+          "discoveredAt": "2026-02-10T13:17:42.169Z"
+        }
+      },
+      {
+        "name": "monitor",
+        "status": "completed",
+        "startedAt": "2026-02-10T13:13:40.742Z",
+        "completedAt": "2026-02-10T13:17:41.962Z",
+        "duration": 241220,
+        "result": {
+          "report": "모니터링 완료"
+        }
+      },
+      {
+        "name": "select",
+        "status": "completed",
+        "startedAt": "2026-02-10T13:17:42.170Z",
+        "completedAt": "2026-02-10T13:17:42.171Z",
+        "duration": 1,
+        "result": [
+          {
+            "title": "강릉 겨울에 오히려 좋은 이유",
+            "type": "travel",
+            "agent": "informative",
+            "framingType": "seasonal"
+          },
+          {
+            "title": "부산 현지인만 아는 골목 맛집과 뷰포인트",
+            "type": "travel",
+            "agent": "informative",
+            "framingType": "local_story"
+          }
+        ]
+      },
+      {
+        "name": "generate",
+        "status": "completed",
+        "startedAt": "2026-02-10T13:17:42.171Z",
+        "completedAt": "2026-02-10T13:22:00.214Z",
+        "duration": 258043,
+        "result": [
+          {
+            "title": "강릉 겨울에 오히려 좋은 이유",
+            "type": "travel",
+            "filePath": "drafts/2026-02-10-강릉-겨울에-오히려-좋은-이유.md",
+            "success": true
+          },
+          {
+            "title": "부산 현지인만 아는 골목 맛집과 뷰포인트",
+            "type": "travel",
+            "filePath": "drafts/2026-02-10-부산-현지인만-아는-골목-맛집과-뷰포인트.md",
+            "success": true
+          }
+        ]
+      },
+      {
+        "name": "validate",
+        "status": "completed",
+        "startedAt": "2026-02-10T13:22:00.214Z",
+        "completedAt": "2026-02-10T13:22:00.214Z",
+        "duration": 0,
+        "result": []
+      },
+      {
+        "name": "publish",
+        "status": "completed",
+        "startedAt": "2026-02-10T13:22:00.214Z",
+        "completedAt": "2026-02-10T13:22:00.215Z",
+        "duration": 1,
+        "result": []
+      }
+    ],
+    "summary": {
+      "topicsDiscovered": 12,
+      "topicsSelected": 2,
+      "postsGenerated": 2,
+      "postsValidated": 0,
+      "postsPublished": 0
+    },
+    "errors": [],
+    "completedAt": "2026-02-10T13:22:00.215Z"
+  },
+  {
+    "id": "run-1770729202009",
+    "startedAt": "2026-02-10T13:13:22.009Z",
+    "status": "completed",
+    "stages": [],
+    "summary": {
+      "topicsDiscovered": 0,
+      "topicsSelected": 0,
+      "postsGenerated": 0,
+      "postsValidated": 0,
+      "postsPublished": 0
+    },
+    "errors": [],
+    "completedAt": "2026-02-10T13:13:22.010Z"
+  },
+  {
+    "id": "run-1770727504927",
+    "startedAt": "2026-02-10T12:45:04.927Z",
+    "status": "completed",
+    "stages": [
+      {
+        "name": "discover",
+        "status": "completed",
+        "startedAt": "2026-02-10T12:45:04.929Z",
+        "completedAt": "2026-02-10T12:49:06.592Z",
+        "duration": 241663,
+        "result": {
+          "trending": [
+            {
+              "topic": "제주",
+              "submolt": "travel",
+              "engagementScore": 90,
+              "postCount": 15,
+              "avgUpvotes": 6,
+              "trendDirection": "rising",
+              "keywords": [
+                "제주",
+                "렌터카",
+                "카페"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.523Z"
+            },
+            {
+              "topic": "강릉",
+              "submolt": "travel",
+              "engagementScore": 85,
+              "postCount": 12,
+              "avgUpvotes": 7,
+              "trendDirection": "rising",
+              "keywords": [
+                "강릉",
+                "바다",
+                "카페"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.523Z"
+            },
+            {
+              "topic": "부산",
+              "submolt": "travel",
+              "engagementScore": 78,
+              "postCount": 14,
+              "avgUpvotes": 6,
+              "trendDirection": "stable",
+              "keywords": [
+                "부산",
+                "바다",
+                "맛집"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.523Z"
+            },
+            {
+              "topic": "여수",
+              "submolt": "travel",
+              "engagementScore": 75,
+              "postCount": 8,
+              "avgUpvotes": 9,
+              "trendDirection": "stable",
+              "keywords": [
+                "여수",
+                "야경",
+                "바다"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.523Z"
+            },
+            {
+              "topic": "미술관",
+              "submolt": "culture",
+              "engagementScore": 72,
+              "postCount": 8,
+              "avgUpvotes": 9,
+              "trendDirection": "rising",
+              "keywords": [
+                "미술관",
+                "전시회",
+                "현대미술"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.552Z"
+            },
+            {
+              "topic": "서울",
+              "submolt": "travel",
+              "engagementScore": 70,
+              "postCount": 20,
+              "avgUpvotes": 4,
+              "trendDirection": "stable",
+              "keywords": [
+                "서울",
+                "카페",
+                "맛집"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.523Z"
+            },
+            {
+              "topic": "박물관",
+              "submolt": "culture",
+              "engagementScore": 68,
+              "postCount": 6,
+              "avgUpvotes": 11,
+              "trendDirection": "stable",
+              "keywords": [
+                "박물관",
+                "전시"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.552Z"
+            },
+            {
+              "topic": "서점",
+              "submolt": "culture",
+              "engagementScore": 65,
+              "postCount": 7,
+              "avgUpvotes": 9,
+              "trendDirection": "rising",
+              "keywords": [
+                "서점",
+                "북카페"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.552Z"
+            },
+            {
+              "topic": "공연",
+              "submolt": "culture",
+              "engagementScore": 60,
+              "postCount": 5,
+              "avgUpvotes": 12,
+              "trendDirection": "stable",
+              "keywords": [
+                "공연",
+                "뮤지컬",
+                "연극"
+              ],
+              "lastUpdated": "2026-02-10T12:49:06.552Z"
+            }
+          ],
+          "gaps": [
+            {
+              "topic": "제주",
+              "moltbookEngagement": 90,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "제주 현지인만 아는 골목 맛집과 뷰포인트",
+                "제주의 숨은 역사: 알고 가면 3배 재미",
+                "제주 1박2일 실제 다녀온 비용과 솔직 후기"
+              ],
+              "lastBlogPost": "제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리",
+              "daysSinceLastPost": 5
+            },
+            {
+              "topic": "여수",
+              "moltbookEngagement": 75,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "여수의 숨은 역사: 알고 가면 3배 재미",
+                "여수 야경 명소 비교: 어디서 봐야 가장 예쁠까",
+                "여수 1박2일 실제 다녀온 비용과 솔직 후기"
+              ],
+              "lastBlogPost": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
+              "daysSinceLastPost": 5
+            },
+            {
+              "topic": "박물관",
+              "moltbookEngagement": 68,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "박물관 다녀온 솔직 후기: 기대 이상 vs 기대 이하",
+                "박물관 첫 방문 체험기: 2시간이면 충분할까?",
+                "박물관, 처음 가는 사람이 알아야 할 배경지식"
+              ],
+              "lastBlogPost": "서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천",
+              "daysSinceLastPost": 5
+            },
+            {
+              "topic": "서점",
+              "moltbookEngagement": 65,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "서점 이번 달 놓치면 안 되는 프로그램",
+                "서점, 처음 가는 사람이 알아야 할 배경지식",
+                "서점 숨은 동네에서 만난 예술가 이야기"
+              ],
+              "lastBlogPost": "서울 독립서점 6곳 솔직 후기: 해방촌 언덕부터 을지로 4층 계단까지 생존기",
+              "daysSinceLastPost": 3
+            },
+            {
+              "topic": "공연",
+              "moltbookEngagement": 60,
+              "blogCoverage": "partial",
+              "recommendedPriority": "medium",
+              "suggestedAngles": [
+                "공연 숨은 동네에서 만난 예술가 이야기",
+                "공연 이번 달 놓치면 안 되는 프로그램",
+                "공연, 처음 가는 사람이 알아야 할 배경지식"
+              ],
+              "lastBlogPost": "현대무용 공연 3곳 솔직 후기: 판교 직장인이 퇴근 후 다녀온 무대 비교",
+              "daysSinceLastPost": 3
+            }
+          ],
+          "recommendations": [
+            {
+              "topic": "여수",
+              "type": "travel",
+              "score": 123,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 75 | 에이전트밸런스(informative) +19 | 지역다양성(전남) +20 | 프레이밍다양성(deep_dive) +9",
+              "suggestedTitle": "여수의 숨은 역사: 알고 가면 3배 재미",
+              "keywords": [
+                "여수"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "informative",
+              "framingType": "deep_dive"
+            },
+            {
+              "topic": "제주",
+              "type": "travel",
+              "score": 119,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 90 | 에이전트밸런스(informative) +19 | 지역다양성(제주) +10 | 프레이밍다양성(local_story) +10",
+              "suggestedTitle": "제주 현지인만 아는 골목 맛집과 뷰포인트",
+              "keywords": [
+                "제주",
+                "렌터카",
+                "카페",
+                "바다",
+                "여행"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "informative",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "미술관",
+              "type": "culture",
+              "score": 106,
+              "source": "moltbook_trending",
+              "reasoning": "rising 트렌드, 평균 9 upvotes | 에이전트밸런스(informative) +19",
+              "suggestedTitle": "이번 달 미술관 놓치면 안 되는 프로그램",
+              "keywords": [
+                "미술관",
+                "전시회",
+                "현대미술"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "informative",
+              "framingType": "experience"
+            },
+            {
+              "topic": "공주 백제문화",
+              "type": "culture",
+              "score": 105,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(충청) 자동 생성 | deep_dive 프레이밍",
+              "suggestedTitle": "공주 백제유적 산책: 무령왕릉에서 공산성까지",
+              "keywords": [
+                "공주",
+                "백제",
+                "무령왕릉",
+                "공산성"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.590Z",
+              "personaId": "informative",
+              "framingType": "deep_dive"
+            },
+            {
+              "topic": "순천만 습지",
+              "type": "travel",
+              "score": 105,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(전남) 자동 생성 | seasonal 프레이밍",
+              "suggestedTitle": "겨울 순천만 갈대밭: 계절별로 달라지는 풍경",
+              "keywords": [
+                "순천",
+                "순천만",
+                "갈대",
+                "겨울"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.590Z",
+              "personaId": "informative",
+              "framingType": "seasonal"
+            },
+            {
+              "topic": "강릉",
+              "type": "travel",
+              "score": 100,
+              "source": "moltbook_trending",
+              "reasoning": "rising 트렌드, 평균 7 upvotes",
+              "suggestedTitle": "강릉 1박2일 실제 비용과 솔직 후기",
+              "keywords": [
+                "강릉",
+                "바다",
+                "카페"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            },
+            {
+              "topic": "공연",
+              "type": "culture",
+              "score": 99,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 60 | 에이전트밸런스(informative) +19 | 프레이밍다양성(local_story) +10",
+              "suggestedTitle": "공연 숨은 동네에서 만난 예술가 이야기",
+              "keywords": [
+                "공연"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "informative",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "대전 빵집 투어",
+              "type": "travel",
+              "score": 95,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(충청) 보조 추천 | experience 프레이밍",
+              "suggestedTitle": "대전 성심당만? 현지인이 가는 진짜 빵집 3곳",
+              "keywords": [
+                "대전",
+                "성심당",
+                "빵집",
+                "맛집"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.590Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            },
+            {
+              "topic": "담양 죽녹원",
+              "type": "travel",
+              "score": 95,
+              "source": "gap_analysis",
+              "reasoning": "미커버 지역(전남) 보조 추천 | local_story 프레이밍",
+              "suggestedTitle": "담양 죽녹원 너머: 주민이 추천하는 진짜 담양",
+              "keywords": [
+                "담양",
+                "죽녹원",
+                "메타세쿼이아",
+                "로컬"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.590Z",
+              "personaId": "friendly",
+              "framingType": "local_story"
+            },
+            {
+              "topic": "서점",
+              "type": "culture",
+              "score": 90.66666666666667,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 65 | 에이전트밸런스(informative) +19",
+              "suggestedTitle": "서점 이번 달 놓치면 안 되는 프로그램",
+              "keywords": [
+                "서점",
+                "북카페",
+                "독서",
+                "취미"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "informative",
+              "framingType": "experience"
+            },
+            {
+              "topic": "부산",
+              "type": "travel",
+              "score": 78,
+              "source": "moltbook_trending",
+              "reasoning": "stable 트렌드, 평균 6 upvotes",
+              "suggestedTitle": "부산 1박2일 실제 비용과 솔직 후기",
+              "keywords": [
+                "부산",
+                "바다",
+                "맛집"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            },
+            {
+              "topic": "박물관",
+              "type": "culture",
+              "score": 72.66666666666667,
+              "source": "gap_analysis",
+              "reasoning": "블로그 커버리지 partial, Moltbook engagement 68",
+              "suggestedTitle": "박물관 다녀온 솔직 후기: 기대 이상 vs 기대 이하",
+              "keywords": [
+                "박물관",
+                "전시",
+                "역사",
+                "문화"
+              ],
+              "discoveredAt": "2026-02-10T12:49:06.571Z",
+              "personaId": "friendly",
+              "framingType": "experience"
+            }
+          ],
+          "discoveredAt": "2026-02-10T12:49:06.591Z"
+        }
+      },
+      {
+        "name": "monitor",
+        "status": "completed",
+        "startedAt": "2026-02-10T12:45:04.929Z",
+        "completedAt": "2026-02-10T12:45:05.008Z",
+        "duration": 79,
+        "result": {
+          "report": "모니터링 완료"
+        }
+      },
+      {
+        "name": "select",
+        "status": "completed",
+        "startedAt": "2026-02-10T12:49:06.592Z",
+        "completedAt": "2026-02-10T12:49:06.593Z",
+        "duration": 1,
+        "result": [
+          {
+            "title": "강릉 겨울에 오히려 좋은 이유",
+            "type": "travel",
+            "agent": "informative",
+            "framingType": "seasonal"
+          },
+          {
+            "title": "부산 현지인만 아는 골목 맛집과 뷰포인트",
+            "type": "travel",
+            "agent": "informative",
+            "framingType": "local_story"
+          }
+        ]
+      },
+      {
+        "name": "generate",
+        "status": "completed",
+        "startedAt": "2026-02-10T12:49:06.593Z",
+        "completedAt": "2026-02-10T12:49:06.594Z",
+        "duration": 0,
+        "result": []
+      },
+      {
+        "name": "validate",
+        "status": "completed",
+        "startedAt": "2026-02-10T12:49:06.594Z",
+        "completedAt": "2026-02-10T12:49:06.594Z",
+        "duration": 0,
+        "result": []
+      },
+      {
+        "name": "publish",
+        "status": "completed",
+        "startedAt": "2026-02-10T12:49:06.594Z",
+        "completedAt": "2026-02-10T12:49:06.594Z",
+        "duration": 0,
+        "result": []
+      }
+    ],
+    "summary": {
+      "topicsDiscovered": 12,
+      "topicsSelected": 2,
+      "postsGenerated": 0,
+      "postsValidated": 0,
+      "postsPublished": 0
+    },
+    "errors": [],
+    "completedAt": "2026-02-10T12:49:06.594Z"
+  },
+  {
     "id": "run-1770300751826",
     "startedAt": "2026-02-05T14:12:31.826Z",
     "status": "completed",

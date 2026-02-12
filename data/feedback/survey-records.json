@@ -7,5 +7,14 @@
     },
     "createdAt": "2026-02-06T13:50:34.018469+00:00",
     "type": "topic-discovery-survey"
+  },
+  {
+    "postId": "106b0a9c-06c0-4962-8f93-7bea7506b459",
+    "title": "[주제 서베이] 2026 문화예술 블로그, 어떤 콘텐츠가 필요할까요?",
+    "submolt": {
+      "name": "culture"
+    },
+    "createdAt": "2026-02-09T14:39:42.93862+00:00",
+    "type": "topic-discovery-survey"
   }
 ]

@@ -1,0 +1,47 @@
+{
+  "tasks": [
+    {
+      "id": "daily-pipeline",
+      "name": "일일 콘텐츠 파이프라인",
+      "schedule": {
+        "type": "daily",
+        "time": "09:00"
+      },
+      "action": "full_pipeline",
+      "enabled": true,
+      "nextRun": "2026-02-11T00:00:00.000Z"
+    },
+    {
+      "id": "hourly-monitor",
+      "name": "시간당 모니터링",
+      "schedule": {
+        "type": "hourly",
+        "interval": 6
+      },
+      "action": "monitor",
+      "enabled": false
+    },
+    {
+      "id": "daily-feedback",
+      "name": "일일 피드백 수집",
+      "schedule": {
+        "type": "daily",
+        "time": "18:00"
+      },
+      "action": "feedback",
+      "enabled": true,
+      "nextRun": "2026-02-11T09:00:00.000Z"
+    },
+    {
+      "id": "feedback-1770727486607",
+      "name": "피드백 수집: 2026-02-10-post.md",
+      "schedule": {
+        "type": "daily",
+        "time": "21:44"
+      },
+      "action": "feedback",
+      "enabled": true
+    }
+  ],
+  "lastUpdated": "2026-02-10T12:44:46.608Z"
+}

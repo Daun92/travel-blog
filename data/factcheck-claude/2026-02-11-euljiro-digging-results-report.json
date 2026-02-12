@@ -1,0 +1,152 @@
+{
+  "filePath": "drafts/2026-02-11-12.md",
+  "title": "을지로 공구골목 디깅: 12번 방문 끝에 찾아낸 '진짜' 을지로의 4가지 레이어",
+  "checkedAt": "2026-02-11T14:22:59.441Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 6,
+    "verified": 6,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 4,
+      "verified": 4,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 2,
+      "verified": 2,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=8c87da94-cd09-4ba4-8a10-6b569ae74b02",
+      "details": "을지로3가역 3호선 4번 출구가 노가리골목으로 연결됨. 한국관광공사 공식 여행 가이드에서 확인.",
+      "checkedAt": "2026-02-11T14:22:59.441Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://ko.wikipedia.org/wiki/%EC%9D%84%EC%A7%80%EB%A1%9C3%EA%B0%80%EC%97%AD",
+      "details": "을지로3가역은 서울 지하철 2호선·3호선 환승역으로 실존하는 역. 위키백과에서 확인.",
+      "checkedAt": "2026-02-11T14:22:59.441Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://shopping.blogsailing.com/1183",
+      "details": "을지로 철제가구거리는 서울특별시 중구 창경궁로 34-1 (예관동)에 위치. 을지로 4가에서 중구청 방면 일방통행길.",
+      "checkedAt": "2026-02-11T14:22:59.441Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.sisul.or.kr/open_content/undershop/guide/euljiro/euljiro.jsp",
+      "details": "을지로 지하상가는 을지로입구역~동대문역사문화공원역 2.8km 구간으로 을지로 2가와 3가를 포함하여 연결. 서울시설공단 공식 정보.",
+      "checkedAt": "2026-02-11T14:22:59.441Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 70,
+      "source": "claude_knowledge",
+      "details": "서울 중구 을지로 일대 백반 가격은 7,000~9,000원 수준으로, 8,000원은 합리적인 범위. 2025-2026년 물가 기준으로 적절함.",
+      "checkedAt": "2026-02-11T14:22:59.441Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 75,
+      "source": "claude_knowledge",
+      "details": "노가리+맥주(약 15,000~20,000원) + 백반(8,000원) + 기타 음료/간식 = 인당 35,000원은 합리적인 예산 추정. 을지로 일대 음식 물가 기준 적절.",
+      "checkedAt": "2026-02-11T14:22:59.441Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "을지로3가역 4번 출구로 나오면 바로 펼쳐지는 노가리골목",
+      "value": "을지로3가역 4번 출구",
+      "severity": "critical",
+      "context": "제일 먼저 발을 들이게 되는 곳은 역시 **을지로 노가리골목**이에요. 을지로3가역 4번 출구로 나오면 바로 펼쳐지는 그 풍경 말이에요.",
+      "lineNumber": 7
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "을지로 3가역",
+      "value": "을지로 3가역",
+      "severity": "critical",
+      "context": "을지로 3가역 디깅 루트 이미지 캡션",
+      "lineNumber": 17
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "철제가구거리 창경궁로 34-1 근처",
+      "value": "창경궁로 34-1",
+      "severity": "critical",
+      "context": "노가리 골목에서 조금만 더 깊이 들어가면 을지로 철제가구거리가 나와요. 창경궁로 34-1 근처인데",
+      "lineNumber": 22
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "을지로 2가와 3가를 잇는 지하상가",
+      "value": "을지로 2가와 3가 지하상가",
+      "severity": "critical",
+      "context": "열 번쯤 가면 이제 골목의 생리가 보여요. 을지로 2가와 3가를 잇는 지하상가 말이에요.",
+      "lineNumber": 32
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "8,000원짜리 백반",
+      "value": "8,000원",
+      "severity": "minor",
+      "context": "8,000원짜리 백반 먹으면서 옆자리 사장님들의 대화를 듣고 있으면",
+      "lineNumber": 40
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "인당 35,000원",
+      "value": "35,000원",
+      "severity": "minor",
+      "context": "노가리에 맥주 한 잔, 백반 한 끼 해서 인당 35,000원이면 충분해요.",
+      "lineNumber": 65
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

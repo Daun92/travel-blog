@@ -287,7 +287,7 @@
       "title": "수원 화성 야간 탐방: 성곽 위 2시간 코스, 7만원으로 버틴 솔직 후기",
       "category": "travel",
       "publishedAt": "2026-02-07T07:52:21.000Z",
-      "priority": 50,
+      "priority": 41,
       "status": "pending",
       "retryCount": 0
     },
@@ -296,7 +296,7 @@
       "title": "2월 강추위 피하는 직장인 주말 여가 TOP 5: 김주말의 현실적인 내돈내산 가이드",
       "category": "travel",
       "publishedAt": "2026-02-07T07:55:56.000Z",
-      "priority": 50,
+      "priority": 41,
       "status": "pending",
       "retryCount": 0
     },
@@ -305,7 +305,7 @@
       "title": "통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다",
       "category": "travel",
       "publishedAt": "2026-02-07T08:04:06.000Z",
-      "priority": 50,
+      "priority": 41,
       "status": "pending",
       "retryCount": 0
     },
@@ -314,7 +314,7 @@
       "title": "공유 안 하면 손해, 대한민국 오지 탐험 TOP 5: 접근 불가 비경 전격 공개",
       "category": "travel",
       "publishedAt": "2026-02-07T07:39:11.000Z",
-      "priority": 50,
+      "priority": 41,
       "status": "pending",
       "retryCount": 0
     },
@@ -323,7 +323,7 @@
       "title": "서울 독립서점 순례: 해방촌, 을지로, 연남동에서 만나는 7곳의 문화적 기록",
       "category": "culture",
       "publishedAt": "2026-02-07T07:44:48.000Z",
-      "priority": 55,
+      "priority": 46,
       "status": "pending",
       "retryCount": 0
     },
@@ -332,7 +332,7 @@
       "title": "성수동 팝업스토어 생존기: 이번 주 꼭 가야 할 곳 vs 시간낭비 TOP 3",
       "category": "culture",
       "publishedAt": "2026-02-07T07:57:41.000Z",
-      "priority": 55,
+      "priority": 46,
       "status": "pending",
       "retryCount": 0
     },
@@ -341,7 +341,7 @@
       "title": "속초 양양 겨울 바다 카페 핫플 TOP 5",
       "category": "travel",
       "publishedAt": "2026-02-08T13:14:11.000Z",
-      "priority": 50,
+      "priority": 43,
       "status": "pending",
       "retryCount": 0
     },
@@ -350,7 +350,7 @@
       "title": "2월 서울 갤러리 신규 전시 깊이 읽기",
       "category": "culture",
       "publishedAt": "2026-02-08T13:17:18.000Z",
-      "priority": 50,
+      "priority": 48,
       "status": "pending",
       "retryCount": 0
     },
@@ -359,7 +359,7 @@
       "title": "군산 시간여행 1박2일 현실 비용 후기",
       "category": "travel",
       "publishedAt": "2026-02-08T13:19:34.000Z",
-      "priority": 50,
+      "priority": 43,
       "status": "pending",
       "retryCount": 0
     },
@@ -377,7 +377,7 @@
       "title": "안동 하회마을 유교 문화 산책",
       "category": "travel",
       "publishedAt": "2026-02-08T13:23:57.000Z",
-      "priority": 50,
+      "priority": 43,
       "status": "pending",
       "retryCount": 0
     },
@@ -386,7 +386,7 @@
       "title": "직장인 전통공예 도자기 한지 체험 주말 코스",
       "category": "culture",
       "publishedAt": "2026-02-08T13:28:50.000Z",
-      "priority": 50,
+      "priority": 48,
       "status": "pending",
       "retryCount": 0
     },
@@ -395,7 +395,7 @@
       "title": "인천 개항장 차이나타운 감성 투어 비교",
       "category": "travel",
       "publishedAt": "2026-02-08T13:31:16.000Z",
-      "priority": 50,
+      "priority": 43,
       "status": "pending",
       "retryCount": 0
     },
@@ -404,7 +404,109 @@
       "title": "한국 전통주 양조장 탐방 및 막걸리 가이드",
       "category": "culture",
       "publishedAt": "2026-02-08T13:33:48.000Z",
+      "priority": 48,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-09-top-5.md",
+      "title": "발렌타인 데이트 국내 여행지 TOP 5 | 공유 안 하면 손해, 이건 진짜 봐야 됨",
+      "category": "travel",
+      "publishedAt": "2026-02-09T14:40:32.000Z",
+      "priority": 46,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-08-indie-venue.md",
+      "title": "서울 인디 공연장 순위 TOP 6: 롤링홀이 1위? 진짜 가본 사람만 아는 현실 랭킹",
+      "category": "culture",
+      "publishedAt": "2026-02-08T14:30:00.000Z",
+      "priority": 49,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-09-post.md",
+      "title": "성수동은 왜 떴나: 도시 재생의 인문학적 통찰과 차세대 문화 허브의 조건",
+      "category": "culture",
+      "publishedAt": "2026-02-09T14:59:09.000Z",
+      "priority": 51,
+      "status": "failed",
+      "retryCount": 1,
+      "lastAttempt": "2026-02-11T12:01:56.431Z",
+      "lastError": "공유 결과 없음",
+      "nextRetryAfter": "2026-02-11T12:31:56.431Z"
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-09-top-5.md",
+      "title": "성수동 다음은 어디? 문화로 뜨는 동네 TOP 5 (공유 안 하면 손해)",
+      "category": "culture",
+      "publishedAt": "2026-02-09T14:58:20.000Z",
+      "priority": 51,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-10-busan.md",
+      "title": "부산의 숨겨진 맥락을 읽다: 감천사에서 F1963까지, 현지인의 뷰포인트",
+      "category": "travel",
+      "publishedAt": "2026-02-10T08:53:29.000Z",
+      "priority": 47,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-10-gangneung.md",
+      "title": "강릉 겨울 여행의 진면목, 역사와 문학으로 읽는 고즈넉한 예향의 숨결",
+      "category": "travel",
+      "publishedAt": "2026-02-10T08:51:35.000Z",
+      "priority": 47,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-10-post-1.md",
+      "title": "겨울 강릉 여행, 인문학적 시선으로 바라본 동해의 깊은 정취",
+      "category": "travel",
+      "publishedAt": "2026-02-10T13:19:56.000Z",
+      "priority": 48,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-10-post-2.md",
+      "title": "부산의 결을 읽다: 산복도로의 애환과 동래의 전통이 깃든 골목 여행",
+      "category": "travel",
+      "publishedAt": "2026-02-10T13:22:00.000Z",
+      "priority": 48,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-11-12.md",
+      "title": "을지로 공구골목 디깅: 12번 방문 끝에 찾아낸 '진짜' 을지로의 4가지 레이어",
+      "category": "travel",
+      "publishedAt": "2026-02-11T14:15:00.000Z",
       "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/travel/2026-02-11-368.md",
+      "title": "제주 오름의 지질학: 368개 오름이 빚어낸 화산섬의 경이로운 서사",
+      "category": "travel",
+      "publishedAt": "2026-02-11T12:20:17.000Z",
+      "priority": 50,
+      "status": "pending",
+      "retryCount": 0
+    },
+    {
+      "filePath": "blog/content/posts/culture/2026-02-11-post.md",
+      "title": "목포 근대역사 산책: 개항장에서 유달산까지, 한교양의 깊이 있는 해설",
+      "category": "culture",
+      "publishedAt": "2026-02-11T12:20:13.000Z",
+      "priority": 55,
       "status": "pending",
       "retryCount": 0
     }
@@ -423,10 +525,10 @@
     ]
   },
   "stats": {
-    "totalPosts": 33,
+    "totalPosts": 52,
     "shared": 27,
-    "pending": 6,
-    "failed": 0,
+    "pending": 24,
+    "failed": 1,
     "skipped": 0,
     "lastShareTime": "2026-02-07T12:27:11.397Z"
   }

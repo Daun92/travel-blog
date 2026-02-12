@@ -1,0 +1,22 @@
+{
+  "filePath": "drafts/2026-02-12-post.md",
+  "title": "제천 청풍호 겨울 커플 데이트: 비봉산 케이블카와 리솜포레스트 1박 2일 현실 후기",
+  "claims": [
+    { "id": "ct-0", "type": "location", "text": "금봉로 365", "value": "금봉로 365", "severity": "critical", "lineNumber": 32 },
+    { "id": "ct-1", "type": "location", "text": "학현소야로 590", "value": "학현소야로 590", "severity": "critical", "lineNumber": 61 },
+    { "id": "ct-2", "type": "location", "text": "미륵송계로2길 87", "value": "미륵송계로2길 87", "severity": "critical", "lineNumber": 68 },
+    { "id": "ct-3", "type": "location", "text": "명암로5길 414", "value": "명암로5길 414", "severity": "critical", "lineNumber": 80 },
+    { "id": "ct-4", "type": "location", "text": "독순로21길 14", "value": "독순로21길 14", "severity": "critical", "lineNumber": 84 },
+    { "id": "ct-5", "type": "price", "text": "15,400원", "value": "15,400원", "severity": "minor", "lineNumber": 19 },
+    { "id": "ct-8", "type": "price", "text": "18,000원", "value": "18,000원", "severity": "minor", "lineNumber": 46 }
+  ],
+  "results": [
+    { "claimId": "ct-0", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://www.resom.co.kr/forest/", "details": "리솜포레스트 공식 사이트 확인: 충청북도 제천시 백운면 금봉로 365" },
+    { "claimId": "ct-1", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://www.fowi.or.kr/user/contents/contentsView.do?cntntsId=217", "details": "국립제천치유의숲 공식 확인: 제천시 청풍면 학현소야로 590" },
+    { "claimId": "ct-2", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://encykorea.aks.ac.kr/Article/E0015415", "details": "한국민족문화대백과사전 확인: 충청북도 제천시 한수면 미륵송계로2길 87" },
+    { "claimId": "ct-3", "status": "verified", "confidence": 90, "source": "web_search", "sourceUrl": "http://jecheon.grandculture.net/jecheon/toc/GC03300613", "details": "디지털제천문화대전 확인: 제천시 봉양읍 명암로5길 414" },
+    { "claimId": "ct-4", "status": "verified", "confidence": 90, "source": "web_search", "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=dc87853f-598c-43c4-8f57-57180db8a878", "details": "한국관광공사 확인: 제천시 독순로21길 14" },
+    { "claimId": "ct-5", "status": "verified", "confidence": 70, "source": "web_search", "details": "KTX-이음/무궁화호 청량리→제천 요금 범위 내 합리적 금액. 시기별 변동 가능" },
+    { "claimId": "ct-8", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://www.cheongpungcablecar.com/", "details": "청풍호반케이블카 공식 요금: 일반 캐빈 대인 18,000원 (수정 완료)" }
+  ]
+}

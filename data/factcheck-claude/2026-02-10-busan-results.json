@@ -1,0 +1,53 @@
+{
+  "filePath": "drafts/2026-02-10-busan.md",
+  "title": "부산의 숨겨진 맥락을 읽다: 감천사에서 F1963까지, 현지인의 뷰포인트",
+  "claims": [
+    { "id": "ct-0", "type": "location", "text": "부산 수영구 구락로123번길 20", "value": "구락로123번길 20", "severity": "critical", "context": "F1963 주소", "lineNumber": 84 },
+    { "id": "ct-1", "type": "price", "text": "1,000원", "value": "1,000원", "severity": "minor", "context": "편의점 1,000원짜리 생수", "lineNumber": 64 },
+    { "id": "ct-2", "type": "price", "text": "4,000원", "value": "4,000원", "severity": "minor", "context": "사설 주차장 1시간당 4,000원", "lineNumber": 93 },
+    { "id": "ct-3", "type": "venue_exists", "text": "F1963 국제갤러리 부산", "value": "F1963", "severity": "critical", "context": "1963년 고려제강 와이어 공장 → 2016년 복합문화공간", "lineNumber": 74 },
+    { "id": "ct-4", "type": "venue_exists", "text": "부산현대미술관 을숙도", "value": "부산현대미술관", "severity": "minor", "context": "을숙도 소재, 상설 무료 관람", "lineNumber": 128 }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.f1963.org/ko/?c=facil",
+      "details": "F1963 공식 사이트 확인: 부산 수영구 구락로123번길 20. visitbusan.net에서도 동일 주소 확인."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 70,
+      "source": "web_search",
+      "sourceUrl": "https://www.sedaily.com/NewsView/29N7BT56A7",
+      "details": "편의점 생수 500ml PB 기준 700~900원이나, 관광지 NB 제품은 900~1,000원 가능. 문맥상 일반적 표현으로 수용 가능."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 60,
+      "source": "web_search",
+      "sourceUrl": "https://bsparking.bisco.or.kr/",
+      "details": "해운대 성수기 사설주차장 3,000~5,000원/시간 범위 내. 4,000원은 합리적 수준."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.f1963.org/ko/?c=facil",
+      "details": "F1963은 1963년 설립된 고려제강(Kiswire) 와이어 공장을 2016년 복합문화공간으로 리모델링. 국제갤러리 부산점, 테라로사 커피, 석천홀 등 입주. visitbusan.net, namu.wiki 등 다수 출처 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.busan.go.kr/moca/index",
+      "details": "부산현대미술관은 부산 사하구 을숙도에 위치. 상설 무료 관람, 금·토 21시까지 야간개장. 공식 사이트 확인."
+    }
+  ]
+}

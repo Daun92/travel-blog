@@ -1,0 +1,187 @@
+{
+  "filePath": "drafts/2026-02-09-post.md",
+  "title": "성수동은 왜 떴나: 도시 재생의 인문학적 통찰과 차세대 문화 허브의 조건",
+  "checkedAt": "2026-02-09T22:22:56.425Z",
+  "overallScore": 80,
+  "categoryScores": {
+    "critical": 100,
+    "major": 33,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 6,
+    "false": 1,
+    "unknown": 1
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 3,
+      "verified": 1,
+      "false": 1,
+      "unknown": 1
+    },
+    "minor": {
+      "total": 5,
+      "verified": 5,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.ajunews.com/view/20260128140239689",
+      "details": "아주경제, 대구일보, 헤럴드경제 등 다수 매체에서 2026 고령 대가야축제 일정을 3월 27일~29일로 확인. 주제: '다시 시작하는 대가야: RE-BORN'. 장소: 대가야역사테마관광지, 대가야박물관.",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "unknown",
+      "confidence": 40,
+      "source": "web_search",
+      "details": "2026년 고창모양성제 공식 일정 미발표. 음력 9월 9일(중양절) 전후 5일간 개최 전통. 2025년은 10/29~11/2 개최. 드래프트의 10/15~10/19는 확인 불가 — 음력 기반이므로 매년 양력 날짜 변동.",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "false",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.marieclairekorea.com/culture/2026/01/mmca-entrance-fee/",
+      "details": "국현미는 기존에도 유료였음 — '유료 전환'이 아니라 '관람료 인상'이 정확. 2026년 실제 가격: 일반 전시 2,000원(유지), 기획전 5,000→8,000원(인상), 통합권 7,000→10,000원. 24세 이하 무료 유지.",
+      "correctValue": "일반 전시 2,000원, 기획전 8,000원 (2026년 관람료 인상)",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/show/todayShow",
+      "details": "예술의전당 한가람미술관 기획전 20,000원 확인 (볼로냐 일러스트 원화전59th 기준). 단, 전시에 따라 가격 상이 (일부 전시 40,000원). 한가람미술관 리모델링 공사 중(2025.10~).",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.gwangallimdrone.co.kr/",
+      "details": "2026 광안리 M 드론라이트쇼 매주 토요일 오후 7시, 9시 공연 확인. 회당 약 12분.",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 80,
+      "source": "claude_knowledge",
+      "details": "서울~대구 약 300km, 고령은 대구 서쪽 약 25-30km. 서울~고령 약 320km는 합리적 추정.",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "claude_knowledge",
+      "details": "서울역~부산역 KTX 약 2시간 15분~2시간 30분. '2.5시간' 표기 정확.",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 70,
+      "source": "claude_knowledge",
+      "details": "성수동 스페셜티 카페 커피 가격 7,000~8,000원대 일반적. 7,500원은 합리적 범위.",
+      "checkedAt": "2026-02-09T22:22:56.425Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "event_period",
+      "text": "고령 대가야축제: 2026-03-27 ~ 03-29",
+      "severity": "major",
+      "context": "- **고령 대가야축제**: 2026-03-27 ~ 03-29",
+      "lineNumber": 160
+    },
+    {
+      "id": "ct-1",
+      "type": "event_period",
+      "text": "고창모양성제: 2026-10-15 ~ 10-19",
+      "severity": "major",
+      "context": "- **고창모양성제**: 2026-10-15 ~ 10-19",
+      "lineNumber": 165
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "국립현대미술관 전시당 2,000~5,000원 (2026년부터 유료 전환)",
+      "severity": "major",
+      "context": "*   **가격**: 전시당 **2,000~5,000원** (2026년부터 유료 전환)",
+      "lineNumber": 146
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "예술의전당 한가람미술관 기획전 20,000원",
+      "severity": "minor",
+      "context": "*   **가격**: **20,000원** (기획전 기준, 내용 대비 살짝 비싼 느낌)",
+      "lineNumber": 149
+    },
+    {
+      "id": "ct-4",
+      "type": "facilities",
+      "text": "광안리 드론쇼 매주 토요일",
+      "severity": "minor",
+      "context": "- **광안리 드론쇼**: 매주 토요일 하는데",
+      "lineNumber": 170
+    },
+    {
+      "id": "ct-5",
+      "type": "transport",
+      "text": "서울에서 고령까지 320km",
+      "severity": "minor",
+      "context": "서울에서 **320km** 정도 떨어져 있어서",
+      "lineNumber": 159
+    },
+    {
+      "id": "ct-6",
+      "type": "transport",
+      "text": "KTX 부산 2.5시간",
+      "severity": "minor",
+      "context": "### (3) 부산: 광복동과 광안리 (KTX로 2.5시간)",
+      "lineNumber": 168
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "성수동 커피 한 잔 7,500원",
+      "severity": "minor",
+      "context": "주말 물가라 커피 한 잔에 **7,500원**씩 태우면서",
+      "lineNumber": 134
+    }
+  ],
+  "corrections": [
+    {
+      "claimId": "ct-2",
+      "originalText": "국립현대미술관 전시당 2,000~5,000원 (2026년부터 유료 전환)",
+      "suggestedText": "국립현대미술관 전시당 2,000~5,000원 (2026년부터 유료 전환)",
+      "reason": "국현미는 기존에도 유료였음 — '유료 전환'이 아니라 '관람료 인상'이 정확. 2026년 실제 가격: 일반 전시 2,000원(유지), 기획전 5,000→8,000원(인상), 통합권 7,000→10,000원. 24세 이하 무료 유지.",
+      "autoApplicable": true
+    }
+  ],
+  "passesGate": false,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

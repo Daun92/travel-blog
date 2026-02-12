@@ -1,0 +1,174 @@
+{
+  "filePath": "drafts/2026-02-09-top-5.md",
+  "title": "성수동 다음은 어디? 문화로 뜨는 동네 TOP 5 (공유 안 하면 손해)",
+  "checkedAt": "2026-02-09T15:19:17.929Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 8,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 7,
+      "verified": 7,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 1,
+      "verified": 1,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.ydp.go.kr/tour/contents.do?key=4001",
+      "details": "문래창작촌은 영등포구 문래동에 실재. 약 1,000개 철공소와 300명 이상 예술가 활동 중.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://groundseesaw.com/seoul/en/",
+      "details": "그라운드시소 서촌은 종로구 자하문로 6길 18-8에 실재. 입장료 15,000원.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.daelimmuseum.org/",
+      "details": "대림미술관은 종로구 자하문로4길 21(통의동)에 실재. 현재 정상 운영 중.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.leeumhoam.org/leeum",
+      "details": "리움미술관은 한남동에 실재. 현재 '이불' 전시 진행 중.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://www.mhns.co.kr/news/articleView.html?idxno=516315",
+      "details": "페이스 갤러리(르 베이지 건물)와 타데우스 로팍(포트힐 건물 2층) 모두 한남동에 실재.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://sewoon.org/",
+      "details": "세운상가 실재. 메이커시티세운으로 운영. 세운전자박물관 등 문화 공간 있음.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://mediahub.seoul.go.kr/archives/1279016",
+      "details": "신당중앙시장 실재. 시장 내 팝업/전시공간에 대한 구체적 근거는 미확인.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 80,
+      "source": "claude_knowledge",
+      "sourceUrl": "https://map.naver.com/v5/search/%EC%9D%84%EC%A7%80%EB%A1%9C3%EA%B0%80",
+      "details": "을지로 3가 일대는 실제로 낡은 빌딩 상층부에 독립 갤러리 및 대안공간이 다수 입주. 을지로 아트신으로 알려진 지역.",
+      "checkedAt": "2026-02-09T15:19:17.929Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "venue_exists",
+      "text": "문래창작촌",
+      "value": "문래창작촌",
+      "severity": "major"
+    },
+    {
+      "id": "ct-1",
+      "type": "venue_exists",
+      "text": "그라운드시소 서촌",
+      "value": "그라운드시소 서촌",
+      "severity": "major"
+    },
+    {
+      "id": "ct-2",
+      "type": "venue_exists",
+      "text": "대림미술관 서촌",
+      "value": "대림미술관",
+      "severity": "major"
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "리움미술관 한남동",
+      "value": "리움미술관",
+      "severity": "major"
+    },
+    {
+      "id": "ct-4",
+      "type": "venue_exists",
+      "text": "페이스 갤러리, 타데우스 로팍 한남동",
+      "value": "페이스 갤러리, 타데우스 로팍",
+      "severity": "major"
+    },
+    {
+      "id": "ct-5",
+      "type": "venue_exists",
+      "text": "세운상가 을지로",
+      "value": "세운상가",
+      "severity": "major"
+    },
+    {
+      "id": "ct-6",
+      "type": "venue_exists",
+      "text": "신당중앙시장",
+      "value": "신당중앙시장",
+      "severity": "major"
+    },
+    {
+      "id": "ct-7",
+      "type": "location",
+      "text": "을지로 3가 뒷골목에 갤러리들이 숨어 있음",
+      "value": "을지로 3가",
+      "severity": "minor"
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

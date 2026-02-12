@@ -1,0 +1,44 @@
+{
+  "filePath": "drafts/2026-02-10-gangneung.md",
+  "title": "강릉 겨울 여행의 진면목, 역사와 문학으로 읽는 고즈넉한 예향의 숨결",
+  "claims": [
+    { "id": "ct-0", "type": "location", "text": "경포로 365", "value": "경포로 365", "severity": "critical", "context": "강원특별자치도 강릉시 경포로 365", "lineNumber": 20 },
+    { "id": "ct-1", "type": "location", "text": "경포로 349", "value": "경포로 349", "severity": "critical", "context": "강원특별자치도 강릉시 경포로 349 (저동)", "lineNumber": 34 },
+    { "id": "ct-2", "type": "location", "text": "굴산사지 당간지주 높이 5.4m", "value": "5.4m", "severity": "critical", "context": "높이 5.4m짜리 당간지주", "lineNumber": 40 },
+    { "id": "ct-3", "type": "price", "text": "가격: 15,000원", "value": "15,000원", "severity": "minor", "context": "가격: 15,000원", "lineNumber": 63 }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.gn.go.kr/tour/",
+      "details": "경포대는 강원특별자치도 강릉시 경포로 365에 위치. 강릉시 관광 사이트 확인."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://access.visitkorea.or.kr/ms/detail.do?cotId=78f6afa9-7646-432e-b34f-64881e1820a2",
+      "details": "한국관광공사 열린관광 페이지 확인: 강릉 3·1운동 기념공원 주소 강원특별자치도 강릉시 경포로 349 (저동). 문의: 강릉시청 녹지과 033-640-5908."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://encykorea.aks.ac.kr/Article/E0006751",
+      "details": "한국민족문화대백과사전 확인: 강릉 굴산사지 당간지주 높이 5.4m, 보물 제86호. 우리나라에서 가장 규모가 큰 당간지주."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.gtdc.or.kr/",
+      "details": "참소리축음기&에디슨과학박물관 성인 입장료 15,000원 확인. 강릉관광개발공사 및 인터파크 티켓 정보."
+    }
+  ]
+}

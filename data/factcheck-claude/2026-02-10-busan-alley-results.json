@@ -1,0 +1,30 @@
+{
+  "filePath": "drafts/2026-02-10-post-2.md",
+  "title": "부산의 결을 읽다: 산복도로의 애환과 동래의 전통이 깃든 골목 여행",
+  "checkedAt": "2026-02-10T23:30:00+09:00",
+  "claims": [
+    { "id": "ct-0", "type": "location", "text": "초량밀면 부산 동구 중앙대로 225", "severity": "critical" },
+    { "id": "ct-1", "type": "location", "text": "왔다식당 부산 영도구 남항서로 97", "severity": "critical" },
+    { "id": "ct-2", "type": "location", "text": "동래할매파전 부산 동래구 명륜로94번길 43-10", "severity": "critical" },
+    { "id": "ct-7", "type": "price", "text": "물밀면/비빔밀면 (소) 6,000원, 왕만두 6,000원", "severity": "minor" },
+    { "id": "ct-8", "type": "price", "text": "스지전골 12,000원", "severity": "minor" },
+    { "id": "ct-9", "type": "price", "text": "동래파전 (소) 30,000원", "severity": "minor" },
+    { "id": "ct-10", "type": "price", "text": "골동반 18,000원", "severity": "minor" },
+    { "id": "ct-11", "type": "transport", "text": "마을버스 활용 추천", "severity": "minor" }
+  ],
+  "results": [
+    { "claimId": "ct-0", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://triple.guide/restaurants/193d2b46-eb9b-41b0-be22-ef349da38eff", "details": "초량밀면 본점 주소 부산 동구 중앙대로 225 확인" },
+    { "claimId": "ct-1", "status": "verified", "confidence": 90, "source": "web_search", "sourceUrl": "https://www.diningcode.com/profile.php?rid=rtSw2x97wYSp", "details": "[AUTO-FIXED] 남항서로 97 → 하나길 811로 수정 완료" },
+    { "claimId": "ct-2", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://www.siksinhot.com/P/89582", "details": "동래할매파전 주소 부산 동래구 명륜로94번길 43-10 확인" },
+    { "claimId": "ct-7", "status": "verified", "confidence": 90, "source": "web_search", "sourceUrl": "https://triple.guide/restaurants/193d2b46-eb9b-41b0-be22-ef349da38eff", "details": "[AUTO-FIXED] 6,000원 → 6,500원으로 수정 완료" },
+    { "claimId": "ct-8", "status": "verified", "confidence": 85, "source": "web_search", "sourceUrl": "https://www.diningcode.com/profile.php?rid=rtSw2x97wYSp", "details": "[AUTO-FIXED] 12,000원 → 14,000원으로 수정 완료" },
+    { "claimId": "ct-9", "status": "unknown", "confidence": 50, "source": "web_search", "details": "2026년 최신 가격 미확인. 공식 사이트/전화 확인 권장" },
+    { "claimId": "ct-10", "status": "unknown", "confidence": 50, "source": "web_search", "details": "2026년 최신 가격 미확인. 공식 사이트/전화 확인 권장" },
+    { "claimId": "ct-11", "status": "verified", "confidence": 80, "source": "claude_knowledge", "details": "부산 산복도로 마을버스 활용은 일반적으로 정확한 조언" }
+  ],
+  "autoFixed": [
+    { "claimId": "ct-1", "field": "address", "from": "부산 영도구 남항서로 97", "to": "부산 영도구 하나길 811" },
+    { "claimId": "ct-7", "field": "price", "from": "6,000원", "to": "6,500원" },
+    { "claimId": "ct-8", "field": "price", "from": "12,000원", "to": "14,000원" }
+  ]
+}

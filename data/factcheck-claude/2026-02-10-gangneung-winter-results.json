@@ -1,0 +1,21 @@
+{
+  "filePath": "drafts/2026-02-10-post-1.md",
+  "title": "겨울 강릉 여행, 인문학적 시선으로 바라본 동해의 깊은 정취",
+  "checkedAt": "2026-02-10T23:30:00+09:00",
+  "claims": [
+    { "id": "ct-0", "type": "location", "text": "강릉역에서 오죽헌, 선교장, 경포대까지 택시 15~20분", "severity": "critical" },
+    { "id": "ct-1", "type": "hours", "text": "오죽헌 09:00~18:00 (입장마감 17:00)", "severity": "major" },
+    { "id": "ct-2", "type": "hours", "text": "선교장 09:00~17:00 (동절기)", "severity": "major" },
+    { "id": "ct-3", "type": "price", "text": "오죽헌 성인 3,000원", "severity": "minor" },
+    { "id": "ct-4", "type": "price", "text": "선교장 성인 5,000원", "severity": "minor" },
+    { "id": "ct-5", "type": "transport", "text": "시내버스나 택시로 15~20분", "severity": "minor" }
+  ],
+  "results": [
+    { "claimId": "ct-0", "status": "verified", "confidence": 85, "source": "claude_knowledge", "details": "강릉역에서 오죽헌까지 약 15분, 경포대까지 약 20분 합리적" },
+    { "claimId": "ct-1", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://www.gn.go.kr/museum/contents.do?key=891", "details": "강릉시 오죽헌 공식 사이트 확인: 09:00~18:00, 입장마감 17:00" },
+    { "claimId": "ct-2", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://knsgj.net/tour", "details": "선교장 공식 사이트: 동절기 09:00~17:00, 하절기 09:00~18:00" },
+    { "claimId": "ct-3", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://www.gn.go.kr/museum/contents.do?key=891", "details": "오죽헌 성인 입장료 3,000원 확인" },
+    { "claimId": "ct-4", "status": "verified", "confidence": 95, "source": "web_search", "sourceUrl": "https://knsgj.net/tour", "details": "선교장 성인 입장료 5,000원 확인" },
+    { "claimId": "ct-5", "status": "verified", "confidence": 85, "source": "claude_knowledge", "details": "시내버스/택시로 15~20분 합리적 범위" }
+  ]
+}
