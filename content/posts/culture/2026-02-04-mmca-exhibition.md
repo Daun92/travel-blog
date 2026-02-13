@@ -21,14 +21,17 @@ keywords:
 cover:
   image: /travel-blog/images/mmca-cover.jpg
   alt: 국립현대미술관 서울관 정면 외관 (스테인드글라스와 건물명 간판)
-  caption: "출처: 한국관광공사"
+  caption: '출처: 한국관광공사'
   relative: false
   hidden: false
-author: Blog Author
+author: 한교양
+personaId: informative
 venue: 국립현대미술관 서울
 eventDate: 상설 전시
 ticketPrice: '통합권 7,000원 (야간/청년 무료)'
 openingHours: '10:00 - 18:00 (수, 토 21:00까지)'
+dataSources:
+  - 한국관광공사
 showToc: true
 TocOpen: false
 ShowReadingTime: true
@@ -36,13 +39,138 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 factcheckScore: 83
+faqs:
+  - q: 무료로 전시를 관람할 수 있는 방법이 있나요?
+    a: >-
+      매주 수요일과 토요일 야간개장 시간(18:00~21:00)에 방문하거나, 24세 미만 또는 65세 이상일 경우 신분증을 제시하면
+      무료로 입장할 수 있습니다.
+  - q: 미술관 휴관일은 언제인가요?
+    a: '매주 월요일과 1월 1일, 그리고 설날과 추석 당일은 정기 휴관일입니다.'
+  - q: 무거운 짐을 보관할 수 있는 곳이 있나요?
+    a: 미술관 1층에 무료로 이용 가능한 물품보관함이 마련되어 있어 편리하게 짐을 맡기고 관람할 수 있습니다.
+  - q: 전시 관람 외에 미술관 내에서 즐길 거리가 있나요?
+    a: '누구나 이용 가능한 미술 도서관에서 자료를 열람하거나, 야외 마당에서 조선시대 건축물인 종친부를 감상하며 휴식을 취할 수 있습니다.'
+  - q: 미술관 주변에 함께 방문하기 좋은 명소는 어디인가요?
+    a: '도보 10분 이내 거리에 경복궁, 삼청동 거리, 북촌한옥마을이 위치해 있어 함께 둘러보기 좋습니다.'
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 무료로 전시를 관람할 수 있는 방법이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            매주 수요일과 토요일 야간개장 시간(18:00~21:00)에 방문하거나, 24세 미만 또는 65세 이상일 경우 신분증을
+            제시하면 무료로 입장할 수 있습니다.
+      - '@type': Question
+        name: 미술관 휴관일은 언제인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '매주 월요일과 1월 1일, 그리고 설날과 추석 당일은 정기 휴관일입니다.'
+      - '@type': Question
+        name: 무거운 짐을 보관할 수 있는 곳이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 미술관 1층에 무료로 이용 가능한 물품보관함이 마련되어 있어 편리하게 짐을 맡기고 관람할 수 있습니다.
+      - '@type': Question
+        name: 전시 관람 외에 미술관 내에서 즐길 거리가 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            누구나 이용 가능한 미술 도서관에서 자료를 열람하거나, 야외 마당에서 조선시대 건축물인 종친부를 감상하며 휴식을 취할 수
+            있습니다.
+      - '@type': Question
+        name: 미술관 주변에 함께 방문하기 좋은 명소는 어디인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: '도보 10분 이내 거리에 경복궁, 삼청동 거리, 북촌한옥마을이 위치해 있어 함께 둘러보기 좋습니다.'
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁'
+    description: 국립현대미술관 서울관의 2026년 주요 전시회 소개와 알뜰하게 관람하는 팁을 정리했습니다. 야간 무료 입장 정보와 주변 볼거리까지!
+    author:
+      '@type': Person
+      name: 한교양
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: '2026-02-04T02:00:00.000Z'
+    dateModified: '2026-02-04T02:00:00.000Z'
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-04-mmca-exhibition/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': TouristAttraction
+    name: 국립현대미술관 서울
+    description: 국립현대미술관 서울관의 2026년 주요 전시회 소개와 알뜰하게 관람하는 팁을 정리했습니다. 야간 무료 입장 정보와 주변 볼거리까지!
+    address:
+      '@type': PostalAddress
+      streetAddress: ''
+      addressLocality: ''
+      addressCountry: KR
+    openingHoursSpecification:
+      - '@type': OpeningHoursSpecification
+        dayOfWeek:
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          - Sunday
+        opens: '10:00'
+        closes: '18:00'
+    priceRange: '통합권 7,000원 (야간/청년 무료)'
+  - '@context': 'https://schema.org'
+    '@type': Event
+    name: '국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁'
+    description: 국립현대미술관 서울관의 2026년 주요 전시회 소개와 알뜰하게 관람하는 팁을 정리했습니다. 야간 무료 입장 정보와 주변 볼거리까지!
+    startDate: 상설 전시
+    endDate: 상설 전시
+    location:
+      '@type': Place
+      name: 국립현대미술관 서울
+      address:
+        '@type': PostalAddress
+        streetAddress: ''
+        addressLocality: ''
+        addressCountry: KR
+    eventStatus: 'https://schema.org/EventScheduled'
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode'
+    offers:
+      '@type': Offer
+      price: 7000
+      priceCurrency: KRW
+      availability: 'https://schema.org/InStock'
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 문화
+        item: /travel-blog/culture/
+      - '@type': ListItem
+        position: 3
+        name: '국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁'
+        item: /travel-blog/posts//
 ---
-
 ## 소개
 
 경복궁 옆에 자리한 국립현대미술관 서울관(MMCA 서울)은 한국 현대미술의 심장이라 불리는 곳입니다. 2013년 개관 이후 국내외 현대미술의 흐름을 한눈에 볼 수 있는 전시를 꾸준히 선보이고 있죠.
 
 특히 2026년에는 '소멸'을 주제로 한 기획전과 1990년대 개념미술을 조명하는 전시가 주목받고 있습니다.
+
+![국립현대미술관 서울관 야간 외관과 경복궁](/travel-blog/images/kto-mmca-gallery-2.jpeg)
+*국립현대미술관 서울관 야경 — 붉은 벽돌 건물 사이로 경복궁 지붕이 보인다*
 
 ## 전시/공연 정보
 
@@ -56,8 +184,8 @@ factcheckScore: 83
 | **청년 무료** | 24세 미만 무료 (신분증 제시) |
 | **예매** | [국립현대미술관 공식 홈페이지](https://www.mmca.go.kr) |
 
-![관람 정보 가이드](/travel-blog/images/inline-mmca-exhibition-1.jpeg)
-*AI 생성 관람 가이드*
+![국립현대미술관 서울 미술 도서관](/travel-blog/images/kto-mmca-gallery-3.jpg)
+*미술 도서관 — 전시 관람과 별개로 누구나 이용할 수 있는 자료 열람 공간*
 
 ## 2026년 주요 전시
 
@@ -102,16 +230,22 @@ factcheckScore: 83
 ## 관람 포인트
 
 ### 1. 건축물 자체가 작품
-서울관 건물은 민현준 건축가의 작품으로, 한옥의 마당 개념을 현대적으로 재해석했습니다. 지하1층부터 지상3층까지 총 4개 층으로 구성되어 있으며, 전시와 별개로 건축 투어도 추천드려요.
 
-### 2. 경복궁 마당 (3층)
-3층에 위치한 '경복궁 마당'에서는 경복궁과 인왕산을 조망할 수 있습니다. 한옥의 마당을 현대적으로 재해석한 공간으로, 날씨 좋은 날 잠시 쉬어가기 좋습니다.
+서울관 건물은 민현준 건축가의 작품으로, 한옥의 마당 개념을 현대적으로 재해석했습니다. 지하1층부터 지상3층까지 총 4개 층으로 구성되어 있으며, 전시와 별개로 건축 투어도 추천드립니다.
+
+![국립현대미술관 서울관 정면 건축 외관](/travel-blog/images/vk-mmca-exterior.jpg)
+*서울관 정면 — 옛 국군기무사령부 건물의 붉은 벽돌을 보존한 건축 디자인*
+
+### 2. 마당과 종친부
+
+서울관의 핵심 공간인 '마당'에서는 조선시대 왕실 종친 업무를 맡았던 종친부 건물을 볼 수 있습니다. 현대 건축과 전통 건축이 공존하는 독특한 공간으로, 미술관 관람 중 잠시 바깥 공기를 쐬며 쉬어가기 좋습니다.
+
+![국립현대미술관 서울 마당과 종친부 전경](/travel-blog/images/vk-mmca-interior.jpg)
+*마당에서 바라본 종친부 — 현대 건축 사이에 보존된 조선시대 관아 건물*
 
 ### 3. 미술관 서점 & 아트샵
-1층 아트샵에서는 전시 관련 도록과 아트 굿즈를 구매할 수 있습니다.
 
-![추천 관람 동선](/travel-blog/images/inline-mmca-exhibition-2.jpeg)
-*AI 생성 관람 동선*
+1층 아트샵에서는 전시 관련 도록과 아트 굿즈를 구매할 수 있습니다.
 
 ## 관람 전 알아두면 좋은 것
 
@@ -121,9 +255,6 @@ factcheckScore: 83
 - **동선**: 1층→2층→3층 순서로 관람하거나 자유롭게 이동 가능
 
 ## 관람 팁
-
-![국립현대미술관 관람 동선](/travel-blog/images/inline-mmca-exhibition-diagram.jpeg)
-
 
 1. **방문 시간 팁**: 수요일/토요일 야간개장(18:00-21:00) 활용하면 무료로 관람 가능
 
@@ -141,9 +272,27 @@ factcheckScore: 83
 ## 주변 볼거리
 
 ### 근처 명소
-- **경복궁**: 도보 5분
-- **삼청동**: 도보 3분
-- **북촌한옥마을**: 도보 10분
+
+**경복궁** — 도보 5분
+
+조선의 법궁으로, 미술관 관람 전후에 함께 둘러보기 좋습니다. 한복 착용 시 무료 입장이 가능합니다.
+
+![경복궁 전경](/travel-blog/images/kto-mmca-gyeongbok-2.jpg)
+*경복궁 — 국립현대미술관 서울에서 도보 5분 거리*
+
+**삼청동** — 도보 3분
+
+미술관에서 나와 삼청로를 따라 걸으면 갤러리, 카페, 공방이 이어지는 삼청동 거리가 펼쳐집니다.
+
+![삼청동 거리 풍경](/travel-blog/images/kto-mmca-samcheong-1.jpg)
+*삼청동 거리 — 현대 건물과 한옥이 어우러진 문화 산책로*
+
+**북촌한옥마을** — 도보 10분
+
+600년 역사의 한옥 밀집 지역으로, 전통 건축의 미학을 체험할 수 있는 곳입니다.
+
+![북촌한옥마을 한옥 지붕 전경](/travel-blog/images/kto-mmca-bukchon-1.jpg)
+*북촌한옥마을 — 기와지붕 너머로 인왕산이 보이는 서울의 전통 주거 지역*
 
 ### 근처 맛집/카페
 - **삼청동 수제비**: 든든한 한 끼
@@ -154,7 +303,7 @@ factcheckScore: 83
 
 **별점**: ⭐⭐⭐⭐⭐ (5/5)
 
-국립현대미술관 서울관은 한국을 대표하는 미술관답게 전시의 질과 시설 모두 훌륭합니다. 특히 야간 무료 입장과 청년 무료 혜택으로 부담 없이 방문할 수 있다는 점이 큰 장점이에요.
+국립현대미술관 서울관은 한국을 대표하는 미술관답게 전시의 질과 시설 모두 훌륭합니다. 특히 야간 무료 입장과 청년 무료 혜택으로 부담 없이 방문할 수 있다는 점이 큰 장점입니다.
 
 **추천 대상:**
 - 현대미술에 관심 있는 분
@@ -167,9 +316,7 @@ factcheckScore: 83
 
 ## 마무리
 
-국립현대미술관 서울관은 서울에서 가장 접근성 좋은 세계적 수준의 미술관입니다. 경복궁 관광과 연계하면 알찬 하루를 보낼 수 있어요.
-
-이번 주말, 예술의 향기를 느끼러 MMCA 서울을 방문해 보세요!
+국립현대미술관 서울관은 서울에서 가장 접근성 좋은 세계적 수준의 미술관입니다. 경복궁 관광과 연계하면 알찬 하루를 보낼 수 있습니다.
 
 ---
 
@@ -179,3 +326,25 @@ factcheckScore: 83
 **관련 포스트:**
 - [북촌한옥마을 완벽 가이드](/posts/travel/2026-02-04-seoul-hanok-village/)
 - [서울 무료 전시회 모음](/posts/culture/seoul-free-exhibitions/)
+
+## 자주 묻는 질문
+
+### 무료로 전시를 관람할 수 있는 방법이 있나요?
+
+매주 수요일과 토요일 야간개장 시간(18:00~21:00)에 방문하거나, 24세 미만 또는 65세 이상일 경우 신분증을 제시하면 무료로 입장할 수 있습니다.
+
+### 미술관 휴관일은 언제인가요?
+
+매주 월요일과 1월 1일, 그리고 설날과 추석 당일은 정기 휴관일입니다.
+
+### 무거운 짐을 보관할 수 있는 곳이 있나요?
+
+미술관 1층에 무료로 이용 가능한 물품보관함이 마련되어 있어 편리하게 짐을 맡기고 관람할 수 있습니다.
+
+### 전시 관람 외에 미술관 내에서 즐길 거리가 있나요?
+
+누구나 이용 가능한 미술 도서관에서 자료를 열람하거나, 야외 마당에서 조선시대 건축물인 종친부를 감상하며 휴식을 취할 수 있습니다.
+
+### 미술관 주변에 함께 방문하기 좋은 명소는 어디인가요?
+
+도보 10분 이내 거리에 경복궁, 삼청동 거리, 북촌한옥마을이 위치해 있어 함께 둘러보기 좋습니다.

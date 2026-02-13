@@ -21,7 +21,10 @@ keywords:
   - 안목해변
   - 강릉 커피거리
   - 강릉 여행
-author: Blog Author
+author: 김주말
+personaId: friendly
+dataSources:
+  - 한국관광공사
 showToc: true
 TocOpen: false
 hidemeta: false
@@ -81,10 +84,10 @@ schema:
     description: >-
       강릉 여행의 필수 코스인 안목해변 강릉 커피거리! 바다 뷰가 환상적인 강릉 카페 추천부터 주차, 교통 정보, 현지인 팁까지 상세히
       소개해 드립니다.
-    image: /travel-blog/images/cover-gangneung-cJKfMvJGHD0.jpg
+    image: /travel-blog/images/cover-2026-02-05-gangneung-cafe.jpg
     author:
       '@type': Person
-      name: Blog Author
+      name: 김주말
     publisher:
       '@type': Organization
       name: OpenClaw Travel
@@ -118,9 +121,13 @@ factcheckScore: 85
 
 솔직히 말하면, 금요일 저녁 7시에 판교에서 차 끌고 나올 때까지만 해도 내가 왜 이 고생을 하나 싶었거든요. 근데 막상 2시간 40분 달려가서 밤바다 냄새 맡으니까 일단 숨은 쉬어지더라고요. 주말 48시간 알차게 태우러 온 '주말탈출러'들을 위해, 강릉 안목해변 커피거리의 현실을 가감 없이 털어볼게요.
 
-![강릉 안목해변 커피거리 카페 투어 지도](/travel-blog/images/inline-gangneung-cafe-map.jpeg)
+![안목커피거리 입구의 커피잔 조형물 — 바다 배경에 '안목커피거리' 글씨가 선명하다](/travel-blog/images/kto-gangneung-cafe-street-3.jpg)
+*출처: 한국관광공사*
 
 ## 1. 안목해변, 근데 이제 자판기 감성은 없는
+
+![겨울 안목해변 — 'ANMOK BEACH'가 적힌 구조대 너머로 파도가 일렁인다](/travel-blog/images/kto-gangneung-cafe-street-2.jpg)
+*출처: 한국관광공사*
 
 여기가 원래 자판기 커피로 유명했다면서요? 근데 지금 가보면 자판기는 구색 맞추기고, 그냥 거대한 카페 전시장 같아요. 인테리어는 예쁜데 커피값은 꽤 센 대형 카페들이 500m 넘게 줄지어 있죠. 솔직히 커피 맛이 거기서 거기지 싶다가도, 창밖으로 보이는 수평선 보면 '그래, 이 맛에 카드 긁지' 싶긴 해요. 근데 이게 핵심인데, 커피 맛 기대하고 가기보다는 그냥 '바다 보이는 자릿세' 낸다고 생각하는 게 속 편해요.
 
@@ -154,7 +161,11 @@ factcheckScore: 85
 *   **특징**: 상대적으로 덜 붐비고 커피 맛이 안정적임.
 *   **한 줄 평**: 기대 안 하고 갔다가 제일 편하게 쉬다 옴.
 
-![강릉 바다 뷰 카페 비교 가이드](/travel-blog/images/inline-gangneung-cafe-compare.jpeg)
+![안목해변 '거리커피' 자판기 — 여기가 원래 자판기 커피 성지였다는 증거](/travel-blog/images/kto-gangneung-cafe-street-4.jpg)
+*출처: 한국관광공사*
+
+![안목해변의 느린우체통 — 빨간 우체통 너머로 동해 파도가 부서진다](/travel-blog/images/kto-gangneung-cafe-street-1.jpg)
+*출처: 한국관광공사*
 
 ---
 
@@ -178,7 +189,11 @@ factcheckScore: 85
 *   **화장실**: 카페 내부 화장실도 줄 길어요. 해변 공중화장실이 의외로 관리가 잘 되어 있으니 급하면 거기로 가세요.
 *   **밤바다**: 낮에는 사람 구경인데, 밤에는 그래도 조명 덕분에 좀 봐줄 만합니다.
 
-![강릉 카페 감성 무드보드](/travel-blog/images/inline-gangneung-cafe-mood.jpeg)
+![안목해변 백사장의 커피잔 조형물 — 수평선 위로 구름이 흐르고, 나무 데크 위 하얀 커피잔이 서 있다](/travel-blog/images/kto-gangneung-cafe-anmok-1.jpg)
+*출처: 한국관광공사*
+
+![ANMOK 조형물 앞에서 바다를 바라보는 사람들 — 안목해맞이공원의 파란 글씨가 동해 수평선과 만난다](/travel-blog/images/kto-gangneung-cafe-sunrise-park.jpg)
+*출처: 한국관광공사*
 
 
 ---

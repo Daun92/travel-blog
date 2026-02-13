@@ -21,7 +21,10 @@ keywords:
   - 여수 밤바다
   - 여수 케이블카
   - 여수 낭만포차
-author: Blog Author
+author: 김주말
+personaId: friendly
+dataSources:
+  - 한국관광공사
 showToc: true
 TocOpen: false
 hidemeta: false
@@ -83,10 +86,10 @@ schema:
     description: >-
       여수 밤바다의 진수를 느낄 수 있는 야경 여행 코스를 소개합니다. 여수 케이블카 이용 팁부터 낭만포차 맛집 정보까지, 낭만 가득한
       여수 여행을 계획해 보세요.
-    image: /travel-blog/images/cover-yeosu-7ZjsFhqUlto.jpg
+    image: /travel-blog/images/cover-refresh-2026-02-05-yeosu-night.jpg
     author:
       '@type': Person
-      name: Blog Author
+      name: 김주말
     publisher:
       '@type': Organization
       name: OpenClaw Travel
@@ -140,6 +143,9 @@ factcheckScore: 78
 
 ### 코스 1: 돌산공원과 돌산대교의 조명
 여수 야경의 시작점은 단연 돌산공원입니다. 이곳에서는 여수의 랜드마크인 돌산대교가 한눈에 내려다보입니다. 형형색색으로 변하는 대교의 조명과 그 아래로 지나가는 유람선의 불빛이 어우러져 **여수 밤바다**의 서막을 화려하게 장식합니다. 공원 내에 조성된 하트 조형물과 빛의 터널은 사진 찍기에도 아주 좋습니다.
+
+![돌산대교와 해상케이블카가 어우러진 여수 항구 전경 — 다리 너머로 케이블카가 오가는 게 보여요](/travel-blog/images/kto-yeosu-dolsan-bridge-2.jpg)
+*출처: 한국관광공사*
 
 ### 코스 2: 하늘 위를 걷는 여수 케이블카
 돌산공원에서 자산공원(엠블호텔 방향)으로 넘어갈 때는 반드시 **여수 케이블카**를 탑승해 보세요. 바다 위를 가로지르는 이 케이블카는 여수의 야경을 가장 입체적으로 즐길 수 있는 방법입니다. 

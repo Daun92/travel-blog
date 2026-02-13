@@ -21,10 +21,13 @@ keywords:
 cover:
   image: /travel-blog/images/bukchon-cover.jpg
   alt: 북촌한옥마을 야경 골목 (한옥 기와지붕과 남산타워)
-  caption: "출처: 한국관광공사"
+  caption: '출처: 한국관광공사'
   relative: false
   hidden: false
-author: Blog Author
+author: 김주말
+personaId: friendly
+dataSources:
+  - 한국관광공사
 location: 서울 종로구 북촌
 visitDate: 2026년 2월
 budget: 약 3-5만원
@@ -36,13 +39,89 @@ ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
 factcheckScore: 85
+faqs:
+  - q: 북촌한옥마을에 가려면 어떤 대중교통을 이용하는 게 가장 좋나요?
+    a: 지하철 3호선 안국역 2번 출구에서 도보 5분 거리입니다. 주차가 매우 어려우므로 대중교통 이용을 권장합니다.
+  - q: 마을을 둘러볼 때 입장료가 따로 있나요?
+    a: 마을 입장료는 무료입니다. 북촌문화센터나 서울공예박물관도 무료로 관람할 수 있어 경제적입니다.
+  - q: 인생샷을 남기기 가장 좋은 장소와 시간대는 언제인가요?
+    a: 한옥 지붕과 서울 시내가 한눈에 담기는 북촌 6경을 추천합니다. 인파가 적은 오전 9~10시가 가장 좋습니다.
+  - q: 방문 시 특별히 주의해야 할 에티켓이 있나요?
+    a: 실제 주민 거주지이므로 큰 소리로 떠들면 안 됩니다. 무단 촬영을 삼가고 출입 제한 시간을 꼭 준수해 주세요.
+  - q: 전체 코스를 둘러보는 데 소요되는 시간은 어느 정도인가요?
+    a: 식사와 카페 이용을 포함해 약 4~5시간 정도 소요됩니다. 일정에 따라 2~3시간 단기 코스 선택도 가능합니다.
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 북촌한옥마을에 가려면 어떤 대중교통을 이용하는 게 가장 좋나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 지하철 3호선 안국역 2번 출구에서 도보 5분 거리입니다. 주차가 매우 어려우므로 대중교통 이용을 권장합니다.
+      - '@type': Question
+        name: 마을을 둘러볼 때 입장료가 따로 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 마을 입장료는 무료입니다. 북촌문화센터나 서울공예박물관도 무료로 관람할 수 있어 경제적입니다.
+      - '@type': Question
+        name: 인생샷을 남기기 가장 좋은 장소와 시간대는 언제인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 한옥 지붕과 서울 시내가 한눈에 담기는 북촌 6경을 추천합니다. 인파가 적은 오전 9~10시가 가장 좋습니다.
+      - '@type': Question
+        name: 방문 시 특별히 주의해야 할 에티켓이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 실제 주민 거주지이므로 큰 소리로 떠들면 안 됩니다. 무단 촬영을 삼가고 출입 제한 시간을 꼭 준수해 주세요.
+      - '@type': Question
+        name: 전체 코스를 둘러보는 데 소요되는 시간은 어느 정도인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: 식사와 카페 이용을 포함해 약 4~5시간 정도 소요됩니다. 일정에 따라 2~3시간 단기 코스 선택도 가능합니다.
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책'
+    description: '서울 북촌한옥마을의 숨은 명소부터 포토스팟, 주변 맛집까지. 반나절 코스로 즐기는 서울 도심 속 전통 여행 완벽 가이드입니다.'
+    author:
+      '@type': Person
+      name: 김주말
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: '2026-02-04T01:00:00.000Z'
+    dateModified: '2026-02-04T01:00:00.000Z'
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/2026-02-04-seoul-hanok-village/
+    inLanguage: ko_KR
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 여행
+        item: /travel-blog/travel/
+      - '@type': ListItem
+        position: 3
+        name: '서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책'
+        item: /travel-blog/posts//
 ---
-
 ## 개요
 
 서울 한복판에서 조선시대로 시간 여행을 떠날 수 있다면 믿으시겠어요? 북촌한옥마을은 600년 역사를 간직한 한옥들이 모여있는 곳으로, 현대적인 카페와 갤러리가 어우러져 독특한 분위기를 자아내는 서울의 대표 명소입니다.
 
 경복궁과 창덕궁 사이에 위치한 이곳은 조선시대 양반들이 살던 고급 주거지역이었습니다. 지금도 실제 주민들이 거주하고 있어 살아있는 역사를 느낄 수 있죠.
+
+![북촌한옥마을 기와지붕 너머로 보이는 서울 도심 전경 — 한옥과 빌딩이 공존하는 풍경이 인상적이에요](/travel-blog/images/kto-bukchon-rooftop-skyline.jpg)
+*출처: 한국관광공사*
 
 ## 기본 정보
 
@@ -68,8 +147,11 @@ factcheckScore: 85
 - 북촌 8경은 각각 다른 매력의 한옥 풍경 제공
 - 삼청동길에서 카페와 갤러리 탐방
 
-![북촌 한옥마을 산책 코스 지도](/travel-blog/images/inline-bukchon-course-map.jpeg)
+![북촌 산책 코스 한눈에 보기 — 안국역에서 삼청동까지 동선 정리](/travel-blog/images/inline-bukchon-course-map.jpeg)
+*북촌 산책 코스 요약 — 안국역 출발, 북촌문화센터부터 삼청동까지 반나절 동선이에요*
 
+![해질 무렵 북촌 골목길 — 한옥 담장 사이로 걷는 이 느낌이 진짜예요](/travel-blog/images/kto-bukchon-alley-evening.jpg)
+*출처: 한국관광공사*
 
 ### 코스 2: 포토그래퍼 코스 (3시간)
 
@@ -83,6 +165,9 @@ factcheckScore: 85
 - 북촌 6경은 한옥 지붕과 서울 시내가 함께 담김
 - 한복 대여 시 더 멋진 사진 가능 (대여비 약 2-3만원)
 
+![북촌 기와지붕 사이로 보이는 남산타워 — 이 구도가 북촌 6경의 포인트예요](/travel-blog/images/kto-bukchon-tower-view.jpg)
+*출처: 한국관광공사*
+
 ## 맛집 & 카페
 
 ### 1. 북촌손만두
@@ -92,9 +177,6 @@ factcheckScore: 85
 - **가격대**: 1-2만원
 
 40년 전통의 손만두 전문점입니다. 두툼한 피에 꽉 찬 속이 일품이에요.
-
-![북촌 한옥마을 관람 정보 가이드](/travel-blog/images/inline-bukchon-visitor-info.jpeg)
-
 
 ### 2. 삼청동 수제비
 - **주소**: 서울 종로구 삼청로 101-1
@@ -110,6 +192,9 @@ factcheckScore: 85
 
 한옥을 개조한 감성 카페로 분위기가 정말 좋습니다.
 
+![삼청동 거리 풍경 — 한옥과 갤러리, 카페가 어우러진 거리를 직접 걸어봤어요](/travel-blog/images/kto-bukchon-samcheong-street.jpg)
+*출처: 한국관광공사*
+
 ## 여행 팁
 
 1. **교통 팁**: 주차가 어려우니 대중교통 이용 권장. 안국역이 가장 가깝습니다.
@@ -122,8 +207,8 @@ factcheckScore: 85
 
 ## 주의사항
 
-![북촌 한옥마을 감성 무드보드](/travel-blog/images/inline-bukchon-mood.jpeg)
-
+![가회동 골목 — 이런 좁은 골목은 실제 주민 거주지라 조용히 다녀야 해요](/travel-blog/images/kto-mmca-bukchon-2.jpg)
+*출처: 한국관광공사*
 
 - 골목길이 경사가 있어 편한 신발 필수
 - 여름철에는 그늘이 적으니 양산이나 모자 준비
@@ -135,6 +220,9 @@ factcheckScore: 85
 
 특히 외국인 친구와 함께라면 한국의 전통문화를 소개하기에 더없이 좋은 장소입니다.
 
+![북촌 골목길 끝에서 바라본 남산타워 — 이 한 장으로 북촌의 매력이 다 담겨요](/travel-blog/images/kto-bukchon-alley-tower.jpg)
+*출처: 한국관광공사*
+
 다음에는 근처의 창덕궁과 후원 산책 코스도 소개해 드릴게요!
 
 ---
@@ -142,3 +230,25 @@ factcheckScore: 85
 **관련 포스트:**
 - [경복궁 야간개장 완벽 가이드](/posts/travel/gyeongbokgung-night/)
 - [삼청동 갤러리 투어](/posts/culture/samcheong-gallery/)
+
+## 자주 묻는 질문
+
+### 북촌한옥마을에 가려면 어떤 대중교통을 이용하는 게 가장 좋나요?
+
+지하철 3호선 안국역 2번 출구에서 도보 5분 거리입니다. 주차가 매우 어려우므로 대중교통 이용을 권장합니다.
+
+### 마을을 둘러볼 때 입장료가 따로 있나요?
+
+마을 입장료는 무료입니다. 북촌문화센터나 서울공예박물관도 무료로 관람할 수 있어 경제적입니다.
+
+### 인생샷을 남기기 가장 좋은 장소와 시간대는 언제인가요?
+
+한옥 지붕과 서울 시내가 한눈에 담기는 북촌 6경을 추천합니다. 인파가 적은 오전 9~10시가 가장 좋습니다.
+
+### 방문 시 특별히 주의해야 할 에티켓이 있나요?
+
+실제 주민 거주지이므로 큰 소리로 떠들면 안 됩니다. 무단 촬영을 삼가고 출입 제한 시간을 꼭 준수해 주세요.
+
+### 전체 코스를 둘러보는 데 소요되는 시간은 어느 정도인가요?
+
+식사와 카페 이용을 포함해 약 4~5시간 정도 소요됩니다. 일정에 따라 2~3시간 단기 코스 선택도 가능합니다.

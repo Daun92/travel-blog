@@ -21,7 +21,10 @@ keywords:
   - 대구 근대골목
   - 김광석 거리
   - 서문시장
-author: Blog Author
+author: 한교양
+personaId: informative
+dataSources:
+  - 한국관광공사
 showToc: true
 TocOpen: false
 hidemeta: false
@@ -81,10 +84,10 @@ schema:
     description: >-
       대구 여행 필수 코스인 대구 근대골목, 김광석 거리, 서문시장을 잇는 역사 탐방 도보 가이드입니다. 상세한 일정과 현지인 팁, 맛집
       정보까지 모두 담았습니다.
-    image: /travel-blog/images/cover-daegu-LVeFDJRtwEA.jpg
+    image: /travel-blog/images/cover-2026-02-05-daegu-alley.png
     author:
       '@type': Person
-      name: Blog Author
+      name: 한교양
     publisher:
       '@type': Organization
       name: OpenClaw Travel
@@ -135,7 +138,8 @@ factcheckScore: 88
 - **입장료:** 오늘 소개해 드리는 대부분의 코스는 무료 개방 구역입니다. 박물관 내부 관람 시 약간의 비용이 발생할 수 있으나, 도보 탐방 자체는 비용 부담이 거의 없습니다.
 - **소요 시간:** 사진 촬영과 식사 시간을 포함하여 약 4~6시간 정도 소요됩니다. 여유롭게 즐기고 싶으시다면 반나절 코스로 잡는 것이 좋습니다.
 
-![대구 도보 여행 코스 지도](/travel-blog/images/inline-daegu-course-map.jpeg)
+![경대병원역에서 김광석 거리, 근대골목, 서문시장까지 이어지는 대구 도보 여행 보물 지도](/travel-blog/images/inline-daegu-course-map.jpeg)
+*작성자: 한교양 -- 대구 근대 도보 코스 약 4~6시간 동선 안내*
 
 ---
 
@@ -144,6 +148,9 @@ factcheckScore: 88
 대구 여행의 시작은 영원한 가객, 김광석의 목소리가 흐르는 **김광석 거리**에서 시작합니다. 이곳은 대구 중구 대봉동 방천시장 인근 골목에 조성된 벽화거리로, 고(故) 김광석의 삶과 음악을 테마로 꾸며져 있습니다.
 
 약 350m에 달하는 골목 벽면에는 그의 노래 가사와 그의 모습을 담은 정교한 벽화들이 가득합니다. 골목 어디선가 들려오는 '서른 즈음에', '이등병의 편지' 같은 명곡들은 여행자의 발걸음을 멈추게 합니다. 이곳은 단순히 사진을 찍는 곳을 넘어, 중장년층에게는 향수를, 젊은 층에게는 레트로한 감성을 전달하는 특별한 공간입니다.
+
+![김광석다시그리기길 벽화 — 기타를 든 김광석과 콘서트 장면이 골목 벽면 가득 펼쳐져 있습니다](/travel-blog/images/kto-daegu-kimgwangseok.jpg)
+*출처: 한국관광공사*
 
 - **추천 스팟:** 김광석 동상 앞 포토존, 사랑의 자물쇠 코너
 - **주소:** [대구 중구 달구벌대로 450길](https://map.naver.com/v5/search/김광석다시그리기길)
@@ -157,8 +164,14 @@ factcheckScore: 88
 ### 청라언덕과 선교사 주택
 대구의 몽마르뜨 언덕이라 불리는 청라언덕은 대구 기독교가 뿌리를 내린 곳입니다. 100년 전 선교사들이 거주했던 스윗즈 주택, 블레어 주택 등 이국적인 붉은 벽돌 건물들이 푸른 숲과 어우러져 장관을 이룹니다. 이곳은 드라마 '미스터 션샤인'의 촬영지로도 알려져 있어 많은 관광객이 찾는 명소입니다.
 
+![동산 청라언덕 — 붉은 벽돌 선교사 주택 너머로 교회 첨탑이 솟아 있는 풍경](/travel-blog/images/kto-daegu-cheongna.jpg)
+*출처: 한국관광공사*
+
 ### 3.1 만세운동 계단과 계산성당
 청라언덕에서 아래로 내려오면 90개의 계단으로 이루어진 '3.1 만세운동 계단'을 만날 수 있습니다. 1919년 당시 학생들이 일제의 감시를 피해 만세 운동 장소로 이동했던 긴박한 역사의 현장입니다. 계단을 따라 내려가면 바로 건너편에 웅장한 고딕 양식의 **계산성당**이 나타납니다. 영남 지역 최초의 서양식 성당으로, 내부의 스테인드글라스는 꼭 한 번 감상해 보시길 권합니다.
+
+![대구근대역사관 — 일제강점기 은행 건물을 그대로 보존한 근대 건축물의 위엄](/travel-blog/images/kto-daegu-history.jpg)
+*출처: 한국관광공사*
 
 - **추천 스팟:** 3.1 계단 위에서 내려다보는 계산성당 전경
 - **주소:** [대구 중구 달구벌대로 2029](https://map.naver.com/v5/search/청라언덕)
@@ -177,9 +190,11 @@ factcheckScore: 88
 - **이용 팁:** 야시장은 오후 7시경부터 열리니, 저녁 시간대에 방문하신다면 화려한 길거리 음식을 즐기실 수 있습니다.
 - **주소:** [대구 중구 큰장로26길 45](https://map.naver.com/v5/search/서문시장)
 
-![서문시장 먹거리 가이드](/travel-blog/images/inline-daegu-food-guide.jpeg)
+![서문시장 야시장 — 해질녘 빨간 포장마차들이 줄지어 선 활기찬 거리 풍경](/travel-blog/images/kto-daegu-seomun.jpg)
+*출처: 한국관광공사*
 
-![대구 근대골목 가이드](/travel-blog/images/inline-daegu-alley-info.jpeg)
+![서문시장 야시장 전경 — 사람들로 북적이는 저녁 시장의 먹거리 골목](/travel-blog/images/kto-daegu-seomun3.jpg)
+*출처: 한국관광공사*
 
 
 ---
