@@ -85,6 +85,8 @@ schema:
         position: 2
         name: 여행
         item: 'https://daun92.github.io/travel-blog/categories/travel/'
+dataSources:
+  - 한국관광공사
 factcheckScore: 90
 ---
 # 북한산 주말 등산: 40분 줄 서서 인증샷 찍을 자신 없으면 읽어보세요
@@ -105,6 +107,9 @@ factcheckScore: 90
 ## 2. 코스 선택: 네이버 평점만 믿고 갔다간 무릎 나갑니다
 
 북한산 코스가 수십 개라는데, 주말탈출러 입장에서 딱 두 가지만 비교해 드릴게요.
+
+![북한산 백운대 정상 전경](/travel-blog/images/kto-bukhansan-1.jpg)
+*출처: 한국관광공사*
 
 ### 코스 1: 백운대 최단 코스 (836m 찍기)
 *   **소요 시간:** 왕복 3시간 30분 (대기 시간 제외)

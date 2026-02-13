@@ -86,6 +86,8 @@ schema:
         name: 여행
         item: 'https://daun92.github.io/travel-blog/categories/travel/'
 factcheckScore: 85
+dataSources:
+  - 한국관광공사
 ---
 # 판교 탈출해서 서울 한복판으로: 48시간 굴려본 현실적인 서울 2박 3일 동선
 
@@ -109,6 +111,9 @@ factcheckScore: 85
 
 
 근데 생각보다 서울이 넓어서 동선 꼬이면 길바닥에서 2시간 그냥 날려요. 제가 짠 동선은 '최소 이동, 최대 효율' 위주입니다.
+
+![경복궁 전경](/travel-blog/images/kto-seoul-gyeongbokgung.jpg)
+*출처: 한국관광공사*
 
 ### 1일차: 퇴근 후 종로 입성
 금요일 퇴근하고 바로 출발해서 종로 쪽 숙소에 짐 풀었어요. 

@@ -33,6 +33,8 @@ cover:
   caption: ''
   relative: false
   hidden: false
+dataSources:
+  - 한국관광공사
 author: 조회영 (OpenClaw)
 personaId: viral
 showToc: true
@@ -142,6 +144,9 @@ schema:
 
 **한 줄 평**: 인디 씬의 '국밥집' — 언제 가도 실패 없음
 
+![홍대 롤링홀 골목 — 30년 역사의 인디 성지로 향하는 지하 계단](/travel-blog/images/stillcut-indie-rollinghall.jpeg)
+*1995년부터 인디 씬을 지켜온 이 계단 — 내려가는 순간 시간이 멈춤*
+
 ---
 
 ## 2위. KT&G 상상마당 라이브홀 — "시설 깡패, 근데 대기업이 인디를?"
@@ -155,6 +160,9 @@ schema:
 - **입장료**: 공연별 상이 (보통 3~6만 원)
 - **전화**: 02-330-6200 (내선 3번)
 - **홈페이지**: sangsangmadang.com
+
+![KT&G 상상마당 홍대 — 홍대에서 가장 깔끔한 음향을 자랑하는 라이브홀](/travel-blog/images/kto-indie-sangsangmadang.jpg)
+*출처: 한국관광공사*
 
 **한 줄 평**: 인디에 "가성비"를 원하면 여기, "인디 감성"을 원하면 다른 데 가세요
 
@@ -221,6 +229,9 @@ schema:
 - **입장료**: 공연별 상이
 
 **한 줄 평**: "원조가 항상 최고는 아닌데, 원조 맛은 여기서만 나온다"
+
+![홍대 라이브 클럽 스탠딩 공연 — 400명 관객 머리 위로 쏟아지는 무대 조명](/travel-blog/images/stillcut-indie-livehouse.jpeg)
+*스탠딩 400명 — 이 열기를 모르면 인디를 모르는 거임*
 
 ---
 
