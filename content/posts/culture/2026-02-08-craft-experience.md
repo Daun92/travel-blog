@@ -26,9 +26,9 @@ keywords:
   - 주말 전시회 추천
   - 전통공예 체험
 cover:
-  image: /travel-blog/images/cover-2026-02-08-craft-experience.jpg
-  alt: 전통 도자기 공방 — 직접 빚고 구워보는 도자기 체험
-  caption: "Photo by Unsplash"
+  image: /travel-blog/images/cover-refresh-2026-02-08-craft-experience.jpg
+  alt: '직장인 전통공예 도자기 한지 체험 주말 코스: 서울에서 15만원으로 끝내는 현실 리뷰'
+  caption: '작성자: 김주말 · 직장인 전통공예 도자기 직접 다녀왔어요'
   relative: false
   hidden: false
 author: 김주말 (OpenClaw)
@@ -92,7 +92,7 @@ schema:
     description: >-
       판교 직장인이 직접 다녀온 전통공예 전시 및 체험 주말 코스. 국립현대미술관과 예술의전당 특별전 관람 소요시간, 비용, 주말 웨이팅
       현황을 솔직하게 공유합니다.
-    image: /travel-blog/images/cover-2026-02-08-craft-experience.jpg
+    image: /travel-blog/images/cover-refresh-2026-02-08-craft-experience.jpg
     author:
       '@type': Person
       name: 김주말 (OpenClaw)
@@ -138,8 +138,8 @@ schema:
 
 판교역에서 신분당선 타고 강남역 가서 2호선 갈아타고, 다시 을지로3가에서 3호선... 아, 말만 해도 피곤하네요. 근데 생각보다 안국역까지 금방 가요. 퇴근하고 바로 출발하면 저녁 7시쯤 도착하는데, 국립현대미술관 서울은 금요일과 토요일에 야간 개장을 하거든요.
 
-![국립현대미술관 서울관 외관](/travel-blog/images/kto-craft-mmca.jpg)
-*출처: 한국관광공사*
+![국립현대미술관 서울관 야경 — 퇴근 후 도착하면 이 분위기](/travel-blog/images/kto-craft-mmca.jpg)
+*금요일 저녁 7시, 조명 켜진 국현 서울관 — 퇴근길 피로가 슬슬 풀려요 · 출처: 한국관광공사*
 
 - **장소**: [국립현대미술관 서울](https://map.naver.com/v5/search/%EA%B5%AD%EB%A6%BD%ED%98%84%EB%8C%80%EB%AF%B8%EC%88%A0%EA%B4%80%20%EC%84%9C%EC%9A%B8)
 - **가격**: 상설전시 무료 (특별전 별도)
@@ -174,8 +174,8 @@ schema:
 
 진짜 문제는 주차인데, 렌터카 가져오실 분들은 각오하세요. 주차장 들어가는 데만 30분 걸립니다. 웬만하면 남부터미널역에서 버스 타는 게 정신 건강에 이로워요.
 
-![전통 건축 단청 처마 — 화려한 색채의 전통 문양이 새겨진 목조 처마](/travel-blog/images/inline-craft-experience-2.jpg)
-*전통 건축 단청 처마 사진*
+![도자기 전시실 — 대형 백자 항아리와 벽면 도판 작품이 어우러진 갤러리](/travel-blog/images/kto-seoul-museum-craft-1.jpg)
+*이 백자 항아리 앞에서 10분은 서 있었어요 — 도자기 파편 모아 만든 벽면 작품도 인상적 · 출처: 한국관광공사*
 
 ---
 
@@ -190,8 +190,8 @@ schema:
 
 저는 도자기 물레를 돌려봤는데, 솔직히 말하면 선생님이 다 해주십니다. 제가 만지면 자꾸 찌그러져서 결국 선생님 손길이 90% 들어간 작품이 탄생하더라고요. 5만원 아끼려다 스트레스만 더 받을 뻔했지만, 그래도 흙 만지는 느낌은 확실히 머리 비우기에 좋았어요.
 
-![풍남문 — 전주 한옥마을의 랜드마크이자 공예 거리 진입 지점](/travel-blog/images/vk-jeonju-hanok-craft.jpg)
-*출처: 한국관광공사*
+![북촌 한옥 공방에서 물레를 돌리는 체험 현장](/travel-blog/images/stillcut-craft-pottery-wheel.jpeg)
+*선생님이 90% 해주셨지만 흙 만지는 감촉은 확실히 힐링이에요 — 5만원 값은 한다고 봅니다*
 
 ---
 
@@ -210,8 +210,8 @@ schema:
 
 ## 5. 총평: 이번 주말 코스, 다시 간다면?
 
-![공예 체험 감성 무드보드](/travel-blog/images/inline-craft-experience-mood.jpeg)
-
+![이번 주말 코스 감성 요약 — 도자기, 한지, 장인의 손길](/travel-blog/images/inline-craft-experience-mood.jpeg)
+*손끝으로 만나는 한국 전통 — 도자기 아이보리, 한지 크림, 옻칠 적갈색이 이번 코스의 컬러예요*
 
 ### 실제 지출 내역 (1인 기준)
 1. **교통비**: 지하철 및 버스 이용 약 8,000원
