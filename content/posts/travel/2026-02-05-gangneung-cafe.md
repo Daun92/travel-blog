@@ -126,7 +126,7 @@ factcheckScore: 85
 
 ## 1. 안목해변, 근데 이제 자판기 감성은 없는
 
-![겨울 안목해변 — 'ANMOK BEACH'가 적힌 구조대 너머로 파도가 일렁인다](/travel-blog/images/kto-gangneung-cafe-street-2.jpg)
+![안목해변 거리커피 자판기 — 여기가 원래 자판기 커피 성지였다는 증거](/travel-blog/images/kto-gangneung-cafe-street-4.jpg)
 *출처: 한국관광공사*
 
 여기가 원래 자판기 커피로 유명했다면서요? 근데 지금 가보면 자판기는 구색 맞추기고, 그냥 거대한 카페 전시장 같아요. 인테리어는 예쁜데 커피값은 꽤 센 대형 카페들이 500m 넘게 줄지어 있죠. 솔직히 커피 맛이 거기서 거기지 싶다가도, 창밖으로 보이는 수평선 보면 '그래, 이 맛에 카드 긁지' 싶긴 해요. 근데 이게 핵심인데, 커피 맛 기대하고 가기보다는 그냥 '바다 보이는 자릿세' 낸다고 생각하는 게 속 편해요.
@@ -161,10 +161,7 @@ factcheckScore: 85
 *   **특징**: 상대적으로 덜 붐비고 커피 맛이 안정적임.
 *   **한 줄 평**: 기대 안 하고 갔다가 제일 편하게 쉬다 옴.
 
-![안목해변 '거리커피' 자판기 — 여기가 원래 자판기 커피 성지였다는 증거](/travel-blog/images/kto-gangneung-cafe-street-4.jpg)
-*출처: 한국관광공사*
-
-![안목해변의 느린우체통 — 빨간 우체통 너머로 동해 파도가 부서진다](/travel-blog/images/kto-gangneung-cafe-street-1.jpg)
+![겨울 안목해변 — 카페 밖으로 나오면 동해 겨울 파도가 기다리고 있다](/travel-blog/images/kto-gangneung-cafe-street-2.jpg)
 *출처: 한국관광공사*
 
 ---
@@ -180,6 +177,9 @@ factcheckScore: 85
 4.  **16:00 - 백사장 산책**
     신발에 모래 들어가는 거 싫어하면 그냥 방파제 쪽으로 걷는 게 나아요. 느린 우체통에 편지 쓰는 사람 많던데, 전 그냥 사진 한 장 찍고 말았습니다.
 
+![안목해변 느린우체통 — 빨간 우체통이 동해 바다와 모래사장 위에 서 있다](/travel-blog/images/kto-gangneung-cafe-street-1.jpg)
+*출처: 한국관광공사*
+
 ---
 
 ## 5. 알아두면 좋은 점 (투덜거림 섞인 요약)
@@ -189,10 +189,7 @@ factcheckScore: 85
 *   **화장실**: 카페 내부 화장실도 줄 길어요. 해변 공중화장실이 의외로 관리가 잘 되어 있으니 급하면 거기로 가세요.
 *   **밤바다**: 낮에는 사람 구경인데, 밤에는 그래도 조명 덕분에 좀 봐줄 만합니다.
 
-![안목해변 백사장의 커피잔 조형물 — 수평선 위로 구름이 흐르고, 나무 데크 위 하얀 커피잔이 서 있다](/travel-blog/images/kto-gangneung-cafe-anmok-1.jpg)
-*출처: 한국관광공사*
-
-![ANMOK 조형물 앞에서 바다를 바라보는 사람들 — 안목해맞이공원의 파란 글씨가 동해 수평선과 만난다](/travel-blog/images/kto-gangneung-cafe-sunrise-park.jpg)
+![ANMOK 조형물 앞에서 바다를 바라보는 사람들 — 이 뷰 하나로 월요일 출근 버틸 수 있다](/travel-blog/images/kto-gangneung-cafe-sunrise-park.jpg)
 *출처: 한국관광공사*
 
 
