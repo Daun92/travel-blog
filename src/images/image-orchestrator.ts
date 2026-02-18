@@ -234,8 +234,8 @@ function headingImageSimilarity(
  * KTO 실사진을 콘텐츠 H2/H3 섹션 뒤에 삽입
  * 이미지 제목과 헤딩 텍스트 유사도 매칭으로 배치 (기존: 인덱스 순서)
  */
-function insertKtoImages(content: string, ktoResults: KtoImageResult[], geoScope?: GeoScope, topic?: string): string {
-  if (ktoResults.length === 0) return content;
+function insertKtoImages(content: string, ktoResults: KtoImageResult[], geoScope?: GeoScope, topic?: string): { content: string; insertedCount: number } {
+  if (ktoResults.length === 0) return { content, insertedCount: 0 };
 
   const lines = content.split('\n');
   const headings: Array<{ index: number; text: string }> = [];
@@ -250,7 +250,7 @@ function insertKtoImages(content: string, ktoResults: KtoImageResult[], geoScope
     const imageBlocks = ktoResults.map(r =>
       `\n![${r.alt}](${r.relativePath})\n*${r.caption}*\n`
     );
-    return imageBlocks.join('') + '\n' + content;
+    return { content: imageBlocks.join('') + '\n' + content, insertedCount: ktoResults.length };
   }
 
   // 지역명 stopword: topic + H1 제목 + geoScope 결합
@@ -294,12 +294,46 @@ function insertKtoImages(content: string, ktoResults: KtoImageResult[], geoScope
     lines.splice(pos + 1, 0, imageBlock);
   }
 
-  return lines.join('\n');
+  return { content: lines.join('\n'), insertedCount: assignments.length };
 }
 
 /**
  * 마커의 라인 번호로 속한 섹션 찾기
  */
+/** 페르소나별 캡션 톤 */
+const PERSONA_CAPTION_TONE: Record<string, (subject: string) => string> = {
+  viral: (s) => `${s} — 이건 직접 봐야 됨`,
+  friendly: (s) => `${s} — 직접 다녀왔어요`,
+  informative: (s) => `${s} — 알면 더 깊은 여행`,
+  niche: (s) => `${s} — 파면 팔수록 빠져들어요`,
+};
+
+/**
+ * 역할 기반 캡션 생성 ("AI 생성 ~" 대신 맥락 내러티브)
+ */
+function buildImageCaption(style: ImageStyle, sectionTitle: string, personaId?: string): string {
+  // 헤딩에서 번호/마크다운 제거
+  const cleanTitle = sectionTitle.replace(/^[#\s\d.:]+/, '').trim();
+  const shortTitle = cleanTitle.length > 20 ? cleanTitle.slice(0, 20) : cleanTitle;
+
+  if (style === 'cover_photo') {
+    // 스틸컷: 페르소나 톤 내러티브
+    const toneFn = PERSONA_CAPTION_TONE[personaId ?? ''];
+    return toneFn ? toneFn(shortTitle) : shortTitle;
+  }
+
+  // 일러스트: 간결한 설명 (AI 생성 없이)
+  const illustMap: Partial<Record<ImageStyle, string>> = {
+    moodboard: '감성 무드보드',
+    diagram: '여정 일러스트',
+    infographic: '정보 가이드',
+    bucketlist: '버킷리스트',
+    map: '코스 지도',
+    comparison: '비교 가이드',
+  };
+  return `${shortTitle} ${illustMap[style] ?? '일러스트'}`;
+}
+
 function findSectionForMarker(sections: ContentSection[], markerLine: number): ContentSection | null {
   for (let i = sections.length - 1; i >= 0; i--) {
     if (markerLine >= sections[i].startLine) {
@@ -368,12 +402,16 @@ export async function processInlineImages(
 
   // ── Step 2: KTO 사진을 content 중간에 삽입 (헤딩-제목 유사도 매칭) ──
   let processedContent = content;
+  let ktoInsertedCount = 0;
   if (ktoResults.length > 0) {
-    processedContent = insertKtoImages(processedContent, ktoResults, geoScope, topic);
+    const ktoInsertResult = insertKtoImages(processedContent, ktoResults, geoScope, topic);
+    processedContent = ktoInsertResult.content;
+    ktoInsertedCount = ktoInsertResult.insertedCount;
   }
 
-  // ── Step 3: 나머지 슬롯은 기존 AI 마커 기반 생성 ──
-  const remainingSlots = imageCount - ktoResults.length;
+  // ── Step 3: 나머지 슬롯은 AI 마커 기반 생성 ──
+  // 실제 삽입된 KTO 수 기준 (다운로드만 되고 미삽입된 것은 제외)
+  const remainingSlots = imageCount - ktoInsertedCount;
 
   if (remainingSlots > 0) {
     const geminiClient = new GeminiImageClient();
@@ -397,13 +435,11 @@ export async function processInlineImages(
       onProgress(`주의: ${usageCheck.warning}`);
     }
 
-    // 마커 추출 또는 자동 삽입
+    // 기존 Gemini 마커를 제거하고 역할 기반 마커로 재삽입
+    // (Gemini가 모든 마커를 infographic/diagram으로 생성하는 문제 방지)
+    processedContent = removeImageMarkers(processedContent);
+    processedContent = insertAutoMarkers(processedContent, type, remainingSlots);
     let markers = extractImageMarkers(processedContent);
-    if (markers.length === 0) {
-      onProgress('이미지 마커가 없습니다. 적절한 위치에 자동 삽입합니다.');
-      processedContent = insertAutoMarkers(processedContent, type, remainingSlots);
-      markers = extractImageMarkers(processedContent);
-    }
 
     const markersToProcess = markers.slice(0, remainingSlots);
 
@@ -449,11 +485,14 @@ export async function processInlineImages(
           const filename = `inline-${slug}-${i + 1}`;
           const savedImage = await saveImage(generatedImage, imageOutputDir, filename);
 
+          // 역할 기반 캡션 생성 ("AI 생성 ~" 형식 대신 맥락 내러티브)
+          const caption = buildImageCaption(marker.style, section?.title ?? marker.description, personaId);
+
           imageResults.push({
             marker,
             relativePath: savedImage.relativePath,
             alt: marker.description,
-            caption: savedImage.caption
+            caption
           });
 
           imagePaths.push(savedImage.filepath);

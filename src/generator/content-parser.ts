@@ -60,7 +60,7 @@ export function extractImageMarkers(content: string): ImageMarker[] {
       const style = styleStr as ImageStyle;
 
       // 유효한 스타일인지 확인
-      const validStyles: ImageStyle[] = ['infographic', 'diagram', 'map', 'comparison', 'moodboard', 'bucketlist'];
+      const validStyles: ImageStyle[] = ['infographic', 'diagram', 'map', 'comparison', 'moodboard', 'bucketlist', 'cover_photo'];
       if (validStyles.includes(style)) {
         markers.push({
           marker: fullMatch,
