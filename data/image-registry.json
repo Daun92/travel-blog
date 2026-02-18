@@ -449,6 +449,1012 @@
       "query": "달성사(목포)",
       "usedAt": "2026-02-12T16:00:00.000Z",
       "note": "image boost: 목포 근대역사 Section 2"
+    },
+    {
+      "ktoContentId": "2658227",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/57/3480057_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-1",
+      "query": "황리단길",
+      "usedAt": "2026-02-13T12:00:00.000Z",
+      "note": "경주 포스트 KTO 보강: 황리단길 한옥 카페 거리"
+    },
+    {
+      "ktoContentId": "2658227",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/60/3480060_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-1",
+      "query": "황리단길 전동차",
+      "usedAt": "2026-02-13T12:00:00.000Z",
+      "note": "경주 포스트 KTO 보강: 황리단길 전동차 대여"
+    },
+    {
+      "ktoContentId": "1492402",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/73/3554373_image2_1.JPG",
+      "source": "kto",
+      "postSlug": "2026-02-04-1",
+      "query": "대릉원",
+      "usedAt": "2026-02-13T12:00:00.000Z",
+      "note": "경주 포스트 KTO 보강: 대릉원 고분 산책로"
+    },
+    {
+      "ktoContentId": "1492402",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/83/3554583_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-1",
+      "query": "대릉원 고분",
+      "usedAt": "2026-02-13T12:00:00.000Z",
+      "note": "경주 포스트 KTO 보강: 대릉원 쌍릉 클로즈업"
+    },
+    {
+      "ktoContentId": "128526",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/37/3029037_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-1",
+      "query": "동궁과월지",
+      "usedAt": "2026-02-13T12:00:00.000Z",
+      "note": "경주 포스트 KTO 보강: 동궁과월지 야경 항공뷰"
+    },
+    {
+      "ktoContentId": "126166",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/65/3506165_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-1",
+      "query": "불국사",
+      "usedAt": "2026-02-13T12:00:00.000Z",
+      "note": "경주 포스트 KTO 보강: 불국사 가을 전경"
+    },
+    {
+      "ktoContentId": "3072031",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/63/3054663_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-2-5",
+      "query": "발왕산 기 스카이워크",
+      "usedAt": "2026-02-13T19:10:00.000Z",
+      "note": "겨울여행 베스트 5 포스트: Section 1 평창 발왕산"
+    },
+    {
+      "ktoContentId": "126114",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/31/3503531_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-2-5",
+      "query": "덕구온천 스파월드",
+      "usedAt": "2026-02-13T19:10:00.000Z",
+      "note": "겨울여행 베스트 5 포스트: Section 2 울진 덕구온천"
+    },
+    {
+      "ktoContentId": "127202",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/73/3555173_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-2-5",
+      "query": "어승생악",
+      "usedAt": "2026-02-13T19:10:00.000Z",
+      "note": "겨울여행 베스트 5 포스트: Section 4 제주 어승생악"
+    },
+    {
+      "ktoContentId": "1818945",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/36/3558336_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-04-2-5",
+      "query": "원대리 자작나무 숲",
+      "usedAt": "2026-02-13T19:10:00.000Z",
+      "note": "겨울여행 베스트 5 포스트: Section 5 인제 자작나무 숲"
+    },
+    {
+      "ktoContentId": "126435",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/93/1876193_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-7",
+      "query": "성산일출봉",
+      "usedAt": "2026-02-13T20:00:00.000Z",
+      "note": "제주 카페 포스트: 오른 카페 섹션 성산 뷰"
+    },
+    {
+      "ktoContentId": "2791501",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/16/3498816_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-7",
+      "query": "애월해안도로",
+      "usedAt": "2026-02-13T20:00:00.000Z",
+      "note": "제주 카페 포스트: 인트로 애월 해안 항공뷰"
+    },
+    {
+      "ktoContentId": "2791501",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/17/3498817_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-7",
+      "query": "애월해안도로",
+      "usedAt": "2026-02-13T20:00:00.000Z",
+      "note": "제주 카페 포스트: 인트로 애월해안도로 전경"
+    },
+    {
+      "ktoContentId": "127490",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/62/3011862_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-7",
+      "query": "협재해수욕장",
+      "usedAt": "2026-02-13T20:00:00.000Z",
+      "note": "제주 카페 포스트: 카페 리스트 후 제주 서쪽 바다"
+    },
+    {
+      "ktoContentId": "572973",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/39/1618739_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-7",
+      "query": "새별오름",
+      "usedAt": "2026-02-13T20:00:00.000Z",
+      "note": "제주 카페 포스트: 새빌 카페 섹션 새별오름"
+    },
+    {
+      "ktoContentId": "1918639",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/29/1954529_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-7",
+      "query": "월정리해변",
+      "usedAt": "2026-02-13T20:00:00.000Z",
+      "note": "제주 카페 포스트: 현실 조언 섹션 월정리 해변"
+    },
+    {
+      "ktoContentId": "127722",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/55/2921955_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "안목해변",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: 안목해변 하트 벤치"
+    },
+    {
+      "ktoContentId": "127722",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/49/2921949_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "안목해변 커피잔 조형물",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: 안목해변 커피잔 조형물"
+    },
+    {
+      "ktoContentId": "2414791",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/91/3557691_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "강릉커피거리 커피잔 포토존",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: 안목커피거리 입구 커피잔 조형물"
+    },
+    {
+      "ktoContentId": "2414791",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/92/3557692_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "강릉커피거리 자판기",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: 안목 거리커피 자판기 (원조)"
+    },
+    {
+      "ktoContentId": "2414791",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/89/3557689_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "강릉커피거리 느린우체통",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: 안목해변 느린우체통"
+    },
+    {
+      "ktoContentId": "2414791",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/90/3557690_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "안목해변 ANMOK BEACH 구조대",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: ANMOK BEACH 구조대 타워"
+    },
+    {
+      "ktoContentId": "2706354",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/11/3378411_image2_1.JPG",
+      "source": "kto",
+      "postSlug": "2026-02-05-gangneung-cafe",
+      "query": "안목해맞이공원 ANMOK 조형물",
+      "usedAt": "2026-02-13T21:00:00.000Z",
+      "note": "강릉 카페 포스트: ANMOK 대형 조형물"
+    },
+    {
+      "ktoContentId": "264284",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/44/3479244_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-jeonju-hanok",
+      "query": "전주 한옥마을",
+      "usedAt": "2026-02-13T22:00:00.000Z",
+      "note": "전주 한옥마을 포스트: Section 1 항공 전경"
+    },
+    {
+      "ktoContentId": "264284",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/48/3479248_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-jeonju-hanok",
+      "query": "전주 한옥마을 거리",
+      "usedAt": "2026-02-13T22:00:00.000Z",
+      "note": "전주 한옥마을 포스트: Section 1 메인 거리 풍경"
+    },
+    {
+      "ktoContentId": "147656",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/75/3422575_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-jeonju-hanok",
+      "query": "경기전 정문",
+      "usedAt": "2026-02-13T22:00:00.000Z",
+      "note": "전주 한옥마을 포스트: Section 2 경기전 정문 한복"
+    },
+    {
+      "ktoContentId": "147656",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/78/3422578_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-jeonju-hanok",
+      "query": "경기전 내부",
+      "usedAt": "2026-02-13T22:00:00.000Z",
+      "note": "전주 한옥마을 포스트: Section 2 경기전 내부 커플"
+    },
+    {
+      "ktoContentId": "126621",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/45/3533045_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-jeonju-hanok",
+      "query": "오목대",
+      "usedAt": "2026-02-13T22:00:00.000Z",
+      "note": "전주 한옥마을 포스트: Section 5 오목대 누각"
+    },
+    {
+      "ktoContentId": "132326",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/45/3428545_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-05-jeonju-hanok",
+      "query": "전주 남부시장",
+      "usedAt": "2026-02-13T22:00:00.000Z",
+      "note": "전주 한옥마을 포스트: Section 4 남부시장 먹거리골목"
+    },
+    {
+      "ktoContentId": "126198",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/66/3580566_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-tongyeong",
+      "query": "세병관",
+      "usedAt": "2026-02-13T11:03:06.557Z",
+      "note": "통영 포스트: 세병관 실사"
+    },
+    {
+      "ktoContentId": "2480899",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/36/3500936_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-2-7",
+      "query": "수원화성",
+      "usedAt": "2026-02-13T11:03:06.557Z",
+      "note": "수원화성 포스트: 수원화성 관광특구"
+    },
+    {
+      "ktoContentId": "2613658",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/91/3350291_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-2-7",
+      "query": "방화수류정",
+      "usedAt": "2026-02-13T11:03:06.557Z",
+      "note": "수원화성 포스트: 방화수류정(동북각루)"
+    },
+    {
+      "ktoContentId": "2783363",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/83/2795083_image2_1.jpeg",
+      "source": "kto",
+      "postSlug": "2026-02-06-bukhansan",
+      "query": "북한산",
+      "usedAt": "2026-02-13T11:03:06.557Z",
+      "note": "북한산 포스트: 북한산 백운대(우이동)"
+    },
+    {
+      "ktoContentId": "126508",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/98/3487598_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-06-seoul-travel",
+      "query": "경복궁",
+      "usedAt": "2026-02-13T11:03:06.557Z",
+      "note": "서울 여행 포스트: 경복궁 전경"
+    },
+    {
+      "ktoContentId": "125790",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/52/3501452_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-10-post-1",
+      "query": "경포대",
+      "usedAt": "2026-02-13T11:03:18.010Z",
+      "note": "강릉 포스트: 강릉 경포대"
+    },
+    {
+      "ktoContentId": "1997221",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/91/3365491_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-10-post-2",
+      "query": "감천문화마을",
+      "usedAt": "2026-02-13T11:03:18.010Z",
+      "note": "부산 산복도로 포스트: 감천문화마을"
+    },
+    {
+      "ktoContentId": "2654613",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/91/3492391_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-10-post-2",
+      "query": "동래읍성",
+      "usedAt": "2026-02-13T11:03:18.010Z",
+      "note": "부산 산복도로 포스트: 동래읍성지"
+    },
+    {
+      "ktoContentId": "129197",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/70/3495570_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-10-post-2",
+      "query": "영도대교",
+      "usedAt": "2026-02-13T11:04:04.471Z",
+      "note": "부산 산복도로 포스트: 영도대교"
+    },
+    {
+      "ktoContentId": "126078",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/45/3311245_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-09-top-5",
+      "query": "광안리해수욕장",
+      "usedAt": "2026-02-13T11:03:18.010Z",
+      "note": "발렌타인 TOP5 포스트: 광안리 해수욕장"
+    },
+    {
+      "ktoContentId": "1333464",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/59/2733659_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-top-5",
+      "query": "백룡동굴",
+      "usedAt": "2026-02-13T11:03:18.010Z",
+      "note": "오지 탐험 TOP5 포스트: 백룡동굴"
+    },
+    {
+      "ktoContentId": "1704748",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/73/3575273_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-top-5",
+      "query": "울릉도",
+      "usedAt": "2026-02-13T11:03:18.010Z",
+      "note": "오지 탐험 TOP5 포스트: 울릉도 거북바위"
+    },
+    {
+      "ktoContentId": "128168",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/28/3529428_image2_1.JPG",
+      "source": "kto",
+      "postSlug": "2026-02-06-5",
+      "query": "헤이리",
+      "usedAt": "2026-02-13T11:04:04.471Z",
+      "note": "서울 근교 포스트: 헤이리 예술마을"
+    },
+    {
+      "ktoContentId": "128611",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/01/3532301_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-vs",
+      "query": "서울숲",
+      "usedAt": "2026-02-13T11:03:26.386Z",
+      "note": "성수동 포스트: 서울숲"
+    },
+    {
+      "ktoContentId": "1934593",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/02/2991502_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-craft-experience",
+      "query": "국립현대미술관 서울",
+      "usedAt": "2026-02-13T11:03:26.386Z",
+      "note": "공예 체험 포스트: 국립현대미술관 서울관"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-craft-pottery-wheel.jpeg",
+      "postSlug": "2026-02-08-craft-experience",
+      "personaId": "friendly",
+      "subject": "북촌 한옥 공방 도자기 물레 체험",
+      "usedAt": "2026-02-14T12:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 전주 풍남문 미스매치 교체"
+    },
+    {
+      "ktoContentId": "1344277",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/76/1971676_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "순천만-겨울-갈대숲-당일치기-현실-후기",
+      "query": "순천만 겨울 갈대숲 당일치기 현실 후기",
+      "usedAt": "2026-02-13T11:24:07.896Z"
+    },
+    {
+      "ktoContentId": "2782215",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/28/2786828_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "남해-다랭이논-독일마을-인문-여행",
+      "query": "남해 다랭이논 독일마을 인문 여행",
+      "usedAt": "2026-02-13T11:25:45.798Z"
+    },
+    {
+      "ktoContentId": "2910050",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/99/2883699_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "대전-대흥동-인디씬-디깅",
+      "query": "대전 대흥동 인디씬 디깅",
+      "usedAt": "2026-02-13T11:27:16.083Z"
+    },
+    {
+      "ktoContentId": "2650046",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/54/3497254_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-post",
+      "query": "익선동",
+      "usedAt": "2026-02-13T11:21:50.555Z"
+    },
+    {
+      "ktoContentId": "126510",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/15/3535215_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-post",
+      "query": "종묘",
+      "usedAt": "2026-02-13T11:21:50.555Z"
+    },
+    {
+      "ktoContentId": "2456701",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/41/3339841_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-top-5",
+      "query": "속초 중앙시장",
+      "usedAt": "2026-02-13T11:21:50.555Z"
+    },
+    {
+      "ktoContentId": "127585",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/94/3518594_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-90",
+      "query": "월미도",
+      "usedAt": "2026-02-13T11:21:50.555Z"
+    },
+    {
+      "ktoContentId": "126157",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/37/3585437_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-andong-hahoe",
+      "query": "안동 개목사",
+      "usedAt": "2026-02-13T11:21:50.555Z"
+    },
+    {
+      "ktoContentId": "1684836",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/14/3304814_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-12",
+      "query": "군산근대역사박물관",
+      "usedAt": "2026-02-13T11:21:50.555Z"
+    },
+    {
+      "ktoContentId": "1934593",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/02/2991502_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-2",
+      "query": "국립현대미술관 서울",
+      "usedAt": "2026-02-13T11:35:41.900Z"
+    },
+    {
+      "ktoContentId": "129703",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/12/3495012_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-07-2-top-5",
+      "query": "국립중앙박물관",
+      "usedAt": "2026-02-13T11:35:41.900Z"
+    },
+    {
+      "ktoContentId": "397572",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/17/3526617_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-indie-venue",
+      "query": "KT&G 상상마당",
+      "usedAt": "2026-02-13T11:35:41.900Z"
+    },
+    {
+      "ktoContentId": "125800",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/00/125800_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-02-08-traditional-liquor",
+      "query": "선교장",
+      "usedAt": "2026-02-13T11:37:00.000Z"
+    },
+    {
+      "ktoContentId": "1997202",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/64/3422964_image2_1.png",
+      "source": "kto",
+      "postSlug": "2026-02-05-yeosu-night",
+      "query": "여수 해상케이블카",
+      "usedAt": "2026-02-13T11:35:41.900Z"
+    },
+    {
+      "unsplashId": "EnbRvdWktwA",
+      "postSlug": "대전-대흥동-인디씬-디깅",
+      "query": "대전 대흥동 인디씬 디깅",
+      "usedAt": "2026-02-13T11:44:37.786Z"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-musical-opera-hall.jpeg",
+      "postSlug": "2026-02-05-2026-best-5",
+      "personaId": "friendly",
+      "subject": "예술의전당 오페라극장 객석",
+      "usedAt": "2026-02-13T23:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 공연장 공간만 촬영 (저작권 안전)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-musical-bluesquare.jpeg",
+      "postSlug": "2026-02-05-2026-best-5",
+      "personaId": "friendly",
+      "subject": "블루스퀘어 한강진 입구 저녁",
+      "usedAt": "2026-02-13T23:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 공연장 외관+대기열 (저작권 안전)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-indie-rollinghall.jpeg",
+      "postSlug": "2026-02-08-indie-venue",
+      "personaId": "viral",
+      "subject": "홍대 롤링홀 골목 지하 계단",
+      "usedAt": "2026-02-13T23:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 공연장 입구/계단 (저작권 안전)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-indie-livehouse.jpeg",
+      "postSlug": "2026-02-08-indie-venue",
+      "personaId": "viral",
+      "subject": "홍대 라이브클럽 스탠딩 공연",
+      "usedAt": "2026-02-13T23:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 관객 실루엣만 (저작권 안전)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-leeum-museum.jpeg",
+      "postSlug": "2026-02-05-post",
+      "personaId": "informative",
+      "subject": "리움미술관 건축 외관 (M1+블랙박스+M2)",
+      "usedAt": "2026-02-13T23:30:00.000Z",
+      "note": "AI 스틸컷 폴백: KTO 이미지 미등록 민간 시설 (Step 3b)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "cover-refresh-2026-02-05-post.jpg",
+      "postSlug": "2026-02-05-post",
+      "personaId": "informative",
+      "subject": "리움미술관 커버 (교양 관인)",
+      "usedAt": "2026-02-13T23:30:00.000Z",
+      "note": "AI 커버 재생성: Unsplash→Gemini 교체 + 교양 관인 오버레이"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-daeheung-signage.jpeg",
+      "postSlug": "2026-02-13-12-1",
+      "personaId": "niche",
+      "subject": "대흥동 골목 손글씨 간판 클로즈업",
+      "usedAt": "2026-02-13T23:45:00.000Z",
+      "note": "AI 스틸컷: Section 1 표면적인 대흥동 (필름 에뮬레이션)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-daeheung-bookshelf.jpeg",
+      "postSlug": "2026-02-13-12-1",
+      "personaId": "niche",
+      "subject": "독립서점 다다르다 합판 선반 디테일",
+      "usedAt": "2026-02-13T23:45:00.000Z",
+      "note": "AI 스틸컷: Section 4 덕질 디깅의 끝 (에디슨 전구 보케)"
+    },
+    {
+      "ktoContentId": "129669",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/52/3376052_image2_1.JPG",
+      "source": "kto",
+      "postSlug": "2026-02-07-top-5",
+      "query": "아침가리계곡",
+      "usedAt": "2026-02-13T12:20:36.553Z",
+      "note": "오지 탐험 TOP5: 3위 아침가리계곡 전경"
+    },
+    {
+      "ktoContentId": "2789629",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/22/3492922_image2_1.JPG",
+      "source": "kto",
+      "postSlug": "2026-02-07-top-5",
+      "query": "이끼폭포",
+      "usedAt": "2026-02-13T12:20:36.553Z",
+      "note": "오지 탐험 TOP5: 1위 삼척 무건리 이끼폭포"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-oji-birch-forest.jpeg",
+      "postSlug": "2026-02-07-top-5",
+      "personaId": "viral",
+      "subject": "영양 자작나무 숲 산기슭 오솔길",
+      "usedAt": "2026-02-13T12:25:00.000Z",
+      "note": "AI 스틸컷 폴백: KTO 영양자작나무숲 이미지 미등록 (contentId: 2704700)"
+    },
+    {
+      "ktoContentId": "2909061",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/38/2889838_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "서울-야경-명소-top-7:-로맨틱부터-힙플레이스까지-뷰-맛집-총정리",
+      "query": "서울 야경 명소 TOP 7: 로맨틱부터 힙플레이스까지 뷰 맛집 총정리",
+      "usedAt": "2026-02-14T05:51:46.911Z"
+    },
+    {
+      "ktoContentId": "2614198",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/46/4001646_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "2026-벚꽃-개화시기-완전-해설:-지역별-만개-예측과-꽃놀이-명소",
+      "query": "2026 벚꽃 개화시기 완전 해설: 지역별 만개 예측과 꽃놀이 명소",
+      "usedAt": "2026-02-14T05:53:22.698Z"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "1874105",
+      "postSlug": "2026-02-14-top-7",
+      "query": "응봉산",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "야경 TOP 7: 응봉산 한강 파노라마 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-nightview-eungbongsan.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "970052",
+      "postSlug": "2026-02-14-top-7",
+      "query": "세빛섬",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "야경 TOP 7: 반포대교 세빛섬 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-nightview-sebitseum.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "129501",
+      "postSlug": "2026-02-14-top-7",
+      "query": "낙산공원",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "야경 TOP 7: 낙산공원 성곽길 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-nightview-naksan.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "3013134",
+      "postSlug": "2026-02-14-top-7",
+      "query": "노들섬",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "야경 TOP 7: 노들섬 한강 복합문화공간 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-nightview-nodeul.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "716272",
+      "postSlug": "2026-02-14-2026",
+      "query": "경화역",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 진해 경화역 벚꽃 터널"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "128792",
+      "postSlug": "2026-02-14-2026",
+      "query": "여좌천",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 진해 여좌천 로망스다리 → AI 스틸컷으로 교체 (LED 하트 야경→벚꽃 수면 반사)",
+      "replacedBy": "stillcut-cherry-yeojwacheon.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "126230",
+      "postSlug": "2026-02-14-2026",
+      "query": "보문관광단지",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 경주 보문단지 벚꽃길 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-cherry-bomun.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "126166",
+      "postSlug": "2026-02-14-2026",
+      "query": "불국사",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 불국사 진입로 벚꽃 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-cherry-bulguksa.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "1492402",
+      "postSlug": "2026-02-14-2026",
+      "query": "대릉원",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 경주 대릉원 고분 벚꽃 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-cherry-daereungwon.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "754052",
+      "postSlug": "2026-02-14-2026",
+      "query": "석촌호수",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 석촌호수 벚꽃 산책로 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-cherry-seokchon.jpeg"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "127955",
+      "postSlug": "2026-02-14-2026",
+      "query": "여의도공원",
+      "usedAt": "2026-02-14T08:00:00.000Z",
+      "note": "벚꽃 개화시기: 여의도 윤중로 벚꽃길 → AI 스틸컷으로 교체",
+      "replacedBy": "stillcut-cherry-yeouido.jpeg"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-nightview-eungbongsan.jpeg",
+      "postSlug": "2026-02-14-top-7",
+      "personaId": "viral",
+      "subject": "응봉산 정상 서울 야경 파노라마",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 주간 이미지를 야경으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-nightview-sebitseum.jpeg",
+      "postSlug": "2026-02-14-top-7",
+      "personaId": "viral",
+      "subject": "반포대교 세빛섬 야경",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 주간 이미지를 야경으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-nightview-naksan.jpeg",
+      "postSlug": "2026-02-14-top-7",
+      "personaId": "viral",
+      "subject": "낙산공원 성곽길 야경",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 주간 이미지를 야경으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-nightview-nodeul.jpeg",
+      "postSlug": "2026-02-14-top-7",
+      "personaId": "viral",
+      "subject": "노들섬 양방향 서울 스카이라인 야경",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 주간 이미지를 야경으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-cherry-bomun.jpeg",
+      "postSlug": "2026-02-14-2026",
+      "personaId": "informative",
+      "subject": "경주 보문단지 벚꽃길",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 범용 관광사진을 벚꽃 만개 장면으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-cherry-bulguksa.jpeg",
+      "postSlug": "2026-02-14-2026",
+      "personaId": "informative",
+      "subject": "불국사 진입로 벚꽃 터널",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 가을 전경을 벚꽃 만개 장면으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-cherry-daereungwon.jpeg",
+      "postSlug": "2026-02-14-2026",
+      "personaId": "informative",
+      "subject": "경주 대릉원 고분과 벚꽃",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 범용 고분 사진을 벚꽃 계절로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-cherry-seokchon.jpeg",
+      "postSlug": "2026-02-14-2026",
+      "personaId": "informative",
+      "subject": "석촌호수 벚꽃과 롯데타워",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 범용 호수 사진을 벚꽃 만개 장면으로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-cherry-yeouido.jpeg",
+      "postSlug": "2026-02-14-2026",
+      "personaId": "informative",
+      "subject": "여의도 윤중로 벚꽃길",
+      "usedAt": "2026-02-14T10:00:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — 범용 공원 사진을 벚꽃 만개 터널로 교체"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-cherry-yeojwacheon.jpeg",
+      "postSlug": "2026-02-14-2026",
+      "personaId": "informative",
+      "subject": "진해 여좌천 벚꽃 수면 반사",
+      "usedAt": "2026-02-14T10:30:00.000Z",
+      "note": "AI 스틸컷: KTO 대체 — LED 하트 야경을 벚꽃 개천 풍경으로 교체"
+    },
+    {
+      "ktoContentId": "2809535",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/57/4001657_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "설날의-두-얼굴:-세배·떡국·윷놀이,-전통-명절-문화는-어떻게-변했는가",
+      "query": "설날의 두 얼굴: 세배·떡국·윷놀이, 전통 명절 문화는 어떻게 변했는가",
+      "usedAt": "2026-02-14T10:26:08.078Z"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "125578",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/87/3563987_image2_1.jpg",
+      "postSlug": "2026-02-14-post",
+      "query": "한국민속촌",
+      "usedAt": "2026-02-14T10:51:09.665Z",
+      "note": "설날 포스트 Section 2 (떡국): 전통 음식 문화 원형"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "2738515",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/45/3505445_image2_1.jpg",
+      "postSlug": "2026-02-14-post",
+      "query": "국립민속박물관",
+      "usedAt": "2026-02-14T10:51:09.665Z",
+      "note": "설날 포스트 Section 3 (윷놀이): 국립민속박물관 파주"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "1934593",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/02/2991502_image2_1.jpg",
+      "postSlug": "2026-02-14-post",
+      "query": "국립현대미술관 서울",
+      "usedAt": "2026-02-14T10:51:09.665Z",
+      "note": "설날 포스트 Section 4 (MMCA): 삼청동 서울관 전경"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "506378",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/89/4013389_image2_1.jpg",
+      "postSlug": "2026-02-14-post",
+      "query": "강진청자축제",
+      "usedAt": "2026-02-14T10:51:09.665Z",
+      "note": "설날 포스트 Section 5 (강진): 전통 청자 가마 현장"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "130099",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/68/3580668_image2_1.jpg",
+      "postSlug": "2026-02-14-post",
+      "query": "대가야박물관",
+      "usedAt": "2026-02-14T10:51:09.665Z",
+      "note": "설날 포스트 Section 5 (대가야): 가야 문명 전시"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "126398",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/98/126398_image2_1.jpg",
+      "postSlug": "2026-02-14-post",
+      "query": "고창읍성",
+      "usedAt": "2026-02-14T10:55:00.000Z",
+      "note": "설날 포스트 Section 5 (고창): 답성놀이 성벽 야경"
+    },
+    {
+      "ktoContentId": "4009866",
+      "ktoUrl": "https://tong.visitkorea.or.kr/cms/resource/65/4009865_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "거제-통영-남해-드라이브-코스-top-5",
+      "query": "거제 통영 남해 드라이브 코스 TOP 5",
+      "usedAt": "2026-02-18T00:00:57.744Z"
+    },
+    {
+      "ktoContentId": "2842851",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/47/2842847_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "망원동-문래동-신당동-디깅-성수-이후-서울의-세-가지-시간-지층",
+      "query": "망원동 문래동 신당동 디깅 성수 이후 서울의 세 가지 시간 지층",
+      "usedAt": "2026-02-18T00:02:36.722Z"
+    },
+    {
+      "ktoContentId": "3049823",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/26/3588926_image2_1.png",
+      "source": "kto",
+      "postSlug": "양평-vs-가평-당일치기-직장인-코스별-비용-정산",
+      "query": "양평 vs 가평 당일치기 직장인 코스별 비용 정산",
+      "usedAt": "2026-02-18T00:04:24.325Z"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "unknown",
+      "postSlug": "2026-02-18-to",
+      "query": "구조라관광어촌마을",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "거제 구조라 포구 — Section 2 삽입"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "unknown",
+      "postSlug": "2026-02-18-to",
+      "query": "덕포해수욕장",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "거제 덕포해수욕장 — Section 4 삽입"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "unknown",
+      "postSlug": "2026-02-18-post",
+      "query": "신당동 떡볶이타운",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "신당동 떡볶이타운 — Section 3 삽입"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "unknown",
+      "postSlug": "2026-02-18-vs",
+      "query": "양평 두물머리",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "양평 두물머리 — Section 3 삽입"
+    },
+    {
+      "source": "kto",
+      "ktoContentId": "unknown",
+      "postSlug": "2026-02-18-vs",
+      "query": "양평빙송어축제",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "양평빙송어축제 — Section 4 삽입"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "cover-refresh-2026-02-18-to.jpg",
+      "postSlug": "2026-02-18-to",
+      "personaId": "viral",
+      "subject": "거제 통영 남해 드라이브 TOP 5",
+      "usedAt": "2026-02-18T08:00:00.000Z",
+      "note": "AI 커버 재생성: 조회영 관인 오버레이"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "cover-refresh-2026-02-18-post.jpg",
+      "postSlug": "2026-02-18-post",
+      "personaId": "niche",
+      "subject": "서울 망원 문래 신당 시간 지층 디깅",
+      "usedAt": "2026-02-18T08:00:00.000Z",
+      "note": "AI 커버 재생성: 오덕우 관인 오버레이"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "cover-refresh-2026-02-18-vs.jpg",
+      "postSlug": "2026-02-18-vs",
+      "personaId": "friendly",
+      "subject": "양평 vs 가평 당일치기",
+      "usedAt": "2026-02-18T08:00:00.000Z",
+      "note": "AI 커버 재생성: 김주말 관인 오버레이"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-2026-02-18-post-mangwon.jpeg",
+      "postSlug": "2026-02-18-post",
+      "personaId": "niche",
+      "subject": "망원동즉석우동 — 태양초 국물 위로 피어오르는 김과 낡은 포미카 테이블",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 망원동 KTO DB 미등록 — niche/오덕우 인디 스트릿 스타일"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-2026-02-18-post-mullae.jpeg",
+      "postSlug": "2026-02-18-post",
+      "personaId": "niche",
+      "subject": "문래창작촌 골목 — 용접 불꽃이 벽면 그래피티를 비추는 오후 3시",
+      "usedAt": "2026-02-18T09:00:00.000Z",
+      "note": "AI 스틸컷 폴백: 문래동 KTO DB 미등록 — niche/오덕우 인디 스트릿 스타일"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "stillcut-2026-02-18-vs-bulbit.jpeg",
+      "postSlug": "2026-02-18-vs",
+      "personaId": "friendly",
+      "subject": "겨울엔 양평, 불빛:애 — 남한강 위로 번지는 겨울밤의 온기",
+      "usedAt": "2026-02-18T10:00:00.000Z",
+      "note": "AI 스틸컷: 빙송어축제 이미지→불빛:애 빛 축제 맥락 매칭 교체"
     }
   ]
 }

@@ -1,0 +1,207 @@
+{
+  "filePath": "drafts/2026-02-13-12.md",
+  "title": "12번 가서 알아낸 대전 대흥동 인디씬의 비밀: 국립현대미술관부터 예술의전당까지의 기록 디깅",
+  "checkedAt": "2026-02-13T11:37:52.575Z",
+  "overallScore": 73,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 33
+  },
+  "claims": {
+    "total": 8,
+    "verified": 4,
+    "false": 2,
+    "unknown": 2
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 2,
+      "verified": 2,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 6,
+      "verified": 2,
+      "false": 2,
+      "unknown": 2
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://ko.foursquare.com/v/%EA%B5%90%EB%B3%B4%EB%AC%B8%EA%B3%A0/578074cb498e75cae5cddfbf",
+      "details": "대전 서구 대덕대로 226은 실존하는 주소로, 둔산동 명동프라자 건물이며 교보문고 대전점(3층)이 입점해 있습니다. 주소 자체는 정확하나, 이 포스트는 '대흥동 인디씬'을 다루고 있는데 해당 주소는 둔산동(상업지구)에 위치합니다. 대흥동과는 다른 지역이므로 콘텐츠 맥락상 적합성에 의문이 있습니다. 주소 자체의 실존 여부는 verified이지만, 인디씬과의 연관성은 본문 맥락을 추가 확인해야 합니다.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://store.kyobobook.co.kr/store-info/002",
+      "details": "ct-0과 동일한 주소의 중복 클레임입니다. 대덕대로 226은 교보문고 대전점(명동프라자 3층, 둔산동)의 실제 주소입니다. 교보문고 공식 매장안내에서 확인됨.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "unknown",
+      "confidence": 45,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/show/todayShow",
+      "details": "[콘텐츠 오염 경고] 예술의전당은 서울 서초구 소재 시설로, 대전 대흥동 인디씬 포스트에 등장하는 것은 auto-collect 데이터 오염으로 판단됩니다. 예술의전당 특별전 입장료는 전시마다 상이하며(보통 10,000~20,000원 범위), 15,000원은 특정 전시의 가격으로 그럴듯하나 구체적으로 어떤 전시인지 명시되지 않아 정확한 검증 불가. 서울 시설이므로 대전 포스트에서 제거하거나 맥락을 수정해야 합니다.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://gugugguggu.com/entry/KTX-%EC%84%9C%EC%9A%B8%EC%97%AD%E2%86%92%EB%8C%80%EC%A0%84%EC%97%AD-%EC%98%88%EB%A7%A4-%EA%BF%80%ED%8C%81-%EC%B4%9D%EC%A0%95%EB%A6%AC-%EC%8B%A4%EC%8B%9C%EA%B0%84-%EC%98%88%EC%95%BD%C2%B7%EC%8B%9C%EA%B0%84%ED%91%9C%C2%B7%EC%9A%94%EA%B8%88-%EC%95%88%EB%82%B4",
+      "details": "KTX 서울-대전 일반실 편도 요금은 23,700원으로 확인됨. 왕복 47,400원(23,700원 x 2)은 정확합니다. 다만 요금은 열차 종류(KTX/KTX-산천/SRT)와 좌석 등급에 따라 변동될 수 있으며, 할인 적용 시 달라질 수 있습니다.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "false",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EA%B5%AD%EB%A6%BD%ED%98%84%EB%8C%80%EB%AF%B8%EC%88%A0%EA%B4%80",
+      "details": "[콘텐츠 오염 경고] 국립현대미술관 서울은 서울 종로구 삼청로 소재 시설로, 대전 포스트에 등장하는 것은 데이터 오염입니다. 또한 '입장료가 무료'라는 주장은 부분적으로만 정확합니다. 국립현대미술관 서울 상설전시는 무료이지만, 기획전시는 개별 관람 2,000~5,000원, 통합권 7,000원입니다. 수요일/토요일 야간(18-21시)은 무료 발권 가능. '무료'라고 단정하는 것은 오해 소지가 있습니다.",
+      "correctValue": "상설전시 무료, 기획전시 유료(2,000~5,000원/건, 통합권 7,000원). 수·토 야간 18-21시 무료.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "false",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://www.hottracks.co.kr/company/store/main?deptcode=030542",
+      "details": "교보핫트랙스 대전점은 교보문고 대전점(대덕대로 226, 명동프라자 3층)과 같은 건물에 위치합니다. 대전역에서 시청역까지 대전 도시철도 1호선으로 약 13분 소요되며, 시청역 3번 출구에서 도보 7분입니다. '지하철 15분'이라는 표현은 지하철 탑승 시간만으로는 약간 과대(실제 13분)이며, 도보를 포함하면 총 20분 내외입니다. 15분 내 도착은 어렵습니다.",
+      "correctValue": "대전역에서 지하철 약 13분(시청역) + 도보 약 7분 = 총 약 20분",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "unknown",
+      "confidence": 50,
+      "source": "web_search",
+      "sourceUrl": "https://moovitapp.com/index/ko/%EB%8C%80%EC%A4%91_%EA%B5%90%ED%86%B5-%EA%B5%AD%EB%A6%BD%ED%98%84%EB%8C%80%EB%AF%B8%EC%88%A0%EA%B4%80_%EC%84%9C%EC%9A%B8%EA%B4%80-%EC%84%9C%EC%9A%B8%EC%8B%9CSeoul-site_39731955-1802",
+      "details": "[콘텐츠 오염 경고] 국립현대미술관 서울(종로구 삼청로) 관련 클레임으로, 대전 포스트와 무관합니다. 서울역에서 국립현대미술관 서울까지 버스로 약 20분은 교통 상황에 따라 달라지나 대략적으로 가능한 범위입니다(광화문 경유 시 15-25분). 그러나 이 정보 자체가 대전 인디씬 포스트에 포함될 이유가 없습니다.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://www.rome2rio.com/ko/s/%EB%8C%80%EC%A0%84%EC%97%AD/%EC%8B%9C%EC%B2%AD%EC%97%AD-Daejeon-%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD",
+      "details": "대전역에서 대덕대로 226(교보문고 대전점, 둔산동)까지 지하철(대전역→시청역, 약 13분) + 도보(시청역 3번 출구에서 약 7분) = 약 20분은 대체로 정확합니다. 다만 환승이나 대기 시간을 포함하면 실제로는 20-25분이 될 수 있습니다.",
+      "checkedAt": "2026-02-13T11:37:52.575Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "대전 서구 대덕대로 226",
+      "value": "대전 서구 대덕대로 226",
+      "severity": "critical",
+      "context": "위치: 대전 서구 대덕대로 226 (대전역에서 지하철+도보 20분)",
+      "lineNumber": 66
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "대덕대로 226",
+      "value": "대덕대로 226",
+      "severity": "critical",
+      "context": "위치: 대전 서구 대덕대로 226 (대전역에서 지하철+도보 20분)",
+      "lineNumber": 66
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "입장료 15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "예술의전당 특별전까지 갔어요. 입장료 15,000원",
+      "lineNumber": 23
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "47,400원",
+      "value": "47,400원",
+      "severity": "minor",
+      "context": "KTX 왕복 47,400원",
+      "lineNumber": 74
+    },
+    {
+      "id": "ct-4",
+      "type": "transport",
+      "text": "버스 타고 20분이면 가는 국립현대미술관 서울 전시는 가성비 면에선 합격이에요. 입장료가 무료니까요.",
+      "value": "국립현대미술관 서울 무료",
+      "severity": "minor",
+      "context": "서울역에서 버스 타고 20분이면 가는 국립현대미술관 서울",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-5",
+      "type": "transport",
+      "text": "지하철 타고 15분 거리인 교보핫트랙스 대전점으로 직행",
+      "value": "대전역에서 지하철 15분",
+      "severity": "minor",
+      "context": "대전역 내리자마자 지하철 타고 15분 거리인 교보핫트랙스 대전점",
+      "lineNumber": 42
+    },
+    {
+      "id": "ct-6",
+      "type": "transport",
+      "text": "버스로 약 20분",
+      "value": "서울역에서 버스 20분",
+      "severity": "minor",
+      "context": "서울역에서 버스로 약 20분",
+      "lineNumber": 56
+    },
+    {
+      "id": "ct-7",
+      "type": "transport",
+      "text": "지하철+도보 20분",
+      "value": "대전역에서 지하철+도보 20분",
+      "severity": "minor",
+      "context": "대전역에서 지하철+도보 20분",
+      "lineNumber": 66
+    }
+  ],
+  "corrections": [
+    {
+      "claimId": "ct-4",
+      "originalText": "버스 타고 20분이면 가는 국립현대미술관 서울 전시는 가성비 면에선 합격이에요. 입장료가 무료니까요.",
+      "suggestedText": "버스 타고 20분이면 가는 국립현대미술관 서울 전시는 가성비 면에선 합격이에요. 입장료가 무료니까요.",
+      "reason": "[콘텐츠 오염 경고] 국립현대미술관 서울은 서울 종로구 삼청로 소재 시설로, 대전 포스트에 등장하는 것은 데이터 오염입니다. 또한 '입장료가 무료'라는 주장은 부분적으로만 정확합니다. 국립현대미술관 서울 상설전시는 무료이지만, 기획전시는 개별 관람 2,000~5,000원, 통합권 7,000원입니다. 수요일/토요일 야간(18-21시)은 무료 발권 가능. '무료'라고 단정하는 것은 오해 소지가 있습니다.",
+      "autoApplicable": true
+    },
+    {
+      "claimId": "ct-5",
+      "originalText": "지하철 타고 15분 거리인 교보핫트랙스 대전점으로 직행",
+      "suggestedText": "지하철 타고 15분 거리인 교보핫트랙스 대전점으로 직행",
+      "reason": "교보핫트랙스 대전점은 교보문고 대전점(대덕대로 226, 명동프라자 3층)과 같은 건물에 위치합니다. 대전역에서 시청역까지 대전 도시철도 1호선으로 약 13분 소요되며, 시청역 3번 출구에서 도보 7분입니다. '지하철 15분'이라는 표현은 지하철 탑승 시간만으로는 약간 과대(실제 13분)이며, 도보를 포함하면 총 20분 내외입니다. 15분 내 도착은 어렵습니다.",
+      "autoApplicable": true
+    }
+  ],
+  "passesGate": false,
+  "needsHumanReview": false,
+  "blockPublish": true,
+  "version": "1.0.0-claude"
+}

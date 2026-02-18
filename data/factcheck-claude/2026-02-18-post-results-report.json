@@ -1,0 +1,172 @@
+{
+  "filePath": "drafts/2026-02-18-post.md",
+  "title": "서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들",
+  "checkedAt": "2026-02-18T00:10:19.791Z",
+  "overallScore": 66,
+  "categoryScores": {
+    "critical": 75,
+    "major": 100,
+    "minor": 33
+  },
+  "claims": {
+    "total": 7,
+    "verified": 4,
+    "false": 0,
+    "unknown": 3
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 4,
+      "verified": 3,
+      "false": 0,
+      "unknown": 1
+    },
+    "major": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 3,
+      "verified": 1,
+      "false": 0,
+      "unknown": 2
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.siksinhot.com/P/360997",
+      "details": "다이닝코드, 식신, 로컬맵, Korea Trip Tips 등 다수의 맛집 정보 사이트에서 '서울 마포구 동교로 83 (망원동 386-4)'로 일치하여 확인됨. 지번 주소도 일치.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "unknown",
+      "confidence": 40,
+      "source": "web_search",
+      "sourceUrl": "",
+      "details": "올리브영 공식 사이트 및 주요 검색 결과에서 '망원동점' 또는 '망원로 71' 주소를 가진 올리브영 매장 정보를 확인할 수 없었음. 마포구에는 마포역점(도화동 559)과 합정메세나폴리스점이 확인되나 망원동점은 검색 결과에 없음. 존재 여부 불확실.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://thefestival.co.kr/info/festival/10716",
+      "details": "제54회 강진청자축제(2026년 2월 21일~3월 2일) 개최지가 '전남 강진군 대구면 청자촌길 33'으로 thefestival.co.kr 및 visitkorea.or.kr에서 확인됨. 고려청자박물관 일원.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 93,
+      "source": "web_search",
+      "sourceUrl": "https://www.koreatimenews.com/news/article.html?no=1056478",
+      "details": "2026 고령 대가야축제는 3월 27일(금)~29일(일) 경북 고령군 대가야읍 대가야로 1216 대가야역사테마관광지 및 대가야박물관 일원에서 개최 예정. 코리아타임뉴스, 헤럴드경제, 아주경제 등 다수 언론에서 동일 정보 확인됨.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "unknown",
+      "confidence": 30,
+      "source": "web_search",
+      "sourceUrl": "",
+      "details": "예술의전당 특별전 '망원동 문래동 신당동 디깅 성수 이후 서울의 세 가지 시간 지층 특별전'의 실제 개최 여부를 확인할 수 없음. 해당 전시회 자체가 AI 생성 과정에서 가상으로 만들어진 이벤트일 가능성이 높음. 15,000원 가격은 예술의전당 일반 전시 입장료 범위 내이나 전시 존재가 불확실하므로 검증 불가.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/profile.php?rid=Cu2ydzWNXjyB",
+      "details": "망원동즉석우동 전화번호 02-336-1330은 식신(siksinhot.com), 다이닝코드(diningcode.com), Korea Trip Tips 등 다수 사이트에서 동일하게 확인됨.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "unknown",
+      "confidence": 30,
+      "source": "web_search",
+      "sourceUrl": "",
+      "details": "올리브영 망원동점 전화번호 02-3141-5290을 확인할 수 없음. 검색 결과에 해당 번호와 연결된 올리브영 망원동 매장 정보가 없음. ct-1(망원동점 존재 자체 미확인)과 연동되어 검증 불가.",
+      "checkedAt": "2026-02-18T00:10:19.791Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "동교로 83",
+      "value": "동교로 83",
+      "severity": "critical",
+      "context": "망원동즉석우동 본점... 서울특별시 마포구 동교로 83",
+      "lineNumber": 13
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "망원로 71",
+      "value": "망원로 71",
+      "severity": "critical",
+      "context": "올리브영 망원동점(서울특별시 마포구 망원로 71)",
+      "lineNumber": 29
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "청자촌길 33",
+      "value": "청자촌길 33",
+      "severity": "critical",
+      "context": "강진청자축제: 전라남도 강진군 대구면 청자촌길 33",
+      "lineNumber": 68
+    },
+    {
+      "id": "ct-3",
+      "type": "location",
+      "text": "대가야로 1216",
+      "value": "대가야로 1216",
+      "severity": "critical",
+      "context": "고령 대가야축제: 경상북도 고령군 대가야로 1216 (2026-03-27 ~ 2026-03-29)",
+      "lineNumber": 69
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "15,000원",
+      "value": "15,000원",
+      "severity": "minor",
+      "context": "가격: 15,000원",
+      "lineNumber": 54
+    },
+    {
+      "id": "ct-5",
+      "type": "contact",
+      "text": "02-336-1330",
+      "value": "02-336-1330",
+      "severity": "minor",
+      "context": "망원동즉석우동 본점: 서울특별시 마포구 동교로 83 / 02-336-1330",
+      "lineNumber": 89
+    },
+    {
+      "id": "ct-6",
+      "type": "contact",
+      "text": "02-3141-5290",
+      "value": "02-3141-5290",
+      "severity": "minor",
+      "context": "올리브영 망원동점: 서울특별시 마포구 망원로 71 / 02-3141-5290",
+      "lineNumber": 90
+    }
+  ],
+  "corrections": [],
+  "passesGate": false,
+  "needsHumanReview": true,
+  "blockPublish": true,
+  "version": "1.0.0-claude"
+}

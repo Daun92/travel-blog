@@ -1,0 +1,110 @@
+{
+  "filePath": "drafts/2026-02-14-post.md",
+  "title": "설날의 두 얼굴: 세배·떡국·윷놀이, 전통 명절 문화의 역사적 변천과 현대적 의미",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "예술의전당 관람료 일반적으로 10,000~20,000원 내외",
+      "value": "10,000~20,000원",
+      "severity": "critical",
+      "context": "관람료: 전시에 따라 상이합니다 (일반적으로 10,000~20,000원 내외). 공식 사이트에서 사전 확인 후 방문하시기 바랍니다.",
+      "lineNumber": 50
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "서울 시내 전시관은 지하철로 1시간 내외에 도달 가능",
+      "value": "지하철로 1시간 내외",
+      "severity": "critical",
+      "context": "서울 시내 전시관은 지하철로 1시간 내외에 도달 가능합니다.",
+      "lineNumber": 71
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "MMCA 전시별 2,000~5,000원",
+      "value": "2,000~5,000원",
+      "severity": "minor",
+      "context": "평상시에는 전시별 2,000~5,000원, 통합 입장권 7,000원이 적용됩니다.",
+      "lineNumber": 45
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "MMCA 통합 입장권 7,000원",
+      "value": "7,000원",
+      "severity": "minor",
+      "context": "평상시에는 전시별 2,000~5,000원, 통합 입장권 7,000원이 적용됩니다.",
+      "lineNumber": 45
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "예술의전당 전시 가격 10,000~20,000원",
+      "value": "10,000~20,000원",
+      "severity": "minor",
+      "context": "전시에 따라 상이합니다 (일반적으로 10,000~20,000원 내외).",
+      "lineNumber": 50
+    },
+    {
+      "id": "ct-5",
+      "type": "transport",
+      "text": "지방 축제는 명절 고속도로 정체 감안 최소 4~5시간",
+      "value": "최소 4~5시간",
+      "severity": "minor",
+      "context": "지방 축제는 명절 고속도로 정체를 감안하여 최소 4~5시간을 계획하시기 바랍니다.",
+      "lineNumber": 71
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/program/schedule",
+      "details": "예술의전당 전시 가격은 전시별로 다양하며, 10,000~20,000원 범위는 일반적인 특별전 가격대에 해당. 포스트에서 '전시에 따라 상이'라고 명시하여 오해 방지."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "common_knowledge",
+      "sourceUrl": "",
+      "details": "서울 시내 주요 전시관(MMCA 서울관 삼청동, 예술의전당 서초동)은 지하철 접근성이 높으며 서울 대부분 지역에서 1시간 내외 도달 가능."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.mmca.go.kr/visitingInfo/seoulInfo.do",
+      "details": "국립현대미술관 서울관 전시별 관람료 2,000~5,000원 확인."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.mmca.go.kr/visitingInfo/seoulInfo.do",
+      "details": "국립현대미술관 통합 입장권 7,000원 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/",
+      "details": "예술의전당 전시 가격은 전시별로 다양. 10,000~20,000원은 일반적인 특별전 가격 범위로 합리적 추정."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 80,
+      "source": "common_knowledge",
+      "sourceUrl": "",
+      "details": "서울→강진 등 남부 지역은 명절 고속도로 정체 시 5시간 이상 소요 가능. 합리적 추정."
+    }
+  ]
+}

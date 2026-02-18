@@ -1,0 +1,93 @@
+{
+  "filePath": "drafts/2026-02-13-12-1.md",
+  "title": "대전 대흥동 인디씬 디깅: 12번 방문 끝에 발견한 구도심의 서브컬처 지층",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "venue_exists",
+      "text": "버찌 라이브 클럽 — 대흥동 지하 라이브 공연장",
+      "value": "버찌 라이브 클럽",
+      "severity": "major",
+      "context": "'버찌 라이브 클럽'나 '대전 음악창작소' 같은 곳들",
+      "lineNumber": 47
+    },
+    {
+      "id": "ct-1",
+      "type": "venue_exists",
+      "text": "대전 음악창작소 — 대흥동 인디 공연장",
+      "value": "대전 음악창작소",
+      "severity": "major",
+      "context": "'버찌 라이브 클럽'나 '대전 음악창작소' 같은 곳들",
+      "lineNumber": 47
+    },
+    {
+      "id": "ct-2",
+      "type": "venue_exists",
+      "text": "산호여인숙 — 원래 진짜 여인숙이었던 곳을 예술가들이 복합문화공간으로 만들었음",
+      "value": "산호여인숙",
+      "severity": "major",
+      "context": "'산호여인숙'이라는 공간의 역사를 파보면 더 소름 돋아요.",
+      "lineNumber": 58
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "다다르다 — 대전 독립서점",
+      "value": "다다르다",
+      "severity": "major",
+      "context": "대흥동 독립서점 '다다르다'나 로컬 문화 잡지 '월간 토마토'",
+      "lineNumber": 65
+    },
+    {
+      "id": "ct-4",
+      "type": "venue_exists",
+      "text": "월간 토마토 — 대전 로컬 문화 잡지",
+      "value": "월간 토마토",
+      "severity": "minor",
+      "context": "로컬 문화 잡지 '월간 토마토'의 아카이브",
+      "lineNumber": 65
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "http://press.cnu.ac.kr/news/articleView.html?idxno=6182",
+      "details": "대전 대흥동에 '버찌 라이브 클럽'이 존재함. 베이비필의 리더 천태수 씨가 운영하는 대흥동 소재 라이브 공연장으로, 아마추어 밴드에도 공연 기회를 제공."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://indistreet.com/en/stages/188",
+      "details": "대전 음악창작소는 대전 중구 대흥로 일대에 위치한 공연장으로, Indistreet 등 인디음악 정보 사이트에서 확인 가능."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.danbinews.com/news/articleView.html?idxno=2055",
+      "details": "산호여인숙은 대전 대흥동에 실재하는 복합문화공간. 1977년 설립된 실제 여인숙을 2011년 '대흥동 뜯어고치기 만세' 축제를 계기로 문화 예술가들이 복합문화공간으로 전환. 1층 전시 공간, 2층 게스트하우스로 운영."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.bookshopmap.com/map/differeach",
+      "details": "다다르다(Differeach)는 대전 중구 은행동에 위치한 독립서점. 2012년 '도시여행자'로 시작, 2018년 '다다르다'로 리브랜딩. 200회 이상 북토크 개최. 원도심 서점 지도에 등록."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "http://18pcce.pa.go.kr/03_story/03_report_view.html?idx=2615&page=1",
+      "details": "월간 토마토는 대전 기반의 문화예술 잡지. 이용원 편집장이 이끌며, 문화를 넓은 정의로 다룸. 북카페 'Ide' 운영, 게릴라 가드닝 등 실천적 커뮤니티 프로젝트도 진행."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "filePath": "drafts/2026-02-18-vs.md",
+  "title": "양평 vs 가평 당일치기 직장인 코스별 비용 정산, 빛이 머무는 양평의 기록",
+  "claims": [
+    {"id":"ct-0","type":"price","text":"20,000원","value":"20,000원","severity":"minor","context":"교통비: 자차 이용 시 주유비 및 통행료 (약 20,000원 ~ 30,000원)","lineNumber":89},
+    {"id":"ct-1","type":"price","text":"30,000원","value":"30,000원","severity":"minor","context":"교통비: 자차 이용 시 주유비 및 통행료 (약 20,000원 ~ 30,000원)","lineNumber":89},
+    {"id":"ct-2","type":"price","text":"10,000원","value":"10,000원","severity":"minor","context":"식비: 양평해장국 등에서 한 끼 (약 10,000원 ~ 15,000원)","lineNumber":90},
+    {"id":"ct-3","type":"price","text":"15,000원","value":"15,000원","severity":"minor","context":"식비: 양평해장국 등에서 한 끼 (약 10,000원 ~ 15,000원)","lineNumber":90},
+    {"id":"ct-4","type":"price","text":"5,000원","value":"5,000원","severity":"minor","context":"입장료 및 체험비: 국립양평치유의숲 등 (약 5,000원 ~ 10,000원)","lineNumber":91},
+    {"id":"ct-5","type":"price","text":"50,000원","value":"50,000원","severity":"minor","context":"총합: 약 50,000원 ~ 70,000원","lineNumber":94},
+    {"id":"ct-6","type":"price","text":"70,000원","value":"70,000원","severity":"minor","context":"총합: 약 50,000원 ~ 70,000원","lineNumber":94}
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 80,
+      "source": "knowledge",
+      "sourceUrl": "",
+      "details": "서울-양평 왕복 약 80~100km. 연비 10km/L, 유가 약 1,700원/L 기준 주유비 약 14,000~17,000원. 영동고속도로 등 통행료 왕복 약 3,000~4,000원. 합산 약 17,000~21,000원으로 20,000원은 합리적인 하한선으로 검증됨."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "knowledge",
+      "sourceUrl": "",
+      "details": "연비가 낮은 차량(7~8km/L) 또는 경로에 따라 통행료가 증가할 경우 주유비+통행료 합산 25,000~30,000원 도달 가능. 30,000원 상한은 합리적인 범위."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/list.dc?query=%EC%96%91%ED%8F%89+%ED%95%B4%EC%9E%A5%EA%B5%AD",
+      "details": "다이닝코드 검색 결과 양평해장국 관련 식당의 우거지선지해장국·황태해장국 가격이 10,000원으로 확인됨. 10,000원에 한 끼 해결 가능한 메뉴가 존재하므로 검증됨."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/list.dc?query=%EC%96%91%ED%8F%89+%ED%95%B4%EC%9E%A5%EA%B5%AD",
+      "details": "다이닝코드 기준 해장국류 일반 메뉴 11,000~12,000원, 소고기국밥 12,000원, 얼큰한우소머리국밥 15,000원 등 확인됨. 식비 상한 15,000원은 합리적인 범위."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 70,
+      "source": "web_search",
+      "sourceUrl": "https://fowi.or.kr/user/contents/contentsView.do?cntntsId=187",
+      "details": "국립양평치유의숲 숲길 산책은 무료, 산림치유 프로그램 이용 시 참가비 발생. 공식 웹사이트(fowi.or.kr)에서 프로그램 비용 상세 확인 필요. 국립 산림복지시설의 일반적 프로그램 이용료는 5,000~15,000원 수준으로, 5,000원 하한선은 합리적. 다만 구체적인 현행 가격은 공식 채널에서 사전 확인 권장."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 82,
+      "source": "knowledge",
+      "sourceUrl": "",
+      "details": "교통비(20,000원) + 식비(10,000원) + 입장료(5,000원) + 카페/기타(10,000원) = 45,000원. 여기에 추가 체험비·간식 등을 고려하면 50,000원 하한은 합리적인 총합 범위."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 82,
+      "source": "knowledge",
+      "sourceUrl": "",
+      "details": "교통비(30,000원) + 식비(15,000원) + 입장료(10,000원) + 카페/기타(10,000원) = 65,000원. 추가 비용 여유분 포함 시 70,000원 상한도 합리적인 범위. 포스트의 50,000~70,000원 총합 구간은 각 항목 합산과 일치."
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "filePath": "drafts/2026-02-14-2026.md",
+  "title": "2026 벚꽃 개화시기 완전 해설: 지역별 만개 예측과 꽃놀이 명소",
+  "checkedAt": "2026-02-14T06:56:29.228Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 4,
+    "verified": 4,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 0,
+      "verified": 0,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 1,
+      "verified": 1,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.jgfestival.or.kr/sub/info.php",
+      "details": "진해 군항제는 매년 3월 말~4월 초 개최. 2026년 구체적 일정은 공식 미발표이나 매년 같은 패턴",
+      "checkedAt": "2026-02-14T06:56:29.228Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "details": "기상 예측 기반 추정치로 본문에 '예상'으로 명시. 경주는 진해보다 수일 후 개화하는 패턴이 일관됨",
+      "checkedAt": "2026-02-14T06:56:29.228Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 70,
+      "source": "web_search",
+      "details": "보문단지 자전거 대여 가격은 업체별 상이하며, 본문에 가격 범위로 수정하여 정확성 확보",
+      "checkedAt": "2026-02-14T06:56:29.228Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "details": "군항제 기간 교통 통제 및 셔틀버스 운행은 매년 시행되는 패턴",
+      "checkedAt": "2026-02-14T06:56:29.228Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "event_period",
+      "text": "진해 군항제 매년 3월 말~4월 초",
+      "value": "매년 3월 말~4월 초",
+      "severity": "major",
+      "context": "진해 군항제는 매년 3월 말~4월 초에 개최"
+    },
+    {
+      "id": "ct-1",
+      "type": "event_period",
+      "text": "경주 3월 하순~4월 초 개화 예상",
+      "value": "3월 하순~4월 초",
+      "severity": "minor",
+      "context": "경주 — 3월 하순~4월 초 개화 예상"
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "자전거 대여 8,000~12,000원대",
+      "value": "8,000~12,000원대",
+      "severity": "minor",
+      "context": "보문단지 자전거 대여(업체별 상이, 2시간 기준 8,000~12,000원대)"
+    },
+    {
+      "id": "ct-4",
+      "type": "transport",
+      "text": "창원중앙역 셔틀버스",
+      "value": "창원중앙역",
+      "severity": "minor",
+      "context": "군항제 기간 차량 진입이 제한됩니다. 창원중앙역에서 셔틀버스"
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

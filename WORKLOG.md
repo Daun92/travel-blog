@@ -10,6 +10,257 @@
 
 ## 개발 이력
 
+### 2026-02-14: 이미지 파이프라인 지리적/섹션 맥락 검증 업그레이드
+
+#### 배경
+
+도자기·한지 체험 포스트 이미지 점검 중 구조적 문제 발견:
+- **전주 풍남문** 사진이 **서울 공방 체험** 섹션에 배치 (완전 미스매치)
+- **단청 처마** 사진이 **예술의전당 전시** 섹션에 배치 (맥락 무관)
+- 근본 원인: 파이프라인에 지리적/섹션별 맥락 검증 부재. `TourismData.address`가 `KtoImageCandidate`로 전달 시 버려지고, 이미지 배치가 헤딩 인덱스 기반(내용 무관)
+
+#### 3-Phase 구현
+
+**Phase 1: 지리적 스코프 추출 + KTO 결과 검증**
+
+| 파일 | 변경 |
+|------|------|
+| `src/images/geo-context.ts` | **신규** — `extractGeoScope()`, `isGeoCompatible()`, `normalizeRegion()` |
+| `src/images/kto-images.ts` | `KtoImageCandidate.address` 추가, `selectBestCoverImage()` geo 스코어링 (+25/-40) |
+| `src/images/image-orchestrator.ts` | KTO 인라인 후보 geo 필터링, `insertKtoImages()` 헤딩-제목 유사도 매칭 |
+
+- 한국 17개 광역시/도 + 180개 시/군 매핑 테이블 (API 호출 0)
+- `selectBestCoverImage`: 지역 일치 +25, 불일치 -40 (firstimage +20보다 강력)
+- `insertKtoImages`: 기존 인덱스 순서 → 헤딩 텍스트-이미지 제목 유사도 매칭
+
+**Phase 2: 섹션별 맥락 인식 AI 이미지 생성**
+
+| 파일 | 변경 |
+|------|------|
+| `src/generator/content-parser.ts` | `ContentSection`에 `mentionedLocations`, `sectionKeywords` 추가, `parseSections()` 강화 |
+| `src/images/image-orchestrator.ts` | `findSectionForMarker()` 추가, AI 마커별 소속 섹션 context 개별 전달 |
+
+- 기존: 전체 포스트 global context를 모든 마커에 동일 전달
+- 변경: 각 마커가 속한 섹션의 장소명/키워드를 개별 전달
+
+**Phase 3: 이미지 검증기 지리적 스코프 확장**
+
+| 파일 | 변경 |
+|------|------|
+| `src/images/image-validator.ts` | `validateImage()` context에 `geoScope`, `sectionTitle` 추가, `validatePostImages()`에서 섹션별 전달 |
+
+- KTO 이미지: 파일명/registry에서 지역 힌트 → geoScope 교차 검증
+- AI 이미지: 파일명 키워드와 sectionTitle 오버랩 검사
+- 지역/섹션 불일치 시 -10점 패널티 + 교체 권장 메시지
+
+#### 동명 지역 맥락 해소 (광주/고성/양평)
+
+한국의 동명 지역 충돌 문제 해결:
+
+| 동명 | 후보 A | 후보 B | 맥락 단서 (A) | 맥락 단서 (B) |
+|------|--------|--------|-------------|-------------|
+| 광주 | 광주광역시 | 경기도 광주시 | 무등산, 충장로, 비엔날레 | 남한산성, 곤지암, 팔당 |
+| 고성 | 강원도 고성군 | 경남 고성군 | 통일전망대, DMZ, 화진포 | 공룡, 당항포, 상족암 |
+| 양평 | 경기도 양평군 | 서울 양평동 | 두물머리, 세미원, 양수리 | 영등포, 선유도, 문래 |
+
+- 주변 텍스트 단서 키워드 매칭으로 판별
+- 단서 없으면 두 지역 모두 호환 (보수적 폴백)
+- topic+content **결합 텍스트**로 해소 (단서가 content에만 있을 수 있음)
+
+#### 테스트
+
+| 파일 | 테스트 수 |
+|------|----------|
+| `src/images/geo-context.test.ts` | 19개 (동명 지역 4개 포함) |
+| `src/generator/content-parser.test.ts` | 5개 |
+| 기존 `link-processor.test.ts` | 18개 (회귀 없음) |
+| **합계** | **42개 통과**, 빌드 0 오류 |
+
+#### 설계 원칙
+
+- **하위 호환**: 모든 새 파라미터 optional → 기존 호출부 변경 없음
+- **다단계 방어선**: 생성 시 필터링(P1) → 컨텍스트 전달(P2) → 사후 검증(P3)
+- **비용 0**: 텍스트 매칭만 사용, API 호출 증가 없음
+
+---
+
+### 2026-02-14: 발렌타인 특집 포스트 2건 발행 + AI 테마 스틸컷 교체 + 강릉 카페 이미지 재배치
+
+#### 발렌타인 특집 포스트 생성 (2건)
+
+| 포스트 | 에이전트 | 타입 |
+|--------|---------|------|
+| `travel/2026-02-14-top-7.md` 서울 야경 TOP 7 | 조회영 (viral) | travel |
+| `travel/2026-02-14-2026.md` 2026 벚꽃 개화시기 | 한교양 (informative) | travel |
+
+- KTO 배치 검색 14건 실행 → 12건 성공, 11건 사용 가능 이미지 확보
+- 두 포스트에 KTO 실사 11장 삽입 후 1차 발행
+
+#### KTO → AI 테마 스틸컷 교체 (10장)
+
+**문제**: KTO 실사는 시간대/계절 태깅이 없어 야경 포스트에 주간 사진, 벚꽃 포스트에 가을 사진이 배치됨
+
+**해결**: `scripts/gen-feb14-themed-stillcuts.mts` 생성 → Gemini AI 포토리얼리스틱 스틸컷으로 교체
+
+**야경 포스트 교체 (4장, viral/조회영 에디토리얼 매거진 스타일)**:
+
+| 원본 (KTO) | 교체 (AI) | 피사체 |
+|------------|----------|--------|
+| `kto-nightview-eungbongsan.jpg` | `stillcut-nightview-eungbongsan.jpeg` | 응봉산 야경 파노라마 — 한강 분기점 |
+| `kto-nightview-sebitseum.jpg` | `stillcut-nightview-sebitseum.jpeg` | 세빛섬 3색 조명 수면 반사 |
+| `kto-nightview-naksan.jpg` | `stillcut-nightview-naksan.jpeg` | 낙산공원 성곽길 + DDP 네온 |
+| `kto-nightview-nodeul.jpg` | `stillcut-nightview-nodeul.jpeg` | 노들섬 양방향 야경 |
+
+**벚꽃 포스트 교체 (6장, informative/한교양 건축 사진 스타일)**:
+
+| 원본 (KTO) | 교체 (AI) | 피사체 |
+|------------|----------|--------|
+| `kto-cherry-bomun.jpg` | `stillcut-cherry-bomun.jpeg` | 보문단지 벚꽃 터널 수면 반사 |
+| `kto-cherry-bulguksa.jpg` | `stillcut-cherry-bulguksa.jpeg` | 불국사 일주문 벚꽃 프레이밍 |
+| `kto-cherry-daereungwon.jpg` | `stillcut-cherry-daereungwon.jpeg` | 대릉원 고분 + 벚꽃 대비 |
+| `kto-cherry-seokchon.jpg` | `stillcut-cherry-seokchon.jpeg` | 석촌호수 롯데타워 + 벚꽃 |
+| `kto-cherry-yeouido.jpg` | `stillcut-cherry-yeouido.jpeg` | 여의도 윤중로 벚꽃 터널 |
+| `kto-cherry-yeojwacheon.jpg` | `stillcut-cherry-yeojwacheon.jpeg` | 여좌천 벚꽃 수면 반사 + 로망스 다리 |
+
+- 여좌천: KTO 원본이 LED 하트 터널(야경 축제 설치물)로 벚꽃과 무관 → 별도 인라인 생성
+- 경화역 KTO 이미지는 유지 (title에 "벚꽃길" 확인됨)
+- Gemini 이미지 쿼터: 10장 사용 (6+9=15/50)
+- `data/image-registry.json`: KTO 10건 `replacedBy` 마킹 + AI 10건 신규 등록
+
+#### 강릉 카페 포스트 KTO 이미지 맥락 재배치
+
+**대상**: `travel/2026-02-05-gangneung-cafe.md` (김주말/friendly)
+
+**문제 진단**:
+- § 1 "자판기 커피로 유명" 텍스트에 구조대 이미지 배치
+- § 3 끝에 이미지 2장 연속 스택 (자판기 + 느린우체통)
+- § 4 "느린 우체통에 편지 쓰는 사람" 텍스트에 이미지 없음
+- § 5 커피잔 조형물 유사 이미지 2장 중복
+
+**재배치 결과**:
+- § 1: `street-2`(구조대) → `street-4`(자판기) 교체 — 텍스트와 일치
+- § 3: 스택 해소 → `street-2`(해변 구조대) 1장만 배치
+- § 4: `street-1`(느린우체통) 삽입 — "편지 쓰는 사람" 직후
+- § 5: `anmok-1`(중복 커피잔) 삭제 → `sunrise-park` 1장만 유지
+- 6장 → 5장 (중복 1장 제거, 맥락 매칭 4건)
+
+#### Git 커밋
+
+| 커밋 | 내용 |
+|------|------|
+| `75add19` | 야경 4 + 벚꽃 5 AI 스틸컷 교체 + registry 업데이트 |
+| `e37cc77` | 여좌천 벚꽃 AI 스틸컷 생성 + 교체 |
+| `9c2d7bb` | 강릉 카페 KTO 이미지 맥락 재배치 |
+
+#### 인사이트
+
+- **KTO 시간대/계절 한계**: KTO API는 대표 이미지 1장만 제공하며 시간대·계절 태깅 없음 → 야경/벚꽃 등 테마 포스트에는 AI 스틸컷이 필수
+- **이미지-텍스트 맥락 매칭**: 이미지는 관련 텍스트 직후 배치가 원칙 — 섹션 끝 스택 배치는 UX 저하
+- **여좌천 LED 함정**: KTO 대표 이미지가 축제 설치물(LED 하트)인 경우 존재 → title만으로 판단 불가, 실제 이미지 확인 필수
+
+### 2026-02-13: 성수동 팝업스토어 포스트 이미지 정비 + 전체 포스트 KTO/스틸컷 일괄 배포
+
+#### 성수동 팝업 포스트 (`culture/2026-02-07-vs.md`) 이미지 리팩터
+
+**문제 진단**:
+- 도입부에 동일 역할 AI 맵 이미지 2개 연속 배치 (중복)
+- "주변 볼거리" 섹션에 서울숲 KTO 실사 2개 연속 배치 (중복)
+- 핵심 섹션(1위 무신사, 2위 탬버린즈)에 이미지 전무
+- 캡션에 "AI 생성 비교 인포그래픽" 등 기계적 표현 사용
+
+**삭제 (2개)**:
+
+| 파일 | 위치 | 사유 |
+|------|------|------|
+| `inline-2026-02-07-vs-1.jpeg` | 도입부 | 바로 아래 journeymap과 동일 역할 중복 |
+| `kto-seongsu-seoulforest.jpg` | 주변 볼거리 | vk-seoul-forest.jpg와 동일 장소 중복 |
+
+**추가 (2개)** — 조회영(viral) 에디토리얼 매거진 스틸컷:
+
+| 파일 | 섹션 | 피사체 |
+|------|------|--------|
+| `stillcut-seongsu-beautyfesta.jpeg` (933KB) | 1위 무신사 뷰티 페스타 | 창고형 부스 40개+, 쇼핑백 든 인파, 게임존 |
+| `stillcut-seongsu-tamburins.jpeg` (1041KB) | 2위 탬버린즈 플래그십 | 노출 콘크리트 골조 건물, 유리 외벽, 150번대 대기 행렬 |
+
+**캡션 수정 (4개)**: "AI 생성 ~" → 조회영 톤 내러티브 캡션
+
+| Before | After |
+|--------|-------|
+| AI 생성 비교 인포그래픽 | (삭제됨) |
+| 조회영의 성수동 팝업 생존 루트 | 이 루트대로 안 돌면 다리만 붓고 끝남 |
+| AI 생성 여행 체크리스트 | 이거 안 챙기면 성수동에서 울게 됨 |
+| 성수동 팝업 최종 판정 인포그래픽 | 3곳 다 돌고 내린 결론 — 이게 진짜 최종 정리 |
+
+**최종 이미지 구성 (6개)**:
+
+| # | 위치 | 타입 | 파일 |
+|---|------|------|------|
+| 1 | 도입 | 일러스트 (투어 루트) | inline-seongsu-journeymap |
+| 2 | 1위 무신사 | **스틸컷 (NEW)** | stillcut-seongsu-beautyfesta |
+| 3 | 2위 탬버린즈 | **스틸컷 (NEW)** | stillcut-seongsu-tamburins |
+| 4 | 생존 전략 | 일러스트 (체크리스트) | inline-2026-02-07-vs-2 |
+| 5 | 주변 볼거리 | KTO 실사 (서울숲) | vk-seoul-forest |
+| 6 | 최종 판정 | 일러스트 (인포그래픽) | inline-seongsu-summary |
+
+**스크립트**: `scripts/gen-seongsu-stillcut.mts` — Gemini API 2회 호출 (쿼터 20→22/50)
+
+#### 전체 포스트 일괄 배포
+
+이전 세션들에서 누적된 KTO 실사진 + AI 스틸컷을 한 번에 배포:
+
+- **24개 포스트** 수정 (인라인 이미지 참조 + 캡션 개선)
+- **46개 신규 이미지** (KTO 32개 + AI 스틸컷 9개 + 커버 1개 + 기타)
+
+#### 커밋
+- `702f713` — `fix: 성수동 팝업 포스트 이미지 정비 + 전체 포스트 KTO/스틸컷 이미지 보강` (blog repo)
+
+---
+
+### 2026-02-13: 검색엔진 노출 설정 — Google Search Console + Naver + FAQ Schema
+
+#### 변경 파일
+
+| 파일 | 변경 내용 |
+|------|----------|
+| `blog/hugo.toml` | `[params.analytics]` 섹션 추가 — Google/Naver/Bing SiteVerificationTag |
+| `blog/layouts/partials/extend_head.html` | FAQPage JSON-LD Schema 추가 (frontmatter `faqs` 필드 기반) |
+
+#### 검색엔진 등록 현황
+
+| 검색엔진 | 상태 | 사이트맵 | 비고 |
+|---------|------|---------|------|
+| **Google Search Console** | 소유권 인증 완료 (2/12 자동 인증) | sitemap.xml 제출 완료 | GA4 통해 자동 인증됨 |
+| **Naver Search Advisor** | HTML 태그 인증 완료 | sitemap.xml + RSS(index.xml) 제출 완료 | 토큰: `e9387d...0b10` |
+| **Bing Webmaster Tools** | GSC 가져오기로 등록 완료 | 자동 가져옴 | 별도 토큰 불필요 |
+
+#### FAQ Schema 구현
+
+PaperMod 테마의 `extend_head.html`에 FAQPage JSON-LD 자동 생성 로직 추가:
+- 포스트 frontmatter에 `faqs` 배열이 있으면 `FAQPage` 구조화 데이터 출력
+- 형식: `faqs: [{q: "질문", a: "답변"}, ...]`
+- 효과: 검색 결과 FAQ 리치 스니펫 표시 → CTR 향상
+
+#### PaperMod 테마 네이티브 지원 확인
+
+`themes/PaperMod/layouts/partials/head.html`이 `[params.analytics]` 하위의 `google`, `naver`, `bing`, `yandex` SiteVerificationTag를 자동으로 `<meta>` 태그로 렌더링함.
+
+#### 루트 GitHub Pages 레포 생성
+
+Naver Search Advisor가 호스트 단위(`https://daun92.github.io`) 등록만 허용하므로, 루트 유저 사이트 레포를 생성:
+- `Daun92/daun92.github.io` 레포 신규 생성
+- `index.html` — Naver 인증 메타태그 + `/travel-blog/`로 자동 리다이렉트
+- 루트 방문자도 블로그로 안내됨
+
+#### 남은 작업 (선택)
+- [ ] Google 사이트맵 "읽을 수 없음" 상태 모니터링 (자동 해결 예상)
+- [ ] 주요 포스트 개별 색인 요청 (Google URL 검사, Naver 웹페이지 수집)
+- [ ] 1~2주 후 `site:daun92.github.io/travel-blog` 검색으로 색인 현황 확인
+
+#### 커밋
+- `92b043b` — `feat: 검색엔진 인증 메타태그 + FAQ Schema 추가` (blog repo)
+
+---
+
 ### 2026-02-12: 공주 백제유적 + 제천 청풍호 포스트 — 이미지 레이아웃 + 콘텐츠 교정 + 프롬프트 오염 근절
 
 #### 발행 포스트

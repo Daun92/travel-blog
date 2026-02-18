@@ -1,0 +1,59 @@
+{
+  "filePath": "drafts/2026-02-13-post.md",
+  "title": "남해 다랭이논과 독일마을 인문 여행: 척박한 땅에 피어난 인간 의지의 기록",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "transport",
+      "text": "셔틀버스 기다릴까 말까 고민되시죠?",
+      "value": "기다릴까 말까 고민되시죠?",
+      "severity": "minor",
+      "context": "## 3. 금산과 보리암: 셔틀버스 기다릴까 말까 고민되시죠?",
+      "lineNumber": 76
+    },
+    {
+      "id": "ct-1",
+      "type": "transport",
+      "text": "셔틀버스 줄이 꽤 깁니다. 40분 정도 기다려야 할 수도 있는데. 금산 38경.",
+      "value": "줄이 꽤 깁니다. 40분 정도 기다려야 할 수도 있는데",
+      "severity": "minor",
+      "context": "주말에 가면 보리암 올라가는 셔틀버스 줄이 꽤 깁니다. 40분 정도 기다려야 할 수도 있는데, 결론부터 말하면 그냥 기다려서 타세요. 걸어 올라가면 금산 38경 구경하기도 전에 지칩니다.",
+      "lineNumber": 81
+    },
+    {
+      "id": "ct-2",
+      "type": "transport",
+      "text": "보리암 셔틀버스는 기본 30~40분 대기입니다.",
+      "value": "는 기본 30~40분 대기입니다.",
+      "severity": "minor",
+      "context": "보리암 셔틀버스는 기본 30~40분 대기입니다. 독일마을 유명 식당들도 점심시간엔 꽤 기다려야 해요.",
+      "lineNumber": 117
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://cosmostime01.com/entry/%EB%82%A8%ED%95%B4-%EB%B3%B4%EB%A6%AC%EC%95%94-%EA%B0%80%EB%8A%94-%EA%B8%B8-%EC%A3%BC%EC%B0%A8%EC%9E%A5-%EC%9E%85%EC%9E%A5%EB%A3%8C-%EB%93%B1%EC%82%B0%EB%A1%9C%EC%A7%80%EB%8F%84-%EC%85%94%ED%8B%80%EB%B2%84%EC%8A%A4-%EC%9A%B4%ED%96%89%EC%8B%9C%EA%B0%84",
+      "details": "남해 금산 보리암 셔틀버스(마을버스)는 실제 운행 중. 복곡 1주차장에서 2주차장까지 26인승 미니버스가 운행하며, 사람이 차면 출발하는 방식. 대기가 발생하는 것은 사실."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://www.gnnews.co.kr/news/articleView.html?idxno=610802",
+      "details": "두 가지 사실 확인: (1) 보리암 셔틀버스 주말 대기 — 방문자 후기에서 약 25분 대기 사례 확인. 40분은 성수기 주말 기준으로 합리적 범위. (2) 금산 38경 — 남해 금산에는 38경이 실제로 존재. 경남일보, 한국민족문화대백과사전, 남해문화관광 공식 사이트 등 다수 출처에서 확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://ionefree.com/%EB%B3%B4%EB%A6%AC%EC%95%94-%EC%86%8C%EC%9B%90-%ED%95%98%EB%82%98-%EA%BC%AD-%EB%93%A4%EC%96%B4%EC%A3%BC%EB%8A%94-%EC%A0%84%EC%84%A4%ED%92%8D%EA%B2%BD%EB%A7%9B%EC%A7%91/",
+      "details": "보리암 셔틀버스 대기시간 30~40분 주장. 방문자 후기에서 약 25분 대기 사례가 확인되었고, 주말 성수기에는 더 길어질 수 있음. 주말 기준으로 합리적 범위 내."
+    }
+  ]
+}

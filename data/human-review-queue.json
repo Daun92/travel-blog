@@ -406,7 +406,62 @@
       "details": "factcheck: 58%",
       "createdAt": "2026-02-11T14:23:52.038Z",
       "status": "pending"
+    },
+    {
+      "id": "review-1771055114420-mhvc1p",
+      "filePath": "drafts/2026-02-14-2026.md",
+      "title": "2026 벚꽃 개화시기 완전 해설: 지역별 만개 예측과 꽃놀이 명소",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 84,
+      "details": "factcheck: 73%",
+      "createdAt": "2026-02-14T07:45:14.420Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1771065637381-cnt7lh",
+      "filePath": "drafts\\2026-02-14-post.md",
+      "title": "설날의 두 얼굴: 세배·떡국·윷놀이, 전통 명절 문화의 역사적 변천과 현대적 의미",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 83,
+      "details": "factcheck: 60%",
+      "createdAt": "2026-02-14T10:40:37.381Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1771373421177-knk05s",
+      "filePath": "drafts/2026-02-18-to.md",
+      "title": "공유 안 하면 손해, 거제 통영 남해 드라이브 코스 TOP 5 (진짜는 여기다)",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 86.33333333333333,
+      "details": "factcheck: 70%",
+      "createdAt": "2026-02-18T00:20:07.065Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1771374014736-u85u4f",
+      "filePath": "drafts/2026-02-18-post.md",
+      "title": "서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 86.33333333333333,
+      "details": "factcheck: 70%",
+      "createdAt": "2026-02-18T00:20:14.736Z",
+      "status": "pending"
+    },
+    {
+      "id": "review-1771374042235-o3a3ix",
+      "filePath": "drafts/2026-02-18-vs.md",
+      "title": "양평 vs 가평 당일치기 직장인 코스별 비용 정산, 빛이 머무는 양평의 기록",
+      "trigger": "high_unknown",
+      "action": "queue",
+      "score": 88.66666666666667,
+      "details": "factcheck: 77%",
+      "createdAt": "2026-02-18T00:20:42.235Z",
+      "status": "pending"
     }
   ],
-  "lastUpdated": "2026-02-11T14:23:52.038Z"
+  "lastUpdated": "2026-02-18T00:20:42.235Z"
 }

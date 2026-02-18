@@ -1,45 +1,64 @@
 {
   "priorityTopics": [
+    "독립서점/북카페 탐방",
+    "인디 음악/페스티벌",
+    "미술관/갤러리 전시 리뷰",
+    "뮤지컬/연극/공연 추천",
+    "전통문화 체험",
     "지역 문화유산 딥다이브",
     "시즌 여행 가이드",
     "전시/공연 현장 리뷰",
     "로컬 체험 스토리",
-    "숨은 여행지 발굴",
-    "독립서점/북카페 탐방",
-    "인디 음악/페스티벌",
-    "전통문화 체험"
+    "숨은 여행지 발굴"
   ],
   "contentFormat": "깊이 있는 단일 주제 리뷰",
   "focusAreas": [
+    "성수",
     "충청도",
     "제주",
     "강원 내륙",
-    "경남 해안",
-    "성수"
+    "경남 해안"
   ],
   "improvementPlan": [],
   "optimalPostingTime": "09:00",
   "optimalLength": 1800,
   "diversityTargets": {
     "agentRatio": {
-      "viral": 0.30,
-      "friendly": 0.30,
-      "informative": 0.40
+      "viral": 0.25,
+      "friendly": 0.25,
+      "informative": 0.3,
+      "niche": 0.2
     },
     "typeMix": {
       "travel": 0.55,
       "culture": 0.45
     },
-    "regionPriority": ["충청", "제주", "경남", "전남"],
-    "regionCovered": ["서울", "경기", "인천", "경북", "대구", "부산", "전북", "강원"],
+    "regionPriority": [
+      "충청",
+      "제주",
+      "경남",
+      "전남"
+    ],
+    "regionCovered": [
+      "서울",
+      "경기",
+      "인천",
+      "경북",
+      "대구",
+      "부산",
+      "전북",
+      "강원"
+    ],
     "framingMix": {
-      "list_ranking": 0.15,
-      "deep_dive": 0.25,
-      "experience": 0.25,
-      "seasonal": 0.10,
-      "comparison": 0.10,
-      "local_story": 0.15
+      "list_ranking": 0.12,
+      "deep_dive": 0.2,
+      "experience": 0.2,
+      "seasonal": 0.08,
+      "comparison": 0.1,
+      "local_story": 0.15,
+      "niche_digging": 0.15
     }
   },
-  "lastUpdated": "2026-02-09T15:00:00.000Z"
+  "lastUpdated": "2026-02-18T00:00:32.752Z",
+  "surveyInfluence": true
 }

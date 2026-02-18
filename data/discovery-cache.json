@@ -12,7 +12,7 @@
         "렌터카",
         "카페"
       ],
-      "lastUpdated": "2026-02-12T09:30:59.925Z"
+      "lastUpdated": "2026-02-13T11:17:35.159Z"
     },
     {
       "topic": "강릉",
@@ -26,7 +26,7 @@
         "바다",
         "카페"
       ],
-      "lastUpdated": "2026-02-12T09:30:59.925Z"
+      "lastUpdated": "2026-02-13T11:17:35.159Z"
     },
     {
       "topic": "부산",
@@ -40,7 +40,7 @@
         "바다",
         "맛집"
       ],
-      "lastUpdated": "2026-02-12T09:30:59.925Z"
+      "lastUpdated": "2026-02-13T11:17:35.159Z"
     },
     {
       "topic": "여수",
@@ -54,7 +54,7 @@
         "야경",
         "바다"
       ],
-      "lastUpdated": "2026-02-12T09:30:59.925Z"
+      "lastUpdated": "2026-02-13T11:17:35.159Z"
     },
     {
       "topic": "서울",
@@ -68,7 +68,7 @@
         "카페",
         "맛집"
       ],
-      "lastUpdated": "2026-02-12T09:30:59.925Z"
+      "lastUpdated": "2026-02-13T11:17:35.159Z"
     }
   ],
   "gaps": [
@@ -78,127 +78,93 @@
       "blogCoverage": "partial",
       "recommendedPriority": "medium",
       "suggestedAngles": [
-        "여수 야경 명소 비교: 어디서 봐야 가장 예쁠까",
         "여수 겨울에 오히려 좋은 이유",
-        "여수 현지인만 아는 골목 맛집과 뷰포인트"
+        "여수의 숨은 역사: 알고 가면 3배 재미",
+        "여수 야경 명소 비교: 어디서 봐야 가장 예쁠까"
       ],
       "lastBlogPost": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
-      "daysSinceLastPost": 7
+      "daysSinceLastPost": 8
     }
   ],
   "recommendations": [
     {
-      "topic": "제주",
-      "type": "travel",
-      "score": 110,
-      "source": "moltbook_trending",
-      "reasoning": "rising 트렌드, 평균 6 upvotes | 지역다양성(제주) +10",
-      "suggestedTitle": "제주 1박2일 실제 비용과 솔직 후기",
-      "keywords": [
-        "제주",
-        "렌터카",
-        "카페"
-      ],
-      "discoveredAt": "2026-02-12T09:30:59.969Z",
-      "personaId": "friendly",
-      "framingType": "experience"
-    },
-    {
       "topic": "강릉",
       "type": "travel",
-      "score": 110,
+      "score": 130,
       "source": "moltbook_trending",
-      "reasoning": "rising 트렌드, 평균 7 upvotes | 에이전트밸런스(viral) +10",
-      "suggestedTitle": "강릉 현지인 단골 가게와 숨은 골목",
+      "reasoning": "rising 트렌드, 평균 7 upvotes | 에이전트밸런스(viral) +15 | 프레이밍다양성(comparison) +15",
+      "suggestedTitle": "강릉 기대 vs 현실: 진짜 가볼 만한 곳",
       "keywords": [
         "강릉",
         "바다",
         "카페"
       ],
-      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "discoveredAt": "2026-02-13T11:17:35.187Z",
       "personaId": "viral",
-      "framingType": "local_story"
+      "framingType": "comparison"
     },
     {
-      "topic": "공주 백제문화",
-      "type": "culture",
-      "score": 105,
-      "source": "gap_analysis",
-      "reasoning": "미커버 지역(충청) 자동 생성 | deep_dive 프레이밍",
-      "suggestedTitle": "공주 백제유적 산책: 무령왕릉에서 공산성까지",
+      "topic": "제주",
+      "type": "travel",
+      "score": 125,
+      "source": "moltbook_trending",
+      "reasoning": "rising 트렌드, 평균 6 upvotes | 에이전트밸런스(viral) +15 | 지역다양성(제주) +10",
+      "suggestedTitle": "이번 달 제주이 특별한 이유",
       "keywords": [
-        "공주",
-        "백제",
-        "무령왕릉",
-        "공산성"
+        "제주",
+        "렌터카",
+        "카페"
       ],
-      "discoveredAt": "2026-02-12T09:30:59.997Z",
-      "personaId": "informative",
-      "framingType": "deep_dive"
+      "discoveredAt": "2026-02-13T11:17:35.187Z",
+      "personaId": "viral",
+      "framingType": "experience"
     },
     {
       "topic": "여수",
       "type": "travel",
-      "score": 95,
+      "score": 100,
       "source": "gap_analysis",
-      "reasoning": "블로그 커버리지 partial, Moltbook engagement 75 | 에이전트밸런스(viral) +10 | 지역다양성(전남) +10",
-      "suggestedTitle": "여수 야경 명소 비교: 어디서 봐야 가장 예쁠까",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 75 | 에이전트밸런스(viral) +15 | 지역다양성(전남) +10",
+      "suggestedTitle": "여수 겨울에 오히려 좋은 이유",
       "keywords": [
         "여수"
       ],
-      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "discoveredAt": "2026-02-13T11:17:35.187Z",
       "personaId": "viral",
-      "framingType": "comparison"
-    },
-    {
-      "topic": "대전 빵집 투어",
-      "type": "travel",
-      "score": 95,
-      "source": "gap_analysis",
-      "reasoning": "미커버 지역(충청) 보조 추천 | experience 프레이밍",
-      "suggestedTitle": "대전 성심당만? 현지인이 가는 진짜 빵집 3곳",
-      "keywords": [
-        "대전",
-        "성심당",
-        "빵집",
-        "맛집"
-      ],
-      "discoveredAt": "2026-02-12T09:30:59.997Z",
-      "personaId": "friendly",
-      "framingType": "experience"
-    },
-    {
-      "topic": "부산",
-      "type": "travel",
-      "score": 88,
-      "source": "moltbook_trending",
-      "reasoning": "stable 트렌드, 평균 6 upvotes | 에이전트밸런스(viral) +10",
-      "suggestedTitle": "부산 기대 vs 현실: 진짜 가볼 만한 곳",
-      "keywords": [
-        "부산",
-        "바다",
-        "맛집"
-      ],
-      "discoveredAt": "2026-02-12T09:30:59.969Z",
-      "personaId": "viral",
-      "framingType": "comparison"
+      "framingType": "seasonal"
     },
     {
       "topic": "서울",
       "type": "travel",
-      "score": 80,
+      "score": 85,
       "source": "moltbook_trending",
-      "reasoning": "stable 트렌드, 평균 4 upvotes | 에이전트밸런스(viral) +10",
+      "reasoning": "stable 트렌드, 평균 4 upvotes | 에이전트밸런스(viral) +15",
       "suggestedTitle": "서울 여행 체크리스트: 놓치기 쉬운 5가지",
       "keywords": [
         "서울",
         "카페",
         "맛집"
       ],
-      "discoveredAt": "2026-02-12T09:30:59.969Z",
+      "discoveredAt": "2026-02-13T11:17:35.187Z",
       "personaId": "viral",
       "framingType": "list_ranking"
+    },
+    {
+      "topic": "부산",
+      "type": "travel",
+      "score": 78,
+      "source": "moltbook_trending",
+      "reasoning": "stable 트렌드, 평균 6 upvotes",
+      "suggestedTitle": "부산 1박2일 실제 비용과 솔직 후기",
+      "keywords": [
+        "부산",
+        "바다",
+        "맛집"
+      ],
+      "discoveredAt": "2026-02-13T11:17:35.187Z",
+      "personaId": "friendly",
+      "framingType": "experience"
     }
   ],
-  "discoveredAt": "2026-02-12T09:30:59.997Z"
+  "discoveredAt": "2026-02-13T11:17:35.216Z"
 }

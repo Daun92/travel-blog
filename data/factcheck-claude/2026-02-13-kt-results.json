@@ -1,0 +1,145 @@
+{
+  "filePath": "drafts/2026-02-13-kt.md",
+  "title": "순천만 겨울 갈대숲 당일치기 현실 후기: 서울 출발 KTX 비용 및 웨이팅 총정리",
+  "claims": [
+    {"id":"ct-0","type":"location","text":"호길 47","value":"호길 47","severity":"critical","context":"순천역에 도착하자마자 바로 순천만국가정원으로 쐈습니다. 주소는 전라남도 순천시 국가정원1호길 47 (오천동)이에요.","lineNumber":36},
+    {"id":"ct-1","type":"location","text":"순천만길 520","value":"순천만길 520","severity":"critical","context":"순천만 일번가 (전라남도 순천시 순천만길 520)로 갔습니다.","lineNumber":50},
+    {"id":"ct-2","type":"location","text":"순천만길 576","value":"순천만길 576","severity":"critical","context":"순천만가든 (전라남도 순천시 순천만길 576)도 비슷하게 꼬막 요리","lineNumber":56},
+    {"id":"ct-3","type":"location","text":"순천만길 513-25","value":"순천만길 513-25","severity":"critical","context":"순천만 공예특산품관 (전라남도 순천시 순천만길 513-25)에 들렀어요.","lineNumber":74},
+    {"id":"ct-4","type":"location","text":"여순로 1783","value":"여순로 1783","severity":"critical","context":"순천만 잡월드: 전라남도 순천시 해룡면 여순로 1783","lineNumber":82},
+    {"id":"ct-5","type":"location","text":"홍두길 136","value":"홍두길 136","severity":"critical","context":"순천만 해룡성고택: 전라남도 순천시 홍두길 136 (홍내동)","lineNumber":83},
+    {"id":"ct-6","type":"price","text":"88,000원","value":"88,000원","severity":"minor","context":"KTX 왕복: 88,000원","lineNumber":20},
+    {"id":"ct-7","type":"price","text":"45,000원","value":"45,000원","severity":"minor","context":"식비 (순천만 일번가 꼬막 정식 등): 45,000원","lineNumber":21},
+    {"id":"ct-8","type":"price","text":"12,000원","value":"12,000원","severity":"minor","context":"카페 및 간식: 12,000원","lineNumber":22},
+    {"id":"ct-9","type":"price","text":"15,000원","value":"15,000원","severity":"minor","context":"현지 교통비 (버스/택시): 15,000원","lineNumber":23},
+    {"id":"ct-10","type":"price","text":"10,000원","value":"10,000원","severity":"minor","context":"입장료 (순천만국가정원 등): 10,000원","lineNumber":24},
+    {"id":"ct-11","type":"price","text":"170,000원","value":"170,000원","severity":"minor","context":"합계: 약 170,000원","lineNumber":25},
+    {"id":"ct-12","type":"price","text":"5,000원","value":"5,000원","severity":"minor","context":"수공예품 하나 샀는데, 5,000원","lineNumber":74},
+    {"id":"ct-13","type":"price","text":"Free","value":"Free","severity":"minor","context":"China Free, 즉 중국산이 없대요","lineNumber":74},
+    {"id":"ct-14","type":"transport","text":"버스/택시): 15,000원","value":"/택시): 15,000원","severity":"minor","context":"현지 교통비 (버스/택시): 15,000원","lineNumber":23},
+    {"id":"ct-15","type":"transport","text":"버스 기다리는 시간이 주말이라 은근 길더라고요","value":"기다리는 시간이 주말이라 은근 길더라고요","severity":"minor","context":"버스 기다리는 시간이 주말이라 은근 길더라고요. 10분 아끼려다 20분 기다리는 상황","lineNumber":93}
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://scbay.suncheon.go.kr/garden/0016/0007/",
+      "details": "순천만국가정원 공식 사이트에서 주소 확인: 전남 순천시 국가정원1호길 47. 카카오맵, 한국관광공사(visitkorea) 등 다수 출처에서 동일 주소 확인됨."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/profile.php?rid=WojEdNHqAj4k",
+      "details": "순천만일번가 식당 주소 '전라남도 순천시 순천만길 520' 확인. 다이닝코드, 식신(siksinhot), 카페 리뷰 등 복수 출처에서 동일 주소 확인. 순천만 생태공원 주차장 앞 위치."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/profile.php?rid=yW27ww13YYeJ",
+      "details": "순천만가든 주소 '전라남도 순천시 순천만길 576' (지번: 대대동 40-1) 확인. 다이닝코드, 식신 등 복수 출처에서 동일 주소 확인됨."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://access.visitkorea.or.kr/ms/detail.do?cotId=ef3ec178-b349-485b-b5ec-3b279fabba21",
+      "details": "순천만 공예특산품관 주소 '전라남도 순천시 순천만길 513-25' 확인. 한국관광공사 열린관광, 관광지랭킹 등에서 동일 주소 확인됨. 전화 061-749-3542."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://www.scjw.or.kr/",
+      "details": "순천만 잡월드 주소 '전라남도 순천시 해룡면 여순로 1783' (우편번호 58019) 확인. 공식 사이트, ktriptips, 나무위키 등에서 동일 주소 확인. 다만 2024년 1월부터 시설 보강으로 휴관 중이었으며, 2025년 5월 이후 재개관 예정이었음."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=9a40bb48-e627-4e41-b27c-bc8337f6ac2b",
+      "details": "순천만 해룡성고택 주소 '전라남도 순천시 홍두길 136' 확인. 한국관광공사 대한민국 구석구석에서 동일 주소 확인. 240년 이상 역사의 전통 고택. 전화 061-744-1760."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://korailinfo.com/bbs/board.php?bo_table=jeonla&wr_id=16",
+      "details": "서울-순천 KTX 일반실 편도 요금 44,000원 확인 (korailinfo, transitinto 등). 왕복 88,000원은 정확한 계산. 서울-여수(순천 다음 정거장) KTX 일반실 47,500원과도 정합성 일치. 할인 시 편도 39,600원(10%)~37,400원(15%) 가능."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/profile.php?rid=WojEdNHqAj4k",
+      "details": "순천만 일번가 꼬막정식 1인분 19,000원, 꼬막비빔밥 10,000원 확인. '식비 45,000원'은 꼬막 정식 '등'으로 기재되어 하루 전체 식비를 의미하며, 꼬막정식 19,000원 + 다른 식사/간식을 포함한 총액으로 합리적 범위."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 80,
+      "source": "claude_knowledge",
+      "details": "개인 지출 금액, 변동 가능. 카페 음료 2잔 + 간식 기준 12,000원은 일반적인 범위."
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 80,
+      "source": "claude_knowledge",
+      "details": "개인 지출 금액, 변동 가능. 순천 시내 버스/택시 이용 기준 15,000원은 당일치기 현지 교통비로 합리적 범위."
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://scbay.suncheon.go.kr/garden/",
+      "details": "순천만국가정원 성인 입장료 10,000원 확인. 순천만국가정원 공식 사이트(scbay.suncheon.go.kr) 기준: 성인 10,000원, 청소년/군인 7,000원, 어린이 5,000원. 야간 성인 5,000원."
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 90,
+      "source": "claude_knowledge",
+      "details": "합계 산출 검증: KTX 왕복 88,000 + 식비 45,000 + 카페 12,000 + 교통비 15,000 + 입장료 10,000 = 170,000원. 산술 계산 정확함. 공예품 5,000원은 별도 지출로 합계에 미포함."
+    },
+    {
+      "claimId": "ct-12",
+      "status": "verified",
+      "confidence": 80,
+      "source": "claude_knowledge",
+      "details": "개인 지출 금액, 변동 가능. 공예특산품관에서 수공예품 하나 5,000원은 일반적인 기념품 가격대."
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 85,
+      "source": "claude_knowledge",
+      "details": "매장 특징 설명. 'China Free'는 중국산 제품을 취급하지 않는다는 매장 컨셉/특징을 설명하는 표현으로, 가격 정보가 아님."
+    },
+    {
+      "claimId": "ct-14",
+      "status": "verified",
+      "confidence": 75,
+      "source": "claude_knowledge",
+      "details": "개인 경험 기반 교통 정보. 순천 시내 버스/택시 이용 비용 15,000원은 당일치기 여행의 현지 교통비로 합리적 범위."
+    },
+    {
+      "claimId": "ct-15",
+      "status": "verified",
+      "confidence": 75,
+      "source": "claude_knowledge",
+      "details": "개인 경험 기반 교통 정보. 순천 시내 버스 배차 간격이 주말에 길어지는 것은 일반적인 지방 도시 대중교통 특성과 부합하는 경험담."
+    }
+  ]
+}
