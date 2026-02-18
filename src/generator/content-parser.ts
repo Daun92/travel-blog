@@ -25,6 +25,10 @@ export interface ContentSection {
   startLine: number;
   endLine: number;
   content: string;
+  /** 섹션 본문에서 추출된 장소명 */
+  mentionedLocations?: string[];
+  /** 섹션 헤딩+본문에서 추출된 핵심 키워드 */
+  sectionKeywords?: string[];
 }
 
 export interface ImageResult {
@@ -74,8 +78,68 @@ export function extractImageMarkers(content: string): ImageMarker[] {
   return markers;
 }
 
+/** 장소/시설 이름 패턴 (한국어) */
+const LOCATION_SUFFIX_REGEX = /(?:[관점원장역사당궁각실집루대탑문교산천호섬항포곶]|해변|해수욕장|시장|거리|마을|길|골목|카페|갤러리|미술관|박물관|공원|사찰|절|성|궁|전시관|기념관|수목원|식물원|동물원|수족관|해양관|공연장)$/;
+
+/**
+ * 텍스트에서 장소명 후보 추출 (굵은 글씨, 고유명사 패턴)
+ */
+function extractLocationsFromText(text: string): string[] {
+  const locations: string[] = [];
+  const seen = new Set<string>();
+
+  // **장소명** 패턴
+  const boldRegex = /\*\*([^*]{2,25})\*\*/g;
+  let match;
+  while ((match = boldRegex.exec(text)) !== null) {
+    const name = match[1].trim();
+    if (LOCATION_SUFFIX_REGEX.test(name) && !seen.has(name)) {
+      seen.add(name);
+      locations.push(name);
+    }
+  }
+
+  return locations;
+}
+
+/**
+ * 텍스트에서 핵심 키워드 추출 (2자+ 한글 명사, 불용어 제거)
+ */
+function extractKeywordsFromText(title: string, body: string): string[] {
+  const combined = `${title} ${body}`;
+  // 한글 단어 추출 (2자 이상)
+  const words = combined.match(/[가-힣]{2,}/g) || [];
+  const stopwords = new Set([
+    '그리고', '하지만', '그래서', '때문에', '이라는', '있는', '없는', '것은',
+    '하는', '되는', '이런', '저런', '여기', '저기', '위한', '대한', '통해',
+    '따라', '관한', '같은', '다른', '모든', '어떤', '함께', '그런', '이미',
+    '바로', '가장', '정말', '아주', '매우', '특히', '또한', '이후', '이전',
+  ]);
+
+  const counts = new Map<string, number>();
+  for (const w of words) {
+    if (!stopwords.has(w)) {
+      counts.set(w, (counts.get(w) || 0) + 1);
+    }
+  }
+
+  // 헤딩에 나온 단어 가중치 2배
+  const titleWords = title.match(/[가-힣]{2,}/g) || [];
+  for (const tw of titleWords) {
+    if (counts.has(tw)) {
+      counts.set(tw, (counts.get(tw) || 0) + 2);
+    }
+  }
+
+  return [...counts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([word]) => word);
+}
+
 /**
  * 콘텐츠를 섹션별로 파싱
+ * 각 섹션에 장소명과 핵심 키워드도 추출
  */
 export function parseSections(content: string): ContentSection[] {
   const sections: ContentSection[] = [];
@@ -93,6 +157,8 @@ export function parseSections(content: string): ContentSection[] {
       if (currentSection) {
         currentSection.endLine = i;
         currentSection.content = contentBuffer.join('\n').trim();
+        currentSection.mentionedLocations = extractLocationsFromText(currentSection.content);
+        currentSection.sectionKeywords = extractKeywordsFromText(currentSection.title, currentSection.content);
         sections.push(currentSection);
         contentBuffer = [];
       }
@@ -114,6 +180,8 @@ export function parseSections(content: string): ContentSection[] {
   if (currentSection) {
     currentSection.endLine = lines.length;
     currentSection.content = contentBuffer.join('\n').trim();
+    currentSection.mentionedLocations = extractLocationsFromText(currentSection.content);
+    currentSection.sectionKeywords = extractKeywordsFromText(currentSection.title, currentSection.content);
     sections.push(currentSection);
   }
 
@@ -175,72 +243,82 @@ export function suggestImagePositions(
   description: string;
 }> {
   const sections = parseSections(content);
+  if (sections.length === 0) return [];
+
+  // ── 이미 이미지가 있는 섹션 식별 ──
+  const hasImage = (s: ContentSection) => /!\[.*?\]\(/.test(s.content);
+
+  // ── 마감/보조 섹션 키워드 (일러스트 배치 대상) ──
+  const closingKeywords = ['자주', 'FAQ', '비용', '정산', '마무리', '여운', '요약', '가이드', '질문'];
+
+  // ── 섹션 분류: intro / body / closing ──
+  const introIndices: number[] = [];
+  const bodyIndices: number[] = [];
+  const closingIndices: number[] = [];
+
+  for (let i = 0; i < sections.length; i++) {
+    if (hasImage(sections[i])) continue; // 이미 이미지 있으면 스킵
+
+    const isClosing = closingKeywords.some(k => sections[i].title.includes(k));
+
+    if (i <= 1 && !isClosing) {
+      introIndices.push(i);
+    } else if (isClosing || i >= sections.length - 1) {
+      closingIndices.push(i);
+    } else {
+      bodyIndices.push(i);
+    }
+  }
+
   const suggestions: Array<{
     afterSection: string;
     style: ImageStyle;
     description: string;
   }> = [];
+  let remaining = maxImages;
 
-  // 여행 콘텐츠
-  if (type === 'travel') {
-    const sectionKeywords: Record<string, { style: ImageStyle; description: string }> = {
-      '기본': { style: 'infographic', description: '교통-비용-시간 요약' },
-      '교통': { style: 'diagram', description: '교통편 안내' },
-      '정보': { style: 'infographic', description: '여행 정보 요약' },
-      '코스': { style: 'map', description: '추천 코스 지도' },
-      '일정': { style: 'map', description: '여행 일정 지도' },
-      '추천': { style: 'map', description: '추천 스팟 지도' },
-      '맛집': { style: 'comparison', description: '맛집 비교' },
-      '카페': { style: 'comparison', description: '카페 비교' },
-      '메뉴': { style: 'comparison', description: '메뉴 가격 비교' },
-      '가격': { style: 'comparison', description: '가격 비교' }
+  // ── 1. 도입 일러스트 (최대 1장) ──
+  if (introIndices.length > 0 && remaining > 0) {
+    const section = sections[introIndices[0]];
+    const introStyles: Record<string, ImageStyle> = {
+      travel: 'moodboard',
+      culture: 'diagram',
     };
-
-    for (const section of sections) {
-      if (suggestions.length >= maxImages) break;
-
-      for (const [keyword, suggestion] of Object.entries(sectionKeywords)) {
-        if (section.title.includes(keyword)) {
-          // 중복 스타일 방지
-          if (!suggestions.some(s => s.style === suggestion.style)) {
-            suggestions.push({
-              afterSection: section.title,
-              ...suggestion
-            });
-          }
-          break;
-        }
-      }
-    }
+    suggestions.push({
+      afterSection: section.title,
+      style: introStyles[type] ?? 'moodboard',
+      description: type === 'travel' ? '여행지 감성 무드보드' : '전시 감성 다이어그램',
+    });
+    remaining--;
   }
 
-  // 문화 콘텐츠
-  if (type === 'culture') {
-    const sectionKeywords: Record<string, { style: ImageStyle; description: string }> = {
-      '기본': { style: 'infographic', description: '관람 정보 요약' },
-      '정보': { style: 'infographic', description: '전시 정보 요약' },
-      '관람': { style: 'diagram', description: '추천 관람 동선' },
-      '포인트': { style: 'diagram', description: '관람 포인트 동선' },
-      '작품': { style: 'infographic', description: '주요 작품 소개' },
-      '티켓': { style: 'comparison', description: '티켓 종류 비교' },
-      '예매': { style: 'infographic', description: '예매 정보 요약' }
-    };
+  // ── 2. 본문 스틸컷 (나머지 슬롯 - 마감 1장 예약) ──
+  const closingReserve = closingIndices.length > 0 ? 1 : 0;
+  const bodySlots = Math.min(bodyIndices.length, Math.max(0, remaining - closingReserve));
 
-    for (const section of sections) {
-      if (suggestions.length >= maxImages) break;
+  for (let i = 0; i < bodySlots; i++) {
+    const section = sections[bodyIndices[i]];
+    // 섹션 콘텐츠에서 피사체 추출: 장소명 > 키워드 > 헤딩 텍스트
+    const subject = section.mentionedLocations?.[0]
+      || section.sectionKeywords?.[0]
+      || section.title.replace(/^[#\s\d.:]+/, '').trim();
+    suggestions.push({
+      afterSection: section.title,
+      style: 'cover_photo',
+      description: `${subject} 현장 스틸컷`,
+    });
+    remaining--;
+  }
 
-      for (const [keyword, suggestion] of Object.entries(sectionKeywords)) {
-        if (section.title.includes(keyword)) {
-          if (!suggestions.some(s => s.style === suggestion.style)) {
-            suggestions.push({
-              afterSection: section.title,
-              ...suggestion
-            });
-          }
-          break;
-        }
-      }
-    }
+  // ── 3. 마감 일러스트 (최대 1장) ──
+  if (closingIndices.length > 0 && remaining > 0) {
+    const section = sections[closingIndices[0]];
+    suggestions.push({
+      afterSection: section.title,
+      style: 'infographic',
+      description: type === 'travel' ? '여행 준비 가이드' : '관람 정보 요약',
+    });
+    remaining--;
   }
 
   return suggestions;

@@ -33,6 +33,8 @@ import {
 } from '../generator/content-parser.js';
 import { generatePromptFromMarker, type ImageContext } from '../generator/image-prompts.js';
 import type { CollectedData } from '../agents/collector.js';
+import { extractGeoScope, isGeoCompatible, type GeoScope } from './geo-context.js';
+import { parseSections, type ContentSection } from '../generator/content-parser.js';
 
 // ─── 타입 ────────────────────────────────────────────────────────
 
@@ -62,6 +64,8 @@ export interface ProcessInlineImagesOptions {
   slug: string;
   imageCount: number;
   collectedImages?: KtoImageCandidate[];
+  /** 페르소나 ID (스틸컷 비주얼 아이덴티티 적용용) */
+  personaId?: string;
   onProgress?: (msg: string) => void;
 }
 
@@ -85,7 +89,9 @@ export async function selectCoverImage(
   if (collectedData) {
     const ktoCandidates = extractKtoImages(collectedData);
     if (ktoCandidates.length > 0) {
-      const bestCover = selectBestCoverImage(ktoCandidates, topic);
+      // 지리적 스코프로 미스매치 후보 감점
+      const geoScope = extractGeoScope('', topic);
+      const bestCover = selectBestCoverImage(ktoCandidates, topic, geoScope);
       if (bestCover) {
         onProgress('KTO 커버 이미지 다운로드 중...');
         const ktoResult = await downloadKtoImage(bestCover, './blog/static/images', slug, 0);
@@ -181,52 +187,126 @@ export function extractContentContext(content: string): { locations: string[]; i
 // ─── KTO 실사진 삽입 ────────────────────────────────────────────
 
 /**
- * KTO 실사진을 콘텐츠 H2/H3 섹션 뒤에 삽입
+ * 텍스트에서 한글/알파벳 단어만 추출 (구두점·마크다운 제거)
  */
-function insertKtoImages(content: string, ktoResults: KtoImageResult[]): string {
+function extractWords(text: string): string[] {
+  return text.replace(/[^\p{Script=Hangul}\p{L}\s]/gu, ' ')
+    .split(/\s+/)
+    .filter(w => w.length >= 2);
+}
+
+/**
+ * 토픽에서 지역명 stopword 추출
+ * 2~3자 한글 단어는 대부분 지역명 (양평, 가평, 거제, 서울 등)
+ * 4자+ 단어는 고유명사(국립양평치유의숲)이므로 제외
+ */
+function buildGeoStopwords(topic: string, geoScope?: GeoScope): Set<string> {
+  const topicShortWords = extractWords(topic).filter(w => w.length <= 3);
+  const regionNames = geoScope?.mentionedRegions ?? [];
+  return new Set([...topicShortWords, ...regionNames]);
+}
+
+/**
+ * KTO 이미지 제목과 헤딩 텍스트의 유사도 점수 계산
+ * 지역명 stopword 제외 후 고유명사 매칭 (맥락 불일치 방지)
+ */
+function headingImageSimilarity(
+  headingText: string,
+  imageTitle: string,
+  stopwords?: Set<string>
+): number {
+  const headingWords = extractWords(headingText);
+  const titleWords = extractWords(imageTitle);
+  let score = 0;
+  for (const hw of headingWords) {
+    if (stopwords?.has(hw)) continue;
+    for (const tw of titleWords) {
+      if (stopwords?.has(tw)) continue;
+      if (hw.includes(tw) || tw.includes(hw)) {
+        score += 1;
+      }
+    }
+  }
+  return score;
+}
+
+/**
+ * KTO 실사진을 콘텐츠 H2/H3 섹션 뒤에 삽입
+ * 이미지 제목과 헤딩 텍스트 유사도 매칭으로 배치 (기존: 인덱스 순서)
+ */
+function insertKtoImages(content: string, ktoResults: KtoImageResult[], geoScope?: GeoScope, topic?: string): string {
   if (ktoResults.length === 0) return content;
 
   const lines = content.split('\n');
-  const headingIndices: number[] = [];
+  const headings: Array<{ index: number; text: string }> = [];
 
-  // H2, H3 헤딩 위치 수집
   for (let i = 0; i < lines.length; i++) {
     if (/^#{2,3}\s/.test(lines[i])) {
-      headingIndices.push(i);
+      headings.push({ index: i, text: lines[i] });
     }
   }
 
-  if (headingIndices.length === 0) {
-    // 헤딩이 없으면 콘텐츠 맨 앞에 삽입
+  if (headings.length === 0) {
     const imageBlocks = ktoResults.map(r =>
       `\n![${r.alt}](${r.relativePath})\n*${r.caption}*\n`
     );
     return imageBlocks.join('') + '\n' + content;
   }
 
-  // 헤딩 뒤 적절한 위치에 이미지 삽입
-  const insertPositions: number[] = [];
-  if (headingIndices.length >= 1) {
-    insertPositions.push(findInsertAfterHeading(lines, headingIndices[0]));
-  }
-  if (ktoResults.length > 1 && headingIndices.length >= 3) {
-    const midIdx = Math.floor(headingIndices.length / 2);
-    insertPositions.push(findInsertAfterHeading(lines, headingIndices[midIdx]));
+  // 지역명 stopword: topic + H1 제목 + geoScope 결합
+  const h1Title = content.match(/^#\s+(.+)$/m)?.[1] ?? '';
+  const stopwords = buildGeoStopwords(
+    topic ? `${topic} ${h1Title}` : h1Title,
+    geoScope
+  );
+
+  // 각 KTO 이미지를 가장 유사한 헤딩에 매칭 (stopword 제외)
+  const assignments: Array<{ headingIdx: number; result: KtoImageResult }> = [];
+  const usedHeadings = new Set<number>();
+
+  for (const result of ktoResults) {
+    let bestHeading = -1;
+    let bestScore = 0; // 최소 1 이상이어야 배치
+
+    for (let h = 0; h < headings.length; h++) {
+      if (usedHeadings.has(h)) continue;
+      const score = headingImageSimilarity(headings[h].text, result.title, stopwords);
+      if (score > bestScore) {
+        bestScore = score;
+        bestHeading = h;
+      }
+    }
+
+    // score > 0 (stopword 제외 후)인 경우에만 배치
+    // score 0이면 맥락 매칭 실패 → 스킵 (강제 배치하지 않음)
+    if (bestHeading >= 0 && bestScore > 0) {
+      usedHeadings.add(bestHeading);
+      assignments.push({ headingIdx: bestHeading, result });
+    }
   }
 
-  // 역순으로 삽입 (인덱스 변동 방지)
-  const sortedPairs: Array<{ pos: number; result: KtoImageResult }> = [];
-  for (let i = 0; i < Math.min(ktoResults.length, insertPositions.length); i++) {
-    sortedPairs.push({ pos: insertPositions[i], result: ktoResults[i] });
-  }
-  sortedPairs.sort((a, b) => b.pos - a.pos);
+  // 역순 삽입 (인덱스 변동 방지)
+  assignments.sort((a, b) => headings[b.headingIdx].index - headings[a.headingIdx].index);
 
-  for (const { pos, result } of sortedPairs) {
+  for (const { headingIdx, result } of assignments) {
+    const pos = findInsertAfterHeading(lines, headings[headingIdx].index);
     const imageBlock = `\n![${result.alt}](${result.relativePath})\n*${result.caption}*\n`;
     lines.splice(pos + 1, 0, imageBlock);
   }
 
   return lines.join('\n');
+}
+
+/**
+ * 마커의 라인 번호로 속한 섹션 찾기
+ */
+function findSectionForMarker(sections: ContentSection[], markerLine: number): ContentSection | null {
+  for (let i = sections.length - 1; i >= 0; i--) {
+    if (markerLine >= sections[i].startLine) {
+      return sections[i];
+    }
+  }
+  return sections.length > 0 ? sections[0] : null;
 }
 
 /**
@@ -252,16 +332,29 @@ function findInsertAfterHeading(lines: string[], headingIdx: number): number {
 export async function processInlineImages(
   options: ProcessInlineImagesOptions
 ): Promise<ProcessInlineImagesResult> {
-  const { content, topic, type, slug, imageCount, collectedImages, onProgress = () => {} } = options;
+  const { content, topic, type, slug, imageCount, collectedImages, personaId, onProgress = () => {} } = options;
 
   const imageOutputDir = join(process.cwd(), 'blog', 'static', 'images');
   const imagePaths: string[] = [];
 
-  // ── Step 1: KTO 실사진 다운로드 (커버에 안 쓴 것들) ──
+  // ── Step 0: 지리적 스코프 추출 ──
+  const geoScope = extractGeoScope(content, topic);
+
+  // ── Step 1: KTO 실사진 다운로드 (커버에 안 쓴 것들, 지리적 필터링) ──
   let ktoResults: KtoImageResult[] = [];
   if (collectedImages && collectedImages.length > 0) {
     // 커버에 사용한 첫 번째 후보(index 0)는 제외
-    const inlineCandidates = collectedImages.slice(1);
+    let inlineCandidates = collectedImages.slice(1);
+
+    // 지리적 미스매치 후보 필터링
+    if (geoScope.primaryRegion) {
+      const filtered = inlineCandidates.filter(c => isGeoCompatible(c.address, geoScope));
+      if (filtered.length > 0) {
+        inlineCandidates = filtered;
+      }
+      // 필터 후 후보가 0이면 원본 유지 (보수적)
+    }
+
     if (inlineCandidates.length > 0) {
       const ktoCount = Math.min(Math.ceil(imageCount / 2), inlineCandidates.length);
       onProgress(`KTO 실사진 ${ktoCount}개 다운로드 중...`);
@@ -273,10 +366,10 @@ export async function processInlineImages(
     }
   }
 
-  // ── Step 2: KTO 사진을 content 중간에 삽입 ──
+  // ── Step 2: KTO 사진을 content 중간에 삽입 (헤딩-제목 유사도 매칭) ──
   let processedContent = content;
   if (ktoResults.length > 0) {
-    processedContent = insertKtoImages(processedContent, ktoResults);
+    processedContent = insertKtoImages(processedContent, ktoResults, geoScope, topic);
   }
 
   // ── Step 3: 나머지 슬롯은 기존 AI 마커 기반 생성 ──
@@ -318,12 +411,26 @@ export async function processInlineImages(
       onProgress(`${markersToProcess.length}개의 AI 인라인 이미지 생성 중...`);
 
       const imageResults: ImageResult[] = [];
-      const { locations, items } = extractContentContext(processedContent);
-      const imageContext: ImageContext = { topic, type, locations, items };
+      const globalContext = extractContentContext(processedContent);
+      const sections = parseSections(processedContent);
 
       for (let i = 0; i < markersToProcess.length; i++) {
         const marker = markersToProcess[i];
         onProgress(`  [${i + 1}/${markersToProcess.length}] ${marker.style} 이미지 생성 중...`);
+
+        // 마커가 속한 섹션의 컨텍스트를 우선 사용
+        const section = findSectionForMarker(sections, marker.line);
+        const sectionLocations = section?.mentionedLocations ?? [];
+        const sectionKeywords = section?.sectionKeywords ?? [];
+
+        const imageContext: ImageContext = {
+          topic,
+          type,
+          section: section?.title,
+          locations: sectionLocations.length > 0 ? sectionLocations : globalContext.locations,
+          items: sectionKeywords.length > 0 ? sectionKeywords : globalContext.items,
+          personaId,
+        };
 
         try {
           const promptInfo = generatePromptFromMarker(marker.marker, imageContext);

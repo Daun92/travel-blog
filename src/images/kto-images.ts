@@ -6,6 +6,7 @@
 import { writeFile, mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import type { CollectedData, TourismData, FestivalData } from '../agents/collector.js';
+import { isGeoCompatible, type GeoScope } from './geo-context.js';
 
 // ─── 타입 정의 ────────────────────────────────────────────────────
 
@@ -14,6 +15,8 @@ export interface KtoImageCandidate {
   title: string;
   source: 'firstimage' | 'gallery';
   contentId?: string;
+  /** KTO 원본 데이터의 주소 (지리적 검증용) */
+  address?: string;
 }
 
 export interface KtoImageResult {
@@ -39,30 +42,31 @@ export function extractKtoImages(data: CollectedData): KtoImageCandidate[] {
     url: string | undefined,
     title: string,
     source: 'firstimage' | 'gallery',
-    contentId?: string
+    contentId?: string,
+    address?: string
   ) => {
     if (!url || seenUrls.has(url)) return;
     if (!isValidKtoUrl(url)) return;
     seenUrls.add(url);
-    candidates.push({ url, title, source, contentId });
+    candidates.push({ url, title, source, contentId, address });
   };
 
   // 관광지 데이터
   for (const item of data.tourismData) {
-    addCandidate(item.image, item.title, 'firstimage', item.contentId);
+    addCandidate(item.image, item.title, 'firstimage', item.contentId, item.address);
     if (item.images) {
       for (const imgUrl of item.images) {
-        addCandidate(imgUrl, item.title, 'gallery', item.contentId);
+        addCandidate(imgUrl, item.title, 'gallery', item.contentId, item.address);
       }
     }
   }
 
   // 축제 데이터
   for (const fest of data.festivals) {
-    addCandidate(fest.image, fest.title, 'firstimage', fest.contentId);
+    addCandidate(fest.image, fest.title, 'firstimage', fest.contentId, fest.address);
     if (fest.images) {
       for (const imgUrl of fest.images) {
-        addCandidate(imgUrl, fest.title, 'gallery', fest.contentId);
+        addCandidate(imgUrl, fest.title, 'gallery', fest.contentId, fest.address);
       }
     }
   }
@@ -95,17 +99,19 @@ function isValidKtoUrl(url: string): boolean {
 /**
  * 커버 이미지로 최적의 후보 선택
  * firstimage 소스 +20점, 제목에 topic 키워드 매칭 +30점
+ * geoScope 제공 시: 지역 일치 +25점, 지역 불일치 -40점
  */
 export function selectBestCoverImage(
   candidates: KtoImageCandidate[],
-  topic: string
+  topic: string,
+  geoScope?: GeoScope
 ): KtoImageCandidate | null {
   if (candidates.length === 0) return null;
 
   const topicWords = topic.split(/\s+/).filter(w => w.length >= 2);
 
   let bestCandidate: KtoImageCandidate | null = null;
-  let bestScore = -1;
+  let bestScore = -Infinity;
 
   for (const candidate of candidates) {
     let score = 0;
@@ -120,6 +126,15 @@ export function selectBestCoverImage(
       if (candidate.title.includes(word)) {
         score += 30;
         break;
+      }
+    }
+
+    // 지리적 호환성 스코어링
+    if (geoScope && candidate.address) {
+      if (isGeoCompatible(candidate.address, geoScope)) {
+        score += 25;
+      } else {
+        score -= 40;
       }
     }
 

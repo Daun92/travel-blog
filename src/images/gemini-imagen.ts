@@ -16,6 +16,7 @@ export interface ImageGenerationOptions {
   aspectRatio?: AspectRatio;
   topic?: string;
   locale?: string;
+  personaId?: string;
 }
 
 export interface GeneratedImage {
@@ -53,6 +54,38 @@ interface GeminiResponse {
 
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models';
 const DEFAULT_MODEL = 'gemini-3.0-pro-preview';
+
+// ============================================================================
+// 페르소나별 일러스트 톤 팔레트
+// 같은 infographic/diagram 스타일도 페르소나에 따라 색감과 분위기가 달라진다
+// ============================================================================
+
+const PERSONA_ILLUSTRATION_TONE: Record<string, {
+  palette: string;
+  mood: string;
+  layout: string;
+}> = {
+  viral: {
+    palette: 'Bold red, electric blue, hot pink, black accents — magazine cover feel',
+    mood: 'Energetic, punchy, eye-catching — stops the scroll',
+    layout: 'Dynamic diagonals, overlapping elements, bold typography, high contrast',
+  },
+  friendly: {
+    palette: 'Warm cream, terracotta, sage green, dusty blue — diary/journal feel',
+    mood: 'Cozy, inviting, personal — like a friend recommending',
+    layout: 'Organic unaligned arrangement, handwritten labels, soft rounded corners',
+  },
+  informative: {
+    palette: 'Navy, ivory, gold accent, charcoal — exhibition catalog feel',
+    mood: 'Elegant, restrained, authoritative — documentary style',
+    layout: 'Grid-based, clean typography, generous whitespace, systematic hierarchy',
+  },
+  niche: {
+    palette: 'Muted olive, burnt orange, film grain overlay — indie zine feel',
+    mood: 'Intimate, discovered, analog — found in a used bookstore',
+    layout: 'Tight crops, layered textures, lo-fi aesthetic, collage-like composition',
+  },
+};
 
 // 일일 사용량 제한
 const DAILY_IMAGE_LIMIT = parseInt(process.env.GEMINI_IMAGE_MAX_COUNT || '50', 10);
@@ -199,8 +232,8 @@ export class GeminiImageClient {
 
     const { prompt, style, aspectRatio = '16:9' } = options;
 
-    // 프롬프트 구성
-    const fullPrompt = this.buildPrompt(prompt, style, aspectRatio);
+    // 프롬프트 구성 (페르소나 톤 반영)
+    const fullPrompt = this.buildPrompt(prompt, style, aspectRatio, options.personaId);
 
     const requestBody = {
       contents: [
@@ -263,7 +296,7 @@ export class GeminiImageClient {
   /**
    * 스타일별 프롬프트 구성 - 감성적이고 공유하고 싶은 이미지
    */
-  private buildPrompt(prompt: string, style: ImageStyle, aspectRatio: AspectRatio): string {
+  private buildPrompt(prompt: string, style: ImageStyle, aspectRatio: AspectRatio, personaId?: string): string {
     const aspectGuide: Record<AspectRatio, string> = {
       '16:9': 'horizontal layout optimized for blog posts and social sharing',
       '4:3': 'slightly horizontal layout, good for Pinterest',
@@ -347,9 +380,19 @@ Aspect ratio: ${aspectGuide[aspectRatio]}
 ${prompt}`;
     }
 
+    // 페르소나 톤 팔레트 주입 (일러스트 스타일에만 적용)
+    const personaTone = personaId ? PERSONA_ILLUSTRATION_TONE[personaId] : null;
+    const toneDirective = personaTone
+      ? `\n\nPERSONA VISUAL IDENTITY:
+- Color palette: ${personaTone.palette}
+- Mood: ${personaTone.mood}
+- Layout: ${personaTone.layout}`
+      : '';
+
     return `${styleGuides[style]}
 
 Aspect ratio: ${aspectGuide[aspectRatio]}
+${toneDirective}
 
 Content to visualize:
 ${prompt}

@@ -8,6 +8,8 @@ import { existsSync } from 'fs';
 import matter from 'gray-matter';
 import { generate } from '../generator/gemini.js';
 import { scoreImageRelevance, type UnsplashPhoto, type ImageSearchContext } from './unsplash.js';
+import { extractGeoScope, isGeoCompatible, normalizeRegion, type GeoScope } from './geo-context.js';
+import { parseSections } from '../generator/content-parser.js';
 
 /**
  * 이미지 검증 결과
@@ -164,6 +166,10 @@ export async function validateImage(
     postKeywords?: string[];
     venue?: string;
     isAiGenerated?: boolean;
+    /** 포스트의 지리적 스코프 (Phase 3) */
+    geoScope?: GeoScope;
+    /** 이미지가 속한 섹션의 제목 (Phase 3) */
+    sectionTitle?: string;
   }
 ): Promise<ImageValidationResult> {
   const issues: string[] = [];
@@ -241,6 +247,33 @@ export async function validateImage(
     }
   }
 
+  // 7. 지리적 스코프 검증 (Phase 3)
+  if (context.geoScope && context.geoScope.primaryRegion) {
+    // KTO 이미지: 파일명에서 지역 힌트 추출
+    if (source === 'kto') {
+      const filenameKeywords = extractKeywordsFromFilename(filename);
+      const filenameText = filenameKeywords.join(' ');
+      if (!isGeoCompatible(filenameText, context.geoScope)) {
+        issues.push(`지역 불일치 가능: 이미지(${filenameText})가 포스트 지역(${context.geoScope.primaryRegion})과 다를 수 있음`);
+        if (recommendation === 'use') {
+          recommendation = 'manual_check';
+        }
+      }
+    }
+
+    // AI 이미지: 파일명 키워드와 섹션 제목 오버랩 검사
+    if (source === 'gemini' && context.sectionTitle) {
+      const filenameKeywords = extractKeywordsFromFilename(filename);
+      const sectionWords = context.sectionTitle.split(/\s+/).filter(w => w.length >= 2);
+      const hasOverlap = filenameKeywords.some(fk =>
+        sectionWords.some(sw => fk.includes(sw) || sw.includes(fk))
+      );
+      if (!hasOverlap && filenameKeywords.length > 0 && sectionWords.length > 0) {
+        issues.push(`섹션-이미지 맥락 불일치: 이미지 키워드(${filenameKeywords.join(',')})와 섹션(${context.sectionTitle}) 연관성 부족`);
+      }
+    }
+  }
+
   // 최종 유효성 판단
   const isValid = issues.length === 0 ||
                   (issues.length <= 2 && recommendation !== 'replace');
@@ -281,6 +314,10 @@ export async function validatePostImages(
   ] as string[];
   const venue = frontmatter.venue as string;
 
+  // 지리적 스코프 + 섹션 파싱 (Phase 3)
+  const geoScope = extractGeoScope(body, title);
+  const sections = parseSections(body);
+
   // 커버 이미지 검증
   let coverImage: ImageValidationResult | null = null;
   if (frontmatter.image) {
@@ -288,7 +325,8 @@ export async function validatePostImages(
       postTitle: title,
       postKeywords: keywords,
       venue,
-      isAiGenerated: (frontmatter.image as string).includes('gemini-')
+      isAiGenerated: (frontmatter.image as string).includes('gemini-'),
+      geoScope,
     });
   }
 
@@ -296,6 +334,9 @@ export async function validatePostImages(
   const inlineImagePattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
   const inlineImages: ImageValidationResult[] = [];
   let match;
+
+  // 이미지 위치 → 섹션 매핑을 위해 라인 인덱스 추적
+  const bodyLines = body.split('\n');
 
   while ((match = inlineImagePattern.exec(body)) !== null) {
     const imagePath = match[2];
@@ -305,11 +346,24 @@ export async function validatePostImages(
       continue;
     }
 
+    // 이미지가 속한 섹션 찾기 (라인 번호 기반)
+    const matchPos = match.index;
+    const lineNum = body.substring(0, matchPos).split('\n').length;
+    let sectionTitle: string | undefined;
+    for (let s = sections.length - 1; s >= 0; s--) {
+      if (lineNum >= sections[s].startLine) {
+        sectionTitle = sections[s].title;
+        break;
+      }
+    }
+
     const result = await validateImage(imagePath, {
       postTitle: title,
       postKeywords: keywords,
       venue,
-      isAiGenerated: imagePath.includes('inline-') || imagePath.includes('gemini-')
+      isAiGenerated: imagePath.includes('inline-') || imagePath.includes('gemini-'),
+      geoScope,
+      sectionTitle,
     });
 
     inlineImages.push(result);
@@ -374,6 +428,15 @@ export async function validatePostImages(
 
   if (aiGeneratedCount > 0 && ktoImageCount === 0 && venue) {
     recommendations.push(`${aiGeneratedCount}개의 AI 생성 이미지 - 실제 장소 사진으로 교체 고려`);
+  }
+
+  // 지리적/섹션 불일치 패널티 (Phase 3)
+  const geoMismatchCount = inlineImages.filter(img =>
+    img.issues.some(issue => issue.includes('지역 불일치') || issue.includes('맥락 불일치'))
+  ).length;
+  if (geoMismatchCount > 0) {
+    totalScore -= geoMismatchCount * 10;
+    recommendations.push(`${geoMismatchCount}개 이미지 지역/섹션 맥락 불일치 - 교체 권장`);
   }
 
   const passesGate = totalScore >= minScore;

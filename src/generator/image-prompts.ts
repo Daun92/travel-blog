@@ -12,6 +12,8 @@ export interface ImageContext {
   data?: Record<string, string | number>;
   items?: string[];
   locations?: string[];
+  /** 페르소나 ID — 스틸컷 비주얼 아이덴티티 적용 */
+  personaId?: string;
 }
 
 // ============================================================
@@ -347,6 +349,48 @@ STYLE GUIDELINES:
 Make visitors want to complete the FULL list.`;
 }
 
+// ─── 페르소나별 스틸컷 촬영 스타일 ────────────────────────────────
+
+const PERSONA_PHOTO_STYLES: Record<string, string> = {
+  viral: `PHOTOGRAPHY STYLE: Editorial magazine photography — strong directional lighting with dramatic shadows. Diagonal composition with hero framing and bold perspective. High contrast, deep blacks, strong saturation. The image should feel like a magazine spread that demands attention.`,
+
+  friendly: `PHOTOGRAPHY STYLE: Lifestyle photography — golden hour warmth with soft bokeh backgrounds. Eye-level perspective with warm vignetting and centered subject. Warm tones, golden highlights, soft shadows. The feeling should be approachable and inviting, like a friend's travel photo.`,
+
+  informative: `PHOTOGRAPHY STYLE: Architectural photography — even, balanced lighting with attention to structural detail. Symmetrical composition, rule of thirds, geometric framing. Balanced exposure, cool shadows, neutral midtones. Clean and precise, emphasizing form and structure.`,
+
+  niche: `PHOTOGRAPHY STYLE: Indie street photography — tight close-up with off-center subject and shallow depth of field. Muted desaturated tones with film emulation (Fuji Superia 400 grain). Slight vignetting at edges. One selectively saturated element against the muted palette. Candid and intimate discovery moment.`,
+};
+
+const DEFAULT_PHOTO_STYLE = PERSONA_PHOTO_STYLES.friendly;
+
+/**
+ * 스틸컷 프롬프트 — 본문 섹션용 포토리얼리스틱 이미지
+ * 3파트 구조: SUBJECT → ATMOSPHERE → PHOTOGRAPHY STYLE
+ */
+function getStillcutPrompt(context: ImageContext): string {
+  const { topic, type, section = '', locations = [], items = [], personaId } = context;
+
+  const subject = locations[0] || items[0] || section;
+  const locationList = locations.length > 0 ? locations.join(', ') : topic;
+  const detailItems = items.length > 0 ? items.slice(0, 3).join(', ') : '';
+
+  const atmosphere = type === 'travel'
+    ? `Natural ambient light appropriate to the time and season. A sense of place — the air, sounds, and energy of ${locationList}. Real travel atmosphere with authentic Korean environmental details: Korean signage, local architecture, natural landscape elements.`
+    : `The contemplative atmosphere of a cultural space. Subtle interior lighting mixed with natural light. Intellectual curiosity and quiet appreciation. Korean cultural markers in architecture, art, or design elements.`;
+
+  const photoStyle = PERSONA_PHOTO_STYLES[personaId ?? ''] || DEFAULT_PHOTO_STYLE;
+
+  return `A photorealistic photograph for a Korean ${type} blog post about: ${topic}
+
+SUBJECT: ${subject}${detailItems ? `. Key details to capture: ${detailItems}` : ''}. The scene should depict a specific, concrete moment at this location — not a generic overview but a particular detail or angle that reveals something about the place. Include authentic Korean environmental elements: Korean text on signs, Korean architectural details, Korean food or cultural items as appropriate.
+
+ATMOSPHERE: ${atmosphere}
+
+${photoStyle}
+
+CRITICAL: Photorealistic photograph ONLY. NO illustration, NO digital art, NO cartoon, NO text overlay, NO watermark. Must look like an actual photograph taken on location. Must fill entire frame edge-to-edge. Korean atmosphere must be unmistakable.`;
+}
+
 /**
  * 이미지 마커에서 프롬프트 생성
  * 형식: [IMAGE:style:description]
@@ -363,7 +407,7 @@ export function generatePromptFromMarker(
   const style = styleStr as ImageStyle;
 
   // 유효한 스타일인지 확인
-  const validStyles: ImageStyle[] = ['infographic', 'diagram', 'map', 'comparison', 'moodboard', 'bucketlist'];
+  const validStyles: ImageStyle[] = ['infographic', 'diagram', 'map', 'comparison', 'moodboard', 'bucketlist', 'cover_photo'];
   if (!validStyles.includes(style)) return null;
 
   // 컨텍스트와 설명 결합
@@ -391,6 +435,9 @@ export function generatePromptFromMarker(
       break;
     case 'bucketlist':
       prompt = getBucketlistPrompt(enrichedContext);
+      break;
+    case 'cover_photo':
+      prompt = getStillcutPrompt(enrichedContext);
       break;
     default:
       return null;

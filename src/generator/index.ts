@@ -149,6 +149,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
       slug,
       imageCount: Math.min(imageCount, getMaxImagesPerPost()),
       collectedImages,
+      personaId: selectedPersona?.id,
       onProgress
     });
     finalContent = imageResult.content;
