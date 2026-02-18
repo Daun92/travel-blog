@@ -112,16 +112,16 @@ const TOPIC_MAP: Record<number, string> = {
   8: '도시 벽화/스트릿아트'
 };
 
-/** topicId → discovery 키워드 매핑 */
+/** topicId → discovery 키워드 매핑 (niche 키워드 확장) */
 const TOPIC_KEYWORD_MAP: Record<number, string[]> = {
-  1: ['미술관', '갤러리', '전시회'],
-  2: ['뮤지컬', '연극', '공연'],
-  3: ['서점', '북카페', '독립서점'],
-  4: ['전통문화'],
-  5: ['공연', '페스티벌'],
-  6: ['영화제'],
-  7: ['워크숍'],
-  8: ['벽화', '스트릿아트']
+  1: ['미술관', '갤러리', '전시회', '전시', '현대미술', '설치미술'],
+  2: ['뮤지컬', '연극', '공연', '소극장', '인디공연'],
+  3: ['서점', '북카페', '독립서점', '독립출판', '책방'],
+  4: ['전통문화', '한옥', '사찰', '도예', '전통공예'],
+  5: ['공연', '페스티벌', '인디밴드', '라이브', '버스킹'],
+  6: ['영화제', '독립영화', '예술영화', '시네마테크'],
+  7: ['워크숍', '클래스', '체험', '공방'],
+  8: ['벽화', '스트릿아트', '그래피티', '골목예술']
 };
 
 const FORMAT_MAP: Record<string, string> = {
@@ -304,7 +304,10 @@ export class SurveyInsightsDBManager {
 
   /**
    * discovery 스코어 부스트 맵 반환
-   * 키워드 → 0~30점 부스트
+   * 키워드 → 0~50점 부스트 (확장: 서베이 데이터 영향력 강화)
+   *
+   * 공식: (투표비율 × 30) + (등장횟수 × 5) + (지역관심 보너스 10)
+   * 최대 50점 — 반복 서베이에서 꾸준히 선택되면 강한 시그널
    */
   getSurveyScoreBoosts(): Record<string, number> {
     const boosts: Record<string, number> = {};
@@ -314,13 +317,30 @@ export class SurveyInsightsDBManager {
     const maxVotes = Math.max(...this.db.insights.topicDemand.map(t => t.totalWeightedVotes));
     if (maxVotes <= 0) return boosts;
 
+    // 지역 관심도 맵 (보너스 계산용)
+    const regionBonus = new Set(
+      this.db.insights.regionInterest
+        .filter(r => r.totalMentions >= 2)
+        .map(r => r.region)
+    );
+
     for (const topic of this.db.insights.topicDemand) {
       const keywords = TOPIC_KEYWORD_MAP[topic.topicId];
       if (!keywords) continue;
 
-      const boost = Math.min(30,
-        (topic.totalWeightedVotes / maxVotes) * 20 + topic.surveyAppearances * 5
-      );
+      // 기본 부스트: 투표 비율 (0~30) + 등장 횟수 (0~15)
+      let boost = (topic.totalWeightedVotes / maxVotes) * 30
+                + Math.min(15, topic.surveyAppearances * 5);
+
+      // 지역 관심도 보너스: 서베이에서 관심 지역이 키워드와 겹치면 +5
+      for (const kw of keywords) {
+        if (regionBonus.has(kw)) {
+          boost += 5;
+          break;
+        }
+      }
+
+      boost = Math.min(50, boost);
 
       if (boost > 0) {
         for (const kw of keywords) {

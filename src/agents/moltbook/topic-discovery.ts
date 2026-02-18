@@ -66,7 +66,7 @@ export interface TopicRecommendation {
     final: number;
   };
   /** 자동 배정된 페르소나 */
-  personaId?: 'viral' | 'friendly' | 'informative';
+  personaId?: 'viral' | 'friendly' | 'informative' | 'niche';
   /** 콘텐츠 프레이밍 유형 */
   framingType?: FramingType;
   /** 이벤트 연결 메타데이터 */
@@ -1436,6 +1436,18 @@ export interface EnhancedDiscoveryResult extends DiscoveryResult {
   votePosts: VotePostResult[];
 }
 
+/** 프레이밍↔페르소나 친화도 매트릭스 타입 */
+interface FramingAffinityEntry {
+  primary: string;
+  secondary: string;
+}
+
+/** 지역 매핑 타입 */
+interface RegionMappingEntry {
+  places: string[];
+  nicheAngles: string[];
+}
+
 export class TopicDiscovery {
   private scanner: MoltbookTrendScanner;
   private gapAnalyzer: TopicGapAnalyzer;
@@ -1451,6 +1463,146 @@ export class TopicDiscovery {
     this.openclawScanner = new OpenClawPostScanner(config);
     this.voteScanner = new VotePostScanner(config);
     this.eventBus = eventBus;
+  }
+
+  /**
+   * framingAffinity 로드 — 프레이밍 유형별 최적 에이전트 매핑
+   */
+  private async loadFramingAffinity(): Promise<Record<string, FramingAffinityEntry>> {
+    try {
+      const raw = await readFile(join(process.cwd(), 'config/personas/index.json'), 'utf-8');
+      const data = JSON.parse(raw) as { framingAffinity?: Record<string, FramingAffinityEntry> };
+      return data.framingAffinity || {};
+    } catch {
+      return {};
+    }
+  }
+
+  /**
+   * region-mapping.json 로드
+   */
+  private async loadRegionMapping(): Promise<Record<string, RegionMappingEntry>> {
+    try {
+      const raw = await readFile(join(process.cwd(), 'config/region-mapping.json'), 'utf-8');
+      return JSON.parse(raw) as Record<string, RegionMappingEntry>;
+    } catch {
+      return {};
+    }
+  }
+
+  /**
+   * framingAffinity 기반 페르소나 배정
+   * framingType이 있으면 친화도 매트릭스에서 primary 에이전트를 배정
+   */
+  private assignPersonaByFraming(
+    rec: TopicRecommendation,
+    affinity: Record<string, FramingAffinityEntry>
+  ): void {
+    if (rec.personaId) return; // 이미 배정된 건 스킵
+
+    if (rec.framingType && affinity[rec.framingType]) {
+      rec.personaId = affinity[rec.framingType].primary as TopicRecommendation['personaId'];
+    }
+  }
+
+  /**
+   * Axis 2B: 트렌딩 주제에서 niche 파생 주제 생성
+   * "경주" 트렌딩 → "경주 석굴암 뒷길 디깅" 같은 niche 앵글 파생
+   */
+  private async deriveNicheTopics(
+    recommendations: TopicRecommendation[]
+  ): Promise<TopicRecommendation[]> {
+    const regionMapping = await this.loadRegionMapping();
+    const derived: TopicRecommendation[] = [];
+
+    // 기존 추천에서 niche가 아닌 것 중 지역 매핑이 있는 것을 파생
+    for (const rec of recommendations) {
+      if (rec.personaId === 'niche') continue; // 이미 niche면 스킵
+
+      // 추천 키워드에서 지역명 찾기
+      const regionKey = Object.keys(regionMapping).find(region =>
+        rec.topic.includes(region) || rec.keywords.some(k => k.includes(region))
+      );
+      if (!regionKey) continue;
+
+      const mapping = regionMapping[regionKey];
+      if (!mapping.nicheAngles || mapping.nicheAngles.length === 0) continue;
+
+      // 랜덤 niche 앵글 1개 선택
+      const angle = mapping.nicheAngles[Math.floor(Math.random() * mapping.nicheAngles.length)];
+      const nichePlace = mapping.places[Math.floor(Math.random() * mapping.places.length)];
+
+      derived.push({
+        topic: `${nichePlace} ${angle}`,
+        type: rec.type,
+        score: Math.max(60, rec.score - 10), // 원본보다 약간 낮은 점수
+        source: rec.source,
+        reasoning: `${rec.topic} 트렌딩에서 niche 파생 — ${angle}`,
+        suggestedTitle: `${nichePlace}, ${angle}: 아는 사람만 아는 이야기`,
+        keywords: [nichePlace, regionKey, ...rec.keywords.slice(0, 2)],
+        discoveredAt: new Date().toISOString(),
+        personaId: 'niche',
+        framingType: 'niche_digging'
+      });
+    }
+
+    return derived;
+  }
+
+  /**
+   * Axis 3C: 에이전트 밸런싱 — 목표 비율 대비 부족한 에이전트 보정
+   */
+  private async balanceAgentDistribution(
+    recommendations: TopicRecommendation[]
+  ): Promise<void> {
+    const targets = await this.loadDiversityTargets();
+    if (!targets?.agentRatio) return;
+
+    // 현재 분포 계산
+    const counts: Record<string, number> = {};
+    for (const rec of recommendations) {
+      const pid = rec.personaId || 'friendly';
+      counts[pid] = (counts[pid] || 0) + 1;
+    }
+    const total = recommendations.length;
+    if (total === 0) return;
+
+    // 목표 대비 부족한 에이전트 찾기
+    const deficits: Array<{ agent: string; deficit: number }> = [];
+    for (const [agent, targetRatio] of Object.entries(targets.agentRatio)) {
+      const actual = (counts[agent] || 0) / total;
+      const deficit = targetRatio - actual;
+      if (deficit > 0.05) { // 5% 이상 부족하면 보정 대상
+        deficits.push({ agent, deficit });
+      }
+    }
+
+    if (deficits.length === 0) return;
+
+    // 가장 많은 에이전트(초과)에서 부족한 에이전트로 재배정
+    deficits.sort((a, b) => b.deficit - a.deficit);
+
+    const surplusAgents = Object.entries(targets.agentRatio)
+      .filter(([agent]) => {
+        const actual = (counts[agent] || 0) / total;
+        return actual > targets.agentRatio[agent] + 0.05;
+      })
+      .map(([agent]) => agent);
+
+    for (const { agent: deficitAgent } of deficits) {
+      // 초과 에이전트의 추천 중 점수가 낮은 것부터 재배정
+      const candidates = recommendations
+        .filter(r => surplusAgents.includes(r.personaId || 'friendly'))
+        .sort((a, b) => a.score - b.score);
+
+      if (candidates.length > 0) {
+        candidates[0].personaId = deficitAgent as TopicRecommendation['personaId'];
+        // counts 업데이트
+        const oldAgent = candidates[0].personaId || 'friendly';
+        counts[oldAgent] = (counts[oldAgent] || 0) - 1;
+        counts[deficitAgent] = (counts[deficitAgent] || 0) + 1;
+      }
+    }
   }
 
   /**
@@ -1528,6 +1680,30 @@ export class TopicDiscovery {
       recommendations.sort((a, b) => b.score - a.score);
       console.log(`   ✓ 미커버 지역 추천 ${regionGapRecs.length}개 추가`);
     }
+
+    // 6. Niche 파생 주제 생성 (Axis 2B)
+    const nicheTopics = await this.deriveNicheTopics(recommendations);
+    if (nicheTopics.length > 0) {
+      const existingSet = new Set(recommendations.map(r => r.topic));
+      for (const nt of nicheTopics) {
+        if (!existingSet.has(nt.topic)) {
+          recommendations.push(nt);
+          existingSet.add(nt.topic);
+        }
+      }
+      console.log(`   ✓ Niche 파생 주제 ${nicheTopics.length}개 추가`);
+    }
+
+    // 7. framingAffinity 기반 페르소나 배정 (Axis 1B)
+    const affinity = await this.loadFramingAffinity();
+    for (const rec of recommendations) {
+      this.assignPersonaByFraming(rec, affinity);
+    }
+
+    // 8. 에이전트 밸런싱 (Axis 3C)
+    await this.balanceAgentDistribution(recommendations);
+
+    recommendations.sort((a, b) => b.score - a.score);
 
     balancer.printAnalysis(boosts);
 
@@ -1694,7 +1870,7 @@ export class TopicDiscovery {
     const mostNeededAgent = (
       Object.entries(postBoosts.agentBoosts)
         .sort(([, a], [, b]) => b - a)[0]?.[0] || 'informative'
-    ) as 'viral' | 'friendly' | 'informative';
+    ) as 'viral' | 'friendly' | 'informative' | 'niche';
     for (const rec of allRecommendations) {
       if (!rec.personaId) {
         rec.personaId = mostNeededAgent;

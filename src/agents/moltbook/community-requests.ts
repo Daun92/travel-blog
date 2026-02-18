@@ -77,12 +77,58 @@ const TOPIC_KEYWORDS = [
   // 지역
   '제주', '서울', '부산', '강릉', '경주', '전주', '대구', '인천', '여수', '속초',
   '대전', '광주', '울산', '춘천', '안동', '통영', '거제', '목포', '순천', '양양',
+  '공주', '부여', '청주', '단양', '진주', '하동', '영월', '정선', '포항', '담양',
   // 카테고리
   '카페', '맛집', '숙소', '호텔', '펜션', '렌터카', '전시회', '미술관', '박물관',
   '공연', '뮤지컬', '서점', '북카페', '시장', '야경', '드라이브', '코스', '일정',
+  '갤러리', '축제', '체험', '산책', '골목', '한옥', '건축', '역사', '문화', '예술',
   // 특수
   '가격', '비용', '예약', '주차', '대중교통', '버스', '기차', 'KTX'
 ];
+
+// ============================================================================
+// 관련성 필터 — 여행/문화 도메인 외 댓글 제거
+// ============================================================================
+
+const RELEVANCE_KEYWORDS = [
+  '여행', '관광', '전시', '공연', '카페', '맛집', '박물관', '미술관', '갤러리',
+  '축제', '체험', '숙소', '호텔', '코스', '데이트', '산책', '야경', '역사',
+  '건축', '문화', '예술', '서점', '골목', '시장', '한옥', '사찰', '해변', '산',
+  '추천', '후기', '방문', '입장', '관람', '투어', '여행지', '볼거리', '먹거리',
+  ...TOPIC_KEYWORDS,
+];
+
+const SPAM_PATTERNS = [
+  /https?:\/\/\S{30,}/g,            // 긴 URL
+  /\b(crypto|NFT|mint|token|web3)\b/gi,  // 스팸 키워드
+  /\b(SOUL\.md|CYBERSECURITY|isnād)\b/g, // 알려진 오염 패턴
+  /(.)\1{10,}/g,                     // 같은 문자 10회 이상 반복
+];
+
+/**
+ * 댓글이 여행/문화 도메인에 관련이 있는지 필터링
+ * 3단 검증: 한글 비율 → 도메인 키워드 → 스팸 패턴
+ */
+function isRelevantComment(content: string): boolean {
+  // Filter 1: 한글 비율 — 30% 이상이어야 함
+  const koreanChars = (content.match(/[가-힣]/g) || []).length;
+  const koreanRatio = koreanChars / Math.max(1, content.length);
+  if (koreanRatio < 0.3) return false;
+
+  // Filter 2: 여행/문화 키워드 최소 1개 포함
+  const hasRelevant = RELEVANCE_KEYWORDS.some(kw => content.includes(kw));
+  if (!hasRelevant) return false;
+
+  // Filter 3: 스팸/봇 패턴 제거
+  if (SPAM_PATTERNS.some(p => p.test(content))) {
+    // 정규식 lastIndex 리셋
+    SPAM_PATTERNS.forEach(p => { p.lastIndex = 0; });
+    return false;
+  }
+  SPAM_PATTERNS.forEach(p => { p.lastIndex = 0; });
+
+  return true;
+}
 
 // ============================================================================
 // 커뮤니티 요청 추출기
@@ -120,7 +166,7 @@ export class CommunityRequestExtractor {
   }
 
   /**
-   * 단일 댓글에서 요청 추출
+   * 단일 댓글에서 요청 추출 (관련성 필터 적용)
    */
   extractRequest(
     comment: Comment,
@@ -128,6 +174,11 @@ export class CommunityRequestExtractor {
     postTitle: string
   ): CommunityRequest | null {
     const content = comment.content;
+
+    // 관련성 필터: 여행/문화 도메인 외 댓글 차단
+    if (!isRelevantComment(content)) {
+      return null;
+    }
 
     // 각 패턴 타입별로 검사
     for (const [requestType, patterns] of Object.entries(REQUEST_PATTERNS)) {
@@ -319,7 +370,7 @@ export class CommunityRequestExtractor {
   }
 
   /**
-   * 캐시 로드
+   * 캐시 로드 (오염 데이터 필터링 적용)
    */
   async loadCache(): Promise<CommunityRequest[]> {
     try {
@@ -328,7 +379,9 @@ export class CommunityRequestExtractor {
       }
 
       const content = await readFile(REQUESTS_CACHE_PATH, 'utf-8');
-      return JSON.parse(content) as CommunityRequest[];
+      const cached = JSON.parse(content) as CommunityRequest[];
+      // 기존 캐시에서도 관련성 필터 재적용 (오염 데이터 정제)
+      return cached.filter(r => isRelevantComment(r.content));
     } catch {
       return [];
     }

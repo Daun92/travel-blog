@@ -1,6 +1,15 @@
 {
   "defaultPersona": "friendly",
   "personas": ["viral", "friendly", "informative", "niche"],
+  "framingAffinity": {
+    "list_ranking":  { "primary": "viral",       "secondary": "friendly" },
+    "deep_dive":     { "primary": "informative",  "secondary": "niche" },
+    "experience":    { "primary": "friendly",     "secondary": "viral" },
+    "seasonal":      { "primary": "friendly",     "secondary": "viral" },
+    "comparison":    { "primary": "viral",        "secondary": "informative" },
+    "local_story":   { "primary": "niche",        "secondary": "friendly" },
+    "niche_digging": { "primary": "niche",        "secondary": "informative" }
+  },
   "assignmentRules": {
     "viral": {
       "keywords": ["TOP", "BEST", "순위", "비교", "vs", "최고", "최악", "핫플", "트렌드", "SNS", "난리", "화제", "기대", "현실", "논란", "꼭", "필수"],
