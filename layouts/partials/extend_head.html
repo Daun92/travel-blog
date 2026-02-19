@@ -1,4 +1,12 @@
 {{/* OpenClaw Travel Blog - Head Extensions */}}
+{{/* PaperMod 테마가 이미 처리하는 항목은 여기서 제외:
+     - OG (og:locale, og:type, og:title, og:description, og:image)
+     - Twitter Card (twitter:card, twitter:title, twitter:description, twitter:image)
+     - Article meta (article:published_time, article:modified_time)
+     - Author meta (meta name="author")
+     - JSON-LD Article/BlogPosting (PaperMod의 BlogPosting + BreadcrumbList가 더 우수)
+     - JSON-LD Organization (PaperMod의 schema_json.html)
+     여기서는 PaperMod에 없는 기능만 추가한다. */}}
 
 {{/* Google Analytics GA4 */}}
 {{- with site.Config.Services.GoogleAnalytics.ID }}
@@ -17,63 +25,18 @@
 {{/* DNS Prefetch for external resources */}}
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
-{{/* 테마 컬러 (모바일 브라우저) */}}
+{{/* 테마 컬러 (모바일 브라우저 — 라이트/다크 분리) */}}
 <meta name="theme-color" content="#4f46e5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#3730a3" media="(prefers-color-scheme: dark)">
 
-{{/* Open Graph 추가 */}}
-<meta property="og:locale" content="ko_KR">
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-
-{{/* Twitter Card */}}
-<meta name="twitter:card" content="summary_large_image">
-
-{{/* Article specific meta */}}
+{{/* 성능: Resource Hints — 다음/이전 포스트 prefetch */}}
 {{ if .IsPage }}
-{{ with .Params.author }}<meta name="author" content="{{ . }}">{{ end }}
-{{ with .Date }}<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
-{{ with .Lastmod }}<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ end }}
-{{ end }}
-
-{{/* 성능: Resource Hints */}}
-{{ if .IsPage }}
-{{/* 다음/이전 포스트 prefetch */}}
 {{ with .NextInSection }}<link rel="prefetch" href="{{ .Permalink }}">{{ end }}
 {{ with .PrevInSection }}<link rel="prefetch" href="{{ .Permalink }}">{{ end }}
 {{ end }}
 
-{{/* JSON-LD 구조화 데이터 */}}
-{{ if .IsPage }}
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "{{ .Title }}",
-  "description": "{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 160 }}{{ end }}",
-  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
-  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
-  "author": {
-    "@type": "Person",
-    "name": "{{ with .Params.author }}{{ . }}{{ else }}{{ site.Params.author }}{{ end }}"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "{{ site.Title }}",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "{{ site.BaseURL }}favicon.svg"
-    }
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "{{ .Permalink }}"
-  }
-  {{ with .Params.cover.image }},
-  "image": "{{ . | absURL }}"
-  {{ end }}
-}
-</script>
-{{ else if .IsHome }}
+{{/* JSON-LD: WebSite + SearchAction (홈페이지 전용 — PaperMod에 없음) */}}
+{{ if .IsHome }}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -90,7 +53,7 @@
 </script>
 {{ end }}
 
-{{/* FAQ Schema (FAQPage) - frontmatter에 faqs 필드가 있으면 자동 생성 */}}
+{{/* JSON-LD: FAQPage (frontmatter에 faqs 필드가 있으면 자동 생성 — PaperMod에 없음) */}}
 {{ if .IsPage }}
 {{ with .Params.faqs }}
 <script type="application/ld+json">
