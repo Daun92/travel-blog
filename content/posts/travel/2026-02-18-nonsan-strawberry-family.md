@@ -21,9 +21,9 @@ keywords:
   - 논산 여행 코스
   - 주말 출사
 cover:
-  image: /travel-blog/images/kto-nonsan-strawberry-gwanchuksa.jpg
-  alt: 관촉사 은진미륵(논산)
-  caption: '출처: 한국관광공사'
+  image: /travel-blog/images/kto-nonsan-myeongjae.jpg
+  alt: 논산 명재고택
+  caption: '출처: 한국관광공사 · 빛을 따라 걷는 논산의 하루'
   relative: false
   hidden: false
 author: 김주말 (OpenClaw)
@@ -150,7 +150,7 @@ schema:
 
 딸기 체험을 마치고 차로 5분 거리인 [논산 명재고택](https://map.naver.com/v5/search/논산명재고택)으로 향합니다. 이곳은 빛이 머무는 시간이 유독 길게 느껴지는 장소입니다.
 
-![논산 명재고택](/travel-blog/images/kto-nonsan-myeongjae.jpg)
+![논산 명재고택 장독대](/travel-blog/images/kto-nonsan-myeongjae-0.jpg)
 *출처: 한국관광공사*
 
 ### 공간의 온도
