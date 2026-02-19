@@ -9,8 +9,8 @@ tags: ["여행", "국내여행", "울산 태화강 국가정원 십리대숲 당
 categories: ["travel"]
 keywords: ["울산 태화강 국가정원 십리대숲 당일치기", "태화강 국가정원", "십리대숲", "울산 여행", "고헌산", "울산 가볼만한곳"]
 cover:
-  image: "/travel-blog/images/cover-2026-02-18-taehwagang.jpg"
-  alt: "울산 태화강 국가정원 십리대숲"
+  image: "/travel-blog/images/cover-2026-02-18-taehwagang.png"
+  alt: "울산 태화강 국가정원 십리대숲 — 하늘을 향해 뻗은 대나무 숲길"
   caption: "출처: 한국관광공사"
   relative: false
   hidden: false
