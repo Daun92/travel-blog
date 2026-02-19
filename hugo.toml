@@ -144,7 +144,7 @@ enableEmoji = true
 # 검색엔진 인증 (웹마스터 도구 등록 후 토큰 입력)
 [params.analytics]
   [params.analytics.google]
-    SiteVerificationTag = ""
+    SiteVerificationTag = "qdaKDU_tQVFSuJ4TQte0xB26PqnZJM0HgKQeuf0nmXE"
   [params.analytics.naver]
     SiteVerificationTag = "e9387d1350e09c88d78fef901c8f5495081e0b10"
   [params.analytics.bing]
