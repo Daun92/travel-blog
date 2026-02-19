@@ -166,6 +166,8 @@ enableEmoji = true
 
 # Google Analytics
 [services]
+  [services.rss]
+    limit = -1
   [services.googleAnalytics]
     id = "G-YZK4FDCRNX"
 

@@ -1,5 +1,6 @@
 ---
 title: '여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스'
+slug: "yeosu-night-sea"
 date: 2026-02-05T12:25:04.000Z
 draft: false
 description: >-

@@ -1,5 +1,6 @@
 ---
 title: '서울 이색 박물관 베스트 5: 데이트 코스로 딱 좋은 숨은 명소 추천'
+slug: "seoul-unique-museums-5"
 date: 2026-02-05T12:24:39.000Z
 draft: false
 description: >-

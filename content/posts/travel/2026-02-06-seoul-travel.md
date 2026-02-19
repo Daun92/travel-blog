@@ -1,5 +1,6 @@
 ---
 title: '서울 여행 완벽 가이드: 전통과 현대가 공존하는 2박 3일 추천 코스와 꿀팁'
+slug: "seoul-travel-guide"
 date: 2026-02-06T13:49:04.000Z
 draft: false
 description: >-

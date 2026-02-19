@@ -1,5 +1,6 @@
 ---
 title: '대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스'
+slug: "daegu-modern-alley"
 date: 2026-02-05T12:24:08.000Z
 draft: false
 description: >-

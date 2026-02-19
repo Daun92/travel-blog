@@ -1,5 +1,6 @@
 ---
 title: '강릉 겨울 여행의 진면목, 역사와 문학으로 읽는 고즈넉한 예향의 숨결'
+slug: "gangneung-winter-literary"
 date: 2026-02-10T08:51:35.000Z
 draft: false
 factcheckScore: 100

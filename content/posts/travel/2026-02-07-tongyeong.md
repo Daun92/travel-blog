@@ -1,5 +1,6 @@
 ---
 title: '통영 동피랑·서피랑 1박 2일 인문 여행: 예술가 마을의 역사와 속살을 만나다'
+slug: "tongyeong-art-village"
 date: 2026-02-07T08:04:06.000Z
 draft: false
 description: >-

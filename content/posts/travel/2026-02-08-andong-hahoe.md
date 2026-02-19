@@ -1,5 +1,6 @@
 ---
 title: '안동 하회마을 유교 문화 산책: 성리학의 숨결과 고건축의 미학을 찾아서'
+slug: "andong-hahoe-village"
 date: 2026-02-08T13:23:57.000Z
 draft: false
 factcheckScore: 100

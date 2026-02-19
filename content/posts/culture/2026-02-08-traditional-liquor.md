@@ -1,5 +1,6 @@
 ---
 title: '한국 전통주 양조장 탐방 및 막걸리 가이드: 인문학으로 빚은 술의 미학'
+slug: "korean-traditional-liquor"
 date: 2026-02-08T13:33:48.000Z
 draft: false
 factcheckScore: 100

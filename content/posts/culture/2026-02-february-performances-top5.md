@@ -1,5 +1,6 @@
 ---
 title: "2월 공연 추천 TOP 5 — 2만원짜리가 13만원보다 만족도 높다고?"
+slug: "february-performances-top5"
 date: 2026-02-18T20:00:00.000Z
 draft: false
 dataSources:

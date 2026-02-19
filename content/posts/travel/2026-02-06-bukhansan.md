@@ -1,5 +1,6 @@
 ---
 title: '북한산 주말 등산 코스 가이드: 초보자도 즐기는 서울 근교 트레킹 추천'
+slug: "bukhansan-hiking"
 date: 2026-02-06T13:50:03.000Z
 draft: false
 description: >-

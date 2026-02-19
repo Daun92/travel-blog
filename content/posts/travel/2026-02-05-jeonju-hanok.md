@@ -1,5 +1,6 @@
 ---
 title: '전주 한옥마을 완벽 가이드: 비빔밥 맛집부터 야경 명소까지 당일치기 코스'
+slug: "jeonju-hanok-village"
 date: 2026-02-05T12:15:39.000Z
 draft: false
 description: >-

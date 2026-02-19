@@ -1,5 +1,6 @@
 ---
 title: '직장인 전통공예 도자기 한지 체험 주말 코스: 서울에서 15만원으로 끝내는 현실 리뷰'
+slug: "traditional-craft-experience"
 date: 2026-02-08T13:28:50.000Z
 draft: false
 factcheckScore: 100

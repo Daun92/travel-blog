@@ -1,5 +1,6 @@
 ---
 title: '서울 인디 공연장 순위 TOP 6: 롤링홀이 1위? 진짜 가본 사람만 아는 현실 랭킹'
+slug: "seoul-indie-venues-top6"
 date: 2026-02-08T14:30:00.000Z
 draft: false
 factcheckScore: 84

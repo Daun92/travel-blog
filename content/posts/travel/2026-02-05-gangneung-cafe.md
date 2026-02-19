@@ -1,5 +1,6 @@
 ---
 title: '강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드'
+slug: "gangneung-coffee-street"
 date: 2026-02-05T12:19:26.000Z
 draft: false
 description: >-
