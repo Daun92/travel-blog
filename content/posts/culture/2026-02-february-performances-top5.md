@@ -32,8 +32,8 @@ keywords:
   - 올림픽공원콘서트
   - 가성비공연
 cover:
-  image: "/travel-blog/images/kto-february-performances-top5-lotte-concert-hall.jpg"
-  alt: "롯데콘서트홀 내부 전경 — 2월 추천 공연 TOP 5"
+  image: "/travel-blog/images/kto-february-performances-top5-national-theater.jpg"
+  alt: "국립극장 정면 전경 — 2월 추천 공연 TOP 5"
   caption: "출처: 한국관광공사"
   relative: false
   hidden: false
