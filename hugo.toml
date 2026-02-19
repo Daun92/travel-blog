@@ -1,6 +1,6 @@
 baseURL = "https://daun92.github.io/travel-blog/"
 languageCode = "ko-KR"
-title = "여행과 문화예술 이야기"
+title = "여행과 문화예술 이야기 블로그"
 theme = "PaperMod"
 
 # 기본 설정
