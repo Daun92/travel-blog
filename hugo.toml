@@ -85,6 +85,7 @@ enableEmoji = true
   ShowCodeCopyButtons = true
   ShowWordCount = true
   ShowRssButtonInSectionTermList = true
+  ShowFullTextinRSS = true
   UseHugoToc = true
   disableSpecial1stPost = false
   disableScrollToTop = false
