@@ -28,7 +28,7 @@ keywords:
   - 국립현대미술관
   - 디깅
 cover:
-  image: /travel-blog/images/cover-refresh-2026-02-18-post.jpg
+  image: /travel-blog/images/cover-refresh-2026-02-18-seoul-time-layers-digging.jpg
   alt: '서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들'
   caption: '작성자: 오덕우 · 서울의 시간 지층 디깅 파면 팔수록 빠져들어요'
   relative: false
@@ -105,7 +105,7 @@ schema:
     dateModified: '2026-02-18T00:04:01.000Z'
     mainEntityOfPage:
       '@type': WebPage
-      '@id': /travel-blog/posts/2026-02-18-post/
+      '@id': /travel-blog/posts/2026-02-18-seoul-time-layers-digging/
     inLanguage: ko_KR
   - '@context': 'https://schema.org'
     '@type': BreadcrumbList
@@ -121,7 +121,7 @@ schema:
       - '@type': ListItem
         position: 3
         name: '서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들'
-        item: /travel-blog/posts/2026-02-18-post/
+        item: /travel-blog/posts/2026-02-18-seoul-time-layers-digging/
 ---
 # 12번 가서 알아낸 건데요, 이거 진짜예요: 성수 이후 서울의 세 가지 시간 지층
 
@@ -129,7 +129,7 @@ schema:
 
 처음에는 그냥 유행하는 동네니까 갔죠. 근데 세 번째 갔을 때 알게 된 건데, 이 동네들이 보여주는 게 단순한 '힙함'이 아니에요. 제가 12번 넘게 이 구역들을 이 잡듯이 뒤지면서 찾아낸 서울의 세 가지 시간 지층 이야기, 오늘만 특별히 공유해 드릴게요. 이건 좀 소름 돋을 수도 있으니까 마음 준비 단단히 하세요.
 
-![전시 감성 무드보드](/travel-blog/images/inline-2026-02-18-post-1.jpeg)
+![전시 감성 무드보드](/travel-blog/images/inline-2026-02-18-seoul-time-layers-digging-1.jpeg)
 *세 동네의 시간 지층 — 성수 이후 서울이 보여주는 것들*
 
 ## 1층: 망원동, 일상의 매운맛이 쌓아 올린 지층
@@ -143,13 +143,13 @@ schema:
 - **주소**: 서울특별시 마포구 동교로 83 (망원동)
 - **특이사항**: 매운맛 조절 가능, 돈까스와의 조합이 인사이더의 정석.
 
-![망원동즉석우동 — 태양초 국물 위로 피어오르는 김과 낡은 포미카 테이블](/travel-blog/images/stillcut-2026-02-18-post-mangwon.jpeg)
+![망원동즉석우동 — 태양초 국물 위로 피어오르는 김과 낡은 포미카 테이블](/travel-blog/images/stillcut-2026-02-18-seoul-time-layers-digging-mangwon.jpeg)
 *8번째 방문에서 발견한 것 — 태양초와 청양의 이중 레이어가 이 한 그릇에 다 있다*
 
 ### 직접 발견한 디테일 2: 올리브영 망원동점의 위치학
 재밌는 건 이 우동집에서 조금만 걸어가면 올리브영 같은 K-뷰티 매장이 나온다는 거예요. 전통적인 매운맛의 지층 바로 위에 최신 K-뷰티라는 아주 얇고 세련된 지층이 덮여 있는 거죠. 망원동 주민들은 우동 한 그릇 때리고 마스크팩을 사요. 이 극단적인 대비가 망원동의 진짜 매력이에요.
 
-![관람 정보 가이드](/travel-blog/images/inline-2026-02-18-post-2.jpeg)
+![관람 정보 가이드](/travel-blog/images/inline-2026-02-18-seoul-time-layers-digging-2.jpeg)
 *망원동의 이중 지층 — 매운맛 위에 쌓인 K-뷰티의 얇은 막*
 
 ## 2층: 문래동, 철 가루 냄새 아래 숨겨진 예술 지층
@@ -164,7 +164,7 @@ schema:
 
 특히 문래동의 철 가루 냄새를 맡으면서 옆 건물 갤러리에 들어가는 그 순간, 아, 이건 진짜예요. 산업과 예술이 동시에 살아 숨 쉬는 게 느껴진다니까요?
 
-![문래창작촌 골목 — 용접 불꽃이 벽면 그래피티를 비추는 오후 3시](/travel-blog/images/stillcut-2026-02-18-post-mullae.jpeg)
+![문래창작촌 골목 — 용접 불꽃이 벽면 그래피티를 비추는 오후 3시](/travel-blog/images/stillcut-2026-02-18-seoul-time-layers-digging-mullae.jpeg)
 *다섯 번째 왔을 때 깨달은 것 — 오후 3시, 불꽃과 그래피티가 겹치는 그 순간*
 
 ## 3층: 신당동 중앙시장, 가장 깊은 지층의 맥박
@@ -176,7 +176,7 @@ schema:
 
 여기서 한 상인분이 하신 말씀이 제 가슴에 꽂혔어요. "여기는 시간이 멈춘 게 아니라, 다른 속도로 흐르는 것뿐이야." 이건 진짜예요.
 
-![신당동 떡볶이타운 — 시장 골목의 날것 에너지](/travel-blog/images/kto-2026-02-18-post-5.jpg)
+![신당동 떡볶이타운 — 시장 골목의 날것 에너지](/travel-blog/images/kto-2026-02-18-seoul-time-layers-digging-5.jpg)
 *출처: 한국관광공사*
 
 ### 덕질 디깅 포인트: 신당동의 소리
@@ -188,12 +188,12 @@ schema:
 
 **을지로 노가리골목**. 을지로3가역 나오자마자 코끝에 닿는 그 냄새, 맥주와 마른안주가 수십 년간 배어든 골목의 체취예요. 여기 호프집들이 1970년대부터 같은 자리를 지키고 있다는 거 알고 계셨어요? 문래동의 철공소가 산업의 지층이라면, 을지로는 그 옆에서 묵묵히 쌓여온 '퇴근 후의 지층'이에요. 인쇄골목, 조명 가게, 철물점이 한 블록 안에 전부 들어차 있는데, 이 밀도가 진짜 소름 돋거든요.
 
-![을지로 노가리골목](/travel-blog/images/kto-2026-02-18-post-3.jpg)
+![을지로 노가리골목](/travel-blog/images/kto-2026-02-18-seoul-time-layers-digging-3.jpg)
 *출처: 한국관광공사*
 
 그리고 **창신동**. 동대문 패션이 화려하잖아요? 근데 그 옷들이 어디서 만들어지는지 아는 사람은 거의 없어요. 창신동 골목에 들어서면 미싱 소리가 건물 사이로 새어 나오고, 원단 자투리가 계단에 흩어져 있어요. 이건 진짜 서울의 가장 밑바닥 지층이에요. 패션이라는 화려한 표면 아래에 봉제 장인들의 시간이 겹겹이 쌓여 있는 거죠. 골목 벽돌 하나하나가 수십 년의 박음질 진동을 기억하고 있다니까요.
 
-![창신동골목길](/travel-blog/images/kto-2026-02-18-post-4.jpg)
+![창신동골목길](/travel-blog/images/kto-2026-02-18-seoul-time-layers-digging-4.jpg)
 *출처: 한국관광공사*
 
 이 두 동네는 아직 본격적으로 안 팠어요. 다음에 제대로 디깅해서 들려드릴 건데, 한 가지만 말씀드리면 — 을지로와 창신동은 서울의 1층도 아니에요. 지하예요. 가장 깊은 곳에서 이 도시를 떠받치고 있는 기반암 같은 존재들이에요.

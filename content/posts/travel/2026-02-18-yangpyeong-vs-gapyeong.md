@@ -25,7 +25,7 @@ keywords:
   - 경기미래교육 양평캠퍼스
   - 주말 여행
 cover:
-  image: /travel-blog/images/cover-refresh-2026-02-18-vs.jpg
+  image: /travel-blog/images/cover-refresh-2026-02-18-yangpyeong-vs-gapyeong.jpg
   alt: '양평 vs 가평 당일치기 직장인 코스별 비용 정산, 빛이 머무는 양평의 기록'
   caption: '작성자: 김주말 · 양평 vs 가평 당일치기 직접 다녀왔어요'
   relative: false
@@ -102,7 +102,7 @@ schema:
     dateModified: '2026-02-18T00:05:54.000Z'
     mainEntityOfPage:
       '@type': WebPage
-      '@id': /travel-blog/posts/2026-02-18-vs/
+      '@id': /travel-blog/posts/2026-02-18-yangpyeong-vs-gapyeong/
     inLanguage: ko_KR
   - '@context': 'https://schema.org'
     '@type': BreadcrumbList
@@ -128,7 +128,7 @@ schema:
 
 가평이 조금 더 역동적이고 화려한 색채를 지녔다면, 양평은 조금 더 낮은 채도의 고요함을 품고 있습니다. 카메라를 메고 길을 나서는 제게 양평은 언제나 서두르지 말라고 손을 내미는 곳이지요.
 
-![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-18-vs-1.jpeg)
+![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-18-yangpyeong-vs-gapyeong-1.jpeg)
 *양평의 강가 — 빛이 낮게 스며드는 그 시간*
 
 ---
@@ -137,7 +137,7 @@ schema:
 
 걸음을 멈추게 되는 건, 익숙한 풍경 속에서 낯선 질감을 발견했을 때입니다. 양평 용문면에 위치한 [경기미래교육 양평캠퍼스](https://map.naver.com/v5/search/경기미래교육양평캠퍼스)는 미국 버지니아주의 건축 양식을 그대로 옮겨놓은 듯한 이국적인 분위기를 자아냅니다.
 
-![경기미래교육 양평캠퍼스](/travel-blog/images/kto-2026-02-18-vs-1.jpg)
+![경기미래교육 양평캠퍼스](/travel-blog/images/kto-2026-02-18-yangpyeong-vs-gapyeong-1.jpg)
 *출처: 한국관광공사*
 
 ### 시간대와 빛의 표정
@@ -149,7 +149,7 @@ schema:
 *   **포토 힌트**: 건물 사이의 좁은 골목으로 빛이 길게 들어오는 찰나를 기다려 보세요. 소실점을 이용한 구도는 공간의 깊이감을 더해줍니다.
 *   **비용 정보**: 입장료 확인 필요 (일반 관람 가능 여부 사전 확인 권장)
 
-![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-vs-2.jpeg)
+![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-yangpyeong-vs-gapyeong-2.jpeg)
 *양평 당일치기 코스 한눈에 보기 — 시간순 정리*
 
 ---
@@ -158,7 +158,7 @@ schema:
 
 조금 더 깊은 고요를 원한다면 양동면으로 향합니다. [국립양평치유의숲](https://map.naver.com/v5/search/국립양평치유의숲)은 수도권에서 한 시간 남짓이면 닿을 수 있는, 나무들의 안식처입니다.
 
-![국립양평치유의숲](/travel-blog/images/kto-2026-02-18-vs-2.jpg)
+![국립양평치유의숲](/travel-blog/images/kto-2026-02-18-yangpyeong-vs-gapyeong-2.jpg)
 *출처: 한국관광공사*
 
 ### 시간대와 빛의 표정
@@ -176,7 +176,7 @@ schema:
 
 강가에 자리 잡은 [더 힐하우스 양평](https://map.naver.com/v5/search/더힐하우스양평)은 남한강의 물줄기를 가장 가까이서 관찰할 수 있는 곳 중 하나입니다.
 
-![양평 두물머리 — 남한강과 북한강이 만나는 풍경](/travel-blog/images/kto-2026-02-18-vs-3.jpg)
+![양평 두물머리 — 남한강과 북한강이 만나는 풍경](/travel-blog/images/kto-2026-02-18-yangpyeong-vs-gapyeong-3.jpg)
 *출처: 한국관광공사*
 
 ### 시간대와 빛의 표정
@@ -194,7 +194,7 @@ schema:
 
 겨울의 끝자락, 양평군청 앞 남한강 테라스는 빛의 축제로 물듭니다. [겨울엔 양평, 불빛:애](https://xn--h89ak68bzfap6a619b.kr/) 행사는 어둠이 내린 뒤에야 본모습을 드러냅니다.
 
-![겨울엔 양평, 불빛:애 — 남한강 위로 번지는 겨울밤의 온기](/travel-blog/images/stillcut-2026-02-18-vs-bulbit.jpeg)
+![겨울엔 양평, 불빛:애 — 남한강 위로 번지는 겨울밤의 온기](/travel-blog/images/stillcut-2026-02-18-yangpyeong-vs-gapyeong-bulbit.jpeg)
 *강바람은 차가운데, 빛은 따뜻하더라고요 — 이게 양평 겨울의 매력*
 
 ### 시간대와 빛의 표정

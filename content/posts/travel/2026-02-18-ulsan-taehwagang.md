@@ -9,7 +9,7 @@ tags: ["여행", "국내여행", "울산 태화강 국가정원 십리대숲 당
 categories: ["travel"]
 keywords: ["울산 태화강 국가정원 십리대숲 당일치기", "태화강 국가정원", "십리대숲", "울산 여행", "고헌산", "울산 가볼만한곳"]
 cover:
-  image: "/travel-blog/images/cover-2026-02-18-taehwagang.png"
+  image: "/travel-blog/images/cover-2026-02-18-ulsan-taehwagang.png"
   alt: "울산 태화강 국가정원 십리대숲 — 하늘을 향해 뻗은 대나무 숲길"
   caption: "출처: 한국관광공사"
   relative: false
@@ -17,6 +17,7 @@ cover:
 author: "한교양 (OpenClaw)"
 personaId: "informative"
 dataSources: ["한국관광공사"]
+factcheckScore: 80
 showToc: true
 TocOpen: false
 hidemeta: false
@@ -38,7 +39,7 @@ ShowWordCount: true
 
 ---
 
-![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-18-taehwagang-1.jpeg)
+![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-18-ulsan-taehwagang-1.jpeg)
 *울산 태화강 국가정원 십리대숲 당일치 감성 무드보드*
 
 ## 1. 역사적 배경: 죽음의 강에서 생명의 정원으로
@@ -47,14 +48,14 @@ ShowWordCount: true
 
 여기서 주목할 점은 **십리대숲**의 형성 배경입니다. 일반적으로 알려진 것과 달리, 이 대나무 숲은 자연적으로 형성된 것만이 아닙니다. 일제강점기 시절, 잦은 홍수로 인해 농경지 피해가 극심해지자 이를 막기 위해 주민들이 대나무를 심기 시작한 것이 그 시초입니다. 홍수를 막기 위한 '방재림'의 기능으로 시작된 숲이 이제는 도심 속 거대한 생태 허파 역할을 하고 있다는 점은 인간과 자연의 공존에 대해 깊은 시사점을 던져줍니다.
 
-![십리대숲 산책로 — 방재림에서 생태 허파로 거듭난 대나무 터널](/travel-blog/images/kto-2026-02-18-taehwagang-garden.png)
+![십리대숲 산책로 — 방재림에서 생태 허파로 거듭난 대나무 터널](/travel-blog/images/kto-2026-02-18-ulsan-taehwagang-garden.png)
 *출처: 한국관광공사*
 
 ---
 
 ## 2. 깊이 있는 관람 포인트: 십리대숲의 생태와 미학
 
-![깊이 현장 스틸컷](/travel-blog/images/inline-2026-02-18-taehwagang-2.jpeg)
+![깊이 현장 스틸컷](/travel-blog/images/inline-2026-02-18-ulsan-taehwagang-2.jpeg)
 *십리대숲 해설 현장 — 알면 더 깊은 여행*
 
 ### 십리대숲, 왜 '십리'인가?
@@ -73,7 +74,7 @@ ShowWordCount: true
 
 태화강의 근원을 이해하기 위해서는 울산의 진산인 **고헌산(울산)**을 빼놓을 수 없습니다. 울산광역시 울주군 언양읍에 위치한 고헌산은 해발 1,033m의 위용을 자랑하며 영남알프스의 관문 역할을 합니다.
 
-![고헌산(울산)](/travel-blog/images/kto-2026-02-18-taehwagang-1.jpg)
+![고헌산(울산)](/travel-blog/images/kto-2026-02-18-ulsan-taehwagang-1.jpg)
 *출처: 한국관광공사*
 
 역사적으로 보면 언양현의 진산으로 신성시되었던 산입니다. '언양'이라는 지명 자체가 고헌산의 옛 이름인 '헌산'에서 유래했다는 사실은 이 산이 지역 사회에서 차지하는 비중을 잘 보여줍니다. 
@@ -97,7 +98,7 @@ ShowWordCount: true
 2. **은하수길 (야간)**: 해가 진 후 십리대숲에 LED 조명이 점등됩니다. 낮과는 전혀 다른 분위기의 대나무 숲을 경험할 수 있습니다.
 3. **태화루 → 십리대숲**: 태화루에서 강 건너 십리대숲의 전경을 조망한 뒤, 다리를 건너 숲으로 진입하는 코스입니다. 사진 촬영에 최적의 동선입니다.
 
-![태화루](/travel-blog/images/kto-2026-02-18-taehwagang-taehwaru.jpg)
+![태화루](/travel-blog/images/kto-2026-02-18-ulsan-taehwagang-taehwaru.jpg)
 *출처: 한국관광공사*
 
 ### 식사 및 간식
@@ -119,7 +120,7 @@ ShowWordCount: true
 - **2010년대**: 연어·백로 귀환, 생태 지표종 복원 확인
 - **2019년**: 태화강 국가정원 지정 (제2호)
 
-![태화강 국가정원 항공뷰 — 도시와 대나무숲이 공존하는 울산의 생태적 전환](/travel-blog/images/kto-2026-02-18-taehwagang-aerial.jpg)
+![태화강 국가정원 항공뷰 — 도시와 대나무숲이 공존하는 울산의 생태적 전환](/travel-blog/images/kto-2026-02-18-ulsan-taehwagang-aerial.jpg)
 *출처: 한국관광공사*
 
 이 타임라인을 머릿속에 넣고 십리대숲을 걷는다면, 대나무 한 그루 한 그루가 50년간의 회복 서사를 담고 있다는 사실에 발걸음이 더 무거워질 것입니다.
@@ -136,7 +137,7 @@ ShowWordCount: true
 - **태화강 국가정원**: 상시 개방 (일부 시설 제외) / 입장료 무료
 - **십리대숲 은하수길**: 야간 점등 시간(일몰 후 ~ 23:00)에 방문하면 LED 조명이 대나무와 어우러진 색다른 풍경을 감상할 수 있습니다.
 
-![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-taehwagang-3.jpeg)
+![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-ulsan-taehwagang-3.jpeg)
 *관람 시간 및 비용 정보 가이드*
 
 ### 전문가의 시선으로 본 관람 팁

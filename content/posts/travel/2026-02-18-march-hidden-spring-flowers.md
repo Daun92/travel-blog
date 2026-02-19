@@ -1,5 +1,6 @@
 ---
 title: '3월 숨은 봄꽃 명소 산수유 매화 동백 — 12번 가서 발견한 1cm의 디테일'
+slug: "march-hidden-spring-flowers"
 date: 2026-02-18T14:22:37.000Z
 draft: false
 description: '12번 방문하고 파헤친 3월 봄꽃의 진짜 매력. 구례 산수유, 광양 매화, 제주 동백에서 발견한 숨은 디테일을 오덕우가 공개합니다.'

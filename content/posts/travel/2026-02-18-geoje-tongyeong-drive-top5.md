@@ -25,7 +25,7 @@ keywords:
   - 거제 가볼만한곳
   - 거제 맛집 추천
 cover:
-  image: /travel-blog/images/cover-refresh-2026-02-18-to.jpg
+  image: /travel-blog/images/cover-refresh-2026-02-18-geoje-tongyeong-drive-top5.jpg
   alt: '공유 안 하면 손해, 거제 통영 남해 드라이브 코스 TOP 5 (진짜는 여기다)'
   caption: '작성자: 조회영 · 공유 안 하면 손해 이건 꼭 봐야 됨'
   relative: false
@@ -102,7 +102,7 @@ schema:
     dateModified: '2026-02-18T00:02:20.000Z'
     mainEntityOfPage:
       '@type': WebPage
-      '@id': /travel-blog/posts/2026-02-18-to/
+      '@id': /travel-blog/posts/2026-02-18-geoje-tongyeong-drive-top5/
     inLanguage: ko_KR
   - '@context': 'https://schema.org'
     '@type': BreadcrumbList
@@ -130,7 +130,7 @@ schema:
 
 이 시간대에는 지상의 소음이 멀어지고 오직 바람 소리만 남습니다. 해발 500m 계룡산 정상으로 향하는 길은 생각보다 느리고 고요합니다. 셔터를 누르기 전에 먼저 서서 산 아래로 떨어지는 빛의 각도를 읽어보세요.
 
-![거제 관광모노레일에서 바라본 한려해상](/travel-blog/images/kto-2026-02-18-to-2.jpg)
+![거제 관광모노레일에서 바라본 한려해상](/travel-blog/images/kto-2026-02-18-geoje-tongyeong-drive-top5-2.jpg)
 *출처: 한국관광공사*
 
 *   **빛이 가장 좋은 순간**: 오후 4시 30분, 해가 기울며 한려해상의 섬들이 겹겹이 실루엣으로 변할 때입니다.
@@ -144,7 +144,7 @@ schema:
 
 아무도 없는 오전 8시, 포구에 닿는 빛은 유난히 투명합니다. 여기서 유람선을 타고 약 10분 정도 나아가면 해금강의 웅장한 단면을 마주하게 됩니다. 사진보다 그 순간의 짠 내 섞인 공기가 더 깊게 남는 곳입니다.
 
-![거제 구조라관광어촌마을의 포구 풍경](/travel-blog/images/kto-2026-02-18-to-3.jpg)
+![거제 구조라관광어촌마을의 포구 풍경](/travel-blog/images/kto-2026-02-18-geoje-tongyeong-drive-top5-3.jpg)
 *출처: 한국관광공사*
 
 *   **빛이 가장 좋은 순간**: 썰물과 아침 햇살이 만나는 시간, 십자동굴 안으로 빛이 스며들 때입니다.
@@ -157,7 +157,7 @@ schema:
 
 빛이 수면 위로 낮게 깔릴 때, 닭을 닮은 뒷산과 지네를 닮은 앞섬 사이의 전설이 비로소 입체적으로 보입니다. 가조로 837을 따라 천천히 차를 세우며 걷다 보면, 낚시꾼들의 기다림마저 하나의 풍경이 됩니다.
 
-![거제 계도어촌체험마을 — 섬과 섬 사이의 서사](/travel-blog/images/kto-2026-02-18-to-1.jpg)
+![거제 계도어촌체험마을 — 섬과 섬 사이의 서사](/travel-blog/images/kto-2026-02-18-geoje-tongyeong-drive-top5-1.jpg)
 *출처: 한국관광공사*
 
 *   **어떤 앵글에서**: 가조연륙교를 건너 마을 전체가 보이는 높은 지대에서 망원 렌즈로 섬의 굴곡을 담아보세요.
@@ -169,13 +169,13 @@ schema:
 
 이 시간이 아니면 볼 수 없는 장면이 있습니다. 덕포해수욕장 위를 가로지르는 선 위에서 바라보는 바다는, 백사장에서 보던 그것과는 전혀 다른 채도를 가집니다. 정적인 기록을 즐기는 저에게도 이 빠른 속도의 시선은 꽤 낯설고도 선명한 자극이었습니다.
 
-![거제 덕포해수욕장 — 하늘과 바다가 맞닿는 백사장](/travel-blog/images/kto-2026-02-18-to-4.jpg)
+![거제 덕포해수욕장 — 하늘과 바다가 맞닿는 백사장](/travel-blog/images/kto-2026-02-18-geoje-tongyeong-drive-top5-4.jpg)
 *출처: 한국관광공사*
 
 *   **비교**: 해안 도로 드라이브가 수평적인 시선이라면, 씨라인은 수직적이고 입체적인 시선을 선사합니다.
 *   **솔직한 기록**: 카메라를 들고 타기엔 속도가 빨라 위험할 수 있습니다. 눈으로 먼저 담고, 내려온 뒤 백사장에서 그 궤적을 기록해 보세요.
 
-![추천 코스 지도](/travel-blog/images/inline-2026-02-18-to-2.jpeg)
+![추천 코스 지도](/travel-blog/images/inline-2026-02-18-geoje-tongyeong-drive-top5-2.jpeg)
 *남해안 드라이브 코스 — 한눈에 보는 TOP 5 루트*
 
 ---
@@ -187,7 +187,7 @@ schema:
 *   **어떤 앵글에서**: 음식이 서빙된 직후, 위에서 수직으로 내려다보는 부감 샷이 해산물의 화려한 배열을 가장 잘 보여줍니다.
 *   **솔직한 기록**: 갈치 요리의 경우 가시가 제거되어 있어 편안하지만, 점심시간에는 공간이 다소 북적여 고요한 식사를 즐기기엔 어려움이 있습니다.
 
-![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-to-1.jpeg)
+![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-geoje-tongyeong-drive-top5-1.jpeg)
 *거제 드라이브 준비 체크리스트 — 이것만 챙기세요*
 
 ---

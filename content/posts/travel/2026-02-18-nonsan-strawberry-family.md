@@ -1,5 +1,6 @@
 ---
 title: '논산 딸기축제 가족 체험 비용 정산, 빛을 따라 걷는 주말의 기록'
+slug: "nonsan-strawberry-family"
 date: 2026-02-18T14:25:02.000Z
 draft: false
 description: '논산 딸기삼촌농장 체험부터 명재고택, 관촉사까지. 시간대별 빛의 변화를 따라가는 논산 가족 여행 비용 정산과 포토 가이드를 전합니다.'
@@ -126,14 +127,14 @@ schema:
 
 ---
 
-![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-post-3-1.jpeg)
+![여행 준비 가이드](/travel-blog/images/inline-2026-02-18-nonsan-strawberry-family-3-1.jpeg)
 *논산 딸기축제 하루 코스 — 직접 다녀왔어요*
 
 ## 1. 오전 10시, 첫 빛이 닿는 딸기삼촌농장
 
 아직 찬 기운이 남은 아침, 비닐하우스 위로 쏟아지는 햇살은 공간의 온도를 순식간에 바꿔놓습니다. 우리가 도착한 곳은 노성면에 위치한 [논산 딸기삼촌농장](https://map.naver.com/v5/search/논산딸기삼촌농장)입니다.
 
-![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-18-post-3-2.jpeg)
+![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-18-nonsan-strawberry-family-3-2.jpeg)
 *오전 10시, 첫 빛이 닿는 딸기삼촌 감성 무드보드*
 
 ### 공간의 질감과 분위기
@@ -170,7 +171,7 @@ schema:
 
 발길이 멈추는 데는 이유가 있습니다. 논산 11경 제1경으로 꼽히는 [관촉사](https://map.naver.com/v5/search/관촉사)에 들어서면, 압도적인 크기의 '은진미륵'이 우리를 맞이합니다.
 
-![관촉사(논산)](/travel-blog/images/kto-2026-02-18-post-3-1.jpg)
+![관촉사(논산)](/travel-blog/images/kto-2026-02-18-nonsan-strawberry-family-3-1.jpg)
 *출처: 한국관광공사*
 
 ### 이 시간이 아니면 볼 수 없는 장면
@@ -189,7 +190,7 @@ schema:
 
 하루의 마무리는 [논산 노성산성](https://map.naver.com/v5/search/논산노성산성)에서 맞이합니다. 산 정상 부분을 돌로 둘러쌓은 백제 시대의 테뫼식 산성입니다.
 
-![논산 노성산성](/travel-blog/images/kto-2026-02-18-post-3-2.jpg)
+![논산 노성산성](/travel-blog/images/kto-2026-02-18-nonsan-strawberry-family-3-2.jpg)
 *출처: 한국관광공사*
 
 ### 소리보다 빛이 먼저 도착하는 곳
