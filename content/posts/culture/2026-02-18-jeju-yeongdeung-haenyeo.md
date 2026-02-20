@@ -22,8 +22,8 @@ keywords:
   - 제주 역사
   - 인문학 여행
 cover:
-  image: /travel-blog/images/kto-제주-영등제-해녀와-바람의-신-유네스코-무형유산-0.jpg
-  alt: 제주 칠머리당 영등굿 풍경
+  image: /travel-blog/images/kto-jeju-yeongdeung-yongduam.jpg
+  alt: 제주 용두암 해안 일몰 — 영등할망이 건너오는 바다
   caption: '출처: 한국관광공사'
   relative: false
   hidden: false
@@ -169,9 +169,12 @@ schema:
 
 2.  **용두암과 용연**: 건입동 해안가의 용두암은 칠머리당에서 도보 20~30분 거리입니다. 영등할망이 바다를 건너오는 풍경을 상상하며 걷기에 좋습니다.
 
-![용두암 해안 전경](/travel-blog/images/kto-jeju-yeongdeung-yongduam.jpg)
+![용두암 해안 전경](/travel-blog/images/kto-yongduam-detail-0.jpg)
 *출처: 한국관광공사*
 3.  **동문재래시장**: 영등달에는 제주 해산물이 가장 풍성해지는 시기이기도 합니다. 갓 잡아 올린 소라와 전복을 맛보며 영등신의 선물을 직접 체험해 보세요.
+
+![동문재래시장 입구](/travel-blog/images/kto-jeju-yeongdeung-dongmun-market.jpg)
+*출처: 한국관광공사*
 
 ---
 
