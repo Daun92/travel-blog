@@ -2,13 +2,17 @@
 title: '부평역 지하 150m, 네 겹의 시간을 걷다'
 slug: bupyeong-industrial-heritage-walking
 date: 2026-02-21T09:00:00.000Z
-draft: true
+draft: false
 factcheckScore: 82
-factcheckNote: "WebSearch 수동 검증 완료 (2026-02-21). 15개 핵심 클레임 중 12개 완전 일치, 3개 표현 수정 적용(강제동원 인원수 정밀화, 캠프마켓 존치 표현 완화, 포니 연도 13년으로 수정). 거짓 0건."
+factcheckNote: >-
+  WebSearch 수동 검증 완료 (2026-02-21). 15개 핵심 클레임 중 12개 완전 일치, 3개 표현 수정 적용(강제동원 인원수
+  정밀화, 캠프마켓 존치 표현 완화, 포니 연도 13년으로 수정). 거짓 0건.
 description: >-
-  인천 부평에는 한국 근현대 산업사의 네 겹 지층이 겹쳐 있습니다. 1939년 일제 조병창부터 미군기지, 자동차 공장, 세계 최대 지하상가까지 — 한교양이 걸어서 읽어드립니다.
+  인천 부평에는 한국 근현대 산업사의 네 겹 지층이 겹쳐 있습니다. 1939년 일제 조병창부터 미군기지, 자동차 공장, 세계 최대 지하상가까지
+  — 한교양이 걸어서 읽어드립니다.
 summary: >-
-  인천 부평에는 한국 근현대 산업사의 네 겹 지층이 겹쳐 있습니다. 1939년 일제 조병창부터 미군기지, 자동차 공장, 세계 최대 지하상가까지 — 한교양이 걸어서 읽어드립니다.
+  인천 부평에는 한국 근현대 산업사의 네 겹 지층이 겹쳐 있습니다. 1939년 일제 조병창부터 미군기지, 자동차 공장, 세계 최대 지하상가까지
+  — 한교양이 걸어서 읽어드립니다.
 tags:
   - 문화
   - 역사
@@ -27,7 +31,8 @@ keywords:
   - 부평지하상가
   - 미쓰비시 줄사택
 cover:
-  image: /travel-blog/images/cover-2026-02-21-bupyeong-industrial-heritage-walking.jpg
+  image: >-
+    /travel-blog/images/cover-2026-02-21-bupyeong-industrial-heritage-walking.jpg
   alt: 부평 조병창 지하호 터널 입구 — 87년의 시간이 겹친 산업 도시
   caption: '작성자: 한교양 · 부평 산업유산 알고 걸으면 다릅니다'
   relative: false
@@ -45,8 +50,113 @@ ShowReadingTime: true
 ShowBreadCrumbs: true
 ShowPostNavLinks: true
 ShowWordCount: true
+faqs:
+  - q: 부평역 지하상가는 어떤 세계 기록을 가지고 있나요?
+    a: >-
+      부평모두몰은 2014년 미국 세계기록원(WRA)으로부터 단일 지하 상가 기준 세계 최다 점포(1,408개)로 인증받은 거대한 지하
+      도시입니다.
+  - q: 부평종합시장을 방문할 때 주의할 점이 있나요?
+    a: >-
+      부평종합시장은 과거 미군 물자를 취급하던 역사로 인해 '깡시장'이라 불리지만, 부산의 야시장인 '부평깡통시장'과는 다른 곳이므로
+      혼동에 주의해야 합니다.
+  - q: 한국GM 부평공장의 역사적 가치는 무엇인가요?
+    a: >-
+      한국GM 부평공장은 1962년 한국 최초의 근대 자동차 조립 라인이 가동된 곳으로, 현대자동차의 포니 생산보다 13년 앞선 한국
+      자동차 산업의 시작점입니다.
+  - q: 복잡한 부평모두몰에서 길을 찾는 방법이 있나요?
+    a: >-
+      부평모두몰 바닥에 그려진 주황, 빨강, 초록, 파랑의 색상 코딩 동선을 따라 걸으면 시대별로 조성된 네 개의 상가 구역을 구분하며
+      효율적으로 이동할 수 있습니다.
+  - q: 부평 캠프마켓은 현재 어떤 상태인가요?
+    a: >-
+      부평 캠프마켓은 2023년 12월 마지막 구역 반환을 통해 84년 만에 완전히 개방되었으며, 기지 내부에 보존된 일제강점기 조병창
+      건물 등을 확인할 수 있습니다.
+schema:
+  - '@context': 'https://schema.org'
+    '@type': FAQPage
+    mainEntity:
+      - '@type': Question
+        name: 부평역 지하상가는 어떤 세계 기록을 가지고 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            부평모두몰은 2014년 미국 세계기록원(WRA)으로부터 단일 지하 상가 기준 세계 최다 점포(1,408개)로 인증받은
+            거대한 지하 도시입니다.
+      - '@type': Question
+        name: 부평종합시장을 방문할 때 주의할 점이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            부평종합시장은 과거 미군 물자를 취급하던 역사로 인해 '깡시장'이라 불리지만, 부산의 야시장인 '부평깡통시장'과는 다른
+            곳이므로 혼동에 주의해야 합니다.
+      - '@type': Question
+        name: 한국GM 부평공장의 역사적 가치는 무엇인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            한국GM 부평공장은 1962년 한국 최초의 근대 자동차 조립 라인이 가동된 곳으로, 현대자동차의 포니 생산보다 13년 앞선
+            한국 자동차 산업의 시작점입니다.
+      - '@type': Question
+        name: 복잡한 부평모두몰에서 길을 찾는 방법이 있나요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            부평모두몰 바닥에 그려진 주황, 빨강, 초록, 파랑의 색상 코딩 동선을 따라 걸으면 시대별로 조성된 네 개의 상가 구역을
+            구분하며 효율적으로 이동할 수 있습니다.
+      - '@type': Question
+        name: 부평 캠프마켓은 현재 어떤 상태인가요?
+        acceptedAnswer:
+          '@type': Answer
+          text: >-
+            부평 캠프마켓은 2023년 12월 마지막 구역 반환을 통해 84년 만에 완전히 개방되었으며, 기지 내부에 보존된 일제강점기
+            조병창 건물 등을 확인할 수 있습니다.
+  - '@context': 'https://schema.org'
+    '@type': Article
+    headline: '부평역 지하 150m, 네 겹의 시간을 걷다'
+    description: >-
+      인천 부평에는 한국 근현대 산업사의 네 겹 지층이 겹쳐 있습니다. 1939년 일제 조병창부터 미군기지, 자동차 공장, 세계 최대
+      지하상가까지 — 한교양이 걸어서 읽어드립니다.
+    author:
+      '@type': Person
+      name: 한교양 (OpenClaw)
+    publisher:
+      '@type': Organization
+      name: OpenClaw Travel
+      logo:
+        '@type': ImageObject
+        url: /travel-blog/images/logo.png
+    datePublished: '2026-02-21T09:00:00.000Z'
+    dateModified: '2026-02-21T09:00:00.000Z'
+    mainEntityOfPage:
+      '@type': WebPage
+      '@id': /travel-blog/posts/bupyeong-industrial-heritage-walking/
+    inLanguage: ko_KR
+    speakable:
+      '@type': SpeakableSpecification
+      cssSelector:
+        - .post-description
+        - '.post-content > blockquote:first-of-type'
+        - h1
+        - h2
+  - '@context': 'https://schema.org'
+    '@type': BreadcrumbList
+    itemListElement:
+      - '@type': ListItem
+        position: 1
+        name: 홈
+        item: /travel-blog
+      - '@type': ListItem
+        position: 2
+        name: 문화
+        item: /travel-blog/culture/
+      - '@type': ListItem
+        position: 3
+        name: '부평역 지하 150m, 네 겹의 시간을 걷다'
+        item: /travel-blog/posts/bupyeong-industrial-heritage-walking/
 ---
 # 하나의 역에서, 네 개의 시대를 만나다
+
+> **부평 산업유산 투어 핵심 요약** — 인천 부평역(1호선/인천1호선) 반경 2km에 일제 조병창 지하호(1939), 캠프마켓 미군기지(1945~2024), 한국GM 자동차 공장(1962~), 세계 최대 지하상가 부평모두몰(1,408개 점포)이 겹쳐 있습니다. 부평문화원 가이드 투어(월 1회, 무료, 032-505-9001)로 지하호 탐방 가능. 서울역에서 1호선 50분.
 
 부평역 개찰구를 빠져나오면 하루 12만 명의 발걸음이 1,408개 점포를 향해 흩어집니다. 1호선과 인천 1호선이 교차하는 이 역은 인천에서 가장 분주한 환승 거점 중 하나입니다. 그런데 이 바닥 아래, 그리고 이 역을 둘러싼 반경 2km 안에 한국 근현대 산업사의 네 겹 지층이 겹쳐 있다는 사실을 아는 분은 많지 않습니다.
 
@@ -157,3 +267,25 @@ GM 공장을 지나 산곡동 방향으로 가면 높은 콘크리트 담장과 
 - [2월 공연 추천 TOP 5 — 2만원짜리가 13만원보다 만족도 높다고?](/travel-blog/posts/2026/02/february-performances-top5/) — 조회영의 시선 · 같은 서울 지역
 - [신도림 디큐브 너머, 12번 방문 끝에 찾아낸 시간의 공장지대 디깅 리포트](/travel-blog/posts/2026/02/sindorim-factory-zone-deep-digging/) — 오덕우의 시선 · 같은 서울 지역
 - [서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들](/travel-blog/posts/2026/02/seoul-time-layers-digging/) — 오덕우의 시선 · 같은 서울 지역
+
+## 자주 묻는 질문
+
+### 부평역 지하상가는 어떤 세계 기록을 가지고 있나요?
+
+부평모두몰은 2014년 미국 세계기록원(WRA)으로부터 단일 지하 상가 기준 세계 최다 점포(1,408개)로 인증받은 거대한 지하 도시입니다.
+
+### 부평종합시장을 방문할 때 주의할 점이 있나요?
+
+부평종합시장은 과거 미군 물자를 취급하던 역사로 인해 '깡시장'이라 불리지만, 부산의 야시장인 '부평깡통시장'과는 다른 곳이므로 혼동에 주의해야 합니다.
+
+### 한국GM 부평공장의 역사적 가치는 무엇인가요?
+
+한국GM 부평공장은 1962년 한국 최초의 근대 자동차 조립 라인이 가동된 곳으로, 현대자동차의 포니 생산보다 13년 앞선 한국 자동차 산업의 시작점입니다.
+
+### 복잡한 부평모두몰에서 길을 찾는 방법이 있나요?
+
+부평모두몰 바닥에 그려진 주황, 빨강, 초록, 파랑의 색상 코딩 동선을 따라 걸으면 시대별로 조성된 네 개의 상가 구역을 구분하며 효율적으로 이동할 수 있습니다.
+
+### 부평 캠프마켓은 현재 어떤 상태인가요?
+
+부평 캠프마켓은 2023년 12월 마지막 구역 반환을 통해 84년 만에 완전히 개방되었으며, 기지 내부에 보존된 일제강점기 조병창 건물 등을 확인할 수 있습니다.
