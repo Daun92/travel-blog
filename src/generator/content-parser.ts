@@ -78,22 +78,41 @@ export function extractImageMarkers(content: string): ImageMarker[] {
   return markers;
 }
 
-/** 장소/시설 이름 패턴 (한국어) */
+/** 장소/시설 이름 패턴 (한국어) — 단일 글자 + 복합 접미사 */
 const LOCATION_SUFFIX_REGEX = /(?:[관점원장역사당궁각실집루대탑문교산천호섬항포곶]|해변|해수욕장|시장|거리|마을|길|골목|카페|갤러리|미술관|박물관|공원|사찰|절|성|궁|전시관|기념관|수목원|식물원|동물원|수족관|해양관|공연장)$/;
 
+/** 복합 접미사만 (비굵은 글씨 Pass 2용 — 오탐 방지를 위해 단일 글자 접미사 제외) */
+const COMPOUND_LOCATION_SUFFIX_REGEX = /(?:해변|해수욕장|시장|거리|마을|골목|카페|갤러리|미술관|박물관|공원|사찰|전시관|기념관|수목원|식물원|동물원|수족관|해양관|공연장|고궁|도서관|성당|교회|서원|향교|온천|폭포|계곡|저수지|둘레길|올레길|해안길|산책로|유적지|생태공원)$/;
+
 /**
- * 텍스트에서 장소명 후보 추출 (굵은 글씨, 고유명사 패턴)
+ * 텍스트에서 장소명 후보 추출 (Pass 1: 굵은 글씨, Pass 2: 비굵은 복합 접미사)
  */
 function extractLocationsFromText(text: string): string[] {
   const locations: string[] = [];
   const seen = new Set<string>();
 
-  // **장소명** 패턴
+  // Pass 1: **장소명** 패턴 (단일 글자 접미사 포함)
   const boldRegex = /\*\*([^*]{2,25})\*\*/g;
   let match;
   while ((match = boldRegex.exec(text)) !== null) {
     const name = match[1].trim();
     if (LOCATION_SUFFIX_REGEX.test(name) && !seen.has(name)) {
+      seen.add(name);
+      locations.push(name);
+    }
+  }
+
+  // Pass 2: 비굵은 텍스트에서 복합 접미사 패턴 (오탐 방지: 복합 접미사만)
+  const plainText = text
+    .replace(/\*\*[^*]+\*\*/g, '')     // 굵은 글씨 제거 (이미 처리됨)
+    .replace(/!\[.*?\]\([^)]*\)/g, '') // 이미지 마크다운 제거
+    .replace(/\[.*?\]\([^)]*\)/g, '')  // 링크 마크다운 제거
+    .replace(/\[IMAGE:[^\]]*\]/g, ''); // 이미지 마커 제거
+
+  const compoundRegex = /([가-힣]{2,20}(?:해변|해수욕장|시장|거리|마을|골목|카페|갤러리|미술관|박물관|공원|사찰|전시관|기념관|수목원|식물원|동물원|수족관|해양관|공연장|고궁|도서관|성당|교회|서원|향교|온천|폭포|계곡|저수지|둘레길|올레길|해안길|산책로|유적지|생태공원))/g;
+  while ((match = compoundRegex.exec(plainText)) !== null) {
+    const name = match[1].trim();
+    if (name.length >= 3 && !seen.has(name)) {
       seen.add(name);
       locations.push(name);
     }
@@ -228,6 +247,96 @@ export function insertImages(content: string, images: ImageResult[]): string {
  */
 export function removeImageMarkers(content: string): string {
   return content.replace(IMAGE_MARKER_REGEX, '').replace(/\n{3,}/g, '\n\n');
+}
+
+/**
+ * 섹션 본문에서 핵심 2-3문장 휴리스틱 추출 (LLM 호출 없이)
+ * 이미지 프롬프트에 서사 컨텍스트를 제공하기 위한 용도
+ *
+ * 전략:
+ * 1. 마크다운 아티팩트 제거
+ * 2. 한국어 문장 경계로 분리
+ * 3. 문장 점수화: 위치 보너스 + 장소명 밀도 + 제목 키워드 겹침
+ * 4. 상위 2-3문장 원래 순서로 정렬, 200자 제한
+ */
+export function summarizeSectionNarrative(
+  sectionContent: string,
+  sectionTitle: string,
+  maxChars: number = 200
+): string {
+  if (!sectionContent || sectionContent.trim().length === 0) return '';
+
+  // 1. 마크다운 아티팩트 제거
+  let cleaned = sectionContent
+    .replace(/!\[.*?\]\([^)]*\)/g, '')         // 이미지
+    .replace(/\[IMAGE:[^\]]*\]/g, '')          // 이미지 마커
+    .replace(/\[LINK:[^\]]*\]/g, '')           // 링크 마커
+    .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')   // 링크 텍스트만 유지
+    .replace(/\*\*([^*]+)\*\*/g, '$1')         // 굵은 글씨 제거
+    .replace(/\*([^*]+)\*/g, '$1')             // 이탤릭 제거
+    .replace(/^#+\s+.*/gm, '')                 // 헤딩 제거
+    .replace(/^[-*]\s+/gm, '')                 // 리스트 마커 제거
+    .replace(/^\d+\.\s+/gm, '')                // 번호 리스트 제거
+    .replace(/\n{2,}/g, '\n')
+    .trim();
+
+  if (cleaned.length === 0) return '';
+
+  // 2. 한국어 문장 경계로 분리
+  // 종결 어미 패턴: ~다, ~요, ~니다, ~습니다, ~세요, ~까요, ~네요 등 + 마침표/느낌표/물음표
+  const sentences = cleaned
+    .split(/(?<=[다요까네세죠지][\.\!\?]?\s)|(?<=[\.\!\?]\s)/g)
+    .map(s => s.trim())
+    .filter(s => s.length >= 10); // 너무 짧은 조각 제거
+
+  if (sentences.length === 0) {
+    // 문장 분리 실패 시 앞부분 잘라서 반환
+    return cleaned.slice(0, maxChars);
+  }
+
+  // 3. 제목 키워드 추출
+  const titleKeywords = (sectionTitle.match(/[가-힣]{2,}/g) || [])
+    .filter(w => w.length >= 2);
+
+  // 4. 문장 점수화
+  const scored = sentences.map((sentence, idx) => {
+    let score = 0;
+
+    // 위치 보너스: 첫 문장 +3, 두 번째 +1
+    if (idx === 0) score += 3;
+    else if (idx === 1) score += 1;
+
+    // 장소명 밀도 (복합 접미사 패턴 매칭)
+    const locationMatches = sentence.match(COMPOUND_LOCATION_SUFFIX_REGEX);
+    if (locationMatches) score += locationMatches.length * 2;
+
+    // 굵은 글씨였던 장소명 접미사 매칭
+    const locationSuffixMatches = sentence.match(/[가-힣]{2,}(?:관|궁|원|점|역|사|당|산|천|호|섬)/g);
+    if (locationSuffixMatches) score += locationSuffixMatches.length;
+
+    // 제목 키워드 겹침
+    for (const kw of titleKeywords) {
+      if (sentence.includes(kw)) score += 2;
+    }
+
+    return { sentence, score, originalIdx: idx };
+  });
+
+  // 5. 상위 2-3문장 선택, 원래 순서로 정렬
+  const topSentences = scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .sort((a, b) => a.originalIdx - b.originalIdx)
+    .map(s => s.sentence);
+
+  // 6. 200자 제한
+  let result = '';
+  for (const s of topSentences) {
+    if ((result + ' ' + s).trim().length > maxChars) break;
+    result = (result + ' ' + s).trim();
+  }
+
+  return result || topSentences[0]?.slice(0, maxChars) || '';
 }
 
 /**

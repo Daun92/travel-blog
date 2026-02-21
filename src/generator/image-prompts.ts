@@ -9,6 +9,8 @@ export interface ImageContext {
   topic: string;
   type: 'travel' | 'culture';
   section?: string;
+  /** 섹션 본문 핵심 2-3문장 요약 — 이미지 프롬프트에 서사 컨텍스트 제공 */
+  narrativeHint?: string;
   data?: Record<string, string | number>;
   items?: string[];
   locations?: string[];
@@ -33,7 +35,7 @@ export interface ImageContext {
  * 단순 정보 나열이 아닌, 여행 설렘을 담은 시각화
  */
 export function getInfographicPrompt(context: ImageContext): string {
-  const { topic, type, data = {}, section = '' } = context;
+  const { topic, type, data = {}, section = '', narrativeHint } = context;
 
   if (type === 'travel') {
     return `Create a beautiful Korean travel infographic illustration for: ${topic}
@@ -49,6 +51,7 @@ MUST INCLUDE ELEMENTS:
 
 INFORMATION TO VISUALIZE:
 ${section ? `- Section focus: ${section}` : ''}
+${narrativeHint ? `- Narrative context: ${narrativeHint}` : ''}
 ${Object.entries(data).map(([key, value]) => `- ${key}: ${value}`).join('\n')}
 
 STYLE GUIDELINES:
@@ -76,6 +79,7 @@ MUST INCLUDE ELEMENTS:
 
 INFORMATION TO VISUALIZE:
 ${section ? `- Section focus: ${section}` : ''}
+${narrativeHint ? `- Narrative context: ${narrativeHint}` : ''}
 ${Object.entries(data).map(([key, value]) => `- ${key}: ${value}`).join('\n')}
 
 STYLE GUIDELINES:
@@ -93,7 +97,7 @@ Make it feel like a collectible piece you'd frame after the exhibition.`;
  * 다이어그램 프롬프트 - 교통/동선을 여정의 이야기로
  */
 export function getDiagramPrompt(context: ImageContext): string {
-  const { topic, type, locations = [], data = {} } = context;
+  const { topic, type, locations = [], data = {}, narrativeHint } = context;
 
   if (type === 'travel') {
     const routeInfo = locations.length > 0
@@ -113,6 +117,7 @@ MUST INCLUDE ELEMENTS:
 
 JOURNEY DETAILS:
 ${routeInfo}
+${narrativeHint ? `- Narrative context: ${narrativeHint}` : ''}
 ${Object.entries(data).map(([key, value]) => `- ${key}: ${value}`).join('\n')}
 
 STYLE GUIDELINES:
@@ -141,6 +146,7 @@ MUST INCLUDE ELEMENTS:
 - Hidden gem indicators
 
 ${locations.length > 0 ? `Recommended order: ${locations.join(' → ')}` : ''}
+${narrativeHint ? `Narrative context: ${narrativeHint}` : ''}
 
 STYLE GUIDELINES:
 - Color palette: Soft grays, gold accents, exhibition's theme color
@@ -368,7 +374,7 @@ const DEFAULT_PHOTO_STYLE = PERSONA_PHOTO_STYLES.friendly;
  * 3파트 구조: SUBJECT → ATMOSPHERE → PHOTOGRAPHY STYLE
  */
 function getStillcutPrompt(context: ImageContext): string {
-  const { topic, type, section = '', locations = [], items = [], personaId } = context;
+  const { topic, type, section = '', narrativeHint, locations = [], items = [], personaId } = context;
 
   const subject = locations[0] || items[0] || section;
   const locationList = locations.length > 0 ? locations.join(', ') : topic;
@@ -380,9 +386,14 @@ function getStillcutPrompt(context: ImageContext): string {
 
   const photoStyle = PERSONA_PHOTO_STYLES[personaId ?? ''] || DEFAULT_PHOTO_STYLE;
 
+  // 내러티브 컨텍스트: 섹션 본문의 서사를 이미지에 반영
+  const narrativeContext = narrativeHint
+    ? `\n\nNARRATIVE CONTEXT: This photograph illustrates a section about: ${narrativeHint}. Capture the essence of this specific story, not a generic view.`
+    : '';
+
   return `A photorealistic photograph for a Korean ${type} blog post about: ${topic}
 
-SUBJECT: ${subject}${detailItems ? `. Key details to capture: ${detailItems}` : ''}. The scene should depict a specific, concrete moment at this location — not a generic overview but a particular detail or angle that reveals something about the place. Include authentic Korean environmental elements: Korean text on signs, Korean architectural details, Korean food or cultural items as appropriate.
+SUBJECT: ${subject}${detailItems ? `. Key details to capture: ${detailItems}` : ''}. The scene should depict a specific, concrete moment at this location — not a generic overview but a particular detail or angle that reveals something about the place. Include authentic Korean environmental elements: Korean text on signs, Korean architectural details, Korean food or cultural items as appropriate.${narrativeContext}
 
 ATMOSPHERE: ${atmosphere}
 
@@ -410,10 +421,10 @@ export function generatePromptFromMarker(
   const validStyles: ImageStyle[] = ['infographic', 'diagram', 'map', 'comparison', 'moodboard', 'bucketlist', 'cover_photo'];
   if (!validStyles.includes(style)) return null;
 
-  // 컨텍스트와 설명 결합
+  // 컨텍스트와 설명 결합 (실제 섹션 제목이 있으면 유지, 없으면 마커 description 사용)
   const enrichedContext: ImageContext = {
     ...context,
-    section: description
+    section: context.section || description,
   };
 
   let prompt: string;

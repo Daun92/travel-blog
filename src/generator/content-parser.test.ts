@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { parseSections, extractImageMarkers, insertAutoMarkers } from './content-parser.js';
+import { parseSections, extractImageMarkers, insertAutoMarkers, summarizeSectionNarrative } from './content-parser.js';
 
 describe('parseSections - 장소/키워드 추출', () => {
   const sampleContent = `
@@ -63,6 +63,51 @@ describe('parseSections - 장소/키워드 추출', () => {
     expect(sections[0]).toHaveProperty('startLine');
     expect(sections[0]).toHaveProperty('endLine');
     expect(sections[0]).toHaveProperty('content');
+  });
+});
+
+describe('summarizeSectionNarrative', () => {
+  it('섹션 본문에서 핵심 문장을 추출한다', () => {
+    const content = '경복궁은 조선 왕조의 정궁으로 1395년에 창건되었다. 근정전은 왕의 즉위식이 열린 곳으로 웅장한 규모를 자랑한다. 경회루 연못에 비친 누각의 모습이 특히 아름답다. 주변에 많은 관광객이 방문한다.';
+    const result = summarizeSectionNarrative(content, '경복궁 산책');
+    expect(result.length).toBeGreaterThan(0);
+    expect(result.length).toBeLessThanOrEqual(200);
+    // 제목 키워드 '경복궁'이 포함된 문장이 우선 선택되어야 함
+    expect(result).toContain('경복궁');
+  });
+
+  it('빈 콘텐츠는 빈 문자열 반환', () => {
+    expect(summarizeSectionNarrative('', '제목')).toBe('');
+    expect(summarizeSectionNarrative('   ', '제목')).toBe('');
+  });
+
+  it('마크다운 아티팩트를 제거한다', () => {
+    const content = '**경복궁**은 아름답다. ![이미지](path.jpg) [LINK:map:경복궁] 근정전을 둘러보세요.';
+    const result = summarizeSectionNarrative(content, '경복궁');
+    expect(result).not.toContain('**');
+    expect(result).not.toContain('![');
+    expect(result).not.toContain('[LINK:');
+  });
+
+  it('200자 제한을 지킨다', () => {
+    const longContent = '이 장소는 정말 아름다운 곳이다. '.repeat(30);
+    const result = summarizeSectionNarrative(longContent, '장소');
+    expect(result.length).toBeLessThanOrEqual(200);
+  });
+
+  it('비굵은 글씨 장소명도 추출한다 (Pass 2)', () => {
+    const content = `
+## 해운대 해변 투어
+
+해운대해변은 부산의 대표적인 관광지입니다. 광안리해수욕장도 가볼 만합니다.
+동백섬공원에서는 아름다운 해안 산책로를 걸을 수 있습니다.
+`.trim();
+
+    const sections = parseSections(content);
+    const locations = sections[0].mentionedLocations ?? [];
+    // 비굵은 글씨 복합 접미사 패턴도 추출되어야 함
+    expect(locations).toContain('해운대해변');
+    expect(locations).toContain('광안리해수욕장');
   });
 });
 

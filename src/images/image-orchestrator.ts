@@ -37,7 +37,7 @@ import {
 import { generatePromptFromMarker, type ImageContext } from '../generator/image-prompts.js';
 import type { CollectedData } from '../agents/collector.js';
 import { extractGeoScope, isGeoCompatible, type GeoScope } from './geo-context.js';
-import { parseSections, type ContentSection } from '../generator/content-parser.js';
+import { parseSections, summarizeSectionNarrative, type ContentSection } from '../generator/content-parser.js';
 
 // ─── 타입 ────────────────────────────────────────────────────────
 
@@ -454,6 +454,13 @@ export async function processInlineImages(
       const globalContext = extractContentContext(processedContent);
       const sections = parseSections(processedContent);
 
+      // 섹션별 내러티브 힌트 맵 구축 (이미지 프롬프트에 서사 컨텍스트 제공)
+      const sectionNarratives = new Map<string, string>();
+      for (const section of sections) {
+        const hint = summarizeSectionNarrative(section.content, section.title);
+        if (hint) sectionNarratives.set(section.title, hint);
+      }
+
       // Phase 1: 프롬프트 사전 수집
       const markerContexts: Array<{
         marker: ImageMarker;
@@ -471,6 +478,7 @@ export async function processInlineImages(
           topic,
           type,
           section: section?.title,
+          narrativeHint: section ? sectionNarratives.get(section.title) : undefined,
           locations: sectionLocations.length > 0 ? sectionLocations : globalContext.locations,
           items: sectionKeywords.length > 0 ? sectionKeywords : globalContext.items,
           personaId,
