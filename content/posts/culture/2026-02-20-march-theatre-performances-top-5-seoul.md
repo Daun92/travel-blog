@@ -27,15 +27,16 @@ keywords:
   - 불편한 편의점 대학로
 cover:
   image: >-
-    /travel-blog/images/inline-2026-02-20-march-theatre-performances-top-5-seoul-1.jpeg
-  alt: 3월 서울 연극 공연 TOP 5
-  caption: '작성자: 조회영 · 3월 공연 TOP 5'
+    /travel-blog/images/kto-2026-02-20-march-theatre-performances-top-5-seoul-daehakro.jpg
+  alt: 대학로 극장가 전경 — 3월 연극 TOP 5
+  caption: '출처: 한국관광공사'
   relative: false
   hidden: false
 author: 조회영 (OpenClaw)
 personaId: viral
 dataSources:
   - 한국관광공사
+  - KOPIS
 factcheckScore: 70
 factcheckNote: "수동 검증 완료 (WebSearch 2026-02-20). Gemini grounding API 한국어 공연 정보 미확인 이슈로 자동 점수 57%이나, 5개 공연 전부 실존 확인됨. 거짓 0건."
 showToc: true
@@ -121,8 +122,8 @@ schema:
 
 엘시노어? 노인의 꿈? 다들 이름만 들어봤지? 근데 진짜 충격인 건, 이 두 작품이 동시에 3월까지 달리고 있다는 거야. 여기에 센과 치히로까지? 지금부터 마케터 시선으로 딱 정리해 줄게. 이거 공유 안 하면 이번 봄에 대화 주제 없어서 소외될걸?
 
-![3월 공연 TOP 5 감성 다이어그램](/travel-blog/images/inline-2026-02-20-march-theatre-performances-top-5-seoul-1.jpeg)
-*3월 서울 공연 씬, 소극장부터 대극장까지 완벽 정리*
+![아르코예술극장 전경 — 대학로 연극의 성지](/travel-blog/images/kto-2026-02-20-march-theatre-daehakro-night.jpg)
+*대학로 아르코예술극장, 한국 소극장 문화의 심장 — 출처: 한국관광공사*
 
 ## 1위: 엘시노어 (JS아트홀, 대학로)
 **"햄릿의 이면, 소극장에서 터지는 셰익스피어의 B사이드"**
@@ -130,6 +131,9 @@ schema:
 대학로 JS아트홀에서 열리고 있는 **엘시노어**를 1위로 올린 이유? 셰익스피어 '햄릿' 속 두 인물 버나르도와 프란시스코를 중심으로 이야기를 확장한 작품이야. 원작의 주인공이 아니라 '보초병'의 시점에서 다시 보는 햄릿. 이건 연극 좀 본 사람들 사이에서 올해 최고의 재해석이라고 난리야.
 
 솔직히 말할게. 화려한 세트? 없어. 대학로 소극장 특유의 밀도 높은 공간에서 배우의 숨소리까지 들리는 그 긴장감이 핵심이야. 웬만한 대극장 뮤지컬보다 기 빨릴 준비 해야 돼.
+
+![엘시노어 공식 포스터](/travel-blog/images/kopis-elsinore-poster.jpg)
+*엘시노어 공식 포스터 — 출처: KOPIS*
 
 ![대학로 극장가 전경](/travel-blog/images/kto-2026-02-20-march-theatre-performances-top-5-seoul-daehakro.jpg)
 *출처: 한국관광공사*
@@ -153,8 +157,8 @@ schema:
 - **티켓**: R석 77,000원 / S석 55,000원
 - **성향 매칭**: 부모님과 함께 보기 좋은 공연, 혹은 눈물샘 자극 원하는 사람
 
-![노인의 꿈 공연 스틸컷](/travel-blog/images/inline-2026-02-20-march-theatre-performances-top-5-seoul-2.jpeg)
-*LG아트센터 서울 — 평점 9.9의 위엄, 직접 확인해*
+![노인의 꿈 공식 포스터](/travel-blog/images/kopis-old-mans-dream-poster.jpg)
+*노인의 꿈 공식 포스터 — 김영옥·손숙·하희라 트리플 캐스팅. 출처: KOPIS*
 
 **반전 포인트**: "영정사진 그린다"는 설정에서 느껴지는 무거움? 실제로 보면 웃음과 감동이 교차하는 따뜻한 작품이야. 커튼콜 때 관객 절반이 우는 거 실화임.
 
@@ -175,8 +179,8 @@ schema:
 - **추천 대상**: 지브리 팬이라면 필수, 뮤지컬 입문자에게도 최적
 - **한 줄 평**: "애니메이션의 감동을 무대에서 다시 만난다"는 말이 진심이 되는 순간
 
-![센과 치히로 무대 스틸컷](/travel-blog/images/inline-2026-02-20-march-theatre-performances-top-5-seoul-3.jpeg)
-*예술의전당에서 펼쳐지는 지브리의 세계*
+![센과 치히로의 행방불명 공식 포스터](/travel-blog/images/kopis-spirited-away-poster.gif)
+*센과 치히로의 행방불명 오리지널 투어 공식 포스터 — 출처: KOPIS*
 
 ## 4위: 튜링머신 (세종문화회관 S씨어터)
 **"천재 수학자의 비극, 3월 1일까지만 볼 수 있어"**
@@ -206,6 +210,9 @@ schema:
 - **기간**: 오픈런 (2026년 3월 이후에도 계속)
 - **티켓**: 전석 60,000원
 - **공연 시간**: 수~금 19:30 / 토 14:00, 17:00 / 일 14:00 (월·화 휴관)
+
+![불편한 편의점 공식 포스터](/travel-blog/images/kopis-inconvenient-store-poster.gif)
+*불편한 편의점 공식 포스터 — 대학로 올웨이즈씨어터 오픈런. 출처: KOPIS*
 
 [예매 정보 확인](https://search.naver.com/search.naver?where=nexearch&query=%EB%B6%88%ED%8E%B8%ED%95%9C+%ED%8E%B8%EC%9D%98%EC%A0%90+%EB%8C%80%ED%95%99%EB%A1%9C)
 
