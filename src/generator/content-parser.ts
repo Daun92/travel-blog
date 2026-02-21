@@ -477,3 +477,223 @@ export function insertAutoMarkers(
 
   return lines.join('\n');
 }
+
+// ──────────────────────────────────────────────
+// 서사 기반 이미지 배치 계획 시스템
+// ──────────────────────────────────────────────
+
+/** 이미지 배치 계획 단위 */
+export interface ImagePlanEntry {
+  sectionTitle: string;
+  sectionIndex: number;
+  role: 'intro_mood' | 'body_evidence' | 'body_atmosphere' | 'closing_summary';
+  style: ImageStyle;
+  /** 서사 기반 구체적 피사체 설명 */
+  subject: string;
+  narrativeContext: string;
+  mentionedLocations: string[];
+  preferKto: boolean;
+  needScore: number;
+}
+
+export interface ImagePlan {
+  entries: ImagePlanEntry[];
+  totalSlots: number;
+  ktoSlots: number;
+  aiSlots: number;
+}
+
+/** 마감/보조 섹션 판별 키워드 */
+const CLOSING_KEYWORDS = ['자주', 'FAQ', '비용', '정산', '마무리', '여운', '요약', '가이드', '질문'];
+
+/** 코스/동선 관련 키워드 */
+const ROUTE_KEYWORDS = ['코스', '동선', '루트', '일정'];
+
+/** 비교/순위 관련 키워드 */
+const RANKING_KEYWORDS = ['비교', '순위', 'TOP', 'BEST'];
+
+/**
+ * 서사 기반 이미지 배치 계획 생성
+ * suggestImagePositions()의 상위 대체 — 서사 컨텍스트와 역할 분류를 포함한 정밀 계획
+ */
+export function planImagePlacement(
+  content: string,
+  type: 'travel' | 'culture',
+  topic: string,
+  maxImages: number,
+  options?: { ktoAvailable?: number }
+): ImagePlan {
+  const sections = parseSections(content);
+  if (sections.length === 0) {
+    return { entries: [], totalSlots: 0, ktoSlots: 0, aiSlots: 0 };
+  }
+
+  // 토픽에서 키워드 추출 (needScore 계산용)
+  const topicKeywords = (topic.match(/[가-힣]{2,}/g) || []).filter(w => w.length >= 2);
+
+  // ── 1. 이미 이미지가 있는 섹션 필터링 ──
+  const hasImage = (s: ContentSection) => /!\[.*?\]\(/.test(s.content);
+
+  // ── 2. 섹션별 점수화 및 분류 ──
+  const candidates: ImagePlanEntry[] = [];
+
+  for (let i = 0; i < sections.length; i++) {
+    const section = sections[i];
+    if (hasImage(section)) continue;
+
+    const locations = section.mentionedLocations || [];
+    const keywords = section.sectionKeywords || [];
+    const cleaned = section.content
+      .replace(/!\[.*?\]\([^)]*\)/g, '')
+      .replace(/\[IMAGE:[^\]]*\]/g, '')
+      .replace(/\[LINK:[^\]]*\]/g, '')
+      .trim();
+
+    // ── needScore 계산 (0-10) ──
+    let needScore = 0;
+    if (locations.length > 0) needScore += 3;
+    if (cleaned.length > 100) needScore += 2;
+    if (topicKeywords.some(kw => section.title.includes(kw))) needScore += 2;
+    if (CLOSING_KEYWORDS.some(k => section.title.includes(k))) needScore -= 2;
+    needScore = Math.max(0, Math.min(10, needScore));
+
+    // ── 역할(role) + 스타일(style) 분류 ──
+    const isClosing = CLOSING_KEYWORDS.some(k => section.title.includes(k));
+    const titleAndKeywords = `${section.title} ${keywords.join(' ')}`;
+    const hasRouteHint = ROUTE_KEYWORDS.some(k => titleAndKeywords.includes(k));
+    const hasRankingHint = RANKING_KEYWORDS.some(k => titleAndKeywords.includes(k));
+
+    let role: ImagePlanEntry['role'];
+    let style: ImageStyle;
+    let preferKto = false;
+
+    if (i <= 1 && !isClosing) {
+      // 첫 번째 비마감 섹션: 도입 무드
+      role = 'intro_mood';
+      style = type === 'travel' ? 'moodboard' : 'diagram';
+    } else if (isClosing) {
+      // 마감 섹션
+      role = 'closing_summary';
+      style = 'infographic';
+    } else if (locations.length > 0) {
+      // 장소 언급 본문: 증거 스틸컷 (KTO 우선)
+      role = 'body_evidence';
+      preferKto = true;
+      if (hasRouteHint) {
+        style = 'diagram';
+      } else if (hasRankingHint) {
+        style = 'comparison';
+      } else {
+        style = 'cover_photo';
+      }
+    } else {
+      // 장소 미언급 본문: 분위기 스틸컷
+      role = 'body_atmosphere';
+      if (hasRouteHint) {
+        style = 'diagram';
+      } else if (hasRankingHint) {
+        style = 'comparison';
+      } else {
+        style = 'cover_photo';
+      }
+    }
+
+    // ── subject 생성 (50자 이내, 범용 표현 금지) ──
+    let subject: string;
+    if (locations[0]) {
+      const kwSlice = keywords.slice(0, 2).join(' ');
+      subject = `${locations[0]} — ${kwSlice}`.slice(0, 50);
+    } else {
+      // 헤딩에서 핵심어 추출 (마크다운 아티팩트 제거)
+      const headingCore = section.title
+        .replace(/^[#\s\d.:]+/, '')
+        .replace(/\*\*/g, '')
+        .trim();
+      subject = headingCore.slice(0, 50);
+    }
+
+    // narrativeContext: summarizeSectionNarrative 결과
+    const narrativeContext = summarizeSectionNarrative(section.content, section.title);
+
+    candidates.push({
+      sectionTitle: section.title,
+      sectionIndex: i,
+      role,
+      style,
+      subject,
+      narrativeContext,
+      mentionedLocations: locations,
+      preferKto,
+      needScore,
+    });
+  }
+
+  // ── 3. needScore 내림차순 정렬 → maxImages개 선택 ──
+  candidates.sort((a, b) => b.needScore - a.needScore);
+  const entries = candidates.slice(0, maxImages);
+
+  // ── 4. KTO / AI 슬롯 계산 ──
+  const preferKtoCount = entries.filter(e => e.preferKto).length;
+  const ktoSlots = Math.min(options?.ktoAvailable ?? 0, preferKtoCount);
+  const aiSlots = entries.length - ktoSlots;
+
+  return {
+    entries,
+    totalSlots: entries.length,
+    ktoSlots,
+    aiSlots,
+  };
+}
+
+/**
+ * ImagePlan의 AI 슬롯 엔트리를 마커로 변환하여 콘텐츠에 삽입
+ * KTO로 채워지지 않은 엔트리만 대상 — 역순 삽입으로 라인 변동 방지
+ */
+export function planToMarkers(
+  content: string,
+  plan: ImagePlan,
+  sections: ContentSection[]
+): string {
+  if (plan.entries.length === 0) return content;
+
+  // KTO로 채워지지 않은 엔트리 = AI 슬롯 대상
+  // preferKto인 엔트리 중 ktoSlots개는 KTO로 채워진다고 가정
+  // → preferKto 엔트리를 needScore 내림차순으로 ktoSlots개 제외
+  const ktoFilled = new Set<number>();
+  let ktoRemaining = plan.ktoSlots;
+  for (const entry of plan.entries) {
+    if (entry.preferKto && ktoRemaining > 0) {
+      ktoFilled.add(entry.sectionIndex);
+      ktoRemaining--;
+    }
+  }
+
+  const aiEntries = plan.entries.filter(e => !ktoFilled.has(e.sectionIndex));
+  if (aiEntries.length === 0) return content;
+
+  const lines = content.split('\n');
+
+  // 각 AI 엔트리의 삽입 위치 계산
+  const insertions: Array<{ lineNum: number; marker: string }> = [];
+
+  for (const entry of aiEntries) {
+    // sectionTitle로 sections에서 endLine 찾기
+    const matchedSection = sections.find(s => s.title === entry.sectionTitle);
+    if (!matchedSection) continue;
+
+    const marker = `[IMAGE:${entry.style}:${entry.subject}]`;
+    insertions.push({
+      lineNum: matchedSection.endLine,
+      marker,
+    });
+  }
+
+  // 역순 삽입으로 라인 변동 방지
+  insertions.sort((a, b) => b.lineNum - a.lineNum);
+
+  for (const insertion of insertions) {
+    lines.splice(insertion.lineNum, 0, '', insertion.marker, '');
+  }
+
+  return lines.join('\n');
+}

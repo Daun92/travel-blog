@@ -4,7 +4,7 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import { parseSections, extractImageMarkers, insertAutoMarkers, summarizeSectionNarrative } from './content-parser.js';
+import { parseSections, extractImageMarkers, insertAutoMarkers, summarizeSectionNarrative, planImagePlacement } from './content-parser.js';
 
 describe('parseSections - 장소/키워드 추출', () => {
   const sampleContent = `
@@ -108,6 +108,88 @@ describe('summarizeSectionNarrative', () => {
     // 비굵은 글씨 복합 접미사 패턴도 추출되어야 함
     expect(locations).toContain('해운대해변');
     expect(locations).toContain('광안리해수욕장');
+  });
+});
+
+describe('planImagePlacement', () => {
+  const blogContent = `
+# 경주 불국사 깊이 보기
+
+> **경주 불국사 핵심 요약** — 경주 불국사는 유네스코 세계문화유산입니다.
+
+## 불국사의 역사와 건축
+
+불국사는 751년에 창건되었다. **불국사** 대웅전은 신라 건축의 정수를 보여준다. 석가탑과 다보탑이 대표적인 국보이다.
+
+## 석굴암 가는 길
+
+석굴암은 불국사에서 버스로 15분 거리에 있다. **석굴암**의 본존불상은 동해를 바라보고 있다.
+
+## 자주 묻는 질문
+
+입장료는 성인 6,000원이다. 주차장은 무료이다.
+`.trim();
+
+  it('서사 기반 이미지 계획을 생성한다', () => {
+    const plan = planImagePlacement(blogContent, 'travel', '경주 불국사', 3);
+    expect(plan.entries.length).toBeLessThanOrEqual(3);
+    expect(plan.totalSlots).toBe(3);
+  });
+
+  it('장소명이 있는 본문 섹션을 body_evidence로 분류한다', () => {
+    // 본문 섹션이 더 많은 콘텐츠 (i>1인 장소 섹션 필요)
+    const richContent = `
+# 경주 완전 가이드
+
+## 개요
+
+경주는 신라의 수도였다.
+
+## 불국사의 역사
+
+**불국사**는 751년에 창건되었다. 석가탑과 다보탑이 유명하다.
+
+## 석굴암 방문
+
+**석굴암**은 불국사에서 버스로 15분이다. 본존불상이 동해를 바라보고 있다.
+
+## 첨성대 산책
+
+**첨성대**는 동양 최고의 천문대이다. 야경이 아름답다.
+
+## 자주 묻는 질문
+
+입장료는 6,000원이다.
+`.trim();
+
+    const plan = planImagePlacement(richContent, 'travel', '경주', 5);
+    const evidenceEntries = plan.entries.filter(e => e.role === 'body_evidence');
+    expect(evidenceEntries.length).toBeGreaterThan(0);
+    // 장소명 있는 섹션은 preferKto=true
+    for (const entry of evidenceEntries) {
+      expect(entry.preferKto).toBe(true);
+    }
+  });
+
+  it('마감 섹션을 closing_summary로 분류한다', () => {
+    const plan = planImagePlacement(blogContent, 'travel', '경주 불국사', 5);
+    const closingEntries = plan.entries.filter(e => e.role === 'closing_summary');
+    // "자주 묻는 질문"은 마감 키워드에 매칭
+    expect(closingEntries.some(e => e.sectionTitle.includes('자주'))).toBe(true);
+  });
+
+  it('subject에 범용 표현을 사용하지 않는다', () => {
+    const plan = planImagePlacement(blogContent, 'travel', '경주 불국사', 3);
+    for (const entry of plan.entries) {
+      expect(entry.subject).not.toContain('현장 스틸컷');
+      expect(entry.subject).not.toContain('감성 무드보드');
+      expect(entry.subject.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('ktoSlots와 aiSlots 합이 entries 수와 일치한다', () => {
+    const plan = planImagePlacement(blogContent, 'travel', '경주 불국사', 3, { ktoAvailable: 2 });
+    expect(plan.ktoSlots + plan.aiSlots).toBe(plan.entries.length);
   });
 });
 

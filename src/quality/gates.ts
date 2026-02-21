@@ -13,6 +13,7 @@ import { analyzeReadability, ReadabilityAnalysis } from './readability.js';
 import { analyzeTone, ToneAnalysis } from './tone-checker.js';
 import { analyzeStructure, StructureAnalysis } from './structure-checker.js';
 import { analyzeKeywordDensity, KeywordDensityAnalysis } from './keyword-density.js';
+import { validateImageNarrativeCoherence } from '../images/image-validator.js';
 
 /**
  * 게이트 결과
@@ -451,6 +452,28 @@ export async function validateFile(
       blockOnFailure: geoConfig.blockOnFailure || false,
       details: `GEO 점수: ${geoAnalysis.geoScore}, 이슈 ${geoAnalysis.geoIssues.length}개`,
       warnings: geoAnalysis.geoIssues.map(i => i.message).slice(0, 5)
+    });
+  }
+
+  // 6. 이미지-서사 일관성 게이트
+  if (options.allGates) {
+    const coherenceResults = validateImageNarrativeCoherence(body, title);
+    const avgCoherence = coherenceResults.length > 0
+      ? Math.round(coherenceResults.reduce((sum, r) => sum + r.coherenceScore, 0) / coherenceResults.length)
+      : 100;
+    const issueCount = coherenceResults.filter(r => r.action !== 'keep').length;
+
+    gates.push({
+      name: 'image_coherence',
+      score: avgCoherence,
+      passed: avgCoherence >= 40,
+      threshold: 40,
+      blockOnFailure: false,
+      details: `이미지-서사 일관성: ${avgCoherence}점 (${coherenceResults.length}개 이미지, 이슈 ${issueCount}개)`,
+      warnings: coherenceResults
+        .filter(r => r.action !== 'keep')
+        .slice(0, 5)
+        .map(r => `${r.sectionTitle}: ${r.coherenceScore}점${r.issue ? ` — ${r.issue}` : ''}`)
     });
   }
 

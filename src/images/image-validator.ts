@@ -459,3 +459,116 @@ export async function validatePostImages(
 export function calculateImageScore(result: PostImageValidationResult): number {
   return result.overallScore;
 }
+
+/**
+ * 이미지-서사 일관성 검증 결과
+ */
+export interface NarrativeCoherenceResult {
+  sectionTitle: string;
+  imagePath: string;
+  imageSource: 'kto' | 'gemini' | 'unsplash' | 'unknown';
+  coherenceScore: number; // 0-100
+  issue?: string;
+  action: 'keep' | 'warn' | 'remove';
+}
+
+/**
+ * 이미지-서사 일관성 검증
+ * 각 섹션의 이미지가 섹션 맥락(키워드, 장소명, 지리적 스코프)과 얼마나 일치하는지 평가
+ */
+export function validateImageNarrativeCoherence(
+  content: string,
+  topic: string,
+  geoScope?: GeoScope
+): NarrativeCoherenceResult[] {
+  const sections = parseSections(content);
+  const results: NarrativeCoherenceResult[] = [];
+  const imagePattern = /!\[([^\]]*)\]\(([^)]+)\)/g;
+
+  for (const section of sections) {
+    let match: RegExpExecArray | null;
+    imagePattern.lastIndex = 0;
+
+    while ((match = imagePattern.exec(section.content)) !== null) {
+      const altText = match[1];
+      const imagePath = match[2];
+      const filename = imagePath.split('/').pop() || '';
+
+      // 소스 추론 (inferImageSource 재사용)
+      const rawSource = inferImageSource(imagePath);
+      const imageSource: NarrativeCoherenceResult['imageSource'] =
+        rawSource === 'kto' || rawSource === 'gemini' || rawSource === 'unsplash'
+          ? rawSource
+          : 'unknown';
+
+      let score = 50; // baseline
+
+      // (a) alt 텍스트 ↔ 섹션 키워드 오버랩 (+20 최대)
+      if (altText && section.sectionKeywords && section.sectionKeywords.length > 0) {
+        const altWords = altText.split(/\s+/).filter(w => w.length >= 2);
+        const overlapCount = altWords.filter(aw =>
+          section.sectionKeywords!.some(sk =>
+            sk.includes(aw) || aw.includes(sk)
+          )
+        ).length;
+        score += Math.min(overlapCount * 10, 20);
+      }
+
+      // (b) 파일명 ↔ 섹션 장소명 오버랩 (+15 최대)
+      const filenameWords = extractKeywordsFromFilename(filename);
+      if (filenameWords.length > 0 && section.mentionedLocations && section.mentionedLocations.length > 0) {
+        const locationOverlap = filenameWords.filter(fw =>
+          section.mentionedLocations!.some(loc =>
+            loc.includes(fw) || fw.includes(loc)
+          )
+        ).length;
+        score += Math.min(locationOverlap * 8, 15);
+      }
+
+      // (c) geo 호환성 (KTO만, +15/-20)
+      if (imageSource === 'kto' && geoScope) {
+        const filenameText = filenameWords.join(' ');
+        if (isGeoCompatible(filenameText, geoScope)) {
+          score += 15;
+        } else {
+          score -= 20;
+        }
+      }
+
+      // (d) 섹션 실질성 (-10): 이미지/마크다운 제거 후 텍스트 < 50자
+      const cleanedContent = section.content
+        .replace(/!\[[^\]]*\]\([^)]+\)/g, '')  // 이미지 마크다운 제거
+        .replace(/[#*_`~\[\]()>|-]/g, '')       // 마크다운 기호 제거
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (cleanedContent.length < 50) {
+        score -= 10;
+      }
+
+      // 판정
+      let action: NarrativeCoherenceResult['action'];
+      let issue: string | undefined;
+
+      if (score >= 50) {
+        action = 'keep';
+      } else if (score >= 30) {
+        action = 'warn';
+        issue = `낮은 서사 일관성 (${score}점): 섹션 "${section.title}"과 이미지 "${filename}" 간 맥락 연결 약함`;
+      } else {
+        action = 'remove';
+        issue = `서사 불일치 (${score}점): 섹션 "${section.title}"에 이미지 "${filename}" 부적합 — 교체 권장`;
+      }
+
+      results.push({
+        sectionTitle: section.title,
+        imagePath,
+        imageSource,
+        coherenceScore: Math.max(0, Math.min(100, score)),
+        issue,
+        action,
+      });
+    }
+  }
+
+  return results;
+}

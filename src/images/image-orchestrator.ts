@@ -29,7 +29,6 @@ import {
 import {
   insertImages,
   removeImageMarkers,
-  insertAutoMarkers,
   extractImageMarkers,
   type ImageResult,
   type ImageMarker,
@@ -37,7 +36,16 @@ import {
 import { generatePromptFromMarker, type ImageContext } from '../generator/image-prompts.js';
 import type { CollectedData } from '../agents/collector.js';
 import { extractGeoScope, isGeoCompatible, type GeoScope } from './geo-context.js';
-import { parseSections, summarizeSectionNarrative, type ContentSection } from '../generator/content-parser.js';
+import {
+  parseSections,
+  summarizeSectionNarrative,
+  planImagePlacement,
+  planToMarkers,
+  type ContentSection,
+  type ImagePlanEntry,
+  type ImagePlan,
+} from '../generator/content-parser.js';
+import { validateImageNarrativeCoherence } from './image-validator.js';
 
 // ─── 타입 ────────────────────────────────────────────────────────
 
@@ -234,6 +242,83 @@ function headingImageSimilarity(
 }
 
 /**
+ * 계획 기반 KTO 이미지 매칭
+ * 각 plan entry의 mentionedLocations + narrativeContext를 활용하여
+ * headingImageSimilarity보다 풍부한 맥락으로 매칭
+ */
+function matchKtoToPlan(
+  plan: ImagePlan,
+  ktoResults: KtoImageResult[],
+  geoScope?: GeoScope,
+  topic?: string
+): Map<number, KtoImageResult> {
+  const mapping = new Map<number, KtoImageResult>();
+  const usedKto = new Set<number>();
+
+  // plan 엔트리 중 preferKto=true인 것만 대상
+  const ktoEntries = plan.entries.filter(e => e.preferKto);
+
+  // 지역명 stopword 구축
+  const h1Title = topic ?? '';
+  const stopwords = buildGeoStopwords(h1Title, geoScope);
+
+  for (const entry of ktoEntries) {
+    let bestKtoIdx = -1;
+    let bestScore = 0;
+
+    for (let k = 0; k < ktoResults.length; k++) {
+      if (usedKto.has(k)) continue;
+
+      const ktoTitle = ktoResults[k].title;
+      let score = 0;
+
+      // 1. 헤딩 텍스트 매칭 (기존 로직)
+      score += headingImageSimilarity(entry.sectionTitle, ktoTitle, stopwords);
+
+      // 2. mentionedLocations 매칭 (확장)
+      for (const loc of entry.mentionedLocations) {
+        const locWords = extractWords(loc);
+        const titleWords = extractWords(ktoTitle);
+        for (const lw of locWords) {
+          if (stopwords.has(lw)) continue;
+          for (const tw of titleWords) {
+            if (stopwords.has(tw)) continue;
+            if (lw.includes(tw) || tw.includes(lw)) {
+              score += 2; // 장소명 직접 매칭은 가중치 2배
+            }
+          }
+        }
+      }
+
+      // 3. narrativeContext 키워드 매칭
+      if (entry.narrativeContext) {
+        const narrativeWords = extractWords(entry.narrativeContext).filter(w => !stopwords.has(w));
+        const titleWords = extractWords(ktoTitle).filter(w => !stopwords.has(w));
+        for (const nw of narrativeWords.slice(0, 5)) { // 상위 5개 키워드만
+          for (const tw of titleWords) {
+            if (nw.includes(tw) || tw.includes(nw)) {
+              score += 1;
+            }
+          }
+        }
+      }
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestKtoIdx = k;
+      }
+    }
+
+    if (bestKtoIdx >= 0 && bestScore > 0) {
+      usedKto.add(bestKtoIdx);
+      mapping.set(entry.sectionIndex, ktoResults[bestKtoIdx]);
+    }
+  }
+
+  return mapping;
+}
+
+/**
  * KTO 실사진을 콘텐츠 H2/H3 섹션 뒤에 삽입
  * 이미지 제목과 헤딩 텍스트 유사도 매칭으로 배치 (기존: 인덱스 순서)
  */
@@ -403,17 +488,44 @@ export async function processInlineImages(
     }
   }
 
-  // ── Step 2: KTO 사진을 content 중간에 삽입 (헤딩-제목 유사도 매칭) ──
+  // ── Step 2: 서사 기반 이미지 계획 생성 ──
   let processedContent = content;
+
+  // LLM이 생성했을 수 있는 마커를 먼저 제거 (계획 기반으로 재배치)
+  processedContent = removeImageMarkers(processedContent);
+
+  // KTO 실사진을 계획 기반으로 삽입
   let ktoInsertedCount = 0;
-  if (ktoResults.length > 0) {
-    const ktoInsertResult = insertKtoImages(processedContent, ktoResults, geoScope, topic);
-    processedContent = ktoInsertResult.content;
-    ktoInsertedCount = ktoInsertResult.insertedCount;
+  const imagePlan = planImagePlacement(processedContent, type, topic, imageCount, {
+    ktoAvailable: ktoResults.length,
+  });
+  onProgress(`이미지 계획: ${imagePlan.entries.length}개 슬롯 (KTO ${imagePlan.ktoSlots} + AI ${imagePlan.aiSlots})`);
+
+  // ── Step 3: 계획 기반 KTO 매칭 + 삽입 ──
+  if (ktoResults.length > 0 && imagePlan.ktoSlots > 0) {
+    const ktoMapping = matchKtoToPlan(imagePlan, ktoResults, geoScope, topic);
+
+    if (ktoMapping.size > 0) {
+      // 계획 순서대로 KTO 이미지 삽입
+      const sections = parseSections(processedContent);
+      const ktoAssignments: Array<{ sectionTitle: string; result: KtoImageResult }> = [];
+
+      for (const [sectionIdx, ktoResult] of ktoMapping) {
+        const entry = imagePlan.entries.find(e => e.sectionIndex === sectionIdx);
+        if (entry) {
+          ktoAssignments.push({ sectionTitle: entry.sectionTitle, result: ktoResult });
+        }
+      }
+
+      const ktoInsertResult = insertKtoImages(processedContent, ktoAssignments.map(a => a.result), geoScope, topic);
+      processedContent = ktoInsertResult.content;
+      ktoInsertedCount = ktoInsertResult.insertedCount;
+      onProgress(`  KTO 실사진 ${ktoInsertedCount}개 계획 위치에 삽입 완료`);
+      imagePaths.push(...ktoResults.slice(0, ktoInsertedCount).map(r => r.localPath));
+    }
   }
 
-  // ── Step 3: 나머지 슬롯은 AI 마커 기반 생성 ──
-  // 실제 삽입된 KTO 수 기준 (다운로드만 되고 미삽입된 것은 제외)
+  // ── Step 4: 나머지 AI 슬롯 마커 삽입 ──
   const remainingSlots = imageCount - ktoInsertedCount;
 
   if (remainingSlots > 0) {
@@ -438,10 +550,10 @@ export async function processInlineImages(
       onProgress(`주의: ${usageCheck.warning}`);
     }
 
-    // 기존 Gemini 마커를 제거하고 역할 기반 마커로 재삽입
-    // (Gemini가 모든 마커를 infographic/diagram으로 생성하는 문제 방지)
+    // 서사 기반 마커 삽입 (기계적 insertAutoMarkers 대신 계획 기반)
     processedContent = removeImageMarkers(processedContent);
-    processedContent = insertAutoMarkers(processedContent, type, remainingSlots);
+    const sections = parseSections(processedContent);
+    processedContent = planToMarkers(processedContent, imagePlan, sections);
     let markers = extractImageMarkers(processedContent);
 
     const markersToProcess = markers.slice(0, remainingSlots);
@@ -452,16 +564,15 @@ export async function processInlineImages(
       onProgress(`${markersToProcess.length}개의 AI 인라인 이미지 생성 중 (${modeLabel} 모드)...`);
 
       const globalContext = extractContentContext(processedContent);
-      const sections = parseSections(processedContent);
+      const allSections = parseSections(processedContent);
 
-      // 섹션별 내러티브 힌트 맵 구축 (이미지 프롬프트에 서사 컨텍스트 제공)
-      const sectionNarratives = new Map<string, string>();
-      for (const section of sections) {
-        const hint = summarizeSectionNarrative(section.content, section.title);
-        if (hint) sectionNarratives.set(section.title, hint);
+      // 계획 엔트리에서 직접 서사 컨텍스트 가져오기
+      const planEntryMap = new Map<string, ImagePlanEntry>();
+      for (const entry of imagePlan.entries) {
+        planEntryMap.set(entry.sectionTitle, entry);
       }
 
-      // Phase 1: 프롬프트 사전 수집
+      // Phase 1: 프롬프트 사전 수집 (계획 기반 컨텍스트)
       const markerContexts: Array<{
         marker: ImageMarker;
         section: ContentSection | null;
@@ -470,17 +581,16 @@ export async function processInlineImages(
 
       for (let i = 0; i < markersToProcess.length; i++) {
         const marker = markersToProcess[i];
-        const section = findSectionForMarker(sections, marker.line);
-        const sectionLocations = section?.mentionedLocations ?? [];
-        const sectionKeywords = section?.sectionKeywords ?? [];
+        const section = findSectionForMarker(allSections, marker.line);
+        const planEntry = section ? planEntryMap.get(section.title) : undefined;
 
         const imageContext: ImageContext = {
           topic,
           type,
           section: section?.title,
-          narrativeHint: section ? sectionNarratives.get(section.title) : undefined,
-          locations: sectionLocations.length > 0 ? sectionLocations : globalContext.locations,
-          items: sectionKeywords.length > 0 ? sectionKeywords : globalContext.items,
+          narrativeHint: planEntry?.narrativeContext || (section ? summarizeSectionNarrative(section.content, section.title) : undefined),
+          locations: planEntry?.mentionedLocations ?? section?.mentionedLocations ?? globalContext.locations,
+          items: section?.sectionKeywords ?? globalContext.items,
           personaId,
         };
 
@@ -574,6 +684,31 @@ export async function processInlineImages(
 
   // 처리되지 않은 마커 제거
   processedContent = removeImageMarkers(processedContent);
+
+  // ── Step 6: 서사-이미지 일관성 사후 검증 ──
+  const coherenceResults = validateImageNarrativeCoherence(processedContent, topic, geoScope);
+
+  const removeTargets = coherenceResults
+    .filter(r => r.action === 'remove')
+    .map(r => r.imagePath);
+
+  if (removeTargets.length > 0) {
+    onProgress(`서사 불일치 이미지 ${removeTargets.length}개 제거 중...`);
+    for (const target of removeTargets) {
+      const escaped = target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const imgLineRegex = new RegExp(
+        `\\n?!\\[[^\\]]*\\]\\(${escaped}\\)\\n?(?:\\*[^*]*\\*\\n?)?`, 'g'
+      );
+      processedContent = processedContent.replace(imgLineRegex, '\n');
+    }
+  }
+
+  const warnings = coherenceResults.filter(r => r.action === 'warn');
+  if (warnings.length > 0) {
+    for (const w of warnings) {
+      onProgress(`  경고: "${w.sectionTitle}" 섹션 이미지 서사 일관성 낮음 (${w.coherenceScore}점)`);
+    }
+  }
 
   return {
     content: processedContent,
