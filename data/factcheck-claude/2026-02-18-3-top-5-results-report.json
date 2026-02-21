@@ -1,0 +1,165 @@
+{
+  "filePath": "drafts/2026-02-18-3-top-5.md",
+  "title": "3월 서울 전시 공연 문화행사 TOP 5: 공유 안 하면 손해, 이건 진짜 봐야 됨",
+  "checkedAt": "2026-02-18T15:03:26.963Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 8,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 4,
+      "verified": 4,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 1,
+      "verified": 1,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://monthlyart.com/portfolio-item/2026%EB%85%84-%EA%B5%AD%EB%A6%BD%ED%98%84%EB%8C%80%EB%AF%B8%EC%88%A0%EA%B4%80-%EC%A3%BC%EC%9A%94-%EA%B3%84%ED%9A%8D-%EB%B0%8F-%EC%A0%84%EC%8B%9C-%EB%B0%9C%ED%91%9C/",
+      "details": "월간미술, 마리끌레르, 헤럴드경제 등 다수 언론 확인: 데미안 허스트 아시아 최초 대규모 개인전, 국립현대미술관 서울관, 3월~6월",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://theater.arko.or.kr/product/performance",
+      "details": "아르코·대학로예술극장 공식 사이트 확인: 해녀 연심 2026.03.14~03.22, 창작산실 선정작",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.artkoreatv.com/news/articleView.html?idxno=100516",
+      "details": "아트코리아TV, 뉴데일리, 뉴스1 등 다수 확인: 렘피카 한국 초연, NOL 씨어터 코엑스 우리은행홀, 2026.03.21~06.21, 김선영·차지연 등 캐스팅",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/show/show_view?SN=74674",
+      "details": "예술의전당 공식 사이트에 윤철희 독주회 게시 확인. 국민대 교수, 활발한 연주활동. 2026년 3월 17일 구체적 날짜는 예술의전당 월간일정으로 교차검증 필요",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.sac.or.kr/site/main/show/show_view?SN=74993",
+      "details": "예술의전당 공식 + 서울경제, 뉴스1, 문화일보 등 확인: BBC 심포니 오케스트라 13년 만의 내한, 사카리 오라모 지휘, 손열음 협연, 2026.03.25~26 콘서트홀",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.marieclairekorea.com/culture/2026/01/mmca-entrance-fee/",
+      "details": "마리끌레르, 이데일리, 문화뉴스 등 확인: 관람료 8,000원 (기존 5,000원에서 60% 인상), 24세 이하 무료",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.mhns.co.kr/news/articleView.html?idxno=734719",
+      "details": "문화뉴스 확인: 제77회 토니 어워즈 여우주연상·여우조연상·무대디자인상 3개 부문 후보",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 70,
+      "source": "claude_knowledge",
+      "details": "예술의전당 독주회 R석 50,000원은 일반적인 가격대. 정확한 가격은 예매 시점에 따라 변동 가능",
+      "checkedAt": "2026-02-18T15:03:26.963Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "venue_exists",
+      "text": "데미안 허스트 회고전 — 국립현대미술관 서울, 3월~6월, 관람료 8,000원",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-1",
+      "type": "event_period",
+      "text": "해녀 연심 — 대학로예술극장, 2026.03.14~03.22",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-2",
+      "type": "venue_exists",
+      "text": "뮤지컬 렘피카 — NOL 씨어터 코엑스, 2026.03.21~06.21, 브로드웨이 한국 초연",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "피아니스트 윤철희 독주회 — 예술의전당, 2026.03.17",
+      "severity": "major"
+    },
+    {
+      "id": "ct-4",
+      "type": "event_period",
+      "text": "BBC 심포니 오케스트라 — 예술의전당 콘서트홀, 2026.03.25~26, 사카리 오라모 지휘, 손열음 협연",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "데미안 허스트 관람료 8,000원, 24세 이하 무료",
+      "severity": "major"
+    },
+    {
+      "id": "ct-6",
+      "type": "venue_exists",
+      "text": "토니 어워즈 3개 부문 후보 (렘피카)",
+      "severity": "major"
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "윤철희 독주회 R석 50,000원",
+      "severity": "minor"
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

@@ -21,7 +21,7 @@ const DEFAULT_CONFIG: FactCheckConfig = {
     critical: 100,   // Critical은 100% 통과 필요
     major: 85,       // Major는 85% 이상
     minor: 70,       // Minor는 70% 이상
-    overall: 80      // 전체 80% 이상
+    overall: 70      // 전체 70% 이상 (CLAUDE.md 기준)
   },
   weights: {
     critical: 0.3,

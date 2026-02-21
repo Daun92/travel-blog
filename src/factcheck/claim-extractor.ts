@@ -15,6 +15,8 @@ const SEVERITY_MAP: Record<ClaimType, ClaimSeverity> = {
   facilities: 'minor',
   contact: 'minor',
   transport: 'minor',
+  heritage: 'major',
+  trail: 'minor',
   general: 'minor'
 };
 
@@ -327,6 +329,8 @@ export function getClaimStats(claims: ExtractedClaim[]): {
     facilities: 0,
     contact: 0,
     transport: 0,
+    heritage: 0,
+    trail: 0,
     general: 0
   };
 

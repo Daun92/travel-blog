@@ -22,7 +22,9 @@ import {
 import {
   GeminiImageClient,
   saveImage,
+  BatchTimeoutError,
   type ImageStyle,
+  type BatchImageRequest,
 } from './gemini-imagen.js';
 import {
   insertImages,
@@ -30,6 +32,7 @@ import {
   insertAutoMarkers,
   extractImageMarkers,
   type ImageResult,
+  type ImageMarker,
 } from '../generator/content-parser.js';
 import { generatePromptFromMarker, type ImageContext } from '../generator/image-prompts.js';
 import type { CollectedData } from '../agents/collector.js';
@@ -444,17 +447,22 @@ export async function processInlineImages(
     const markersToProcess = markers.slice(0, remainingSlots);
 
     if (markersToProcess.length > 0) {
-      onProgress(`${markersToProcess.length}개의 AI 인라인 이미지 생성 중...`);
+      const useBatch = process.env.GEMINI_BATCH_ENABLED !== 'false';
+      const modeLabel = useBatch ? '배치' : '순차';
+      onProgress(`${markersToProcess.length}개의 AI 인라인 이미지 생성 중 (${modeLabel} 모드)...`);
 
-      const imageResults: ImageResult[] = [];
       const globalContext = extractContentContext(processedContent);
       const sections = parseSections(processedContent);
 
+      // Phase 1: 프롬프트 사전 수집
+      const markerContexts: Array<{
+        marker: ImageMarker;
+        section: ContentSection | null;
+        promptInfo: { prompt: string; style: ImageStyle } | null;
+      }> = [];
+
       for (let i = 0; i < markersToProcess.length; i++) {
         const marker = markersToProcess[i];
-        onProgress(`  [${i + 1}/${markersToProcess.length}] ${marker.style} 이미지 생성 중...`);
-
-        // 마커가 속한 섹션의 컨텍스트를 우선 사용
         const section = findSectionForMarker(sections, marker.line);
         const sectionLocations = section?.mentionedLocations ?? [];
         const sectionKeywords = section?.sectionKeywords ?? [];
@@ -468,39 +476,86 @@ export async function processInlineImages(
           personaId,
         };
 
-        try {
-          const promptInfo = generatePromptFromMarker(marker.marker, imageContext);
-          if (!promptInfo) {
-            onProgress(`    스킵: 잘못된 마커 형식`);
-            continue;
+        const promptInfo = generatePromptFromMarker(marker.marker, imageContext);
+        markerContexts.push({ marker, section, promptInfo });
+      }
+
+      let imageResults: ImageResult[] = [];
+
+      if (useBatch) {
+        // Phase 2a: 배치 제출 + 폴링
+        const batchRequests: BatchImageRequest[] = [];
+        for (const ctx of markerContexts) {
+          if (ctx.promptInfo) {
+            batchRequests.push({
+              prompt: ctx.promptInfo.prompt,
+              style: ctx.promptInfo.style,
+              aspectRatio: '16:9',
+              topic,
+              personaId,
+            });
           }
-
-          const generatedImage = await geminiClient.generateImage({
-            prompt: promptInfo.prompt,
-            style: promptInfo.style,
-            aspectRatio: '16:9',
-            topic
-          });
-
-          const filename = `inline-${slug}-${i + 1}`;
-          const savedImage = await saveImage(generatedImage, imageOutputDir, filename);
-
-          // 역할 기반 캡션 생성 ("AI 생성 ~" 형식 대신 맥락 내러티브)
-          const caption = buildImageCaption(marker.style, section?.title ?? marker.description, personaId);
-
-          imageResults.push({
-            marker,
-            relativePath: savedImage.relativePath,
-            alt: marker.description,
-            caption
-          });
-
-          imagePaths.push(savedImage.filepath);
-          onProgress(`    완료: ${savedImage.relativePath}`);
-        } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : String(error);
-          onProgress(`    실패: ${errorMessage}`);
         }
+
+        if (batchRequests.length > 0) {
+          try {
+            const batchResults = await geminiClient.generateImagesBatch(
+              batchRequests,
+              { pollIntervalMs: 5000, timeoutMs: 600_000, onProgress }
+            );
+
+            // Phase 3: 결과 매핑 + 저장
+            let batchIdx = 0;
+            for (let i = 0; i < markerContexts.length; i++) {
+              const { marker, section, promptInfo } = markerContexts[i];
+              if (!promptInfo) {
+                onProgress(`  스킵: 잘못된 마커 형식`);
+                continue;
+              }
+
+              const result = batchResults[batchIdx++];
+              if (result?.success && result.image) {
+                const filename = `inline-${slug}-${i + 1}`;
+                const savedImage = await saveImage(
+                  result.image, imageOutputDir, filename,
+                  { optimize: true, maxWidth: 1200, quality: 85 }
+                );
+
+                const caption = buildImageCaption(
+                  marker.style,
+                  section?.title ?? marker.description,
+                  personaId
+                );
+
+                imageResults.push({
+                  marker,
+                  relativePath: savedImage.relativePath,
+                  alt: marker.description,
+                  caption,
+                });
+
+                imagePaths.push(savedImage.filepath);
+                onProgress(`  완료: ${savedImage.relativePath}`);
+              } else {
+                onProgress(`  실패 [${i + 1}]: ${result?.error || '알 수 없는 오류'}`);
+              }
+            }
+          } catch (error) {
+            if (error instanceof BatchTimeoutError) {
+              onProgress(`배치 시간 초과 — 순차 모드로 폴백합니다...`);
+              imageResults = await processMarkersSequentially(
+                markerContexts, geminiClient, slug, imageOutputDir, personaId, imagePaths, onProgress
+              );
+            } else {
+              throw error;
+            }
+          }
+        }
+      } else {
+        // Phase 2b: 순차 모드 (GEMINI_BATCH_ENABLED=false 또는 폴백)
+        imageResults = await processMarkersSequentially(
+          markerContexts, geminiClient, slug, imageOutputDir, personaId, imagePaths, onProgress
+        );
       }
 
       if (imageResults.length > 0) {
@@ -516,4 +571,68 @@ export async function processInlineImages(
     content: processedContent,
     imagePaths
   };
+}
+
+// ─── 순차 이미지 생성 (배치 실패 시 폴백) ─────────────────────────
+
+async function processMarkersSequentially(
+  markerContexts: Array<{
+    marker: ImageMarker;
+    section: ContentSection | null;
+    promptInfo: { prompt: string; style: ImageStyle } | null;
+  }>,
+  geminiClient: GeminiImageClient,
+  slug: string,
+  imageOutputDir: string,
+  personaId: string | undefined,
+  imagePaths: string[],
+  onProgress: (msg: string) => void,
+): Promise<ImageResult[]> {
+  const results: ImageResult[] = [];
+
+  for (let i = 0; i < markerContexts.length; i++) {
+    const { marker, section, promptInfo } = markerContexts[i];
+    if (!promptInfo) {
+      onProgress(`  스킵: 잘못된 마커 형식`);
+      continue;
+    }
+
+    onProgress(`  [${i + 1}/${markerContexts.length}] ${marker.style} 이미지 생성 중 (순차)...`);
+
+    try {
+      const generatedImage = await geminiClient.generateImage({
+        prompt: promptInfo.prompt,
+        style: promptInfo.style,
+        aspectRatio: '16:9',
+        topic: marker.description
+      });
+
+      const filename = `inline-${slug}-${i + 1}`;
+      const savedImage = await saveImage(
+        generatedImage, imageOutputDir, filename,
+        { optimize: true, maxWidth: 1200, quality: 85 }
+      );
+
+      const caption = buildImageCaption(
+        marker.style,
+        section?.title ?? marker.description,
+        personaId
+      );
+
+      results.push({
+        marker,
+        relativePath: savedImage.relativePath,
+        alt: marker.description,
+        caption,
+      });
+
+      imagePaths.push(savedImage.filepath);
+      onProgress(`    완료: ${savedImage.relativePath}`);
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      onProgress(`    실패: ${errorMessage}`);
+    }
+  }
+
+  return results;
 }

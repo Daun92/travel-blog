@@ -1,0 +1,191 @@
+{
+  "filePath": "drafts/2026-02-18-post.md",
+  "title": "광양 매화축제 당일치기 현실 코스: 빛이 머무는 시간의 기록",
+  "checkedAt": "2026-02-18T15:04:29.522Z",
+  "overallScore": 78,
+  "categoryScores": {
+    "critical": 50,
+    "major": 75,
+    "minor": 100
+  },
+  "claims": {
+    "total": 8,
+    "verified": 6,
+    "false": 2,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 2,
+      "verified": 1,
+      "false": 1,
+      "unknown": 0
+    },
+    "major": {
+      "total": 4,
+      "verified": 3,
+      "false": 1,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 2,
+      "verified": 2,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "false",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.naewoeilbo.com/news/articleView.html?idxno=2306885",
+      "details": "제25회 광양매화축제(2026년)는 3월 13일~22일(10일간) 개최. 포스트가 주장하는 3월 7일~16일은 2025년(제24회) 일정과 일치. 2026년 일정이 아님.",
+      "correctValue": "2026-03-13 ~ 2026-03-22 (제25회, 10일간)",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 98,
+      "source": "web_search",
+      "sourceUrl": "https://gwangyang.go.kr/tour/gallery.es?mid=a30102010000&bid=0008&act=view&list_no=11120",
+      "details": "광양매화마을 주소: 전라남도 광양시 다압면 목길 34-2. 섬진강 하류 백운산 자락 위치 확인. 광양시 문화관광 공식 사이트 및 한국관광공사 자료 일치.",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "false",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.ardentnews.co.kr/news/articleView.html?idxno=11027",
+      "details": "2026년(제25회) 입장료는 성인 6,000원, 청소년 5,000원으로 인상됨. 성인 5,000원/청소년 4,000원은 2025년(제24회) 가격. 어린이 3,000원 정보는 2026년 공식 발표에서 확인 불가. 입장료 전액 지역상품권 환급 제도는 유지.",
+      "correctValue": "2026년 기준: 성인 6,000원 / 청소년 5,000원 (전액 지역상품권 환급)",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.kctg.or.kr/tour/touristSiteView.do?tourist_cd=TOURIST_ID00011120",
+      "details": "광양역사문화관 실재 확인. 주소: 전남 광양시 광양읍 매천로 829. 전화: 061-797-2305. 1942년 건립, 구 광양군청으로 사용 후 2011년 역사문화관으로 전환. 등록문화재 제444호.",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 97,
+      "source": "web_search",
+      "sourceUrl": "https://gwangyang.go.kr/tour/gallery.es?mid=a30102010000&bid=0008&act=view&list_no=11098",
+      "details": "광양 김시식지 실재 확인 (전라남도 기념물 제113호). 김여익(1606년생)이 조선 인조 때 태인도에서 세계 최초로 김 양식 시작. 영모재(추모관)와 인호사(사당, 위패·묘비 보관) 모두 실재. 매년 음력 10월 10일 추모제 거행.",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "http://m.sonanggu.kr/",
+      "details": "소낭구 실재 확인. 주소: 전라남도 광양시 광양읍 서평로 40 (구산리). 닭숯불구이 전문점. tvN 유퀴즈 온 더 블럭에서도 소개된 현지인 맛집. 영업시간: 매일 11:30~21:00 (14:00~17:00 브레이크), 화요일 정기휴무.",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "claude_knowledge",
+      "sourceUrl": "https://korean.visitkorea.or.kr/",
+      "details": "옥룡사 동백나무 숲 실재 확인. 광양시 옥룡면 소재. 천연기념물 제489호. 옥룡사지(폐사지) 주변으로 약 7,000그루의 동백나무가 군락을 이루고 있음. 매화마을에서 차로 약 20분 거리.",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.korearank.com/tour/tour_detail.php?uid=48765",
+      "details": "광양역사문화관이 등록문화재 제444호로 지정된 구 광양군청 건물(1942년 건립)을 활용한 시설임을 확인. 근대 건축물의 특징인 정면 중앙부 현관 포치(porch) 돌출 구조가 보존되어 있음.",
+      "checkedAt": "2026-02-18T15:04:29.522Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "event_period",
+      "text": "광양 매화축제 2026-03-07 ~ 03-16",
+      "severity": "critical",
+      "context": "포스트 발행일 2026-02-18 기준 축제 기간 정보"
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "전남 광양시 다압면 매화마을",
+      "severity": "critical",
+      "context": "광양 매화마을은 섬진강 하류 백운산 자락에 자리하고 있어요"
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "입장료 성인 5,000원 / 청소년 4,000원 / 어린이 3,000원",
+      "severity": "major",
+      "context": "매화축제 입장료 정보 (본문에는 명시 안 됨, 사전 검증 대상)"
+    },
+    {
+      "id": "ct-3",
+      "type": "venue_exists",
+      "text": "광양 역사문화관 (전라남도 광양시 광양읍 매천로 829)",
+      "severity": "major",
+      "context": "여행의 끝자락, 광양 역사문화관에 들러 광양이라는 도시가 품어온 이야기를 읽어봅니다"
+    },
+    {
+      "id": "ct-4",
+      "type": "venue_exists",
+      "text": "광양 김시식지 — 세계 최초 김 양식지, 김여익 공, 영모재, 인호사",
+      "severity": "major",
+      "context": "이곳은 세계 최초로 김을 양식한 역사적인 장소입니다. 김여익 공을 기리는 영모재와 인호사의 고요한 마당"
+    },
+    {
+      "id": "ct-5",
+      "type": "venue_exists",
+      "text": "소낭구 (전라남도 광양시 광양읍 서평로 40) — 닭구이 식당",
+      "severity": "minor",
+      "context": "현지인들도 즐겨 찾는 곳으로, 세련된 외관과 정갈한 분위기"
+    },
+    {
+      "id": "ct-6",
+      "type": "venue_exists",
+      "text": "옥룡사 동백나무 숲",
+      "severity": "major",
+      "context": "옥룡사지 주변을 감싸고 있는 수천 그루의 동백나무"
+    },
+    {
+      "id": "ct-7",
+      "type": "location",
+      "text": "광양 역사문화관 — 등록문화재, 옛 광양군청 건물",
+      "severity": "minor",
+      "context": "등록문화재로 지정된 옛 광양군청 건물을 활용한 이곳"
+    }
+  ],
+  "corrections": [
+    {
+      "claimId": "ct-0",
+      "originalText": "광양 매화축제 2026-03-07 ~ 03-16",
+      "suggestedText": "광양 매화축제 2026-03-07 ~ 03-16",
+      "reason": "제25회 광양매화축제(2026년)는 3월 13일~22일(10일간) 개최. 포스트가 주장하는 3월 7일~16일은 2025년(제24회) 일정과 일치. 2026년 일정이 아님.",
+      "autoApplicable": false
+    },
+    {
+      "claimId": "ct-2",
+      "originalText": "입장료 성인 5,000원 / 청소년 4,000원 / 어린이 3,000원",
+      "suggestedText": "입장료 성인 5,000원 / 청소년 4,000원 / 어린이 3,000원",
+      "reason": "2026년(제25회) 입장료는 성인 6,000원, 청소년 5,000원으로 인상됨. 성인 5,000원/청소년 4,000원은 2025년(제24회) 가격. 어린이 3,000원 정보는 2026년 공식 발표에서 확인 불가. 입장료 전액 지역상품권 환급 제도는 유지.",
+      "autoApplicable": true
+    }
+  ],
+  "passesGate": false,
+  "needsHumanReview": true,
+  "blockPublish": true,
+  "version": "1.0.0-claude"
+}

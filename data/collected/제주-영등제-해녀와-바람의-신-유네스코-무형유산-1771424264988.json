@@ -1,0 +1,736 @@
+{
+  "keyword": "제주 영등제 해녀와 바람의 신 유네스코 무형유산",
+  "timestamp": "2026-02-18T14:17:41.247Z",
+  "tourismData": [
+    {
+      "title": "강촌제주산흑돼지",
+      "address": "강원특별자치도 강릉시 용지각길8번길 1 (포남동)",
+      "tel": "",
+      "overview": "동네 고기 찐맛집",
+      "image": "",
+      "mapx": 128.9050101431,
+      "mapy": 37.7607427988,
+      "contentTypeId": "39",
+      "contentId": "3547763"
+    },
+    {
+      "title": "갤럭시 제주점",
+      "address": "제주특별자치도 제주시 연북로 259 (오라이동)",
+      "tel": "",
+      "overview": "갤럭시는 삼성물산이 운영하는 대한민국 남성복 브랜드로, 클래식한 테일러링과 세련된 디자인을 바탕으로 품격 있는 비즈니스 스타일을 제공합니다. 고급 소재와 정교한 패턴으로 완성된 제품들은 안정감 있는 핏과 현대적인 감성을 동시에 담고 있습니다.",
+      "image": "",
+      "mapx": 126.509136801609,
+      "mapy": 33.4815139753064,
+      "contentTypeId": "38",
+      "contentId": "4013231",
+      "homepage": "www.galaxy.co.kr"
+    },
+    {
+      "title": "건강과 성 박물관(제주)",
+      "address": "제주특별자치도 서귀포시 안덕면 일주서로 1611",
+      "tel": "",
+      "overview": "음지에 있는 성 인식을 양지로 끌어내고, 행위 위주의 국한된 성이 아닌 성에 대한 문화, 교육, 예술 그리고 세대별 고민을 함께 나누고, 성에 대한 의식의 변화를 추구하고자 건강과 성 박물관은 설립되었다. 건강과 성 박물관은 전 세계 각지에서 성과 관련된 유물과 예술품 5,000여 점을 수집해 박물관을 꾸몄고 가벼운 성인 잡지에서 성과 관련된 전문 도서 등도 살펴볼 수 있다. 다양한 자료를 통해 성에 대해 학습할 수 있는 성인들만의 공간으로 성인만 입장 가능하다. 건강과 성 박물관은 행위에 초점을 두지 않고 성과 삶을 조명하는 다양한 유물과 예술품을 전시하여 성이란 무엇인가 하는 근본적인 내용에 다가가고자 한다.",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/99/2996899_image2_1.JPG",
+      "mapx": 126.3467,
+      "mapy": 33.2549,
+      "contentTypeId": "14",
+      "contentId": "130853",
+      "homepage": "http://www.sexmuseum.or.kr",
+      "images": [
+        "https://tong.visitkorea.or.kr/cms/resource/00/2996900_image2_1.JPG",
+        "https://tong.visitkorea.or.kr/cms/resource/01/2996901_image2_1.JPG",
+        "https://tong.visitkorea.or.kr/cms/resource/02/2996902_image2_1.jpg"
+      ]
+    },
+    {
+      "title": "게스 제주점",
+      "address": "제주특별자치도 제주시 중앙로 39 (일도일동)",
+      "tel": "",
+      "overview": "게스는 미국 LA에서 시작된 라이프스타일 패션 브랜드로, 세련된 데님과 감각적인 디자인으로 전 세계 젊은 층에게 사랑받습니다. 자유롭고 트렌디한 스타일을 통해 개성을 표현할 수 있습니다.",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/47/2887547_image2_1.jpg",
+      "mapx": 126.524911627091,
+      "mapy": 33.514790385505,
+      "contentTypeId": "38",
+      "contentId": "2925674",
+      "homepage": "www.guess.com",
+      "images": [
+        "https://tong.visitkorea.or.kr/cms/resource/48/2887548_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/49/2887549_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/50/2887550_image2_1.jpg"
+      ]
+    },
+    {
+      "title": "골든구스 신세계사이먼프리미엄아울렛 제주점",
+      "address": "제주특별자치도 서귀포시 안덕면 신화역사로304번길 38",
+      "tel": "",
+      "overview": "-",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/54/3313654_image2_1.jpg",
+      "mapx": 126.31635202613,
+      "mapy": 33.3049726791712,
+      "contentTypeId": "38",
+      "contentId": "3307027",
+      "homepage": "www.goldengoose.com"
+    },
+    {
+      "title": "골든듀 신세계사이먼프리미엄아울렛 제주점",
+      "address": "제주특별자치도 서귀포시 안덕면 신화역사로304번길 38",
+      "tel": "",
+      "image": "",
+      "mapx": 126.31635202613,
+      "mapy": 33.3049726791712,
+      "contentTypeId": "38",
+      "contentId": "4012998"
+    },
+    {
+      "title": "골프존마켓 신세계사이먼 제주아울렛",
+      "address": "제주특별자치도 서귀포시 안덕면 신화역사로304번길 38",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/31/3313231_image2_1.jpeg",
+      "mapx": 126.3197479556,
+      "mapy": 33.3072595277,
+      "contentTypeId": "38",
+      "contentId": "3306785"
+    },
+    {
+      "title": "관덕정(제주)",
+      "address": "제주특별자치도 제주시 관덕로 19",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/35/3403535_image2_1.jpg",
+      "mapx": 126.5219701925,
+      "mapy": 33.513295493,
+      "contentTypeId": "12",
+      "contentId": "126460"
+    },
+    {
+      "title": "관음사(제주)",
+      "address": "제주특별자치도 제주시 산록북로 660",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/64/3384664_image2_1.jpg",
+      "mapx": 126.5581440803,
+      "mapy": 33.4237615317,
+      "contentTypeId": "12",
+      "contentId": "126456"
+    },
+    {
+      "title": "광명사(제주)",
+      "address": "제주특별자치도 서귀포시 중문상로17번길 51",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/36/3477436_image2_1.jpg",
+      "mapx": 126.4190406356,
+      "mapy": 33.249045297,
+      "contentTypeId": "12",
+      "contentId": "778296"
+    },
+    {
+      "title": "구호 신세계사이먼 제주아울렛",
+      "address": "제주특별자치도 서귀포시 안덕면 신화역사로304번길 38",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/43/3313543_image2_1.jpg",
+      "mapx": 126.3197479556,
+      "mapy": 33.3072595277,
+      "contentTypeId": "38",
+      "contentId": "3306952"
+    },
+    {
+      "title": "국립제주박물관",
+      "address": "제주특별자치도 제주시 일주동로 17 (건입동)",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/63/3562163_image2_1.jpg",
+      "mapx": 126.5492150664,
+      "mapy": 33.5124015817,
+      "contentTypeId": "14",
+      "contentId": "130461"
+    },
+    {
+      "title": "귤품은흑돼지 제주공항점",
+      "address": "제주특별자치도 제주시 도두항서길 42",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/33/2870533_image2_1.jpg",
+      "mapx": 126.4639059537,
+      "mapy": 33.5063870002,
+      "contentTypeId": "39",
+      "contentId": "2870537"
+    },
+    {
+      "title": "그라벨호텔_제주점",
+      "address": "제주특별자치도 제주시 일주서로 7316 1층(외도일동)",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/99/2886999_image2_1.jpg",
+      "mapx": 126.4286648899,
+      "mapy": 33.4924157657,
+      "contentTypeId": "38",
+      "contentId": "2903432"
+    },
+    {
+      "title": "그랜드 조선 제주",
+      "address": "제주특별자치도 서귀포시 중문관광로72번길 60",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/37/2819937_image2_1.jpg",
+      "mapx": 126.4063028265,
+      "mapy": 33.2501588629,
+      "contentTypeId": "32",
+      "contentId": "2819964"
+    },
+    {
+      "title": "그랜드 하얏트 제주",
+      "address": "제주특별자치도 제주시 노연로 12 (노형동)",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/83/2876783_image2_1.jpg",
+      "mapx": 126.4814715703,
+      "mapy": 33.4852923931,
+      "contentTypeId": "32",
+      "contentId": "2876795"
+    },
+    {
+      "title": "그랜드메르호텔제주",
+      "address": "제주특별자치도 서귀포시 논짓물로 45 (하예동)",
+      "tel": "",
+      "image": "",
+      "mapx": 126.3861298105,
+      "mapy": 33.2396708139,
+      "contentTypeId": "32",
+      "contentId": "3076360"
+    },
+    {
+      "title": "그린조이 제주중앙지하상가점",
+      "address": "제주특별자치도 제주시 중앙로 60 (일도일동)",
+      "tel": "",
+      "image": "",
+      "mapx": 126.524440112964,
+      "mapy": 33.512837715448,
+      "contentTypeId": "38",
+      "contentId": "4009611"
+    },
+    {
+      "title": "글라스스토리 제주연동",
+      "address": "제주특별자치도 제주시 연동 284-5",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/34/2887234_image2_1.jpg",
+      "mapx": 126.492923345,
+      "mapy": 33.4856147617,
+      "contentTypeId": "38",
+      "contentId": "2914023"
+    },
+    {
+      "title": "글로스터호텔 제주",
+      "address": "제주특별자치도 제주시 삼무로 57 (연동)",
+      "tel": "",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/82/3089182_image2_1.jpg",
+      "mapx": 126.4926621543,
+      "mapy": 33.4901448115,
+      "contentTypeId": "32",
+      "contentId": "3089186"
+    }
+  ],
+  "cultureEvents": [
+    {
+      "title": "우상임의 쌀롱음악회 4회 [제주]",
+      "place": "애월뮤직팩토리",
+      "startDate": "2026.02.25",
+      "endDate": "2026.02.25",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285207_260213_143555.png"
+    },
+    {
+      "title": "우상임 아코디언 에세이: 붉은 풍금소리",
+      "place": "애월뮤직팩토리",
+      "startDate": "2026.02.12",
+      "endDate": "2026.08.13",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284920_260211_125924.png"
+    },
+    {
+      "title": "제주국제컨벤션센터 2 개관기념 K-POP CONCERT: 블루밍 아일랜드 (Blooming Island) [제주]",
+      "place": "ICC제주국제컨벤션센터",
+      "startDate": "2026.02.27",
+      "endDate": "2026.02.27",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284824_260210_104253.jpg"
+    },
+    {
+      "title": "내 곁에, 모차르트: 어린이 오감 만족 클래식 콘서트 [제주]",
+      "place": "애월뮤직팩토리",
+      "startDate": "2026.02.28",
+      "endDate": "2026.02.28",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284686_260209_105539.jpg"
+    },
+    {
+      "title": "고영열 전국 투어 미니콘서트 [제주]",
+      "place": "카페을리",
+      "startDate": "2026.03.14",
+      "endDate": "2026.03.14",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284666_260206_152443.jpg"
+    },
+    {
+      "title": "JEJU PLAYLIST VOL. 1 지금 [제주]",
+      "place": "제주문예회관",
+      "startDate": "2026.02.21",
+      "endDate": "2026.02.21",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284509_260205_114124.jpg"
+    },
+    {
+      "title": "제90회 제주특별자치도립 서귀포관악단 정기연주회 [제주 서귀포]",
+      "place": "서귀포예술의전당",
+      "startDate": "2026.02.26",
+      "endDate": "2026.02.26",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284481_260205_104010.jpg"
+    },
+    {
+      "title": "베베핀, 두근두근 새친구 [제주]",
+      "place": "제주문예회관",
+      "startDate": "2026.03.14",
+      "endDate": "2026.03.15",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283851_260126_132524.gif"
+    },
+    {
+      "title": "어린이 마술쇼 [제주]",
+      "place": "제주특별자치도 설문대여성문화센터",
+      "startDate": "2026.03.15",
+      "endDate": "2026.03.15",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283183_260114_133605.gif"
+    },
+    {
+      "title": "애니메이션 OST 섀도우콘서트 [제주]",
+      "place": "알레스 아트(Alles-Art)",
+      "startDate": "2026.01.17",
+      "endDate": "2026.02.22",
+      "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283095_260113_140828.png"
+    }
+  ],
+  "festivals": [
+    {
+      "title": "강진청자축제",
+      "address": "전라남도 강진군 대구면 청자촌길 33",
+      "startDate": "20260221",
+      "endDate": "20260302",
+      "tel": "061-430-3354",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/89/4013389_image2_1.jpg",
+      "contentId": "506378",
+      "overview": "강진청자축제는 ‘흙과 불 그리고 사람의 이야기’를 주제로 고려청자의 역사적 가치와 제작 과정을 바탕으로 한 도자기 문화 콘텐츠를 운영하는 지역 문화축제이다. 본 축제는 고려청자박물관 일원에서 개최되며, 청자 물레 성형 체험, 화목가마 불지피기 및 요출, 청자 판매 및 전시, 대한민국 청자 공모전 수상작 전시 등 도자기 제작과 관련된 프로그램으로 구성되어 있다. 제54회 축제에서는 청자와 미술을 결합한 체험 프로그램과 함께 어린이를 동반한 가족 단위 방문객의 이용을 고려하여 키즈존을 3개 공간으로 구성하고, 어린이 체험 프로그램을 포함한 참여형 프로그램을 운영한다. 본 축제는 전통 도자 문화를 기반으로 체험, 전시, 공연, 판매 프로그램을 종합적으로 구성하여 운영되는 도자문화 중심의 지역 축제이다.",
+      "homepage": "www.gangjin.go.kr",
+      "images": [
+        "https://tong.visitkorea.or.kr/cms/resource/82/4013382_image2_1.JPG",
+        "https://tong.visitkorea.or.kr/cms/resource/86/4013386_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/86/4013386_image2_1.jpg"
+      ]
+    },
+    {
+      "title": "고령 대가야축제",
+      "address": "경상북도 고령군 대가야로 1216 대가야역사테마관광지",
+      "startDate": "20260327",
+      "endDate": "20260329",
+      "tel": "054-955-0808",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/25/3476725_image2_1.jpg",
+      "contentId": "2667017",
+      "overview": "*하기 축제장 먹거리 내용은 전년도(2025년) 축제 내용으로, 2026년도 축제 내용은 업데이트 중에 있습니다.*대가야의 독특한 역사와 문화를 배우고 즐길 수 있는, 오랜 역사를 지닌 고령군의 대표 축제이다.2025년, 고령군의 대가야 고도(古都) 지정으로 대가야 역사와 문화를 지닌 고령군의 가치가 한층 높아졌다.또한, 고령 대가야 궁성지 해자에서 대왕(大王)명 토기 출토로 대가야가 강력한 고대왕국이었음이 입증되었고, 지산동고분군이 UNESCO 세계유산으로 지정됨에 따라 대가야의 역사와 문화는 후대까지 보존하고 알려야 할 우리 역사의 중요한 유산이다.2026 고령 대가야축제에서는 ‘다시 시작되는 대가야 : RE-BORN’이라는 주제로 개최되며, 2026 고령 대가야축제를 통해 고도(古都)로 지정된 고령군의 자긍심을 키우는 축제로 도약하고자 한다.",
+      "homepage": "https://www.festdgy.com/",
+      "images": [
+        "https://tong.visitkorea.or.kr/cms/resource/15/3476715_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/16/3476716_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/17/3476717_image2_1.JPG"
+      ]
+    },
+    {
+      "title": "고창모양성제",
+      "address": "전북특별자치도 고창군 고창읍 모양성로 11",
+      "startDate": "20261015",
+      "endDate": "20261019",
+      "tel": "063-560-2949",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/30/3519730_image2_1.jpg",
+      "contentId": "604454",
+      "overview": "고창모양성제는 국내에서 가장 원형이 잘 보존된 모양성을 주제로 한 역사문화축제이다. 대표프로그램은 답성놀이로서 한바퀴 돌면 다릿병이 낫고, 두바퀴돌면 무병장수하며, 세 바퀴돌면 극락승천 한다는 전설을 체험형 프로그램으로 개발했다. 이 외에도, 답성놀이와 강강술래를 혼합하여 군민과 관광객이 함께 어우러진 야간답성강강술래달밤, 과거현재미래를 표현한 주민 1,000여명이 참여하는 거리 퍼레이드, 과거로의 여행을 주제로 하여 고창읍성 내부를 누비며 즐길 수 있는 리턴즈1453, 그리고 고창지역의 특산물을 활용한 먹거리와 직거래장터 등을 운영한다.",
+      "homepage": "https://www.xn--v52bo3j80dp4c.com/",
+      "images": [
+        "https://tong.visitkorea.or.kr/cms/resource/28/3519728_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/29/3519729_image2_1.jpg",
+        "https://tong.visitkorea.or.kr/cms/resource/31/3519731_image2_1.jpg"
+      ]
+    },
+    {
+      "title": "광복로 겨울빛 트리축제",
+      "address": "부산광역시 중구 광복로 72-1 (광복동2가)",
+      "startDate": "20251205",
+      "endDate": "20260222",
+      "tel": "051-714-4758",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/05/3576405_image2_1.JPG",
+      "contentId": "3576410"
+    },
+    {
+      "title": "광안리 M(Marvelous) 드론 라이트쇼",
+      "address": "부산광역시 수영구 광안해변로 219 (광안동)",
+      "startDate": "20260101",
+      "endDate": "20261231",
+      "tel": "051-610-6518",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/12/3518612_image2_1.jpeg",
+      "contentId": "2786391"
+    },
+    {
+      "title": "광주 추억의 충장축제",
+      "address": "광주광역시 동구 금남로3가",
+      "startDate": "20261007",
+      "endDate": "20261011",
+      "tel": "062-608-4672",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/71/3584471_image2_1.jpg",
+      "contentId": "692682"
+    },
+    {
+      "title": "김제지평선축제",
+      "address": "전북특별자치도 김제시 부량면 벽골제로 442",
+      "startDate": "20261001",
+      "endDate": "20261005",
+      "tel": "063-540-3172",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/44/4013544_image2_1.jpg",
+      "contentId": "574285"
+    },
+    {
+      "title": "남산봉수의식 등 전통문화행사",
+      "address": "서울특별시 종로구 종로 54 (관철동)",
+      "startDate": "20260101",
+      "endDate": "20261231",
+      "tel": "행사장 02-319-1220운영사 02-737-6444",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/57/4001657_image2_1.jpg",
+      "contentId": "2809535"
+    },
+    {
+      "title": "단종문화제",
+      "address": "강원특별자치도 영월군 영월읍 하송리",
+      "startDate": "20260424",
+      "endDate": "20260426",
+      "tel": "033-375-6372",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/21/4004221_image2_1.jpg",
+      "contentId": "292835"
+    },
+    {
+      "title": "대관령눈꽃축제",
+      "address": "강원특별자치도 평창군 대관령로 135-9",
+      "startDate": "20260213",
+      "endDate": "20260222",
+      "tel": "033-335-3995",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/89/3588789_image2_1.JPG",
+      "contentId": "391883"
+    },
+    {
+      "title": "사천에어쇼",
+      "address": "경상남도 사천시 사천읍 정의리",
+      "startDate": "20261022",
+      "endDate": "20261025",
+      "tel": "055-831-2061",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/49/3566649_image2_1.png",
+      "contentId": "234232"
+    },
+    {
+      "title": "서울 왕궁수문장 교대의식",
+      "address": "서울특별시 중구 세종대로 99 (정동)",
+      "startDate": "20260101",
+      "endDate": "20261231",
+      "tel": "02-6242-7402",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/23/4003323_image2_1.jpg",
+      "contentId": "292961"
+    },
+    {
+      "title": "서천 동백꽃 주꾸미 축제",
+      "address": "충청남도 서천군 서인로 58",
+      "startDate": "20260321",
+      "endDate": "20260405",
+      "tel": "041-951-9123",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/03/4013603_image2_1.jpg",
+      "contentId": "141641"
+    },
+    {
+      "title": "세종한글축제",
+      "address": "세종특별자치시 다솜로 216 (세종동)",
+      "startDate": "20261009",
+      "endDate": "20261011",
+      "tel": "044-850-0591~0594",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/16/3553216_image2_1.jpg",
+      "contentId": "1849007"
+    },
+    {
+      "title": "아산 성웅 이순신축제",
+      "address": "충청남도 아산시 온천대로 1496 (온천동)",
+      "startDate": "20260428",
+      "endDate": "20260503",
+      "tel": "041-534-2634",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/03/4011603_image2_1.JPG",
+      "contentId": "506647"
+    },
+    {
+      "title": "양양 낙산해변 달빛 모닥불축제",
+      "address": "강원특별자치도 양양군 강현면 해맞이길 59",
+      "startDate": "20260228",
+      "endDate": "20260301",
+      "tel": "033-671-3803",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/16/4009716_image2_1.png",
+      "contentId": "3472311"
+    },
+    {
+      "title": "양평빙송어축제",
+      "address": "경기도 양평군 곱다니길 55-2",
+      "startDate": "20251206",
+      "endDate": "20260302",
+      "tel": "031-775-5205",
+      "image": "http://tong.visitkorea.or.kr/cms/resource/93/3108393_image2_1.jpg",
+      "contentId": "1762432"
+    },
+    {
+      "title": "어린이·가족 예술축제",
+      "address": "서울특별시 양천구 남부순환로64길 2 (신월동)",
+      "startDate": "20260502",
+      "endDate": "20260503",
+      "tel": "02-2697-0014",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/18/4012118_image2_1.jpg",
+      "contentId": "3310483"
+    },
+    {
+      "title": "여수 영취산 진달래축제",
+      "address": "전라남도 여수시 중흥동",
+      "startDate": "20260328",
+      "endDate": "20260329",
+      "tel": "061-691-3104",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/89/4010789_image2_1.jpg",
+      "contentId": "526696"
+    },
+    {
+      "title": "연등회",
+      "address": "서울특별시 종로구 종로 99 (종로2가)",
+      "startDate": "20260516",
+      "endDate": "20260517",
+      "tel": "02-2011-1740",
+      "image": "https://tong.visitkorea.or.kr/cms/resource/65/4012465_image2_1.jpg",
+      "contentId": "531460"
+    }
+  ],
+  "trendKeywords": [
+    "제주도 카페",
+    "서울 야경",
+    "부산 맛집",
+    "강릉 커피",
+    "경주 한옥",
+    "서울 전시회",
+    "미술관 추천",
+    "뮤지컬 예매",
+    "콘서트 일정",
+    "박물관 무료"
+  ],
+  "images": [],
+  "weatherData": [
+    {
+      "spotName": "(봉화)춘양목 송이마을",
+      "date": "2026-02-19 09:00",
+      "sky": 1,
+      "minTemp": "",
+      "maxTemp": "",
+      "rainProb": 0,
+      "humidity": ""
+    },
+    {
+      "spotName": "(봉화)계서당(성이성 생가)",
+      "date": "2026-02-19 09:00",
+      "sky": 1,
+      "minTemp": "",
+      "maxTemp": "",
+      "rainProb": 0,
+      "humidity": ""
+    },
+    {
+      "spotName": "(봉화)계서당(성이성 생가)",
+      "date": "2026-02-19 09:00",
+      "sky": 1,
+      "minTemp": "",
+      "maxTemp": "",
+      "rainProb": 0,
+      "humidity": ""
+    },
+    {
+      "spotName": "(봉화)계서당(성이성 생가)",
+      "date": "2026-02-19 09:00",
+      "sky": 1,
+      "minTemp": "",
+      "maxTemp": "",
+      "rainProb": 0,
+      "humidity": ""
+    },
+    {
+      "spotName": "(봉화)지림사",
+      "date": "2026-02-19 09:00",
+      "sky": 1,
+      "minTemp": "",
+      "maxTemp": "",
+      "rainProb": 0,
+      "humidity": ""
+    }
+  ],
+  "marketData": [],
+  "bigdataStats": {
+    "keywordTrends": [],
+    "visitorStats": []
+  },
+  "performances": [
+    {
+      "title": "우상임의 쌀롱음악회 4회 [제주]",
+      "startDate": "2026.02.25",
+      "endDate": "2026.02.25",
+      "venue": "애월뮤직팩토리",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF285207_260213_143555.png",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "우상임 아코디언 에세이: 붉은 풍금소리",
+      "startDate": "2026.02.12",
+      "endDate": "2026.08.13",
+      "venue": "애월뮤직팩토리",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284920_260211_125924.png",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "제주국제컨벤션센터 2 개관기념 K-POP CONCERT: 블루밍 아일랜드 (Blooming Island) [제주]",
+      "startDate": "2026.02.27",
+      "endDate": "2026.02.27",
+      "venue": "ICC제주국제컨벤션센터",
+      "category": "대중음악",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284824_260210_104253.jpg",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "내 곁에, 모차르트: 어린이 오감 만족 클래식 콘서트 [제주]",
+      "startDate": "2026.02.28",
+      "endDate": "2026.02.28",
+      "venue": "애월뮤직팩토리",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284686_260209_105539.jpg",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "고영열 전국 투어 미니콘서트 [제주]",
+      "startDate": "2026.03.14",
+      "endDate": "2026.03.14",
+      "venue": "카페을리",
+      "category": "한국음악(국악)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284666_260206_152443.jpg",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "JEJU PLAYLIST VOL. 1 지금 [제주]",
+      "startDate": "2026.02.21",
+      "endDate": "2026.02.21",
+      "venue": "제주문예회관",
+      "category": "대중음악",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284509_260205_114124.jpg",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "제90회 제주특별자치도립 서귀포관악단 정기연주회 [제주 서귀포]",
+      "startDate": "2026.02.26",
+      "endDate": "2026.02.26",
+      "venue": "서귀포예술의전당",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF284481_260205_104010.jpg",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "베베핀, 두근두근 새친구 [제주]",
+      "startDate": "2026.03.14",
+      "endDate": "2026.03.15",
+      "venue": "제주문예회관",
+      "category": "뮤지컬",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283851_260126_132524.gif",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "어린이 마술쇼 [제주]",
+      "startDate": "2026.03.15",
+      "endDate": "2026.03.15",
+      "venue": "제주특별자치도 설문대여성문화센터",
+      "category": "서커스/마술",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283183_260114_133605.gif",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "애니메이션 OST 섀도우콘서트 [제주]",
+      "startDate": "2026.01.17",
+      "endDate": "2026.02.22",
+      "venue": "알레스 아트(Alles-Art)",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF283095_260113_140828.png",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "지브리와 사랑에 빠지다: 지브리 영화음악 콘서트 [제주]",
+      "startDate": "2026.02.28",
+      "endDate": "2026.02.28",
+      "venue": "제주호은아트센터(구.섬아이뮤직아트센터)",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF282001_251222_150457.png",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "겨울왕국: 겨울이야기 [제주]",
+      "startDate": "2026.03.07",
+      "endDate": "2026.03.08",
+      "venue": "제주특별자치도 설문대여성문화센터",
+      "category": "뮤지컬",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281999_251222_150013.gif",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "지브리와 사랑에 빠지다: 지브리 영화음악 콘서트 스페셜 [제주 서귀포]",
+      "startDate": "2026.03.01",
+      "endDate": "2026.03.01",
+      "venue": "서귀포예술의전당",
+      "category": "서양음악(클래식)",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF281513_251215_101154.gif",
+      "url": "",
+      "source": "kopis"
+    },
+    {
+      "title": "난타 [제주]",
+      "startDate": "2024.04.01",
+      "endDate": "2026.04.30",
+      "venue": "제주난타극장",
+      "category": "뮤지컬",
+      "area": "제주특별자치도",
+      "price": "",
+      "thumbnail": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF236460_240304_103714.jpg",
+      "url": "",
+      "source": "kopis"
+    }
+  ],
+  "festivalStdData": []
+}

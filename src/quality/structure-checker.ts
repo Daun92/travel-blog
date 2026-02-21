@@ -18,7 +18,8 @@ export interface SectionInfo {
 
 export interface StructureIssue {
   type: 'missing_intro' | 'missing_conclusion' | 'unbalanced_sections' | 'missing_cta' |
-        'heading_hierarchy' | 'empty_section' | 'no_subheadings';
+        'heading_hierarchy' | 'empty_section' | 'no_subheadings' |
+        'missing_geo_summary' | 'pronoun_heavy_sections' | 'entity_poor_faq' | 'no_self_contained_opener';
   severity: 'high' | 'medium' | 'low';
   message: string;
   suggestion?: string;
@@ -39,6 +40,10 @@ export interface StructureAnalysis {
     imageCount: number;
     listCount: number;
   };
+  /** GEO (Generative Engine Optimization) 점수 0-100 */
+  geoScore: number;
+  /** GEO 관련 이슈만 필터링 */
+  geoIssues: StructureIssue[];
 }
 
 // ============================================================================
@@ -112,6 +117,13 @@ export class StructureChecker {
       issues
     );
 
+    // GEO 체크
+    const geoIssues = this.checkGEOReadiness(content, sections);
+    issues.push(...geoIssues);
+
+    // GEO 점수 계산
+    const geoScore = this.calculateGEOScore(content, sections, geoIssues);
+
     return {
       score,
       hasIntro,
@@ -120,7 +132,9 @@ export class StructureChecker {
       ctaPresent,
       sections,
       issues,
-      metrics
+      metrics,
+      geoScore,
+      geoIssues
     };
   }
 
@@ -407,10 +421,14 @@ export class StructureChecker {
     if (bodyStructure === 'needs-improvement') score -= 10;
     if (bodyStructure === 'poor') score -= 20;
 
-    // 이슈별 감점 (20점)
+    // 이슈별 감점 (20점) — GEO 이슈는 geoScore에서 별도 계산하므로 제외
+    const GEO_TYPES = ['missing_geo_summary', 'pronoun_heavy_sections', 'entity_poor_faq', 'no_self_contained_opener'];
     for (const issue of issues) {
       if (issue.type === 'missing_intro' || issue.type === 'missing_conclusion') {
         continue;  // 이미 감점됨
+      }
+      if (GEO_TYPES.includes(issue.type)) {
+        continue;  // GEO 점수에서 별도 처리
       }
 
       if (issue.severity === 'high') {
@@ -420,6 +438,143 @@ export class StructureChecker {
       } else {
         score -= 1;
       }
+    }
+
+    return Math.max(0, Math.min(100, score));
+  }
+
+  // ============================================================================
+  // GEO (Generative Engine Optimization) 체크
+  // ============================================================================
+
+  /**
+   * GEO 준비도 체크 — AI 검색 엔진 인용 친화 구조 검사
+   */
+  private checkGEOReadiness(content: string, sections: SectionInfo[]): StructureIssue[] {
+    const issues: StructureIssue[] = [];
+    const cleaned = content.replace(/^---[\s\S]*?---\n/, '');
+
+    // 1. 도입부 blockquote 요약 존재 확인
+    const firstH2Index = cleaned.search(/^##\s+/m);
+    const introArea = firstH2Index > 0 ? cleaned.substring(0, firstH2Index) : cleaned.substring(0, 500);
+    const hasGeoSummary = /^>\s+\*\*.*\*\*/m.test(introArea) || /^>\s+.{30,}/m.test(introArea);
+
+    if (!hasGeoSummary) {
+      issues.push({
+        type: 'missing_geo_summary',
+        severity: 'medium',
+        message: '도입부에 팩트 요약 블록(blockquote)이 없습니다.',
+        suggestion: '제목 직후, 첫 H2 이전에 "> **주제 핵심 요약** — ..." 형태의 요약 블록을 추가하세요.'
+      });
+    }
+
+    // 2. 대명사로 시작하는 H2 섹션 체크
+    const pronounPattern = /^(?:여기|이곳|거기|그곳|이\s|그\s|저\s)(?:는|은|에|서|가|를|도)/;
+    const h2Sections = sections.filter(s => s.level === 2);
+    let pronounCount = 0;
+
+    for (const section of h2Sections) {
+      const firstLine = section.content.replace(/^[\s\n]+/, '').split('\n')[0]?.trim() || '';
+      if (pronounPattern.test(firstLine)) {
+        pronounCount++;
+      }
+    }
+
+    if (pronounCount >= 3) {
+      issues.push({
+        type: 'pronoun_heavy_sections',
+        severity: 'low',
+        message: `${pronounCount}개 섹션이 대명사("여기", "이곳" 등)로 시작합니다.`,
+        suggestion: '각 H2 섹션의 첫 문장에 장소명/주제를 명시적으로 포함하세요. AI 검색 엔진 발췌 시 맥락이 유지됩니다.'
+      });
+    }
+
+    // 3. FAQ 답변 대명사 체크 (frontmatter에서 추출)
+    const faqMatch = content.match(/^faqs:\s*\n([\s\S]*?)(?=^[a-zA-Z]|\Z)/m);
+    if (faqMatch) {
+      const faqAnswers = [...content.matchAll(/^\s+a:\s*["']?(.+?)["']?\s*$/gm)].map(m => m[1]);
+      if (faqAnswers.length > 0) {
+        const pronounFaqCount = faqAnswers.filter(a => pronounPattern.test(a.trim())).length;
+        const pronounRatio = pronounFaqCount / faqAnswers.length;
+
+        if (pronounRatio >= 0.4) {
+          issues.push({
+            type: 'entity_poor_faq',
+            severity: 'medium',
+            message: `FAQ 답변의 ${Math.round(pronounRatio * 100)}%가 대명사로 시작합니다.`,
+            suggestion: 'FAQ 답변 첫 문장에 장소명/주제를 명시적으로 포함하세요.'
+          });
+        }
+      }
+    }
+
+    // 4. 섹션 첫 문장에 주제 키워드 미포함 체크
+    // frontmatter에서 title/tags/keywords 추출하여 키워드 풀 구성
+    const titleMatch = content.match(/^title:\s*["']?(.+?)["']?\s*$/m);
+    const topicTitle = titleMatch?.[1] || '';
+    // 제목에서 주요 명사 추출 (한글 2자 이상 단어)
+    const topicKeywords = topicTitle.match(/[가-힣]{2,}/g) || [];
+
+    if (topicKeywords.length > 0 && h2Sections.length >= 3) {
+      let noKeywordCount = 0;
+      for (const section of h2Sections) {
+        // 결론/마무리/FAQ 섹션 제외
+        if (/마무리|정리|결론|마치며|자주\s*묻는/.test(section.title)) continue;
+
+        const firstSentence = section.content.replace(/^[\s\n]+/, '').split(/[.!?。]\s/)[0] || '';
+        const hasKeyword = topicKeywords.some(kw => firstSentence.includes(kw));
+        if (!hasKeyword) {
+          noKeywordCount++;
+        }
+      }
+
+      const contentSections = h2Sections.filter(s => !/마무리|정리|결론|마치며|자주\s*묻는/.test(s.title));
+      if (contentSections.length > 0 && noKeywordCount / contentSections.length > 0.6) {
+        issues.push({
+          type: 'no_self_contained_opener',
+          severity: 'low',
+          message: `${noKeywordCount}개 섹션 첫 문장에 주제 키워드가 포함되지 않았습니다.`,
+          suggestion: '섹션 첫 문장에 주제와 관련된 장소명/키워드를 포함하면 AI 검색 엔진 발췌 시 맥락이 유지됩니다.'
+        });
+      }
+    }
+
+    return issues;
+  }
+
+  /**
+   * GEO 점수 계산 (0-100)
+   */
+  private calculateGEOScore(
+    content: string,
+    sections: SectionInfo[],
+    geoIssues: StructureIssue[]
+  ): number {
+    let score = 100;
+
+    for (const issue of geoIssues) {
+      switch (issue.type) {
+        case 'missing_geo_summary':
+          score -= 30;  // 요약 블록 없음: 큰 감점
+          break;
+        case 'pronoun_heavy_sections':
+          score -= 20;  // 대명사 과다
+          break;
+        case 'entity_poor_faq':
+          score -= 25;  // FAQ 품질 저하
+          break;
+        case 'no_self_contained_opener':
+          score -= 15;  // 키워드 미포함
+          break;
+      }
+    }
+
+    // 보너스: blockquote 요약이 있고 + FAQ가 있으면 +10
+    const cleaned = content.replace(/^---[\s\S]*?---\n/, '');
+    const hasFAQ = content.includes('faqs:') || cleaned.includes('## 자주 묻는 질문');
+    const hasBlockquote = /^>\s+/m.test(cleaned);
+    if (hasFAQ && hasBlockquote) {
+      score += 10;
     }
 
     return Math.max(0, Math.min(100, score));

@@ -1,0 +1,185 @@
+{
+  "queueId": "march-2026-festival",
+  "createdAt": "2026-02-18",
+  "description": "3월 축제 시즌 포스트 큐 — 봄꽃·체험·문화유산 6편",
+  "status": "active",
+  "agentDistribution": {
+    "viral": 2,
+    "friendly": 2,
+    "informative": 1,
+    "niche": 1
+  },
+  "typeDistribution": {
+    "travel": 4,
+    "culture": 2
+  },
+  "posts": [
+    {
+      "order": 1,
+      "slug": "gwangyang-maehwa",
+      "title": "광양 매화축제 당일치기 현실 코스: 매화마을 입장료부터 주차·맛집까지 솔직 정산",
+      "type": "travel",
+      "agent": "friendly",
+      "targetPublishWeek": "2026-03-02",
+      "festival": {
+        "name": "광양 매화축제",
+        "period": "2026-03-07 ~ 2026-03-16",
+        "location": "전남 광양시 다압면 매화마을",
+        "admissionFee": "성인 5,000원 / 청소년 4,000원 / 어린이 3,000원"
+      },
+      "keywords": ["광양 매화축제", "광양 매화마을", "3월 꽃축제", "전남 당일치기", "봄 여행"],
+      "contentAngle": "직장인 주말 당일치기 시점 — 서울/수도권 출발 현실 비용·시간·코스 정산",
+      "ktoSearchTargets": ["광양매화마을", "섬진강", "광양", "다압면"],
+      "differentiator": "기존 포스트 없음. 3월 첫 꽃축제로 시즌 오프너 역할",
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-18-post.md",
+      "generatedTitle": "광양 매화축제 당일치기 현실 코스: 빛이 머무는 시간의 기록",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 2, "날씨": 5 },
+      "coverSource": "KTO: 광양 김시식지",
+      "inlineImages": 5
+    },
+    {
+      "order": 2,
+      "slug": "jeju-yeongdeung-haenyeo",
+      "title": "제주 영등제: 해녀와 바람의 신, 유네스코가 인정한 바다 제의의 모든 것",
+      "type": "culture",
+      "agent": "informative",
+      "targetPublishWeek": "2026-03-02",
+      "festival": {
+        "name": "제주 영등제 (칠머리당영등굿)",
+        "period": "음력 2월 (2026년 양력 3월 중순 추정)",
+        "location": "제주시 건입동 칠머리당",
+        "designation": "국가무형문화재 제71호 / UNESCO 무형문화유산"
+      },
+      "keywords": ["제주 영등제", "칠머리당영등굿", "해녀 문화", "제주 무형문화재", "유네스코"],
+      "contentAngle": "한교양 해설 — 영등할망 신화 + 해녀 잠수 문화 + 제주 바다 제의의 인류학적 의미",
+      "ktoSearchTargets": ["칠머리당", "제주해녀박물관", "영등굿", "제주해녀"],
+      "differentiator": "기존 제주 포스트(오름 지질학)와 완전 다른 각도. 해녀+무형유산 문화 딥다이브",
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-18-post-2.md",
+      "generatedTitle": "제주 영등제와 해녀 문화: 유네스코가 주목한 바람의 신과 공동체의 기록",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 10, "날씨": 5, "공연": 14 },
+      "coverSource": "KTO: 건강과 성 박물관(제주)",
+      "inlineImages": 6
+    },
+    {
+      "order": 3,
+      "slug": "march-hidden-spring-flowers",
+      "title": "3월 숨은 봄꽃 명소 디깅: 산수유·매화·동백, 관광객 없는 꽃길 4곳의 시간",
+      "type": "travel",
+      "agent": "niche",
+      "targetPublishWeek": "2026-03-09",
+      "festival": {
+        "name": "구례 산수유축제 외 비축제 봄꽃 명소",
+        "period": "3월 중순",
+        "location": "전남 구례 / 경남 하동 / 여수 / 강진"
+      },
+      "keywords": ["숨은 봄꽃 명소", "산수유꽃", "동백꽃", "3월 여행", "구례 산수유"],
+      "contentAngle": "오덕우 디깅 — 관광객 몰리는 축제장 대신 동네 사람만 아는 꽃길. 미시적 관찰 + 시간의 흔적",
+      "ktoSearchTargets": ["구례산수유마을", "하동매화", "여수동백", "강진백련사"],
+      "differentiator": "TOP N 리스트가 아닌 '발견 서사' 형식. 축제 바깥의 봄꽃을 다루는 유일한 포스트",
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-18-3-13.md",
+      "generatedTitle": "3월 숨은 봄꽃 명소 디깅",
+      "apiData": { "관광지": 3, "축제": 20, "문화행사": 10, "날씨": 5, "공연": 20 },
+      "coverSource": "KTO: 백제삼계탕13월",
+      "inlineImages": 5,
+      "note": "관광지 데이터 부족 — Phase 3에서 구례/하동/여수/강진 키워드로 KTO 재수집 필요"
+    },
+    {
+      "order": 4,
+      "slug": "march-seoul-culture-top5",
+      "title": "3월 서울 전시·공연 TOP 5: 봄맞이 문화 행사, 이건 진짜 가야 됨",
+      "type": "culture",
+      "agent": "viral",
+      "targetPublishWeek": "2026-03-09",
+      "festival": {
+        "name": "3월 서울 주요 전시/공연",
+        "period": "2026년 3월 전체",
+        "location": "서울 주요 전시관·공연장"
+      },
+      "keywords": ["3월 서울 전시", "3월 공연 추천", "봄 문화행사", "서울 전시회", "주말 데이트"],
+      "contentAngle": "조회영 바이럴 — 직접 확인한 3월 전시/공연 중 '무조건 가야 하는' TOP 5 큐레이션",
+      "ktoSearchTargets": [],
+      "differentiator": "기존 2월 전시 포스트(2026-02-08-2.md)의 3월 버전. 시의성 최고",
+      "note": "Phase 2 직전에 WebSearch로 3월 실제 전시/공연 확정 필수 (가상 콘텐츠 방지)",
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-18-3-top-5.md",
+      "generatedTitle": "3월 서울 전시 공연 문화행사 TOP 5: 공유 안 하면 손해, 이건 진짜 봐야 됨",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 10, "날씨": 5, "공연": 20 },
+      "coverSource": "KTO: 남산봉수의식",
+      "inlineImages": 6
+    },
+    {
+      "order": 5,
+      "slug": "nonsan-strawberry-festival",
+      "title": "논산 딸기축제 가족 체험 현실 후기: 딸기 따기부터 디저트까지 비용 총정산",
+      "type": "travel",
+      "agent": "friendly",
+      "targetPublishWeek": "2026-03-16",
+      "festival": {
+        "name": "제28회 논산딸기축제",
+        "period": "2026-03-26 ~ 2026-03-29",
+        "location": "충남 논산시 (연산면 딸기단지 일대 추정)",
+        "admissionFee": "확인 필요"
+      },
+      "keywords": ["논산 딸기축제", "딸기 체험", "충남 축제", "가족 여행", "3월 체험 축제"],
+      "contentAngle": "김주말 솔직 후기 — 딸기 따기 체험 비용, 아이 동반 현실, 주차 난이도, 먹거리 정산",
+      "ktoSearchTargets": ["논산", "논산딸기축제", "강경젓갈시장"],
+      "differentiator": "충남 지역 첫 포스트. 체험형 축제(꽃축제와 차별화). 전략 지역 우선순위 1위 충청",
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-18-post-3.md",
+      "generatedTitle": "논산 딸기축제 가족 체험 비용 정산, 빛을 따라 걷는 주말의 기록",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 10, "날씨": 5, "공연": 20 },
+      "coverSource": "KTO: 개태사(논산)",
+      "inlineImages": 4
+    },
+    {
+      "order": 6,
+      "slug": "jinhae-gunhangje-top5",
+      "title": "진해 군항제 벚꽃 뷰포인트 TOP 5: 현지인만 아는 진짜 코스 (인파 회피 꿀팁)",
+      "type": "travel",
+      "agent": "viral",
+      "targetPublishWeek": "2026-03-23",
+      "festival": {
+        "name": "제64회 진해 군항제",
+        "period": "2026-03-29 ~ 2026-04-07 (추정)",
+        "location": "경남 창원시 진해구",
+        "website": "https://www.jgfestival.or.kr/"
+      },
+      "keywords": ["진해 군항제", "진해 벚꽃", "군항제 코스", "벚꽃 명소", "경남 봄 여행"],
+      "contentAngle": "조회영 바이럴 — 여좌천 로망스다리·경화역·해군사관학교 등 뷰포인트 TOP 5 + 인파 회피 시간대",
+      "ktoSearchTargets": ["진해군항제", "여좌천", "경화역", "진해해양공원"],
+      "differentiator": "기존 벚꽃 포스트는 '개화시기 해설'. 이 포스트는 '현장 체험 TOP 5' 각도",
+      "status": "draft_regenerated",
+      "draftFile": "drafts/2026-02-18-top-5-1.md",
+      "generatedTitle": "진해 군항제 벚꽃 뷰포인트 TOP 5: 이거 공유 안 하면 손해, 2026 벚꽃 핏 완벽 가이드",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 10 },
+      "coverSource": "KTO 교체 필요 (가진해변=강원도)",
+      "inlineImages": 6,
+      "note": "1차 생성이 KOPIS 공연 데이터로 오염되어 재생성. 커버 이미지 교체 필요"
+    }
+  ],
+  "publishSchedule": {
+    "week1": {
+      "date": "2026-03-02 주",
+      "posts": ["gwangyang-maehwa", "jeju-yeongdeung-haenyeo"],
+      "note": "매화축제 시작 전 선발행 (검색 유입 선점)"
+    },
+    "week2": {
+      "date": "2026-03-09 주",
+      "posts": ["march-hidden-spring-flowers", "march-seoul-culture-top5"],
+      "note": "봄 시즌 콘텐츠 확대"
+    },
+    "week3": {
+      "date": "2026-03-16 주",
+      "posts": ["nonsan-strawberry-festival"],
+      "note": "딸기축제 1주 전 선발행"
+    },
+    "week4": {
+      "date": "2026-03-23 주",
+      "posts": ["jinhae-gunhangje-top5"],
+      "note": "군항제 직전 발행 (검색 피크 타이밍)"
+    }
+  }
+}

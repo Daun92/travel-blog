@@ -18,7 +18,11 @@ import {
   generateEventSchema,
   generateBreadcrumbSchema,
   generateCombinedSchema,
-  schemaToJsonLd
+  schemaToJsonLd,
+  generateItemListSchema,
+  generateHowToSchema,
+  extractListItems,
+  extractHowToSteps
 } from './schema-generator.js';
 
 export {
@@ -31,7 +35,11 @@ export {
   generateEventSchema,
   generateBreadcrumbSchema,
   generateCombinedSchema,
-  schemaToJsonLd
+  schemaToJsonLd,
+  generateItemListSchema,
+  generateHowToSchema,
+  extractListItems,
+  extractHowToSteps
 };
 export type { FAQItem, FAQGenerationResult };
 
@@ -67,6 +75,12 @@ export interface AEOConfig {
   includeLocationSchema: boolean;
   includeEventSchema: boolean;
   includeBreadcrumbSchema: boolean;
+  /** frontmatter framingType (list_ranking, experience 등) */
+  framingType?: string;
+  /** ItemList 스키마 자동 생성 (default: true) */
+  includeItemListSchema?: boolean;
+  /** HowTo 스키마 자동 생성 (default: true) */
+  includeHowToSchema?: boolean;
 }
 
 const DEFAULT_CONFIG: AEOConfig = {
@@ -78,7 +92,9 @@ const DEFAULT_CONFIG: AEOConfig = {
   includeFAQSchema: true,
   includeLocationSchema: true,
   includeEventSchema: true,
-  includeBreadcrumbSchema: true
+  includeBreadcrumbSchema: true,
+  includeItemListSchema: true,
+  includeHowToSchema: true
 };
 
 /**
@@ -190,6 +206,36 @@ export async function processAEO(
       { name: category === 'travel' ? '여행' : '문화', url: `${config.baseUrl}/${category}/` },
       { name: title, url: `${config.baseUrl}/posts/${frontmatter.slug || ''}/` }
     ]));
+  }
+
+  // 6. ItemList Schema (TOP/BEST/순위형 포스트)
+  const framingType = config.framingType || frontmatter.framingType as string || '';
+  if (config.includeItemListSchema !== false) {
+    const isListType = framingType === 'list_ranking' ||
+      /TOP|BEST|순위|베스트/i.test(title);
+
+    if (isListType) {
+      const listItems = extractListItems(body);
+      if (listItems.length >= 2) {
+        schemas.push(generateItemListSchema(title, description, listItems));
+      }
+    }
+  }
+
+  // 7. HowTo Schema (코스/체험형 포스트)
+  if (config.includeHowToSchema !== false) {
+    const isHowToType = framingType === 'experience' ||
+      /코스|당일치기|일정|체험|순서|가이드/i.test(title);
+
+    // 번호 매긴 H2 섹션이 2개+ 있으면 HowTo 후보
+    const numberedH2Count = (body.match(/^##\s+(?:\d+[\.\)]\s|[①②③④⑤⑥⑦⑧⑨⑩])/gm) || []).length;
+
+    if (isHowToType || numberedH2Count >= 2) {
+      const steps = extractHowToSteps(body);
+      if (steps.length >= 2) {
+        schemas.push(generateHowToSchema(title, description, steps));
+      }
+    }
   }
 
   return {

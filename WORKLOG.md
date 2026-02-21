@@ -10,6 +10,567 @@
 
 ## 개발 이력
 
+### 2026-02-21: Gemini Batch API + Sharp 이미지 최적화 — 비용 50% 절감 + 용량 80% 절감
+
+#### 배경
+
+포스트 1건당 AI 인라인 이미지 3~5장을 순차 생성(단건 `fetch()`)하며, 생성된 이미지를 원본 그대로 저장(평균 913KB, 1356×772px). Gemini Batch API를 도입하면 50% 비용 할인 + 비동기 일괄 처리가 가능하고, Sharp 후처리를 추가하면 이미지 용량을 80% 줄일 수 있음.
+
+#### 구현 내용
+
+| 파일 | 변경 | 효과 |
+|------|------|------|
+| `package.json` | `@google/genai` SDK 추가 (기존 `@google/generative-ai`와 공존) | Batch API 클라이언트 |
+| `src/images/gemini-imagen.ts` | `generateImagesBatch()` 메서드, `buildFullPrompt()`, `BatchTimeoutError`, `SaveImageOptions` Sharp 최적화, `incrementUsageBatch()` | 핵심 배치 로직 |
+| `src/images/image-orchestrator.ts` | `processInlineImages()` 순차 루프 → 3-Phase 배치 (프롬프트 수집 → 배치 제출/폴링 → 결과 매핑) + `processMarkersSequentially()` 폴백 | 오케스트레이터 통합 |
+| `CLAUDE.md` | `GEMINI_BATCH_ENABLED` 환경변수 문서화 | 운영 가이드 |
+
+#### 아키텍처 요점
+
+- **`@google/genai` SDK**: `GoogleGenAI` 클래스의 `batches.create()` → 폴링 → `inlinedResponses` 추출
+- **InlinedRequest 구조**: `{ contents, config: { responseModalities: ['TEXT','IMAGE'] } }` — nested `request:` 아님
+- **BatchJobSourceUnion**: `InlinedRequest[]`를 `src`에 직접 전달 (SDK 타입)
+- **Sharp 최적화**: `saveImage()` 4번째 인자 `{ optimize: true, maxWidth: 1200, quality: 85 }` — 기존 3인자 호출은 변경 없음
+- **순차 폴백**: `BatchTimeoutError` 캐치 또는 `GEMINI_BATCH_ENABLED=false`로 기존 방식 유지
+- **하위 호환**: 기존 `generateImage()` 단건 호출 27개 스크립트 변경 없음
+
+#### 수치 효과
+
+| 항목 | 이전 | 이후 |
+|------|------|------|
+| API 비용 (인라인 5장) | 100% × 5건 | 50% × 1배치 |
+| 인라인 이미지 용량 | 913KB/장 | ~180KB/장 (Sharp) |
+| 포스트 이미지 총 용량 | ~4.5MB | ~0.9MB |
+| 페이지 로드 LCP | 높음 | 개선 (Core Web Vitals) |
+
+---
+
+### 2026-02-20: GEO (Generative Engine Optimization) 구현 — AI 검색 엔진 인용 최적화
+
+#### 배경
+
+블로그의 기술적 SEO와 Schema Markup은 상위 수준이지만, ChatGPT/Perplexity/Google AI Overview 등 AI 엔진이 콘텐츠를 발췌·인용하기 좋은 "self-contained" 구조가 부족했음. 핵심 갭 3가지: (1) 도입부 팩트 요약 블록 없음, (2) 섹션 첫 문장이 대명사 의존적, (3) frontmatter `schema:` 배열이 Hugo 미렌더링 (dead YAML).
+
+#### 구현 내용 (7단계)
+
+| Step | 내용 | 효과 |
+|------|------|------|
+| 1. Dead Schema 렌더링 | `extend_head.html`에 `schema:` frontmatter 배열 렌더링 + `meta keywords` 태그 | 기존 26+ 포스트에 Article/TouristAttraction/Event 스키마 즉시 활성화 |
+| 2. Speakable 추가 | `generateArticleSchema()`에 `SpeakableSpecification` (cssSelector 기반) | 음성 검색/AI 발췌 대상 영역 명시 |
+| 3. GEO 프롬프트 지침 | 작성 지침 8번 추가 + `buildGeoIntroGuidance()` 페르소나별 도입부 톤 분화 | 새 포스트에 blockquote 팩트 요약 + self-contained 첫 문장 자동 생성 |
+| 4. FAQ 답변 GEO화 | 답변 가이드라인에 대명사 금지 규칙 + 50-100자 완결형 답변 | FAQ 발췌 시 맥락 유지 |
+| 5. ItemList/HowTo 스키마 | `extractListItems()`/`extractHowToSteps()` H2 파싱 (LLM 호출 0) | TOP/순위형 → ItemList, 코스/체험형 → HowTo Rich Results |
+| 6. GEO 품질 체크 | 4종 이슈 감지 + `geoScore` (0-100) + non-blocking 게이트 | 기존 포스트 GEO 준비도 측정 + 점진적 개선 유도 |
+| 7. 빌드 검증 | `npm run build` 성공 | 타입 안전성 확인 |
+
+#### 설계 결정
+
+- **`<!-- GEO_Q: -->` 코멘트 방식 기각**: HTML 코멘트를 Google이 hidden text로 판단할 위험. 대신 visible blockquote + self-contained 첫 문장으로 동일 효과.
+- **H2 질문화 기각**: 4인 페르소나의 H2 톤이 브랜드 자산. FAQ 스키마가 question-answer 신호 역할.
+- **별도 `src/geo/` 모듈 미생성**: 기존 AEO + structure-checker 확장으로 충분. 불필요한 모듈 증식 방지.
+- **GEO 게이트 non-blocking**: `blockOnFailure: false` — 기존 포스트 발행 차단 없이 경고만.
+
+#### GEO 체크 4종
+
+| 타입 | severity | 감지 로직 |
+|------|----------|----------|
+| `missing_geo_summary` | medium | 첫 H2 이전에 blockquote 요약 없음 |
+| `pronoun_heavy_sections` | low | 대명사("여기", "이곳")로 시작하는 H2 섹션 3개+ |
+| `entity_poor_faq` | medium | FAQ 답변 40%+ 대명사 시작 |
+| `no_self_contained_opener` | low | 섹션 첫 문장에 제목 키워드 미포함 60%+ |
+
+#### API 비용
+
+추가 Gemini 호출 **0회** — 모든 변경이 프롬프트 텍스트 또는 정적 분석.
+
+#### 터치 파일
+
+- `blog/layouts/partials/extend_head.html` — schema 렌더링 + meta keywords
+- `src/generator/prompts.ts` — GEO 지침 8번 + `buildGeoIntroGuidance()`
+- `src/aeo/schema-generator.ts` — speakable + ItemList + HowTo + 헬퍼 4개
+- `src/aeo/index.ts` — processAEO wiring + AEOConfig 확장
+- `src/aeo/faq-generator.ts` — FAQ 답변 가이드라인 GEO화
+- `src/quality/structure-checker.ts` — GEO 체크 + geoScore/geoIssues
+- `src/quality/config.ts` — GEOGateConfig 타입 + 기본값
+- `src/quality/gates.ts` — GEO 게이트 추가
+
+---
+
+### 2026-02-19: 포스트 URL 일관성 확보 — slug 생성 파이프라인 개선
+
+#### 배경
+
+2/18 생성된 7개 포스트의 URL이 비일관적이었음. `slugify` 라이브러리가 한글을 제거하여 "양평 vs 가평 당일치기" → `vs`, "공유 안 하면 손해 거제 통영 남해 드라이브 코스 TOP 5" → `to` 같은 무의미한 slug가 생성됨.
+
+#### 문제 분석
+
+| 원인 | 영향 |
+|------|------|
+| `slugify({ strict: true, locale: 'ko' })`가 한글 문자를 전부 제거 | 한글 제목에서 ASCII 잔여물만 slug가 됨 |
+| `slice(0, 30)`으로 짧게 자름 | "TOP 5" 같은 끝부분 키워드가 잘림 |
+| `frontmatter.slug` 필드 미사용 | 파일명과 Hugo URL이 불일치 |
+
+#### 해결 (2단계)
+
+**Phase A: 기존 2/18 포스트 수동 정비**
+
+| 원래 파일명 | 변경 후 | 이유 |
+|------------|---------|------|
+| `2026-02-18-vs.md` | `yangpyeong-vs-gapyeong.md` | "양평 vs 가평" |
+| `2026-02-18-to.md` | `geoje-tongyeong-drive-top5.md` | "거제 통영 TOP 5" |
+| `2026-02-18-taehwagang.md` | `ulsan-taehwagang.md` | "울산 태화강" |
+| `2026-02-18-post.md` | `seoul-time-layers-digging.md` | "서울 시간의 레이어" |
+
+- 52개 이미지 파일 리네임 + 마크다운 참조 업데이트
+- frontmatter `slug:` 필드 추가 (7개 포스트)
+- `image-registry.json` `postSlug` 4건 업데이트
+- 교차 오염 수정: `post-N-*` 접두사 이미지가 복수 포스트에 걸쳐 사용됨 → 포스트별 분리
+
+**Phase B: 미래 포스트 자동 slug 생성 개선**
+
+1. **`prompts.ts`**: SEO 메타데이터에 `slug` 필드 추가 — LLM이 한글 주제를 영문 로마자 slug로 직접 생성
+   ```json
+   <!--SEO { "slug": "gyeongju-bulguksa-temple-guide" } -->
+   ```
+
+2. **`frontmatter.ts`**:
+   - `parseSeoMeta()` → slug 추출 + 정규화 (`[^a-z0-9-]` 제거)
+   - `isPreformattedSlug()` → 이미 유효한 slug면 `slugifyText()` 바이패스
+   - `generateSlug()` → LLM slug 우선, title 폴백, topic 폴백, 타임스탬프 최후 수단
+   - `extractSlugWithoutDate()` → 날짜 접두사 제거 (Hugo frontmatter용)
+   - `FrontmatterData.slug` 필드 추가
+
+3. **`index.ts`**: LLM SEO slug → `generateSlug()` → frontmatter slug 파이프라인 연결
+
+#### 테스트 결과
+
+```
+LLM slug "Seoul-March-Exhibitions-TOP-5"
+  → 정규화: "seoul-march-exhibitions-top-5"
+  → 파일명: 2026-02-19-seoul-march-exhibitions-top-5.md
+  → Hugo URL: /posts/2026/02/seoul-march-exhibitions-top-5/
+```
+
+#### 터치 파일
+
+- `src/generator/prompts.ts` — SEO 출력에 slug 필드 + 규칙 추가
+- `src/generator/frontmatter.ts` — slug 추출/정규화/바이패스 로직
+- `src/generator/index.ts` — LLM slug 우선 사용 파이프라인
+- `CLAUDE.md` — 가드레일 #1 갱신
+- `.claude/skills/publish-pipeline/SKILL.md` — Phase 2 체크리스트 갱신
+- `blog/content/posts/` — 2/18 포스트 7개 + 이미지 52개 리네임
+- `data/image-registry.json` — postSlug 4건 수정
+
+---
+
+### 2026-02-19: CLAUDE.md 구조 정비 — 1,285줄 → 161줄 (87.5% 감소)
+
+#### 배경
+
+CLAUDE.md가 1,285줄(~63KB)로 비대해져 매 대화 시작 시 ~15-20K 토큰을 소비. 대부분의 콘텐츠가 특정 워크플로우에서만 필요한 상세 가이드(KTO 전략, API 규칙, 이미지 시스템 등)로, 모든 세션에 로드할 필요가 없었음.
+
+#### 핵심 문제: 스킬의 CLAUDE.md 런타임 의존성
+
+기존 스킬 5개(phase3-enhance, factcheck-claude, publish-pipeline, post-edit, survey-cycle)가 `CLAUDE.md를 Read로 참조` 패턴을 사용. CLAUDE.md에서 콘텐츠를 제거하면 스킬이 참조할 대상을 잃는 순환 의존 구조였음.
+
+**해결**: 스킬 내부에 필요한 레퍼런스를 인라인하여 **자립화(self-contained)** 달성.
+
+#### 콘텐츠 이동 매트릭스
+
+| 원래 위치 (CLAUDE.md) | 새 위치 | 줄 수 | 로딩 방식 |
+|----------------------|---------|------|----------|
+| data.go.kr API 규칙 전체 | `docs/api-rules.md` | 160 | 필요 시 Read |
+| KOPIS API + 이중 API 워크플로우 | `docs/api-rules.md` | (포함) | 필요 시 Read |
+| KTO 3+1 Tier, 배치 검색, 실패 패턴 | `skills/phase3-enhance/kto-strategy.md` | 85 | `/phase3-enhance` 시 |
+| 이미지 역할분리, 스틸컷, 캡션 | `skills/phase3-enhance/image-matching.md` | 66 | `/phase3-enhance` 시 |
+| 팩트체크 claim.type 전략표 | `skills/factcheck-claude/SKILL.md` 인라인 | — | `/factcheck-claude` 시 |
+| 파이프라인 상세 체크리스트 | `skills/publish-pipeline/SKILL.md` 인라인 | — | `/publish-pipeline` 시 |
+| 8-API 통합 현황 | `docs/api-rules.md` | (포함) | 필요 시 Read |
+| MEMORY.md 중복 내용 | 삭제 | — | — |
+
+#### CLAUDE.md 잔류 항목 (161줄)
+
+| 섹션 | 역할 |
+|------|------|
+| Project Overview | 프로젝트 목적, 4인 에이전트 요약 |
+| Common Commands | 주요 npm 명령 (축약) |
+| 5-Phase 파이프라인 다이어그램 | 전체 흐름도 (ASCII) |
+| Architecture 트리 | 디렉토리 구조 |
+| Environment Variables | 환경변수 목록 |
+| Critical Rules 5개 | Hugo 경로, API 응답, 스크립트 dotenv, Git 구조, 가드레일 17개 |
+| 에이전트 배정표 | 키워드→페르소나 매핑 |
+| 트리아지 프로토콜 | 모듈 의존성 맵, 위험 등급 |
+| Multi-Agent Rules | 충돌 방지 원칙 |
+| 상세 레퍼런스 테이블 | 스킬/docs 참조 경로 안내 |
+
+#### 스킬 수정 내역
+
+| 스킬 | 변경 |
+|------|------|
+| `phase3-enhance/SKILL.md` | "CLAUDE.md 동적 참조" → "스킬 내장 레퍼런스 참조 (kto-strategy.md, image-matching.md)" |
+| `phase3-enhance/kto-strategy.md` | 전면 재작성 — 3+1 Tier 전략, 실패 패턴, 키워드 설계, registry 형식 완비 |
+| `phase3-enhance/image-matching.md` | 전면 재작성 — 매칭 원칙, 역할 분리, 스틸컷 프로토콜, 캡션 규칙 완비 |
+| `factcheck-claude/SKILL.md` | "CLAUDE.md Read로 확인" → claim.type 전략표+confidence 기준 인라인 |
+| `publish-pipeline/SKILL.md` | "CLAUDE.md 참조" 3건 → 체크리스트/에이전트표/가드레일 인라인 |
+| `post-edit/SKILL.md` | "CLAUDE.md 참조" 2건 → 지리적 스코프 검증/docs 경로로 교체 |
+
+#### 효과 측정
+
+| 지표 | Before | After |
+|------|--------|-------|
+| CLAUDE.md 줄 수 | 1,285 | 161 |
+| 매 세션 토큰 소비 | ~15-20K | ~3-4K |
+| 스킬 CLAUDE.md 의존성 | 7건 (Read 참조) | 0건 |
+| `npm run build` | PASS | PASS |
+
+#### 핵심 인사이트
+
+1. **시스템 프롬프트 = 항상 로드되는 코드** — lazy loading(스킬/docs) vs eager loading(CLAUDE.md) 분리가 토큰 경제의 핵심
+2. **스킬 자립화가 전제 조건** — CLAUDE.md 의존성을 끊지 않으면 콘텐츠 제거 시 스킬이 깨짐
+3. **3-tier 계층**: CLAUDE.md(규칙, 항상) → Skills(워크플로우, on-demand) → docs/(레퍼런스, 필요 시 Read)
+
+#### 반영 파일
+
+| 파일 | 변경 |
+|------|------|
+| `CLAUDE.md` | 1,285줄 → 161줄 전면 재작성 |
+| `docs/api-rules.md` | 신규 생성 (160줄) — API 규칙 통합 레퍼런스 |
+| `.claude/skills/phase3-enhance/kto-strategy.md` | 전면 재작성 (85줄) |
+| `.claude/skills/phase3-enhance/image-matching.md` | 전면 재작성 (66줄) |
+| `.claude/skills/phase3-enhance/SKILL.md` | CLAUDE.md 참조 → 내장 레퍼런스 |
+| `.claude/skills/factcheck-claude/SKILL.md` | CLAUDE.md 참조 → 인라인 |
+| `.claude/skills/publish-pipeline/SKILL.md` | CLAUDE.md 참조 → 인라인 |
+| `.claude/skills/post-edit/SKILL.md` | CLAUDE.md 참조 → docs 경로 |
+| `MEMORY.md` | 구조 정비 기록 추가 |
+
+---
+
+### 2026-02-19: 태화강 포스트 이미지 최적화 — detailImage2 심층 탐색 전략 수립
+
+#### 배경
+
+태화강 포스트의 이미지 품질을 향상시키기 위해 커버 이미지 교체 + 기존 KTO 이미지 보완 작업 수행. 이 과정에서 `detailImage2` API의 숨겨진 가치를 발견하고, KTO 이미지 검색 전략을 3-Tier에서 **3+1 Tier**로 업그레이드.
+
+#### 커버 이미지 교체
+
+**문제**: 기존 커버(태화강 아치교 석양)는 포스트 핵심 주제인 "십리대숲"과 직접 연결되지 않음.
+
+**검색 과정**:
+
+| 키워드 | 결과 |
+|--------|------|
+| 십리대숲 | 0건 — KTO에 독립 관광지로 미등록 |
+| 태화강 십리대숲 | 0건 |
+| 태화강 | 6건 — 전부 기존 확보분 |
+
+→ `searchKeyword`만으로는 한계. **detailImage2 전환점**.
+
+**detailImage2 심층 탐색 결과**:
+
+| contentId | 관광지 | detailImage2 수 | 주요 발견 |
+|-----------|--------|-----------------|----------|
+| 128202 | 태화강 국가정원 | **9장** | 십리대숲 터널, 캐노피 광각, 입구 분기점 등 |
+| 128201 | 태화강 | **6장** | 야경 조감도, 항공뷰(도시+자연), 십리대숲 원경 등 |
+
+→ `firstimage`만 사용 시 간판+억새 2장이었으나, detailImage2로 **15장 풀** 확보.
+
+**커버 선정**: garden-6.png (십리대숲 캐노피 광각 파노라마) — 하늘을 향해 뻗은 대나무 숲길, 한교양(informative) 페르소나의 건축적 구도에 부합.
+
+#### 섹션 이미지 교체 (2건)
+
+15장 풀에서 서사 적합성을 기준으로 기존 이미지 교체:
+
+| 섹션 | Before | After | 교체 근거 |
+|------|--------|-------|----------|
+| §1 역사적 배경 | 국가정원 간판+초승달 | 십리대숲 터널 산책로 (garden-5) | "방재림→생태 허파" 서사를 숲 내부로 직접 증거 |
+| §5 배경 지식 | 억새군락지 데크길 | 국가정원 항공뷰 (river-1) | "산업 도시의 생태적 전환"을 도시+자연 공존 조감도로 시각화 |
+
+유지 판정 (5건): 도입 무드보드(역할 적합), §2 AI 스틸컷(역할 적합), §3 고헌산 정상석(완벽), §4 태화루(적합), §6 AI 가이드(역할 적합)
+
+#### detailImage2 심층 탐색 전략 문서화
+
+이번 세션의 핵심 인사이트를 프로젝트 문서에 반영:
+
+| 위치 | 변경 |
+|------|------|
+| **CLAUDE.md §3-B 표** | 3-Tier → 3+1 Tier (Tier 2b: detailImage2 심층 탐색 추가) |
+| **CLAUDE.md 체크리스트** | `□ Tier 2b: detailImage2 심층 탐색` 항목 추가 |
+| **CLAUDE.md Step 4b** | 신규 섹션 — API 호출법, 전략 표, 실전 사례(태화강), 주의사항 |
+| **MEMORY.md** | "detailImage2 심층 탐색 (2026-02-19)" 소섹션 추가 |
+
+#### 핵심 인사이트
+
+1. **detailImage2 = 숨겨진 이미지 풀**: `firstimage`는 대표 1장, `detailImage2(contentId)`는 모든 상세 이미지(0~20장+). 같은 contentId에서도 시점(내부/외부/항공/클로즈업)이 완전히 다름
+2. **Tier 2b가 이미지 품질의 결정타**: Tier 1~2에서 확보한 contentId 전부에 detailImage2 조회 → 시점별 분류 → 섹션 서사에 최적 이미지 선별 가능
+3. **API 비용 극히 낮음**: detailImage2 = 1 API call/contentId. 2개 contentId 조회로 15장 확보 (쿼터 2건 소비)
+4. **메서드명 주의**: `client.detailImage(contentId)` — NOT `getDetailImages`
+5. **PNG 확장자 주의**: detailImage2 반환 URL이 `.png`인 경우 있음 → 파일명 확장자 맞춤 필요
+
+#### 배포
+
+| 커밋 | 내용 |
+|------|------|
+| `4fdc081` (blog) | §1·§5 KTO 이미지 교체, 새 파일 2개 추가 |
+| push | `origin/master` 성공 |
+
+#### 반영 파일
+
+| 파일 | 변경 |
+|------|------|
+| `blog/.../2026-02-18-taehwagang.md` | §1 이미지 경로 `.jpg`→`.png`, §5 경로+alt 교체 |
+| `drafts/2026-02-18-taehwagang.md` | 동기화 |
+| `blog/static/images/kto-*-garden.png` | 신규 (십리대숲 터널) |
+| `blog/static/images/kto-*-aerial.jpg` | 신규 (국가정원 항공뷰) |
+| `data/image-registry.json` | 구 엔트리 2건 note 갱신 + 신규 엔트리 2건 추가 |
+| `CLAUDE.md` | 3+1 Tier 전략, Step 4b, 체크리스트 Tier 2b |
+| `MEMORY.md` | detailImage2 심층 탐색 인사이트 |
+
+---
+
+### 2026-02-18: 2월 추천공연 TOP 5 포스트 — KOPIS+KTO 이중 API 활용 최초 적용
+
+#### 배경
+
+공연 콘텐츠에 KOPIS API(공연예술통합전산망)를 최대한 활용하여 데이터 기반 포스트를 생성하는 첫 시도.
+기존 travel/culture 포스트는 KTO(한국관광공사) API 단독 사용이었으나, 공연 도메인에서는 KOPIS가 공연 메타데이터(제목, 일정, 가격, 캐스트, 포스터)를, KTO가 공연장 공간 데이터(건물 사진, 주소, 관광정보)를 각각 담당하는 **이중 API 전략**을 수립.
+
+#### KOPIS API 활용
+
+**검색 → 선별 → 상세 조회 3단계**:
+
+| 단계 | API | 결과 |
+|------|-----|------|
+| 1. 검색 | `/pblprfr?stdate=20260201&eddate=20260301&rows=500` | ~500건 (서울 2월 공연) |
+| 2. 선별 | 장르/인지도/가격 다양성 기준 수동 5건 선정 | 지브리&디즈니, CJ STAGE UP, wave to earth, 칼로막베스, 뮤지컬 스톤 |
+| 3. 상세 | `/pblprfr/{mt20id}` × 5 | 포스터 URL, 정확 가격, 캐스트, 소개 텍스트 |
+
+**선정 기준** (조회영/viral 페르소나 관점):
+- 장르 다양성: 클래식+대중음악+뮤지컬+연극
+- 가격 스펙트럼: 2만원(CJ) ~ 14.3만원(wave to earth) — "2만원짜리가 13만원보다 만족도 높다고?" 제목 훅
+- 화제성: 월드투어 앵콜, 브랜드 후원, 밀리언셀러 원작
+
+**KOPIS 포스터 다운로드 (5장)**:
+- `kopis-performances-top5-ghibli.gif` (지브리&디즈니)
+- `kopis-performances-top5-cj-stageup.jpg` (CJ STAGE UP)
+- `kopis-performances-top5-wavetoearth.gif` (wave to earth)
+- `kopis-performances-top5-karlomacbeth.gif` (칼로막베스)
+- `kopis-performances-top5-stone.png` (뮤지컬 스톤)
+
+#### KTO API 공연장 이미지 확보
+
+KOPIS의 `fcltynm`(공연시설명)을 KTO `searchKeyword2` 검색어로 매핑하여 공연장 실사진 확보:
+
+| 공연장 (KOPIS) | KTO 검색어 | contentId | typeId | 이미지 |
+|-------------|-----------|-----------|--------|--------|
+| 롯데콘서트홀 | 롯데콘서트홀 | 3085149 | 14(문화시설) | 6장 |
+| 국립극장 하늘극장 | 국립극장 | 130231 | 14 | 6장 |
+| 올림픽공원 올림픽홀 | 올림픽공원 | 3085174 | 14 | 7장 |
+| 대학로 예그린씨어터 | 대학로 | 126534 | 12(관광지) | 1장 |
+| CJ아지트 광흥창 | CJ아지트 광흥창 | 3082435 | 14 | 2장 |
+
+→ **5개 시설 전부 KTO 이미지 확보** (100% 커버리지). CJ아지트 같은 소규모 민간 시설도 KTO에 등록되어 있어서 예상 외 성과.
+
+**KTO 이미지 다운로드 (9장)**: firstimage + detailImage 2장씩 (대학로·CJ아지트 제외)
+
+#### 이미지-섹션 배치 전략
+
+각 섹션에 **KOPIS 포스터 + KTO 공연장** 이중 배치:
+
+```
+## N위. {공연명} — {부제}
+> 📍 {공연장} | 🎫 {가격} | 📅 {일정}    ← 정보 블록
+[KOPIS 포스터]                             ← 공연 콘텐츠 증거
+{본문 리뷰}
+[KTO 공연장 사진]                          ← 공간 콘텐츠 증거
+{추천 TIP + 관람 정보 테이블}
+출처: KOPIS                                ← 데이터 출처
+```
+
+**최종 이미지 구성 (11장)**:
+
+| # | 타입 | 파일 | 위치 |
+|---|------|------|------|
+| 0 | **KTO 커버** | lotte-concert-hall | 1위 공연장 |
+| 1-5 | KOPIS 포스터 ×5 | ghibli, stone, wavetoearth, karlomacbeth, cj-stageup | 각 섹션 blockquote 후 |
+| 6-10 | KTO 공연장 ×5 | lotte-concert-hall-2, daehakro, olympic-hall, national-theater, cj-azit | 각 섹션 중간 |
+
+#### 검증 및 발행
+
+| 단계 | 결과 |
+|------|------|
+| Factcheck | **100%** (9/9 verified, KOPIS 데이터 직접 확인) |
+| AEO | FAQ 4건 + Schema.org FAQPage JSON-LD |
+| 발행 | `blog/content/posts/culture/2026-02-february-performances-top5.md` |
+| Git | 커밋 `34bb86f` — 15 files, blog repo push to master |
+
+#### 핵심 인사이트
+
+1. **KOPIS+KTO 이중 API 시너지**: 공연 도메인에서 KOPIS(메타데이터)와 KTO(공간 데이터)는 완벽히 상호보완적. 연결 포인트는 `fcltynm`↔`searchKeyword2`
+2. **소규모 시설도 KTO 등록**: CJ아지트 광흥창 같은 민간 소규모 공연장도 contentId 보유 — KTO 커버리지가 예상보다 넓음
+3. **포스터 GIF 포맷**: KOPIS 포스터 중 3건이 GIF — Hugo에서 정상 렌더링 확인
+4. **가격 정보 정확도**: KOPIS `pcseguidance` 필드에서 좌석별 정확 가격 확보 → factcheck 100% 가능
+5. **Factcheck 오파싱**: 제목의 숫자 포함 텍스트("사랑으로 0.3", "후속으로 3~4월")를 location으로 오분류 — claim-extractor 정규식 개선 여지
+
+#### 반영 파일
+
+| 파일 | 변경 |
+|------|------|
+| `drafts/2026-02-february-performances-top5.md` | 신규 생성 + 이미지 삽입 + AEO + factcheck |
+| `blog/content/posts/culture/2026-02-february-performances-top5.md` | 발행 |
+| `data/image-registry.json` | 11건 추가 (KOPIS 5 + KTO 6) |
+| `data/factcheck-claude/february-performances-top5-results*.json` | 팩트체크 결과 2건 |
+| `blog/static/images/kopis-performances-top5-*` | KOPIS 포스터 5장 |
+| `blog/static/images/kto-february-performances-top5-*` | KTO 공연장 9장 |
+
+---
+
+### 2026-02-18: 5-Phase 발행 파이프라인 확정 + 태화강 포스트 KTO 심층 보강
+
+#### 배경
+
+울산 태화강 국가정원 테스트 포스트 발행 과정에서 다수의 품질 문제 발견:
+- **LLM 할루시네이션**: "경상남도 울산" (울산광역시가 정확), 가상 전시/공연 날조, 무관 API 데이터 덤프
+- **이미지 부족**: `npm run new --auto-collect` 자동 수집만으로는 KTO 실사 1장에 불과
+- **slug 충돌**: 범용 slug(`2026-02-18-post`)가 기존 포스트와 이미지 파일명 충돌
+- **커버 미스매치**: KTO 자동 선택이 고헌산(산 정상)을 커버로 배치 — 태화강 포스트 주제와 불일치
+
+#### 태화강 포스트 KTO 심층 보강
+
+**3-Tier 검색 전략 실전 적용:**
+
+| Tier | 키워드 | 결과 |
+|------|--------|------|
+| **1차** (고유명사) | 태화강 국가정원, 십리대숲, 태화루, 태화강 대공원 | 2/4 성공 (국가정원, 태화루) |
+| **2차** (상위 지명) | "태화강" 단독 키워드 | **6개 관광지 일괄 발견** (강, 전망대, 삼호지구, 동굴피아, 억새군락지 + 국가정원) |
+| 선별 | 시각 검증 + 논점 연결 판정 | 7장 중 4장 채택, 3장 제외 |
+
+**최종 이미지 구성 (8장):**
+
+| 이미지 | 소스 | 배치 | 선정 이유 |
+|--------|------|------|----------|
+| 태화강 석양+아치교 | KTO | **커버** | 포스트 전체 주제 대표 |
+| 국가정원 간판+대숲 | KTO | §1 역사적 배경 | 복원 결과물 시각화 |
+| AI 무드보드 | Gemini | 도입부 | 감성 요약 |
+| AI 스틸컷 (대숲) | Gemini | §2 십리대숲 | 본문 핵심 장면 |
+| 고헌산 정상 석비 | KTO | §3 고헌산 | 기존 유지 |
+| 태화루 전통 누각 | KTO | §4 산책 코스 | 본문 직접 언급 장소 |
+| 억새군락지 데크길 | KTO | §5 배경 지식 | 생태 복원 증거 |
+| AI 인포그래픽 | Gemini | §6 실용 정보 | 정보 시각화 |
+
+**제외 3장:** 전망대(본문 미언급), 삼호지구 꽃밭(본문 미언급+여름), 동굴피아(주제 무관)
+
+#### 5-Phase 발행 파이프라인 확정
+
+기존 "4-Layer" → **5-Phase 순차 파이프라인** 재설계.
+
+```
+Phase 1(발굴) → Phase 2(생성) → Phase 3(보강) → Phase 4(검증) → Phase 5(발행)
+                                    ↑ 핵심
+```
+
+| Phase | 역할 | 핵심 산출물 |
+|-------|------|-----------|
+| 1. 발굴 | 주제 선정 (주 1회) | 주제 큐 |
+| 2. 생성 | LLM 초안 작성 | drafts/ |
+| **3. 보강** | **콘텐츠 검증 + KTO 이미지 (수동, 핵심)** | **보강된 초안** |
+| 4. 검증 | enhance+factcheck+AEO | 검증 완료 |
+| 5. 발행 | 배포+피드백→Phase 1 순환 | 발행 포스트 |
+
+Phase 3 세부: 3-A(콘텐츠 사전 검증) → 3-B(KTO 3-Tier 검색) → 3-C(이미지-섹션 매칭) → 3-D(커버+캡션+frontmatter)
+
+#### 반영 파일
+
+| 파일 | 변경 |
+|------|------|
+| `CLAUDE.md` | "포스트 발행 파이프라인" 5-Phase 전면 재작성, 체크리스트+금지사항 17개 |
+| `blog/.../2026-02-18-taehwagang.md` | KTO 실사 4장 통합, 커버 교체 |
+| `data/image-registry.json` | KTO 엔트리 4건 추가 |
+| `scripts/kto-taehwagang-*.mts` | Tier 1 + Tier 2 검색 스크립트 |
+
+#### 핵심 교훈
+
+1. **Tier 2 상위 지명 검색이 핵심** — "십리대숲" 미등록이어도 "태화강"으로 6개 관광지 발견
+2. **논점 연결 원칙** — 같은 울산이어도 동굴피아(실내)는 생태 포스트와 무관 → 제외
+3. **Phase 3 없이는 발행 품질 불가** — LLM 구조적 오류 + 자동 이미지 부족은 항상 발생
+4. **slug 충돌 방지** — 범용 slug 금지, 주제 기반 고유 slug 필수
+
+---
+
+### 2026-02-18: 망원·문래·신당 포스트 지리적 스코프 정비 + 콘텐츠 검증 워크플로우 확립
+
+#### 배경
+
+`culture/2026-02-18-post.md` (오덕우/niche) 포스트의 콘텐츠 검증 중 지리적 스코프 이탈 발견:
+- **Section 4**: 강진청자축제(전남), 고령 대가야축제(경북), 고창모양성제(전북) — 서울 포스트에 무관 지역
+- **결론부**: 부산 광복로 겨울빛 트리축제, 광안리 M 드론 라이트쇼 — 동일 문제
+- **근본 원인**: `--auto-collect` API 수집 데이터가 포스트 지리적 스코프 무시하고 기계적 삽입됨
+- **연쇄 오염**: FAQ(frontmatter + Schema.org + body)까지 비서울 콘텐츠 전파
+
+#### 수행 작업
+
+**1단계: 문제 식별 (5건)**
+
+| # | 문제 | 위치 |
+|---|------|------|
+| 1 | Section 4 전체가 비서울 축제 (강진/고령/고창) | lines 184-199 |
+| 2 | 결론부 부산 축제 언급 | line 207 |
+| 3 | image-registry.json에 kto-post-1, post-2 미등록 | data/image-registry.json |
+| 4 | FAQ가 이탈 콘텐츠 참조 | frontmatter + schema + body |
+| 5 | Schema.org breadcrumb URL 이중슬래시 | `/travel-blog/posts//` |
+
+**2단계: KTO 이미지 소싱 (서울 교체 대상)**
+
+| 키워드 | typeId | 결과 | 이미지 |
+|--------|--------|------|--------|
+| 을지로 | 12(관광지) | 을지로 노가리골목 (contentId: 2994062) | ✅ firstimage 존재 |
+| 창신동 | 12(관광지) | 창신동골목길 (contentId: 2946517) | ✅ firstimage 존재 |
+| 황학동 | 12 | 결과 없음 | — |
+| 낙원상가 | 14(문화시설) | 결과 없음 | — |
+| 세운상가 | 14 | 결과 없음 | — |
+
+→ 을지로 + 창신동 KTO 실사 2장 확보. AI 폴백 불필요.
+
+**3단계: 콘텐츠 교체 + 메타데이터 동기화**
+
+| 변경 | Before | After |
+|------|--------|-------|
+| Section 4 | 강진/고령/고창 축제 | 을지로 노가리골목 + 창신동 봉제골목 (오덕우 톤) |
+| 결론 step 3 | 부산 광복로/광안리 | 을지로 인쇄 골목/창신동 봉제공장 거리 |
+| FAQ | "서울 외 축제?" → 강진/고령 | "서울에서 더 파볼 동네?" → 을지로/창신동 |
+| Schema.org FAQ | 동일 | 동일 반영 |
+| URL | `/travel-blog/posts//` | `/travel-blog/posts/2026-02-18-post/` |
+| 이미지 | kto-post-1(강진), post-2(고령) | kto-post-3(을지로), post-4(창신동) |
+| image-registry | post-1, post-2 누락 | post-3, post-4 정식 등록 |
+
+**4단계: 고아 이미지 정리 + 배포**
+
+- `kto-2026-02-18-post-1.jpg` (강진), `kto-2026-02-18-post-2.jpg` (고령) 삭제
+- blog repo 커밋 `4eeb0f2` → push to master
+
+#### 확립된 워크플로우: 콘텐츠 수정 시 3단계 동기화
+
+이번 세션에서 확인된 패턴을 MEMORY.md에 기록:
+
+```
+콘텐츠 수정 시 반드시 3단계 동기화:
+1. 텍스트: 본문 섹션 교체/삭제/추가
+2. 이미지: KTO 검색 → 없으면 웹리서치 기반 AI 스틸컷 → 고아 이미지 삭제
+3. 메타데이터: image-registry.json, FAQ(frontmatter + schema + body), URL 경로
+```
+
+**auto-collect 지리적 스코프 검증 규칙**:
+- 포스트 제목/주제의 지리적 스코프를 벗어나는 API 데이터는 삽입 금지
+- FAQ/Schema까지 연쇄 오염되므로 삽입 전 스코프 체크 필수
+
+#### 기술 메모
+
+- `getDataGoKrClient()`는 dotenv 미로드 시 null 반환 → 스크립트 상단 `config()` 필수
+- `searchKeyword(keyword, opts)` 시그니처: 첫 번째 인자가 keyword 문자열, 두 번째가 옵션 객체
+- Windows 환경에서 curl이 안 되는 경우 `node -e "http.get(...)"` 폴백 사용
+- blog/ 레포 선택적 스테이징: 관련 파일만 명시적으로 `git add` (다른 작업의 미완성 파일 혼입 방지)
+
+---
+
 ### 2026-02-14: 이미지 파이프라인 지리적/섹션 맥락 검증 업그레이드
 
 #### 배경

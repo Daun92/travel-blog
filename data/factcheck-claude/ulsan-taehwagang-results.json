@@ -1,0 +1,59 @@
+{
+  "filePath": "blog/content/posts/travel/2026-02-18-ulsan-taehwagang.md",
+  "title": "울산 태화강 국가정원 십리대숲 당일치기, 죽음의 강에서 생명의 숲으로 거듭난 인문학적 여정",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "울산 특정공업지구 지정",
+      "value": "울산 특정공업지구 지정",
+      "severity": "critical",
+      "context": "- **1962년**: 울산 특정공업지구 지정 — 급격한 산업화 시작",
+      "lineNumber": 87
+    },
+    {
+      "id": "ct-1",
+      "type": "contact",
+      "text": "00100200100",
+      "value": "00100200100",
+      "severity": "minor",
+      "context": "[고헌산 상세정보](https://tour.ulsan.go.kr/kor/unit/attrctn/view.ulsan?mId=001002001000000000&unqId=7)",
+      "lineNumber": 58
+    },
+    {
+      "id": "ct-2",
+      "type": "transport",
+      "text": "버스(5001번 등)를 이용하여 태화강 국가정원 인근으로 편리하게 이동할 수 있습니다.",
+      "value": "(5001번 등)를 이용하여 태화강 국가정원 인근으로 편리하게 이동할 수 있습니다.",
+      "severity": "minor",
+      "context": "- **KTX 울산역(통도사역)** 이용 시: 리무진 버스(5001번 등)를 이용하여 태화강 국가정원 인근으로 편리하게 이동할 수 있습니다.",
+      "lineNumber": 103
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://theme.archives.go.kr/next/industry/delegate1960A.do",
+      "details": "1962년 1월 27일 각령 제403호로 울산이 국내 최초 특정공업지구로 지정됨. 국가기록원 자료에서 확인."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "unknown",
+      "confidence": 55,
+      "source": "web_search",
+      "sourceUrl": "https://tour.ulsan.go.kr",
+      "details": "tour.ulsan.go.kr 도메인은 울산 공식 관광 포털이나, URL 구조 개편으로 unqId=7 매핑 직접 확인 불가."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 92,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EC%9A%B8%EC%82%B0%20%EB%B2%84%EC%8A%A4%205001",
+      "details": "5001번 리무진 버스가 KTX 울산역에서 출발, 태화강역 경유 확인. 태화강 국가정원은 태화강역 인근."
+    }
+  ]
+}

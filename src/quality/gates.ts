@@ -436,6 +436,24 @@ export async function validateFile(
     }
   }
 
+  // 9. GEO 게이트 (AI 검색 엔진 인용 친화)
+  const geoConfig = (config.gates as Record<string, { minScore?: number; blockOnFailure?: boolean; enabled?: boolean; warn?: boolean }>).geo || { minScore: 60, blockOnFailure: false, enabled: true, warn: true };
+  if (geoConfig.enabled !== false && (options.allGates || options.structure)) {
+    // structure 게이트에서 이미 analyzeStructure()가 실행됐으면 재사용
+    const geoAnalysis = structureAnalysis || analyzeStructure(content);
+    if (!structureAnalysis) structureAnalysis = geoAnalysis;
+
+    gates.push({
+      name: 'geo',
+      score: geoAnalysis.geoScore,
+      passed: geoAnalysis.geoScore >= (geoConfig.minScore || 60),
+      threshold: geoConfig.minScore || 60,
+      blockOnFailure: geoConfig.blockOnFailure || false,
+      details: `GEO 점수: ${geoAnalysis.geoScore}, 이슈 ${geoAnalysis.geoIssues.length}개`,
+      warnings: geoAnalysis.geoIssues.map(i => i.message).slice(0, 5)
+    });
+  }
+
   // 종합 판정
   const requiredGates = gates.filter(g => config.publishRequirements.requiredGates.includes(g.name));
   const warningGates = gates.filter(g => config.publishRequirements.warningGates.includes(g.name));

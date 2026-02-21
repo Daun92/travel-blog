@@ -19,6 +19,7 @@ import {
 import {
   generateFrontmatter,
   generateSlug,
+  extractSlugWithoutDate,
   parseSeoMeta,
   generateMarkdownFile,
   type FrontmatterData
@@ -126,15 +127,20 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
 
   // SEO 메타데이터 추출
   onProgress('SEO 메타데이터 추출 중...');
-  const { title, description, keywords: seoKeywords, content: parsedContent } = parseSeoMeta(rawContent);
+  const { title, description, keywords: seoKeywords, slug: seoSlug, content: parsedContent } = parseSeoMeta(rawContent);
 
   // 제목 추출 (SEO에서 못 찾으면 본문에서 추출)
   const finalTitle = title || extractTitleFromContent(parsedContent) || topic;
   const finalDescription = description || extractDescriptionFromContent(parsedContent) || topic;
   const finalKeywords = seoKeywords || keywords;
 
-  // 슬러그 생성 (이미지 파일명에도 사용) — outputDir 전달로 충돌 방지
-  const slug = generateSlug(finalTitle, outputDir);
+  // 슬러그 생성: LLM SEO slug 우선 → generateSlug 폴백
+  const slug = seoSlug
+    ? generateSlug(seoSlug, outputDir)
+    : generateSlug(finalTitle, outputDir, topic);
+  if (seoSlug) {
+    onProgress(`LLM 생성 slug 사용: ${seoSlug}`);
+  }
 
   // 인라인 이미지 처리
   let finalContent = parsedContent;
@@ -177,6 +183,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
   const authorName = selectedPersona?.authorLine || 'Blog Author';
   const frontmatter: FrontmatterData = {
     title: finalTitle,
+    slug: extractSlugWithoutDate(slug),
     date: new Date(),
     draft,
     description: finalDescription,

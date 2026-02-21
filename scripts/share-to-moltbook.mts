@@ -87,7 +87,7 @@ async function sharePost(filePath: string, baseUrl: string = 'https://daun92.git
 
 // 메인 실행
 const filePath = process.argv[2];
-const baseUrl = process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog';
+const baseUrl = (process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog').replace(/\/+$/, '');
 
 if (!filePath) {
   console.log(`

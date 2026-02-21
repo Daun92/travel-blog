@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config();
 import { loadMoltbookConfig, MoltbookShareAgent } from '../src/agents/moltbook/index.js';
 
-const baseUrl = process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog';
+const baseUrl = (process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog').replace(/\/+$/, '');
 const moltConfig = await loadMoltbookConfig();
 if (!moltConfig) {
   console.error('❌ Moltbook 설정 로드 실패');

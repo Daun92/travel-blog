@@ -153,7 +153,7 @@ export class MoltbookShareAgent {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          submolt,
+          submolt_name: submolt,
           title: blogPost.title,
           url: blogPost.url,
           content: `${blogPost.summary}\n\n📊 데이터 기반 큐레이션\n🔗 전체 글: ${blogPost.url}\n\n#${blogPost.topics.join(' #')}`
@@ -222,7 +222,7 @@ export class MoltbookShareAgent {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          submolt,
+          submolt_name: submolt,
           title: `[초안 피드백 요청] ${draft.title}`,
           content: `📝 **초안 미리보기**\n\n${draft.summary}\n\n---\n\n💬 이 초안에 대한 피드백을 부탁드립니다!\n- 내용이 정확한가요?\n- 추가되었으면 하는 정보가 있나요?\n- 개선할 점이 있다면 알려주세요!\n\n#${draft.topics.join(' #')} #초안피드백`
         })

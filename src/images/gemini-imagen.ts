@@ -1,11 +1,13 @@
 /**
  * Gemini AI 이미지 생성 모듈
  * Google Gemini API를 사용한 인포그래픽, 다이어그램, 지도 등 설명 이미지 생성
+ * Batch API 지원 — 50% 비용 할인 + 비동기 일괄 처리
  */
 
 import { writeFile, mkdir, readFile } from 'fs/promises';
 import { join, dirname } from 'path';
 import { existsSync } from 'fs';
+import { GoogleGenAI, JobState } from '@google/genai';
 
 export type ImageStyle = 'infographic' | 'diagram' | 'map' | 'comparison' | 'moodboard' | 'bucketlist' | 'cover_photo';
 export type AspectRatio = '16:9' | '4:3' | '1:1';
@@ -36,6 +38,50 @@ export interface SavedImage {
 interface UsageStats {
   date: string;
   count: number;
+}
+
+// ============================================================================
+// Batch API 타입
+// ============================================================================
+
+export interface BatchImageRequest {
+  prompt: string;
+  style: ImageStyle;
+  aspectRatio?: AspectRatio;
+  topic?: string;
+  personaId?: string;
+}
+
+export interface BatchImageResultItem {
+  success: boolean;
+  image?: GeneratedImage;
+  error?: string;
+  index: number;
+}
+
+export interface BatchGenerateOptions {
+  /** 폴링 간격 ms (기본 5000) */
+  pollIntervalMs?: number;
+  /** 최대 대기 시간 ms (기본 600000 = 10분) */
+  timeoutMs?: number;
+  /** 진행 상황 콜백 */
+  onProgress?: (msg: string) => void;
+}
+
+export interface SaveImageOptions {
+  /** Sharp 최적화 적용 (리사이즈 + JPEG 압축) */
+  optimize?: boolean;
+  /** 최대 폭 px (기본 1200) */
+  maxWidth?: number;
+  /** JPEG 품질 1-100 (기본 85) */
+  quality?: number;
+}
+
+export class BatchTimeoutError extends Error {
+  constructor(message: string, public readonly jobName: string) {
+    super(message);
+    this.name = 'BatchTimeoutError';
+  }
 }
 
 interface GeminiResponse {
@@ -99,11 +145,19 @@ export class GeminiImageClient {
   private apiKey: string;
   private model: string;
   private usageFilePath: string;
+  private genaiClient: GoogleGenAI | null = null;
 
   constructor(apiKey?: string, model?: string) {
     this.apiKey = apiKey || process.env.GEMINI_API_KEY || '';
     this.model = model || process.env.GEMINI_IMAGE_MODEL || DEFAULT_MODEL;
     this.usageFilePath = join(process.cwd(), 'data', 'gemini-usage.json');
+  }
+
+  private getGenAIClient(): GoogleGenAI {
+    if (!this.genaiClient) {
+      this.genaiClient = new GoogleGenAI({ apiKey: this.apiKey });
+    }
+    return this.genaiClient;
   }
 
   /**
@@ -173,6 +227,35 @@ export class GeminiImageClient {
     );
 
     return count;
+  }
+
+  /**
+   * 배치 사용량 증가 (한 번에 n개)
+   */
+  private async incrementUsageBatch(count: number): Promise<number> {
+    const today = new Date().toISOString().split('T')[0];
+    let current = 0;
+
+    try {
+      if (existsSync(this.usageFilePath)) {
+        const data = await readFile(this.usageFilePath, 'utf-8');
+        const stats: UsageStats = JSON.parse(data);
+        if (stats.date === today) {
+          current = stats.count;
+        }
+      }
+    } catch { /* ignore */ }
+
+    current += count;
+
+    await mkdir(dirname(this.usageFilePath), { recursive: true });
+    await writeFile(
+      this.usageFilePath,
+      JSON.stringify({ date: today, count: current }, null, 2),
+      'utf-8'
+    );
+
+    return current;
   }
 
   /**
@@ -294,6 +377,177 @@ export class GeminiImageClient {
   }
 
   /**
+   * 배치 요청용 프롬프트 사전 구성 (public wrapper)
+   */
+  buildFullPrompt(options: ImageGenerationOptions): string {
+    const { prompt, style, aspectRatio = '16:9', personaId } = options;
+    return this.buildPrompt(prompt, style, aspectRatio, personaId);
+  }
+
+  /**
+   * 배치 이미지 생성 (Batch API — 50% 할인)
+   * 인라인 요청, 3~10개 이미지에 적합
+   */
+  async generateImagesBatch(
+    requests: BatchImageRequest[],
+    options: BatchGenerateOptions = {}
+  ): Promise<BatchImageResultItem[]> {
+    if (!this.isConfigured()) {
+      throw new Error('Gemini API 키가 설정되지 않았습니다.');
+    }
+    if (!this.isEnabled()) {
+      throw new Error('Gemini 이미지 생성이 비활성화되어 있습니다.');
+    }
+    if (requests.length === 0) {
+      return [];
+    }
+
+    const usageCheck = await this.checkUsageLimit(requests.length);
+    if (!usageCheck.allowed) {
+      throw new Error(usageCheck.warning || '일일 한도 초과');
+    }
+
+    const {
+      pollIntervalMs = 5000,
+      timeoutMs = 600_000,
+      onProgress = () => {},
+    } = options;
+
+    const ai = this.getGenAIClient();
+
+    // 인라인 요청 구성 (InlinedRequest[] 직접 전달)
+    const inlinedRequests = requests.map((req) => {
+      const fullPrompt = this.buildFullPrompt({
+        prompt: req.prompt,
+        style: req.style,
+        aspectRatio: req.aspectRatio,
+        topic: req.topic,
+        personaId: req.personaId,
+      });
+      return {
+        contents: [{ parts: [{ text: fullPrompt }] }],
+        config: {
+          responseModalities: ['TEXT', 'IMAGE'] as string[],
+        },
+      };
+    });
+
+    onProgress(`배치 작업 생성 중 (${requests.length}개 이미지)...`);
+
+    const batchJob = await ai.batches.create({
+      model: this.model,
+      src: inlinedRequests,
+      config: { displayName: `openclaw-images-${Date.now()}` },
+    });
+
+    const jobName = batchJob.name;
+    if (!jobName) {
+      throw new Error('배치 작업 ID를 받지 못했습니다.');
+    }
+
+    onProgress(`배치 작업 생성됨: ${jobName}`);
+
+    // 폴링
+    const startTime = Date.now();
+    const TERMINAL_STATES = new Set([
+      JobState.JOB_STATE_SUCCEEDED,
+      JobState.JOB_STATE_FAILED,
+      JobState.JOB_STATE_CANCELLED,
+    ]);
+
+    let job = batchJob;
+
+    while (true) {
+      const elapsed = Date.now() - startTime;
+      if (elapsed > timeoutMs) {
+        try { await ai.batches.cancel({ name: jobName }); } catch { /* ignore */ }
+        throw new BatchTimeoutError(
+          `배치 작업 시간 초과 (${Math.round(timeoutMs / 1000)}초)`,
+          jobName
+        );
+      }
+
+      job = await ai.batches.get({ name: jobName });
+      const state = job.state;
+
+      onProgress(`배치 상태: ${state ?? 'UNKNOWN'} (${Math.round(elapsed / 1000)}초 경과)`);
+
+      if (state && TERMINAL_STATES.has(state)) {
+        break;
+      }
+
+      await new Promise(resolve => setTimeout(resolve, pollIntervalMs));
+    }
+
+    if (job.state === JobState.JOB_STATE_FAILED) {
+      throw new Error(`배치 작업 실패`);
+    }
+    if (job.state === JobState.JOB_STATE_CANCELLED) {
+      throw new Error('배치 작업이 취소되었습니다.');
+    }
+
+    // 결과 추출
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const responses = (job.dest as any)?.inlinedResponses as Array<{
+      error?: { message?: string };
+      response?: GeminiResponse;
+    }> | undefined;
+
+    if (!responses || responses.length === 0) {
+      throw new Error('배치 응답이 비어 있습니다.');
+    }
+
+    const results: BatchImageResultItem[] = [];
+
+    for (let i = 0; i < requests.length; i++) {
+      const resp = responses[i];
+
+      if (!resp || resp.error) {
+        results.push({
+          success: false,
+          error: resp?.error?.message || '이미지 생성 실패',
+          index: i,
+        });
+        continue;
+      }
+
+      const parts = resp.response?.candidates?.[0]?.content?.parts;
+      const imagePart = parts?.find(
+        (p: { inlineData?: { data: string; mimeType: string } }) => p.inlineData?.data
+      );
+
+      if (!imagePart?.inlineData) {
+        results.push({
+          success: false,
+          error: '응답에서 이미지를 찾을 수 없습니다.',
+          index: i,
+        });
+        continue;
+      }
+
+      results.push({
+        success: true,
+        image: {
+          base64Data: imagePart.inlineData.data,
+          mimeType: imagePart.inlineData.mimeType || 'image/png',
+          prompt: requests[i].prompt,
+          style: requests[i].style,
+        },
+        index: i,
+      });
+    }
+
+    // 성공 건수만큼 사용량 한 번에 기록
+    const successCount = results.filter(r => r.success).length;
+    if (successCount > 0) {
+      await this.incrementUsageBatch(successCount);
+    }
+
+    onProgress(`배치 완료: ${successCount}/${requests.length} 성공`);
+    return results;
+  }
+
+  /**
    * 스타일별 프롬프트 구성 - 감성적이고 공유하고 싶은 이미지
    */
   private buildPrompt(prompt: string, style: ImageStyle, aspectRatio: AspectRatio, personaId?: string): string {
@@ -407,24 +661,35 @@ CRITICAL REQUIREMENTS:
 }
 
 /**
- * 이미지 저장
+ * 이미지 저장 (옵션: Sharp 최적화)
  */
 export async function saveImage(
   image: GeneratedImage,
   outputDir: string,
-  filename: string
+  filename: string,
+  options: SaveImageOptions = {}
 ): Promise<SavedImage> {
-  // MIME 타입에서 확장자 추출
-  const ext = image.mimeType.split('/')[1] || 'png';
+  const { optimize = false, maxWidth = 1200, quality = 85 } = options;
+
+  const buffer = Buffer.from(image.base64Data, 'base64');
+
+  let ext = image.mimeType.split('/')[1] || 'png';
+  let finalBuffer: Buffer = buffer;
+
+  if (optimize) {
+    const sharp = (await import('sharp')).default;
+    finalBuffer = await sharp(buffer)
+      .resize(maxWidth, undefined, { fit: 'inside', withoutEnlargement: true })
+      .jpeg({ quality })
+      .toBuffer();
+    ext = 'jpg';
+  }
+
   const fullFilename = filename.endsWith(`.${ext}`) ? filename : `${filename}.${ext}`;
   const filepath = join(outputDir, fullFilename);
 
-  // 디렉토리 생성
   await mkdir(dirname(filepath), { recursive: true });
-
-  // Base64 디코딩 및 저장
-  const buffer = Buffer.from(image.base64Data, 'base64');
-  await writeFile(filepath, buffer);
+  await writeFile(filepath, finalBuffer);
 
   // Hugo baseURL 포함 절대 경로 (/travel-blog/images/...)
   const baseURL = process.env.HUGO_BASE_URL || '/travel-blog';

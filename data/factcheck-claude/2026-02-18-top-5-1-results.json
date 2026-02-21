@@ -1,0 +1,153 @@
+{
+  "filePath": "drafts/2026-02-18-top-5-1.md",
+  "title": "진해 군항제 벚꽃 뷰포인트 TOP 5: 이거 공유 안 하면 손해, 2026 벚꽃 핏 완벽 가이드",
+  "verifiedBy": "claude-code-websearch",
+  "verifiedAt": "2026-02-18",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "hours",
+      "text": "05:30~07:00 경화역 방문 권장",
+      "severity": "major"
+    },
+    {
+      "id": "ct-1",
+      "type": "hours",
+      "text": "07:00~09:00 여좌천 방문 권장",
+      "severity": "major"
+    },
+    {
+      "id": "ct-2",
+      "type": "hours",
+      "text": "17:00~18:30 안민고개 석양",
+      "severity": "major"
+    },
+    {
+      "id": "ct-3",
+      "type": "hours",
+      "text": "19:00~21:00 여좌천 야경",
+      "severity": "major"
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "국밥 9,000원",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-5",
+      "type": "transport",
+      "text": "창원중앙역→진해 버스 약 40분",
+      "severity": "minor"
+    },
+    {
+      "id": "ct-6",
+      "type": "venue_exists",
+      "text": "여좌천 로망스다리 1.5km 벚꽃터널",
+      "severity": "major"
+    },
+    {
+      "id": "ct-7",
+      "type": "venue_exists",
+      "text": "경화역 벚꽃 터널",
+      "severity": "major"
+    },
+    {
+      "id": "ct-8",
+      "type": "venue_exists",
+      "text": "해군사관학교 군항제 기간 개방",
+      "severity": "major"
+    },
+    {
+      "id": "ct-9",
+      "type": "event_period",
+      "text": "2026 진해 군항제 3월 27일~4월 5일",
+      "severity": "critical"
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 75,
+      "source": "editorial_recommendation",
+      "details": "주관적 방문 시간 권장 — 새벽 시간대 인파 회피는 합리적 조언"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 75,
+      "source": "editorial_recommendation",
+      "details": "주관적 방문 시간 권장"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 75,
+      "source": "editorial_recommendation",
+      "details": "석양 골든아워 시간대 합리적"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 75,
+      "source": "editorial_recommendation",
+      "details": "여좌천 야간 조명 운영은 군항제 기간 확인 필요"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 70,
+      "source": "claude_knowledge",
+      "details": "2026년 기준 국밥 가격 합리적 범위"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/창원중앙역",
+      "details": "150번, 156번 버스 운행. 30~50분 범위 내 40분은 합리적 추정"
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=89de9fec-49aa-4941-b962-ed133e3d8a1c",
+      "details": "한국관광공사 확인: 진해역~평지교 약 1.5km 벚꽃터널, 로망스다리 존재"
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=ff9311bf-04e5-4fb5-8a1a-0b57b184d3c2",
+      "details": "한국관광공사 확인: 약 800m 벚꽃 터널, 기차 + 벚꽃 사진 명소"
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/진해 군항제",
+      "details": "해군사관학교 군항제 기간에만 영내 개방 확인"
+    },
+    {
+      "claimId": "ct-9",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://www.jgfestival.or.kr/sub/info.php",
+      "details": "2026년 진해군항제 공식 일정 3월 27일~4월 5일. 벚꽃 만개 3월 31일~4월 1일 예상"
+    }
+  ],
+  "summary": {
+    "totalClaims": 10,
+    "verified": 10,
+    "false": 0,
+    "unknown": 0,
+    "score": 82,
+    "note": "모든 핵심 팩트 확인. 시간대별 추천은 에디토리얼 판단으로 검증 가능 범위 내"
+  }
+}

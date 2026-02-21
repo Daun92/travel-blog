@@ -60,6 +60,14 @@ export interface KeywordDensityGateConfig extends GateConfig {
 }
 
 /**
+ * GEO (Generative Engine Optimization) 게이트 설정
+ */
+export interface GEOGateConfig extends GateConfig {
+  /** non-blocking 경고만 출력 (default: true) */
+  warn?: boolean;
+}
+
+/**
  * 품질 게이트 설정
  */
 export interface QualityGatesConfig {
@@ -74,6 +82,7 @@ export interface QualityGatesConfig {
     tone?: ToneGateConfig;
     structure?: StructureGateConfig;
     keyword_density?: KeywordDensityGateConfig;
+    geo?: GEOGateConfig;
   };
   publishRequirements: {
     requiredGates: string[];
@@ -95,12 +104,12 @@ const DEFAULT_CONFIG: QualityGatesConfig = {
   version: '1.0.0',
   gates: {
     factcheck: {
-      minScore: 80,
+      minScore: 70,
       blockOnFailure: true,
       critical: { minScore: 100, items: ['venue_exists', 'location'] },
       major: { minScore: 85, items: ['hours', 'event_period'] },
       minor: { minScore: 70, items: ['price', 'facilities'] },
-      overall: { minScore: 80, blockOnFailure: true }
+      overall: { minScore: 70, blockOnFailure: true }
     },
     seo: {
       minScore: 70,
@@ -153,6 +162,12 @@ const DEFAULT_CONFIG: QualityGatesConfig = {
       blockOnFailure: false,
       enabled: true,
       targetDensity: [1, 3]
+    },
+    geo: {
+      minScore: 60,
+      blockOnFailure: false,
+      enabled: true,
+      warn: true
     }
   },
   publishRequirements: {

@@ -24,6 +24,7 @@ export interface NewCommandOptions {
   agent?: string; // 에이전트 페르소나 ID (viral|friendly|informative|niche)
   framingType?: string; // 콘텐츠 프레이밍 유형 (list_ranking|deep_dive|experience|...)
   autoCollect?: boolean; // 자동 데이터 수집 후 프롬프트에 주입
+  allApis?: boolean; // --auto-collect 시 모든 API 활성화
   autoFactcheck?: boolean; // 생성 후 자동 팩트체크 실행
 }
 
@@ -139,15 +140,23 @@ export async function newCommand(options: NewCommandOptions): Promise<void> {
     let collectedDataRaw: CollectedData | undefined;
     if (options.autoCollect) {
       console.log('');
-      spinner.start(`"${options.topic}" 관련 데이터 수집 중 (data.go.kr)...`);
+      const apiLabel = options.allApis ? '전체 API' : 'data.go.kr';
+      spinner.start(`"${options.topic}" 관련 데이터 수집 중 (${apiLabel})...`);
       try {
-        const collected = await collectData(options.topic);
+        const collected = await collectData(options.topic, {
+          allApis: options.allApis,
+        });
         collectedDataRaw = collected;
         collectedDataContext = dataToPromptContext(collected);
         const stats = [
           collected.tourismData.length > 0 ? `관광지 ${collected.tourismData.length}` : '',
           collected.festivals.length > 0 ? `축제 ${collected.festivals.length}` : '',
           collected.cultureEvents.length > 0 ? `문화행사 ${collected.cultureEvents.length}` : '',
+          collected.weatherData?.length ? `날씨 ${collected.weatherData.length}` : '',
+          collected.heritageData?.length ? `문화유산 ${collected.heritageData.length}` : '',
+          collected.trailData?.length ? `둘레길 ${collected.trailData.length}` : '',
+          collected.marketData?.length ? `시장 ${collected.marketData.length}` : '',
+          collected.performances?.length ? `공연 ${collected.performances.length}` : '',
         ].filter(Boolean).join(', ');
         spinner.succeed(`데이터 수집 완료: ${stats}`);
       } catch (error) {

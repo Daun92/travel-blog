@@ -10,6 +10,14 @@ import { collectData, getTrendKeywords, dataToPromptContext } from '../../agents
 export interface CollectCommandOptions {
   keyword?: string;
   type?: 'travel' | 'culture';
+  weather?: boolean;
+  heritage?: boolean;
+  trail?: boolean;
+  market?: boolean;
+  bigdata?: boolean;
+  performances?: boolean;
+  festivalStd?: boolean;
+  allApis?: boolean;
 }
 
 export async function collectCommand(options: CollectCommandOptions): Promise<void> {
@@ -65,7 +73,16 @@ export async function collectCommand(options: CollectCommandOptions): Promise<vo
     // 데이터 수집
     spinner.start(`"${keyword}" 데이터 수집 중...`);
 
-    const data = await collectData(keyword);
+    const data = await collectData(keyword, {
+      weather: options.weather,
+      heritage: options.heritage,
+      trail: options.trail,
+      market: options.market,
+      bigdata: options.bigdata,
+      performances: options.performances,
+      festivalStd: options.festivalStd,
+      allApis: options.allApis,
+    });
 
     spinner.succeed('데이터 수집 완료!');
 
@@ -79,6 +96,12 @@ export async function collectCommand(options: CollectCommandOptions): Promise<vo
     console.log(`• 축제/행사: ${chalk.green(data.festivals?.length ?? 0)}개`);
     console.log(`• 문화행사: ${chalk.green(data.cultureEvents.length)}개`);
     console.log(`• 트렌드 키워드: ${chalk.green(data.trendKeywords.length)}개`);
+    if (data.weatherData?.length) console.log(`• 관광 날씨: ${chalk.green(data.weatherData.length)}개`);
+    if (data.heritageData?.length) console.log(`• 문화유산: ${chalk.green(data.heritageData.length)}개`);
+    if (data.trailData?.length) console.log(`• 둘레길: ${chalk.green(data.trailData.length)}개`);
+    if (data.marketData?.length) console.log(`• 전통시장: ${chalk.green(data.marketData.length)}개`);
+    if (data.performances?.length) console.log(`• 공연/전시: ${chalk.green(data.performances.length)}개`);
+    if (data.festivalStdData?.length) console.log(`• 문화축제: ${chalk.green(data.festivalStdData.length)}개`);
 
     // 관광지 목록
     if (data.tourismData.length > 0) {

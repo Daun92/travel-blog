@@ -12,6 +12,11 @@ import {
   OfficialApiResult
 } from './types.js';
 import { getDataGoKrClient } from '../api/data-go-kr/index.js';
+import { getHeritageClient } from '../api/heritage/index.js';
+import { getMarketClient } from '../api/market/index.js';
+import { getCulturePortalClient } from '../api/culture-portal/index.js';
+import { getKopisClient } from '../api/kopis/index.js';
+import { getTrailClient } from '../api/trail/index.js';
 
 interface GroundingClientConfig {
   apiKey: string;
@@ -30,9 +35,101 @@ const verificationCache = new Map<string, VerificationResult>();
 async function verifyWithOfficialApi(
   claim: ExtractedClaim
 ): Promise<OfficialApiResult | null> {
-  const cultureApiKey = process.env.CULTURE_API_KEY;
+  // 특화 API를 먼저 검사 → 일반 venue_exists/location은 마지막 폴백
+  // (TypeScript 제어 흐름: venue_exists가 early return으로 소비되면 이후 비교 불가)
 
-  // 장소/관광지 검증 (한국관광공사 KorService2)
+  // 1. 문화재/유산 검증 (국가유산청 API)
+  if (claim.type === 'heritage' || (claim.type === 'venue_exists' && claim.context?.includes('문화재'))) {
+    const heritageClient = getHeritageClient();
+    if (heritageClient) {
+      try {
+        const items = await heritageClient.searchHeritage(claim.value, { numOfRows: 5 });
+        if (items.length > 0) {
+          return {
+            found: true,
+            data: { name: items[0].ccbaMnm1, type: items[0].ccbaKdnm, location: items[0].ccbaLcad },
+            source: 'heritage_api',
+            checkedAt: new Date().toISOString()
+          };
+        }
+      } catch { /* fallthrough to general */ }
+    }
+  }
+
+  // 2. 전통시장 검증 (시장 API)
+  if (claim.type === 'venue_exists' && claim.context?.includes('시장')) {
+    const marketClient = getMarketClient();
+    if (marketClient) {
+      try {
+        const items = await marketClient.searchMarkets(claim.value, { numOfRows: 5 });
+        if (items.length > 0) {
+          return {
+            found: true,
+            data: { name: items[0].mrktNm, address: items[0].rdnmadr ?? items[0].lnmadr },
+            source: 'market_api',
+            checkedAt: new Date().toISOString()
+          };
+        }
+      } catch { /* fallthrough to general */ }
+    }
+  }
+
+  // 3. 둘레길/산책로 검증 (산림청 API)
+  if (claim.type === 'trail' || (claim.type === 'venue_exists' && claim.context?.includes('둘레길'))) {
+    const trailClient = getTrailClient();
+    if (trailClient) {
+      try {
+        const items = await trailClient.searchTrails(claim.value, { numOfRows: 5 });
+        if (items.length > 0) {
+          return {
+            found: true,
+            data: { name: items[0].frtrlNm, location: items[0].sigun },
+            source: 'trail_api',
+            checkedAt: new Date().toISOString()
+          };
+        }
+      } catch { /* fallthrough to general */ }
+    }
+  }
+
+  // 4. 전시/문화행사 검증 (문화포털 + KOPIS)
+  if (claim.type === 'event_period') {
+    // 1차: 문화포털 클라이언트
+    const cultureClient = getCulturePortalClient();
+    if (cultureClient) {
+      try {
+        const items = await cultureClient.searchPerformances({ keyword: claim.value, rows: 5 });
+        if (items.length > 0) {
+          return {
+            found: true,
+            data: { title: items[0].eventNm, place: items[0].opar },
+            source: 'culture_portal_api',
+            checkedAt: new Date().toISOString()
+          };
+        }
+      } catch { /* fallthrough */ }
+    }
+
+    // 2차: KOPIS
+    const kopisClient = getKopisClient();
+    if (kopisClient) {
+      try {
+        const items = await kopisClient.searchPerformances({ keyword: claim.value, rows: 5 });
+        if (items.length > 0) {
+          return {
+            found: true,
+            data: { title: items[0].prfnm, venue: items[0].fcltynm },
+            source: 'kopis_api',
+            checkedAt: new Date().toISOString()
+          };
+        }
+      } catch { /* fallthrough */ }
+    }
+
+    return { found: false, source: 'culture_portal_api', checkedAt: new Date().toISOString() };
+  }
+
+  // 5. 장소/관광지 일반 검증 (한국관광공사 KorService2 — 폴백)
   if (claim.type === 'venue_exists' || claim.type === 'location') {
     const client = getDataGoKrClient();
     if (!client) return null;
@@ -56,31 +153,6 @@ async function verifyWithOfficialApi(
       return {
         found: false,
         source: 'korean_tourism_api_v2',
-        checkedAt: new Date().toISOString()
-      };
-    } catch {
-      return null;
-    }
-  }
-
-  // 전시/문화행사 검증 (문화포털 API)
-  if (claim.type === 'event_period') {
-    if (!cultureApiKey) return null;
-
-    try {
-      const searchKeyword = encodeURIComponent(claim.value);
-      const url = `http://www.culture.go.kr/openapi/rest/publicperformancedisplays/period?serviceKey=${cultureApiKey}&keyword=${searchKeyword}&rows=5`;
-
-      const response = await fetch(url);
-      if (!response.ok) return null;
-
-      // XML 응답 처리 (간소화)
-      const text = await response.text();
-      const found = text.includes('<item>');
-
-      return {
-        found,
-        source: 'culture_portal_api',
         checkedAt: new Date().toISOString()
       };
     } catch {

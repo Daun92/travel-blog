@@ -54,6 +54,7 @@ program
   .option('--image-count <count>', '생성할 인라인 이미지 개수 (기본: 3, 최대: 5)', '3')
   .option('--agent <id>', '에이전트 페르소나 지정 (viral|friendly|informative|niche)')
   .option('--auto-collect', 'data.go.kr API로 주제 관련 데이터 자동 수집 후 프롬프트에 주입')
+  .option('--all-apis', '--auto-collect 시 모든 API 활성화 (날씨/유산/둘레길/시장/빅데이터/공연/축제)')
   .option('--auto-factcheck', '생성 후 자동 팩트체크 실행 (70% 미만 시 경고)')
   .action((options) => {
     // image-count를 숫자로 변환
@@ -108,6 +109,14 @@ program
   .description('공공 API에서 데이터 수집')
   .option('-k, --keyword <keyword>', '수집할 키워드')
   .option('--type <type>', '유형 (travel|culture)', 'travel')
+  .option('--weather', '관광 날씨 데이터 포함')
+  .option('--heritage', '국가유산 데이터 포함')
+  .option('--trail', '둘레길 데이터 포함')
+  .option('--market', '전통시장 데이터 포함')
+  .option('--bigdata', '빅데이터 트렌드 포함')
+  .option('--performances', '공연/전시 데이터 포함')
+  .option('--festival-std', '문화축제 표준데이터 포함')
+  .option('--all-apis', '모든 API 활성화')
   .action(collectCommand);
 
 // Moltbook 커뮤니티

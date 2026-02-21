@@ -10,6 +10,7 @@ import slugify from 'slugify';
 
 export interface FrontmatterData {
   title: string;
+  slug?: string;
   date: Date;
   draft: boolean;
   description: string;
@@ -48,6 +49,9 @@ export function generateFrontmatter(data: FrontmatterData): string {
 
   // 필수 필드
   lines.push(`title: "${escapeYaml(data.title)}"`);
+  if (data.slug) {
+    lines.push(`slug: "${escapeYaml(data.slug)}"`);
+  }
   lines.push(`date: ${format(data.date, "yyyy-MM-dd'T'HH:mm:ssXXX")}`);
   lines.push(`draft: ${data.draft}`);
   lines.push(`description: "${escapeYaml(data.description)}"`);
@@ -131,25 +135,55 @@ export function generateFrontmatter(data: FrontmatterData): string {
 }
 
 /**
- * 파일명용 슬러그 생성
- * @param title 포스트 제목
- * @param outputDir 출력 디렉토리 경로 — 제공 시 기존 파일과 충돌 검사하여 카운터 부여
+ * 텍스트에서 slugify 가능한 부분을 추출
+ * 한글은 slugify가 제거하므로, ASCII 문자만 남는 점을 고려하여 충분한 길이를 확보
  */
-export function generateSlug(title: string, outputDir?: string): string {
-  // 한글 제목을 영문으로 변환하지 않고 날짜+간략화된 형태로 사용
-  const date = format(new Date(), 'yyyy-MM-dd');
-  const cleaned = title
+function slugifyText(text: string): string {
+  const cleaned = text
     .replace(/[^\w\s가-힣]/g, '')
     .trim()
-    .slice(0, 30);
+    .slice(0, 80);
 
-  const slug = slugify(cleaned, {
+  return slugify(cleaned, {
     lower: true,
     strict: true,
     locale: 'ko'
   });
+}
 
-  const baseSlug = `${date}-${slug || 'post'}`;
+/**
+ * 이미 유효한 slug 형식인지 확인 (소문자 영문 + 숫자 + 하이픈만 포함)
+ * LLM이 생성한 pre-formatted slug를 slugifyText()로 망가뜨리지 않기 위해 사용
+ */
+function isPreformattedSlug(text: string): boolean {
+  return /^[a-z0-9][a-z0-9-]*[a-z0-9]$/.test(text) && text.length >= 3;
+}
+
+/**
+ * 파일명용 슬러그 생성
+ * @param title 포스트 제목 (LLM 생성) 또는 LLM이 직접 만든 pre-formatted slug
+ * @param outputDir 출력 디렉토리 경로 — 제공 시 기존 파일과 충돌 검사하여 카운터 부여
+ * @param topic 원본 주제 (CLI -t 인자) — title에서 유효 slug 추출 실패 시 폴백
+ */
+export function generateSlug(title: string, outputDir?: string, topic?: string): string {
+  const date = format(new Date(), 'yyyy-MM-dd');
+  const MIN_SLUG_LENGTH = 3;
+
+  // 0차: 이미 유효한 slug 형식이면 그대로 사용 (LLM SEO slug)
+  // 1차: LLM 생성 제목에서 slug 추출
+  let slug = isPreformattedSlug(title) ? title : slugifyText(title);
+
+  // 2차: 너무 짧으면 원본 topic으로 폴백
+  if (slug.length < MIN_SLUG_LENGTH && topic) {
+    slug = slugifyText(topic);
+  }
+
+  // 3차: topic도 실패하면 타임스탬프 기반 유니크 slug
+  if (slug.length < MIN_SLUG_LENGTH) {
+    slug = `post-${Date.now()}`;
+  }
+
+  const baseSlug = `${date}-${slug}`;
 
   // outputDir이 제공되면 기존 파일과 충돌 검사
   if (outputDir) {
@@ -166,12 +200,21 @@ export function generateSlug(title: string, outputDir?: string): string {
 }
 
 /**
+ * 전체 slug에서 날짜 접두사를 제거하여 Hugo frontmatter용 slug 반환
+ * "2026-02-19-gyeongju-bulguksa" → "gyeongju-bulguksa"
+ */
+export function extractSlugWithoutDate(fullSlug: string): string {
+  return fullSlug.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+}
+
+/**
  * SEO 메타데이터 파싱
  */
 export function parseSeoMeta(content: string): {
   title?: string;
   description?: string;
   keywords?: string[];
+  slug?: string;
   content: string;
 } {
   const seoMatch = content.match(/<!--SEO\s*([\s\S]*?)-->/);
@@ -184,10 +227,17 @@ export function parseSeoMeta(content: string): {
     const seoJson = JSON.parse(seoMatch[1].trim());
     const cleanContent = content.replace(/<!--SEO[\s\S]*?-->/, '').trim();
 
+    // LLM이 생성한 slug를 정규화 (소문자, 하이픈만 허용)
+    const rawSlug = seoJson.slug as string | undefined;
+    const normalizedSlug = rawSlug
+      ? rawSlug.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '')
+      : undefined;
+
     return {
       title: seoJson.title,
       description: seoJson.description,
       keywords: seoJson.keywords,
+      slug: normalizedSlug && normalizedSlug.length >= 3 ? normalizedSlug : undefined,
       content: cleanContent
     };
   } catch {

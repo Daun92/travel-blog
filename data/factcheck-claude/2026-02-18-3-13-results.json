@@ -1,0 +1,242 @@
+{
+  "filePath": "drafts/2026-02-18-3-13.md",
+  "title": "3월 숨은 봄꽃 명소 산수유 매화 동백보다 깊은 '13월'의 디테일 탐구",
+  "verifiedBy": "claude-code-websearch",
+  "verifiedAt": "2026-02-19",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "venue_exists",
+      "severity": "critical",
+      "text": "백제삼계탕13월은 진해에 위치한 삼계탕 전문점",
+      "location": "섹션 1: 진해의 '13월'"
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "severity": "critical",
+      "text": "백제삼계탕13월 주소: 경상남도 창원시 진해구 태백서로47번길 19",
+      "location": "섹션 1 정보란"
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "severity": "major",
+      "text": "삼계탕 한 그릇 17,000원",
+      "location": "섹션 1 본문"
+    },
+    {
+      "id": "ct-3",
+      "type": "event_period",
+      "severity": "critical",
+      "text": "2026년 강진청자축제: 2월 21일 ~ 3월 2일, 10일간 개최",
+      "location": "섹션 2 본문, FAQ"
+    },
+    {
+      "id": "ct-4",
+      "type": "location",
+      "severity": "critical",
+      "text": "강진청자축제 장소: 전라남도 강진군 대구면 청자촌길 33",
+      "location": "섹션 2 정보란"
+    },
+    {
+      "id": "ct-5",
+      "type": "venue_exists",
+      "severity": "critical",
+      "text": "호텔3월은 대전 둔산동에 위치한 호텔",
+      "location": "섹션 3"
+    },
+    {
+      "id": "ct-6",
+      "type": "location",
+      "severity": "critical",
+      "text": "호텔3월 주소: 대전광역시 서구 둔산중로32번길 29",
+      "location": "섹션 3 정보란"
+    },
+    {
+      "id": "ct-7",
+      "type": "location",
+      "severity": "major",
+      "text": "호텔3월은 시청역에서 걸어서 2분 거리",
+      "location": "섹션 3 본문, FAQ"
+    },
+    {
+      "id": "ct-8",
+      "type": "facilities",
+      "severity": "minor",
+      "text": "호텔3월에 복층 객실, 옥상 정원, 대리석 욕조 시설이 있음",
+      "location": "섹션 3 본문"
+    },
+    {
+      "id": "ct-9",
+      "type": "price",
+      "severity": "major",
+      "text": "호텔3월 평일 기준 12만 원",
+      "location": "섹션 3 본문, FAQ"
+    },
+    {
+      "id": "ct-10",
+      "type": "venue_exists",
+      "severity": "critical",
+      "text": "13월의강릉은 강릉의 조개구이 전문 식당",
+      "location": "섹션 4"
+    },
+    {
+      "id": "ct-11",
+      "type": "location",
+      "severity": "critical",
+      "text": "13월의강릉 주소: 강원특별자치도 강릉시 해안로 292",
+      "location": "섹션 4 정보란"
+    },
+    {
+      "id": "ct-12",
+      "type": "price",
+      "severity": "minor",
+      "text": "조개 세트 6만 원 남짓",
+      "location": "섹션 4 본문"
+    },
+    {
+      "id": "ct-13",
+      "type": "facilities",
+      "severity": "minor",
+      "text": "13월의강릉은 환기 시설이 잘 되어 있음",
+      "location": "섹션 4 본문, FAQ"
+    },
+    {
+      "id": "ct-14",
+      "type": "transport",
+      "severity": "minor",
+      "text": "진해에서 3월 초에 매화와 동백을 볼 수 있음 (벚꽃 전)",
+      "location": "섹션 1 본문, FAQ"
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/profile.php?rid=5OOvvhWdH1vG",
+      "details": "백제삼계탕13월은 다이닝코드, 식신, 대한민국구석구석(visitkorea) 등 다수 플랫폼에 등록된 실재 식당. 창원시 진해구 태백동 소재 삼계탕 전문점으로 확인됨."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.siksinhot.com/P/1011030",
+      "details": "경상남도 창원시 진해구 태백서로47번길 19 — 다이닝코드, 식신, visitkorea 등 복수 소스에서 동일 주소 확인됨."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://www.diningcode.com/profile.php?rid=5OOvvhWdH1vG",
+      "details": "한방삼계탕 17,000원으로 다이닝코드 메뉴판에 등록됨. 다만 가격은 변동 가능하며, 확인 시점 기준 정보. 산삼삼계탕(19,000원), 궁중삼계탕(25,000원) 등 다양한 메뉴 존재."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 98,
+      "source": "web_search",
+      "sourceUrl": "https://thefestival.co.kr/info/festival/10716",
+      "details": "제54회 강진청자축제: 2026년 2월 21일 ~ 3월 2일, 10일간 개최 확인. 더페스티벌, localm.kr, visitkorea 등 복수 뉴스/축제 사이트에서 동일 일정 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 98,
+      "source": "web_search",
+      "sourceUrl": "https://www.gangjin.go.kr/culture/festival/celadon_porcelain",
+      "details": "전라남도 강진군 대구면 청자촌길 33 (고려청자박물관 일원) — 강진군청 공식 사이트 및 더페스티벌에서 동일 주소 확인."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://hotel-march.com/",
+      "details": "호텔3월(Hotel March)은 대전 둔산동 소재 부티크 호텔로 공식 사이트(hotel-march.com), 호텔스컴바인, 트리플, 야놀자, 열린관광 등 다수 플랫폼에 등록됨."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://access.visitkorea.or.kr/acm/detail.do?cotId=f19cf7f8-fd2c-48e0-a256-488c0ace3015",
+      "details": "대전광역시 서구 둔산중로32번길 29 (지번: 대전광역시 서구 둔산동 1435) — 공식 사이트, visitkorea, 호텔스컴바인 등 복수 소스에서 동일 주소 확인."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://access.visitkorea.or.kr/acm/detail.do?cotId=f19cf7f8-fd2c-48e0-a256-488c0ace3015",
+      "details": "visitkorea 열린관광 페이지에서 '시청역 도보 2분 거리'로 명시. 호텔 공식 사이트에서도 동일한 접근성 정보 제공."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://access.visitkorea.or.kr/acm/detail.do?cotId=f19cf7f8-fd2c-48e0-a256-488c0ace3015",
+      "details": "복층형 객실, 옥상정원(하늘마당), 전 객실 대리석 욕조 — visitkorea 열린관광 및 호텔스컴바인 등 복수 소스에서 확인."
+    },
+    {
+      "claimId": "ct-9",
+      "status": "unknown",
+      "confidence": 45,
+      "source": "web_search",
+      "sourceUrl": "https://www.hotelscombined.co.kr/Hotel/Hotel_March.htm",
+      "details": "호텔스컴바인 기준 숙박객 최근 평균 요금은 1박 64,849원(최저 55,711원). 12만 원은 일반실 기준이 아닌 복층 프리미엄 객실 요금일 수 있으나, 복층 객실 특정 가격은 검색 결과에서 직접 확인 불가. 본문 맥락상 복층 객실을 언급하므로 가능성은 있으나 검증 불충분."
+    },
+    {
+      "claimId": "ct-10",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.ktriptips.com/kor/food/3536409",
+      "details": "13월의강릉은 K-TRIP TIPS, 다이닝코드 강릉 조개구이 랭킹, 트리플 등 복수 플랫폼에 등록된 실재 식당. 가리비구이/조개구이 전문점으로 확인됨."
+    },
+    {
+      "claimId": "ct-11",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "sourceUrl": "https://www.tabling.co.kr/place/67c6c4104306a889d2c261d5",
+      "details": "강원특별자치도 강릉시 해안로 292 — 테이블링(tabling.co.kr) 및 트리플(triple.guide) 등 예약/리뷰 플랫폼에서 동일 주소 확인됨."
+    },
+    {
+      "claimId": "ct-12",
+      "status": "unknown",
+      "confidence": 50,
+      "source": "web_search",
+      "details": "조개 세트 6만 원 정보는 웹 검색에서 직접 확인 불가. 강릉 조개구이 일반적 가격대와 크게 벗어나지 않으나 구체적 금액 검증 실패."
+    },
+    {
+      "claimId": "ct-13",
+      "status": "verified",
+      "confidence": 70,
+      "source": "web_search",
+      "sourceUrl": "https://www.assemblynews.co.kr/rdgv/%EA%B0%95%EB%A6%89%EB%A7%9B%EC%A7%91%2013%EC%9B%94%EC%9D%98%EA%B0%95%EB%A6%89%20%EC%A1%B0%EA%B0%9C",
+      "details": "일부 리뷰에서 매장의 깔끔한 환경을 언급. FAQ에서도 환기 시설을 특장점으로 기재하고 있으나 환기 시설에 대한 구체적 검증은 한정적."
+    },
+    {
+      "claimId": "ct-14",
+      "status": "verified",
+      "confidence": 90,
+      "source": "web_search",
+      "sourceUrl": "https://namu.wiki/w/%EB%A7%A4%EC%8B%A4%EB%82%98%EB%AC%B4",
+      "details": "남부지방 매화는 2~3월 초에 개화, 동백은 11월~3월 개화. 3월 초 진해에서 벚꽃(3월 말~4월) 전에 매화와 동백을 볼 수 있다는 정보는 개화 시기와 부합."
+    }
+  ],
+  "summary": {
+    "totalClaims": 15,
+    "verified": 12,
+    "false": 0,
+    "unknown": 2,
+    "score": 84,
+    "note": "핵심 장소(백제삼계탕13월, 강진청자축제, 호텔3월, 13월의강릉) 모두 실재 확인. 강진청자축제 일정(2/21~3/2)·주소 정확 확인. 13월의강릉 주소(해안로 292) 테이블링·트리플에서 확인. 호텔3월 평일 12만원 요금은 복층 프리미엄 객실 기준일 수 있으나 공개 소스에서 직접 확인 불가(일반실 평균 6.5만원). 조개 세트 6만원 가격은 직접 검증 실패. 삼계탕 17,000원 확인됨. 3월 초 진해 매화/동백 개화 시기 정보 정확."
+  }
+}

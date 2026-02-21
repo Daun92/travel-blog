@@ -1,0 +1,157 @@
+{
+  "filePath": "blog/content/posts/travel/2026-02-18-march-hidden-spring-flowers.md",
+  "title": "3월 숨은 봄꽃 명소 산수유 매화 동백 — 12번 가서 발견한 1cm의 디테일",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "전남 구례군 산동면에 도착하면 마을 전체가 노란색이에요",
+      "value": "전남 구례군 산동면에 도착하면 마을 전체가 노란색이에요",
+      "severity": "critical",
+      "context": "전남 구례군 산동면에 도착하면 마을 전체가 노란색이에요.",
+      "lineNumber": 12
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "전남 광양시 다압면 매화마을에 도착해요",
+      "value": "전남 광양시 다압면 매화마을에 도착해요",
+      "severity": "critical",
+      "context": "구례에서 차로 30분이면 전남 광양시 다압면 매화마을에 도착해요.",
+      "lineNumber": 34
+    },
+    {
+      "id": "ct-2",
+      "type": "location",
+      "text": "제주 서귀포시 안덕면의",
+      "value": "제주 서귀포시 안덕면의",
+      "severity": "critical",
+      "context": "제주 서귀포시 안덕면의 카멜리아힐은 동백이 6,000그루 넘게 심어져 있어요.",
+      "lineNumber": 54
+    },
+    {
+      "id": "ct-3",
+      "type": "transport",
+      "text": "구례에서 차로 30분",
+      "value": "구례에서 차로 30분",
+      "severity": "critical",
+      "context": "구례에서 차로 30분이면 전남 광양시 다압면 매화마을에 도착해요.",
+      "lineNumber": 34
+    },
+    {
+      "id": "ct-4",
+      "type": "location",
+      "text": "제주특별자치도 서귀포시 안덕면 병악로 166",
+      "value": "제주특별자치도 서귀포시 안덕면 병악로 166",
+      "severity": "critical",
+      "context": "주소: 제주특별자치도 서귀포시 안덕면 병악로 166",
+      "lineNumber": 68
+    },
+    {
+      "id": "ct-5",
+      "type": "general",
+      "text": "꽃잎 안으로 1cm만 더 들어간 사람에게는",
+      "value": "1cm",
+      "severity": "minor",
+      "context": "꽃잎 안으로 1cm만 더 들어간 사람에게는 세상이 숨겨둔 수만 개의 레이어가 보이기 시작해요.",
+      "lineNumber": 74
+    },
+    {
+      "id": "ct-6",
+      "type": "general",
+      "text": "광양 매화 → 구례 산수유 → 제주 동백 순서로 2박 3일 루트",
+      "value": "2박 3일 루트",
+      "severity": "minor",
+      "context": "광양 매화(2월 말~) → 구례 산수유(3월 초~) → 제주 동백(3월 초 낙화 절정) 순서로 2박 3일 루트가 가능합니다.",
+      "lineNumber": 102
+    },
+    {
+      "id": "ct-7",
+      "type": "hours",
+      "text": "오전 9시~10시 사이 돌담길에 역광",
+      "value": "오전 9시~10시",
+      "severity": "major",
+      "context": "3월 초~중순이 만개 시기이며, 오전 9시~10시 사이 돌담길에 역광이 들 때 산수유 꽃송이의 투명한 결이 가장 아름답게 빛납니다.",
+      "lineNumber": 90
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "접사 클립렌즈(3,000~10,000원대)",
+      "value": "3,000~10,000원",
+      "severity": "minor",
+      "context": "스마트폰이라면 접사 클립렌즈(3,000~10,000원대)만으로도 충분합니다.",
+      "lineNumber": 106
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=ebc0dba3-2762-4319-bf76-4249f930f7f6",
+      "details": "한국관광공사, 구례군청 등에서 구례 산수유마을이 전라남도 구례군 산동면 일대에 위치함을 확인. 산동면은 전국 산수유 생산량의 70% 이상을 점유하는 대표적 산수유 산지."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://gwangyang.go.kr/tour/",
+      "details": "광양시 문화관광 공식 사이트에서 매화마을 위치를 전라남도 광양시 다압면 도사리로 확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://www.visitjeju.net/kr/detail/view?contentsid=CNTS_000000000001195",
+      "details": "카멜리아힐 공식 홈페이지, 제주관광공사에서 서귀포시 안덕면 소재 확인. 80개국 500여 품종 6,000여 그루 동백."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 80,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr/detail/rem_detail.do?cotid=fcae45f0-32cd-46df-baa2-296bb038f63b",
+      "details": "광양 다압면~구례 산동면 간 직선 20~25km. 비축제 기간 차량 30분 합리적. 축제 기간에는 1시간 이상 소요 가능."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://camelliahill.co.kr",
+      "details": "카멜리아힐 공식 홈페이지, 카카오맵 등에서 주소 '서귀포시 안덕면 병악로 166' 확인."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "knowledge",
+      "details": "수사적 표현(매크로 관찰 비유). 팩트체크 대상 아님."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 85,
+      "source": "web_search",
+      "details": "광양 매화(2월 말~), 구례 산수유(3월 초~), 제주 동백(12월~3월) 개화 시기 기준 2박 3일 루트는 합리적. 광양~구례 30분, 구례~제주는 항공/해운 이동 필요."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 75,
+      "source": "knowledge",
+      "details": "3월 구례 위도(35°N) 기준 오전 9~10시 태양 고도에서 돌담길 역광 연출 가능. 촬영 팁으로서 합리적 조언이나, 구체적 광조건은 날씨·지형에 따라 변동."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 85,
+      "source": "knowledge",
+      "details": "스마트폰 접사 클립렌즈 가격대 3,000~10,000원은 온라인 쇼핑몰 시세와 일치."
+    }
+  ]
+}

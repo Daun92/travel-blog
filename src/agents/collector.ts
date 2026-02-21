@@ -8,6 +8,14 @@
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { getDataGoKrClient } from '../api/data-go-kr/index.js';
+import { getWeatherClient, type WeatherData } from '../api/weather/index.js';
+import { getBigDataClient, type BigDataStats } from '../api/bigdata/index.js';
+import { getMarketClient, type MarketData } from '../api/market/index.js';
+import { getTrailClient, type TrailData } from '../api/trail/index.js';
+import { getHeritageClient, type HeritageData } from '../api/heritage/index.js';
+import { getFestivalStdClient, type FestivalStdData } from '../api/festival-std/index.js';
+import { getCulturePortalClient, type PerformanceData } from '../api/culture-portal/index.js';
+import { getKopisClient } from '../api/kopis/index.js';
 
 // ============================================================================
 // 타입 정의
@@ -63,6 +71,14 @@ export interface CollectedData {
   festivals: FestivalData[];
   trendKeywords: string[];
   images: string[];
+  // 신규 API 데이터 (모두 optional — 하위 호환)
+  weatherData?: WeatherData[];
+  heritageData?: HeritageData[];
+  trailData?: TrailData[];
+  marketData?: MarketData[];
+  bigdataStats?: BigDataStats;
+  performances?: PerformanceData[];
+  festivalStdData?: FestivalStdData[];
 }
 
 // ============================================================================
@@ -259,22 +275,117 @@ function getMockFestivals(): FestivalData[] {
 }
 
 // ============================================================================
+// KOPIS 지역 코드 매핑
+// ============================================================================
+
+/** 키워드에서 KOPIS 지역 코드를 추출 (시/도 + 주요 시/군 별칭) */
+const KOPIS_AREA_MAP: Record<string, string> = {
+  '서울': '11', '부산': '26', '대구': '27', '인천': '28',
+  '광주': '29', '대전': '30', '울산': '31', '세종': '36',
+  '경기': '41', '강원': '42', '충북': '43', '충남': '44',
+  '전북': '45', '전남': '46', '경북': '47', '경남': '48', '제주': '50',
+  // 시/군 → 도 매핑 (주요 관광지)
+  '수원': '41', '용인': '41', '양평': '41', '가평': '42',
+  '강릉': '42', '속초': '42', '양양': '42', '평창': '42',
+  '논산': '44', '공주': '44', '서천': '44', '제천': '43',
+  '전주': '45', '군산': '45', '완주': '45',
+  '광양': '46', '여수': '46', '순천': '46', '구례': '46', '담양': '46', '강진': '46', '하동': '48',
+  '경주': '47', '안동': '47', '고령': '47', '영양': '47',
+  '진해': '48', '창원': '48', '통영': '48', '거제': '48', '남해': '48', '진주': '48',
+};
+
+function extractKopisArea(keyword: string): string | undefined {
+  // 키워드의 첫 단어부터 매칭 시도
+  const words = keyword.split(/\s+/);
+  for (const word of words) {
+    if (KOPIS_AREA_MAP[word]) return KOPIS_AREA_MAP[word];
+  }
+  return undefined;
+}
+
+function getDateRange30Days(): { start: string; end: string } {
+  const now = new Date();
+  const end = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+  return {
+    start: now.toISOString().split('T')[0].replace(/-/g, ''),
+    end: end.toISOString().split('T')[0].replace(/-/g, ''),
+  };
+}
+
+// ============================================================================
 // 문화포털 API 연동
 // ============================================================================
 
-const CULTURE_API_KEY = process.env.CULTURE_API_KEY || '';
-
 /**
- * 문화 행사 검색
+ * 문화 행사 검색 — 문화포털 + KOPIS 실제 API 연동
+ * KOPIS: 키워드 대신 기간+지역 기반 검색 (공연명이 주제와 일치할 리 없으므로)
  */
 export async function searchCultureEvents(keyword: string): Promise<CultureEvent[]> {
-  if (!CULTURE_API_KEY) {
-    console.log('⚠️ 문화포털 API 키가 설정되지 않았습니다. (CULTURE_API_KEY)');
+  const results: CultureEvent[] = [];
+
+  // 1. 전국공연행사정보 표준데이터 API (기존 culture.go.kr → data.go.kr 전환)
+  const cultureClient = getCulturePortalClient();
+  if (cultureClient) {
+    try {
+      const items = await cultureClient.searchPerformances({
+        keyword,
+        rows: 10,
+      });
+      for (const item of items) {
+        results.push({
+          title: item.eventNm ?? '',
+          place: item.opar ?? '',
+          startDate: item.eventStartDate ?? '',
+          endDate: item.eventEndDate ?? '',
+          price: item.admfee,
+          url: item.homepageUrl,
+          image: undefined,
+        });
+      }
+    } catch (error) {
+      console.log(`⚠️ 공연행사 검색 오류: ${error}`);
+    }
+  }
+
+  // 2. KOPIS API — 기간+지역 기반 검색 (키워드 필터 제거)
+  const kopisClient = getKopisClient();
+  if (kopisClient) {
+    try {
+      const { start, end } = getDateRange30Days();
+      const area = extractKopisArea(keyword);
+      if (area) {
+        console.log(`  🎭 KOPIS: 지역 ${area} 기간 ${start}~${end} 공연 검색`);
+      }
+      const items = await kopisClient.searchPerformances({
+        startDate: start,
+        endDate: end,
+        area,
+        rows: 10,
+      });
+      for (const item of items) {
+        results.push({
+          title: item.prfnm ?? '',
+          place: item.fcltynm ?? '',
+          startDate: item.prfpdfrom ?? '',
+          endDate: item.prfpdto ?? '',
+          price: item.pcseguidance,
+          image: item.poster,
+        });
+      }
+      if (items.length > 0) {
+        console.log(`  🎭 KOPIS: ${items.length}건 공연 수집 완료`);
+      }
+    } catch (error) {
+      console.log(`⚠️ KOPIS 검색 오류: ${error}`);
+    }
+  }
+
+  if (results.length === 0) {
+    console.log('⚠️ 문화포털/KOPIS API 사용 불가 — Mock 데이터 사용');
     return getMockCultureEvents(keyword);
   }
 
-  // 실제 API 연동 구현 예정
-  return getMockCultureEvents(keyword);
+  return results;
 }
 
 /**
@@ -330,14 +441,27 @@ export async function getTrendKeywords(category: 'travel' | 'culture'): Promise<
 // 통합 데이터 수집
 // ============================================================================
 
+/** 수집 옵션 — 개별 API 활성화 제어 */
+export interface CollectOptions {
+  weather?: boolean;
+  heritage?: boolean;
+  trail?: boolean;
+  market?: boolean;
+  bigdata?: boolean;
+  performances?: boolean;
+  festivalStd?: boolean;
+  /** 모든 API 활성화 */
+  allApis?: boolean;
+}
+
 /**
  * 키워드 기반 데이터 통합 수집
  */
-export async function collectData(keyword: string): Promise<CollectedData> {
+export async function collectData(keyword: string, opts?: CollectOptions): Promise<CollectedData> {
   console.log(`🔍 데이터 수집 중: "${keyword}"`);
+  const enableAll = opts?.allApis ?? false;
 
-  // 축제는 searchFestivals가 순차 호출 필요 (공유 레이트리밋)
-  // → 관광 검색 후 축제 검색
+  // 기존 API — KorService2 (순차 호출)
   const tourismData = await searchTourism(keyword);
   const festivals = await searchFestivals();
 
@@ -354,8 +478,47 @@ export async function collectData(keyword: string): Promise<CollectedData> {
     cultureEvents,
     festivals,
     trendKeywords: [...travelTrends.slice(0, 5), ...cultureTrends.slice(0, 5)],
-    images: [] // Unsplash에서 별도 수집
+    images: [],
   };
+
+  // ── 신규 API 수집 (각 API 실패 시 해당 필드만 비움) ──
+
+  // 날씨
+  if (enableAll || opts?.weather) {
+    collectedData.weatherData = await collectWeather(keyword);
+  }
+
+  // 국가유산 — KHS 제외 (별도 API 키 필요, 현재 미사용)
+  // heritage는 --all-apis에서 제외, 명시적 opts.heritage일 때만 수집
+  if (opts?.heritage) {
+    collectedData.heritageData = await collectHeritage(keyword);
+  }
+
+  // 둘레길 — openapi.forest.go.kr 도메인 접속 불가 (2026-02 확인)
+  // --all-apis에서 제외, 명시적 opts.trail일 때만 시도
+  if (opts?.trail) {
+    collectedData.trailData = await collectTrails(keyword);
+  }
+
+  // 전통시장
+  if (enableAll || opts?.market) {
+    collectedData.marketData = await collectMarkets(keyword);
+  }
+
+  // 빅데이터 트렌드
+  if (enableAll || opts?.bigdata) {
+    collectedData.bigdataStats = await collectBigData(keyword);
+  }
+
+  // 공연/전시 (문화포털 + KOPIS — 이미 cultureEvents에 포함되므로 별도 필드)
+  if (enableAll || opts?.performances) {
+    collectedData.performances = await collectPerformances(keyword);
+  }
+
+  // 문화축제 표준데이터
+  if (enableAll || opts?.festivalStd) {
+    collectedData.festivalStdData = await collectFestivalStd(keyword);
+  }
 
   // 수집 데이터 저장
   const dataDir = join(process.cwd(), 'data/collected');
@@ -367,9 +530,207 @@ export async function collectData(keyword: string): Promise<CollectedData> {
     JSON.stringify(collectedData, null, 2)
   );
 
-  console.log(`✅ 데이터 수집 완료: 관광지 ${tourismData.length}개, 축제 ${festivals.length}개, 문화행사 ${cultureEvents.length}개`);
+  const counts = [
+    `관광지 ${tourismData.length}`,
+    `축제 ${festivals.length}`,
+    `문화행사 ${cultureEvents.length}`,
+    collectedData.weatherData?.length ? `날씨 ${collectedData.weatherData.length}` : '',
+    collectedData.heritageData?.length ? `유산 ${collectedData.heritageData.length}` : '',
+    collectedData.trailData?.length ? `둘레길 ${collectedData.trailData.length}` : '',
+    collectedData.marketData?.length ? `시장 ${collectedData.marketData.length}` : '',
+    collectedData.performances?.length ? `공연 ${collectedData.performances.length}` : '',
+    collectedData.festivalStdData?.length ? `문화축제 ${collectedData.festivalStdData.length}` : '',
+  ].filter(Boolean).join(', ');
+
+  console.log(`✅ 데이터 수집 완료: ${counts}`);
 
   return collectedData;
+}
+
+// ============================================================================
+// 신규 API 수집 함수
+// ============================================================================
+
+async function collectWeather(keyword: string): Promise<WeatherData[]> {
+  const client = getWeatherClient();
+  if (!client) return [];
+
+  try {
+    // 키워드에서 지역 번호 추정은 복잡하므로, 코스 검색으로 시도
+    const items = await client.getCourseWeather('1', { numOfRows: 5 });
+    return items.map(item => ({
+      spotName: item.spotName ?? '',
+      date: item.tm ?? '',
+      sky: item.sky ?? '',
+      minTemp: item.tmn ?? '',
+      maxTemp: item.tmx ?? '',
+      rainProb: item.pop ?? '',
+      humidity: item.reh ?? '',
+    }));
+  } catch (error) {
+    console.log(`⚠️ 관광 날씨 수집 오류: ${error}`);
+    return [];
+  }
+}
+
+async function collectHeritage(keyword: string): Promise<HeritageData[]> {
+  const client = getHeritageClient();
+  if (!client) return [];
+
+  try {
+    const items = await client.searchHeritage(keyword, { numOfRows: 10 });
+    return items.map(item => ({
+      name: item.ccbaMnm1 ?? '',
+      type: item.ccbaKdnm ?? '',
+      era: item.ccceName ?? '',
+      location: item.ccbaLcad ?? '',
+      description: item.content ?? '',
+      designationNo: item.ccbaAsno ?? '',
+      imageUrl: item.imageUrl ?? '',
+    }));
+  } catch (error) {
+    console.log(`⚠️ 국가유산 수집 오류: ${error}`);
+    return [];
+  }
+}
+
+async function collectTrails(keyword: string): Promise<TrailData[]> {
+  const client = getTrailClient();
+  if (!client) return [];
+
+  try {
+    const items = await client.searchTrails(keyword, { numOfRows: 10 });
+    return items.map(item => ({
+      name: item.frtrlNm ?? '',
+      course: item.crsKorNm ?? '',
+      distance: item.crsDstnc ?? '',
+      duration: item.crsTotlRqrmHour ?? '',
+      difficulty: item.crsLevel ?? '',
+      description: item.crsContents ?? '',
+      location: item.sigun ?? '',
+    }));
+  } catch (error) {
+    console.log(`⚠️ 둘레길 수집 오류: ${error}`);
+    return [];
+  }
+}
+
+async function collectMarkets(keyword: string): Promise<MarketData[]> {
+  const client = getMarketClient();
+  if (!client) return [];
+
+  try {
+    const items = await client.searchMarkets(keyword, { numOfRows: 10 });
+    return items.map(item => ({
+      name: item.mrktNm ?? '',
+      type: item.mrktType ?? '',
+      address: item.rdnmadr ?? item.lnmadr ?? '',
+      storeCount: item.storCo ?? '',
+      products: item.prdlst ?? '',
+      phone: item.telno ?? '',
+      parking: item.parkngPsbltyAt ?? '',
+    }));
+  } catch (error) {
+    console.log(`⚠️ 전통시장 수집 오류: ${error}`);
+    return [];
+  }
+}
+
+async function collectBigData(keyword: string): Promise<BigDataStats> {
+  const client = getBigDataClient();
+  if (!client) return { keywordTrends: [], visitorStats: [] };
+
+  try {
+    const keywordTrends = await client.getKeywordTrend(keyword, { numOfRows: 6 });
+    return { keywordTrends, visitorStats: [] };
+  } catch (error) {
+    console.log(`⚠️ 빅데이터 수집 오류: ${error}`);
+    return { keywordTrends: [], visitorStats: [] };
+  }
+}
+
+async function collectPerformances(keyword: string): Promise<PerformanceData[]> {
+  const results: PerformanceData[] = [];
+
+  // 전국공연행사정보 표준데이터
+  const cultureClient = getCulturePortalClient();
+  if (cultureClient) {
+    try {
+      const items = await cultureClient.searchPerformances({ keyword, rows: 10 });
+      for (const item of items) {
+        results.push({
+          title: item.eventNm ?? '',
+          startDate: item.eventStartDate ?? '',
+          endDate: item.eventEndDate ?? '',
+          venue: item.opar ?? '',
+          category: '',
+          area: item.rdnmadr ?? item.lnmadr ?? '',
+          price: item.admfee ?? '',
+          thumbnail: '',
+          url: item.homepageUrl ?? '',
+          source: 'culture-portal',
+        });
+      }
+    } catch (error) {
+      console.log(`⚠️ 공연행사 수집 오류: ${error}`);
+    }
+  }
+
+  // KOPIS — 기간+지역 기반 검색 (키워드 제거)
+  const kopisClient = getKopisClient();
+  if (kopisClient) {
+    try {
+      const { start, end } = getDateRange30Days();
+      const area = extractKopisArea(keyword);
+      const items = await kopisClient.searchPerformances({
+        startDate: start,
+        endDate: end,
+        area,
+        rows: 20,
+      });
+      for (const item of items) {
+        results.push({
+          title: item.prfnm ?? '',
+          startDate: item.prfpdfrom ?? '',
+          endDate: item.prfpdto ?? '',
+          venue: item.fcltynm ?? '',
+          category: item.genrenm ?? '',
+          area: item.area ?? '',
+          price: item.pcseguidance ?? '',
+          thumbnail: item.poster ?? '',
+          url: '',
+          source: 'kopis',
+        });
+      }
+    } catch (error) {
+      console.log(`⚠️ KOPIS 공연 수집 오류: ${error}`);
+    }
+  }
+
+  return results;
+}
+
+async function collectFestivalStd(keyword: string): Promise<FestivalStdData[]> {
+  const client = getFestivalStdClient();
+  if (!client) return [];
+
+  try {
+    const items = await client.searchFestivals({ keyword, numOfRows: 10 });
+    return items.map(item => ({
+      name: item.fstvlNm ?? '',
+      venue: item.opar ?? '',
+      startDate: item.fstvlStartDate ?? '',
+      endDate: item.fstvlEndDate ?? '',
+      description: item.fstvlCo ?? '',
+      organizer: item.mnnstNm ?? '',
+      phone: item.phoneNumber ?? '',
+      address: item.rdnmadr ?? item.lnmadr ?? '',
+      homepage: item.homepageUrl ?? '',
+    }));
+  } catch (error) {
+    console.log(`⚠️ 문화축제 수집 오류: ${error}`);
+    return [];
+  }
 }
 
 /**
@@ -464,6 +825,79 @@ export function dataToPromptContext(data: CollectedData): string {
       context += `- 기간: ${event.startDate} ~ ${event.endDate}\n`;
       if (event.price) context += `- 가격: ${event.price}\n`;
       if (event.url) context += `- 링크: ${event.url}\n`;
+    }
+    context += '\n';
+  }
+
+  // ── 신규 API 데이터 섹션 ──
+
+  if (data.weatherData && data.weatherData.length > 0) {
+    context += '### 관광지 날씨 정보\n';
+    for (const w of data.weatherData.slice(0, 5)) {
+      context += `- ${w.spotName}: ${w.sky}, ${w.minTemp}~${w.maxTemp}°C, 강수 ${w.rainProb}%\n`;
+    }
+    context += '\n';
+  }
+
+  if (data.heritageData && data.heritageData.length > 0) {
+    context += '### 주변 문화유산 (출처: 국가유산청)\n';
+    for (const h of data.heritageData.slice(0, 5)) {
+      context += `\n**${h.name}** (${h.type})\n`;
+      if (h.era) context += `- 시대: ${h.era}\n`;
+      if (h.location) context += `- 소재지: ${h.location}\n`;
+      if (h.description) context += `- 설명: ${h.description.slice(0, 200)}${h.description.length > 200 ? '...' : ''}\n`;
+    }
+    context += '\n';
+  }
+
+  if (data.trailData && data.trailData.length > 0) {
+    context += '### 추천 산책/둘레길 (출처: 산림청)\n';
+    for (const t of data.trailData.slice(0, 5)) {
+      context += `- ${t.name} ${t.course ? `(${t.course})` : ''}: 거리 ${t.distance}, 소요 ${t.duration}, 난이도 ${t.difficulty}\n`;
+      if (t.description) context += `  설명: ${t.description.slice(0, 150)}${t.description.length > 150 ? '...' : ''}\n`;
+    }
+    context += '\n';
+  }
+
+  if (data.marketData && data.marketData.length > 0) {
+    context += '### 인근 전통시장\n';
+    for (const m of data.marketData.slice(0, 5)) {
+      context += `- **${m.name}** (${m.type}): ${m.address}`;
+      if (m.products) context += `, 취급품목: ${m.products}`;
+      if (m.storeCount) context += `, 점포 ${m.storeCount}개`;
+      context += '\n';
+    }
+    context += '\n';
+  }
+
+  if (data.bigdataStats && data.bigdataStats.keywordTrends.length > 0) {
+    context += '### 방문 트렌드 (출처: 관광빅데이터)\n';
+    for (const t of data.bigdataStats.keywordTrends.slice(0, 6)) {
+      context += `- ${t.baseYm}: "${t.keyword}" 검색량 ${t.searchCnt}\n`;
+    }
+    context += '\n';
+  }
+
+  if (data.performances && data.performances.length > 0) {
+    context += '### 공연/전시 정보 (출처: 문화포털, KOPIS)\n';
+    for (const p of data.performances.slice(0, 5)) {
+      context += `\n**${p.title}** [${p.source}]\n`;
+      context += `- 장소: ${p.venue}\n`;
+      context += `- 기간: ${p.startDate} ~ ${p.endDate}\n`;
+      if (p.category) context += `- 분야: ${p.category}\n`;
+      if (p.price) context += `- 요금: ${p.price}\n`;
+    }
+    context += '\n';
+  }
+
+  if (data.festivalStdData && data.festivalStdData.length > 0) {
+    context += '### 문화축제 (출처: 전국문화축제 표준데이터)\n';
+    for (const f of data.festivalStdData.slice(0, 5)) {
+      context += `\n**${f.name}**\n`;
+      context += `- 장소: ${f.venue}\n`;
+      context += `- 기간: ${f.startDate} ~ ${f.endDate}\n`;
+      if (f.organizer) context += `- 주최: ${f.organizer}\n`;
+      if (f.description) context += `- 내용: ${f.description.slice(0, 200)}${f.description.length > 200 ? '...' : ''}\n`;
     }
     context += '\n';
   }

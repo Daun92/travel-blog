@@ -32,6 +32,8 @@ export type ClaimType =
   | 'facilities'      // 시설 정보
   | 'contact'         // 연락처
   | 'transport'       // 교통/접근성
+  | 'heritage'        // 문화재/유산
+  | 'trail'           // 둘레길/산책로
   | 'general';        // 일반 정보
 
 /**

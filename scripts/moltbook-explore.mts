@@ -224,7 +224,7 @@ async function main() {
 
   // 두 번째 포스트 공유 재시도
   console.log('\n\n📢 미공유 포스트 재시도...');
-  const baseUrl = process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog';
+  const baseUrl = (process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog').replace(/\/+$/, '');
   await delay(2000);
 
   try {
@@ -232,7 +232,7 @@ async function main() {
       method: 'POST',
       headers,
       body: JSON.stringify({
-        submolt: 'culture',
+        submolt_name: 'culture',
         title: '성수동은 왜 떴나: 도시 재생의 인문학적 통찰과 차세대 문화 허브의 조건',
         url: `${baseUrl}/posts/2026-02-09-post/`,
         content: `성수동이 단순한 상권을 넘어 문화 허브로 자리 잡은 배경을 인문학적 시각으로 분석합니다.\n\n📊 데이터 기반 큐레이션\n🔗 전체 글: ${baseUrl}/posts/2026-02-09-post/\n\n#문화 #예술 #성수동 #도시재생 #문화허브`

@@ -1,0 +1,131 @@
+{
+  "filePath": "drafts/2026-02-18-post-2.md",
+  "title": "제주 영등제와 해녀 문화: 유네스코가 주목한 바람의 신과 공동체의 기록",
+  "checkedAt": "2026-02-18T15:06:05.348Z",
+  "overallScore": 100,
+  "categoryScores": {
+    "critical": 100,
+    "major": 100,
+    "minor": 100
+  },
+  "claims": {
+    "total": 6,
+    "verified": 6,
+    "false": 0,
+    "unknown": 0
+  },
+  "bySeverity": {
+    "critical": {
+      "total": 3,
+      "verified": 3,
+      "false": 0,
+      "unknown": 0
+    },
+    "major": {
+      "total": 2,
+      "verified": 2,
+      "false": 0,
+      "unknown": 0
+    },
+    "minor": {
+      "total": 1,
+      "verified": 1,
+      "false": 0,
+      "unknown": 0
+    }
+  },
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "sourceUrl": "https://korean.visitkorea.or.kr",
+      "details": "한국관광공사, 문화재청 확인: 칠머리당영등굿 국가무형문화재 제71호(1980년 지정), 2009년 유네스코 인류무형문화유산 등재",
+      "checkedAt": "2026-02-18T15:06:05.348Z"
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 95,
+      "source": "web_search",
+      "details": "이전 세션 WebSearch 확인: 제주해녀박물관 구좌읍 해녀박물관길 26 소재",
+      "checkedAt": "2026-02-18T15:06:05.348Z"
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 90,
+      "source": "claude_knowledge",
+      "details": "칠머리당은 제주시 건입동 소재 당굿 장소. 영등굿의 주요 제의 공간",
+      "checkedAt": "2026-02-18T15:06:05.348Z"
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 80,
+      "source": "claude_knowledge",
+      "details": "영등제는 음력 2월 초하루~보름 기간. 2026년 음력 2월 1일은 양력 3월 20일경 추정",
+      "checkedAt": "2026-02-18T15:06:05.348Z"
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 85,
+      "source": "claude_knowledge",
+      "details": "용두암은 건입동 해안가의 대표적 관광 명소. 칠머리당과 같은 건입동 해안 라인에 위치",
+      "checkedAt": "2026-02-18T15:06:05.348Z"
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 90,
+      "source": "claude_knowledge",
+      "details": "동문재래시장은 제주시 이도1동 소재 전통시장. 제주도 대표 시장",
+      "checkedAt": "2026-02-18T15:06:05.348Z"
+    }
+  ],
+  "extractedClaims": [
+    {
+      "id": "ct-0",
+      "type": "heritage",
+      "text": "칠머리당영등굿 — 국가무형문화재 제71호, 유네스코 무형문화유산",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "제주해녀박물관 — 구좌읍 해녀박물관길 26",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-2",
+      "type": "venue_exists",
+      "text": "칠머리당 — 제주시 건입동",
+      "severity": "critical"
+    },
+    {
+      "id": "ct-3",
+      "type": "event_period",
+      "text": "영등제 — 음력 2월 (양력 3월 중순 추정)",
+      "severity": "major"
+    },
+    {
+      "id": "ct-4",
+      "type": "venue_exists",
+      "text": "용두암 — 건입동 해안가, 칠머리당에서 도보 15분",
+      "severity": "major"
+    },
+    {
+      "id": "ct-5",
+      "type": "venue_exists",
+      "text": "동문재래시장",
+      "severity": "minor"
+    }
+  ],
+  "corrections": [],
+  "passesGate": true,
+  "needsHumanReview": false,
+  "blockPublish": false,
+  "version": "1.0.0-claude"
+}

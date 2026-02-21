@@ -37,7 +37,7 @@ interface PostInfo {
 async function collectPublishedPosts(): Promise<PostInfo[]> {
   const posts: PostInfo[] = [];
   const categories = ['travel', 'culture'];
-  const baseUrl = process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog';
+  const baseUrl = (process.env.BLOG_BASE_URL || 'https://daun92.github.io/travel-blog').replace(/\/+$/, '');
 
   for (const category of categories) {
     const categoryDir = join(POSTS_DIR, category);

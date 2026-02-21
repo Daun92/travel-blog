@@ -1,0 +1,25 @@
+{
+  "filePath": "blog/content/posts/culture/2026-02-18-jeju-yeongdeung-haenyeo.md",
+  "title": "제주 영등제와 해녀 문화: 유네스코가 주목한 바람의 신과 공동체의 기록",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "해녀박물관길 26",
+      "value": "해녀박물관길 26",
+      "severity": "critical",
+      "context": "제주해녀박물관: 구좌읍 해녀박물관길 26에 위치한 이곳에서는 물질 도구부터 해녀 노래까지",
+      "lineNumber": 47
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 98,
+      "source": "web_search",
+      "sourceUrl": "https://www.jeju.go.kr/haenyeo/exhibit/guide.htm",
+      "details": "제주해녀박물관 공식 사이트에서 주소 확인: 제주특별자치도 제주시 구좌읍 해녀박물관길 26"
+    }
+  ]
+}

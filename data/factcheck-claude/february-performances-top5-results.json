@@ -1,0 +1,161 @@
+{
+  "filePath": "drafts/2026-02-february-performances-top5.md",
+  "title": "2월 공연 추천 TOP 5 — 2만원짜리가 13만원보다 만족도 높다고?",
+  "claims": [
+    {
+      "id": "ct-0",
+      "type": "location",
+      "text": "사랑으로 0",
+      "value": "사랑으로 0",
+      "severity": "critical",
+      "context": "## 3위. wave to earth '사랑으로 0.3' — 월드투어 서울 앵콜",
+      "lineNumber": 90
+    },
+    {
+      "id": "ct-1",
+      "type": "location",
+      "text": "후속으로 3",
+      "value": "후속으로 3",
+      "severity": "critical",
+      "context": "이게 끝이 아닙니다. 후속으로 3~4월엔 **'튠업: 라이브 스테이지'**(신진 음악가 12팀 공연), 3~5월엔 **'스토리업: 컬처 토크'**(무료!)가 이어져요.",
+      "lineNumber": 144
+    },
+    {
+      "id": "ct-2",
+      "type": "price",
+      "text": "66,000원",
+      "value": "66,000원",
+      "severity": "minor",
+      "context": "> 📍 예그린씨어터 (대학로) | 🎫 전석 66,000원 | 📅 2/10~4/26",
+      "lineNumber": 17
+    },
+    {
+      "id": "ct-3",
+      "type": "price",
+      "text": "55,000원",
+      "value": "55,000원",
+      "severity": "minor",
+      "context": "> 📍 국립극장 하늘극장 | 🎫 전석 55,000원 | 📅 2/27~3/15",
+      "lineNumber": 52
+    },
+    {
+      "id": "ct-4",
+      "type": "price",
+      "text": "143,000원",
+      "value": "143,000원",
+      "severity": "minor",
+      "context": "> 📍 올림픽공원 올림픽홀 | 🎫 132,000~143,000원 | 📅 2/28~3/1",
+      "lineNumber": 92
+    },
+    {
+      "id": "ct-5",
+      "type": "price",
+      "text": "132,000원",
+      "value": "132,000원",
+      "severity": "minor",
+      "context": "스탠딩 132,000원, 지정석 SR 143,000원.",
+      "lineNumber": 103
+    },
+    {
+      "id": "ct-6",
+      "type": "price",
+      "text": "20,000원",
+      "value": "20,000원",
+      "severity": "minor",
+      "context": "> 📍 CJ아지트 광흥창 | 🎫 전석 20,000원 | 📅 2/25~4/15",
+      "lineNumber": 131
+    },
+    {
+      "id": "ct-7",
+      "type": "price",
+      "text": "130,000원",
+      "value": "130,000원",
+      "severity": "minor",
+      "context": "> 📍 롯데콘서트홀 | 🎫 40,000~130,000원 | 📅 2/28 (토) 19:30",
+      "lineNumber": 173
+    },
+    {
+      "id": "ct-8",
+      "type": "price",
+      "text": "40,000원",
+      "value": "40,000원",
+      "severity": "minor",
+      "context": "| 가격 | R 130,000 / S 100,000 / A 80,000 / B 60,000 / C 40,000원 |",
+      "lineNumber": 205
+    }
+  ],
+  "results": [
+    {
+      "claimId": "ct-0",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr",
+      "details": "오파싱 — '사랑으로 0.3'은 wave to earth 콘서트 제목으로, 위치 정보가 아님. KOPIS PF283595에서 콘서트 실재 확인."
+    },
+    {
+      "claimId": "ct-1",
+      "status": "verified",
+      "confidence": 90,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr",
+      "details": "오파싱 — CJ문화재단 STAGE UP 후속 시리즈 안내 텍스트. KOPIS PF284990 상세정보에서 시리즈 정보 확인."
+    },
+    {
+      "claimId": "ct-2",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF283613",
+      "details": "뮤지컬 스톤 전석 66,000원 — KOPIS 공연 ID PF283613 pcseguidance 필드에서 직접 확인."
+    },
+    {
+      "claimId": "ct-3",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF284207",
+      "details": "칼로막베스 전석 55,000원 — KOPIS 공연 ID PF284207 pcseguidance 필드에서 직접 확인."
+    },
+    {
+      "claimId": "ct-4",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF283595",
+      "details": "wave to earth SR석 143,000원 — KOPIS 공연 ID PF283595 pcseguidance 필드에서 직접 확인."
+    },
+    {
+      "claimId": "ct-5",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF283595",
+      "details": "wave to earth 스탠딩 132,000원 — KOPIS 공연 ID PF283595 pcseguidance 필드에서 직접 확인."
+    },
+    {
+      "claimId": "ct-6",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF284990",
+      "details": "CJ STAGE UP 전석 20,000원 — KOPIS 공연 ID PF284990 pcseguidance 필드에서 직접 확인."
+    },
+    {
+      "claimId": "ct-7",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF283875",
+      "details": "지브리&디즈니 R석 130,000원 — KOPIS 공연 ID PF283875 pcseguidance 필드에서 직접 확인."
+    },
+    {
+      "claimId": "ct-8",
+      "status": "verified",
+      "confidence": 95,
+      "source": "kopis_api",
+      "sourceUrl": "https://www.kopis.or.kr/pblprfr/PF283875",
+      "details": "지브리&디즈니 C석 40,000원 — KOPIS 공연 ID PF283875 pcseguidance 필드에서 직접 확인."
+    }
+  ]
+}

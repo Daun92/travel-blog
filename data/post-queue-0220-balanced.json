@@ -1,0 +1,252 @@
+{
+  "queueId": "2026-02-20-balanced",
+  "createdAt": "2026-02-20",
+  "description": "균형 혼합 큐 v3 — niche 보강(2) + 시즌 선점(1) + 지역 확장(1) + 서울 심층(1), 5편",
+  "status": "deployed",
+  "deployedAt": "2026-02-21",
+  "strategy": {
+    "core": "균형 혼합 — 에이전트 밸런스 + 서울/지방 균형 + 시즌 활용",
+    "nicheRatio": "2/5 (40%) — 신도림 디깅 + 서해안 둘레길",
+    "excludedRegions": ["성수동", "경주", "강릉"],
+    "newRegions": ["충북 단양", "서울 신도림/구로", "서해안 태안·보령", "서울 5대궁"]
+  },
+  "agentDistribution": {
+    "viral": 1,
+    "niche": 2,
+    "informative": 1,
+    "friendly": 1
+  },
+  "typeDistribution": {
+    "travel": 3,
+    "culture": 2
+  },
+  "posts": [
+    {
+      "order": 1,
+      "slug": "march-theater-top5",
+      "title": "3월 연극 TOP 5: 엘시노어부터 노인의 꿈까지, 소극장이 뜨거워지는 이유",
+      "type": "culture",
+      "agent": "viral",
+      "targetPublishWeek": "2026-03-02",
+      "description": "2월 공연 TOP 5 후속. 3월 마감 임박 + 초연 연극 큐레이션. 뮤지컬 제외, 연극만",
+      "keywords": [
+        "3월 연극 추천", "엘시노어 연극", "노인의 꿈 초연", "비밀통로 대학로",
+        "너를 위한 글자", "튜링머신", "서울 연극", "대학로 소극장"
+      ],
+      "contentAngle": "조회영 바이럴 — '뮤지컬만 보면 손해. 진짜 공연 고수는 소극장 연극을 본다.' 마감 임박 + 초연 긴장감",
+      "candidateWorks": [
+        {
+          "name": "엘시노어",
+          "venue": "JS아트홀",
+          "period": "2026.01.08 ~ 03.29",
+          "hook": "햄릿 스핀오프 — 소극장 밀도"
+        },
+        {
+          "name": "노인의 꿈",
+          "venue": "LG아트센터 서울 U+스테이지",
+          "period": "2026.01.09 ~ 03.22",
+          "hook": "LG아트센터 초연 — 3/22 마감 임박"
+        },
+        {
+          "name": "비밀통로",
+          "venue": "NOL씨어터 대학로",
+          "period": "2026.02.13 ~ 05.03",
+          "hook": "기억을 잃은 두 사람의 밀실극"
+        },
+        {
+          "name": "너를 위한 글자",
+          "venue": "확인 필요",
+          "period": "2026.03",
+          "hook": "발명가·작가·지망생 세 사람의 휴먼 드라마"
+        },
+        {
+          "name": "튜링머신",
+          "venue": "세종문화회관 S씨어터",
+          "period": "2026.01.08 ~ 03.01",
+          "hook": "앨런 튜링의 삶 — 3/1 종료 직전"
+        }
+      ],
+      "note": "Phase 2 직전 KOPIS + WebSearch로 최신 정보 확정 필수",
+      "ktoSearchTargets": ["대학로", "세종문화회관", "LG아트센터"],
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-20-march-theatre-performances-top-5-seoul.md",
+      "generatedTitle": "3월 연극 TOP 5: 엘시노어부터 노인의 꿈까지, 안 보면 손해 보는 소극장 라인업",
+      "inlineImages": 7
+    },
+    {
+      "order": 2,
+      "slug": "sindorim-culture-digging",
+      "title": "신도림, 디큐브 너머의 시간: 공장 지대가 품은 골목 카페·갤러리·로컬 먹거리 디깅",
+      "type": "culture",
+      "agent": "niche",
+      "targetPublishWeek": "2026-03-09",
+      "description": "오덕우 디깅 — 디큐브시티 쇼핑몰 너머, 신도림·구로 일대의 숨은 문화 공간과 로컬 먹거리 탐방. 공장 지대→문화 공간 전환의 현장",
+      "keywords": [
+        "신도림 맛집", "신도림 카페", "구로 문화", "디큐브시티",
+        "신도림 숨은 명소", "구로디지털단지", "안양천 산책", "서울 로컬"
+      ],
+      "contentAngle": "오덕우 미시적 발견 — '신도림역에서 내리면 디큐브시티로 빨려 들어가잖아. 근데 반대쪽 출구로 나가봤어?' 쇼핑몰 관광 vs 골목 탐색의 대비. 구로공단 시절의 흔적 위에 들어선 작은 카페·공방·로컬 식당, 안양천변 산책로의 조용한 시간",
+      "sectionCandidates": [
+        "디큐브시티 — 41층 쉐라톤 라운지 뷰 (서울 파노라마)",
+        "디큐브 바깥 골목 — 공장→카페/공방 전환 공간들",
+        "구로디지털단지 방면 — 직장인 로컬 먹거리 (숨은 맛집)",
+        "안양천 산책로 — 도심 속 물길 산책 (봄 벚꽃 포인트)",
+        "대림동 차이나타운 연계 — 중국·베트남 로컬 먹거리"
+      ],
+      "ktoSearchTargets": ["신도림", "구로", "안양천"],
+      "differentiator": "신도림/구로 첫 포스트. 쇼핑몰 리뷰가 아닌 '도시 재생' 관점의 디깅. 대림동 다문화 거리 연계 가능성",
+      "dataSourceStrategy": {
+        "primary": "WebSearch — 신도림/구로 골목 카페·문화공간 최신 정보",
+        "venueImages": "KTO 등록 제한적 → AI 스틸컷 폴백 비중 높을 것",
+        "note": "신도림은 관광지가 아닌 생활권 — KTO보다 WebSearch + AI 이미지 중심"
+      },
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-20-sindorim-factory-zone-deep-digging.md",
+      "generatedTitle": "신도림 디큐브 너머, 12번 방문 끝에 찾아낸 시간의 공장지대 디깅 리포트",
+      "inlineImages": 6
+    },
+    {
+      "order": 3,
+      "slug": "danyang-cave-river-daytrip",
+      "title": "단양 당일치기 현실 코스: 도담삼봉·고수동굴·마늘 먹거리까지 비용 총정산",
+      "type": "travel",
+      "agent": "friendly",
+      "targetPublishWeek": "2026-03-16",
+      "description": "김주말 솔직 후기 — 충북 단양 당일치기 현실 비용·시간·코스 정산",
+      "keywords": [
+        "단양 당일치기", "단양 여행 코스", "도담삼봉", "고수동굴",
+        "단양 맛집", "충북 여행", "단양 마늘 음식", "봄 단양"
+      ],
+      "contentAngle": "김주말 비용 정산 — 서울 출발 KTX vs 자차, 도담삼봉-고수동굴-구경시장 동선, 마늘순대국·흑마늘닭강정 먹거리 정산",
+      "sectionPlan": [
+        "도담삼봉 + 석문 유람선 (비용·시간·뷰포인트)",
+        "고수동굴 탐방 (입장료·소요시간·주의사항)",
+        "단양 구경시장 먹거리 정산 (마늘순대국, 흑마늘닭강정, 마늘만두)",
+        "만천하스카이워크 (선택 코스)",
+        "총비용 정산 테이블 + 꿀팁"
+      ],
+      "ktoSearchTargets": ["도담삼봉", "고수동굴", "단양", "만천하스카이워크"],
+      "differentiator": "충북 지역 첫 포스트. 국가지질공원 + 마늘 먹거리 차별점",
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-20-danyang-day-trip-course-and-cost.md",
+      "generatedTitle": "단양 당일치기 현실 코스: 구인사에서 고수동굴까지, 빛을 따라 걷는 시간과 비용 총정산",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 10 },
+      "inlineImages": 7
+    },
+    {
+      "order": 4,
+      "slug": "seoul-palace-spring-tour",
+      "title": "서울 5대 궁궐 봄 투어: 경복궁 별빛야행부터 창덕궁 후원까지, 건축으로 읽는 조선 500년",
+      "type": "travel",
+      "agent": "informative",
+      "targetPublishWeek": "2026-03-16",
+      "description": "한교양 해설 — 5대 궁궐(경복궁·창덕궁·창경궁·덕수궁·경희궁)을 건축학적 관점에서 비교 해설. 봄 야간 특별관람 시즌 맞춤",
+      "keywords": [
+        "서울 궁궐 투어", "경복궁 야간개장 2026", "창덕궁 달빛기행",
+        "덕수궁 석조전", "창경궁 물빛연화", "서울 고궁 봄",
+        "궁궐 건축", "조선 궁궐 비교"
+      ],
+      "contentAngle": "한교양 해설 — '같은 궁궐인데 왜 다 다르게 생겼을까?' 5대 궁의 건축 철학·배치 원리·역사적 맥락을 비교 해설하면서, 봄 시즌 야간 특별관람 실용 정보까지 겸비",
+      "sectionPlan": [
+        "5대 궁 한눈에 비교 (규모·건축양식·역사·입장료 테이블)",
+        "경복궁 — 정궁의 위엄, 근정전 건축의 비밀, 별빛야행 예약 팁",
+        "창덕궁 — 자연 지형을 살린 배치, 후원의 사계절, 달빛기행",
+        "덕수궁 — 근대 건축(석조전)이 공존하는 유일한 궁, 밤의 석조전",
+        "창경궁·경희궁 — 덜 알려진 궁궐의 재발견 (창경궁 물빛연화)",
+        "궁궐 투어 추천 코스 — 반나절/하루 동선 + 봄 야간관람 캘린더"
+      ],
+      "nightPrograms": {
+        "경복궁": "별빛야행 — 궁궐 북측 권역 특별 관람 + 전통 공연",
+        "창덕궁": "달빛기행 — 전문해설사 동행 + 전통예술 공연",
+        "창경궁": "물빛연화 — 봄 야간 조명 특별 행사",
+        "덕수궁": "밤의 석조전 — 근대 건축 야간 관람"
+      },
+      "ktoSearchTargets": ["경복궁", "창덕궁", "덕수궁", "창경궁", "경희궁"],
+      "differentiator": "기존 서울 포스트(한옥마을, 남산, 북한산)와 완전 다른 '궁궐 건축 해설' 각도. 5개 궁 비교 포맷은 블로그 최초. 봄 야간관람 시즌 시의성",
+      "dataSourceStrategy": {
+        "primary": "KTO API — 5대 궁궐 모두 KTO 등록 (이미지 매우 풍부)",
+        "supplementary": "궁능유적본부(royal.khs.go.kr) — 2026 봄 야간관람 일정·가격 확인",
+        "note": "KTO 이미지 최상급 — 궁궐은 detailImage2로 내부·외부·야경 다양한 시점 확보 가능"
+      },
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-20-seoul-five-palaces-spring-tour-guide.md",
+      "generatedTitle": "서울 5대 궁궐 봄 투어: 경복궁 별빛야행부터 창덕궁 후원까지, 건축으로 읽는 조선 500년",
+      "apiData": { "관광지": 20, "축제": 20, "문화행사": 10 },
+      "inlineImages": 6
+    },
+    {
+      "order": 5,
+      "slug": "west-coast-trail-taean-boryeong",
+      "title": "서해안 둘레길 디깅: 태안 해변길에서 보령 무창포까지, 파도 소리로 걷는 봄",
+      "type": "travel",
+      "agent": "niche",
+      "targetPublishWeek": "2026-03-23",
+      "description": "오덕우 디깅 — 서해랑길 중 태안~보령 구간의 봄 트레일 탐색. 2026 제3연륙교 개통으로 재조명되는 서해안",
+      "keywords": [
+        "서해안 둘레길", "서해랑길", "태안 해변길", "보령 무창포",
+        "꽃지 해수욕장", "서해안 걷기 여행", "충남 트레킹", "봄 해안 산책"
+      ],
+      "contentAngle": "오덕우 디깅 — '동해만 바다라고 생각했어? 서해 갯벌 위를 걸어본 적 없잖아.' 관광객은 동해로, 서퍼는 양양으로 갈 때 오덕우는 서해안 둘레길을 걷는다. 태안 해변길의 고요한 모래사장, 꽃지 낙조, 보령 무창포 '모세의 기적' 바닷길",
+      "sectionCandidates": [
+        "태안 해변길 — 만리포~천리포~꽃지 구간 (할미바위 낙조 포인트)",
+        "안면도 자연휴양림 — 소나무 숲 트레일 (봄 야생화)",
+        "보령 무창포 — 바닷길이 열리는 시간 (음력 보름/그믐 타이밍)",
+        "오천항 — 로컬 어항 먹거리 (봄 주꾸미, 꽃게)",
+        "2026 제3연륙교 — 태안↔보령 직선 연결, 서해안 여행 지도가 바뀌는 해"
+      ],
+      "timeliness": "2026 제3연륙교 개통 — 안면도~원산도~효자도~보령 오천항 직선 연결. 기존 1시간+ 우회 → 직선 관통. 서해안 여행 패러다임 전환",
+      "ktoSearchTargets": ["태안", "만리포", "꽃지해수욕장", "안면도", "보령", "무창포"],
+      "differentiator": "서해안 첫 포스트. 동해안 편중 탈피. 제3연륙교 개통 시의성. '걷기 여행' 포맷은 블로그 최초. 서해랑길이라는 국가 트레일 활용",
+      "dataSourceStrategy": {
+        "primary": "KTO API — 태안/보령 관광지 (KTO 이미지 풍부, 국가 해안 관광지)",
+        "supplementary": "두루누비(durunubi.kr) — 서해랑길 공식 코스 정보",
+        "note": "태안·보령은 KTO 관광100선급 — detailImage2로 해변·낙조·갯벌 이미지 다수 확보 가능"
+      },
+      "status": "draft_generated",
+      "draftFile": "drafts/2026-02-20-west-coast-trail-digging-taean-boryeong.md",
+      "generatedTitle": "12번 가서 알아낸 서해안 둘레길 디깅: 태안에서 무창포까지 파도소리의 층위",
+      "apiData": { "관광지": 17, "축제": 20, "문화행사": 10 },
+      "inlineImages": 6
+    }
+  ],
+  "publishSchedule": {
+    "week1": {
+      "date": "2026-03-02 주",
+      "posts": ["march-theater-top5"],
+      "note": "튜링머신(3/1) 종료 직전, 노인의 꿈(3/22) 마감 임박"
+    },
+    "week2": {
+      "date": "2026-03-09 주",
+      "posts": ["sindorim-culture-digging"],
+      "note": "봄 시즌 도심 산책 수요"
+    },
+    "week3": {
+      "date": "2026-03-16 주",
+      "posts": ["danyang-cave-river-daytrip", "seoul-palace-spring-tour"],
+      "note": "봄 나들이 + 궁궐 야간관람 시즌 개시"
+    },
+    "week4": {
+      "date": "2026-03-23 주",
+      "posts": ["west-coast-trail-taean-boryeong"],
+      "note": "봄 해안 걷기 여행 수요. 제3연륙교 개통 시의성"
+    }
+  },
+  "crossPromotion": {
+    "existingPosts": [
+      "2026-02-february-performances-top5 → '2월 공연에 이어 3월 연극 TOP 5'",
+      "2026-02-04-seoul-hanok-village → 궁궐 투어와 한옥마을 코스 연결",
+      "2026-02-18-seoul-time-layers-digging → 시간층 디깅의 신도림 버전"
+    ],
+    "existingQueuePosts": [
+      "march-spring-festival-top5 → 서해안 둘레길과 '3월 봄 나들이' 연결",
+      "march-seoul-exhibition-top5 → 궁궐 투어 + 전시로 '서울 문화 풀코스'"
+    ]
+  },
+  "metrics": {
+    "agentBalance": "viral(1) + niche(2) + informative(1) + friendly(1)",
+    "newRegions": ["충북 단양 (첫)", "서울 신도림/구로 (첫)", "충남 태안·보령 (첫)"],
+    "seoulDepth": "궁궐(건축 해설) + 신도림(도시 재생 디깅) — 기존 서울 포스트와 완전 다른 각도",
+    "trailFormat": "서해랑길 — 블로그 최초 '걷기 여행' 포맷 도입",
+    "evergreen_vs_seasonal": "에버그린 3편(신도림, 단양, 서해안) + 시즌 2편(연극, 궁궐 야간관람)"
+  }
+}
