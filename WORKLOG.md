@@ -10,6 +10,94 @@
 
 ## 개발 이력
 
+### 2026-02-21: 콘텐츠-이미지 서사 파이프라인 전면 개선 — 3-Phase 아키텍처
+
+#### 배경
+
+콘텐츠 생성과 이미지 배치가 분리되어 실행되는 구조적 문제:
+- LLM이 "주변 맛집", "연계 코스" 등 주제 무관 섹션을 자유롭게 추가
+- 이미지가 위치 기반(도입/본문/마감)으로 기계적 배치되어 섹션 서사와 무관
+- 배치 후 서사 일관성 검증 없이 발행 → 고아 이미지, 맥락 미스매치
+
+#### 구현: 3-Phase 아키텍처
+
+**Phase A — 프롬프트 주제 범위 강제** (`prompts.ts`)
+- `buildTopicScopeGuard()`: 프레이밍별 섹션 제약 (deep_dive→단일 주제 심층, list_ranking→범주 내 한정)
+- 구조 지시를 예시→필수로 강화, `⛔ 주제 무관 범용 섹션 추가 금지`
+- collectedData 주입에 `"주제 범위 내에서만 활용"` 안내 추가
+- LLM 이미지 마커 가이드 제거 (오케스트레이터가 재생성하므로 토큰 낭비)
+
+**Phase B — 서사 기반 이미지 계획** (`content-parser.ts` + `image-orchestrator.ts`)
+- `ImagePlan`/`ImagePlanEntry`: 섹션별 역할(intro_mood/body_evidence/body_atmosphere/closing_summary), 스타일, 구체적 피사체, 서사 문맥 구조화
+- `planImagePlacement()`: 섹션 needScore 점수화(장소명 밀도, 서사 실질성, 토픽 키워드 겹침) → 내용 기반 스타일 결정
+- `matchKtoToPlan()`: 헤딩 텍스트만 → mentionedLocations + narrativeContext 종합 매칭
+- `processInlineImages()` 재배선: 기계적 `insertAutoMarkers()` → 계획 기반 `planToMarkers()`
+
+**Phase C — 이미지-서사 사후 검증** (`image-validator.ts` + `gates.ts`)
+- `validateImageNarrativeCoherence()`: alt텍스트-키워드, 파일명-장소명, geo 호환, 섹션 실질성 4축 점수화
+- `processInlineImages()` Step 6으로 자동 통합 (score<30 제거, 30-49 경고)
+- `image_coherence` 품질 게이트 추가 (경고 전용, blockOnFailure: false)
+
+#### 이전 커밋: 이미지 프롬프트 서사 컨텍스트 연결
+
+- `ImageContext.narrativeHint`: 섹션 본문 2-3문장 휴리스틱 요약을 이미지 프롬프트에 주입
+- `summarizeSectionNarrative()`: 위치 보너스 + 장소명 밀도 + 제목 키워드 겹침으로 핵심 문장 선택
+- `generatePromptFromMarker()` section 덮어쓰기 버그 수정
+- 장소 추출 Pass 2: 비굵은 글씨 복합 접미사 패턴 추가
+
+#### 변경 파일
+
+| 파일 | 변경 유형 |
+|------|----------|
+| `src/generator/prompts.ts` | 가드레일 추가, 구조 강화, 마커 가이드 제거 |
+| `src/generator/content-parser.ts` | ImagePlan 타입, planImagePlacement(), planToMarkers(), summarizeSectionNarrative() |
+| `src/generator/image-prompts.ts` | ImageContext.narrativeHint, section 버그 수정, 프롬프트 내러티브 주입 |
+| `src/images/image-orchestrator.ts` | matchKtoToPlan(), 파이프라인 재배선, 사후 검증 통합 |
+| `src/images/image-validator.ts` | validateImageNarrativeCoherence() |
+| `src/quality/gates.ts` | image_coherence 게이트 |
+
+#### 데이터 흐름 (변경 후)
+
+```
+LLM 프롬프트(가드레일 강화) → 주제 집중 콘텐츠 생성
+     ↓
+parseSections() → planImagePlacement() → ImagePlan (역할/스타일/피사체/서사)
+     ↓
+matchKtoToPlan() → KTO 실사 계획 위치 삽입
+     ↓
+planToMarkers() → AI 마커 삽입 → generatePromptFromMarker(narrativeHint) → Gemini Batch API
+     ↓
+validateImageNarrativeCoherence() → 서사 불일치 자동 제거/경고
+```
+
+---
+
+### 2026-02-21: 댓글 → 리액션 버튼 전환 — Giscus 제거 + Applause Button 도입
+
+#### 배경
+
+Giscus(GitHub Discussions 기반) 댓글은 GitHub 로그인이 필수여서 일반 방문자 참여율이 낮음. 로그인 없이 즉시 반응할 수 있는 경량 리액션 버튼으로 전환하여 참여 장벽을 제거.
+
+#### 구현 내용
+
+| 파일 | 변경 | 효과 |
+|------|------|------|
+| `layouts/partials/comments.html` | Giscus 스크립트 전체 → Applause Button 웹 컴포넌트 | 로그인 불필요 리액션 |
+| `hugo.toml` | `[params.giscus]` 12줄 제거 → `[params.reactions]` 3줄 추가 | 설정 간소화 |
+| `assets/css/extended/custom.css` | `.comments` + Giscus 스타일 → `.reactions` + Applause Button 스타일 | 다크모드 대응 |
+| `layouts/_default/single.html` | 렌더링 조건 `comments` → `comments OR reactions` | 하위 호환 |
+
+#### 기술 요점
+
+- **Applause Button**: CDN(`unpkg.com/applause-button`) 로드, `<applause-button>` 웹 컴포넌트
+- **카운트 저장**: applause-button.com 서버가 URL 기반으로 자동 관리 (별도 백엔드 불필요)
+- **multiclap**: 세션당 최대 ~10회 클릭 가능 (쿠키 기반 중복 방지)
+- **브랜드 컬러**: `color="#2563eb"` (기존 `--brand-primary`)
+- **다크모드**: CSS 변수 `--applause-button-color`로 자동 대응
+- **Giscus 완전 제거**: `repo`, `repoId`, `categoryId` 등 GitHub 연동 설정 삭제
+
+---
+
 ### 2026-02-21: Gemini Batch API + Sharp 이미지 최적화 — 비용 50% 절감 + 용량 80% 절감
 
 #### 배경
