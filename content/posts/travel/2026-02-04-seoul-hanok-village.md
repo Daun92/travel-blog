@@ -232,6 +232,14 @@ schema:
 - [경복궁 야간개장 완벽 가이드](/posts/travel/gyeongbokgung-night/)
 - [삼청동 갤러리 투어](/posts/culture/samcheong-gallery/)
 
+---
+
+## 함께 읽기
+
+- [서울 여행 완벽 가이드: 전통과 현대가 공존하는 2박 3일 추천 코스와 꿀팁](/travel-blog/posts/2026/02/seoul-travel-guide/) — 같은 서울 지역
+- [국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁](/travel-blog/posts/2026/02/mmca-seoul-2026/) — 한교양의 시선 · 같은 서울 지역
+- [서울 야경 명소 TOP 7: 로맨틱부터 힙플레이스까지 뷰 맛집 총정리](/travel-blog/posts/2026/02/seoul-night-views-top7/) — 조회영의 시선 · 같은 서울 지역
+
 ## 자주 묻는 질문
 
 ### 북촌한옥마을에 가려면 어떤 대중교통을 이용하는 게 가장 좋나요?

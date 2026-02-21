@@ -198,6 +198,14 @@ schema:
 ![관람 정보 요약](/travel-blog/images/inline-2026-02-18-jeju-yeongdeung-haenyeo-2-4.jpeg)
 *영등제 관람 정보 — 알면 더 깊은 여행*
 
+---
+
+## 함께 읽기
+
+- [3월 숨은 봄꽃 명소 산수유 매화 동백 — 12번 가서 발견한 1cm의 디테일](/travel-blog/posts/2026/02/march-hidden-spring-flowers/) — 오덕우의 시선 · 같은 제주 지역
+- [제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리](/travel-blog/posts/2026/02/jeju-cafes-best-7/) — 김주말의 시선 · 같은 제주 지역
+- [제주 오름의 지질학: 368개 오름이 빚어낸 화산섬의 경이로운 서사](/travel-blog/posts/2026/02/jeju-oreum-geology/) — 같은 제주 지역
+
 ## 자주 묻는 질문
 
 ### 영등달은 정확히 언제이며, 영등신은 제주에 얼마나 머무나요?

@@ -160,3 +160,11 @@ ShowWordCount: true
 - 한국관광공사 관광지 정보
 - 울산광역시 문화관광 공식 홈페이지
 - 울산 태화강 국가정원 공식 안내 (taehwagang.ulsan.go.kr)
+
+---
+
+## 함께 읽기
+
+- [경주 여행 완벽 가이드: 황리단길부터 야경 명소까지 1박 2일 코스 추천](/travel-blog/posts/2026/02/gyeongju-travel-guide/) — 김주말의 시선 · 같은 경북 지역
+- [여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스](/travel-blog/posts/2026/02/yeosu-night-sea/) — 김주말의 시선 · 같은 전남 지역
+- [속초 양양 겨울 바다 핫플 TOP 5 | 카페 말고 진짜 가볼 곳, 이건 봐야 됨](/travel-blog/posts/2026/02/sokcho-yangyang-winter-top5/) — 조회영의 시선 · 같은 울산 지역

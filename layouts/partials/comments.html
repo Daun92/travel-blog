@@ -1,68 +1,62 @@
-{{/* 댓글 시스템 - Giscus (테마 동기화) */}}
+{{/* 리액션 버튼 - Applause Button (로그인 불필요, 1일 1회 제한) */}}
 
-{{ if site.Params.giscus }}
-<div class="comments">
-  <h3>댓글</h3>
-  <script>
-    // 블로그 테마에 따라 Giscus 테마 결정
-    function getGiscusTheme() {
-      const theme = document.documentElement.getAttribute('data-theme');
-      return theme === 'dark' ? 'dark' : 'light';
-    }
-
-    // Giscus 스크립트 동적 로드
-    function loadGiscus() {
-      const script = document.createElement('script');
-      script.src = 'https://giscus.app/client.js';
-      script.setAttribute('data-repo', '{{ site.Params.giscus.repo }}');
-      script.setAttribute('data-repo-id', '{{ site.Params.giscus.repoId }}');
-      script.setAttribute('data-category', '{{ site.Params.giscus.category | default "Comments" }}');
-      script.setAttribute('data-category-id', '{{ site.Params.giscus.categoryId }}');
-      script.setAttribute('data-mapping', '{{ site.Params.giscus.mapping | default "pathname" }}');
-      script.setAttribute('data-strict', '0');
-      script.setAttribute('data-reactions-enabled', '{{ site.Params.giscus.reactionsEnabled | default "1" }}');
-      script.setAttribute('data-emit-metadata', '{{ site.Params.giscus.emitMetadata | default "0" }}');
-      script.setAttribute('data-input-position', '{{ site.Params.giscus.inputPosition | default "top" }}');
-      script.setAttribute('data-theme', getGiscusTheme());
-      script.setAttribute('data-lang', '{{ site.Params.giscus.lang | default "ko" }}');
-      script.setAttribute('data-loading', 'lazy');
-      script.setAttribute('crossorigin', 'anonymous');
-      script.async = true;
-
-      document.querySelector('.comments').appendChild(script);
-    }
-
-    // 테마 변경 시 Giscus 테마 업데이트
-    function updateGiscusTheme() {
-      const iframe = document.querySelector('iframe.giscus-frame');
-      if (iframe) {
-        iframe.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: getGiscusTheme() } } },
-          'https://giscus.app'
-        );
-      }
-    }
-
-    // 초기 로드
-    loadGiscus();
-
-    // 테마 토글 버튼 감지
-    const themeToggle = document.getElementById('theme-toggle');
-    if (themeToggle) {
-      themeToggle.addEventListener('click', function() {
-        setTimeout(updateGiscusTheme, 100);
-      });
-    }
-
-    // MutationObserver로 data-theme 변경 감지
-    const observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
-        if (mutation.attributeName === 'data-theme') {
-          updateGiscusTheme();
-        }
-      });
-    });
-    observer.observe(document.documentElement, { attributes: true });
-  </script>
+{{ if site.Params.reactions }}
+<div class="reactions">
+  <link rel="stylesheet" href="https://unpkg.com/applause-button/dist/applause-button.css" />
+  <script src="https://unpkg.com/applause-button/dist/applause-button.js"></script>
+  <div class="reaction-wrapper">
+    <applause-button
+      id="applause-btn"
+      style="width: 48px; height: 48px;"
+      color="{{ site.Params.reactions.color | default "var(--brand-primary)" }}"
+    />
+    <span class="reaction-label" id="reaction-label">{{ site.Params.reactions.label | default "이 글이 도움이 되었나요?" }}</span>
+  </div>
 </div>
+<script>
+(function() {
+  var KEY_PREFIX = 'applause_';
+  var COOLDOWN_MS = 24 * 60 * 60 * 1000;
+  var pageKey = KEY_PREFIX + location.pathname;
+  var btn = document.getElementById('applause-btn');
+  var label = document.getElementById('reaction-label');
+  if (!btn || !label) return;
+
+  function isLocked() {
+    try {
+      var ts = localStorage.getItem(pageKey);
+      if (!ts) return false;
+      return (Date.now() - Number(ts)) < COOLDOWN_MS;
+    } catch(e) { return false; }
+  }
+
+  function lock() {
+    try { localStorage.setItem(pageKey, String(Date.now())); } catch(e) {}
+  }
+
+  function showLocked() {
+    btn.classList.add('reacted');
+    label.textContent = '{{ site.Params.reactions.lockedLabel | default "오늘 이미 반응했어요!" }}';
+  }
+
+  if (isLocked()) {
+    showLocked();
+  }
+
+  btn.addEventListener('clapped', function() {
+    if (isLocked()) return;
+    lock();
+    label.textContent = '{{ site.Params.reactions.thanksLabel | default "감사합니다!" }}';
+    setTimeout(showLocked, 2000);
+  });
+
+  btn.addEventListener('mousedown', function(e) {
+    if (isLocked()) {
+      e.preventDefault();
+      e.stopPropagation();
+      label.textContent = '{{ site.Params.reactions.lockedLabel | default "오늘 이미 반응했어요!" }}';
+    }
+  }, true);
+})();
+</script>
 {{ end }}

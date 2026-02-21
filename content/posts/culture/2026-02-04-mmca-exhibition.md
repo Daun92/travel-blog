@@ -328,6 +328,14 @@ schema:
 - [북촌한옥마을 완벽 가이드](/posts/travel/2026-02-04-seoul-hanok-village/)
 - [서울 무료 전시회 모음](/posts/culture/seoul-free-exhibitions/)
 
+---
+
+## 함께 읽기
+
+- [2월 서울 전시 솔직 후기: 국립현대미술관 무료 vs 예술의전당 15,000원 비교](/travel-blog/posts/2026/02/february-seoul-exhibitions/) — 김주말의 시선 · 같은 서울 지역
+- [서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책](/travel-blog/posts/2026/02/seoul-bukchon-hanok/) — 김주말의 시선 · 같은 서울 지역
+- [서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들](/travel-blog/posts/2026/02/seoul-time-layers-digging/) — 오덕우의 시선 · 같은 서울 지역
+
 ## 자주 묻는 질문
 
 ### 무료로 전시를 관람할 수 있는 방법이 있나요?

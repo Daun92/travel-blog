@@ -188,6 +188,14 @@ factcheckScore: 78
 *   [여수 낭만포차 거리](https://map.naver.com/v5/search/여수낭만포차거리)
 *   [돌산공원](https://map.naver.com/v5/search/돌산공원)
 
+---
+
+## 함께 읽기
+
+- [목포 근대역사 산책: 개항장에서 유달산까지, 한교양의 깊이 있는 해설](/travel-blog/posts/2026/02/mokpo-modern-history/) — 한교양의 시선 · 같은 전남 지역
+- [경주 여행 완벽 가이드: 황리단길부터 야경 명소까지 1박 2일 코스 추천](/travel-blog/posts/2026/02/gyeongju-travel-guide/) — 같은 서울 지역
+- [서울 야경 명소 TOP 7: 로맨틱부터 힙플레이스까지 뷰 맛집 총정리](/travel-blog/posts/2026/02/seoul-night-views-top7/) — 조회영의 시선 · 같은 서울 지역
+
 ## 자주 묻는 질문
 
 ### 여수 야경을 차로 구경할 때 어디에 주차하는 것이 좋나요?

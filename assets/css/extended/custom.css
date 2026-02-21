@@ -1048,22 +1048,82 @@ button:focus-visible {
   transform: translateY(-2px);
 }
 
+/* 카카오톡 — 브랜드 컬러 호버 */
+.share-buttons .share-kakao:hover {
+  background: #FEE500;
+  color: #191919;
+}
+
 .share-buttons svg {
   width: 18px;
   height: 18px;
 }
 
-/* 5-5. 댓글 섹션 스타일 (C: 참여 유도) */
-.comments {
+/* 공유 토스트 알림 */
+.share-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--primary);
+  color: var(--theme);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+  white-space: nowrap;
+}
+
+.share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 5-5. 리액션 버튼 스타일 (C: 참여 유도) */
+.reactions {
   margin-top: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border);
 }
 
-/* Giscus/Utterances 컨테이너 */
-.giscus,
-.utterances {
-  max-width: 100%;
+.reaction-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem;
+}
+
+.reaction-label {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+/* Applause Button 커스텀 */
+applause-button {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+applause-button.reacted {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+applause-button .count-container {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--secondary);
+}
+
+:root[data-theme="dark"] applause-button {
+  --applause-button-color: var(--brand-primary);
 }
 
 /* 5-6. 반응형 조정 */

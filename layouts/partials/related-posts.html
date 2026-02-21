@@ -1,8 +1,8 @@
-{{/* 관련 포스트 섹션 */}}
-{{ $related := site.RegularPages.Related . | first 4 }}
+{{/* 다른 추천 포스트 섹션 — 본문 "함께 읽기"와 차별화 */}}
+{{ $related := site.RegularPages.Related . | first 5 }}
 {{ with $related }}
 <div class="related-posts">
-  <h3>관련 포스트</h3>
+  <h3>다른 추천 포스트</h3>
   <div class="related-posts-grid">
     {{ range . }}
     <a href="{{ .Permalink }}" class="related-post-card">

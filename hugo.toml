@@ -119,18 +119,15 @@ enableEmoji = true
   [params.schema]
     publisherType = "Organization"
 
-  # 댓글 설정 (Giscus)
-  [params.giscus]
-    repo = "Daun92/travel-blog"
-    repoId = "R_kgDORIgjaA"
-    category = "General"
-    categoryId = "DIC_kwDORIgjaM4C161N"
-    mapping = "pathname"
-    reactionsEnabled = "1"
-    emitMetadata = "0"
-    inputPosition = "top"
-    theme = "preferred_color_scheme"
-    lang = "ko"
+  # 공유 버튼 선택 (미설정 시 전체 표시)
+  ShareButtons = ["kakao", "band", "x", "facebook", "telegram"]
+
+  # 리액션 버튼 (Applause Button - 로그인 불필요, 1일 1회)
+  [params.reactions]
+    color = "#2563eb"
+    label = "이 글이 도움이 되었나요?"
+    thanksLabel = "감사합니다!"
+    lockedLabel = "오늘 이미 반응했어요!"
 
   # 검색 설정
   [params.fuseOpts]
@@ -157,6 +154,27 @@ enableEmoji = true
   favicon16x16 = "/favicon.svg"
   favicon32x32 = "/favicon.svg"
   apple_touch_icon = "/favicon.svg"
+
+# 관련 포스트 설정
+[related]
+  includeNewer = true
+  threshold = 40
+  toLower = true
+
+  [[related.indices]]
+    name = "tags"
+    weight = 100
+    toLower = true
+
+  [[related.indices]]
+    name = "categories"
+    weight = 60
+    toLower = true
+
+  [[related.indices]]
+    name = "keywords"
+    weight = 80
+    toLower = true
 
 # 분류 체계
 [taxonomies]

@@ -207,6 +207,14 @@ schema:
 
 [서해안 둘레길](https://search.naver.com/search.naver?where=nexearch&query=%EC%84%9C%ED%95%B4%EC%95%88+%EB%91%98%EB%A0%88%EA%B8%B8)
 
+---
+
+## 함께 읽기
+
+- [논산 딸기축제 가족 체험 비용 정산, 빛을 따라 걷는 주말의 기록](/travel-blog/posts/2026/02/nonsan-strawberry-family/) — 김주말의 시선 · 같은 충남 지역
+- [무령왕릉 벽돌 한 장의 소름 돋는 디테일, 12번 가서 알아낸 공주 백제유적 디깅](/travel-blog/posts/2026/02/muryeong-tomb-digging/) — 같은 충남 지역
+- [속초 양양 겨울 바다 핫플 TOP 5 | 카페 말고 진짜 가볼 곳, 이건 봐야 됨](/travel-blog/posts/2026/02/sokcho-yangyang-winter-top5/) — 조회영의 시선 · 같은 충남 지역
+
 ## 자주 묻는 질문
 
 ### 서해안 둘레길을 방문하기 가장 좋은 시기는 언제인가요?

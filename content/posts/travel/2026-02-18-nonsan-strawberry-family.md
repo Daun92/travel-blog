@@ -242,6 +242,14 @@ schema:
 - [논산 백일헌 종택](https://nonsan.go.kr/tour/): 고즈넉한 하룻밤을 꿈꾼다면 (충청남도 논산시 상월면 주곡길 45)
 - [사의 찬미 (공연)](https://search.naver.com/search.naver?query=사의찬미+논산): 3월 초 논산아트센터에서 열리는 연극 한 편
 
+---
+
+## 함께 읽기
+
+- [12번 가서 알아낸 서해안 둘레길 디깅: 태안에서 무창포까지 파도소리의 층위](/travel-blog/posts/2026/02/west-coast-trail-digging-taean-boryeong/) — 오덕우의 시선 · 같은 충남 지역
+- [무령왕릉 벽돌 한 장의 소름 돋는 디테일, 12번 가서 알아낸 공주 백제유적 디깅](/travel-blog/posts/2026/02/muryeong-tomb-digging/) — 오덕우의 시선 · 같은 충남 지역
+- [단양 당일치기 현실 코스: 구인사에서 도담삼봉까지, 빛을 따라 걷는 시간과 비용 총정산](/travel-blog/posts/2026/02/danyang-day-trip-course-and-cost/) — 같은 충남 지역
+
 ## 자주 묻는 질문
 
 ### 논산 딸기삼촌농장의 특징은 무엇인가요?

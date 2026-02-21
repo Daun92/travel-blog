@@ -244,6 +244,14 @@ schema:
 - **고령 대가야축제**: [축제 홈페이지](https://www.festdgy.com/)
 - **부산 트리축제(참고)**: [광복로 겨울빛 트리축제](https://litt.ly/gwangbok_treefestival) (2/22까지라 얼마 안 남았어요!)
 
+---
+
+## 함께 읽기
+
+- [2월 서울 전시 솔직 후기: 국립현대미술관 무료 vs 예술의전당 15,000원 비교](/travel-blog/posts/2026/02/february-seoul-exhibitions/) — 같은 서울 지역
+- [설날의 두 얼굴: 세배·떡국·윷놀이, 전통 명절 문화의 역사적 변천과 현대적 의미](/travel-blog/posts/2026/02/seollal-traditions/) — 한교양의 시선 · 같은 서울 지역
+- [국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁](/travel-blog/posts/2026/02/mmca-seoul-2026/) — 한교양의 시선 · 같은 서울 지역
+
 ## 자주 묻는 질문
 
 ### 이번 주말 코스의 총 예상 비용은 얼마인가요?

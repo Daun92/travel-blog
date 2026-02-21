@@ -67,7 +67,7 @@
     {{- end }}
   </footer>
 
-  {{- if (.Param "comments") }}
+  {{- if or (.Param "comments") (site.Params.reactions) }}
   {{- partial "comments.html" . }}
   {{- end }}
 </article>

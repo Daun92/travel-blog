@@ -2,7 +2,7 @@
 title: '신도림 디큐브 너머, 12번 방문 끝에 찾아낸 시간의 공장지대 디깅 리포트'
 slug: sindorim-factory-zone-deep-digging
 date: 2026-02-20T11:05:35.000Z
-draft: false
+draft: true
 factcheckScore: 75
 factcheckNote: "수동 검증 완료 (2026-02-21). 테크노마트 완공연도 1997→2007 수정, 1층→6층 전자매장 수정. 전주관 18종 비빔밥·10층 위치·공원 주소 등 핵심 정보 정확."
 description: >-
@@ -191,6 +191,8 @@ schema:
 ![신도림전주관의 비빔밥 세계](/travel-blog/images/kto-2026-02-20-sindorim-factory-zone-deep-digging-jeonju.jpg)
 *신도림전주관 — 10년 고집의 18종 비빔밥, 출처: 한국관광공사*
 
+식사을 더 깊이 디깅하고 싶다면 [직장인 전통공예 도자기 한지 체험 주말 코스: 서울에서 15만원으로 끝내는 현실 리뷰](/travel-blog/posts/2026/02/traditional-craft-experience/)을 추천합니다.
+
 ---
 
 ## 4층 레이어: 이 시간이 아니면 볼 수 없는 장면들
@@ -200,6 +202,16 @@ schema:
 빛이 바뀌는 15분이 전부인 그 짧은 황금 시간대에 이곳을 걸어보세요. 차가운 철골 사이로 오후의 볕이 스며드는 순간, 비로소 이 동네의 결이 읽히기 시작할 거예요. 이 시간이 아니면 볼 수 없는 신도림의 문장들을 여러분도 발견하시길 바랍니다.
 
 [신도림역](https://map.naver.com/v5/search/%EC%8B%A0%EB%8F%84%EB%A6%BC%EC%97%AD) | [신도림 테크노마트](https://map.naver.com/v5/search/%EC%8B%A0%EB%8F%84%EB%A6%BC%ED%85%8C%ED%81%AC%EB%85%B8%EB%A7%88%ED%8A%B8)
+
+이 흐름의 연장선에서 [2월 서울 전시 솔직 후기: 국립현대미술관 무료 vs 예술의전당 15,000원 비교](/travel-blog/posts/2026/02/february-seoul-exhibitions/)도 한번 탐색해 볼 만합니다.
+
+---
+
+## 함께 읽기
+
+- [성수동은 왜 떴나: 도시 재생의 인문학적 통찰과 차세대 문화 허브의 조건](/travel-blog/posts/2026/02/seongsu-urban-regeneration/) — 김주말의 시선 · 같은 서울 지역
+- [서울 대형 뮤지컬 관람 가이드: 판교 퇴근러가 골라본 5편](/travel-blog/posts/2026/02/seoul-musical-guide-5/) — 김주말의 시선 · 같은 서울 지역
+- [3월 연극 TOP 5: 엘시노어부터 노인의 꿈까지, 안 보면 손해 보는 소극장 라인업](/travel-blog/posts/2026/02/march-theatre-performances-top-5-seoul/) — 조회영의 시선 · 같은 서울 지역
 
 ## 자주 묻는 질문
 
