@@ -27,7 +27,7 @@ keywords:
   - 명사십리
   - 병바위
 cover:
-  image: /travel-blog/images/kto-서해안-둘레길-디깅-태안-해변길에서-보령-무창포까지-파도소리로-걷는-봄-0.jpg
+  image: /travel-blog/images/kto-2026-02-20-west-coast-trail-digging-taean-boryeong-cover.jpg
   alt: 병바위 (전북 서해안 국가지질공원)
   caption: '출처: 한국관광공사'
   relative: false

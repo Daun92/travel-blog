@@ -26,7 +26,7 @@ keywords:
   - 단양 먹거리
   - 단양 여행 비용
 cover:
-  image: /travel-blog/images/kto-단양-당일치기-현실-코스-도담삼봉-고수동굴-마늘-먹거리까지-비용-총정산-0.jpg
+  image: /travel-blog/images/kto-2026-02-20-danyang-day-trip-course-and-cost-cover.jpg
   alt: 구인사(단양)
   caption: '출처: 한국관광공사'
   relative: false
