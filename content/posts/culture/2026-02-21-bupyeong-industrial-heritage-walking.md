@@ -265,7 +265,6 @@ GM 공장을 지나 산곡동 방향으로 가면 높은 콘크리트 담장과 
 ## 함께 읽기
 
 - [2월 공연 추천 TOP 5 — 2만원짜리가 13만원보다 만족도 높다고?](/travel-blog/posts/2026/02/february-performances-top5/) — 조회영의 시선 · 같은 서울 지역
-- [신도림 디큐브 너머, 12번 방문 끝에 찾아낸 시간의 공장지대 디깅 리포트](/travel-blog/posts/2026/02/sindorim-factory-zone-deep-digging/) — 오덕우의 시선 · 같은 서울 지역
 - [서울의 시간 지층 디깅: 망원·문래·신당, 성수 이후의 세계를 12번 가보고 알아낸 것들](/travel-blog/posts/2026/02/seoul-time-layers-digging/) — 오덕우의 시선 · 같은 서울 지역
 
 ## 자주 묻는 질문
