@@ -10,6 +10,32 @@
 
 ## 개발 이력
 
+### 2026-02-21: 공유 시스템 한국화 — 카카오톡 + 네이버 밴드 추가
+
+#### 배경
+
+PaperMod 기본 공유 버튼(X, LinkedIn, Reddit, Facebook, WhatsApp, Telegram, YC)이 한국 독자 대상 블로그에 맞지 않음. 한국 사용자가 가장 많이 사용하는 카카오톡과 네이버 밴드 공유 버튼이 필요.
+
+#### 구현 내용
+
+| 파일 | 변경 | 효과 |
+|------|------|------|
+| `layouts/partials/share_icons.html` | 신규 override 생성 — 카카오톡 + 밴드 버튼 추가 | 한국 SNS 공유 |
+| `layouts/partials/extend_head.html` | Kakao SDK 조건부 로드 (`kakaoJsKey` 설정 시) | SDK 초기화 |
+| `hugo.toml` | `ShareButtons`, `kakaoJsKey` 설정 추가 | 버튼 큐레이션 |
+| `assets/css/extended/custom.css` | 카카오 브랜드 호버(#FEE500), 토스트 알림 스타일 | UI 일관성 |
+
+#### 기술 요점
+
+- **카카오톡**: Kakao JS SDK 연동 — `Kakao.Share.sendDefault()` (커버 이미지 + 제목 + 설명 포함)
+- **카카오 폴백**: SDK 키 미설정 시 → `navigator.clipboard.writeText()` + 토스트 "링크가 복사되었습니다"
+- **네이버 밴드**: URL 기반 — `https://band.us/plugin/share?body=TITLE&route=URL` (별도 키 불필요)
+- **버튼 큐레이션**: `ShareButtons = ["kakao", "band", "x", "facebook", "telegram"]` (Reddit, WhatsApp, YC 기본 비활성)
+- **PaperMod 호환**: 테마 파일 미수정, `layouts/partials/share_icons.html` override 방식
+- **SDK 요구사항**: developers.kakao.com 앱 등록 → JS 키 발급 → `kakaoJsKey` 설정
+
+---
+
 ### 2026-02-21: 콘텐츠-이미지 서사 파이프라인 전면 개선 — 3-Phase 아키텍처
 
 #### 배경

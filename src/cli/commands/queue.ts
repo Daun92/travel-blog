@@ -7,6 +7,7 @@ import { join } from 'path';
 import chalk from 'chalk';
 import { loadMoltbookConfig } from '../../agents/moltbook/index.js';
 import TopicDiscovery, { TopicRecommendation } from '../../agents/moltbook/topic-discovery.js';
+import { ContentBalancer } from '../../agents/moltbook/content-balancer.js';
 import CommunityRequestExtractor from '../../agents/moltbook/community-requests.js';
 import SurveyInsightsDBManager from '../../agents/moltbook/survey-insights-db.js';
 import { EventCalendarScanner } from '../../agents/events/event-scanner.js';
@@ -376,8 +377,11 @@ export async function queueCommand(
         const minScore = parseInt(options.minScore || '100', 10); // 0-200 스케일 기본 100
         console.log(chalk.white.bold(`\n🤖 자동 큐 채우기 (최소 점수: ${minScore}/200, 비율: ${ratio})`));
 
+        // 리전 캡 적용 (같은 리전 최대 2개)
+        const cappedRecs = ContentBalancer.applyRegionalCap(result.recommendations, 2);
+
         // 비율 밸런싱 적용
-        const balancedRecs = balanceByRatio(result.recommendations, ratio, minScore);
+        const balancedRecs = balanceByRatio(cappedRecs, ratio, minScore);
 
         const added = await discovery.autoPopulateQueue(balancedRecs, 0); // 이미 필터링됨
 

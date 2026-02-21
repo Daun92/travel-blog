@@ -2059,6 +2059,39 @@
       "subject": "무창포 갯벌 일몰 — 신비의 바닷길 기하학적 패턴",
       "usedAt": "2026-02-21T12:00:00.000Z",
       "note": "AI 스틸컷: §3 muchangpo2 교체 — 어선 항구→갯벌 일몰 (서사 일치)"
+    },
+    {
+      "source": "gemini-ai",
+      "filename": "cover-2026-02-20-west-coast-trail-digging-taean-boryeong.jpg",
+      "postSlug": "west-coast-trail-digging-taean-boryeong",
+      "personaId": "niche",
+      "subject": "서해안 갯벌 리플 마크 — 물이 빠진 뒤 드러난 자연의 판화 텍스처",
+      "usedAt": "2026-02-21T18:00:00.000Z",
+      "note": "커버 교체: 조개구이 간판+어항 → 갯벌 판화 (§3 '자연이 그린 거대한 판화' + §1 '리플 마크' 서사 연결)"
+    },
+    {
+      "ktoContentId": "1989501",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/25/2578925_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "한국-속-유럽마을-완전-디깅-프쁘띠프랑스-독일마을-프로방스마을-숨은-테마마을-순례",
+      "query": "한국 속 유럽마을 완전 디깅 프쁘띠프랑스 독일마을 프로방스마을 숨은 테마마을 순례",
+      "usedAt": "2026-02-21T11:21:22.470Z"
+    },
+    {
+      "ktoContentId": "3553728",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/26/3553726_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "경기-남부-숨은-트레킹-명소-수리산-광교산-칠보산-물왕저수지-현지인만-아는-산길",
+      "query": "경기 남부 숨은 트레킹 명소 수리산 광교산 칠보산 물왕저수지 현지인만 아는 산길",
+      "usedAt": "2026-02-21T11:32:47.237Z"
+    },
+    {
+      "ktoContentId": "604009",
+      "ktoUrl": "http://tong.visitkorea.or.kr/cms/resource/15/3423715_image2_1.jpg",
+      "source": "kto",
+      "postSlug": "쁘띠프랑스-남해독일마을-파주프로방스마을-한국-속-외국마을-디깅",
+      "query": "쁘띠프랑스 남해독일마을 파주프로방스마을 한국 속 외국마을 디깅",
+      "usedAt": "2026-02-21T11:46:27.081Z"
     }
   ]
 }

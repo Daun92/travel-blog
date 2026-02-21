@@ -7,49 +7,76 @@
  */
 
 import { readFile, readdir } from 'fs/promises';
-import { existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
-import type { TopicRecommendation, FramingType } from './topic-discovery.js';
+import type { TopicRecommendation, FramingType, TopicSeedPool } from './topic-discovery.js';
 import type { DiversityTargets } from './index.js';
 import type { WorkflowEventBus } from '../../workflow/event-bus.js';
 
 // ============================================================================
-// 지역 매핑
+// 지역 매핑 (동적 빌드)
 // ============================================================================
 
-/** 세부 지역 키워드 → 광역 지역 코드 */
-const LOCATION_TO_REGION: Record<string, string> = {
-  // 서울
+/** 하드코딩 기본 매핑 (seed pool 로드 실패 시 폴백) */
+const BASE_LOCATION_TO_REGION: Record<string, string> = {
   '서울': '서울', '강남': '서울', '성수': '서울', '북촌': '서울',
   '익선동': '서울', '해방촌': '서울', '을지로': '서울', '연남동': '서울',
   '홍대': '서울', '대학로': '서울', '종로': '서울', '한남동': '서울',
   '이태원': '서울', '명동': '서울',
-  // 경기
   '파주': '경기', '수원': '경기', '용인': '경기', '가평': '경기',
   '양평': '경기', '포천': '경기', '북한산': '경기',
-  // 인천
   '인천': '인천',
-  // 강원
   '강릉': '강원', '속초': '강원', '양양': '강원', '춘천': '강원',
   '평창': '강원', '원주': '강원', '정선': '강원',
-  // 충청
   '대전': '충청', '공주': '충청', '부여': '충청', '청주': '충청',
   '보령': '충청', '단양': '충청', '천안': '충청', '세종': '충청',
-  // 경북
   '경주': '경북', '안동': '경북', '영주': '경북', '포항': '경북',
-  // 대구
   '대구': '대구',
-  // 부산
   '부산': '부산', '해운대': '부산',
-  // 경남
   '통영': '경남', '거제': '경남', '남해': '경남', '하동': '경남', '진주': '경남',
-  // 전북
   '전주': '전북', '군산': '전북',
-  // 전남
   '여수': '전남', '순천': '전남', '담양': '전남', '목포': '전남',
-  // 제주
   '제주': '제주',
 };
+
+/** seed pool + region-mapping.json에서 동적 빌드 (lazy cached) */
+let _locationToRegionCache: Record<string, string> | null = null;
+
+function buildLocationToRegion(): Record<string, string> {
+  if (_locationToRegionCache) return _locationToRegionCache;
+
+  const map = { ...BASE_LOCATION_TO_REGION };
+
+  // seed pool에서 추가
+  try {
+    const raw = readFileSync(join(process.cwd(), 'config/topic-seed-pool.json'), 'utf-8');
+    const pool = JSON.parse(raw) as TopicSeedPool;
+    for (const loc of Object.values(pool.locations)) {
+      if (!map[loc.name]) {
+        map[loc.name] = loc.region;
+      }
+    }
+  } catch { /* seed pool 없으면 무시 */ }
+
+  // region-mapping.json에서 추가
+  try {
+    const raw = readFileSync(join(process.cwd(), 'config/region-mapping.json'), 'utf-8');
+    const regionMap = JSON.parse(raw) as Record<string, { places: string[] }>;
+    for (const [region, data] of Object.entries(regionMap)) {
+      for (const place of data.places) {
+        if (!map[place]) {
+          map[place] = region;
+        }
+      }
+    }
+  } catch { /* region-mapping 없으면 무시 */ }
+
+  _locationToRegionCache = map;
+  return map;
+}
+
+/** 하위 호환: 기존 코드에서 사용하는 상수 */
+const LOCATION_TO_REGION = buildLocationToRegion();
 
 /** 에이전트 키워드 매핑 (personas/index.json과 동일) */
 const PERSONA_KEYWORDS: Record<string, string[]> = {
@@ -411,6 +438,65 @@ export class ContentBalancer {
     console.log('──────────────────────────────────────────────────');
   }
 
+  /**
+   * 리전 캡: 같은 리전에서 maxPerRegion개까지만 허용
+   * 콘셉트 토픽(크로스-리전)은 바이패스
+   */
+  static applyRegionalCap(
+    recommendations: TopicRecommendation[],
+    maxPerRegion: number = 2
+  ): TopicRecommendation[] {
+    const locMap = buildLocationToRegion();
+    const regionCounts: Record<string, number> = {};
+    const kept: TopicRecommendation[] = [];
+    const overflow: TopicRecommendation[] = [];
+
+    // 점수 내림차순 보존
+    const sorted = [...recommendations].sort((a, b) => b.score - a.score);
+
+    for (const rec of sorted) {
+      // 콘셉트 토픽(reasoning에 '크로스-리전' 포함)은 캡 바이패스
+      if (rec.reasoning?.includes('크로스-리전')) {
+        kept.push(rec);
+        continue;
+      }
+
+      // 지역 감지
+      const combined = rec.topic + ' ' + rec.suggestedTitle + ' ' + (rec.keywords || []).join(' ');
+      let region: string | null = null;
+      for (const [loc, reg] of Object.entries(locMap)) {
+        if (combined.includes(loc)) {
+          region = reg;
+          break;
+        }
+      }
+
+      if (!region) {
+        kept.push(rec);
+        continue;
+      }
+
+      regionCounts[region] = (regionCounts[region] || 0) + 1;
+      if (regionCounts[region] <= maxPerRegion) {
+        kept.push(rec);
+      } else {
+        overflow.push(rec);
+      }
+    }
+
+    // 부족하면 overflow에서 -10 페널티로 복원
+    if (kept.length < 5 && overflow.length > 0) {
+      for (const rec of overflow) {
+        rec.score -= 10;
+        rec.reasoning += ' | 리전캡초과 -10';
+        kept.push(rec);
+        if (kept.length >= sorted.length) break;
+      }
+    }
+
+    return kept;
+  }
+
   // ============================================================================
   // 내부 헬퍼
   // ============================================================================
@@ -499,7 +585,8 @@ export class ContentBalancer {
   }
 
   /**
-   * 미커버 지역 기반 추천 생성 (다양한 프레이밍 + 에이전트 배정)
+   * 미커버 지역 기반 추천 생성 — seed pool에서 동적 조회
+   * 폴백: 하드코딩 REGION_TOPICS (seed pool에 해당 지역 없을 때)
    */
   generateRegionGapRecommendations(
     boosts: BalanceBoosts
@@ -509,8 +596,15 @@ export class ContentBalancer {
     const mostNeededAgent = this.getMostNeededAgent(boosts.agentBoosts);
     const mostNeededFraming = this.getMostNeededFraming(boosts.framingBoosts);
 
-    // 미커버 지역별 대표 주제 + 프레이밍 매핑
-    const REGION_TOPICS: Record<string, Array<{
+    // seed pool에서 동적 조회
+    let pool: TopicSeedPool | null = null;
+    try {
+      const raw = readFileSync(join(process.cwd(), 'config/topic-seed-pool.json'), 'utf-8');
+      pool = JSON.parse(raw) as TopicSeedPool;
+    } catch { /* seed pool 없으면 폴백 사용 */ }
+
+    // 폴백 하드코딩
+    const FALLBACK_REGION_TOPICS: Record<string, Array<{
       topic: string; type: 'travel' | 'culture';
       framing: FramingType; persona: 'viral' | 'friendly' | 'informative';
       title: string; keywords: string[];
@@ -520,38 +614,58 @@ export class ContentBalancer {
           title: '공주 백제유적 산책: 무령왕릉에서 공산성까지', keywords: ['공주', '백제', '무령왕릉', '공산성'] },
         { topic: '대전 빵집 투어', type: 'travel', framing: 'experience', persona: 'friendly',
           title: '대전 성심당만? 현지인이 가는 진짜 빵집 3곳', keywords: ['대전', '성심당', '빵집', '맛집'] },
-        { topic: '단양 절경', type: 'travel', framing: 'local_story', persona: 'friendly',
-          title: '단양 도담삼봉 주민이 알려준 숨은 뷰포인트', keywords: ['단양', '도담삼봉', '절경', '소백산'] },
       ],
       '제주': [
         { topic: '제주 오름', type: 'travel', framing: 'deep_dive', persona: 'informative',
           title: '제주 오름의 지질학: 368개 오름이 만든 풍경', keywords: ['제주', '오름', '지질', '트레킹'] },
         { topic: '제주 로컬 식당', type: 'travel', framing: 'local_story', persona: 'friendly',
           title: '제주 현지인 단골 식당: 관광객 모르는 동네 맛집', keywords: ['제주', '현지인', '맛집', '로컬'] },
-        { topic: '제주 겨울 여행', type: 'travel', framing: 'seasonal', persona: 'viral',
-          title: '2월 제주도가 오히려 좋은 이유 5가지', keywords: ['제주', '겨울', '2월', '비수기'] },
       ],
       '경남': [
         { topic: '통영 예술', type: 'culture', framing: 'deep_dive', persona: 'informative',
           title: '통영이 예술의 도시가 된 이유: 윤이상에서 전혁림까지', keywords: ['통영', '윤이상', '전혁림', '예술'] },
         { topic: '남해 바래길', type: 'travel', framing: 'experience', persona: 'friendly',
           title: '남해 바래길 걸어본 솔직 후기: 3코스 비교', keywords: ['남해', '바래길', '트레킹', '올레'] },
-        { topic: '거제 해안도로', type: 'travel', framing: 'comparison', persona: 'viral',
-          title: '거제 vs 통영 드라이브: 어디가 더 예쁠까', keywords: ['거제', '통영', '드라이브', '해안'] },
       ],
       '전남': [
         { topic: '순천만 습지', type: 'travel', framing: 'seasonal', persona: 'informative',
           title: '겨울 순천만 갈대밭: 계절별로 달라지는 풍경', keywords: ['순천', '순천만', '갈대', '겨울'] },
-        { topic: '담양 죽녹원', type: 'travel', framing: 'local_story', persona: 'friendly',
-          title: '담양 죽녹원 너머: 주민이 추천하는 진짜 담양', keywords: ['담양', '죽녹원', '메타세쿼이아', '로컬'] },
         { topic: '목포 근대문화', type: 'culture', framing: 'deep_dive', persona: 'informative',
           title: '목포 근대역사 산책: 개항장에서 유달산까지', keywords: ['목포', '근대', '개항', '유달산'] },
       ],
     };
 
     for (const region of uncoveredRegions) {
-      const topics = REGION_TOPICS[region];
-      if (!topics) continue;
+      // seed pool에서 해당 리전의 앵글 동적 조회
+      let topics: Array<{
+        topic: string; type: 'travel' | 'culture';
+        framing: FramingType; persona: 'viral' | 'friendly' | 'informative';
+        title: string; keywords: string[];
+      }> = [];
+
+      if (pool) {
+        const regionLocs = Object.values(pool.locations).filter(loc => loc.region === region);
+        for (const loc of regionLocs) {
+          for (const angle of loc.angles) {
+            const persona = (angle.suggestedAgents[0] || 'friendly') as 'viral' | 'friendly' | 'informative';
+            topics.push({
+              topic: `${loc.name} ${angle.title.split(':')[0]?.split('→')[0]?.trim() || ''}`.trim(),
+              type: angle.type,
+              framing: angle.framingType as FramingType,
+              persona,
+              title: angle.title,
+              keywords: angle.keywords,
+            });
+          }
+        }
+      }
+
+      // seed pool에 결과가 없으면 폴백 사용
+      if (topics.length === 0) {
+        topics = FALLBACK_REGION_TOPICS[region] || [];
+      }
+
+      if (topics.length === 0) continue;
 
       // 가장 부족한 프레이밍과 매칭되는 주제 우선, 없으면 첫 번째
       const preferred = topics.find(t => t.framing === mostNeededFraming) || topics[0];

@@ -104,6 +104,10 @@
     "covers:dry-run": "tsx scripts/refresh-covers.mts --sample --dry-run",
     "covers:all": "tsx scripts/refresh-covers.mts --all",
     "covers:overlay-only": "tsx scripts/refresh-covers.mts --sample --overlay-only",
+    "crosslinks:index": "tsx src/crosslinks/build-index.ts",
+    "crosslinks:batch": "tsx scripts/batch-crosslinks.mts",
+    "crosslinks:batch:dry": "tsx scripts/batch-crosslinks.mts --dry-run",
+    "crosslinks:verify": "tsx scripts/verify-crosslinks.mts",
     "test": "vitest"
   },
   "keywords": [

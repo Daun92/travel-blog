@@ -39,6 +39,8 @@ export interface FrontmatterData {
   eventDate?: string;
   ticketPrice?: string;
   openingHours?: string;
+  // 크로스 링크 (수동 오버라이드용)
+  relatedPosts?: string[];
 }
 
 /**
@@ -117,6 +119,11 @@ export function generateFrontmatter(data: FrontmatterData): string {
   if (data.eventDate) lines.push(`eventDate: "${escapeYaml(data.eventDate)}"`);
   if (data.ticketPrice) lines.push(`ticketPrice: "${escapeYaml(data.ticketPrice)}"`);
   if (data.openingHours) lines.push(`openingHours: "${escapeYaml(data.openingHours)}"`);
+
+  // 크로스 링크 (수동 오버라이드)
+  if (data.relatedPosts && data.relatedPosts.length > 0) {
+    lines.push(`relatedPosts: [${data.relatedPosts.map(s => `"${escapeYaml(s)}"`).join(', ')}]`);
+  }
 
   // PaperMod 테마 설정
   lines.push('showToc: true');

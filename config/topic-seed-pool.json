@@ -1,0 +1,427 @@
+{
+  "locations": {
+    "yeoncheon": {
+      "name": "연천", "region": "경기", "tier": "niche",
+      "angles": [
+        { "title": "연천 임진강 DMZ 생태: 두루미가 찾아오는 마을", "framingType": "deep_dive", "type": "travel", "suggestedAgents": ["informative", "niche"], "keywords": ["연천", "임진강", "DMZ", "두루미"], "seasonalRelevance": "winter" },
+        { "title": "연천 전곡리 선사유적: 주먹도끼와 30만 년", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["연천", "전곡리", "선사", "구석기"], "seasonalRelevance": null },
+        { "title": "연천 당일치기: 재인폭포→한탄강 주상절리 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["연천", "재인폭포", "한탄강", "주상절리"], "seasonalRelevance": null }
+      ]
+    },
+    "pocheon": {
+      "name": "포천", "region": "경기", "tier": "secondary",
+      "angles": [
+        { "title": "포천 아트밸리: 폐채석장이 예술 공간이 되기까지", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["포천", "아트밸리", "채석장", "예술"], "seasonalRelevance": null },
+        { "title": "포천 허브아일랜드 + 산정호수 당일코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["포천", "허브아일랜드", "산정호수", "근교"], "seasonalRelevance": null }
+      ]
+    },
+    "namyangju": {
+      "name": "남양주", "region": "경기", "tier": "secondary",
+      "angles": [
+        { "title": "남양주 북한강 자전거길: 두물머리에서 양수리까지", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["남양주", "북한강", "자전거", "두물머리"], "seasonalRelevance": "spring" },
+        { "title": "남양주 다산 정약용 유적지 깊이 읽기", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["남양주", "정약용", "다산", "실학"], "seasonalRelevance": null }
+      ]
+    },
+    "icheon": {
+      "name": "이천", "region": "경기", "tier": "secondary",
+      "angles": [
+        { "title": "이천 도예 체험: 쌀밥보다 도자기가 먼저인 도시", "framingType": "experience", "type": "culture", "suggestedAgents": ["niche"], "keywords": ["이천", "도자기", "도예", "체험"], "seasonalRelevance": null },
+        { "title": "이천 쌀밥 거리 + 테르메덴 당일코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["이천", "쌀밥", "온천", "맛집"], "seasonalRelevance": "winter" }
+      ]
+    },
+    "seosan": {
+      "name": "서산", "region": "충남", "tier": "niche",
+      "angles": [
+        { "title": "서산 해미읍성: 조선 군사 요새의 비밀", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["서산", "해미읍성", "조선", "읍성"], "seasonalRelevance": null },
+        { "title": "서산 용현리 마애삼존불 + 개심사 코스", "framingType": "experience", "type": "culture", "suggestedAgents": ["informative", "niche"], "keywords": ["서산", "마애삼존불", "개심사", "백제"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "ansan": {
+      "name": "안산", "region": "경기", "tier": "secondary",
+      "angles": [
+        { "title": "안산 다문화 음식거리: 한국 속 작은 세계", "framingType": "local_story", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["안산", "다문화", "원곡동", "음식거리"], "seasonalRelevance": null },
+        { "title": "안산 대부도 갯벌 체험 + 시화나래 조력공원", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["안산", "대부도", "갯벌", "시화호"], "seasonalRelevance": "summer" }
+      ]
+    },
+    "uiryeong": {
+      "name": "의령", "region": "경남", "tier": "niche",
+      "angles": [
+        { "title": "의령 의병의 고장: 곽재우 장군과 붉은 갑옷", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["의령", "의병", "곽재우", "역사"], "seasonalRelevance": null },
+        { "title": "의령 솥바위 + 정암진 비경 드라이브", "framingType": "experience", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["의령", "솥바위", "정암진", "낙동강"], "seasonalRelevance": null }
+      ]
+    },
+    "gochang": {
+      "name": "고창", "region": "전북", "tier": "niche",
+      "angles": [
+        { "title": "고창읍성 답성놀이: 성벽 위를 걷는 600년 전통", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["고창", "읍성", "답성놀이", "전통"], "seasonalRelevance": null },
+        { "title": "고창 선운사 동백꽃 + 복분자 와이너리 코스", "framingType": "seasonal", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["고창", "선운사", "동백꽃", "복분자"], "seasonalRelevance": "spring" }
+      ]
+    },
+    "goseong_gangwon": {
+      "name": "고성", "region": "강원", "tier": "niche",
+      "nameQualifier": "강원",
+      "angles": [
+        { "title": "강원 고성 통일전망대: DMZ 너머를 바라보다", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["고성", "통일전망대", "DMZ", "금강산"], "seasonalRelevance": null },
+        { "title": "강원 고성 화진포 해변 + 이승만 별장 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["고성", "화진포", "해변", "별장"], "seasonalRelevance": "summer" }
+      ]
+    },
+    "goseong_gyeongnam": {
+      "name": "고성", "region": "경남", "tier": "niche",
+      "nameQualifier": "경남",
+      "angles": [
+        { "title": "경남 고성 공룡발자국 화석지: 1억 년 전 해안선", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative", "niche"], "keywords": ["고성", "공룡", "화석", "상족암"], "seasonalRelevance": null },
+        { "title": "경남 고성 당항포 해전지 + 해안 드라이브", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["고성", "당항포", "해안", "이순신"], "seasonalRelevance": null }
+      ]
+    },
+    "chujado": {
+      "name": "추자도", "region": "제주", "tier": "niche",
+      "angles": [
+        { "title": "추자도: 제주도 가는 길에 숨어 있는 또 다른 섬", "framingType": "niche_digging", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["추자도", "제주", "섬", "낚시"], "seasonalRelevance": null },
+        { "title": "추자도 참굴비 축제 + 등대 트레킹", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly", "niche"], "keywords": ["추자도", "참굴비", "등대", "트레킹"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "seoul": {
+      "name": "서울", "region": "서울", "tier": "mainstream",
+      "angles": [
+        { "title": "성수동 재생 건축 산책: 공장에서 갤러리로", "framingType": "local_story", "type": "culture", "suggestedAgents": ["niche"], "keywords": ["서울", "성수동", "재생건축", "갤러리"], "seasonalRelevance": null },
+        { "title": "을지로 인쇄골목 디깅: 활자 장인과 카페의 공존", "framingType": "niche_digging", "type": "culture", "suggestedAgents": ["niche"], "keywords": ["서울", "을지로", "인쇄골목", "활자"], "seasonalRelevance": null },
+        { "title": "서울 야경 비교: 남산타워 vs N서울타워 vs 롯데타워", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral"], "keywords": ["서울", "야경", "남산", "롯데타워"], "seasonalRelevance": null }
+      ]
+    },
+    "busan": {
+      "name": "부산", "region": "부산", "tier": "mainstream",
+      "angles": [
+        { "title": "부산 영도 조선소 역사 산책: 깡깡이마을에서 태종대까지", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["부산", "영도", "조선소", "깡깡이"], "seasonalRelevance": null },
+        { "title": "부산 서면 vs 전포동: 어디서 커피 마실까", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral", "friendly"], "keywords": ["부산", "서면", "전포동", "카페"], "seasonalRelevance": null }
+      ]
+    },
+    "gangneung": {
+      "name": "강릉", "region": "강원", "tier": "mainstream",
+      "angles": [
+        { "title": "강릉 겨울바다 감성 코스: 안목해변→정동진→주문진", "framingType": "seasonal", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["강릉", "겨울바다", "안목", "정동진"], "seasonalRelevance": "winter" },
+        { "title": "강릉 커피거리의 비밀: 왜 강릉이 커피 도시가 됐을까", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative", "niche"], "keywords": ["강릉", "커피", "카페", "바리스타"], "seasonalRelevance": null }
+      ]
+    },
+    "gyeongju": {
+      "name": "경주", "region": "경북", "tier": "mainstream",
+      "angles": [
+        { "title": "경주 야간 걷기: 동궁과 월지→첨성대→대릉원 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["경주", "야경", "동궁과월지", "대릉원"], "seasonalRelevance": null },
+        { "title": "경주 남산 불교유적 트레킹: 80개 절터의 역사", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["경주", "남산", "불교", "석불"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "jeonju": {
+      "name": "전주", "region": "전북", "tier": "mainstream",
+      "angles": [
+        { "title": "전주 한옥마을 이면도로: 관광객 모르는 진짜 골목", "framingType": "local_story", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["전주", "한옥마을", "골목", "로컬"], "seasonalRelevance": null },
+        { "title": "전주 비빔밥 vs 콩나물국밥: 어떤 한 그릇?", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral", "friendly"], "keywords": ["전주", "비빔밥", "콩나물국밥", "맛집"], "seasonalRelevance": null }
+      ]
+    },
+    "yeosu": {
+      "name": "여수", "region": "전남", "tier": "mainstream",
+      "angles": [
+        { "title": "여수 밤바다 야경 비교: 해상케이블카 vs 돌산대교 vs 이순신광장", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral"], "keywords": ["여수", "야경", "케이블카", "돌산대교"], "seasonalRelevance": null },
+        { "title": "여수 향일암 일출 + 오동도 동백 코스", "framingType": "seasonal", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["여수", "향일암", "일출", "동백"], "seasonalRelevance": "winter" }
+      ]
+    },
+    "sokcho": {
+      "name": "속초", "region": "강원", "tier": "mainstream",
+      "angles": [
+        { "title": "속초 중앙시장 먹거리 디깅: 현지인 단골 코스", "framingType": "local_story", "type": "travel", "suggestedAgents": ["niche", "friendly"], "keywords": ["속초", "중앙시장", "먹거리", "단골"], "seasonalRelevance": null }
+      ]
+    },
+    "cheolwon": {
+      "name": "철원", "region": "강원", "tier": "niche",
+      "angles": [
+        { "title": "철원 DMZ 평화의 길: 민통선 너머의 풍경", "framingType": "deep_dive", "type": "travel", "suggestedAgents": ["informative"], "keywords": ["철원", "DMZ", "민통선", "평화"], "seasonalRelevance": null },
+        { "title": "철원 한탄강 물윗길 트레킹: 주상절리 협곡 위를 걷다", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly", "niche"], "keywords": ["철원", "한탄강", "물윗길", "주상절리"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "hwacheon": {
+      "name": "화천", "region": "강원", "tier": "niche",
+      "angles": [
+        { "title": "화천 산천어축제: 겨울 강원의 대표 체험", "framingType": "seasonal", "type": "travel", "suggestedAgents": ["friendly", "viral"], "keywords": ["화천", "산천어", "겨울축제", "얼음낚시"], "seasonalRelevance": "winter" }
+      ]
+    },
+    "inje": {
+      "name": "인제", "region": "강원", "tier": "niche",
+      "angles": [
+        { "title": "인제 원대리 자작나무숲: 겨울에 만나는 하얀 숲", "framingType": "seasonal", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["인제", "자작나무", "겨울", "숲"], "seasonalRelevance": "winter" },
+        { "title": "인제 내린천 래프팅: 여름 강원의 짜릿한 선택", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["인제", "내린천", "래프팅", "여름"], "seasonalRelevance": "summer" }
+      ]
+    },
+    "taebaek": {
+      "name": "태백", "region": "강원", "tier": "niche",
+      "angles": [
+        { "title": "태백 삼수령: 한강·낙동강·오십천이 갈라지는 곳", "framingType": "deep_dive", "type": "travel", "suggestedAgents": ["informative", "niche"], "keywords": ["태백", "삼수령", "분수령", "한강"], "seasonalRelevance": null },
+        { "title": "태백산 눈꽃 트레킹 + 태백 석탄박물관", "framingType": "seasonal", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["태백", "태백산", "눈꽃", "석탄"], "seasonalRelevance": "winter" }
+      ]
+    },
+    "yeongwol": {
+      "name": "영월", "region": "강원", "tier": "niche",
+      "angles": [
+        { "title": "영월 단종의 유배지: 청령포에서 장릉까지", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["영월", "단종", "청령포", "장릉"], "seasonalRelevance": null },
+        { "title": "영월 별마로천문대 + 동강 래프팅 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["영월", "천문대", "동강", "래프팅"], "seasonalRelevance": "summer" }
+      ]
+    },
+    "jeongseon": {
+      "name": "정선", "region": "강원", "tier": "niche",
+      "angles": [
+        { "title": "정선 아리랑의 고장: 노래에 담긴 산골 이야기", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["정선", "아리랑", "민요", "문화"], "seasonalRelevance": null },
+        { "title": "정선 5일장 + 곤드레밥 코스", "framingType": "local_story", "type": "travel", "suggestedAgents": ["niche", "friendly"], "keywords": ["정선", "5일장", "곤드레밥", "시장"], "seasonalRelevance": null }
+      ]
+    },
+    "hongseong": {
+      "name": "홍성", "region": "충남", "tier": "niche",
+      "angles": [
+        { "title": "홍성 홍주읍성 역사산책 + 광천 새우젓 시장", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly", "informative"], "keywords": ["홍성", "홍주읍성", "광천", "새우젓"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "yesan": {
+      "name": "예산", "region": "충남", "tier": "niche",
+      "angles": [
+        { "title": "예산 수덕사 + 덕산온천 하루코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["예산", "수덕사", "덕산온천", "충남"], "seasonalRelevance": "winter" },
+        { "title": "예산 추사 김정희 유적지: 서예 거장의 발자취", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["예산", "김정희", "추사", "서예"], "seasonalRelevance": null }
+      ]
+    },
+    "buan": {
+      "name": "부안", "region": "전북", "tier": "niche",
+      "angles": [
+        { "title": "부안 변산반도 해안 트레킹: 채석강→적벽강", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly", "niche"], "keywords": ["부안", "변산반도", "채석강", "적벽강"], "seasonalRelevance": null },
+        { "title": "부안 내소사 전나무숲길: 천년 고찰의 고요", "framingType": "niche_digging", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["부안", "내소사", "전나무", "사찰"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "changnyeong": {
+      "name": "창녕", "region": "경남", "tier": "niche",
+      "angles": [
+        { "title": "창녕 우포늪: 1억 4천만 년 습지의 사계절", "framingType": "deep_dive", "type": "travel", "suggestedAgents": ["informative", "niche"], "keywords": ["창녕", "우포늪", "습지", "생태"], "seasonalRelevance": null }
+      ]
+    },
+    "sancheong": {
+      "name": "산청", "region": "경남", "tier": "niche",
+      "angles": [
+        { "title": "산청 지리산 자락 한방체험: 동의보감촌 이야기", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative", "niche"], "keywords": ["산청", "지리산", "한방", "동의보감"], "seasonalRelevance": null },
+        { "title": "산청 경호강 래프팅 + 대원사 트레킹", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["산청", "경호강", "래프팅", "대원사"], "seasonalRelevance": "summer" }
+      ]
+    },
+    "hapcheon": {
+      "name": "합천", "region": "경남", "tier": "niche",
+      "angles": [
+        { "title": "합천 해인사 팔만대장경: 세계기록유산을 만나다", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["합천", "해인사", "팔만대장경", "세계유산"], "seasonalRelevance": null },
+        { "title": "합천영상테마파크: 시대극 촬영지 산책", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["합천", "영상테마파크", "촬영지", "시대극"], "seasonalRelevance": null }
+      ]
+    },
+    "biyangdo": {
+      "name": "비양도", "region": "제주", "tier": "niche",
+      "angles": [
+        { "title": "비양도: 한림 앞바다에 떠 있는 작은 화산섬", "framingType": "niche_digging", "type": "travel", "suggestedAgents": ["niche"], "keywords": ["비양도", "제주", "화산섬", "한림"], "seasonalRelevance": null }
+      ]
+    },
+    "marado": {
+      "name": "마라도", "region": "제주", "tier": "niche",
+      "angles": [
+        { "title": "마라도: 대한민국 최남단에서 보내는 반나절", "framingType": "experience", "type": "travel", "suggestedAgents": ["niche", "friendly"], "keywords": ["마라도", "제주", "최남단", "짜장면"], "seasonalRelevance": null }
+      ]
+    },
+    "hwaseong": {
+      "name": "화성", "region": "경기", "tier": "secondary",
+      "angles": [
+        { "title": "화성 궁평리 해안 + 공룡알화석지 드라이브", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["화성", "궁평리", "공룡알", "서해"], "seasonalRelevance": null }
+      ]
+    },
+    "yongin": {
+      "name": "용인", "region": "경기", "tier": "secondary",
+      "angles": [
+        { "title": "용인 한국민속촌 vs 에버랜드: 가족 나들이 비교", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral", "friendly"], "keywords": ["용인", "한국민속촌", "에버랜드", "가족"], "seasonalRelevance": null }
+      ]
+    },
+    "tongyeong": {
+      "name": "통영", "region": "경남", "tier": "mainstream",
+      "angles": [
+        { "title": "통영 동피랑 벽화마을에서 서피랑까지: 언덕의 예술", "framingType": "local_story", "type": "culture", "suggestedAgents": ["niche"], "keywords": ["통영", "동피랑", "서피랑", "벽화"], "seasonalRelevance": null },
+        { "title": "통영 한려수도 케이블카 + 충무김밥 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["통영", "케이블카", "충무김밥", "한려수도"], "seasonalRelevance": null }
+      ]
+    },
+    "andong": {
+      "name": "안동", "region": "경북", "tier": "secondary",
+      "angles": [
+        { "title": "안동 하회마을 깊이 읽기: 유교 건축의 비밀", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["안동", "하회마을", "유교", "건축"], "seasonalRelevance": null },
+        { "title": "안동 찜닭골목 + 월영교 야경 당일코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["안동", "찜닭", "월영교", "야경"], "seasonalRelevance": null }
+      ]
+    },
+    "suncheon": {
+      "name": "순천", "region": "전남", "tier": "secondary",
+      "angles": [
+        { "title": "순천만국가정원 + 순천만습지: 하루로 충분할까?", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["순천", "순천만", "국가정원", "습지"], "seasonalRelevance": "autumn" }
+      ]
+    },
+    "damyang": {
+      "name": "담양", "region": "전남", "tier": "secondary",
+      "angles": [
+        { "title": "담양 죽녹원 + 메타세쿼이아길: 초록의 두 얼굴", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral"], "keywords": ["담양", "죽녹원", "메타세쿼이아", "대나무"], "seasonalRelevance": "summer" }
+      ]
+    },
+    "mokpo": {
+      "name": "목포", "region": "전남", "tier": "secondary",
+      "angles": [
+        { "title": "목포 근대문화거리 + 유달산 야경 코스", "framingType": "experience", "type": "culture", "suggestedAgents": ["informative", "friendly"], "keywords": ["목포", "근대", "유달산", "개항장"], "seasonalRelevance": null }
+      ]
+    },
+    "chuncheon": {
+      "name": "춘천", "region": "강원", "tier": "secondary",
+      "angles": [
+        { "title": "춘천 닭갈비 골목 + 소양호 유람선 당일코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["춘천", "닭갈비", "소양호", "당일치기"], "seasonalRelevance": null }
+      ]
+    },
+    "daejeon": {
+      "name": "대전", "region": "충청", "tier": "secondary",
+      "angles": [
+        { "title": "대전 빵집 투어: 성심당만? 현지인이 가는 3곳", "framingType": "local_story", "type": "travel", "suggestedAgents": ["niche", "friendly"], "keywords": ["대전", "성심당", "빵집", "맛집"], "seasonalRelevance": null }
+      ]
+    },
+    "gongju": {
+      "name": "공주", "region": "충청", "tier": "secondary",
+      "angles": [
+        { "title": "공주 백제유적 산책: 무령왕릉에서 공산성까지", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["공주", "백제", "무령왕릉", "공산성"], "seasonalRelevance": null }
+      ]
+    },
+    "buyeo": {
+      "name": "부여", "region": "충청", "tier": "secondary",
+      "angles": [
+        { "title": "부여 백제의 마지막 수도: 부소산성→낙화암→궁남지", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["부여", "백제", "부소산성", "낙화암"], "seasonalRelevance": null }
+      ]
+    },
+    "gunsan": {
+      "name": "군산", "region": "전북", "tier": "secondary",
+      "angles": [
+        { "title": "군산 시간여행: 근대건축관→히로쓰가옥→경암동 철길마을", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["군산", "근대건축", "시간여행", "철길마을"], "seasonalRelevance": null }
+      ]
+    },
+    "jeju": {
+      "name": "제주", "region": "제주", "tier": "mainstream",
+      "angles": [
+        { "title": "제주 오름 트레킹 비교: 새별오름 vs 용눈이오름 vs 다랑쉬오름", "framingType": "comparison", "type": "travel", "suggestedAgents": ["viral"], "keywords": ["제주", "오름", "트레킹", "비교"], "seasonalRelevance": null },
+        { "title": "제주 해녀 문화 심층: 유네스코 무형유산의 현재", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["제주", "해녀", "유네스코", "무형유산"], "seasonalRelevance": null }
+      ]
+    },
+    "danyang": {
+      "name": "단양", "region": "충청", "tier": "secondary",
+      "angles": [
+        { "title": "단양 팔경 완주 코스: 도담삼봉부터 사인암까지", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["단양", "팔경", "도담삼봉", "사인암"], "seasonalRelevance": null }
+      ]
+    },
+    "namhae": {
+      "name": "남해", "region": "경남", "tier": "secondary",
+      "angles": [
+        { "title": "남해 독일마을 + 다랭이논 일몰 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["남해", "독일마을", "다랭이논", "일몰"], "seasonalRelevance": null }
+      ]
+    },
+    "geoje": {
+      "name": "거제", "region": "경남", "tier": "secondary",
+      "angles": [
+        { "title": "거제 바람의 언덕 + 해금강 유람선 코스", "framingType": "experience", "type": "travel", "suggestedAgents": ["friendly"], "keywords": ["거제", "바람의언덕", "해금강", "유람선"], "seasonalRelevance": null }
+      ]
+    },
+    "incheon": {
+      "name": "인천", "region": "인천", "tier": "mainstream",
+      "angles": [
+        { "title": "인천 개항장 역사거리: 근대 건축과 차이나타운", "framingType": "deep_dive", "type": "culture", "suggestedAgents": ["informative"], "keywords": ["인천", "개항장", "차이나타운", "근대건축"], "seasonalRelevance": null }
+      ]
+    },
+    "daegu": {
+      "name": "대구", "region": "대구", "tier": "mainstream",
+      "angles": [
+        { "title": "대구 근대골목 투어 + 서문시장 야시장 코스", "framingType": "experience", "type": "culture", "suggestedAgents": ["friendly", "informative"], "keywords": ["대구", "근대골목", "서문시장", "야시장"], "seasonalRelevance": null }
+      ]
+    }
+  },
+  "concepts": [
+    {
+      "id": "lake-comparison",
+      "titleTemplate": "대한민국 호수 비교: {loc1} vs {loc2} vs {loc3}",
+      "type": "travel",
+      "framingType": "comparison",
+      "locations": ["춘천 소양호", "충주호", "청평호", "안동호", "합천 해인호", "영월 선암마을"],
+      "keywords": ["호수", "비교", "드라이브", "수상레저"],
+      "suggestedAgents": ["viral", "friendly"],
+      "minLocations": 3,
+      "description": "전국 주요 호수의 분위기·활동·접근성 비교"
+    },
+    {
+      "id": "west-south-island",
+      "titleTemplate": "서해 vs 남해 섬 비교: {loc1} vs {loc2}",
+      "type": "travel",
+      "framingType": "comparison",
+      "locations": ["안면도", "영흥도", "외연도", "거문도", "청산도", "욕지도"],
+      "keywords": ["섬", "비교", "서해", "남해", "배편"],
+      "suggestedAgents": ["viral", "friendly"],
+      "minLocations": 2,
+      "description": "서해·남해 섬의 분위기·풍경·접근 난이도 비교"
+    },
+    {
+      "id": "haeparang-trail",
+      "titleTemplate": "해파랑길 {loc1} 구간 체험기",
+      "type": "travel",
+      "framingType": "experience",
+      "locations": ["부산 오륙도", "울산 간절곶", "경주 감포", "포항 호미곶", "영덕 블루로드", "울진 망양정", "삼척 해신당", "동해 추암", "강릉 정동진", "양양 낙산"],
+      "keywords": ["해파랑길", "트레킹", "동해안", "걷기여행"],
+      "suggestedAgents": ["friendly", "niche"],
+      "minLocations": 1,
+      "description": "동해안 해파랑길 구간별 체험 시리즈"
+    },
+    {
+      "id": "dmz-tour",
+      "titleTemplate": "DMZ 여행: {loc1}에서 {loc2}까지",
+      "type": "culture",
+      "framingType": "deep_dive",
+      "locations": ["파주 임진각", "연천 고랑포구", "철원 노동당사", "고성 통일전망대", "화천 평화의댐"],
+      "keywords": ["DMZ", "분단", "평화", "역사", "민통선"],
+      "suggestedAgents": ["informative"],
+      "minLocations": 2,
+      "description": "접경 지역의 분단 역사와 평화 관광"
+    },
+    {
+      "id": "traditional-market",
+      "titleTemplate": "전통시장 비교: {loc1} vs {loc2}",
+      "type": "travel",
+      "framingType": "comparison",
+      "locations": ["서울 광장시장", "서울 통인시장", "대전 중앙시장", "속초 중앙시장", "부산 자갈치시장", "전주 남부시장", "강릉 중앙시장", "정선 5일장"],
+      "keywords": ["전통시장", "먹거리", "비교", "시장"],
+      "suggestedAgents": ["viral", "friendly"],
+      "minLocations": 2,
+      "description": "전국 전통시장 먹거리·분위기 비교"
+    },
+    {
+      "id": "temple-stay",
+      "titleTemplate": "템플스테이 비교: {loc1} vs {loc2}",
+      "type": "culture",
+      "framingType": "comparison",
+      "locations": ["합천 해인사", "양산 통도사", "순천 송광사", "공주 마곡사", "영주 부석사", "부안 내소사"],
+      "keywords": ["템플스테이", "사찰", "비교", "명상"],
+      "suggestedAgents": ["informative", "niche"],
+      "minLocations": 2,
+      "description": "전국 주요 사찰 템플스테이 체험 비교"
+    },
+    {
+      "id": "industrial-heritage",
+      "titleTemplate": "산업유산 여행: {loc1}의 변신",
+      "type": "culture",
+      "framingType": "deep_dive",
+      "locations": ["군산 근대산업유산", "태백 석탄박물관", "영월 탄광촌", "포항 스페이스워크", "인천 개항장", "부산 깡깡이마을"],
+      "keywords": ["산업유산", "재생", "근대", "변신"],
+      "suggestedAgents": ["informative", "niche"],
+      "minLocations": 1,
+      "description": "폐산업시설의 문화공간 변신 이야기"
+    },
+    {
+      "id": "festival-season",
+      "titleTemplate": "이달의 축제 비교: {loc1} vs {loc2}",
+      "type": "culture",
+      "framingType": "seasonal",
+      "locations": ["보령 머드축제", "화천 산천어축제", "진주 유등축제", "안동 탈춤축제", "부산 불꽃축제", "강진 청자축제"],
+      "keywords": ["축제", "비교", "시즌", "페스티벌"],
+      "suggestedAgents": ["viral", "friendly"],
+      "minLocations": 2,
+      "description": "월별 주요 축제 비교 시리즈"
+    }
+  ]
+}

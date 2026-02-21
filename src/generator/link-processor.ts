@@ -16,7 +16,7 @@ export interface LinkMarker {
   line: number;
 }
 
-export type LinkType = 'map' | 'place' | 'booking' | 'yes24' | 'official';
+export type LinkType = 'map' | 'place' | 'booking' | 'yes24' | 'official' | 'info';
 
 export interface LinkAnalysis {
   totalMarkers: number;
@@ -47,7 +47,8 @@ const URL_TEMPLATES: Record<LinkType, (query: string) => string> = {
   place: (query) => `https://search.naver.com/search.naver?where=nexearch&query=${encodeURIComponent(query)}`,
   booking: (query) => `https://ticket.interpark.com/search?q=${encodeURIComponent(query)}`,
   yes24: (query) => `https://www.yes24.com/Product/Search?query=${encodeURIComponent(query)}`,
-  official: (query) => query // 직접 URL 사용
+  official: (query) => query, // 직접 URL 사용
+  info: (query) => `https://korean.visitkorea.or.kr/search/search_list.do?keyword=${encodeURIComponent(query)}`,
 };
 
 /**
@@ -55,12 +56,12 @@ const URL_TEMPLATES: Record<LinkType, (query: string) => string> = {
  * 형식: [LINK:type:query] 또는 [LINK:type:query:표시텍스트]
  */
 const LINK_MARKER_OFFICIAL_REGEX = /\[LINK:official:(https?:\/\/[^\]:\s]+)(?::([^\]\n]+))?\]/gi;
-const LINK_MARKER_STANDARD_REGEX = /\[LINK:(map|place|booking|yes24):([^\]:\n]+)(?::([^\]\n]+))?\]/gi;
+const LINK_MARKER_STANDARD_REGEX = /\[LINK:(map|place|booking|yes24|info):([^\]:\n]+)(?::([^\]\n]+))?\]/gi;
 
 /**
  * 유효한 링크 타입 목록
  */
-const VALID_LINK_TYPES: LinkType[] = ['map', 'place', 'booking', 'yes24', 'official'];
+const VALID_LINK_TYPES: LinkType[] = ['map', 'place', 'booking', 'yes24', 'official', 'info'];
 
 const CONTENT_TRUNCATION_LIMIT = 8000;
 
@@ -272,7 +273,8 @@ export function analyzeLinkMarkers(content: string): LinkAnalysis {
     place: 0,
     booking: 0,
     yes24: 0,
-    official: 0
+    official: 0,
+    info: 0,
   };
 
   for (const marker of markers) {

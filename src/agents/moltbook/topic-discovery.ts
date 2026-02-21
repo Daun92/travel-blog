@@ -3,7 +3,7 @@
  */
 
 import { readFile, writeFile, mkdir, readdir } from 'fs/promises';
-import { existsSync } from 'fs';
+import { readFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { loadMoltbookConfig, MoltbookConfig } from './index.js';
 import type { DiversityTargets } from './index.js';
@@ -85,6 +85,107 @@ export interface DiscoveryResult {
 }
 
 // ============================================================================
+// Seed Pool 타입 정의
+// ============================================================================
+
+export interface TopicSeedPool {
+  locations: Record<string, SeedLocation>;
+  concepts: ConceptTheme[];
+}
+
+export interface SeedLocation {
+  name: string;
+  region: string;
+  tier: 'mainstream' | 'secondary' | 'niche';
+  nameQualifier?: string;
+  angles: SeedAngle[];
+}
+
+export interface SeedAngle {
+  title: string;
+  framingType: string;
+  type: 'travel' | 'culture';
+  suggestedAgents: string[];
+  keywords: string[];
+  seasonalRelevance: string | null;
+}
+
+export interface ConceptTheme {
+  id: string;
+  titleTemplate: string;
+  type: 'travel' | 'culture';
+  framingType: string;
+  locations: string[];
+  keywords: string[];
+  suggestedAgents: string[];
+  minLocations: number;
+  description: string;
+}
+
+// ============================================================================
+// Event Seeds 확장 타입
+// ============================================================================
+
+interface HolidayTheme {
+  title: string;
+  type: 'travel' | 'culture';
+  framingType: string;
+  agents: string[];
+}
+
+interface Holiday {
+  date: string;
+  name: string;
+  themes: HolidayTheme[];
+}
+
+interface Anniversary {
+  date: string;
+  name: string;
+  yearStarted: number;
+  themes: HolidayTheme[];
+}
+
+interface EventSeeds {
+  annualEvents: unknown[];
+  seasonalTemplates: unknown[];
+  holidays?: Holiday[];
+  anniversaries?: Anniversary[];
+  monthlyHooks?: Record<string, string[]>;
+}
+
+// ============================================================================
+// Seed Pool 로더 (lazy, cached)
+// ============================================================================
+
+let _seedPoolCache: TopicSeedPool | null = null;
+let _eventSeedsCache: EventSeeds | null = null;
+
+function loadSeedPool(): TopicSeedPool {
+  if (_seedPoolCache) return _seedPoolCache;
+  try {
+    const raw = readFileSync(join(process.cwd(), 'config/topic-seed-pool.json'), 'utf-8');
+    _seedPoolCache = JSON.parse(raw) as TopicSeedPool;
+    return _seedPoolCache;
+  } catch {
+    _seedPoolCache = { locations: {}, concepts: [] };
+    return _seedPoolCache;
+  }
+}
+
+function loadEventSeeds(): EventSeeds {
+  if (_eventSeedsCache) return _eventSeedsCache;
+  try {
+    const raw = readFileSync(join(process.cwd(), 'config/event-seeds.json'), 'utf-8');
+    _eventSeedsCache = JSON.parse(raw) as EventSeeds;
+    return _eventSeedsCache;
+  } catch {
+    _eventSeedsCache = { annualEvents: [], seasonalTemplates: [] };
+    return _eventSeedsCache;
+  }
+}
+
+// ============================================================================
 // 설정
 // ============================================================================
 
@@ -101,12 +202,22 @@ const OPENCLAW_PATTERNS = [
   '오픈클로'
 ];
 
-// 한국 여행/문화 관련 키워드
-const TRAVEL_KEYWORDS = [
-  '제주', '서울', '부산', '강릉', '경주', '전주', '대구', '인천', '여수', '속초',
+// 일반 여행 키워드 (지역명은 seed pool에서 동적 추출)
+const GENERIC_TRAVEL_KEYWORDS = [
   '카페', '맛집', '여행', '숙소', '렌터카', '코스', '일정', '가격', '비용',
   '드라이브', '야경', '바다', '산', '호텔', '펜션', '캠핑'
 ];
+
+/** seed pool에서 전체 지역명을 추출하여 GENERIC과 합산 */
+function getExpandedTravelKeywords(): string[] {
+  const pool = loadSeedPool();
+  const locationNames = Object.values(pool.locations).map(loc => loc.name);
+  // 중복 제거
+  return [...new Set([...locationNames, ...GENERIC_TRAVEL_KEYWORDS])];
+}
+
+// 하위 호환: 기존 TRAVEL_KEYWORDS 참조를 유지
+const TRAVEL_KEYWORDS = getExpandedTravelKeywords();
 
 const CULTURE_KEYWORDS = [
   '전시회', '미술관', '박물관', '공연', '콘서트', '뮤지컬', '연극', '페스티벌',
@@ -954,39 +1065,97 @@ export class MoltbookTrendScanner {
   }
 
   /**
-   * 시뮬레이션 트렌딩 데이터 생성
+   * 시뮬레이션 트렌딩 데이터 생성 — seed pool 기반 다양성 샘플링
    */
   private generateSimulatedTrending(submolt: 'travel' | 'culture'): MoltbookTrendingTopic[] {
     const now = new Date();
     const month = now.getMonth();
+    const pool = loadSeedPool();
+    const locations = Object.values(pool.locations);
 
-    // 계절별 인기 주제
-    const seasonalTopics: Record<string, MoltbookTrendingTopic[]> = {
-      travel: [
-        // 겨울 (11, 0, 1월)
-        ...(month >= 11 || month <= 1 ? [
-          { topic: '강릉', submolt: 'travel' as const, engagementScore: 85, postCount: 12, avgUpvotes: 7, trendDirection: 'rising' as const, keywords: ['강릉', '바다', '카페'], lastUpdated: now.toISOString() },
-          { topic: '여수', submolt: 'travel' as const, engagementScore: 75, postCount: 8, avgUpvotes: 9, trendDirection: 'stable' as const, keywords: ['여수', '야경', '바다'], lastUpdated: now.toISOString() },
-          { topic: '제주', submolt: 'travel' as const, engagementScore: 90, postCount: 15, avgUpvotes: 6, trendDirection: 'rising' as const, keywords: ['제주', '렌터카', '카페'], lastUpdated: now.toISOString() },
-        ] : []),
-        // 봄 (2, 3, 4월)
-        ...(month >= 2 && month <= 4 ? [
-          { topic: '경주', submolt: 'travel' as const, engagementScore: 88, postCount: 10, avgUpvotes: 9, trendDirection: 'rising' as const, keywords: ['경주', '벚꽃', '야경'], lastUpdated: now.toISOString() },
-          { topic: '전주', submolt: 'travel' as const, engagementScore: 82, postCount: 11, avgUpvotes: 7, trendDirection: 'stable' as const, keywords: ['전주', '한옥마을', '맛집'], lastUpdated: now.toISOString() },
-        ] : []),
-        // 기본 인기 주제
-        { topic: '서울', submolt: 'travel' as const, engagementScore: 70, postCount: 20, avgUpvotes: 4, trendDirection: 'stable' as const, keywords: ['서울', '카페', '맛집'], lastUpdated: now.toISOString() },
-        { topic: '부산', submolt: 'travel' as const, engagementScore: 78, postCount: 14, avgUpvotes: 6, trendDirection: 'stable' as const, keywords: ['부산', '바다', '맛집'], lastUpdated: now.toISOString() },
-      ],
-      culture: [
-        { topic: '미술관', submolt: 'culture' as const, engagementScore: 72, postCount: 8, avgUpvotes: 9, trendDirection: 'rising' as const, keywords: ['미술관', '전시회', '현대미술'], lastUpdated: now.toISOString() },
-        { topic: '박물관', submolt: 'culture' as const, engagementScore: 68, postCount: 6, avgUpvotes: 11, trendDirection: 'stable' as const, keywords: ['박물관', '전시'], lastUpdated: now.toISOString() },
-        { topic: '서점', submolt: 'culture' as const, engagementScore: 65, postCount: 7, avgUpvotes: 9, trendDirection: 'rising' as const, keywords: ['서점', '북카페'], lastUpdated: now.toISOString() },
-        { topic: '공연', submolt: 'culture' as const, engagementScore: 60, postCount: 5, avgUpvotes: 12, trendDirection: 'stable' as const, keywords: ['공연', '뮤지컬', '연극'], lastUpdated: now.toISOString() },
-      ]
+    if (submolt === 'culture') {
+      // culture는 기존 카테고리 기반 유지
+      return [
+        { topic: '미술관', submolt: 'culture', engagementScore: 72, postCount: 8, avgUpvotes: 9, trendDirection: 'rising', keywords: ['미술관', '전시회', '현대미술'], lastUpdated: now.toISOString() },
+        { topic: '박물관', submolt: 'culture', engagementScore: 68, postCount: 6, avgUpvotes: 11, trendDirection: 'stable', keywords: ['박물관', '전시'], lastUpdated: now.toISOString() },
+        { topic: '서점', submolt: 'culture', engagementScore: 65, postCount: 7, avgUpvotes: 9, trendDirection: 'rising', keywords: ['서점', '북카페'], lastUpdated: now.toISOString() },
+        { topic: '공연', submolt: 'culture', engagementScore: 60, postCount: 5, avgUpvotes: 12, trendDirection: 'stable', keywords: ['공연', '뮤지컬', '연극'], lastUpdated: now.toISOString() },
+      ];
+    }
+
+    // travel: seed pool 기반 다양성 샘플링
+    const seasonMap: Record<string, number[]> = {
+      winter: [11, 0, 1],
+      spring: [2, 3, 4],
+      summer: [5, 6, 7],
+      autumn: [8, 9, 10],
     };
 
-    return seasonalTopics[submolt] || [];
+    const currentSeason = Object.entries(seasonMap).find(([, months]) =>
+      months.includes(month)
+    )?.[0] || 'spring';
+
+    const results: MoltbookTrendingTopic[] = [];
+    const usedRegions = new Set<string>();
+
+    // 1. 계절 부스트 지역 2~3개
+    const seasonalLocs = locations.filter(loc =>
+      loc.angles.some(a => a.seasonalRelevance === currentSeason && a.type === 'travel')
+    );
+    const shuffledSeasonal = shuffleArray([...seasonalLocs]);
+    for (const loc of shuffledSeasonal.slice(0, 3)) {
+      if (usedRegions.has(loc.region)) continue;
+      usedRegions.add(loc.region);
+      const angle = loc.angles.find(a => a.seasonalRelevance === currentSeason && a.type === 'travel')!;
+      results.push({
+        topic: loc.name, submolt: 'travel',
+        engagementScore: 80 + Math.floor(Math.random() * 15),
+        postCount: 8 + Math.floor(Math.random() * 8),
+        avgUpvotes: 6 + Math.floor(Math.random() * 5),
+        trendDirection: 'rising',
+        keywords: angle.keywords,
+        lastUpdated: now.toISOString(),
+      });
+    }
+
+    // 2. 메인스트림 2개 (미사용 리전에서)
+    const mainstream = locations.filter(loc =>
+      loc.tier === 'mainstream' && !usedRegions.has(loc.region)
+    );
+    for (const loc of shuffleArray([...mainstream]).slice(0, 2)) {
+      usedRegions.add(loc.region);
+      const angle = loc.angles.find(a => a.type === 'travel') || loc.angles[0];
+      results.push({
+        topic: loc.name, submolt: 'travel',
+        engagementScore: 70 + Math.floor(Math.random() * 15),
+        postCount: 10 + Math.floor(Math.random() * 10),
+        avgUpvotes: 4 + Math.floor(Math.random() * 5),
+        trendDirection: 'stable',
+        keywords: angle.keywords,
+        lastUpdated: now.toISOString(),
+      });
+    }
+
+    // 3. 니치 2~3개 (미사용 리전에서)
+    const niche = locations.filter(loc =>
+      (loc.tier === 'niche' || loc.tier === 'secondary') && !usedRegions.has(loc.region)
+    );
+    for (const loc of shuffleArray([...niche]).slice(0, 3)) {
+      if (usedRegions.has(loc.region)) continue;
+      usedRegions.add(loc.region);
+      const angle = loc.angles.find(a => a.type === 'travel') || loc.angles[0];
+      results.push({
+        topic: loc.name, submolt: 'travel',
+        engagementScore: 55 + Math.floor(Math.random() * 25),
+        postCount: 3 + Math.floor(Math.random() * 7),
+        avgUpvotes: 5 + Math.floor(Math.random() * 8),
+        trendDirection: Math.random() > 0.5 ? 'rising' : 'stable',
+        keywords: angle.keywords,
+        lastUpdated: now.toISOString(),
+      });
+    }
+
+    return results;
   }
 }
 
@@ -1506,6 +1675,214 @@ export class TopicDiscovery {
   }
 
   /**
+   * Pillar 2: 크로스-리전 콘셉트 추천 생성
+   */
+  private generateConceptRecommendations(): TopicRecommendation[] {
+    const pool = loadSeedPool();
+    const concepts = pool.concepts;
+    if (!concepts || concepts.length === 0) return [];
+
+    const sampled = shuffleArray([...concepts]).slice(0, 3);
+    const recs: TopicRecommendation[] = [];
+
+    for (const concept of sampled) {
+      // titleTemplate에서 {loc1}, {loc2} 등을 랜덤 location으로 치환
+      const locs = shuffleArray([...concept.locations]).slice(0, concept.minLocations);
+      let title = concept.titleTemplate;
+      locs.forEach((loc, i) => {
+        title = title.replace(`{loc${i + 1}}`, loc);
+      });
+      // 남은 플레이스홀더 제거
+      title = title.replace(/\s*\{loc\d+\}/g, '');
+
+      const agent = concept.suggestedAgents[Math.floor(Math.random() * concept.suggestedAgents.length)];
+
+      recs.push({
+        topic: concept.id,
+        type: concept.type,
+        score: 80 + Math.floor(Math.random() * 16),
+        source: 'gap_analysis',
+        reasoning: `크로스-리전 콘셉트: ${concept.description}`,
+        suggestedTitle: title,
+        keywords: [...concept.keywords, ...locs.slice(0, 2)],
+        discoveredAt: new Date().toISOString(),
+        personaId: agent as TopicRecommendation['personaId'],
+        framingType: concept.framingType as FramingType,
+      });
+    }
+
+    return recs;
+  }
+
+  /**
+   * Pillar 3: 캘린더 기반 추천 (공휴일, N주년, 월별 훅)
+   */
+  private generateCalendarRecommendations(currentDate: Date = new Date()): TopicRecommendation[] {
+    const seeds = loadEventSeeds();
+    const recs: TopicRecommendation[] = [];
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+
+    // 1. 30일 내 공휴일 체크
+    if (seeds.holidays) {
+      for (const holiday of seeds.holidays) {
+        const [mm, dd] = holiday.date.split('-').map(Number);
+        const holidayDate = new Date(year, mm - 1, dd);
+        const daysUntil = Math.floor((holidayDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+        if (daysUntil >= 0 && daysUntil <= 30) {
+          for (const theme of holiday.themes) {
+            const agent = theme.agents[0] as TopicRecommendation['personaId'];
+            recs.push({
+              topic: holiday.name,
+              suggestedTitle: theme.title,
+              score: 90 + Math.max(0, 20 - daysUntil),
+              source: 'event_calendar',
+              reasoning: `공휴일 D-${daysUntil}: ${holiday.name}`,
+              type: theme.type,
+              framingType: theme.framingType as FramingType,
+              keywords: [holiday.name],
+              discoveredAt: currentDate.toISOString(),
+              personaId: agent,
+            });
+          }
+        }
+      }
+    }
+
+    // 2. N주년 기념일 체크 (5주년 단위)
+    if (seeds.anniversaries) {
+      for (const anni of seeds.anniversaries) {
+        const [mm, dd] = anni.date.split('-').map(Number);
+        const anniDate = new Date(year, mm - 1, dd);
+        const daysUntil = Math.floor((anniDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24));
+        const n = year - anni.yearStarted;
+        const isSignificant = n > 0 && (n % 5 === 0);
+        if (isSignificant && daysUntil >= -7 && daysUntil <= 45) {
+          for (const theme of anni.themes) {
+            const agent = theme.agents[0] as TopicRecommendation['personaId'];
+            recs.push({
+              topic: `${anni.name} ${n}주년`,
+              suggestedTitle: theme.title.replace('{n}', String(n)),
+              score: 85 + (n % 10 === 0 ? 15 : 0),
+              source: 'event_calendar',
+              reasoning: `${n}주년 기념: ${anni.name}`,
+              type: theme.type,
+              framingType: theme.framingType as FramingType,
+              keywords: [anni.name, `${n}주년`],
+              discoveredAt: currentDate.toISOString(),
+              personaId: agent,
+            });
+          }
+        }
+      }
+    }
+
+    // 3. 월별 훅 (현재월 + 다음달)
+    if (seeds.monthlyHooks) {
+      const months = [String(month), String(month === 12 ? 1 : month + 1)];
+      for (const m of months) {
+        const hooks = seeds.monthlyHooks[m] || [];
+        const sampled = shuffleArray([...hooks]).slice(0, 2);
+        for (const hook of sampled) {
+          recs.push({
+            topic: `${m}월 ${hook}`,
+            suggestedTitle: hook,
+            score: 70,
+            source: 'event_calendar',
+            reasoning: `월별 훅: ${m}월 - ${hook}`,
+            type: 'travel',
+            framingType: 'seasonal' as FramingType,
+            keywords: hook.split(' '),
+            discoveredAt: currentDate.toISOString(),
+          });
+        }
+      }
+    }
+
+    return recs;
+  }
+
+  /**
+   * 기발행 앵글 스캔: Set<"지역명::framingType">
+   */
+  private async getPublishedAngles(): Promise<Set<string>> {
+    const published = new Set<string>();
+    if (!existsSync(BLOG_POSTS_DIR)) return published;
+
+    for (const category of ['travel', 'culture'] as const) {
+      const catDir = join(BLOG_POSTS_DIR, category);
+      if (!existsSync(catDir)) continue;
+      try {
+        const files = await readdir(catDir);
+        for (const file of files) {
+          if (!file.endsWith('.md')) continue;
+          const content = await readFile(join(catDir, file), 'utf-8');
+          const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+          if (!fmMatch) continue;
+          const fm = fmMatch[1];
+          const titleMatch = fm.match(/title:\s*["']?(.+?)["']?\s*$/m);
+          const title = titleMatch?.[1] || '';
+          // 지역명 추출
+          const pool = loadSeedPool();
+          for (const loc of Object.values(pool.locations)) {
+            if (title.includes(loc.name)) {
+              // 프레이밍 추출
+              for (const [framing, patterns] of Object.entries({
+                list_ranking: [/TOP\s*\d+/i, /베스트/, /\d+선/, /순위/],
+                deep_dive: [/역사/, /의미/, /해설/, /이야기/],
+                experience: [/후기/, /체험/, /1박2일/, /당일/],
+                seasonal: [/\d+월/, /봄/, /여름/, /가을/, /겨울/],
+                comparison: [/vs/i, /비교/, /장단점/],
+                local_story: [/골목/, /로컬/, /숨은/, /현지인/],
+                niche_digging: [/디깅/, /취향/, /발견/],
+              })) {
+                if (patterns.some(p => p.test(title))) {
+                  published.add(`${loc.name}::${framing}`);
+                }
+              }
+              // 프레이밍 미감지 시 기본값
+              published.add(`${loc.name}::experience`);
+            }
+          }
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    return published;
+  }
+
+  /**
+   * 기발행 앵글 패널티 적용
+   */
+  private penalizePublishedAngles(
+    recommendations: TopicRecommendation[],
+    publishedAngles: Set<string>
+  ): void {
+    const pool = loadSeedPool();
+    const locationNames = new Set(Object.values(pool.locations).map(l => l.name));
+
+    for (const rec of recommendations) {
+      // 추천에서 지역명 찾기
+      let locName: string | null = null;
+      for (const name of locationNames) {
+        if (rec.topic.includes(name) || rec.suggestedTitle.includes(name)) {
+          locName = name;
+          break;
+        }
+      }
+      if (!locName) continue;
+
+      const key = `${locName}::${rec.framingType || 'experience'}`;
+      if (publishedAngles.has(key)) {
+        rec.score -= 15;
+        rec.reasoning += ` | 기발행앵글(${key}) -15`;
+      }
+    }
+  }
+
+  /**
    * Axis 2B: 트렌딩 주제에서 niche 파생 주제 생성
    * "경주" 트렌딩 → "경주 석굴암 뒷길 디깅" 같은 niche 앵글 파생
    */
@@ -1681,6 +2058,32 @@ export class TopicDiscovery {
       console.log(`   ✓ 미커버 지역 추천 ${regionGapRecs.length}개 추가`);
     }
 
+    // 5.5. Pillar 2: 크로스-리전 콘셉트 추천
+    const conceptRecs = this.generateConceptRecommendations();
+    if (conceptRecs.length > 0) {
+      const existingTopics2 = new Set(recommendations.map(r => r.topic));
+      for (const rec of conceptRecs) {
+        if (!existingTopics2.has(rec.topic)) {
+          recommendations.push(rec);
+          existingTopics2.add(rec.topic);
+        }
+      }
+      console.log(`   ✓ 크로스-리전 콘셉트 ${conceptRecs.length}개 추가`);
+    }
+
+    // 5.7. Pillar 3: 캘린더 기반 추천
+    const calendarRecs = this.generateCalendarRecommendations();
+    if (calendarRecs.length > 0) {
+      const existingTopics3 = new Set(recommendations.map(r => r.topic));
+      for (const rec of calendarRecs) {
+        if (!existingTopics3.has(rec.topic)) {
+          recommendations.push(rec);
+          existingTopics3.add(rec.topic);
+        }
+      }
+      console.log(`   ✓ 캘린더 추천 ${calendarRecs.length}개 추가`);
+    }
+
     // 6. Niche 파생 주제 생성 (Axis 2B)
     const nicheTopics = await this.deriveNicheTopics(recommendations);
     if (nicheTopics.length > 0) {
@@ -1703,7 +2106,22 @@ export class TopicDiscovery {
     // 8. 에이전트 밸런싱 (Axis 3C)
     await this.balanceAgentDistribution(recommendations);
 
-    recommendations.sort((a, b) => b.score - a.score);
+    // 8.5. 기발행 앵글 패널티
+    const publishedAngles = await this.getPublishedAngles();
+    if (publishedAngles.size > 0) {
+      this.penalizePublishedAngles(recommendations, publishedAngles);
+      console.log(`   ✓ 기발행 앵글 ${publishedAngles.size}개 감지, 패널티 적용`);
+    }
+
+    // 9. 리전 캡 적용
+    const cappedRecommendations = ContentBalancer.applyRegionalCap(recommendations, 2);
+
+    // 최종 정렬
+    cappedRecommendations.sort((a, b) => b.score - a.score);
+
+    // recommendations 배열을 캡 적용 결과로 교체
+    recommendations.length = 0;
+    recommendations.push(...cappedRecommendations);
 
     balancer.printAnalysis(boosts);
 
@@ -1910,6 +2328,7 @@ export class TopicDiscovery {
 
   /**
    * 추천 병합 (중복 제거, 점수 통합)
+   * 앵글 인식: 같은 지역이라도 다른 framingType이면 별개로 취급
    */
   private mergeRecommendations(
     base: TopicRecommendation[],
@@ -1917,19 +2336,24 @@ export class TopicDiscovery {
   ): TopicRecommendation[] {
     const merged = new Map<string, TopicRecommendation>();
 
+    // 키: topic::framingType (같은 지역 + 같은 프레이밍만 중복)
+    const makeKey = (rec: TopicRecommendation) =>
+      `${rec.topic}::${rec.framingType || 'experience'}`;
+
     // 기본 추천 추가
     for (const rec of base) {
-      merged.set(rec.topic, rec);
+      merged.set(makeKey(rec), rec);
     }
 
     // 추가 추천 병합 (점수가 높으면 대체)
     for (const rec of additional) {
-      const existing = merged.get(rec.topic);
+      const key = makeKey(rec);
+      const existing = merged.get(key);
       if (!existing) {
-        merged.set(rec.topic, rec);
+        merged.set(key, rec);
       } else if (rec.score > existing.score) {
         // 점수가 높으면 대체하되, 소스 정보 추가
-        merged.set(rec.topic, {
+        merged.set(key, {
           ...rec,
           reasoning: `${rec.reasoning} | ${existing.reasoning}`
         });
@@ -2085,6 +2509,19 @@ export class TopicDiscovery {
 
     return added;
   }
+}
+
+// ============================================================================
+// 유틸리티
+// ============================================================================
+
+/** Fisher-Yates 셔플 */
+function shuffleArray<T>(arr: T[]): T[] {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
 }
 
 export default TopicDiscovery;

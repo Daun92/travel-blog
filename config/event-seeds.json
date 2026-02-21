@@ -42,5 +42,67 @@
     { "title": "억새 명소", "month": 10, "category": "seasonal", "keywords": ["억새", "가을", "하늘공원", "억새밭", "사진명소"] },
     { "title": "겨울바다 여행", "month": 2, "category": "seasonal", "keywords": ["겨울바다", "강릉", "동해", "속초", "포항"] },
     { "title": "야간개장 시즌", "month": 5, "category": "seasonal", "keywords": ["야간개장", "궁궐", "야경", "봄밤", "데이트"] }
-  ]
+  ],
+
+  "holidays": [
+    { "date": "01-01", "name": "새해", "themes": [
+      { "title": "새해 해돋이 명소 TOP 7: 간절곶부터 정동진까지", "type": "travel", "framingType": "list_ranking", "agents": ["viral"] }
+    ]},
+    { "date": "03-01", "name": "삼일절", "themes": [
+      { "title": "삼일절에 가볼 독립운동 유적지: 서대문형무소부터 천안독립기념관까지", "type": "culture", "framingType": "deep_dive", "agents": ["informative"] }
+    ]},
+    { "date": "05-05", "name": "어린이날", "themes": [
+      { "title": "어린이날 가족 나들이 코스 비교: 서울 vs 근교", "type": "travel", "framingType": "comparison", "agents": ["friendly", "viral"] }
+    ]},
+    { "date": "06-06", "name": "현충일", "themes": [
+      { "title": "현충일 호국보훈 여행: 전쟁기념관에서 DMZ까지", "type": "culture", "framingType": "deep_dive", "agents": ["informative"] }
+    ]},
+    { "date": "08-15", "name": "광복절", "themes": [
+      { "title": "광복절 역사 산책: 경교장→서대문형무소→남산 안중근 기념관", "type": "culture", "framingType": "deep_dive", "agents": ["informative"] }
+    ]},
+    { "date": "10-03", "name": "개천절", "themes": [
+      { "title": "개천절 단군 유적지 순례: 마니산→단군릉→태백산", "type": "culture", "framingType": "deep_dive", "agents": ["informative", "niche"] }
+    ]},
+    { "date": "10-09", "name": "한글날", "themes": [
+      { "title": "한글날 기념 여주 세종대왕릉 + 한글박물관 코스", "type": "culture", "framingType": "experience", "agents": ["friendly"] }
+    ]}
+  ],
+
+  "anniversaries": [
+    { "date": "06-25", "name": "한국전쟁 발발", "yearStarted": 1950,
+      "themes": [
+        { "title": "{n}주년 한국전쟁: 파주 임진각에서 읽는 분단의 역사", "type": "culture", "framingType": "deep_dive", "agents": ["informative"] }
+      ]
+    },
+    { "date": "04-19", "name": "4·19 혁명", "yearStarted": 1960,
+      "themes": [
+        { "title": "4·19 혁명 {n}주년: 서울 민주화 유적지 걷기", "type": "culture", "framingType": "deep_dive", "agents": ["informative"] }
+      ]
+    },
+    { "date": "05-18", "name": "5·18 민주화운동", "yearStarted": 1980,
+      "themes": [
+        { "title": "5·18 {n}주년: 광주 민주화 성지 순례 코스", "type": "culture", "framingType": "deep_dive", "agents": ["informative"] }
+      ]
+    },
+    { "date": "12-14", "name": "한국 유네스코 세계유산 등재 시작", "yearStarted": 1995,
+      "themes": [
+        { "title": "유네스코 세계유산 등재 {n}주년: 한국 세계유산 총정리", "type": "culture", "framingType": "list_ranking", "agents": ["viral", "informative"] }
+      ]
+    }
+  ],
+
+  "monthlyHooks": {
+    "1":  ["겨울방학 가족여행", "설날 귀성길 중간 기착지", "새해 첫 여행"],
+    "2":  ["겨울바다 감성", "졸업여행 시즌", "발렌타인 데이트코스"],
+    "3":  ["벚꽃 개화 시작", "봄맞이 나들이", "개학 캠퍼스 투어"],
+    "4":  ["봄꽃 절정 시즌", "4월 봄비 실내 문화", "어버이날 효도관광 준비"],
+    "5":  ["가정의 달 가족여행", "야간개장 시즌 시작", "석가탄신일 사찰 투어"],
+    "6":  ["여름휴가 사전답사", "수학여행 시즌", "매실·체리 수확 체험"],
+    "7":  ["본격 여름 바다", "워터파크·물놀이", "여름축제 시작"],
+    "8":  ["피서 절정", "광복절 역사여행", "방학 막바지 알짜코스"],
+    "9":  ["가을 초입 단풍 예보", "추석 연휴 근교", "문화의 계절 전시·공연"],
+    "10": ["단풍 절정", "가을축제 러시", "핼러윈 테마파크"],
+    "11": ["늦가을 감성", "야경 시즌", "빼빼로데이 데이트"],
+    "12": ["크리스마스 마켓", "연말 감성 여행", "스키·온천 시즌 개막"]
+  }
 }

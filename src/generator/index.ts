@@ -179,6 +179,55 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
     }
   }
 
+  // 크로스 링크 삽입 (포스트 인덱스가 존재하면 자동 적용)
+  try {
+    const { loadPostIndex } = await import('../crosslinks/build-index.js');
+    const { findRelatedPosts } = await import('../crosslinks/matcher.js');
+    const { generateHamkkeSection, appendHamkkeSection } = await import('../crosslinks/hamkke-section.js');
+    const { detectInlineLinkCandidates } = await import('../crosslinks/inline-detector.js');
+    const { generateInlineLinkSentences, insertInlineLinks } = await import('../crosslinks/inline-inserter.js');
+
+    const postIndex = loadPostIndex();
+    if (postIndex && postIndex.entries.length > 0) {
+      onProgress('크로스 링크 삽입 중...');
+      const tempEntry = {
+        fileSlug: slug,
+        slug: extractSlugWithoutDate(slug),
+        permalink: '',
+        title: finalTitle,
+        category: type as 'travel' | 'culture',
+        personaId: selectedPersona?.id || 'friendly',
+        date: new Date().toISOString().split('T')[0],
+        tags: type === 'travel' ? ['여행', '국내여행', ...finalKeywords.slice(0, 3)] : ['문화', '예술', ...finalKeywords.slice(0, 3)],
+        keywords: finalKeywords,
+        regions: [],
+        locations: [],
+        sectionKeywords: [],
+        sectionTitles: [],
+        isListPost: false,
+      };
+
+      const matches = findRelatedPosts(tempEntry, postIndex.entries);
+      if (matches.length > 0) {
+        // 인라인 링크
+        const candidates = detectInlineLinkCandidates(tempEntry, finalContent, matches);
+        if (candidates.length > 0) {
+          const insertions = generateInlineLinkSentences(candidates, tempEntry.personaId);
+          finalContent = insertInlineLinks(finalContent, insertions);
+          onProgress(`  인라인 링크 ${candidates.length}건 삽입`);
+        }
+        // 함께 읽기 섹션
+        const hamkke = generateHamkkeSection(matches, tempEntry.personaId, 3);
+        if (hamkke) {
+          finalContent = appendHamkkeSection(finalContent, hamkke);
+          onProgress(`  함께 읽기 ${Math.min(matches.length, 3)}건 추가`);
+        }
+      }
+    }
+  } catch {
+    // 크로스 링크 모듈 없거나 인덱스 없으면 조용히 스킵
+  }
+
   // 프론트매터 데이터 구성
   const authorName = selectedPersona?.authorLine || 'Blog Author';
   const frontmatter: FrontmatterData = {

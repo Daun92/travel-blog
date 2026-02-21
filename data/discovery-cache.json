@@ -1,170 +1,469 @@
 {
   "trending": [
     {
-      "topic": "제주",
+      "topic": "인제",
       "submolt": "travel",
-      "engagementScore": 90,
-      "postCount": 15,
-      "avgUpvotes": 6,
+      "engagementScore": 92,
+      "postCount": 8,
+      "avgUpvotes": 10,
       "trendDirection": "rising",
       "keywords": [
-        "제주",
-        "렌터카",
-        "카페"
+        "인제",
+        "자작나무",
+        "겨울",
+        "숲"
       ],
-      "lastUpdated": "2026-02-13T11:17:35.159Z"
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
     },
     {
-      "topic": "강릉",
+      "topic": "연천",
       "submolt": "travel",
-      "engagementScore": 85,
+      "engagementScore": 92,
       "postCount": 12,
       "avgUpvotes": 7,
       "trendDirection": "rising",
       "keywords": [
-        "강릉",
-        "바다",
-        "카페"
+        "연천",
+        "임진강",
+        "DMZ",
+        "두루미"
       ],
-      "lastUpdated": "2026-02-13T11:17:35.159Z"
-    },
-    {
-      "topic": "부산",
-      "submolt": "travel",
-      "engagementScore": 78,
-      "postCount": 14,
-      "avgUpvotes": 6,
-      "trendDirection": "stable",
-      "keywords": [
-        "부산",
-        "바다",
-        "맛집"
-      ],
-      "lastUpdated": "2026-02-13T11:17:35.159Z"
-    },
-    {
-      "topic": "여수",
-      "submolt": "travel",
-      "engagementScore": 75,
-      "postCount": 8,
-      "avgUpvotes": 9,
-      "trendDirection": "stable",
-      "keywords": [
-        "여수",
-        "야경",
-        "바다"
-      ],
-      "lastUpdated": "2026-02-13T11:17:35.159Z"
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
     },
     {
       "topic": "서울",
       "submolt": "travel",
-      "engagementScore": 70,
-      "postCount": 20,
-      "avgUpvotes": 4,
+      "engagementScore": 78,
+      "postCount": 13,
+      "avgUpvotes": 6,
       "trendDirection": "stable",
       "keywords": [
         "서울",
-        "카페",
-        "맛집"
+        "야경",
+        "남산",
+        "롯데타워"
       ],
-      "lastUpdated": "2026-02-13T11:17:35.159Z"
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
+    },
+    {
+      "topic": "비양도",
+      "submolt": "travel",
+      "engagementScore": 77,
+      "postCount": 3,
+      "avgUpvotes": 5,
+      "trendDirection": "stable",
+      "keywords": [
+        "비양도",
+        "제주",
+        "화산섬",
+        "한림"
+      ],
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
+    },
+    {
+      "topic": "대구",
+      "submolt": "travel",
+      "engagementScore": 76,
+      "postCount": 11,
+      "avgUpvotes": 6,
+      "trendDirection": "stable",
+      "keywords": [
+        "대구",
+        "근대골목",
+        "서문시장",
+        "야시장"
+      ],
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
+    },
+    {
+      "topic": "공주",
+      "submolt": "travel",
+      "engagementScore": 74,
+      "postCount": 5,
+      "avgUpvotes": 6,
+      "trendDirection": "rising",
+      "keywords": [
+        "공주",
+        "백제",
+        "무령왕릉",
+        "공산성"
+      ],
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
+    },
+    {
+      "topic": "산청",
+      "submolt": "travel",
+      "engagementScore": 58,
+      "postCount": 6,
+      "avgUpvotes": 6,
+      "trendDirection": "stable",
+      "keywords": [
+        "산청",
+        "경호강",
+        "래프팅",
+        "대원사"
+      ],
+      "lastUpdated": "2026-02-21T12:00:00.693Z"
     }
   ],
   "gaps": [
     {
-      "topic": "여수",
-      "moltbookEngagement": 75,
+      "topic": "인제",
+      "moltbookEngagement": 92,
+      "blogCoverage": "none",
+      "recommendedPriority": "high",
+      "suggestedAngles": [
+        "인제의 숨은 역사: 알고 가면 3배 재미",
+        "인제 1박2일 실제 다녀온 비용과 솔직 후기",
+        "인제 현지인만 아는 골목 맛집과 뷰포인트"
+      ]
+    },
+    {
+      "topic": "연천",
+      "moltbookEngagement": 92,
+      "blogCoverage": "none",
+      "recommendedPriority": "high",
+      "suggestedAngles": [
+        "연천 현지인만 아는 골목 맛집과 뷰포인트",
+        "연천 1박2일 실제 다녀온 비용과 솔직 후기",
+        "연천 겨울에 오히려 좋은 이유"
+      ]
+    },
+    {
+      "topic": "비양도",
+      "moltbookEngagement": 77,
+      "blogCoverage": "none",
+      "recommendedPriority": "high",
+      "suggestedAngles": [
+        "비양도 기대 vs 현실: 과대평가된 곳 vs 진짜 명소",
+        "비양도 현지인만 아는 골목 맛집과 뷰포인트",
+        "비양도 겨울에 오히려 좋은 이유"
+      ]
+    },
+    {
+      "topic": "대구",
+      "moltbookEngagement": 76,
       "blogCoverage": "partial",
       "recommendedPriority": "medium",
       "suggestedAngles": [
-        "여수 겨울에 오히려 좋은 이유",
-        "여수의 숨은 역사: 알고 가면 3배 재미",
-        "여수 야경 명소 비교: 어디서 봐야 가장 예쁠까"
+        "대구 1박2일 실제 다녀온 비용과 솔직 후기",
+        "대구 현지인만 아는 골목 맛집과 뷰포인트",
+        "대구 겨울에 오히려 좋은 이유"
       ],
-      "lastBlogPost": "여수 밤바다 낭만 여행: 케이블카부터 낭만포차까지 완벽 야경 코스",
-      "daysSinceLastPost": 8
+      "lastBlogPost": "대구 여행의 정수, 근대골목부터 김광석 거리와 서문시장까지 완벽 도보 코스",
+      "daysSinceLastPost": 16
+    },
+    {
+      "topic": "공주",
+      "moltbookEngagement": 74,
+      "blogCoverage": "partial",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "공주 1박2일 실제 다녀온 비용과 솔직 후기",
+        "공주 겨울에 오히려 좋은 이유",
+        "공주 기대 vs 현실: 과대평가된 곳 vs 진짜 명소"
+      ],
+      "lastBlogPost": "무령왕릉 벽돌 한 장의 소름 돋는 디테일, 12번 가서 알아낸 공주 백제유적 디깅",
+      "daysSinceLastPost": 9
+    },
+    {
+      "topic": "산청",
+      "moltbookEngagement": 58,
+      "blogCoverage": "none",
+      "recommendedPriority": "medium",
+      "suggestedAngles": [
+        "산청 현지인만 아는 골목 맛집과 뷰포인트",
+        "산청 1박2일 실제 다녀온 비용과 솔직 후기",
+        "산청 기대 vs 현실: 과대평가된 곳 vs 진짜 명소"
+      ]
     }
   ],
   "recommendations": [
     {
-      "topic": "강릉",
+      "topic": "연천",
       "type": "travel",
-      "score": 130,
-      "source": "moltbook_trending",
-      "reasoning": "rising 트렌드, 평균 7 upvotes | 에이전트밸런스(viral) +15 | 프레이밍다양성(comparison) +15",
-      "suggestedTitle": "강릉 기대 vs 현실: 진짜 가볼 만한 곳",
+      "score": 145,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 92 | 에이전트밸런스(niche) +30 | 프레이밍다양성(local_story) +15",
+      "suggestedTitle": "연천 현지인만 아는 골목 맛집과 뷰포인트",
       "keywords": [
-        "강릉",
-        "바다",
-        "카페"
+        "연천"
       ],
-      "discoveredAt": "2026-02-13T11:17:35.187Z",
+      "discoveredAt": "2026-02-21T12:00:00.717Z",
+      "personaId": "niche",
+      "framingType": "local_story"
+    },
+    {
+      "topic": "비양도",
+      "type": "travel",
+      "score": 125,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 77 | 지역다양성(제주) +10 | 프레이밍다양성(comparison) +15",
+      "suggestedTitle": "비양도 기대 vs 현실: 과대평가된 곳 vs 진짜 명소",
+      "keywords": [
+        "비양도"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.717Z",
       "personaId": "viral",
       "framingType": "comparison"
     },
     {
-      "topic": "제주",
+      "topic": "여수 여수 밤바다 야경 비교",
       "type": "travel",
-      "score": 125,
-      "source": "moltbook_trending",
-      "reasoning": "rising 트렌드, 평균 6 upvotes | 에이전트밸런스(viral) +15 | 지역다양성(제주) +10",
-      "suggestedTitle": "이번 달 제주이 특별한 이유",
+      "score": 105,
+      "source": "gap_analysis",
+      "reasoning": "미커버 지역(전남) 자동 생성 | comparison 프레이밍",
+      "suggestedTitle": "여수 밤바다 야경 비교: 해상케이블카 vs 돌산대교 vs 이순신광장",
       "keywords": [
-        "제주",
-        "렌터카",
-        "카페"
+        "여수",
+        "야경",
+        "케이블카",
+        "돌산대교"
       ],
-      "discoveredAt": "2026-02-13T11:17:35.187Z",
+      "discoveredAt": "2026-02-21T12:00:00.746Z",
       "personaId": "viral",
-      "framingType": "experience"
+      "framingType": "comparison"
     },
     {
-      "topic": "여수",
+      "topic": "인제",
       "type": "travel",
-      "score": 100,
+      "score": 104,
       "source": "gap_analysis",
-      "reasoning": "블로그 커버리지 partial, Moltbook engagement 75 | 에이전트밸런스(viral) +15 | 지역다양성(전남) +10",
-      "suggestedTitle": "여수 겨울에 오히려 좋은 이유",
+      "reasoning": "블로그 커버리지 none, Moltbook engagement 92 | 프레이밍다양성(deep_dive) +4",
+      "suggestedTitle": "인제의 숨은 역사: 알고 가면 3배 재미",
       "keywords": [
-        "여수"
+        "인제"
       ],
-      "discoveredAt": "2026-02-13T11:17:35.187Z",
-      "personaId": "viral",
+      "discoveredAt": "2026-02-21T12:00:00.717Z",
+      "personaId": "informative",
+      "framingType": "deep_dive"
+    },
+    {
+      "topic": "삼일절",
+      "suggestedTitle": "삼일절에 가볼 독립운동 유적지: 서대문형무소부터 천안독립기념관까지",
+      "score": 103,
+      "source": "event_calendar",
+      "reasoning": "공휴일 D-7: 삼일절",
+      "type": "culture",
+      "framingType": "deep_dive",
+      "keywords": [
+        "삼일절"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "informative"
+    },
+    {
+      "topic": "여수 여수 향일암 일출 + 오동도 동백 코스",
+      "type": "travel",
+      "score": 95,
+      "source": "gap_analysis",
+      "reasoning": "미커버 지역(전남) 보조 추천 | seasonal 프레이밍",
+      "suggestedTitle": "여수 향일암 일출 + 오동도 동백 코스",
+      "keywords": [
+        "여수",
+        "향일암",
+        "일출",
+        "동백"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.746Z",
+      "personaId": "friendly",
       "framingType": "seasonal"
+    },
+    {
+      "topic": "lake-comparison",
+      "type": "travel",
+      "score": 94,
+      "source": "gap_analysis",
+      "reasoning": "크로스-리전 콘셉트: 전국 주요 호수의 분위기·활동·접근성 비교",
+      "suggestedTitle": "대한민국 호수 비교: 합천 해인호 vs 충주호 vs 안동호",
+      "keywords": [
+        "호수",
+        "비교",
+        "드라이브",
+        "수상레저",
+        "합천 해인호",
+        "충주호"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "friendly",
+      "framingType": "comparison"
+    },
+    {
+      "topic": "haeparang-trail",
+      "type": "travel",
+      "score": 94,
+      "source": "gap_analysis",
+      "reasoning": "크로스-리전 콘셉트: 동해안 해파랑길 구간별 체험 시리즈",
+      "suggestedTitle": "해파랑길 울산 간절곶 구간 체험기",
+      "keywords": [
+        "해파랑길",
+        "트레킹",
+        "동해안",
+        "걷기여행",
+        "울산 간절곶"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "friendly",
+      "framingType": "experience"
     },
     {
       "topic": "서울",
       "type": "travel",
-      "score": 85,
+      "score": 93,
       "source": "moltbook_trending",
-      "reasoning": "stable 트렌드, 평균 4 upvotes | 에이전트밸런스(viral) +15",
-      "suggestedTitle": "서울 여행 체크리스트: 놓치기 쉬운 5가지",
+      "reasoning": "stable 트렌드, 평균 6 upvotes | 에이전트밸런스(niche) +30 | 기발행앵글(서울::experience) -15",
+      "suggestedTitle": "이번 달 서울이 특별한 이유",
       "keywords": [
         "서울",
-        "카페",
-        "맛집"
+        "야경",
+        "남산",
+        "롯데타워"
       ],
-      "discoveredAt": "2026-02-13T11:17:35.187Z",
-      "personaId": "viral",
-      "framingType": "list_ranking"
+      "discoveredAt": "2026-02-21T12:00:00.717Z",
+      "personaId": "niche",
+      "framingType": "experience"
     },
     {
-      "topic": "부산",
-      "type": "travel",
-      "score": 78,
-      "source": "moltbook_trending",
-      "reasoning": "stable 트렌드, 평균 6 upvotes",
-      "suggestedTitle": "부산 1박2일 실제 비용과 솔직 후기",
+      "topic": "festival-season",
+      "type": "culture",
+      "score": 93,
+      "source": "gap_analysis",
+      "reasoning": "크로스-리전 콘셉트: 월별 주요 축제 비교 시리즈",
+      "suggestedTitle": "이달의 축제 비교: 화천 산천어축제 vs 안동 탈춤축제",
       "keywords": [
-        "부산",
-        "바다",
-        "맛집"
+        "축제",
+        "비교",
+        "시즌",
+        "페스티벌",
+        "화천 산천어축제",
+        "안동 탈춤축제"
       ],
-      "discoveredAt": "2026-02-13T11:17:35.187Z",
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "friendly",
+      "framingType": "seasonal"
+    },
+    {
+      "topic": "간절곶 고래문화 디깅",
+      "type": "travel",
+      "score": 84,
+      "source": "gap_analysis",
+      "reasoning": "haeparang-trail 트렌딩에서 niche 파생 — 고래문화 디깅",
+      "suggestedTitle": "간절곶, 고래문화 디깅: 아는 사람만 아는 이야기",
+      "keywords": [
+        "간절곶",
+        "울산",
+        "해파랑길",
+        "트레킹"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.748Z",
+      "personaId": "niche",
+      "framingType": "niche_digging"
+    },
+    {
+      "topic": "2월 발렌타인 데이트코스",
+      "suggestedTitle": "발렌타인 데이트코스",
+      "score": 70,
+      "source": "event_calendar",
+      "reasoning": "월별 훅: 2월 - 발렌타인 데이트코스",
+      "type": "travel",
+      "framingType": "seasonal",
+      "keywords": [
+        "발렌타인",
+        "데이트코스"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "informative"
+    },
+    {
+      "topic": "2월 졸업여행 시즌",
+      "suggestedTitle": "졸업여행 시즌",
+      "score": 70,
+      "source": "event_calendar",
+      "reasoning": "월별 훅: 2월 - 졸업여행 시즌",
+      "type": "travel",
+      "framingType": "seasonal",
+      "keywords": [
+        "졸업여행",
+        "시즌"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "viral"
+    },
+    {
+      "topic": "3월 벚꽃 개화 시작",
+      "suggestedTitle": "벚꽃 개화 시작",
+      "score": 70,
+      "source": "event_calendar",
+      "reasoning": "월별 훅: 3월 - 벚꽃 개화 시작",
+      "type": "travel",
+      "framingType": "seasonal",
+      "keywords": [
+        "벚꽃",
+        "개화",
+        "시작"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "friendly"
+    },
+    {
+      "topic": "3월 봄맞이 나들이",
+      "suggestedTitle": "봄맞이 나들이",
+      "score": 70,
+      "source": "event_calendar",
+      "reasoning": "월별 훅: 3월 - 봄맞이 나들이",
+      "type": "travel",
+      "framingType": "seasonal",
+      "keywords": [
+        "봄맞이",
+        "나들이"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.747Z",
+      "personaId": "friendly"
+    },
+    {
+      "topic": "김광석길 대구 커피 문화",
+      "type": "travel",
+      "score": 65.33333333333333,
+      "source": "gap_analysis",
+      "reasoning": "대구 트렌딩에서 niche 파생 — 대구 커피 문화",
+      "suggestedTitle": "김광석길, 대구 커피 문화: 아는 사람만 아는 이야기",
+      "keywords": [
+        "김광석길",
+        "대구",
+        "대구"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.748Z",
+      "personaId": "niche",
+      "framingType": "niche_digging"
+    },
+    {
+      "topic": "대구",
+      "type": "travel",
+      "score": 60.33333333333333,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 76 | 기발행앵글(대구::experience) -15",
+      "suggestedTitle": "대구 1박2일 실제 다녀온 비용과 솔직 후기",
+      "keywords": [
+        "대구"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.717Z",
+      "personaId": "friendly",
+      "framingType": "experience"
+    },
+    {
+      "topic": "공주",
+      "type": "travel",
+      "score": 59.66666666666667,
+      "source": "gap_analysis",
+      "reasoning": "블로그 커버리지 partial, Moltbook engagement 74 | 기발행앵글(공주::experience) -15",
+      "suggestedTitle": "공주 1박2일 실제 다녀온 비용과 솔직 후기",
+      "keywords": [
+        "공주"
+      ],
+      "discoveredAt": "2026-02-21T12:00:00.717Z",
       "personaId": "friendly",
       "framingType": "experience"
     }
   ],
-  "discoveredAt": "2026-02-13T11:17:35.216Z"
+  "discoveredAt": "2026-02-21T12:00:00.772Z"
 }
