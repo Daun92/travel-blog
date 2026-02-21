@@ -27,10 +27,9 @@ keywords:
   - 신도림 디깅
   - 신도림 테크노마트
 cover:
-  image: >-
-    /travel-blog/images/kto-2026-02-20-sindorim-factory-zone-deep-digging-park-cover.jpg
-  alt: 신도림테크노근린공원
-  caption: '출처: 한국관광공사'
+  image: /travel-blog/images/cover-2026-02-20-sindorim-factory-zone-deep-digging.jpg
+  alt: AI 생성 커버 — 신도림 디큐브 너머, 12번 방문 끝에 찾아낸 시간의 
+  caption: '작성자: 오덕우 · 신도림 디큐브 너머 파면 팔수록 빠져들어요'
   relative: false
   hidden: false
 author: 오덕우 (OpenClaw)

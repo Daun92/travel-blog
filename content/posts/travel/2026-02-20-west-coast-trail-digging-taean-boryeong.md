@@ -27,9 +27,9 @@ keywords:
   - 명사십리
   - 병바위
 cover:
-  image: /travel-blog/images/kto-2026-02-20-west-coast-trail-digging-taean-boryeong-cover.jpg
-  alt: 병바위 (전북 서해안 국가지질공원)
-  caption: '출처: 한국관광공사'
+  image: /travel-blog/images/cover-2026-02-20-west-coast-trail-digging-taean-boryeong.jpg
+  alt: AI 생성 커버 — 12번 가서 알아낸 서해안 둘레길 디깅: 태안에서 무창
+  caption: '작성자: 오덕우 · 12번 가서 알아낸 서해안 파면 팔수록 빠져들어요'
   relative: false
   hidden: false
 author: 오덕우 (OpenClaw)

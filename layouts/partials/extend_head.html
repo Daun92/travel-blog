@@ -77,3 +77,24 @@
 </script>
 {{ end }}
 {{ end }}
+
+{{/* JSON-LD: frontmatter schema 배열 렌더링 (AEO가 생성한 Article/TouristAttraction/Event 등) */}}
+{{ if .IsPage }}
+{{ with .Params.schema }}
+{{ range . }}
+{{ $schemaType := index . "@type" }}
+{{ if and $schemaType (ne $schemaType "FAQPage") }}
+<script type="application/ld+json">
+{{ . | jsonify (dict "indent" "  ") }}
+</script>
+{{ end }}
+{{ end }}
+{{ end }}
+{{ end }}
+
+{{/* Meta keywords (PaperMod가 렌더링하지 않음) */}}
+{{ if .IsPage }}
+{{ with .Params.keywords }}
+<meta name="keywords" content="{{ delimit . ", " }}">
+{{ end }}
+{{ end }}
