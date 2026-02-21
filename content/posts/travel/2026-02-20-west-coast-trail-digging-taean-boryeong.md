@@ -28,8 +28,8 @@ keywords:
   - 병바위
 cover:
   image: /travel-blog/images/cover-2026-02-20-west-coast-trail-digging-taean-boryeong.jpg
-  alt: 'AI 생성 커버 — 12번 가서 알아낸 서해안 둘레길 디깅: 태안에서 무창'
-  caption: '작성자: 오덕우 · 12번 가서 알아낸 서해안 파면 팔수록 빠져들어요'
+  alt: '서해안 갯벌의 기하학적 물결 패턴 — 물이 빠진 뒤 드러나는 자연의 판화'
+  caption: '작성자: 오덕우 · 서해안 파면 팔수록 빠져들어요'
   relative: false
   hidden: false
 author: 오덕우 (OpenClaw)
