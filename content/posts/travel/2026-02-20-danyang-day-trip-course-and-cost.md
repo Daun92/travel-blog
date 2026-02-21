@@ -27,7 +27,7 @@ keywords:
   - 단양 여행 비용
 cover:
   image: /travel-blog/images/cover-2026-02-20-danyang-day-trip-course-and-cost.jpg
-  alt: AI 생성 커버 — 단양 당일치기 현실 코스: 구인사에서 고수동굴까지, 빛
+  alt: '구인사 회랑에서 바라본 단양의 석양 — 빛을 따라 걷는 하루'
   caption: '작성자: 김주말 · 단양 당일치기 현실 코스 직접 다녀왔어요'
   relative: false
   hidden: false
@@ -150,9 +150,6 @@ schema:
 
 > **단양에서의 시간들** — 소백산의 능선이 겹쳐지는 곳, 단양으로 향했습니다. 구인사의 선 굵은 건축물과 고수동굴의 내밀한 질감을 눈에 담았습니다. 1인 기준 약 11만 원의 예산으로 보낸, 소리보다 빛이 먼저 도착하는 공간들에 대한 기록입니다.
 
-![여행 준비 가이드](/travel-blog/images/inline-2026-02-20-danyang-day-trip-course-and-cost-1.jpeg)
-*구인사에서 고수동굴까지, 빛을 따라 걷는 하루*
-
 ## 셔터를 누르기 전에 먼저 서 있어 보세요
 
 주말의 짧은 여정은 언제나 빛이 어디서 오는지 가늠하는 일부터 시작됩니다. 단양은 산세가 깊어 해가 뜨고 지는 모양새가 도심과는 사뭇 달라요. 안개가 자욱한 이른 아침, 소백산 자락이 서서히 제 모습을 드러낼 때 비로소 단양에 도착했음을 실감합니다.
@@ -160,9 +157,6 @@ schema:
 이번 여정은 화려한 수식어보다는 공간이 주는 질감과 그 시간대에만 만날 수 있는 공기에 집중해 보려 해요. 사진보다 그 순간의 공기가 기억나는 그런 장소들입니다.
 
 ---
-
-![여행지 감성 무드보드](/travel-blog/images/inline-2026-02-20-danyang-day-trip-course-and-cost-2.jpeg)
-*빛이 도착하는 시간, 단양으로 향하는 감성 무드보드*
 
 ## 오전 09:30 — 구인사, 겹겹이 쌓인 기도의 질감
 
@@ -179,7 +173,7 @@ schema:
 
 ---
 
-![구인사 현장 스틸컷](/travel-blog/images/inline-2026-02-20-danyang-day-trip-course-and-cost-3.jpeg)
+![구인사 대법당과 산안개 속 아침 커피](/travel-blog/images/inline-2026-02-20-danyang-day-trip-course-and-cost-3.jpeg)
 *겹겹이 쌓인 기도의 질감 — 구인사의 아침 빛*
 
 ## 오후 12:30 — 단양 고수동굴, 빛이 멈춘 곳에서의 발견
@@ -194,7 +188,7 @@ schema:
 
 ---
 
-![단양 현장 스틸컷](/travel-blog/images/inline-2026-02-20-danyang-day-trip-course-and-cost-4.jpeg)
+![고수동굴 내부 석순과 종유석](/travel-blog/images/inline-2026-02-20-danyang-day-trip-course-and-cost-4.jpg)
 *빛이 멈춘 곳에서의 발견 — 고수동굴의 서늘한 공기*
 
 ## 오후 02:30 — 관광특구, 일상의 빛이 머무는 거리
