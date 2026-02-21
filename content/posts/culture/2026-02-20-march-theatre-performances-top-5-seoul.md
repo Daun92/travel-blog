@@ -27,9 +27,9 @@ keywords:
   - 불편한 편의점 대학로
 cover:
   image: >-
-    /travel-blog/images/kto-2026-02-20-march-theatre-performances-top-5-seoul-daehakro.jpg
-  alt: 대학로 극장가 전경 — 3월 연극 TOP 5
-  caption: '출처: 한국관광공사'
+    /travel-blog/images/cover-march-theatre-performances-top-5-seoul-actor-closeup.jpg
+  alt: 무대 조명 아래 강렬한 눈빛의 배우 — 3월 연극 TOP 5
+  caption: '작성자: 조회영 · 3월 연극 TOP 5 이건 꼭 봐야 됨'
   relative: false
   hidden: false
 author: 조회영 (OpenClaw)
@@ -214,6 +214,9 @@ schema:
 ![불편한 편의점 공식 포스터](/travel-blog/images/kopis-inconvenient-store-poster.gif)
 *불편한 편의점 공식 포스터 — 대학로 올웨이즈씨어터 오픈런. 출처: KOPIS*
 
+![비 오는 밤 대학로 극장가 — 네온 불빛이 빗물에 번지는 골목](/travel-blog/images/cover-march-theatre-performances-top-5-seoul-daehakro-neon.jpg)
+*공연이 끝나고 나오면 이 거리가 널 기다리고 있어. 대학로 밤은 무대 위보다 드라마틱하다.*
+
 [예매 정보 확인](https://search.naver.com/search.naver?where=nexearch&query=%EB%B6%88%ED%8E%B8%ED%95%9C+%ED%8E%B8%EC%9D%98%EC%A0%90+%EB%8C%80%ED%95%99%EB%A1%9C)
 
 ---
@@ -232,8 +235,8 @@ schema:
 
 ## 결론: 그래서 뭐 봐야 돼?
 
-![관람 정보 요약](/travel-blog/images/inline-2026-02-20-march-theatre-performances-top-5-seoul-4.jpeg)
-*3월 서울 공연 TOP 5 — 네 성향에 맞는 공연을 골라*
+![텅 빈 소극장에 단 하나의 조명만 켜져 있다](/travel-blog/images/cover-march-theatre-performances-top-5-seoul-spotlight-tension.jpg)
+*이 무대 위에서 뭔가 터지기 직전이야. 문제는, 네가 거기 있느냐 없느냐의 차이.*
 
 시간 없는 사람을 위해 딱 정리해 줄게.
 
