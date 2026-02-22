@@ -262,6 +262,15 @@ GM 공장을 지나 산곡동 방향으로 가면 높은 콘크리트 담장과 
 
 ---
 
+## 참고 정보
+
+- [부평 종합시장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1213d48b-4c6f-4d62-a500-ef9cfaeb8125)
+- [부평역사박물관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=efe21522-9b7f-42b4-9cf6-d321b43a94c9)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [2월 공연 추천 TOP 5 — 2만원짜리가 13만원보다 만족도 높다고?](/travel-blog/posts/2026/02/february-performances-top5/) — 조회영의 시선 · 같은 서울 지역

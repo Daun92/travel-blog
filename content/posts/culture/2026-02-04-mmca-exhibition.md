@@ -330,6 +330,17 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [국립현대미술관 서울관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=d51b6e84-e905-4901-955f-ab4182f108a5)
+- [경복궁 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=443caffd-74a6-4713-ba02-4b5520ef7e62)
+- [북촌한옥마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=395d0087-0bd2-42a1-a051-49c4c46d8821)
+- [삼청동거리 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=cc498063-d951-4343-a838-c6aaca8d584a)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [2월 서울 전시 솔직 후기: 국립현대미술관 무료 vs 예술의전당 15,000원 비교](/travel-blog/posts/2026/02/february-seoul-exhibitions/) — 김주말의 시선 · 같은 서울 지역

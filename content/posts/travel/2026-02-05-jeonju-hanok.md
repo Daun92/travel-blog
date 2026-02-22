@@ -207,6 +207,18 @@ factcheckScore: 82
 
 ---
 
+## 참고 정보
+
+- [전주 한옥마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=66dba60b-a623-4753-a3b4-76a62fcbbe05)
+- [경기전 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=9894d02b-5f1e-411a-b700-762cc2d0ab2b)
+- [전주전동성당 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f8f9cc52-2274-4584-a442-e152782e5e60)
+- [오목대와 이목대 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=214a62d9-ffc9-451f-81e3-fb81a203889b)
+- [전주 남부시장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=89fb2c76-9eee-438a-a611-604625c0db82)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [전주 한옥마을 여행, 직장인 김주말의 솔직한 2박 3일 생존기 (비용/웨이팅/코스)](/travel-blog/posts/2026/02/jeonju-hanok-2n3d/) — 같은 전북 지역

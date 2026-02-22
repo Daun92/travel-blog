@@ -229,6 +229,18 @@ factcheckScore: 82
 
 ---
 
+## 참고 정보
+
+- [서울공예박물관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4fe96029-fd94-4232-bb02-e22798f87dcc)
+- [뮤지엄김치간 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=dc18db30-ddce-4342-b2e7-ba65eb659d84)
+- [떡박물관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a8d89ac6-a9ea-45bc-9521-4fdd76af61ba)
+- [인사동 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3259a90d-1924-43c6-b333-df502374b491)
+- [낙산공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3c98e24b-9fb9-4ecf-b8a2-f26a5890748f)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [성수동 팝업스토어 생존기: 이번 주 꼭 가야 할 곳 vs 시간낭비 TOP 3](/travel-blog/posts/2026/02/seongsu-popup-store/) — 조회영의 시선 · 같은 서울 지역

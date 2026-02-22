@@ -219,6 +219,18 @@ factcheckScore: 88
 
 ---
 
+## 참고 정보
+
+- [김광석다시그리기길 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=8f10eef7-a5f1-454b-88db-c8e9e3528580)
+- [대구 근대골목 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=af55f079-93b5-4f2d-bc46-0848e95de04b)
+- [대구 서문시장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=214a6b35-763e-4071-bba7-63dbaa3dd72d)
+- [계산동성당 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f01dbcf5-1ac0-48f5-900b-e5c4bf761260)
+- [동산청라언덕 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=6dd5a55c-21e7-483b-a964-5d3586038da3)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [부산 해운대 맛집 베스트 4 추천: 현지인도 줄 서는 로컬 찐맛집 총정리](/travel-blog/posts/2026/02/busan-haeundae-restaurants/) — 김주말의 시선 · 같은 대구 지역

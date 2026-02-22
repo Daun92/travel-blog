@@ -161,6 +161,17 @@ dataSources:
 
 ---
 
+## 참고 정보
+
+- [경복궁 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=443caffd-74a6-4713-ba02-4b5520ef7e62)
+- [성수동 카페거리 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=0d4a50c2-61c6-4e14-851c-a3d08c1a84ae)
+- [반포한강공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=29dc393d-367f-4721-b283-0067bf76ffd4)
+- [광장시장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=242c556a-2365-47b9-be5c-ea36d8db3663)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [서울 북촌한옥마을 완벽 가이드: 전통과 현대가 공존하는 골목 산책](/travel-blog/posts/2026/02/seoul-bukchon-hanok/) — 같은 서울 지역

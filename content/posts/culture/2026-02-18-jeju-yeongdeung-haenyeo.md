@@ -200,6 +200,16 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [제주해녀박물관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1606e304-520e-4497-b554-6b51511b6722)
+- [용두암 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=619aecc2-fb2e-41a7-97bc-f475c79d7264)
+- [동문재래시장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f598268e-368c-4e52-8f5a-7e8d3dc8b32a)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [3월 숨은 봄꽃 명소 산수유 매화 동백 — 12번 가서 발견한 1cm의 디테일](/travel-blog/posts/2026/02/march-hidden-spring-flowers/) — 오덕우의 시선 · 같은 제주 지역

@@ -250,6 +250,15 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [대학로 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a69263ff-480d-473c-9e24-69c469696596)
+- [예술의전당 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2668d783-2c8b-439b-a99e-c9208896a794)
+
+> 본 포스트의 관광 정보는 한국관광공사, KOPIS 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [2월 서울 전시 솔직 후기: 국립현대미술관 무료 vs 예술의전당 15,000원 비교](/travel-blog/posts/2026/02/february-seoul-exhibitions/) — 김주말의 시선 · 같은 서울 지역

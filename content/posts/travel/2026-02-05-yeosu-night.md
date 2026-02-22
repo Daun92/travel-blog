@@ -190,6 +190,18 @@ factcheckScore: 78
 
 ---
 
+## 참고 정보
+
+- [돌산공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=67c8cefb-2648-494d-a1cd-490e7d845bee)
+- [돌산대교 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f8357c6d-5185-4c55-b3c0-363c043b3462)
+- [여수 해상케이블카 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=1474d159-54e5-4e8c-862f-07d5c6021cdb)
+- [한려해상국립공원 오동도 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e3f78829-970e-4762-84db-f92d7ed281ef)
+- [낭만포차거리 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f3435a31-7d31-4808-adad-0696272126ab)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [목포 근대역사 산책: 개항장에서 유달산까지, 한교양의 깊이 있는 해설](/travel-blog/posts/2026/02/mokpo-modern-history/) — 한교양의 시선 · 같은 전남 지역

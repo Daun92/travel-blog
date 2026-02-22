@@ -244,6 +244,16 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [논산명재고택 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3e21d814-dde4-48f9-9e5c-6c04f805248d)
+- [관촉사(논산) — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=eb03bccd-6494-44b4-b766-c15727caf2dc)
+- [논산 노성산성 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3e9cd007-3b65-4c99-aa38-b57347aaaa9e)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [12번 가서 알아낸 서해안 둘레길 디깅: 태안에서 무창포까지 파도소리의 층위](/travel-blog/posts/2026/02/west-coast-trail-digging-taean-boryeong/) — 오덕우의 시선 · 같은 충남 지역

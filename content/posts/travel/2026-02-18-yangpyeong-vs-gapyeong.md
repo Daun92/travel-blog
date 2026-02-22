@@ -237,6 +237,15 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [국립양평치유의숲 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=c20b2f46-5796-4a33-ad3f-35aaf3058e3b)
+- [뚝섬한강공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=654574cc-fb6b-41da-85ea-ca7e1619cd48)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [수원 화성 야간 탐방: 성곽 위 2시간 코스, 7만원으로 버틴 솔직 후기](/travel-blog/posts/2026/02/suwon-hwaseong-night/) — 같은 경기 지역

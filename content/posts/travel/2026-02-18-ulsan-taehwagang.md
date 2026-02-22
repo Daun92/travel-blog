@@ -85,7 +85,7 @@ ShowWordCount: true
 
 시간적 여유가 되신다면 고헌산 자락에서 태화강으로 이어지는 지형적 흐름을 조망해보시는 것도 좋습니다. 산의 정기가 강으로 이어져 십리대숲이라는 생태적 결실을 맺었다는 관점으로 바라보면 울산의 지리가 한눈에 들어올 것입니다.
 
-[고헌산 상세정보](https://tour.ulsan.go.kr/kor/unit/attrctn/view.ulsan?mId=001002001000000000&unqId=7)
+[고헌산 상세정보 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f3c9ee18-5582-43cd-b934-1fe351eb3bb9)
 
 ---
 
@@ -156,10 +156,14 @@ ShowWordCount: true
 이상으로 해설사 한교양이었습니다. 여러분의 여정이 지적 즐거움으로 가득하기를 기원합니다.
 
 ---
-**참고 자료**
-- 한국관광공사 관광지 정보
-- 울산광역시 문화관광 공식 홈페이지
-- 울산 태화강 국가정원 공식 안내 (taehwagang.ulsan.go.kr)
+
+## 참고 정보
+
+- [태화강 국가정원 — 울산광역시 공식](https://www.ulsan.go.kr/s/garden/main.ulsan)
+- [태화강 국가정원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=34647178-fe80-4b2c-a0f4-0c372f7daf34)
+- [고헌산 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f3c9ee18-5582-43cd-b934-1fe351eb3bb9)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
 
 ---
 

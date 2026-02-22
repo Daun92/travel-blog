@@ -205,6 +205,15 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [강릉 경포대 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=babcea7b-a8e6-4a30-9e33-f783ad33fe79)
+- [강릉 굴산사지 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=11658e1e-11dd-4a76-a2ef-67ab08c24fef)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [강릉 커피거리 & 안목해변 바다 뷰 카페 투어: 완벽한 감성 여행 코스 가이드](/travel-blog/posts/2026/02/gangneung-coffee-street/) — 김주말의 시선 · 같은 강원 지역

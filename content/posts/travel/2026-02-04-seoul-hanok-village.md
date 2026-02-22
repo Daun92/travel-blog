@@ -234,6 +234,18 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [북촌한옥마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=395d0087-0bd2-42a1-a051-49c4c46d8821)
+- [북촌 8경 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=72de6f2f-b808-4354-9e83-c1c59513a327)
+- [북촌문화센터 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=6f3c3ab5-cb66-47c2-97aa-a3ef00aaa47d)
+- [서울공예박물관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=4fe96029-fd94-4232-bb02-e22798f87dcc)
+- [창덕궁과 후원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e06275fd-e065-4c90-806e-cbe5c1ba44e6)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [서울 여행 완벽 가이드: 전통과 현대가 공존하는 2박 3일 추천 코스와 꿀팁](/travel-blog/posts/2026/02/seoul-travel-guide/) — 같은 서울 지역

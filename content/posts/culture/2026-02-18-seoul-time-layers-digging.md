@@ -222,6 +222,17 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [문래예술공장 (문래창작촌) — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=bde65df2-14ae-4919-a5c8-27a7a11f6478)
+- [신당동 떡볶이타운 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=c64d5699-c7b2-4908-ae22-2dec5a317089)
+- [을지로 노가리골목 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=8c87da94-cd09-4ba4-8a10-6b569ae74b02)
+- [창신동골목길 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a8e4f4f5-0ff0-4213-bb1b-1e2a78682edc)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [국립현대미술관 서울 2026 기획전: 꼭 봐야 할 전시와 관람 팁](/travel-blog/posts/2026/02/mmca-seoul-2026/) — 한교양의 시선 · 같은 서울 지역

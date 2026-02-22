@@ -232,6 +232,16 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [안동 하회마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3e375cc0-c11e-45de-9651-e77d6b40891e)
+- [병산서원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=9748f019-0d47-47de-85a4-acfec5f3d14d)
+- [봉정사 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=aef12332-e6b9-4fec-a669-04685c512e6f)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [경주 여행 완벽 가이드: 황리단길부터 야경 명소까지 1박 2일 코스 추천](/travel-blog/posts/2026/02/gyeongju-travel-guide/) — 김주말의 시선 · 같은 경북 지역

@@ -241,6 +241,16 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [강릉 선교장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=c34935ed-c697-4483-b150-fc20f1f32493)
+- [전주 한옥마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=66dba60b-a623-4753-a3b4-76a62fcbbe05)
+- [국립한국자생식물원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=b06407b9-f149-473d-bd57-01af820f21fa)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [2월 겨울 국내여행 추천 베스트 5: 온천부터 눈꽃까지 완벽 가이드](/travel-blog/posts/2026/02/winter-travel-best-5/) — 조회영의 시선 · 같은 강원 지역

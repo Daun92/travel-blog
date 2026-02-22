@@ -212,6 +212,15 @@ factcheckScore: 85
 
 ---
 
+## 참고 정보
+
+- [안목해변 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f9d3fd78-55bd-4d5c-90fe-25af7ffa76a0)
+- [강릉커피거리 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=c8ba8c57-7a5d-40bd-a233-1749259168c7)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [강릉 겨울 여행의 진면목, 역사와 문학으로 읽는 고즈넉한 예향의 숨결](/travel-blog/posts/2026/02/gangneung-winter-literary/) — 한교양의 시선 · 같은 강원 지역

@@ -306,6 +306,21 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [경복궁 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=443caffd-74a6-4713-ba02-4b5520ef7e62)
+- [창덕궁과 후원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e06275fd-e065-4c90-806e-cbe5c1ba44e6)
+- [덕수궁 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e413abf3-f8a7-486d-95fd-4fb12598aefc)
+- [창경궁 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=8198c334-6d6c-4d87-bdc6-5625b772cc59)
+- [경희궁 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a82d1e7d-95bc-4a17-ac4d-6beee6b3e716)
+- [서울역사박물관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=36d0d7f2-3197-4bf3-a30e-562775f03e97)
+- [개운사(서울) — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=dc16a49b-8eef-4865-9f7b-d4e248507ebe)
+- [간송미술관(서울 보화각) — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=475daf64-9b86-4f45-8558-621a946a75bb)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [서울 야경 명소 TOP 7: 로맨틱부터 힙플레이스까지 뷰 맛집 총정리](/travel-blog/posts/2026/02/seoul-night-views-top7/) — 조회영의 시선 · 같은 서울 지역

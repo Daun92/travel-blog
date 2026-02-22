@@ -253,6 +253,17 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [구인사(단양) — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=fb8f5b80-230f-42f6-951c-eb81313ba4ea)
+- [단양 고수동굴 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a3444f94-3c9f-4b97-8ea3-1aeff940dd39)
+- [도담삼봉 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=3531a546-e403-4a77-9feb-d28fd701601d)
+- [석문 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=ebeb05f9-8d22-4d0c-a445-7c0afaa44e06)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [제천 청풍호 겨울 커플 데이트: 비봉산 케이블카와 리솜포레스트 1박 2일 현실 후기](/travel-blog/posts/2026/02/jecheon-cheongpungho-winter/) — 같은 충북 지역

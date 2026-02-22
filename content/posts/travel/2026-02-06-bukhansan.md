@@ -160,6 +160,16 @@ factcheckScore: 90
 
 ---
 
+## 참고 정보
+
+- [북한산국립공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a4fe25a7-d634-43b6-832a-81836064e450)
+- [북한산 백운대 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2d227c33-22fc-436b-af39-410e5c6d0a59)
+- [북한산성 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=9af55839-338e-43a1-9da4-0935b66221bb)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [서울 야경 명소 TOP 7: 로맨틱부터 힙플레이스까지 뷰 맛집 총정리](/travel-blog/posts/2026/02/seoul-night-views-top7/) — 조회영의 시선 · 같은 서울 지역

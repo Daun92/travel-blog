@@ -209,6 +209,16 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [꽃지해수욕장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=f9d3de41-778d-4cc8-8b2d-64d9a77511d9)
+- [무창포해수욕장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2211f2e7-72d4-4be6-afa2-188da2a22afa)
+- [명사십리 및 구시포 (전북 서해안 국가지질공원) — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a898ed0c-57c3-4fec-970d-fbb3f2431e08)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [논산 딸기축제 가족 체험 비용 정산, 빛을 따라 걷는 주말의 기록](/travel-blog/posts/2026/02/nonsan-strawberry-family/) — 김주말의 시선 · 같은 충남 지역

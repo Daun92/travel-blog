@@ -227,6 +227,18 @@ factcheckScore: 92
 
 ---
 
+## 참고 정보
+
+- [동피랑마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=41211b90-1572-4fdf-9766-da12341150e6)
+- [서피랑 마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=d9cf99de-a9de-4474-b6f3-7282c358f750)
+- [통영 세병관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=cd833710-5350-4a09-b596-7bc46fd0614c)
+- [박경리 기념관 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=c1f27077-bd9a-4366-aa74-20d1c18c1067)
+- [윤이상 기념공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=0cf00c0b-96cd-44b6-aebe-792bff7a4734)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [공유 안 하면 손해, 거제 통영 남해 드라이브 코스 TOP 5 (진짜는 여기다)](/travel-blog/posts/2026/02/geoje-tongyeong-drive-top5/) — 조회영의 시선 · 같은 경남 지역

@@ -320,6 +320,16 @@ CJ문화재단이 설립 20주년을 기념해서 콘서트 시리즈를 시작�
 
 ---
 
+## 참고 정보
+
+- [올림픽공원 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=7ba5e7f2-5b78-43a1-8806-d8a6c0e7af2c)
+- [예술의전당 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=2668d783-2c8b-439b-a99e-c9208896a794)
+- [대학로 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=a69263ff-480d-473c-9e24-69c469696596)
+
+> 본 포스트의 관광 정보는 KOPIS 공연예술통합전산망, 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [현대무용 공연 3곳 솔직 후기: 판교 직장인이 퇴근 후 다녀온 무대 비교](/travel-blog/posts/2026/02/modern-dance-review-3/) — 김주말의 시선 · 같은 서울 지역

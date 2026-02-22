@@ -213,6 +213,17 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [거제 관광모노레일 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=be85397a-f0f5-491e-b842-c909598ba353)
+- [거제도 해금강 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e0eeb63a-cdb9-48a3-9c4a-19784a66a32c)
+- [학동 흑진주 몽돌해변 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=83b8305a-c8ec-48b3-aa7f-39da82ce7ced)
+- [덕포해수욕장 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=5d2c5fef-eddb-415a-a63d-f3967e117d0c)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [남해 다랭이논과 독일마을 인문 여행: 척박한 땅에 피어난 인간 의지의 기록](/travel-blog/posts/2026/02/namhae-daraengi-german-village/) — 한교양의 시선 · 같은 경남 지역

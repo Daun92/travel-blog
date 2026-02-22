@@ -221,6 +221,16 @@ schema:
 
 ---
 
+## 참고 정보
+
+- [구례 산수유마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=ebc0dba3-2762-4319-bf76-4249f930f7f6)
+- [광양 매화마을 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=b647a5ef-755d-43ea-83a2-7533ec8feb3c)
+- [카멜리아힐 — 대한민국 구석구석](https://korean.visitkorea.or.kr/detail/ms_detail.do?cotid=e4f4a116-be4b-46fa-a289-11e223fa597a)
+
+> 본 포스트의 관광 정보는 한국관광공사 데이터를 기반으로 작성되었습니다.
+
+---
+
 ## 함께 읽기
 
 - [제주도 감성 카페 베스트 7: 오션뷰부터 숨은 핫플까지 인스타 성지 총정리](/travel-blog/posts/2026/02/jeju-cafes-best-7/) — 김주말의 시선 · 같은 제주 지역
