@@ -29,7 +29,8 @@ keywords:
   - 총정리
   - 치트시트
 cover:
-  image: '/travel-blog/images/kto-봄꽃-최종-판정:-5종-꽃-×-성향-매칭-치트시트-0.jpg'
+  image: >-
+    /travel-blog/images/kto-2026-02-21-spring-flower-ranking-personality-matching-1.jpg
   alt: 동대문구 봄꽃축제
   caption: '출처: 한국관광공사'
   relative: false

@@ -85,6 +85,13 @@ seriesId: spring-flower-battle-2026
 seriesOrder: 4
 seriesTotal: 5
 factcheckScore: 50
+cover:
+  image: >-
+    /travel-blog/images/inline-2026-02-21-seoul-vs-jeju-canola-flower-cost-comparison-1.jpg
+  alt: 서울 근교 유채꽃밭
+  caption: '출처: 한국관광공사'
+  relative: false
+  hidden: false
 ---
 # 유채꽃은 제주만? 서울 근교 유채꽃밭에서 마주한 빛의 기록
 

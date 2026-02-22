@@ -29,7 +29,8 @@ keywords:
   - 비교
   - 경화역
 cover:
-  image: '/travel-blog/images/kto-벚꽃-명소-가성비-판정:-진해-vs-하동-vs-경주,-결론-냄-0.jpg'
+  image: >-
+    /travel-blog/images/kto-2026-02-21-jinhae-vs-hadong-vs-gyeongju-cherry-blossom-battle-1.jpg
   alt: 경화역 벚꽃길
   caption: '출처: 한국관광공사'
   relative: false

@@ -29,7 +29,8 @@ keywords:
   - 비교
   - 광양매화마을
 cover:
-  image: '/travel-blog/images/kto-매화-vs-벚꽃:-2월에-먼저-피는-꽃이-이기는-이유-0.jpg'
+  image: >-
+    /travel-blog/images/kto-2026-02-21-maehwa-vs-cherryblossom-spring-battle-1.jpg
   alt: 경인아라뱃길 매화동산
   caption: '출처: 한국관광공사'
   relative: false
